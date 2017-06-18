@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace PosMat\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

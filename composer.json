@@ -6,11 +6,8 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "codecourse/notify": "^1.1",
-        "jailtonsc/validador-cpf-laravel": "^4.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0",
-        "league/csv": "^8.2"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -48,6 +45,7 @@
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
