@@ -176,6 +176,7 @@ return [
         // PosMat\Providers\BroadcastServiceProvider::class,
         PosMat\Providers\EventServiceProvider::class,
         PosMat\Providers\RouteServiceProvider::class,
+        ValidadorCpf\CpfServiceProvider54::class
 
     ],
 
