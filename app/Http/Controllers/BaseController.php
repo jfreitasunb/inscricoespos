@@ -24,5 +24,15 @@ class BaseController extends Controller
 	   $periodo_inscricao = $monitoria->retorna_periodo_inscricao();
 
        View::share ( 'periodo_inscricao', $periodo_inscricao );
-    }  
+    }
+
+    public function setLocale($locale)
+    {
+    	if(Auth::check()){
+	     $user = User::find(Auth::user()->id);
+	     $user->update(['locale'=>$locale]);
+	  	}else{
+	    	Session::put('locale',$locale);
+	  	}
+    }
 }
