@@ -8,7 +8,7 @@
               </div>
               <div class="col-sm-8 col-md-7 col-xs-12">  
               <h1>Departamento de Matemática</h1>
-              <h2>Inscrições Monitoria</h2>
+              <h2>Inscrições Pós-Graduação</h2>
               <h3>{{$periodo_inscricao}}</h3>
               </div>
       </div>
