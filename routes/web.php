@@ -11,61 +11,83 @@
 |
 */
 
-Route::get('/get-cidades/{idEstado}', '\Monitoriamat\Http\Controllers\CandidatoController@getCidades');
+Route::get('/get-cidades/{idEstado}', '\Posmat\Http\Controllers\CandidatoController@getCidades');
+
+/*
+*Seleção de Idioma
+*/
+
+Route::get('/', [
+	'uses' => '\Posmat\Http\Controllers\BaseController@getLangPortuguese',
+	'as'   => 'lang.portuguese',
+	'middleware' => ['define.locale'],
+]);
+
+Route::get('/', [
+	'uses' => '\Posmat\Http\Controllers\BaseController@getLangEnglish',
+	'as'   => 'lang.english',
+	'middleware' => ['define.locale'],
+]);
+
+Route::get('/', [
+	'uses' => '\Posmat\Http\Controllers\BaseController@getLangSpanish',
+	'as'   => 'lang.spanish',
+	'middleware' => ['define.locale'],
+]);
 
 /*
 *Área do candidato
 */
 
 Route::get('/aluno', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@getMenu',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMenu',
 	'as'   => 'menu.candidato',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::get('/aluno/dados/academicos', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@getDadosAcademicos',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos',
 	'as'   => 'dados.academicos',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::post('/aluno/dados/academicos', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@postDadosAcademicos',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos',
 	'as'   => 'dados.academicos',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::get('/aluno/dados/bancarios', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@getDadosBancarios',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosBancarios',
 	'as'   => 'dados.bancarios',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::post('/aluno/dados/bancarios', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@postDadosBancarios',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosBancarios',
 	'as'   => 'dados.bancarios',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::get('/aluno/dados/pessoais', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@getDadosPessoais',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais',
 	'as'   => 'dados.pessoais',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::post('/aluno/dados/pessoais', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@postDadosPessoais',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::get('/aluno/dados/escolhas', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@getEscolhaCandidato',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato',
 	'as'   => 'dados.escolhas',
 	'middleware' => ['user.role:aluno'],
 ]);
 
 Route::post('/aluno/dados/escolhas', [
-	'uses' => '\Monitoriamat\Http\Controllers\CandidatoController@postEscolhaCandidato',
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato',
 	'middleware' => ['user.role:aluno'],
 ]);
 
@@ -75,49 +97,49 @@ Route::post('/aluno/dados/escolhas', [
  */
 
 Route::get('/admin', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@getMenu',
+	'uses' => '\Posmat\Http\Controllers\AdminController@getMenu',
 	'as'   => 'menu.admin',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::get('/admin/ativa/conta', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@getAtivaConta',
+	'uses' => '\Posmat\Http\Controllers\AdminController@getAtivaConta',
 	'as'   => 'ativa.conta',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::post('/admin/ativa/conta', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@postAtivaConta',
+	'uses' => '\Posmat\Http\Controllers\AdminController@postAtivaConta',
 	'as'   => 'ativa.conta',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::get('/admin/pesquisar/papel', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@getPesquisarPapelAtual',
+	'uses' => '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual',
 	'as'   => 'pesquisar.papel',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::post('/admin/pesquisar/papel', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@postPesquisarPapelAtual',
+	'uses' => '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual',
 	'as'   => 'pesquisar.papel',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::post('/admin/atribuir/papel', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@postAtribuirPapel',
+	'uses' => '\Posmat\Http\Controllers\AdminController@postAtribuirPapel',
 	'as'   => 'atribuir.papel',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::get('/admin/cria/coordenador', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@getCriaCoordenador',
+	'uses' => '\Posmat\Http\Controllers\AdminController@getCriaCoordenador',
 	'as'   => 'criar.coordenador',
 	'middleware' => ['user.role:admin'],
 ]);
 
 Route::post('/admin/cria/coordenador', [
-	'uses' => '\Monitoriamat\Http\Controllers\AdminController@postCriaCoordenador',
+	'uses' => '\Posmat\Http\Controllers\AdminController@postCriaCoordenador',
 	'as'   => 'criar.coordenador',
 	'middleware' => ['user.role:admin'],
 ]);
@@ -127,42 +149,42 @@ Route::post('/admin/cria/coordenador', [
  */
 
 Route::get('/coordenador/cadastrar/disciplina',[
-    'uses' => '\Monitoriamat\Http\Controllers\CoordenadorController@getCadastraDisciplina',
+    'uses' => '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina',
     'as'   => 'cadastra.disciplina',
     'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::post('/coordenador/cadastrar/disciplina',[
-    'uses' => '\Monitoriamat\Http\Controllers\CoordenadorController@PostCadastraDisciplina',
+    'uses' => '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina',
     'as'   => 'cadastra.disciplina',
     'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::get('/coordenador/relatorio/{id_monitoria}',[
-    'uses' => '\Monitoriamat\Http\Controllers\RelatorioController@geraRelatorio',
+    'uses' => '\Posmat\Http\Controllers\RelatorioController@geraRelatorio',
     'as'   => 'gera.relatorio',
     'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::get('/coordenador/relatorio', [
-	'uses' => '\Monitoriamat\Http\Controllers\RelatorioController@getListaRelatorios',
+	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios',
 	'as' => 'relatorio.monitoria',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::get('/coordenador/configura/monitoria', [
-	'uses' => '\Monitoriamat\Http\Controllers\CoordenadorController@getConfiguraMonitoria',
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getConfiguraMonitoria',
 	'as' => 'configura.monitoria',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::post('/coordenador/configura/monitoria', [
-	'uses' => '\Monitoriamat\Http\Controllers\CoordenadorController@postConfiguraMonitoria',
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@postConfiguraMonitoria',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::get('/coordenador', [
-	'uses' => '\Monitoriamat\Http\Controllers\CoordenadorController@getMenu',
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getMenu',
 	'as'   => 'menu.coordenador',
 	'middleware' => ['user.role:coordenador'],
 ]);
@@ -172,12 +194,12 @@ Route::get('/coordenador', [
  */
 
 Route::get('/logout', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@getLogout',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getLogout',
 		'as'	=> 'auth.logout',
 ]);
 
 Route::post('/login', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@postLogin',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@postLogin',
 ]);
 
 /**
@@ -185,17 +207,17 @@ Route::post('/login', [
  */
 
 Route::get('/login', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@getLogin',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getLogin',
 		'as'	=> 'auth.login',
 		'middleware' => ['guest'],
 ]);
 
 Route::post('/login', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@postLogin',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@postLogin',
 ]);
 
 Route::get('register/verify/{token}',[
-	'uses' => '\Monitoriamat\Http\Controllers\Auth\AuthController@verify',
+	'uses' => '\Posmat\Http\Controllers\Auth\AuthController@verify',
 	'middleware' => ['guest'],
 ]);
 
@@ -203,13 +225,13 @@ Route::get('register/verify/{token}',[
 * Registrar
  */
 Route::get('/registrar', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@getSignup',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getSignup',
 		'as'	=> 'auth.registrar',
 		'middleware' => ['guest','autoriza.inscricao']
 ]);
 
 Route::post('/registrar', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@postSignup',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@postSignup',
 ]);
 
 /*
@@ -217,31 +239,31 @@ Route::post('/registrar', [
  */
 
 Route::get('esqueci/senha', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm',
 		'as'	=> 'password.request',
 		'middleware' => ['guest'],
 ]);
 
 Route::post('esqueci/senha/link', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail',
 		'as' => 'password.email',
 		'middleware' => ['guest'],
 ]);
 
 Route::get('/esqueci/senha/{token}', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\ResetPasswordController@showResetForm',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\ResetPasswordController@showResetForm',
 		'as' => 'password.reset',
 		'middleware' => ['guest'],
 ]);
 
 Route::post('/esqueci/senha/{token}', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\ResetPasswordController@reset',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\ResetPasswordController@reset',
 		'as' => 'password.reset',
 		'middleware' => ['guest'],
 ]);
 
 Route::get('/mudousenha', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\Auth\AuthController@getMudouSenha',
+		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getMudouSenha',
 		'as'	=> 'mudou.senha',
 ]);
 
@@ -256,6 +278,6 @@ Route::get('/alert', function () {
 * Home
  */
 Route::get('/', [
-		'uses'	=> '\Monitoriamat\Http\Controllers\HomeController@index',
+		'uses'	=> '\Posmat\Http\Controllers\HomeController@index',
 		'as'	=> 'home',
 ]);
