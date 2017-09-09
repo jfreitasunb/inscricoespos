@@ -14,28 +14,6 @@
 Route::get('/get-cidades/{idEstado}', '\Posmat\Http\Controllers\CandidatoController@getCidades');
 
 /*
-*Seleção de Idioma
-*/
-
-Route::get('/', [
-	'uses' => '\Posmat\Http\Controllers\BaseController@getLangPortuguese',
-	'as'   => 'lang.portuguese',
-	'middleware' => ['define.locale'],
-]);
-
-Route::get('/', [
-	'uses' => '\Posmat\Http\Controllers\BaseController@getLangEnglish',
-	'as'   => 'lang.english',
-	'middleware' => ['define.locale'],
-]);
-
-Route::get('/', [
-	'uses' => '\Posmat\Http\Controllers\BaseController@getLangSpanish',
-	'as'   => 'lang.spanish',
-	'middleware' => ['define.locale'],
-]);
-
-/*
 *Área do candidato
 */
 
@@ -209,7 +187,7 @@ Route::post('/login', [
 Route::get('/login', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getLogin',
 		'as'	=> 'auth.login',
-		'middleware' => ['guest'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::post('/login', [
@@ -280,4 +258,26 @@ Route::get('/alert', function () {
 Route::get('/', [
 		'uses'	=> '\Posmat\Http\Controllers\HomeController@index',
 		'as'	=> 'home',
+]);
+
+/*
+*Seleção de Idioma
+*/
+
+Route::get('/ptbr', [
+	'uses' => '\Posmat\Http\Controllers\HomeController@getLangPortuguese',
+	'as'   => 'lang.portuguese',
+	'middleware' => ['define.locale'],
+]);
+
+Route::get('/en', [
+	'uses' => '\Posmat\Http\Controllers\HomeController@getLangEnglish',
+	'as'   => 'lang.english',
+	'middleware' => ['define.locale'],
+]);
+
+Route::get('/sp', [
+	'uses' => '\Posmat\Http\Controllers\HomeController@getLangSpanish',
+	'as'   => 'lang.spanish',
+	'middleware' => ['define.locale'],
 ]);
