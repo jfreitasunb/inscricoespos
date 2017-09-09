@@ -10,9 +10,9 @@ class LocaleMiddleware {
     public function handle($request, Closure $next)
     {
         if(Auth::user()){
-            app()->setLocale(Auth::user()->locale);
+            app()->setLocale(LC_ALL,Auth::user()->locale);
         }elseif($locale = Session::has('locale')){
-            app()->setLocale($locale);
+            app()->setLocale(LC_ALL,$locale);
         }
 
 

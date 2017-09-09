@@ -28,6 +28,7 @@ class AdminController extends CoordenadorController
 
 	public function getMenu()
 	{	
+		echo Session::get('locale');
 		return view('home');
 	}
 

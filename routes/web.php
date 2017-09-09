@@ -77,7 +77,7 @@ Route::post('/aluno/dados/escolhas', [
 Route::get('/admin', [
 	'uses' => '\Posmat\Http\Controllers\AdminController@getMenu',
 	'as'   => 'menu.admin',
-	'middleware' => ['user.role:admin'],
+	'middleware' => ['user.role:admin','define.locale'],
 ]);
 
 Route::get('/admin/ativa/conta', [
