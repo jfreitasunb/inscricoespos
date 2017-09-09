@@ -6,6 +6,17 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Barryvdh\\TranslationManager\\Console\\CleanCommand' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Console/CleanCommand.php',
+    'Barryvdh\\TranslationManager\\Console\\ExportCommand' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Console/ExportCommand.php',
+    'Barryvdh\\TranslationManager\\Console\\FindCommand' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Console/FindCommand.php',
+    'Barryvdh\\TranslationManager\\Console\\ImportCommand' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Console/ImportCommand.php',
+    'Barryvdh\\TranslationManager\\Console\\ResetCommand' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Console/ResetCommand.php',
+    'Barryvdh\\TranslationManager\\Controller' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Controller.php',
+    'Barryvdh\\TranslationManager\\Manager' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Manager.php',
+    'Barryvdh\\TranslationManager\\ManagerServiceProvider' => $vendorDir . '/barryvdh/laravel-translation-manager/src/ManagerServiceProvider.php',
+    'Barryvdh\\TranslationManager\\Models\\Translation' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Models/Translation.php',
+    'Barryvdh\\TranslationManager\\TranslationServiceProvider' => $vendorDir . '/barryvdh/laravel-translation-manager/src/TranslationServiceProvider.php',
+    'Barryvdh\\TranslationManager\\Translator' => $vendorDir . '/barryvdh/laravel-translation-manager/src/Translator.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

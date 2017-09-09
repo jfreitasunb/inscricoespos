@@ -3666,5 +3666,61 @@
             "read",
             "write"
         ]
+    },
+    {
+        "name": "barryvdh/laravel-translation-manager",
+        "version": "v0.4.1",
+        "version_normalized": "0.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/barryvdh/laravel-translation-manager.git",
+            "reference": "c9939e6199e92d36301143f37a735fcf36d022f5"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/barryvdh/laravel-translation-manager/zipball/c9939e6199e92d36301143f37a735fcf36d022f5",
+            "reference": "c9939e6199e92d36301143f37a735fcf36d022f5",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
+            "illuminate/translation": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x",
+            "php": ">=5.4.0",
+            "symfony/finder": "~2.3|~3.0"
+        },
+        "time": "2017-09-02T16:02:44+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "0.4-dev"
+            },
+            "laravel": {
+                "providers": [
+                    "Barryvdh\\TranslationManager\\TranslationServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Barryvdh\\TranslationManager\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Barry vd. Heuvel",
+                "email": "barryvdh@gmail.com"
+            }
+        ],
+        "description": "Manage Laravel Translations",
+        "keywords": [
+            "laravel",
+            "translations",
+            "translator"
+        ]
     }
 ]

@@ -98,6 +98,10 @@ class ComposerStaticInit894ab5c72b663ec66aa46641cd60bfb9
             'Collective\\Html\\' => 16,
             'Carbon\\' => 7,
         ),
+        'B' => 
+        array (
+            'Barryvdh\\TranslationManager\\' => 28,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -247,6 +251,10 @@ class ComposerStaticInit894ab5c72b663ec66aa46641cd60bfb9
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
+        'Barryvdh\\TranslationManager\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -296,6 +304,17 @@ class ComposerStaticInit894ab5c72b663ec66aa46641cd60bfb9
     );
 
     public static $classMap = array (
+        'Barryvdh\\TranslationManager\\Console\\CleanCommand' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Console/CleanCommand.php',
+        'Barryvdh\\TranslationManager\\Console\\ExportCommand' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Console/ExportCommand.php',
+        'Barryvdh\\TranslationManager\\Console\\FindCommand' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Console/FindCommand.php',
+        'Barryvdh\\TranslationManager\\Console\\ImportCommand' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Console/ImportCommand.php',
+        'Barryvdh\\TranslationManager\\Console\\ResetCommand' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Console/ResetCommand.php',
+        'Barryvdh\\TranslationManager\\Controller' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Controller.php',
+        'Barryvdh\\TranslationManager\\Manager' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Manager.php',
+        'Barryvdh\\TranslationManager\\ManagerServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/ManagerServiceProvider.php',
+        'Barryvdh\\TranslationManager\\Models\\Translation' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Models/Translation.php',
+        'Barryvdh\\TranslationManager\\TranslationServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/TranslationServiceProvider.php',
+        'Barryvdh\\TranslationManager\\Translator' => __DIR__ . '/..' . '/barryvdh/laravel-translation-manager/src/Translator.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
