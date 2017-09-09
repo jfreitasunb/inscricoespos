@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Monitoriamat\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Monitoriamat\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -58,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'user.role' => \Monitoriamat\Http\Middleware\UserRoles::class,
         'autoriza.inscricao' => \Monitoriamat\Http\Middleware\AutorizaLogin::class,
+        'define.locale' => \Monitoriamat\Http\Middleware\LocaleMiddleware::class,
     ];
 }
