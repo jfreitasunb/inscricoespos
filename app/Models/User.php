@@ -20,7 +20,8 @@ class User extends Authenticatable
 
     protected $fillable = [
         'login', 
-        'email', 
+        'email',
+        'locale',
         'password',
         'validation_code',
         'ativo',
