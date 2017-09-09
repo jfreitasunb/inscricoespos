@@ -3,6 +3,7 @@
 namespace Posmat\Http\Controllers;
 
 use Auth;
+use Session;
 
 
 /**
@@ -19,4 +20,36 @@ class HomeController extends BaseController
 	{
 		return view('home');
 	}
+
+	public function setaLocale($locale)
+    {
+    	if(Auth::check()){
+	     $user = User::find(Auth::user()->id);
+	     $user->update(['locale'=>$locale]);
+	  	}else{
+	    	Session::put('locale',$locale);
+	  	}
+    }
+
+	public function getLangPortuguese()
+    {
+    	$this->setaLocale('pt-br');
+
+    	return redirect()->back();
+    }
+
+    public function getLangEnglish()
+    {
+    	$this->setaLocale('en');
+
+    	return redirect()->back();
+    }
+
+    public function getLangSpanish()
+    {
+    	$this->setaLocale('sp');
+
+    	return redirect()->back();
+    }
+
 }
