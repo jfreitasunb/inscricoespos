@@ -1,6 +1,6 @@
 <?php
 
-namespace PosMat\Http\Middleware;
+namespace Monitoriamat\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

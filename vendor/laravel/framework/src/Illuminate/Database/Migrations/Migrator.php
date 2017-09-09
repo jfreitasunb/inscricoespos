@@ -181,7 +181,7 @@ class Migrator
         // in the application. A migration repository keeps the migrate order.
         $this->repository->log($name, $batch);
 
-        $this->note("<info>Migrated:</info>  {$name}");
+        $this->note("<info>Migrated:</info> {$name}");
     }
 
     /**
@@ -228,11 +228,11 @@ class Migrator
      * Rollback the given migrations.
      *
      * @param  array  $migrations
-     * @param  array|string  $paths
+     * @param  array  $paths
      * @param  array  $options
      * @return array
      */
-    protected function rollbackMigrations(array $migrations, $paths, array $options)
+    protected function rollbackMigrations(array $migrations, array $paths, array $options)
     {
         $rolledBack = [];
 
@@ -244,17 +244,11 @@ class Migrator
         foreach ($migrations as $migration) {
             $migration = (object) $migration;
 
-            if (! $file = Arr::get($files, $migration->migration)) {
-                $this->note("<fg=red>Migration not found:</> {$migration->migration}");
-
-                continue;
-            }
-
-            $rolledBack[] = $file;
+            $rolledBack[] = $files[$migration->migration];
 
             $this->runDown(
-                $file, $migration,
-                Arr::get($options, 'pretend', false)
+                $files[$migration->migration],
+                $migration, Arr::get($options, 'pretend', false)
             );
         }
 
@@ -338,7 +332,7 @@ class Migrator
         // by the application then will be able to fire by any later operation.
         $this->repository->delete($migration);
 
-        $this->note("<info>Rolled back:</info>  {$name}");
+        $this->note("<info>Rolled back:</info> {$name}");
     }
 
     /**
@@ -355,9 +349,7 @@ class Migrator
         );
 
         $callback = function () use ($migration, $method) {
-            if (method_exists($migration, $method)) {
-                $migration->{$method}();
-            }
+            $migration->{$method}();
         };
 
         $this->getSchemaGrammar($connection)->supportsSchemaTransactions()
@@ -398,9 +390,7 @@ class Migrator
         );
 
         return $db->pretend(function () use ($migration, $method) {
-            if (method_exists($migration, $method)) {
-                $migration->{$method}();
-            }
+            $migration->$method();
         });
     }
 

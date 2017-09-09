@@ -1,8 +1,8 @@
 <?php
 
-namespace PosMat\Http\Controllers\Auth;
+namespace Monitoriamat\Http\Controllers\Auth;
 
-use PosMat\Http\Controllers\Controller;
+use Monitoriamat\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -25,7 +25,8 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    
+    protected $redirectTo = 'mudousenha';
 
     /**
      * Create a new controller instance.
@@ -34,6 +35,6 @@ class ResetPasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['except' => 'logout']);
     }
 }

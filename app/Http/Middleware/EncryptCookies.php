@@ -1,6 +1,6 @@
 <?php
 
-namespace PosMat\Http\Middleware;
+namespace Monitoriamat\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

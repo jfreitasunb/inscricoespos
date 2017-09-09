@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => PosMat\User::class,
+            'model' => Monitoriamat\Models\User::class,
         ],
 
         // 'users' => [

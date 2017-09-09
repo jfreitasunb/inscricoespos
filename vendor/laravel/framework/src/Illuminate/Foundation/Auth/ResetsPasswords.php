@@ -115,7 +115,7 @@ trait ResetsPasswords
      * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendResetResponse($response)
-    {
+    {   
         return redirect($this->redirectPath())
                             ->with('status', trans($response));
     }

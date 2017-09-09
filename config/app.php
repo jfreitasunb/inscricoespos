@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+   
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Inscrições para Pós-graduação do Mat/UnB',
+    'name' => 'Inscrições Monitoria Mat',
 
     /*
     |--------------------------------------------------------------------------
@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -90,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'pt-br',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -171,12 +173,14 @@ return [
         /*
          * Application Service Providers...
          */
-        PosMat\Providers\AppServiceProvider::class,
-        PosMat\Providers\AuthServiceProvider::class,
-        // PosMat\Providers\BroadcastServiceProvider::class,
-        PosMat\Providers\EventServiceProvider::class,
-        PosMat\Providers\RouteServiceProvider::class,
-        ValidadorCpf\CpfServiceProvider54::class
+        Monitoriamat\Providers\AppServiceProvider::class,
+        Monitoriamat\Providers\AuthServiceProvider::class,
+        // Monitoriamat\Providers\BroadcastServiceProvider::class,
+        Monitoriamat\Providers\EventServiceProvider::class,
+        Monitoriamat\Providers\RouteServiceProvider::class,
+        ValidadorCpf\CpfServiceProvider54::class,
+        Monitoriamat\Providers\ViewComposerServiceProvider::class,
+        Codecourse\Notify\NotifyServiceProvider::class,
 
     ],
 
@@ -226,6 +230,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

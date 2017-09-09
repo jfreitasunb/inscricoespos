@@ -18,21 +18,20 @@ class ImplicitRouteBinding
         $parameters = $route->parameters();
 
         foreach ($route->signatureParameters(Model::class) as $parameter) {
-            if (! $parameterName = static::getParameterName($parameter->name, $parameters)) {
-                continue;
-            }
-
-            $parameterValue = $parameters[$parameterName];
-
-            if ($parameterValue instanceof Model) {
+            if ($route->parameter($parameter->name) instanceof Model) {
                 continue;
             }
 
             $model = $container->make($parameter->getClass()->name);
 
-            $route->setParameter($parameterName, $model->where(
-                $model->getRouteKeyName(), $parameterValue
-            )->firstOrFail());
+            $parameterName = static::checkForParameter($parameter->name, $parameters) ?:
+                             static::checkForParameter(snake_case($parameter->name), $parameters);
+
+            if ($parameterName) {
+                $route->setParameter($parameterName, $model->where(
+                    $model->getRouteKeyName(), $parameters[$parameterName]
+                )->firstOrFail());
+            }
         }
     }
 
@@ -43,16 +42,9 @@ class ImplicitRouteBinding
      * @param  array  $parameters
      * @return string|null
      */
-    protected static function getParameterName($name, $parameters)
+    protected static function checkForParameter($name, $parameters)
     {
-        if (array_key_exists($name, $parameters)) {
-            return $name;
-        }
-
-        $snakedName = snake_case($name);
-
-        if (array_key_exists($snakedName, $parameters)) {
-            return $snakedName;
-        }
+        return array_key_exists($name, $parameters)
+                        ? $name : null;
     }
 }

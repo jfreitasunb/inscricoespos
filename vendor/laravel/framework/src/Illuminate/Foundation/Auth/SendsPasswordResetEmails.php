@@ -25,7 +25,7 @@ trait SendsPasswordResetEmails
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $this->validateEmail($request);
+        $this->validate($request, ['email' => 'required|email']);
 
         // We will send the password reset link to this user. Once we have attempted
         // to send the link, we will examine the response then see the message we
@@ -40,17 +40,6 @@ trait SendsPasswordResetEmails
     }
 
     /**
-     * Validate the email for the given request.
-     *
-     * @param \Illuminate\Http\Request  $request
-     * @return void
-     */
-    protected function validateEmail(Request $request)
-    {
-        $this->validate($request, ['email' => 'required|email']);
-    }
-
-    /**
      * Get the response for a successful password reset link.
      *
      * @param  string  $response
@@ -58,7 +47,7 @@ trait SendsPasswordResetEmails
      */
     protected function sendResetLinkResponse($response)
     {
-        return back()->with('status', trans($response));
+        return redirect()->route('home')->with('status', trans($response));
     }
 
     /**

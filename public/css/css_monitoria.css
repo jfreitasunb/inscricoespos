@@ -45,10 +45,27 @@ h3{
     background-color: #D8D8D8;
     border-color: #63b6ec;
 }
+.navbar-default-admin{
+    background-color: #ebccd1;
+    border-color: #63b6ec;
+}
+.navbar-default-admin .navbar-nav > .active{
+    color: #000;
+   background: #3498db;
+ }
+ .navbar-default-coord{
+    background-color: #d6e9c6;
+    border-color: #63b6ec;
+}
+.navbar-default-coord .navbar-nav > .active{
+    color: #000;
+   background: #3498db;
+ }
 .navbar-default .navbar-nav > .active{
     color: #000;
    background: #3498db;
  }
+
  .navbar-default .navbar-nav > .active > a, 
  .navbar-default .navbar-nav > .active > a:hover, 
  .navbar-default .navbar-nav > .active > a:focus {

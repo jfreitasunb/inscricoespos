@@ -132,10 +132,6 @@ class Mailable implements MailableContract
      */
     public function queue(Queue $queue)
     {
-        if (property_exists($this, 'delay')) {
-            return $this->later($this->delay, $queue);
-        }
-
         $connection = property_exists($this, 'connection') ? $this->connection : null;
 
         $queueName = property_exists($this, 'queue') ? $this->queue : null;
@@ -196,7 +192,7 @@ class Mailable implements MailableContract
 
         return [
             'html' => $markdown->render($this->markdown, $data),
-            'text' => $this->buildMarkdownText($markdown, $data),
+            'text' => $markdown->renderText($this->markdown, $data),
         ];
     }
 
@@ -216,20 +212,6 @@ class Mailable implements MailableContract
         }
 
         return $data;
-    }
-
-    /**
-     * Build the text view for a Markdown message.
-     *
-     * @param  \Illuminate\Mail\Markdown  $markdown
-     * @param  array  $data
-     * @return string
-     */
-    protected function buildMarkdownText($markdown, $data)
-    {
-        return isset($this->textView)
-                ? $this->textView
-                : $markdown->renderText($this->markdown, $data);
     }
 
     /**
@@ -344,18 +326,6 @@ class Mailable implements MailableContract
     public function from($address, $name = null)
     {
         return $this->setAddress($address, $name, 'from');
-    }
-
-    /**
-     * Determine if the given recipient is set on the mailable.
-     *
-     * @param  object|array|string  $address
-     * @param  string|null  $name
-     * @return bool
-     */
-    public function hasFrom($address, $name = null)
-    {
-        return $this->hasRecipient($address, $name, 'from');
     }
 
     /**
