@@ -1,9 +1,9 @@
 <?php
 
-namespace Monitoriamat\Providers;
+namespace Posmat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Monitoriamat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricao;
 
 
 class ViewComposerServiceProvider extends ServiceProvider

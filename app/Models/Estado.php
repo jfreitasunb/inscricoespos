@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Models;
+namespace Posmat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Estado extends Model
 
     public function cidades()
     {
-        return $this->hasMany('Monitoriamat\Models\Cidade');
+        return $this->hasMany('Posmat\Models\Cidade');
     }
 
 }

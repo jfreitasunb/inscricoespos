@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Providers;
+namespace Posmat\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

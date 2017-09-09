@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers;
+namespace Posmat\Http\Controllers;
 
 use Auth;
 use DB;
@@ -9,22 +9,22 @@ use Session;
 use File;
 use ZipArchive;
 use Carbon\Carbon;
-use Monitoriamat\Models\User;
-use Monitoriamat\Models\ConfiguraInscricao;
-use Monitoriamat\Models\DadoPessoal;
-use Monitoriamat\Models\DadoBancario;
-use Monitoriamat\Models\Documento;
-use Monitoriamat\Models\DadoAcademico;
-use Monitoriamat\Models\DisciplinaMat;
-use Monitoriamat\Models\DisciplinaMonitoria;
-use Monitoriamat\Models\EscolhaMonitoria;
-use Monitoriamat\Models\HorarioEscolhido;
-use Monitoriamat\Models\AtuacaoMonitoria;
-use Monitoriamat\Models\FinalizaEscolha;
+use Posmat\Models\User;
+use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoBancario;
+use Posmat\Models\Documento;
+use Posmat\Models\DadoAcademico;
+use Posmat\Models\DisciplinaMat;
+use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\EscolhaMonitoria;
+use Posmat\Models\HorarioEscolhido;
+use Posmat\Models\AtuacaoMonitoria;
+use Posmat\Models\FinalizaEscolha;
 use Illuminate\Http\Request;
-use Monitoriamat\Mail\EmailVerification;
-use Monitoriamat\Http\Controllers\Controller;
-use Monitoriamat\Http\Controllers\AuthController;
+use Posmat\Mail\EmailVerification;
+use Posmat\Http\Controllers\Controller;
+use Posmat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;

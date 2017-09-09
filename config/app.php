@@ -173,13 +173,13 @@ return [
         /*
          * Application Service Providers...
          */
-        Monitoriamat\Providers\AppServiceProvider::class,
-        Monitoriamat\Providers\AuthServiceProvider::class,
-        // Monitoriamat\Providers\BroadcastServiceProvider::class,
-        Monitoriamat\Providers\EventServiceProvider::class,
-        Monitoriamat\Providers\RouteServiceProvider::class,
+        Posmat\Providers\AppServiceProvider::class,
+        Posmat\Providers\AuthServiceProvider::class,
+        // Posmat\Providers\BroadcastServiceProvider::class,
+        Posmat\Providers\EventServiceProvider::class,
+        Posmat\Providers\RouteServiceProvider::class,
         ValidadorCpf\CpfServiceProvider54::class,
-        Monitoriamat\Providers\ViewComposerServiceProvider::class,
+        Posmat\Providers\ViewComposerServiceProvider::class,
         Codecourse\Notify\NotifyServiceProvider::class,
 
     ],

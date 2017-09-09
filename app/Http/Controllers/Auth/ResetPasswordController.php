@@ -1,8 +1,8 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers\Auth;
+namespace Posmat\Http\Controllers\Auth;
 
-use Monitoriamat\Http\Controllers\Controller;
+use Posmat\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

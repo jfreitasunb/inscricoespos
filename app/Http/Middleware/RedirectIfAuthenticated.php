@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Http\Middleware;
+namespace Posmat\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

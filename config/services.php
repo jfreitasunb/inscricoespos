@@ -30,7 +30,7 @@ return [
     ],
 
     'stripe' => [
-        'model' => Monitoriamat\User::class,
+        'model' => Posmat\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],

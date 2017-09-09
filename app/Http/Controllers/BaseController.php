@@ -1,8 +1,8 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers;
+namespace Posmat\Http\Controllers;
 
-use Monitoriamat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricao;
 
 use View;
 
@@ -34,5 +34,20 @@ class BaseController extends Controller
 	  	}else{
 	    	Session::put('locale',$locale);
 	  	}
+    }
+
+    public function getLangPortuguese()
+    {
+    	setLocale('pt-br');
+    }
+
+    public function getLangEnglish()
+    {
+    	setLocale('en');
+    }
+
+    public function getLangSpanish()
+    {
+    	setLocale('sp');
     }
 }

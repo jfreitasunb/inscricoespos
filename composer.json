@@ -23,7 +23,7 @@
             "database"
         ],
         "psr-4": {
-            "Monitoriamat\\": "app/"
+            "Posmat\\": "app/"
         }
     },
     "autoload-dev": {

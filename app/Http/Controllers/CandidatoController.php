@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers;
+namespace Posmat\Http\Controllers;
 
 use Auth;
 use DB;
@@ -8,27 +8,27 @@ use Mail;
 use Session;
 use Validator;
 use Carbon\Carbon;
-use Monitoriamat\Models\User;
-use Monitoriamat\Models\ConfiguraInscricao;
-use Monitoriamat\Models\DisciplinaMat;
-use Monitoriamat\Models\DisciplinaMonitoria;
-use Monitoriamat\Models\DadoPessoal;
-use Monitoriamat\Models\Estado;
-use Monitoriamat\Models\DadoBancario;
-use Monitoriamat\Models\DadoAcademico;
-use Monitoriamat\Models\AtuacaoMonitoria;
-use Monitoriamat\Models\EscolhaMonitoria;
-use Monitoriamat\Models\HorarioEscolhido;
-use Monitoriamat\Models\FinalizaEscolha;
-use Monitoriamat\Models\Documento;
+use Posmat\Models\User;
+use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\DisciplinaMat;
+use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\DadoPessoal;
+use Posmat\Models\Estado;
+use Posmat\Models\DadoBancario;
+use Posmat\Models\DadoAcademico;
+use Posmat\Models\AtuacaoMonitoria;
+use Posmat\Models\EscolhaMonitoria;
+use Posmat\Models\HorarioEscolhido;
+use Posmat\Models\FinalizaEscolha;
+use Posmat\Models\Documento;
 use Illuminate\Http\Request;
-use Monitoriamat\Mail\EmailVerification;
-use Monitoriamat\Http\Controllers\Controller;
-use Monitoriamat\Http\Controllers\AuthController;
-use Monitoriamat\Http\Controllers\CidadeController;
+use Posmat\Mail\EmailVerification;
+use Posmat\Http\Controllers\Controller;
+use Posmat\Http\Controllers\AuthController;
+use Posmat\Http\Controllers\CidadeController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-use Monitoriamat\Http\Requests;
+use Posmat\Http\Requests;
 use Illuminate\Support\Facades\Response;
 
 /**

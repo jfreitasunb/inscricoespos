@@ -1,7 +1,7 @@
 <?php
 
-namespace Monitoriamat\Mail;
-use Monitoriamat\Models\User;
+namespace Posmat\Mail;
+use Posmat\Models\User;
 
 
 use Illuminate\Bus\Queueable;

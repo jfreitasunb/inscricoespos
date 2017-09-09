@@ -1,9 +1,9 @@
 <?php
 
-namespace Monitoriamat\Http\Middleware;
+namespace Posmat\Http\Middleware;
 
 use Closure;
-use Monitoriamat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricao;
 
 class AutorizaLogin
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Models;
+namespace Posmat\Models;
 
 use DB;
 use Carbon\Carbon;

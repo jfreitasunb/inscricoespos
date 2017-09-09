@@ -1,22 +1,22 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers;
+namespace Posmat\Http\Controllers;
 
 use Auth;
 use DB;
 use Mail;
 use Session;
 use Carbon\Carbon;
-use Monitoriamat\Models\User;
-use Monitoriamat\Models\ConfiguraInscricao;
-use Monitoriamat\Models\DisciplinaMat;
-use Monitoriamat\Models\DisciplinaMonitoria;
-use Monitoriamat\Models\RelatorioController;
+use Posmat\Models\User;
+use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\DisciplinaMat;
+use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\RelatorioController;
 use Illuminate\Http\Request;
-use Monitoriamat\Mail\EmailVerification;
-use Monitoriamat\Http\Controllers\Controller;
-use Monitoriamat\Http\Controllers\AuthController;
-use Monitoriamat\Http\Controllers\CoordenadorController;
+use Posmat\Mail\EmailVerification;
+use Posmat\Http\Controllers\Controller;
+use Posmat\Http\Controllers\AuthController;
+use Posmat\Http\Controllers\CoordenadorController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 

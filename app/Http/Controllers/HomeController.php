@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Http\Controllers;
+namespace Posmat\Http\Controllers;
 
 use Auth;
 

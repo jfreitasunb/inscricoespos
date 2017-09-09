@@ -1,6 +1,6 @@
 <?php
 
-namespace Monitoriamat\Providers;
+namespace Posmat\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Monitoriamat\Model' => 'Monitoriamat\Policies\ModelPolicy',
+        'Posmat\Model' => 'Posmat\Policies\ModelPolicy',
     ];
 
     /**
