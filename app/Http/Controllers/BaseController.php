@@ -25,29 +25,4 @@ class BaseController extends Controller
 
        View::share ( 'periodo_inscricao', $periodo_inscricao );
     }
-
-    public function setLocale($locale)
-    {
-    	if(Auth::check()){
-	     $user = User::find(Auth::user()->id);
-	     $user->update(['locale'=>$locale]);
-	  	}else{
-	    	Session::put('locale',$locale);
-	  	}
-    }
-
-    public function getLangPortuguese()
-    {
-    	setLocale('pt-br');
-    }
-
-    public function getLangEnglish()
-    {
-    	setLocale('en');
-    }
-
-    public function getLangSpanish()
-    {
-    	setLocale('sp');
-    }
 }
