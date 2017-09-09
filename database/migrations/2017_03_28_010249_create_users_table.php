@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id_user');
             $table->string('login')->unique();
             $table->string('email')->unique();
+            $table->string('locale', 5)->default('pt-br');
             $table->string('password');
             $table->string('validation_code')->nullable();
             $table->string('user_type','12')->default('aluno');
