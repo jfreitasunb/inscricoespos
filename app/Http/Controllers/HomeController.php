@@ -24,8 +24,8 @@ class HomeController extends BaseController
 	public function setaLocale($locale)
     {
     	if(Auth::check()){
-	     $user = User::find(Auth::user()->id);
-	     $user->update(['locale'=>$locale]);
+	       $user = User::find(Auth::user()->id);
+	       $user->update(['locale'=>$locale]);
 	  	}else{
 	    	Session::put('locale',$locale);
 	  	}
@@ -47,7 +47,7 @@ class HomeController extends BaseController
 
     public function getLangSpanish()
     {
-    	$this->setaLocale('sp');
+    	$this->setaLocale('es');
 
     	return redirect()->back();
     }
