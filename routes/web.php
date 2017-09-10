@@ -276,7 +276,7 @@ Route::get('/en', [
 	'middleware' => ['define.locale'],
 ]);
 
-Route::get('/en', [
+Route::get('/es', [
 	'uses' => '\Posmat\Http\Controllers\HomeController@getLangSpanish',
 	'as'   => 'lang.spanish',
 	'middleware' => ['define.locale'],
