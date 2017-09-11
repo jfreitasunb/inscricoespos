@@ -2,7 +2,7 @@
 
 return [
 
-    'menu_login' => 'Login.',
-    'menu_registrar' => 'Registrar.',
+    'menu_login' => 'Login',
+    'menu_registrar' => 'Registrar',
 
 ];
