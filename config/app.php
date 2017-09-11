@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Inscrições Monitoria Mat',
+    'name' => 'Inscrições para a Pós-Graduação do Mat',
 
     /*
     |--------------------------------------------------------------------------
