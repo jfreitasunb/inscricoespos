@@ -3,6 +3,6 @@
 return [
 
     'menu_login' => 'Login',
-    'menu_registrar' => 'Registere',
+    'menu_registrar' => 'Registro',
 
 ];
