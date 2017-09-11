@@ -8,7 +8,7 @@
         "php": ">=5.6.4",
         "codecourse/notify": "^1.1",
         "jailtonsc/validador-cpf-laravel": "^4.0",
-        "laravel/framework": "5.4.*",
+        "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "league/csv": "^8.2"
@@ -16,7 +16,8 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~5.7",
+        "filp/whoops": "~2.0"
     },
     "autoload": {
         "classmap": [

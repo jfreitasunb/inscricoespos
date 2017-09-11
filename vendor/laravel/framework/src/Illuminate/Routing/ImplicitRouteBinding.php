@@ -2,7 +2,9 @@
 
 namespace Illuminate\Routing;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use Illuminate\Contracts\Routing\UrlRoutable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ImplicitRouteBinding
 {
@@ -17,21 +19,24 @@ class ImplicitRouteBinding
     {
         $parameters = $route->parameters();
 
-        foreach ($route->signatureParameters(Model::class) as $parameter) {
-            if ($route->parameter($parameter->name) instanceof Model) {
+        foreach ($route->signatureParameters(UrlRoutable::class) as $parameter) {
+            if (! $parameterName = static::getParameterName($parameter->name, $parameters)) {
                 continue;
             }
 
-            $model = $container->make($parameter->getClass()->name);
+            $parameterValue = $parameters[$parameterName];
 
-            $parameterName = static::checkForParameter($parameter->name, $parameters) ?:
-                             static::checkForParameter(snake_case($parameter->name), $parameters);
-
-            if ($parameterName) {
-                $route->setParameter($parameterName, $model->where(
-                    $model->getRouteKeyName(), $parameters[$parameterName]
-                )->firstOrFail());
+            if ($parameterValue instanceof UrlRoutable) {
+                continue;
             }
+
+            $instance = $container->make($parameter->getClass()->name);
+
+            if (! $model = $instance->resolveRouteBinding($parameterValue)) {
+                throw (new ModelNotFoundException)->setModel(get_class($instance));
+            }
+
+            $route->setParameter($parameterName, $model);
         }
     }
 
@@ -42,9 +47,14 @@ class ImplicitRouteBinding
      * @param  array  $parameters
      * @return string|null
      */
-    protected static function checkForParameter($name, $parameters)
+    protected static function getParameterName($name, $parameters)
     {
-        return array_key_exists($name, $parameters)
-                        ? $name : null;
+        if (array_key_exists($name, $parameters)) {
+            return $name;
+        }
+
+        if (array_key_exists($snakedName = Str::snake($name), $parameters)) {
+            return $snakedName;
+        }
     }
 }
