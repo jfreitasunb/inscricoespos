@@ -258,6 +258,7 @@ Route::get('/alert', function () {
 Route::get('/', [
 		'uses'	=> '\Posmat\Http\Controllers\HomeController@index',
 		'as'	=> 'home',
+		'middleware' => ['define.locale'],
 ]);
 
 /*
