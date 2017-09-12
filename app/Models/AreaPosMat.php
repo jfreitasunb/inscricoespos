@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class DisciplinaMat extends Model
+class AreaPosMat extends Model
 {
     
 
@@ -17,14 +17,13 @@ class DisciplinaMat extends Model
      * @var array
      */
     
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_area_pos';
 
-    protected $table = 'disciplinas_mat';
+    protected $table = 'areas_pos_mat';
 
     protected $fillable = [
         'codigo',
-        'nome', 
-        'creditos',
+        'nome',
     ];
 
     public function pega_disciplinas_monitoria()
@@ -37,7 +36,7 @@ class DisciplinaMat extends Model
 
     public function retorna_nome_pelo_codigo($codigo)
     {
-        $nome_disciplina = $this->select('nome')->where('codigo',"=",$codigo)->get();
+        $nome_disciplina = $this->select('nome')->where('codigo',$codigo)->get();
 
         return $nome_disciplina;
 
