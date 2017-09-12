@@ -45,38 +45,16 @@
       </div>
     </div>
 
-    <legend>Escolher disciplinas disponíveis para a Monitoria</legend>
+    <legend>Escolher os programas para Inscrição:</legend>
     <div class="row">
       <div class="col-xs-12">
-        <div class="form-group form-horizontal{{ $errors->has('escolhas_coordenador') ? ' has-error' : '' }}">
+        <div class="form-group form-inline{{ $errors->has('escolhas_coordenador') ? ' has-error' : '' }}">
         @if ($errors->has('escolhas_coordenador'))
-          <span class="help-block">Você deve escolher pelo menos 01(uma) disciplina</span>
+          <span class="help-block">Você deve escolher pelo menos 01(uma) programa.</span>
         @endif
-          <input type="checkbox" name="selectAll" id="disciplinas" /> Selecionar todos
-          <table class="table table-striped" id="disciplinas">
-            <thead>
-              <tr>
-                <th>Disponível</th>
-                <th>Disciplina</th>
-                <th>Disponível</th>
-                <th>Disciplina</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php $i=0;?>
-            @while ($i < sizeof($disciplinas))
-                <tr>
-                  <td><input type="checkbox" id="disciplinas" name="escolhas_coordenador[]" class="checkbox" value="{{ $disciplinas[$i]->codigo }}"></td>
-                  <td>{{ $disciplinas[$i]->nome }}</td>
-                  @if ($i+1<sizeof($disciplinas))
-                    <td><input type="checkbox" id="disciplinas" name="escolhas_coordenador[]" class="checkbox" value="{{ $disciplinas[$i+1]->codigo }}"></td>
-                    <td>{{ $disciplinas[$i+1]->nome }}</td>
-                  @endif
-                </tr>
-                <?php $i=$i+2;?>
-            @endwhile
-            </tbody>
-          </table>
+          @foreach($programas_pos_mat as $programa)
+          <input type="checkbox" id="programa" name="escolhas_coordenador[]" class="checkbox" value="{{ $programa->id_programa_pos }}"> {{ $programa->tipo_programa_pos }}
+          @endforeach
         </div>
       </div>
     </div>
