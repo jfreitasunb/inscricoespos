@@ -37,6 +37,23 @@
           </div>
       </div>
     </div>
+    <div class="row">
+      <div class='col-xs-4'>
+          <div class="form-group form-inline">
+              <label for="">Data limite para envio das cartas de recomendação:</label>
+              <div class='input-group date' id='data_envio_carta_recomendacao'>
+                  <input type='text' class="form-control{{ $errors->has('data_envio_carta_recomendacao') ? ' has-error' : '' }}" name="data_envio_carta_recomendacao" value="{{ Request::old('data_envio_carta_recomendacao') ?: '' }}"/>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+              </div>
+              @if ($errors->has('data_envio_carta_recomendacao'))
+                      <span class="help-block">{{ $errors->first('data_envio_carta_recomendacao') }}</span>
+                @endif
+          </div>
+      </div>
+    </div>
+
 
     <legend>Definir Ano e Semestre de Admissão</legend>
     <div class="row">
