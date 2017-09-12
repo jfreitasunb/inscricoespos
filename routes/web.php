@@ -150,14 +150,14 @@ Route::get('/coordenador/relatorio', [
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
-Route::get('/coordenador/configura/monitoria', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getConfiguraMonitoria',
-	'as' => 'configura.monitoria',
+Route::get('/coordenador/configura/inscricao', [
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos',
+	'as' => 'configura.inscricao',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
-Route::post('/coordenador/configura/monitoria', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@postConfiguraMonitoria',
+Route::post('/coordenador/configura/inscricao', [
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
