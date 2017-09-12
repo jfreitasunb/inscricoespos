@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
         $user = ['login' => 'javx', 'email' => 'jfreitas@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
 
-    	$user = ['login' => 'coord', 'email' => 'coord@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $user = ['login' => 'coordpos', 'email' => 'posgrad@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
 
         $dados_jota = [
@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
 
         $dados_coord = [
             'id_user' => '2',
-            'nome' => 'Coordenação de Graduação',
+            'nome' => 'Coordenação de Pós-Graduação',
             'numerorg' => '2',
             'emissorrg' => '2', 
             'cpf' => '2',
@@ -83,8 +83,9 @@ class DatabaseSeeder extends Seeder
         ];
         $db_dados_coord = DB::table('dados_pessoais')->insert($dados_coord);
 
-        $configura_monitoria = ['ano_monitoria' => '2016','semestre_monitoria' => '1', 'inicio_inscricao' => '2017-01-01', 'fim_inscricao' => '2017-01-02', 'id_coordenador' => '2','created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
-        $db_configura_monitoria = DB::table('configura_monitoria')->insert($configura_monitoria);
+        $configura_inscricao_pos = ['ano_inscricao_pos' => '2018','semestre_inscricao_pos' => '1', 'edital' => '1-2017', 'inicio_inscricao' => '2017-09-01', 'fim_inscricao' => '2017-09-30', 'id_coordenador' => '2','created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_configura_inscricao_pos = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos);
+
 
         // $configura_monitoria2 = ['ano_monitoria' => '2017','semestre_monitoria' => '2', 'inicio_inscricao' => '2017-08-01', 'fim_inscricao' => '2017-08-04', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         // $db_configura_monitoria2 = DB::table('configura_monitoria')->insert($configura_monitoria2);
