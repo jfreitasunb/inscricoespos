@@ -67,9 +67,9 @@ class CoordenadorController extends BaseController
 
 		$programas_pos_mat = ProgramaPos::get()->all();
 
-		$areas_pos_mat = AreaPosMat::get()->all();
+		// $areas_pos_mat = AreaPosMat::get()->all();
 
-		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat','areas_pos_mat'));
+		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat'));
 	}
 
 	public function postConfiguraInscricaoPos(Request $request)
