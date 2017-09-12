@@ -17,6 +17,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->increments('id_inscricao_pos');
             $table->string('ano_inscricao_pos',4);
             $table->string('semestre_inscricao_pos',2);
+            $table->string('edital',6);
             $table->date('inicio_inscricao');
             $table->date('fim_inscricao');
             $table->integer('id_coordenador');
