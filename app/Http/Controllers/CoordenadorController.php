@@ -93,7 +93,16 @@ class CoordenadorController extends BaseController
 
     	$ano = $inicio->format('Y');
 
-    	dd($request->escolhas_coordenador);
+    	$arquivos_temporarios = public_path("/editais");
+
+    	// dd($Input::hasFile(''));
+    	$filename = $request->edital->storeAs(public_path("/editais"),'Edital');
+
+
+		// $arquivo = new Documento();
+		// $arquivo->id_user = $id_user;
+		// $arquivo->nome_arquivo = $filename;
+		// $arquivo->save();
 
   //   	$monitoria = new ConfiguraInscricaoPos();
 
