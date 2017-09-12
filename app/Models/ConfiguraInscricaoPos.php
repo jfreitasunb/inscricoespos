@@ -17,13 +17,13 @@ class ConfiguraInscricaoPos extends Model
      * @var array
      */
     
-    protected $primaryKey = 'id_monitoria';
+    protected $primaryKey = 'id_inscricao_pos';
 
-    protected $table = 'configura_monitoria';
+    protected $table = 'configura_inscricao_pos';
 
     protected $fillable = [
-        'ano_monitoria',
-        'semestre_monitoria', 
+        'ano_inscricao_pos',
+        'semestre_inscricao_pos', 
         'inicio_inscricao', 
         'fim_inscricao',
         'id_coordenador',
@@ -31,7 +31,7 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_lista_para_relatorio()
     {
-        $lista_relatorio = $this->take(10)->get()->sortByDesc('id_monitoria');
+        $lista_relatorio = $this->take(10)->get()->sortByDesc('id_inscricao_pos');
 
         return $lista_relatorio;
 
@@ -39,9 +39,9 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_inscricao_ativa()
     {
-        $monitoria_ativa = $this->get()->sortByDesc('id_monitoria')->first();
+        $inscricao_pos_ativa = $this->get()->sortByDesc('id_inscricao_pos')->first();
 
-        return $monitoria_ativa;
+        return $inscricao_pos_ativa;
 
     }
 
