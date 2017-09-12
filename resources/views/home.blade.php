@@ -21,7 +21,7 @@
               <a href="{{ route('auth.login') }}">Login</a>
             </div>
             <div class="col-xs-6">
-              <a href="{{ route('auth.registrar') }}">trans('tela_inicial.menu_registrar')</a>
+              <a href="{{ route('auth.registrar') }}">{{trans('tela_inicial.menu_registrar')}}</a>
             </div>
           </div>
         </div>
