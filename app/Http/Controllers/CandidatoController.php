@@ -10,8 +10,8 @@ use Validator;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\DisciplinaMat;
-use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\AreaPosMat;
+use Posmat\Models\ProgramaPosMat;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoBancario;
@@ -330,7 +330,7 @@ class CandidatoController extends BaseController
 		$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
 		$autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 		
-		$disciplinas_escolhas = new DisciplinaMonitoria();
+		$disciplinas_escolhas = new ProgramaPosMat();
 		$escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
 
 		$array_horarios_disponiveis = array('12:00 às 13:00','13:00 às 14:00','18:00 às 19:00');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCursosGraduacaoTable extends Migration
+class CreateAreaPosMatTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateCursosGraduacaoTable extends Migration
      */
     public function up()
     {
-         Schema::create('cursos_graduacao', function (Blueprint $table){
-            $table->increments('id');
-            $table->integer('id_curso_graduacao');
-            $table->string('nome_curso',255);
+        Schema::create('area_pos_mat', function (Blueprint $table){
+            $table->increments('id_area_pos');
+            $table->string('nome',200);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateCursosGraduacaoTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cursos_graduacao');
+        Schema::drop('area_pos_mat');
     }
 }

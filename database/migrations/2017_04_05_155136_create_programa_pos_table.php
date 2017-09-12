@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAreasPosMatTable extends Migration
+class CreateProgramaPosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAreasPosMatTable extends Migration
      */
     public function up()
     {
-        Schema::create('areas_pos_mat', function (Blueprint $table){
-            $table->increments('id');
-            $table->integer('codigo');
-            $table->string('nome',200);
+         Schema::create('programa_pos_mat', function (Blueprint $table){
+            $table->increments('id_programa_pos');
+            $table->string('tipo_programa_pos',255);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAreasPosMatTable extends Migration
      */
     public function down()
     {
-        Schema::drop('areas_pos_mat');
+        Schema::drop('programa_pos_mat');
     }
 }

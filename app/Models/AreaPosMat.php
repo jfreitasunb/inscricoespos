@@ -19,10 +19,9 @@ class AreaPosMat extends Model
     
     protected $primaryKey = 'id_area_pos';
 
-    protected $table = 'areas_pos_mat';
+    protected $table = 'area_pos_mat';
 
     protected $fillable = [
-        'codigo',
         'nome',
     ];
 

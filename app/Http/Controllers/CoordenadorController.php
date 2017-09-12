@@ -9,8 +9,8 @@ use Session;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\DisciplinaMat;
-use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\AreaPosMat;
+use Posmat\Models\ProgramaPosMat;
 use Posmat\Models\RelatorioController;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
@@ -44,7 +44,7 @@ class CoordenadorController extends BaseController
 			'creditos_disciplina' => 'required|numeric',
 		]);
     
-    	$nova_disciplina = new DisciplinaMat();
+    	$nova_disciplina = new AreaPosMat();
 
 		$nova_disciplina->codigo = $request->codigo;
 		$nova_disciplina->nome = $request->nome_disciplina;
@@ -65,7 +65,7 @@ class CoordenadorController extends BaseController
 
 		$monitoria = new ConfiguraInscricaoPos();
 
-		$disciplina = new DisciplinaMat();
+		$disciplina = new AreaPosMat();
 
 		$disciplinas = $disciplina->pega_disciplinas_monitoria();
 
@@ -106,7 +106,7 @@ class CoordenadorController extends BaseController
 
 		for ($i=0; $i < sizeof($request->escolhas_coordenador); $i++) { 
 
-			$disciplinamonitoria = new DisciplinaMonitoria;
+			$disciplinamonitoria = new ProgramaPosMat;
 
 			$disciplinamonitoria->id_monitoria = $id_monitoria;
 			

@@ -15,8 +15,8 @@ use Posmat\Models\DadoPessoal;
 use Posmat\Models\DadoBancario;
 use Posmat\Models\Documento;
 use Posmat\Models\DadoAcademico;
-use Posmat\Models\DisciplinaMat;
-use Posmat\Models\DisciplinaMonitoria;
+use Posmat\Models\AreaPosMat;
+use Posmat\Models\ProgramaPosMat;
 use Posmat\Models\EscolhaMonitoria;
 use Posmat\Models\HorarioEscolhido;
 use Posmat\Models\AtuacaoMonitoria;
@@ -160,7 +160,7 @@ class RelatorioController extends BaseController
 
        		$escolhas_candidato = $escolheu->retorna_escolha_monitoria($id_user,$id_monitoria);
 
-       		$disciplina = new DisciplinaMat();
+       		$disciplina = new AreaPosMat();
 
 
        		for ($i=0; $i < sizeof($escolhas_candidato); $i++) { 
