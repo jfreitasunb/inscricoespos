@@ -10,10 +10,13 @@ class LocaleMiddleware {
     public function handle($request, Closure $next)
     {
         if(Auth::user()){
-        	App::setLocale(Auth::user()->locale);
-            // app()->setLocale(LC_ALL,Auth::user()->locale);
-        }elseif($locale = Session::has('locale')){
-            App::setLocale($locale);
+        	// App::setLocale(Auth::user()->locale);
+            app()->setLocale(Auth::user()->locale);
+        }elseif(Session::has('locale')){
+        	$locale = Session::get('locale');
+            app()->setLocale($locale);
+        }else{
+        	app()->setLocale('pt-br');
         }
 
 
