@@ -59,6 +59,25 @@
       </div>
     </div>
 
+    <legend>Edital</legend>
+    <div class="form-horizontal"{{ $errors->has('edital') ? ' has-error' : '' }}>
+      <div class="row">
+        <span class="input-group-btn">
+            <!-- image-preview-clear button -->
+            <button type="button" class="btn btn-primary" style="display:none;">
+                <span class="glyphicon glyphicon-remove"></span> Clear
+            </button>
+            <!-- image-preview-input -->
+            <div class="btn btn-primary">
+                <input type="file" accept="application/pdf" name="edital" required=""/> <!-- rename it -->
+            </div>
+        </span>
+      </div>
+       @if ($errors->has('edital'))
+        <span class="help-block">{{ $errors->first('edital') }}</span>
+      @endif
+    </div>
+
     <div id="hidden_form_container" style="display:none;"></div>
     <div class="col-xs-12" style="height:35px;"></div>
         <div class="form-group">
