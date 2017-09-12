@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateConfiguraMonitoriaTable extends Migration
+class CreateConfiguraInscricaoPosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateConfiguraMonitoriaTable extends Migration
      */
     public function up()
     {
-        Schema::create('configura_monitoria', function (Blueprint $table){
-            $table->increments('id_monitoria');
-            $table->string('ano_monitoria',4);
-            $table->string('semestre_monitoria',2);
+        Schema::create('configura_inscricao_pos', function (Blueprint $table){
+            $table->increments('id_inscricao_pos');
+            $table->string('ano_inscricao_pos',4);
+            $table->string('semestre_inscricao_pos',2);
             $table->date('inicio_inscricao');
             $table->date('fim_inscricao');
             $table->integer('id_coordenador');
@@ -31,6 +31,6 @@ class CreateConfiguraMonitoriaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('configura_monitoria');
+        Schema::drop('configura_inscricao_pos');
     }
 }
