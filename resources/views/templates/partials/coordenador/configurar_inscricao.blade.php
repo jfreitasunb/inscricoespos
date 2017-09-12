@@ -36,13 +36,23 @@
                 @endif
           </div>
       </div>
+    </div>
+
+    <legend>Definir Ano e Semestre de Admissão</legend>
+    <div class="row">
       <div class="col-xs-4">
         <div class="form-group form-inline{{ $errors->has('semestre') ? ' has-error' : '' }}">
-        <label for="">Semestre: </label>
+        <label for="">Ano de admissão: </label>
+          <input type="text" name="ano_admissao" id="ano_admissao" required="" value="{{Request::old('ano_admissao') ?: '' }}">
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="form-group form-inline{{ $errors->has('semestre') ? ' has-error' : '' }}">
+        <label for="">Semestre de admissão: </label>
           <input type="radio" name="semestre" id="semestre" class="radio" value="1" @if(Request::old('semestre')==1) checked @endif> 1
           <input type="radio" name="semestre" id="semestre" class="radio" value="2" @if(Request::old('semestre')==2) checked @endif> 2
         </div>
-      </div>
+      </div> 
     </div>
 
     <legend>Escolher os programas para Inscrição:</legend>
@@ -58,9 +68,24 @@
         </div>
       </div>
     </div>
-
+  
     <legend>Edital</legend>
     <div class="form-horizontal"{{ $errors->has('edital') ? ' has-error' : '' }}>
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="form-group form-inline{{ $errors->has('semestre') ? ' has-error' : '' }}">
+        <label for="">Ano: </label>
+          <input type="text" name="ano_edital" id="ano_edital" required="" value="{{Request::old('ano_edital') ?: '' }}">
+        </div>
+      </div> 
+      <div class="row">
+      <div class="col-xs-4">
+        <div class="form-group form-inline{{ $errors->has('semestre') ? ' has-error' : '' }}">
+        <label for="">Número: </label>
+          <input type="text" name="ano_edital" id="ano_edital" required="" value="{{Request::old('ano_edital') ?: '' }}">
+        </div>
+      </div> 
+    </div>
       <div class="row">
         <span class="input-group-btn">
             <!-- image-preview-clear button -->
