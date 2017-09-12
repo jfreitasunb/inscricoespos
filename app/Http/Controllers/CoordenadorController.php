@@ -82,6 +82,7 @@ class CoordenadorController extends BaseController
 			'escolhas_coordenador' => 'required',
 		]);
 
+
 		$user = Auth::user();
     
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
@@ -92,32 +93,34 @@ class CoordenadorController extends BaseController
 
     	$ano = $inicio->format('Y');
 
-    	$monitoria = new ConfiguraInscricaoPos();
+    	dd($request->escolhas_coordenador);
 
-		$monitoria->ano_monitoria = $ano;
-		$monitoria->semestre_monitoria = $request->semestre;
-		$monitoria->inicio_inscricao = $data_inicio;
-		$monitoria->fim_inscricao = $data_fim;
-		$monitoria->id_coordenador = $user->id_user;
+  //   	$monitoria = new ConfiguraInscricaoPos();
 
-		$monitoria->save();
+		// $monitoria->ano_monitoria = $ano;
+		// $monitoria->semestre_monitoria = $request->semestre;
+		// $monitoria->inicio_inscricao = $data_inicio;
+		// $monitoria->fim_inscricao = $data_fim;
+		// $monitoria->id_coordenador = $user->id_user;
 
-		$id_monitoria=$monitoria->id_monitoria;
+		// $monitoria->save();
 
-		for ($i=0; $i < sizeof($request->escolhas_coordenador); $i++) { 
+		// $id_monitoria=$monitoria->id_monitoria;
 
-			$disciplinamonitoria = new ProgramaPosMat;
+		// for ($i=0; $i < sizeof($request->escolhas_coordenador); $i++) { 
 
-			$disciplinamonitoria->id_monitoria = $id_monitoria;
+		// 	$disciplinamonitoria = new ProgramaPosMat;
+
+		// 	$disciplinamonitoria->id_monitoria = $id_monitoria;
 			
-			$disciplinamonitoria->codigo_disciplina = $request->escolhas_coordenador[$i];
+		// 	$disciplinamonitoria->codigo_disciplina = $request->escolhas_coordenador[$i];
 
-			$disciplinamonitoria->save();
+		// 	$disciplinamonitoria->save();
 
-		}
+		// }
 
-		notify()->flash('Dados gravados com sucesso.','info');
-		return redirect()->route('configura.monitoria');
+		// notify()->flash('Dados gravados com sucesso.','info');
+		// return redirect()->route('configura.monitoria');
 
 		
 
