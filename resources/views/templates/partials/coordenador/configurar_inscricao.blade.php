@@ -5,7 +5,7 @@
 @endsection
 
 @section('configura_inscricao')
-  <form action="{{ route('configura.inscricao') }}" method="POST" data-parsley-validate>
+  <form action="{{ route('configura.inscricao') }}" method="POST" data-parsley-validate enctype="multipart/form-data">
     <legend>Configurar período da abertura da inscrição</legend>
     <div class="row">
       <div class='col-xs-4'>
