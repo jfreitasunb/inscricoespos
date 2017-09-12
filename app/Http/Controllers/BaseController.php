@@ -19,9 +19,9 @@ class BaseController extends Controller
 
 	public function __construct() {
 
-       $monitoria = new ConfiguraInscricaoPos();
+       $inscricao_pos = new ConfiguraInscricaoPos();
 
-	   $periodo_inscricao = $monitoria->retorna_periodo_inscricao();
+	   $periodo_inscricao = $inscricao_pos->retorna_periodo_inscricao();
 
        View::share ( 'periodo_inscricao', $periodo_inscricao );
     }
