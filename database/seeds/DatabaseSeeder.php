@@ -87,24 +87,22 @@ class DatabaseSeeder extends Seeder
         $db_configura_inscricao_pos = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos);
 
 
-        // $configura_monitoria2 = ['ano_monitoria' => '2017','semestre_monitoria' => '2', 'inicio_inscricao' => '2017-08-01', 'fim_inscricao' => '2017-08-04', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
-        // $db_configura_monitoria2 = DB::table('configura_monitoria')->insert($configura_monitoria2);
+        $lista_areas_pos = [1 => 'Álgebra', 2 => 'Análise', 3 => 'Geometria', 4 => 'Matemática Aplicada', 5 => 'Teoria dos Números', 6 => 'Sistemas Dinâmicos'];
 
-        $lista_disciplinas = [1 => 'Matemática (Bacharelado/Licenciatura)', 2 => 'Ciências da Computação (Bacharelado/Licenciatura)', 3 => 'Estatística', 4 => 'Física (Bacharelado/Licenciatura)', 5 => 'Química (Bacharelado/Licenciatura)', 6 => 'Geologia/Geofísica', 7 => 'Engenharia (Mecânica/Elétrica/Civil/Redes/Mecatrônica/Química/Produção)', 8 => 'Outros'];
-
-        for ($i=1; $i < sizeof($lista_disciplinas)+1; $i++) { 
+        for ($i=1; $i < sizeof($lista_areas_pos)+1; $i++) { 
             
-            $disciplina = ['id_curso_graduacao' => $i, 'nome_curso' => $lista_disciplinas[$i], 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+            $disciplina = ['id_area_pos' => $i, 'nome_curso' => $lista_areas_pos[$i], 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
             $db_disciplina = DB::table('cursos_graduacao')->insert($disciplina);
         }
 
-        $d1 = ['codigo' => 113115, 'nome' => 'Teoria dos Números', 'creditos' => 4, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
 
-        $db_disciplina_mat = DB::table('disciplinas_mat')->insert($d1);
+        $programa_pos1 = ['id_programa_pos' => 1, 'nome' => 'Mestrado', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
 
-        $d2 = ['codigo' => 117323, 'nome' => 'Teoria dos Números 2', 'creditos' => 4, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_programa_pos1 = DB::table('disciplinas_mat')->insert($programa_pos1);
 
-        $db_disciplina_mat = DB::table('disciplinas_mat')->insert($d2);
+        $programa_pos1 = ['id_programa_pos' => 2, 'nome' => 'Doutorado', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+
+        $db_programa_pos2 = DB::table('disciplinas_mat')->insert($programa_pos2);
 
         $d3 = ['codigo' => 113263, 'nome' => 'Topologia dos Espaços Métricos', 'creditos' => 4, 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
 
