@@ -10,7 +10,7 @@ use File;
 use ZipArchive;
 use Carbon\Carbon;
 use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\DadoBancario;
 use Posmat\Models\Documento;
@@ -38,7 +38,7 @@ class RelatorioController extends BaseController
 	public function getListaRelatorios()
 	{
 
-		$relatorio = new ConfiguraInscricao();
+		$relatorio = new ConfiguraInscricaoPos();
 
 		$relatorio_disponivel = $relatorio->retorna_lista_para_relatorio();
 
@@ -55,7 +55,7 @@ class RelatorioController extends BaseController
        public function getArquivosRelatorios($id_monitoria,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario)
        {
 
-              $relatorio = new ConfiguraInscricao();
+              $relatorio = new ConfiguraInscricaoPos();
 
               $relatorio_disponivel = $relatorio->retorna_lista_para_relatorio();
 

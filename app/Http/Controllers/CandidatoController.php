@@ -9,7 +9,7 @@ use Session;
 use Validator;
 use Carbon\Carbon;
 use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\DisciplinaMat;
 use Posmat\Models\DisciplinaMonitoria;
 use Posmat\Models\DadoPessoal;
@@ -243,7 +243,7 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricao();
+		$monitoria_ativa = new ConfiguraInscricaoPos();
 		$ano_semestre_ira = $monitoria_ativa->ira_ano_semestre();
 
 		$dados_academicos = new DadoAcademico();
@@ -288,7 +288,7 @@ class CandidatoController extends BaseController
 				$atuacao->save();
 			}
 
-			$monitoria_ativa = new ConfiguraInscricao();
+			$monitoria_ativa = new ConfiguraInscricaoPos();
 
 			$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
 			
@@ -326,7 +326,7 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricao();
+		$monitoria_ativa = new ConfiguraInscricaoPos();
 		$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
 		$autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 		
@@ -394,7 +394,7 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricao();
+		$monitoria_ativa = new ConfiguraInscricaoPos();
 		$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
 		$autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 

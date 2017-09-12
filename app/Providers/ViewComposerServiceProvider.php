@@ -3,7 +3,7 @@
 namespace Posmat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 
 
 class ViewComposerServiceProvider extends ServiceProvider
@@ -13,7 +13,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         view()->composer('templates.partials.cabecalho', function($view)
             {
-                $periodo = new ConfiguraInscricao();
+                $periodo = new ConfiguraInscricaoPos();
 
                 $periodo_inscricao = $periodo->retorna_periodo_inscricao();
 

@@ -2,7 +2,7 @@
 
 namespace Posmat\Http\Controllers;
 
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 
 use View;
 
@@ -19,7 +19,7 @@ class BaseController extends Controller
 
 	public function __construct() {
 
-       $monitoria = new ConfiguraInscricao();
+       $monitoria = new ConfiguraInscricaoPos();
 
 	   $periodo_inscricao = $monitoria->retorna_periodo_inscricao();
 

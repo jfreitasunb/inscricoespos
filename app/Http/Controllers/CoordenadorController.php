@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Carbon\Carbon;
 use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\DisciplinaMat;
 use Posmat\Models\DisciplinaMonitoria;
 use Posmat\Models\RelatorioController;
@@ -63,7 +63,7 @@ class CoordenadorController extends BaseController
 	public function getConfiguraMonitoria()
 	{
 
-		$monitoria = new ConfiguraInscricao();
+		$monitoria = new ConfiguraInscricaoPos();
 
 		$disciplina = new DisciplinaMat();
 
@@ -92,7 +92,7 @@ class CoordenadorController extends BaseController
 
     	$ano = $inicio->format('Y');
 
-    	$monitoria = new ConfiguraInscricao();
+    	$monitoria = new ConfiguraInscricaoPos();
 
 		$monitoria->ano_monitoria = $ano;
 		$monitoria->semestre_monitoria = $request->semestre;

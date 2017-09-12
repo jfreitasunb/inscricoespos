@@ -3,7 +3,7 @@
 namespace Posmat\Http\Middleware;
 
 use Closure;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 
 class AutorizaLogin
 {
@@ -16,7 +16,7 @@ class AutorizaLogin
      */
     public function handle($request, Closure $next)
     {
-        $monitoria = new ConfiguraInscricao();
+        $monitoria = new ConfiguraInscricaoPos();
 
         $autoriza_inscricao = $monitoria->autoriza_inscricao();
 

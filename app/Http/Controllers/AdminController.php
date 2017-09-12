@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Carbon\Carbon;
 use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\DisciplinaMat;
 use Posmat\Models\DisciplinaMonitoria;
 use Posmat\Models\RelatorioController;

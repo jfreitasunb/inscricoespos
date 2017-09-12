@@ -3,7 +3,7 @@
 namespace Posmat\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Posmat\Models\ConfiguraInscricao;
+use Posmat\Models\ConfiguraInscricaoPos;
 use Validator;
 use Illuminate\Http\Request;
 
