@@ -4,8 +4,8 @@
   <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
 @endsection
 
-@section('configura_monitoria')
-  <form action="{{ route('configura.monitoria') }}" method="POST" data-parsley-validate>
+@section('configura_inscricao')
+  <form action="{{ route('configura.inscricao') }}" method="POST" data-parsley-validate>
     <legend>Configurar período da abertura da inscrição</legend>
     <div class="row">
       <div class='col-xs-4'>

@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="bar1">
       <ul class="nav navbar-nav">
         <li class="{{ Route::currentRouteNamed('cadastra.disciplina') ? 'active' : '' }}"><a href="{{ route('cadastra.disciplina') }}">Cadastrar Disciplina</a></li>
-        <li class="{{ Route::currentRouteNamed('configura.monitoria') ? 'active' : '' }}"><a href="{{ route('configura.monitoria') }}">Configurar Inscrição</a></li>
+        <li class="{{ Route::currentRouteNamed('configura.inscricao') ? 'active' : '' }}"><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a></li>
         <li class="{{ Route::currentRouteNamed('relatorio.monitoria') ? 'active' : '' }}"><a href="{{ route('relatorio.monitoria') }}">Relatórios</a></li>
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}""><a href="{{ route('auth.logout') }}">Sair</a></li>
       </ul>
