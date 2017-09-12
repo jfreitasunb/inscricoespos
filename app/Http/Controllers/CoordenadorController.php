@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPosMat;
+use Posmat\Models\ProgramaPos;
 use Posmat\Models\RelatorioController;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
