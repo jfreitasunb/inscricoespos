@@ -60,19 +60,19 @@ class CoordenadorController extends BaseController
 
 	}
 
-	public function getConfiguraMonitoria()
+	public function getConfiguraInscricaoPos()
 	{
 
-		$monitoria = new ConfiguraInscricaoPos();
+		$inscricao_pos = new ConfiguraInscricaoPos();
 
-		$disciplina = new AreaPosMat();
+		$programas_pos_mat = ProgramaPos::get()->all();
 
-		$disciplinas = $disciplina->pega_disciplinas_monitoria();
+		$areas_pos_mat = AreaPosMat::get()->all();
 
-		return view('templates.partials.coordenador.configurar_monitoria')->with('disciplinas', $disciplinas);
+		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat','areas_pos_mat'));
 	}
 
-	public function postConfiguraMonitoria(Request $request)
+	public function postConfiguraInscricaoPos(Request $request)
 	{
 
 		$this->validate($request, [
