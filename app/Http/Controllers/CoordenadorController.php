@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Mail;
 use Session;
+use File;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
@@ -17,6 +18,7 @@ use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 
 /**
 * Classe para visualização da página inicial.
@@ -93,10 +95,23 @@ class CoordenadorController extends BaseController
 
     	$ano = $inicio->format('Y');
 
-    	$arquivos_temporarios = public_path("/editais");
 
-    	// dd($Input::hasFile(''));
-    	$filename = $request->edital->storeAs(public_path("/editais"),'Edital');
+    	$temp_file = $request->edital->store("arquivos_temporarios");
+
+
+    	$local_documentos = storage_path('app/');
+        $arquivos_editais = public_path("/editais/");
+
+        $nome_temporario_edital = $local_documentos.$temp_file;
+
+        $nome_final_edital = $arquivos_editais."Teste.pdf";
+
+		File::copy($nome_temporario_edital,$nome_final_edital);
+
+		File::delete($nome_temporario_edital);
+
+
+    	// $move = File::move(store("arquivos_temporarios"), public_path("editais/")."Teste.pdf");
 
 
 		// $arquivo = new Documento();
