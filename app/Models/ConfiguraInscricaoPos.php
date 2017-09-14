@@ -21,11 +21,12 @@ class ConfiguraInscricaoPos extends Model
 
     protected $table = 'configura_inscricao_pos';
 
-    protected $fillable = [
-        'ano_inscricao_pos',
-        'semestre_inscricao_pos', 
+    protected $fillable = [ 
         'inicio_inscricao', 
         'fim_inscricao',
+        'prazo_carta',
+        'programa',
+        'edital',
         'id_coordenador',
     ];
 

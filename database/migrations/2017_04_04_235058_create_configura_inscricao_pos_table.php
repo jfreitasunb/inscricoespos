@@ -15,11 +15,11 @@ class CreateConfiguraInscricaoPosTable extends Migration
     {
         Schema::create('configura_inscricao_pos', function (Blueprint $table){
             $table->increments('id_inscricao_pos');
-            $table->string('ano_inscricao_pos',4);
-            $table->string('semestre_inscricao_pos',2);
-            $table->string('edital',6);
             $table->date('inicio_inscricao');
             $table->date('fim_inscricao');
+            $table->date('prazo_carta');
+            $table->string('programa',7);
+            $table->string('edital',7);
             $table->integer('id_coordenador');
             $table->timestamps();
         });

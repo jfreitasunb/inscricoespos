@@ -83,7 +83,7 @@ class DatabaseSeeder extends Seeder
         ];
         $db_dados_coord = DB::table('dados_pessoais')->insert($dados_coord);
 
-        $configura_inscricao_pos = ['ano_inscricao_pos' => '2018','semestre_inscricao_pos' => '1', 'edital' => '1-2017', 'inicio_inscricao' => '2017-09-01', 'fim_inscricao' => '2017-09-30', 'id_coordenador' => '2','created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $configura_inscricao_pos = ['inicio_inscricao' => '2017-09-01', 'fim_inscricao' => '2017-09-30', 'prazo_carta' => '2017-10-01','edital' => '2017-1', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_configura_inscricao_pos = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos);
 
 
