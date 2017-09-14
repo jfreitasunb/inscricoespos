@@ -78,7 +78,7 @@
         
         <legend></legend>
         <div class="col-md-10 text-center"> 
-          {!! Form::submit('Teste', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
+          {!! Form::submit('Salvar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
         </div>
     </div>
       {!! Form::close() !!}
