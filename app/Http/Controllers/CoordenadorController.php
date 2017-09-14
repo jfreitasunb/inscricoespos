@@ -90,6 +90,9 @@ class CoordenadorController extends BaseController
 		$configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
 
 		$user = Auth::user();
+
+		$local_documentos = storage_path('app/');
+        $arquivos_editais = public_path("/editais/");
     
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
     	$fim = Carbon::createFromFormat('d/m/Y', $request->fim_inscricao);
@@ -105,31 +108,34 @@ class CoordenadorController extends BaseController
     		$configura_nova_inscricao_pos->inicio_inscricao = $data_inicio;
 			$configura_nova_inscricao_pos->fim_inscricao = $data_fim;
 			$configura_nova_inscricao_pos->prazo_carta = $prazo_carta;
-			$configura_nova_inscricao_pos->edital = $request->$edital_ano."-".$request->$edital_numero;
+			$configura_nova_inscricao_pos->edital = $request->edital_ano."-".$request->edital_numero;
 			$configura_nova_inscricao_pos->programa = implode("_", $request->escolhas_coordenador);
 			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
 
-			$configura_nova_inscricao_pos->save();
-    		
+			$temp_file = $request->edital->store("arquivos_temporarios");
+
+        	$nome_temporario_edital = $local_documentos.$temp_file;
+
+	        $nome_final_edital = $arquivos_editais."Edital_MAT_".$configura_nova_inscricao_pos->edital.".pdf";
+
+			if (File::copy($nome_temporario_edital,$nome_final_edital)) {
+				
+				File::delete($nome_temporario_edital);
+				$configura_nova_inscricao_pos->save();
+
+				notify()->flash('Inscrição configurada com sucesso.','success');
+			return redirect()->route('configura.inscricao');
+
+
+			}else{
+				notify()->flash('Houve um problema na hora de enviar o edital. Tente novamente.','error');
+				return redirect()->route('configura.inscricao');
+			}
     	}else{
     		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
-			return redirect()->route('configura.inscricao');
+			return redirect()->back('configura.inscricao');
     	}
 
-
-    	$temp_file = $request->edital->store("arquivos_temporarios");
-
-
-    	$local_documentos = storage_path('app/');
-        $arquivos_editais = public_path("/editais/");
-
-        $nome_temporario_edital = $local_documentos.$temp_file;
-
-        $nome_final_edital = $arquivos_editais."Teste.pdf";
-
-		File::copy($nome_temporario_edital,$nome_final_edital);
-
-		File::delete($nome_temporario_edital);
 
 
     	// $move = File::move(store("arquivos_temporarios"), public_path("editais/")."Teste.pdf");
