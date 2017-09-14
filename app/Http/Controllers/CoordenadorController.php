@@ -135,46 +135,6 @@ class CoordenadorController extends BaseController
     		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
 			return redirect()->back('configura.inscricao');
     	}
-
-
-
-    	// $move = File::move(store("arquivos_temporarios"), public_path("editais/")."Teste.pdf");
-
-
-		// $arquivo = new Documento();
-		// $arquivo->id_user = $id_user;
-		// $arquivo->nome_arquivo = $filename;
-		// $arquivo->save();
-
-  //   	$monitoria = new ConfiguraInscricaoPos();
-
-		// $monitoria->ano_monitoria = $ano;
-		// $monitoria->semestre_monitoria = $request->semestre;
-		// $monitoria->inicio_inscricao = $data_inicio;
-		// $monitoria->fim_inscricao = $data_fim;
-		// $monitoria->id_coordenador = $user->id_user;
-
-		// $monitoria->save();
-
-		// $id_monitoria=$monitoria->id_monitoria;
-
-		// for ($i=0; $i < sizeof($request->escolhas_coordenador); $i++) { 
-
-		// 	$disciplinamonitoria = new ProgramaPosMat;
-
-		// 	$disciplinamonitoria->id_monitoria = $id_monitoria;
-			
-		// 	$disciplinamonitoria->codigo_disciplina = $request->escolhas_coordenador[$i];
-
-		// 	$disciplinamonitoria->save();
-
-		// }
-
-		// notify()->flash('Dados gravados com sucesso.','info');
-		// return redirect()->route('configura.monitoria');
-
-		
-
 	}
 
 	public function getRelatorioMonitoria()
