@@ -77,7 +77,6 @@ class CoordenadorController extends BaseController
 	public function postConfiguraInscricaoPos(Request $request)
 	{
 
-		dd($request);
 		$this->validate($request, [
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
 			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
@@ -100,14 +99,15 @@ class CoordenadorController extends BaseController
     	$data_fim = $fim->format('Y-m-d');
     	$prazo_carta = $prazo->format('Y-m-d');
 
+
+    	$ano = $inicio->format('Y');
+
     	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
     		# code...
     	}else{
     		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
-			return redirect()->route('configura.monitoria');
+			return redirect()->route('configura.inscricao');
     	}
-
-    	$ano = $inicio->format('Y');
 
 
     	$temp_file = $request->edital->store("arquivos_temporarios");
