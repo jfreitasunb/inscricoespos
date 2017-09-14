@@ -7,6 +7,10 @@ $(function () {
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
         });
+        $('#prazo_carta').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
 });
 
 $('#disciplinas').click(function() {
