@@ -85,6 +85,9 @@ class CoordenadorController extends BaseController
 		]);
 
 
+		$configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
+
+
 		$user = Auth::user();
     
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
@@ -92,6 +95,8 @@ class CoordenadorController extends BaseController
 
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
+
+    	$configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio);
 
     	$ano = $inicio->format('Y');
 
