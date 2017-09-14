@@ -46,11 +46,17 @@
         <legend>Escolher os programas para Inscrição:</legend>
           @foreach($programas_pos_mat as $programa)
             <div class="col-xs-6">
-              {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos }}
+              <div class="form-group form-inline">
+                {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos }}  
+              </div>
             </div>
           @endforeach
-
+        
         <legend>Edital</legend>
+
+
+
+
         {!! Form::submit('Teste', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
       {!! Form::close() !!}
       
