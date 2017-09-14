@@ -90,16 +90,22 @@ class CoordenadorController extends BaseController
 
 		$configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
 
-
 		$user = Auth::user();
     
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
     	$fim = Carbon::createFromFormat('d/m/Y', $request->fim_inscricao);
+    	$prazo = Carbon::createFromFormat('d/m/Y', $request->prazo_carta);
 
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
+    	$prazo_carta = $prazo->format('Y-m-d');
 
-    	$configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio);
+    	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
+    		# code...
+    	}else{
+    		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
+			return redirect()->route('configura.monitoria');
+    	}
 
     	$ano = $inicio->format('Y');
 
