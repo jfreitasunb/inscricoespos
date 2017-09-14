@@ -100,10 +100,17 @@ class CoordenadorController extends BaseController
     	$prazo_carta = $prazo->format('Y-m-d');
 
 
-    	$ano = $inicio->format('Y');
-
     	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
-    		# code...
+
+    		$configura_nova_inscricao_pos->inicio_inscricao = $data_inicio;
+			$configura_nova_inscricao_pos->fim_inscricao = $data_fim;
+			$configura_nova_inscricao_pos->prazo_carta = $prazo_carta;
+			$configura_nova_inscricao_pos->edital = $request->$edital_ano."-".$request->$edital_numero;
+			$configura_nova_inscricao_pos->programa = implode("_", $request->escolhas_coordenador);
+			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
+
+			$configura_nova_inscricao_pos->save();
+    		
     	}else{
     		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
 			return redirect()->route('configura.inscricao');
