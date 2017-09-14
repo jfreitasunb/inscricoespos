@@ -64,11 +64,27 @@
           {!! Form::text('edital_numero', null, ['class' => 'form-group', 'required' => '', 'data-parsley-type' => 'integer']) !!}
         </div>
 
-        {!! Form::submit('Teste', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-primary" style="display:none;">
+            <span class="glyphicon glyphicon-remove"></span> Clear
+          </button>
+          <div class="register-submit btn btn-primary">
+            <input type="file" accept="application/pdf" name="edital" required=""/> <!-- rename it -->
+          </div>
+        </span>
+        @if ($errors->has('edital'))
+          <span class="help-block">{{ $errors->first('edital') }}</span>
+        @endif
+        
+        <legend></legend>
+        <div class="col-md-10 text-center"> 
+          {!! Form::submit('Teste', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
+        </div>
+    </div>
       {!! Form::close() !!}
       
-    </div>
   </div>
+
 @endsection
 
 @section('scripts')
