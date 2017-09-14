@@ -87,6 +87,21 @@ class ConfiguraInscricaoPos extends Model
         }
     }
 
+    public function autoriza_configuracao_inscricao($nova_inscricao_inicio)
+    {
+        $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
+        $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
+
+        $data_inicio = $inicio->format('Y-m-d');
+        $data_fim = $fim->format('Y-m-d');
+
+        if ($nova_inscricao_inicio > $data_fim) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function ira_ano_semestre()
     {    
         $date = new Carbon();
