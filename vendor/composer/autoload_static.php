@@ -13,10 +13,12 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'd92e6dafb93e67e5b59c39d9b9d00659' => __DIR__ . '/..' . '/codecourse/notify/src/Codecourse/Notify/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        'cb61d74ad51d00867155534456b38b23' => __DIR__ . '/..' . '/mews/purifier/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -74,6 +76,7 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Mews\\Purifier\\' => 14,
         ),
         'L' => 
         array (
@@ -223,6 +226,10 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Mews\\Purifier\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mews/purifier/src',
+        ),
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
@@ -307,6 +314,13 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
                 0 => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src',
             ),
         ),
+        'H' => 
+        array (
+            'HTMLPurifier' => 
+            array (
+                0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
+            ),
+        ),
         'D' => 
         array (
             'Doctrine\\Common\\Lexer\\' => 
@@ -351,21 +365,21 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'CidadesSaoPauloSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesSaoPauloSeeder.php',
         'CidadesSergipeSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesSergipeSeeder.php',
         'CidadesTocantinsSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesTocantinsSeeder.php',
+        'CreateAreaPosMatTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155212_create_area_pos_mat_table.php',
         'CreateArquivosEnviadosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155028_create_arquivos_enviados_table.php',
         'CreateAtuouMonitoriaTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155102_create_atuou_monitoria_table.php',
         'CreateCidadesTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_07_163722_create_cidades_table.php',
-        'CreateConfiguraMonitoriaTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_04_235058_create_configura_monitoria_table.php',
-        'CreateCursosGraduacaoTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155136_create_cursos_graduacao_table.php',
+        'CreateConfiguraInscricaoPosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_04_235058_create_configura_inscricao_pos_table.php',
         'CreateDadosAcademicosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155145_create_dados_academicos_table.php',
         'CreateDadosBancariosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155150_create_dados_bancarios_table.php',
         'CreateDadosPessoaisTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_145628_create_dados_pessoais_table.php',
-        'CreateDisciplinasMatTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155212_create_disciplinas_mat_table.php',
         'CreateDisciplinasMonitoriaTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155206_create_disciplinas_monitoria_table.php',
         'CreateEscolhasCandidatosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155218_create_escolhas_candidatos_table.php',
         'CreateEstadosTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_07_163713_create_estados_table.php',
         'CreateFinalizaEscolhasTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155223_create_finaliza_escolhas_table.php',
         'CreateHorarioEscolhidoTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155233_create_horario_escolhido_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_02_151032_create_password_resets_table.php',
+        'CreateProgramaPosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155136_create_programa_pos_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_28_010249_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'EstadosTableSeeder' => __DIR__ . '/../..' . '/database/seeds/EstadosTableSeeder.php',
