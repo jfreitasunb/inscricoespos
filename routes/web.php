@@ -205,7 +205,7 @@ Route::get('register/verify/{token}',[
 Route::get('/registrar', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getSignup',
 		'as'	=> 'auth.registrar',
-		'middleware' => ['guest','autoriza.inscricao']
+		'middleware' => ['guest','autoriza.inscricao','define.locale']
 ]);
 
 Route::post('/registrar', [
