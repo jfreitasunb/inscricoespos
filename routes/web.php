@@ -192,6 +192,7 @@ Route::get('/login', [
 
 Route::post('/login', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@postLogin',
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::get('register/verify/{token}',[

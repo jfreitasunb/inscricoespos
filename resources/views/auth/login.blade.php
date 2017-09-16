@@ -17,13 +17,13 @@
               <div class="col-lg-12">
                 <form id="login-form" action="{{ route('auth.login') }}" method="post" role="form">
                   <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                    <input type="text" name="login" id="login" tabindex="1" class="form-control" placeholder="Matrícula" value="">
-                      @if ($errors->has('login'))
-                        <span class="help-block">{{ $errors->first('login') }}</span>
+                    <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="{{trans('tela_login.menu_email')}}" value="">
+                      @if ($errors->has('email'))
+                        <span class="help-block">{{ $errors->first('email') }}</span>
                       @endif
                     </div>
                   <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Senha">
+                    <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="{{trans('tela_login.menu_senha')}}">
                     @if ($errors->has('password'))
                       <span class="help-block">{{ $errors->first('password') }}</span>
                     @endif
@@ -32,7 +32,7 @@
                     <div class="form-group">
                       <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                          <input type="submit" name = "login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Entrar">
+                          <input type="submit" name = "login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="{{trans('tela_login.menu_entrar')}}">
                         </div>
                       </div>
                     </div>
@@ -40,7 +40,7 @@
                       <div class="row">
                         <div class="col-lg-12">
                           <div class="text-center">
-                            <a href="{{ route('password.request') }}" tabindex="5" class="forgot-password">Esqueceu a senha?</a>
+                            <a href="{{ route('password.request') }}" tabindex="5" class="forgot-password">{{trans('tela_login.menu_esqueceu_senha')}}</a>
                           </div>
                         </div>
                       </div>
