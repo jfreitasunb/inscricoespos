@@ -80,18 +80,18 @@ class AuthController extends BaseController
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
-			'login' => 'required',
+			'email' => 'required',
 			'password' => 'required',
 		]);
 
 		
-		$user = DB::table('users')->where('login', $request->input('login'))->value('ativo');
+		$user = DB::table('users')->where('email', $request->input('email'))->value('ativo');
 
 		if (!$user) {
 			notify()->flash('Você não ativou sua conta ainda. Você deve clicar no link de ativação que foi enviado para seu e-mail.','info');
 			return redirect()->back();
 		}else{
-			if (!Auth::attempt($request->only(['login', 'password']))) {
+			if (!Auth::attempt($request->only(['email', 'password']))) {
 				notify()->flash('Usuário ou senha não conferem!', 'error',[
 					'timer' => 3000,
 				]);
@@ -99,7 +99,7 @@ class AuthController extends BaseController
 			}
 		}
 
-		$user_type = DB::table('users')->where('login', $request->input('login'))->value('user_type');
+		$user_type = DB::table('users')->where('email', $request->input('email'))->value('user_type');
 
 		Session::put('user_type', $user_type);
 
