@@ -210,6 +210,7 @@ Route::get('/registrar', [
 
 Route::post('/registrar', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@postSignup',
+		'middleware' => ['guest','autoriza.inscricao','define.locale']
 ]);
 
 /*
