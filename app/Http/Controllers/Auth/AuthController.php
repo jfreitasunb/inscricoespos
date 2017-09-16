@@ -34,11 +34,12 @@ class AuthController extends BaseController
 	public function postSignup( Request $request)
 	{
 
-		$STRING_VALIDA_EMAIL = "EsN7Qh2G#U(i24g@LQ=^=NMX74CmuVYZmAPNW?nE3ss6hxtUnvLZBjbD.V[7Y,8LW6trtj%CZWKr^aREKgm]QYW@87xZW4]CEK4mT[yz*o&t6VvzT,E2BGx2j2BP7%Jo{EkRM2Z=Pa4qWu4GeT83)pA]9*rHYctr}L4ka[c6YiweZq=Q>m$7tfPBQoW8wgFm86k8[iDu?HBA[9kiRJeH)7QGnND6oFAbD2Vq(2acX+TAmQbMq3jPUVJ,JPaA]9.)"; /*string usada para gerar o código de validação do e-mail. Deve ser grande por questões de segurança.*/
+		/*string usada para gerar o código de validação do e-mail. Deve ser grande por questões de segurança.*/
+
+		$STRING_VALIDA_EMAIL = "EsN7Qh2G#U(i24g@LQ=^=NMX74CmuVYZmAPNW?nE3ss6hxtUnvLZBjbD.V[7Y,8LW6trtj%CZWKr^aREKgm]QYW@87xZW4]CEK4mT[yz*o&t6VvzT,E2BGx2j2BP7%Jo{EkRM2Z=Pa4qWu4GeT83)pA]9*rHYctr}L4ka[c6YiweZq=Q>m$7tfPBQoW8wgFm86k8[iDu?HBA[9kiRJeH)7QGnND6oFAbD2Vq(2acX+TAmQbMq3jPUVJ,JPaA]9.)";
 
 		$this->validate($request,[
 			'nome' => 'required|max:255',
-			'login'  => 'required|unique:users|max:255',
 			'email'  => 'required|unique:users|email|max:255',
 			'confirmar-email'  => 'required|email|same:email|max:255',
 			'password'  => 'required|min:1',
@@ -48,8 +49,7 @@ class AuthController extends BaseController
 
 		$novo_usuario = new User();
 
-
-		$novo_usuario->login = $request->input('login');
+		$novo_usuario->locale = Session::get('locale');
         $novo_usuario->email = $request->input('email');
         $novo_usuario->password = bcrypt($request->input('password'));
         $novo_usuario->validation_code =  md5($STRING_VALIDA_EMAIL.$request->input('email').date("d-m-Y H:i:s:u"));
@@ -63,13 +63,10 @@ class AuthController extends BaseController
 		$cria_candidato->nome = $request->input('nome');
 		$cria_candidato->save();
 
-		
-
-
 		Notification::send(User::find($id_user), new AtivaConta($novo_usuario->validation_code));
 
 
-		notify()->flash('Conta criada com sucesso. Foi enviado para o e-mail: '.$novo_usuario->email.' um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.','info');
+		notify()->flash(trans('tela_registro.menu_registro_sucesso_parte_inicial').' '.$novo_usuario->email.' '.trans('tela_registro.menu_registro_sucesso_parte_final'),'info');
 
 		return redirect()->route('home');
 
