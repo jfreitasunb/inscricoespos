@@ -1,5 +1,9 @@
 <?php
 
+/*
+*Tradução dos textos para Espanhol
+ */
+
 return [
 
     'menu_login' => 'Login',
