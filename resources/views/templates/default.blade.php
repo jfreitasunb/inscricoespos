@@ -17,7 +17,7 @@
     @if (Auth::check())
       {{-- @include($templatemenu) --}}
       @if (Session::has('user_type') && Session::get('user_type')==='aluno')
-        @include('templates.partials.candidato.menu_aluno')
+        @include('templates.partials.candidato.menu_candidato')
         @yield('dados_pessoais')
         @yield('dados_bancarios')
         @yield('dados_academicos')
