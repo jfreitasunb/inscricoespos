@@ -20,7 +20,7 @@ Route::get('/get-cidades/{idEstado}', '\Posmat\Http\Controllers\CandidatoControl
 Route::get('/candidato', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMenu',
 	'as'   => 'menu.candidato',
-	'middleware' => ['user.role:aluno'],
+	'middleware' => ['user.role:aluno','define.locale'],
 ]);
 
 Route::get('/candidato/dados/academicos', [
