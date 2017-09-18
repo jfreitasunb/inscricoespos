@@ -17,54 +17,54 @@ Route::get('/get-cidades/{idEstado}', '\Posmat\Http\Controllers\CandidatoControl
 *Área do candidato
 */
 
-Route::get('/aluno', [
+Route::get('/candidato', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMenu',
 	'as'   => 'menu.candidato',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::get('/aluno/dados/academicos', [
+Route::get('/candidato/dados/academicos', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos',
 	'as'   => 'dados.academicos',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::post('/aluno/dados/academicos', [
+Route::post('/candidato/dados/academicos', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos',
 	'as'   => 'dados.academicos',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::get('/aluno/dados/bancarios', [
+Route::get('/candidato/dados/bancarios', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosBancarios',
 	'as'   => 'dados.bancarios',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::post('/aluno/dados/bancarios', [
+Route::post('/candidato/dados/bancarios', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosBancarios',
 	'as'   => 'dados.bancarios',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::get('/aluno/dados/pessoais', [
+Route::get('/candidato/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais',
 	'as'   => 'dados.pessoais',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::post('/aluno/dados/pessoais', [
+Route::post('/candidato/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::get('/aluno/dados/escolhas', [
+Route::get('/candidato/dados/escolhas', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato',
 	'as'   => 'dados.escolhas',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::post('/aluno/dados/escolhas', [
+Route::post('/candidato/dados/escolhas', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato',
 	'middleware' => ['user.role:aluno'],
 ]);
