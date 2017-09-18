@@ -127,7 +127,7 @@ class AuthController extends BaseController
 			notify()->flash('Bem vindo!','success',[
 				'timer' => 1500,
 			]);
-			return redirect()->intended('aluno');
+			return redirect()->intended('candidato');
 		}
 
 		notify()->flash('Você não se identificou ainda.','warning',[
