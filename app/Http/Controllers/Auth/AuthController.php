@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Mail;
 use Session;
+use Purifier;
 use Posmat\Models\User;
 use Posmat\Models\Monitoria;
 use Posmat\Models\DadoPessoal;
@@ -50,8 +51,8 @@ class AuthController extends BaseController
 		$novo_usuario = new User();
 
 		$novo_usuario->locale = Session::get('locale');
-        $novo_usuario->email = $request->input('email');
-        $novo_usuario->password = bcrypt($request->input('password'));
+        $novo_usuario->email = Purifier::clean(trim($request->input('email')));
+        $novo_usuario->password = bcrypt(trim($request->input('password')));
         $novo_usuario->validation_code =  md5($STRING_VALIDA_EMAIL.$request->input('email').date("d-m-Y H:i:s:u"));
 
         $novo_usuario->save();
@@ -60,7 +61,7 @@ class AuthController extends BaseController
 
 		$cria_candidato = new DadoPessoal();
 		$cria_candidato->id_user = $id_user;
-		$cria_candidato->nome = $request->input('nome');
+		$cria_candidato->nome = Purifier::clean(trim($request->input('nome')));
 		$cria_candidato->save();
 
 		Notification::send(User::find($id_user), new AtivaConta($novo_usuario->validation_code));
