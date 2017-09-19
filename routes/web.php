@@ -55,6 +55,7 @@ Route::get('/candidato/dados/pessoais', [
 
 Route::post('/candidato/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais',
+	'as'   => 'dados.pessoais',
 	'middleware' => ['user.role:aluno'],
 ]);
 
