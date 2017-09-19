@@ -94,13 +94,11 @@ class CandidatoController extends BaseController
 			$this->validate($request, [
 				'nome' => 'max:256',
 				'numerorg' => 'required|max:21',
-				'emissorrg' => 'required|max:201',
-				'cpf' => 'required|cpf|numeric',
 				'endereco' => 'required|max:256',
-				'cidade' => 'required|max:101',
-				'cep' => 'required|max:12',
+				'cep' => 'required|max:20',
 				'estado' => 'required|max:3',
-				'telefone' => 'required|max:21',
+				'cidade' => 'required',
+				'pais' => 'required',
 				'celular' => 'required|max:21',
 			]);
 
@@ -110,13 +108,11 @@ class CandidatoController extends BaseController
 			$dados_pessoais = [
 				'id_user' => $id_user,
 				'numerorg' => $request->input('numerorg'),
-				'emissorrg' => $request->input('emissorrg'),
-				'cpf' => $request->input('cpf'),
 				'endereco' => $request->input('endereco'),
-				'cidade' => $request->input('cidade'),
 				'cep' => $request->input('cep'),
 				'estado' => $request->input('estado'),
-				'telefone' => $request->input('telefone'),
+				'cidade' => $request->input('cidade'),
+				'pais' => $request->input('pais'),
 				'celular' => $request->input('celular'),
 			];
 
@@ -127,13 +123,11 @@ class CandidatoController extends BaseController
 				$cria_candidato->id_user = $id_user;
 				$cria_candidato->nome = $request->input('nome');
 				$cria_candidato->numerorg = $request->input('numerorg');
-				$cria_candidato->emissorrg = $request->input('emissorrg');
-				$cria_candidato->cpf = $request->input('cpf');
 				$cria_candidato->endereco = $request->input('endereco');
-				$cria_candidato->cidade = $request->input('cidade');
 				$cria_candidato->cep = $request->input('cep');
 				$cria_candidato->estado = $request->input('estado');
-				$cria_candidato->telefone = $request->input('telefone');
+				$cria_candidato->cidade = $request->input('cidade');
+				$cria_candidato->pais = $request->input('pais')
 				$cria_candidato->celular = $request->input('celular');
 				$cria_candidato->save($dados_pessoais);
 			}else{
