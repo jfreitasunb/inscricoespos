@@ -16,13 +16,11 @@ class DadoPessoal extends Model
     protected $fillable = [
         'nome',
         'numerorg',
-        'emissorrg', 
-        'cpf',
         'endereco',
-        'cidade',
         'cep',
         'estado',
-        'telefone',
+        'cidade',
+        'pais',
         'celular',
     ];
 
