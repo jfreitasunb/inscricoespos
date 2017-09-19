@@ -83,11 +83,12 @@ class CandidatoController extends BaseController
 			'numerorg' => $dados_pessoais->numerorg,
 			'emissorrg' => $dados_pessoais->emissorrg,
 			'cpf' => $dados_pessoais->cpf,
+			'data_nascimento' => '1',
 			'endereco' => $dados_pessoais->endereco,
 			'cidade' => $dados_pessoais->cidade,
 			'cep' => $dados_pessoais->cep,
 			'estado' => $dados_pessoais->estado,
-			'telefone' => $dados_pessoais->telefone,
+			'pais' => 'Temp',
 			'celular' => $dados_pessoais->celular,
 		];
 
