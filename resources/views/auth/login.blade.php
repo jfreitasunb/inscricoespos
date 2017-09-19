@@ -17,7 +17,7 @@
               <div class="col-lg-12">
                 {!! Form::open(array('route' => 'auth.login','data-parsley-validate' => '' )) !!}
                 <div class="form-group">
-                  {!! Form::text('email', null, ['class' => 'form-control', 'placeholder' => trans('tela_login.menu_email')]) !!}
+                  {!! Form::text('email', null, ['class' => 'form-control', 'tabindex' => '1', 'placeholder' => trans('tela_login.menu_email')]) !!}
                 </div>
                 <div class="form-group">
                   {!! Form::password('password', ['class' => 'form-control', 'tabindex' => '2', 'placeholder' => trans('tela_login.menu_senha')]) !!}
@@ -32,14 +32,14 @@
                 {!! Form::close() !!}
               </div>
               <div class="form-group">
-                      <div class="row">
-                        <div class="col-lg-12">
-                          <div class="text-center">
-                            <a href="{{ route('password.request') }}" tabindex="5" class="forgot-password">{{trans('tela_login.menu_esqueceu_senha')}}</a>
-                          </div>
-                        </div>
-                      </div>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="text-center">
+                      <a href="{{ route('password.request') }}" tabindex="5" class="forgot-password">{{trans('tela_login.menu_esqueceu_senha')}}</a>
                     </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
