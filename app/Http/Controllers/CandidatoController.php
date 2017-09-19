@@ -44,13 +44,6 @@ class CandidatoController extends BaseController
         $this->estadoModel = $estado;
     }
 
-    // public function index()
-    // {
-    //     $estados = $this->estadoModel->pluck('estado', 'id');
-
-    //     return view('templates.partials.cidade', compact('estados'));
-    // }
-
     public function getCidades($idEstado)
     {
         $estado = $this->estadoModel->find($idEstado);
