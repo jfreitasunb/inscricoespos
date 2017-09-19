@@ -91,6 +91,7 @@ class CandidatoController extends BaseController
 
 	public function postDadosPessoais(Request $request)
 	{
+			dd($request);
 			$this->validate($request, [
 				'nome' => 'max:256',
 				'numerorg' => 'required|max:21',
@@ -127,7 +128,7 @@ class CandidatoController extends BaseController
 				$cria_candidato->cep = $request->input('cep');
 				$cria_candidato->estado = $request->input('estado');
 				$cria_candidato->cidade = $request->input('cidade');
-				$cria_candidato->pais = $request->input('pais')
+				$cria_candidato->pais = $request->input('pais');
 				$cria_candidato->celular = $request->input('celular');
 				$cria_candidato->save($dados_pessoais);
 			}else{
