@@ -67,8 +67,6 @@ class CandidatoController extends BaseController
 
 		$countries = $getcountries->index();
 
-		// $estados = $this->estadoModel->pluck('estado', 'id');
-
 		$user = Auth::user();
 		$nome = $user->nome;
 		$id_user = $user->id_user;
