@@ -26,6 +26,7 @@ use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\AuthController;
 use Posmat\Http\Controllers\CidadeController;
+use Posmat\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Posmat\Http\Requests;
@@ -62,7 +63,11 @@ class CandidatoController extends BaseController
 	public function getDadosPessoais()
 	{
 
-		$estados = $this->estadoModel->pluck('estado', 'id');
+		$getcountries = new APIController();
+
+		$countries = $getcountries->index();
+
+		// $estados = $this->estadoModel->pluck('estado', 'id');
 
 		$user = Auth::user();
 		$nome = $user->nome;
@@ -85,7 +90,7 @@ class CandidatoController extends BaseController
 			'celular' => $dados_pessoais->celular,
 		];
 
-		return view('templates.partials.candidato.dados_pessoais')->with(compact('estados','dados'));
+		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados'));
 		
 	}
 
