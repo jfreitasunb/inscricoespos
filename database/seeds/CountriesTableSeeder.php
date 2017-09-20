@@ -13,6 +13,9 @@ class CountriesTableSeeder extends Seeder
     public function run()
     {
         
+
+        \DB::table('countries')->delete();
+        
         \DB::table('countries')->insert(array (
             0 => 
             array (
