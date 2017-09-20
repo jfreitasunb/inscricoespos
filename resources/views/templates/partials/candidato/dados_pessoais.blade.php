@@ -46,23 +46,23 @@
         </div>
 
         <div class="row">
-          {!! Form::label('country', trans('dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('pais', trans('dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::select('country', ['' => 'Select'] +$countries,'',array('class'=>'form-control','id'=>'country','style'=>'width:350px;'));!!}
+            {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('state', trans('dados_pessoais.estado'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          {!! Form::label('estado', trans('dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
           <div class="col-md-4">
-            <select name="state" id="state" class="form-control" style="width:350px"></select>
+            <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('city', trans('dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          {!! Form::label('cidade', trans('dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
           <div class="col-md-4">
-            <select name="city" id="city" class="form-control" style="width:350px"></select>
+            <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
           </div>
         </div>
         
@@ -93,50 +93,50 @@
 
 @section('post-script')
 <script type="text/javascript">
-    $('#country').change(function(){
-    var countryID = $(this).val();    
-    if(countryID){
+    $('#pais').change(function(){
+    var paisID = $(this).val();    
+    if(paisID){
         $.ajax({
            type:"GET",
-           url:"{{url('api/get-state-list')}}?country_id="+countryID,
+           url:"{{url('api/get-state-list')}}?country_id="+paisID,
            success:function(res){               
             if(res){
-                $("#state").empty();
-                $("#state").append('<option>Select</option>');
+                $("#estado").empty();
+                $("#estado").append('<option>Select</option>');
                 $.each(res,function(key,value){
-                    $("#state").append('<option value="'+key+'">'+value+'</option>');
+                    $("#estado").append('<option value="'+key+'">'+value+'</option>');
                 });
            
             }else{
-               $("#state").empty();
+               $("#estado").empty();
             }
            }
         });
     }else{
-        $("#state").empty();
-        $("#city").empty();
+        $("#estado").empty();
+        $("#cidade").empty();
     }      
    });
-    $('#state').on('change',function(){
-    var stateID = $(this).val();    
-    if(stateID){
+    $('#estado').on('change',function(){
+    var estadoID = $(this).val();    
+    if(estadoID){
         $.ajax({
            type:"GET",
-           url:"{{url('api/get-city-list')}}?state_id="+stateID,
+           url:"{{url('api/get-city-list')}}?state_id="+estadoID,
            success:function(res){               
             if(res){
-                $("#city").empty();
+                $("#cidade").empty();
                 $.each(res,function(key,value){
-                    $("#city").append('<option value="'+key+'">'+value+'</option>');
+                    $("#cidade").append('<option value="'+key+'">'+value+'</option>');
                 });
            
             }else{
-               $("#city").empty();
+               $("#cidade").empty();
             }
            }
         });
     }else{
-        $("#city").empty();
+        $("#cidade").empty();
     }
         
    });
