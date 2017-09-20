@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {   
         
+
         $user = ['email' => 'jfreitas@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
 

@@ -46,26 +46,26 @@
         </div>
 
         <div class="row">
-          {!! Form::label('estado', trans('dados_pessoais.estado'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          {!! Form::label('country', trans('dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::select('estado', $estados) !!}
+            {!! Form::select('country', ['' => 'Select'] +$countries,'',array('class'=>'form-control','id'=>'country','style'=>'width:350px;'));!!}
+          </div>
+        </div>
+
+        <div class="row">
+          {!! Form::label('state', trans('dados_pessoais.estado'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          <div class="col-md-4">
+            <select name="state" id="state" class="form-control" style="width:350px"></select>
+          </div>
+        </div>
+
+        <div class="row">
+          {!! Form::label('city', trans('dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          <div class="col-md-4">
+            <select name="city" id="city" class="form-control" style="width:350px"></select>
           </div>
         </div>
         
-        <div class="row">
-          {!! Form::label('cidade', trans('dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
-          <div class="col-md-4">
-            {!! Form::select('cidade', []) !!}
-          </div>
-        </div>
-
-        <div class="row">
-          {!! Form::label('pais', trans('dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
-          <div class="col-md-4">
-            {!! Form::text('pais', $dados['pais'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
-          </div>
-        </div>
-
         <div class="row">
           {!! Form::label('celular', trans('dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
@@ -92,7 +92,56 @@
 @endsection
 
 @section('post-script')
-    <script type="text/javascript">
+<script type="text/javascript">
+    $('#country').change(function(){
+    var countryID = $(this).val();    
+    if(countryID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('api/get-state-list')}}?country_id="+countryID,
+           success:function(res){               
+            if(res){
+                $("#state").empty();
+                $("#state").append('<option>Select</option>');
+                $.each(res,function(key,value){
+                    $("#state").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#state").empty();
+            }
+           }
+        });
+    }else{
+        $("#state").empty();
+        $("#city").empty();
+    }      
+   });
+    $('#state').on('change',function(){
+    var stateID = $(this).val();    
+    if(stateID){
+        $.ajax({
+           type:"GET",
+           url:"{{url('api/get-city-list')}}?state_id="+stateID,
+           success:function(res){               
+            if(res){
+                $("#city").empty();
+                $.each(res,function(key,value){
+                    $("#city").append('<option value="'+key+'">'+value+'</option>');
+                });
+           
+            }else{
+               $("#city").empty();
+            }
+           }
+        });
+    }else{
+        $("#city").empty();
+    }
+        
+   });
+</script>
+    {{-- <script type="text/javascript">
         $('select[name=estado]').change(function () {
             var idEstado = $(this).val();
 
@@ -104,7 +153,5 @@
             });
         });
 
-    </script>
+    </script> --}}
 @endsection
-
-
