@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCidadesTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCidadesTable extends Migration
      */
     public function up()
     {
-       Schema::create('cidades', function (Blueprint $table){
+        Schema::create('countries', function (Blueprint $table){
             $table->increments('id');
-            $table->string('cidade');
-            $table->integer('estado_id')->unsigned()->default(0);
-            $table->foreign('estado_id')->references('id')->on('estados');
-            $table->timestamps();
+            $table->string('sortname',3);
+            $table->string('name',150);
+            $table->integer('phonecode');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateCidadesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cidades');
+        Schema::drop('countries');
     }
 }
