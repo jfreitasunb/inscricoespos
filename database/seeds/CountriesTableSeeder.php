@@ -221,7 +221,7 @@ class CountriesTableSeeder extends Seeder
             array (
                 'id' => 30,
                 'sortname' => 'BR',
-                'name' => 'Brazil',
+                'name' => 'Brasil',
                 'phonecode' => 55,
             ),
             30 => 
