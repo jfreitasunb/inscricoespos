@@ -3097,7 +3097,7 @@ class StatesTableSeeder extends Seeder
             13 => 
             array (
                 'id_state' => 514,
-                'name' => 'Amapa',
+                'name' => 'Amapá',
                 'country_id' => 30,
             ),
             14 => 
@@ -3115,7 +3115,7 @@ class StatesTableSeeder extends Seeder
             16 => 
             array (
                 'id_state' => 517,
-                'name' => 'Ceara',
+                'name' => 'Ceará',
                 'country_id' => 30,
             ),
             17 => 
@@ -3127,13 +3127,13 @@ class StatesTableSeeder extends Seeder
             18 => 
             array (
                 'id_state' => 519,
-                'name' => 'Espirito Santo',
+                'name' => 'Espírito Santo',
                 'country_id' => 30,
             ),
             19 => 
             array (
                 'id_state' => 520,
-                'name' => 'Estado de Sao Paulo',
+                'name' => 'São Paulo',
                 'country_id' => 30,
             ),
             20 => 
@@ -3145,7 +3145,7 @@ class StatesTableSeeder extends Seeder
             21 => 
             array (
                 'id_state' => 522,
-                'name' => 'Maranhao',
+                'name' => 'Maranhão',
                 'country_id' => 30,
             ),
             22 => 
@@ -3169,19 +3169,19 @@ class StatesTableSeeder extends Seeder
             25 => 
             array (
                 'id_state' => 526,
-                'name' => 'Para',
+                'name' => 'Pará',
                 'country_id' => 30,
             ),
             26 => 
             array (
                 'id_state' => 527,
-                'name' => 'Paraiba',
+                'name' => 'Paraíba',
                 'country_id' => 30,
             ),
             27 => 
             array (
                 'id_state' => 528,
-                'name' => 'Parana',
+                'name' => 'Paraná',
                 'country_id' => 30,
             ),
             28 => 
@@ -3193,7 +3193,7 @@ class StatesTableSeeder extends Seeder
             29 => 
             array (
                 'id_state' => 530,
-                'name' => 'Piaui',
+                'name' => 'Piauí',
                 'country_id' => 30,
             ),
             30 => 
@@ -3217,7 +3217,7 @@ class StatesTableSeeder extends Seeder
             33 => 
             array (
                 'id_state' => 534,
-                'name' => 'Rondonia',
+                'name' => 'Rondônia',
                 'country_id' => 30,
             ),
             34 => 
@@ -3235,7 +3235,7 @@ class StatesTableSeeder extends Seeder
             36 => 
             array (
                 'id_state' => 537,
-                'name' => 'Sao Paulo',
+                'name' => 'São Paulo',
                 'country_id' => 30,
             ),
             37 => 
