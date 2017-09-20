@@ -13,6 +13,10 @@
 
 Route::get('/get-cidades/{idEstado}', '\Posmat\Http\Controllers\CandidatoController@getCidades');
 
+Route::get('api/dependent-dropdown','APIController@index');
+Route::get('api/get-state-list','APIController@getStateList');
+Route::get('api/get-city-list','APIController@getCityList');
+
 /*
 *Área do candidato
 */
