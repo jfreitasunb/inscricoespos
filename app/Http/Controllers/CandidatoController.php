@@ -76,6 +76,7 @@ class CandidatoController extends BaseController
 
 		$dados = [
 			'nome' => $dados_pessoais->nome,
+			'data_nascimento' => $dados_pessoais->data_nascimento,
 			'numerorg' => $dados_pessoais->numerorg,
 			'emissorrg' => $dados_pessoais->emissorrg,
 			'cpf' => $dados_pessoais->cpf,
