@@ -7,6 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Validator;
+use Purifier;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
@@ -28,7 +29,6 @@ use Posmat\Http\Controllers\AuthController;
 use Posmat\Http\Controllers\CidadeController;
 use Posmat\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
 use Posmat\Http\Requests;
 use Illuminate\Support\Facades\Response;
 
@@ -79,12 +79,12 @@ class CandidatoController extends BaseController
 			'numerorg' => $dados_pessoais->numerorg,
 			'emissorrg' => $dados_pessoais->emissorrg,
 			'cpf' => $dados_pessoais->cpf,
-			'data_nascimento' => '1',
+			'data_nascimento' => $dados_pessoais->data_nascimento,
 			'endereco' => $dados_pessoais->endereco,
+			'pais' => $dados_pessoais->pais,
+			'estado' => $dados_pessoais->estado,
 			'cidade' => $dados_pessoais->cidade,
 			'cep' => $dados_pessoais->cep,
-			'estado' => $dados_pessoais->estado,
-			'pais' => 'Temp',
 			'celular' => $dados_pessoais->celular,
 		];
 
@@ -94,30 +94,35 @@ class CandidatoController extends BaseController
 
 	public function postDadosPessoais(Request $request)
 	{
-			dd($request);
 			$this->validate($request, [
 				'nome' => 'max:256',
+				'data_nascimento' => 'required',
 				'numerorg' => 'required|max:21',
 				'endereco' => 'required|max:256',
 				'cep' => 'required|max:20',
+				'pais' => 'required',
 				'estado' => 'required|max:3',
 				'cidade' => 'required',
-				'pais' => 'required',
 				'celular' => 'required|max:21',
 			]);
 
 			$user = Auth::user();
 			$id_user = $user->id_user;
-			
+
+    		$nascimento = Carbon::createFromFormat('d/m/Y', Purifier::clean(trim($request->data_nascimento)));
+
+    		$data_nascimento = $nascimento->format('Y-m-d');
+    	
 			$dados_pessoais = [
 				'id_user' => $id_user,
-				'numerorg' => $request->input('numerorg'),
-				'endereco' => $request->input('endereco'),
-				'cep' => $request->input('cep'),
+				'data_nascimento' => $data_nascimento,
+				'numerorg' => Purifier::clean(trim($request->input('numerorg'))),
+				'endereco' => Purifier::clean(trim($request->input('endereco'))),
+				'cep' => Purifier::clean(trim($request->input('cep'))),
 				'estado' => $request->input('estado'),
 				'cidade' => $request->input('cidade'),
 				'pais' => $request->input('pais'),
-				'celular' => $request->input('celular'),
+				'celular' => Purifier::clean(trim($request->input('celular'))),
 			];
 
 			$candidato =  DadoPessoal::find($id_user);
@@ -125,14 +130,15 @@ class CandidatoController extends BaseController
 			if (is_null($candidato)) {
 				$cria_candidato = new DadoPessoal();
 				$cria_candidato->id_user = $id_user;
-				$cria_candidato->nome = $request->input('nome');
-				$cria_candidato->numerorg = $request->input('numerorg');
-				$cria_candidato->endereco = $request->input('endereco');
-				$cria_candidato->cep = $request->input('cep');
+				$cria_candidato->nome = Purifier::clean(trim($request->input('nome')));
+				$cria_candidato->data_nascimento = $data_nascimento;
+				$cria_candidato->numerorg = Purifier::clean(trim($request->input('numerorg')));
+				$cria_candidato->endereco = Purifier::clean(trim($request->input('endereco')));
+				$cria_candidato->cep = Purifier::clean(trim($request->input('cep')));
 				$cria_candidato->estado = $request->input('estado');
 				$cria_candidato->cidade = $request->input('cidade');
 				$cria_candidato->pais = $request->input('pais');
-				$cria_candidato->celular = $request->input('celular');
+				$cria_candidato->celular = Purifier::clean(trim($request->input('celular')));
 				$cria_candidato->save($dados_pessoais);
 			}else{
 				
