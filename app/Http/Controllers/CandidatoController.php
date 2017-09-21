@@ -322,57 +322,59 @@ class CandidatoController extends BaseController
  */
 	public function getEscolhaCandidato()
 	{
-		$user = Auth::user();
-		$id_user = $user->id_user;
+		// $user = Auth::user();
+		// $id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricaoPos();
-		$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
-		$autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
+		// $monitoria_ativa = new ConfiguraInscricaoPos();
+		// $id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
+		// $autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 		
-		$disciplinas_escolhas = new ProgramaPosMat();
-		$escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
+		// $disciplinas_escolhas = new ProgramaPosMat();
+		// $escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
 
-		$array_horarios_disponiveis = array('12:00 às 13:00','13:00 às 14:00','18:00 às 19:00');
+		// $array_horarios_disponiveis = array('12:00 às 13:00','13:00 às 14:00','18:00 às 19:00');
 
     
-    	$array_dias_semana = array('Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira');
+  //   	$array_dias_semana = array('Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira');
 
-    	$escolhas_candidato = new EscolhaMonitoria();
-		$fez_escolhas = $escolhas_candidato->retorna_escolha_monitoria($id_user,$id_monitoria);
+  //   	$escolhas_candidato = new EscolhaMonitoria();
+		// $fez_escolhas = $escolhas_candidato->retorna_escolha_monitoria($id_user,$id_monitoria);
 		
 
-		$disable[] = 'disabled="disabled"';
+		// $disable[] = 'disabled="disabled"';
 
-		$finaliza_inscricao = new FinalizaEscolha();
+		// $finaliza_inscricao = new FinalizaEscolha();
 
-		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_monitoria);
+		// $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_monitoria);
 
-		if (!$autoriza_inscricao) {
+		// if (!$autoriza_inscricao) {
 
-			notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
+		// 	notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
 			
-			return redirect()->route('home');
-		}
+		// 	return redirect()->route('home');
+		// }
 
-		if ($status_inscricao) {
+		// if ($status_inscricao) {
 
-			notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','warning');
+		// 	notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','warning');
 
-			return redirect()->back();
-		}
+		// 	return redirect()->back();
+		// }
 
-		if (count($fez_escolhas)==3) {
+		// if (count($fez_escolhas)==3) {
 			
-			notify()->flash('Você já realizou as 03 (três) escolhas possíveis. Não é possível escolher mais nenhuma disciplina.','error');
+		// 	notify()->flash('Você já realizou as 03 (três) escolhas possíveis. Não é possível escolher mais nenhuma disciplina.','error');
 
-			return redirect()->back();
-		}else{
+		// 	return redirect()->back();
+		// }else{
 
-			$disable=[];
-			$disable[] = '';
+		// 	$disable=[];
+		// 	$disable[] = '';
 			
-			return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
-		}
+			return view('templates.partials.candidato.escolha_monitoria');
+
+			// return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
+		// }
 		
 	}
 
