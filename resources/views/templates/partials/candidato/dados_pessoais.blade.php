@@ -13,63 +13,63 @@
       {!! Form::open(array('route' => 'dados.pessoais', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
         
         <div class="row">
-          {!! Form::label('nome', trans('dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('data_nascimento', trans('dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('numerorg', trans('dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         
         <div class="row">
-          {!! Form::label('endereco', trans('dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('cep', trans('dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('cep', trans('tela_dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('pais', trans('dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('estado', trans('dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
+          {!! Form::label('estado', trans('tela_dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
           <div class="col-md-4">
             <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('cidade', trans('dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          {!! Form::label('cidade', trans('tela_dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
           <div class="col-md-4">
             <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
           </div>
         </div>
         
         <div class="row">
-          {!! Form::label('celular', trans('dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######', 'required' => '']) !!}
           </div>
@@ -78,7 +78,7 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-              {!! Form::submit(trans('dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+              {!! Form::submit(trans('tela_dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
             </div>
           </div>
         </div>
