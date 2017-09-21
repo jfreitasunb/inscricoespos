@@ -11,6 +11,11 @@ $(function () {
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
         });
+        $('#data_nascimento').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY',
+            viewMode: 'years'
+        });
 });
 
 $('#disciplinas').click(function() {
