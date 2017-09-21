@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
             
             $disciplina = ['id_area_pos' => $i, 'nome' => $lista_areas_pos[$i], 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
             $db_disciplina = DB::table('area_pos_mat')->insert($disciplina);
-    }
+        }
 
 
         $programa_pos1 = ['id_programa_pos' => 1, 'tipo_programa_pos' => 'Mestrado', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
@@ -69,6 +69,18 @@ class DatabaseSeeder extends Seeder
         $programa_pos2 = ['id_programa_pos' => 2, 'tipo_programa_pos' => 'Doutorado', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
 
         $db_programa_pos2 = DB::table('programa_pos_mat')->insert($programa_pos2);
+
+        $formacao1 = ['id' => 1, 'tipo' => 'Bacharelado', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao1 = DB::table('formacao')->insert($formacao1);
+
+        $formacao2 = ['id' => 2, 'tipo' => 'Licenciatura', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao3 = DB::table('formacao')->insert($formacao2);
+
+        $formacao3 = ['id' => 3, 'tipo' => 'Strictu Sensu', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao3 = DB::table('formacao')->insert($formacao3);
+
+        $formacao4 = ['id' => 4, 'tipo' => 'Latu Sensu', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao4 = DB::table('formacao')->insert($formacao4);
 
         $this->call(CountriesTableSeeder::class);
         $this->call(StatesTableSeeder::class);
