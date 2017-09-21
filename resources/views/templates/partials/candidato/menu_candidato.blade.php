@@ -13,7 +13,7 @@
         <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">Dados Pessoais</a></li>
         <li class="{{ Route::currentRouteNamed('dados.bancarios') ? 'active' : '' }}"><a href="{{ route('dados.bancarios') }}">Dados Bancários</a></li>
         <li class="{{ Route::currentRouteNamed('dados.academicos') ? 'active' : '' }}"><a href="{{ route('dados.academicos') }}">Dados Acadêmicos</a></li>
-        <li class="{{ Route::currentRouteNamed('dados.escolhas') ? 'active' : '' }}"><a href="{{ route('dados.escolhas') }}">Escolher Monitoria</a></li>
+        <li class="{{ Route::currentRouteNamed('dados.escolhas') ? 'active' : '' }}"><a href="{{ route('dados.escolhas') }}">{{trans('tela_escolha_candidato.tela_escolhas')}}</a></li>
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
       </ul>
     </div>
