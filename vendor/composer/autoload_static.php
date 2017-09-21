@@ -81,6 +81,7 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'League\\Csv\\' => 11,
             'Laravel\\Tinker\\' => 15,
         ),
         'I' => 
@@ -233,6 +234,10 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
+        'League\\Csv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/csv/src',
+        ),
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
@@ -340,39 +345,11 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
     );
 
     public static $classMap = array (
-        'CidadesAcreSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesAcreSeeder.php',
-        'CidadesAlagoasSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesAlagoasSeeder.php',
-        'CidadesAmapaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesAmapaSeeder.php',
-        'CidadesAmazonasSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesAmazonasSeeder.php',
-        'CidadesBahiaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesBahiaSeeder.php',
-        'CidadesCearaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesCearaSeeder.php',
-        'CidadesDistritoFederalSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesDistritoFederalSeeder.php',
-        'CidadesEspiritoSantoSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesEspiritoSantoSeeder.php',
-        'CidadesGoiasSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesGoiasSeeder.php',
-        'CidadesMaranhaoSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesMaranhaoSeeder.php',
-        'CidadesMatoGrossoDoSulSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesMatoGrossoDoSulSeeder.php',
-        'CidadesMatoGrossoSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesMatoGrossoSeeder.php',
-        'CidadesMinasGeraisSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesMinasGeraisSeeder.php',
-        'CidadesParaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesParaSeeder.php',
-        'CidadesParaibaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesParaibaSeeder.php',
-        'CidadesParanaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesParanaSeeder.php',
-        'CidadesPernambucoSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesPernambucoSeeder.php',
-        'CidadesPiauiSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesPiauiSeeder.php',
-        'CidadesRioDeJaneiroSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesRioDeJaneiroSeeder.php',
-        'CidadesRioGrandeDoNorteSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesRioGrandeDoNorteSeeder.php',
-        'CidadesRioGrandeDoSulSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesRioGrandeDoSulSeeder.php',
-        'CidadesRondoniaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesRondoniaSeeder.php',
-        'CidadesRoraimaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesRoraimaSeeder.php',
-        'CidadesSantaCatarinaSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesSantaCatarinaSeeder.php',
-        'CidadesSaoPauloSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesSaoPauloSeeder.php',
-        'CidadesSergipeSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesSergipeSeeder.php',
-        'CidadesTocantinsSeeder' => __DIR__ . '/../..' . '/database/seeds/Estados/CidadesTocantinsSeeder.php',
         'CitiesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CitiesTableSeeder.php',
         'CountriesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/CountriesTableSeeder.php',
         'CreateAreaPosMatTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155212_create_area_pos_mat_table.php',
         'CreateArquivosEnviadosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155028_create_arquivos_enviados_table.php',
         'CreateAtuouMonitoriaTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155102_create_atuou_monitoria_table.php',
-        'CreateCidadesTable' => __DIR__ . '/../..' . '/database/migrations/2015_06_01_014241_create_cidades_table.php',
         'CreateCitiesTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_20_163722_create_cities_table.php',
         'CreateConfiguraInscricaoPosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_04_235058_create_configura_inscricao_pos_table.php',
         'CreateCountriesTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_20_163713_create_countries_table.php',
@@ -381,15 +358,14 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'CreateDadosPessoaisTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_145628_create_dados_pessoais_table.php',
         'CreateDisciplinasMonitoriaTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155206_create_disciplinas_monitoria_table.php',
         'CreateEscolhasCandidatosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155218_create_escolhas_candidatos_table.php',
-        'CreateEstadosTable' => __DIR__ . '/../..' . '/database/migrations/2015_06_01_014232_create_estados_table.php',
         'CreateFinalizaEscolhasTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155223_create_finaliza_escolhas_table.php',
+        'CreateFormacaoTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_21_161036_create_formacao_table.php',
         'CreateHorarioEscolhidoTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155233_create_horario_escolhido_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2017_06_02_151032_create_password_resets_table.php',
         'CreateProgramaPosTable' => __DIR__ . '/../..' . '/database/migrations/2017_04_05_155136_create_programa_pos_table.php',
         'CreateStatesTable' => __DIR__ . '/../..' . '/database/migrations/2017_09_20_163721_create_states_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_03_28_010249_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
-        'EstadosTableSeeder' => __DIR__ . '/../..' . '/database/seeds/EstadosTableSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
