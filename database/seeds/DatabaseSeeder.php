@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $dados_jota = [
             'id_user' => '1',
             'nome' => 'Jota',
+            'data_nascimento' => '1979-05-28',
             'numerorg' => '1',
             'endereco' => '1',
             'cidade' => '1',
@@ -36,6 +37,7 @@ class DatabaseSeeder extends Seeder
         $dados_coord = [
             'id_user' => '2',
             'nome' => 'Coordenação de Pós-Graduação',
+            'data_nascimento' => '1963-04-01',
             'numerorg' => '2', 
             'endereco' => '2',
             'cidade' => '2',
