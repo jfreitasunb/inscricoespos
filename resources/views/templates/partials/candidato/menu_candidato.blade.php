@@ -10,7 +10,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bar1">
       <ul class="nav navbar-nav">
-        <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">Dados Pessoais</a></li>
+        <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">{{trans('tela_dados_pessoais.tela_dados_pessoais')}}</a></li>
         <li class="{{ Route::currentRouteNamed('dados.bancarios') ? 'active' : '' }}"><a href="{{ route('dados.bancarios') }}">Dados Bancários</a></li>
         <li class="{{ Route::currentRouteNamed('dados.academicos') ? 'active' : '' }}"><a href="{{ route('dados.academicos') }}">Dados Acadêmicos</a></li>
         <li class="{{ Route::currentRouteNamed('dados.escolhas') ? 'active' : '' }}"><a href="{{ route('dados.escolhas') }}">{{trans('tela_escolha_candidato.tela_escolhas')}}</a></li>
