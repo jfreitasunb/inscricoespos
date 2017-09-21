@@ -371,7 +371,7 @@ class CandidatoController extends BaseController
 		// 	$disable=[];
 		// 	$disable[] = '';
 			
-			return view('templates.partials.candidato.escolha_monitoria');
+			return view('templates.partials.candidato.escolha_candidato');
 
 			// return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
 		// }
