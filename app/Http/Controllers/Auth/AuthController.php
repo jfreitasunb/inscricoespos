@@ -56,7 +56,7 @@ class AuthController extends BaseController
 			$novo_usuario->locale = "pt-br";
 		}
 		
-        $novo_usuario->email = trim($request->input('email'));
+        $novo_usuario->email = Purifier::clean(strtolower(trim($request->input('email'))));
         $novo_usuario->password = bcrypt(trim($request->input('password')));
         $novo_usuario->validation_code =  md5($STRING_VALIDA_EMAIL.$request->input('email').date("d-m-Y H:i:s:u"));
 
@@ -66,7 +66,7 @@ class AuthController extends BaseController
 
 		$cria_candidato = new DadoPessoal();
 		$cria_candidato->id_user = $id_user;
-		$cria_candidato->nome = trim($request->input('nome'));
+		$cria_candidato->nome = Purifier::clean(trim($request->input('nome')));
 		$cria_candidato->save();
 
 		Notification::send(User::find($id_user), new AtivaConta($novo_usuario->validation_code));
@@ -91,7 +91,7 @@ class AuthController extends BaseController
 		]);
 
 		
-		$user = DB::table('users')->where('email', $request->input('email'))->value('ativo');
+		$user = DB::table('users')->where('email', strtolower(trim($request->input('email'))))->value('ativo');
 
 		if (!$user) {
 			notify()->flash('Você não ativou sua conta ainda. Você deve clicar no link de ativação que foi enviado para seu e-mail.','info');
