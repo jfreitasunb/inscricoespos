@@ -5,6 +5,7 @@
  */
 
 return [
+    'tela_dados_pessoais' => 'Dados Pessoais',
     'nome' => 'Nome',
     'rg' => 'RG',
     'data_nascimento' => 'Data de Nascimento',
