@@ -17,7 +17,7 @@ class CreateDadosPessoaisTable extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->string('nome');
-            $table->date('fim_inscricao');
+            $table->date('data_nascimento')->nullable();
             $table->string('numerorg',30)->nullable();
             $table->string('endereco',255)->nullable();
             $table->string('cep',11)->nullable();
