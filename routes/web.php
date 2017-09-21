@@ -71,6 +71,7 @@ Route::get('/candidato/dados/escolhas', [
 
 Route::post('/candidato/dados/escolhas', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato',
+	'as'   => 'dados.escolhas',
 	'middleware' => ['user.role:aluno'],
 ]);
 
