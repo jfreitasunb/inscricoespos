@@ -7,6 +7,7 @@
 
 return [
 	'tela_escolhas' => 'Choose',
+	'programa_disponivel' => 'Choose the Programa',
     'menu_registro' => 'Registrar',
     'menu_nome' => 'Nome Completo',
     'menu_email' => 'E-mail',

@@ -6,7 +6,7 @@
 
 @section('escolha_monitoria')
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">Monitorias disponíveis</legend>
+    <legend class="scheduler-border">{{trans('tela_escolhas.programa_disponivel')}}</legend>
       {!! Form::open(array('route' => 'dados.escolhas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 
