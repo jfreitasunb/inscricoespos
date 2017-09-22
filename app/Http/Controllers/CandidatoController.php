@@ -326,8 +326,11 @@ class CandidatoController extends BaseController
 		$id_user = $user->id_user;
 		
 		$edital_ativo = new ConfiguraInscricaoPos();
+
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		$programa_para_inscricao = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
 		
 		// $disciplinas_escolhas = new ProgramaPosMat();
 		// $escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
