@@ -25,14 +25,10 @@ class ProgramaPos extends Model
         'tipo_programa_pos', 
     ];
 
-    // public function pega_programa_pos_mat($id_monitoria){
+    public function pega_programa_pos_mat($programa){
 
-    //     $disciplinas = DB::table('disciplinas_mat')
-    //         ->select('codigo', 'nome')
-    //         ->join('programa_pos_mat', 'codigo', '=', 'codigo_disciplina')
-    //         ->where('id_monitoria', $id_monitoria)->orderBy('nome')
-    //         ->get();
-            
-    //     return $disciplinas;
-    // }
+        return $this->select('tipo_programa_pos')
+            ->where('id_programa_pos', $programa)
+            ->value('tipo_programa_pos');
+    }
 }
