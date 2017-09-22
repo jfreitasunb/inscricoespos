@@ -322,12 +322,12 @@ class CandidatoController extends BaseController
  */
 	public function getEscolhaCandidato()
 	{
-		// $user = Auth::user();
-		// $id_user = $user->id_user;
+		$user = Auth::user();
+		$id_user = $user->id_user;
 		
-		// $monitoria_ativa = new ConfiguraInscricaoPos();
-		// $id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
-		// $autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
+		$edital_ativo = new ConfiguraInscricaoPos();
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 		
 		// $disciplinas_escolhas = new ProgramaPosMat();
 		// $escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
