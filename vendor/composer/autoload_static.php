@@ -81,7 +81,6 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
-            'League\\Csv\\' => 11,
             'Laravel\\Tinker\\' => 15,
         ),
         'I' => 
@@ -233,10 +232,6 @@ class ComposerStaticInit3f39956306b8f7357be9a0219143fa0d
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
-        ),
-        'League\\Csv\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/league/csv/src',
         ),
         'Laravel\\Tinker\\' => 
         array (

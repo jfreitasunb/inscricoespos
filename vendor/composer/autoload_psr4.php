@@ -36,7 +36,6 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Mews\\Purifier\\' => array($vendorDir . '/mews/purifier/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
-    'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
     'Laravel\\Tinker\\' => array($vendorDir . '/laravel/tinker/src'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
