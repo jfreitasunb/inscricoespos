@@ -11,9 +11,9 @@
       
       <div class="row">
         
-          @foreach($programa_para_inscricao as $programa)
+          @foreach($programa_para_inscricao as $programa => $key)
           <div class="col-md-4">
-            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, ['class' => 'col-md-4 control-label']) !!} Teste</label>
+            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, ['class' => 'col-md-4 control-label']) !!} {{$key}}</label>
           </div>
           @endforeach
       </div>
