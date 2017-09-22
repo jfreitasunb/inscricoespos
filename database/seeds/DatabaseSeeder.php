@@ -74,13 +74,19 @@ class DatabaseSeeder extends Seeder
         $db_formacao1 = DB::table('formacao')->insert($formacao1);
 
         $formacao2 = ['id' => 2, 'tipo' => 'Licenciatura', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
-        $db_formacao3 = DB::table('formacao')->insert($formacao2);
+        $db_formacao2 = DB::table('formacao')->insert($formacao2);
 
-        $formacao3 = ['id' => 3, 'tipo' => 'Strictu Sensu', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $formacao3 = ['id' => 3, 'tipo' => 'Ambos', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_formacao3 = DB::table('formacao')->insert($formacao3);
 
-        $formacao4 = ['id' => 4, 'tipo' => 'Latu Sensu', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $formacao4 = ['id' => 4, 'tipo' => 'Não se Aplica', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_formacao4 = DB::table('formacao')->insert($formacao4);
+
+        $formacao5 = ['id' => 5, 'tipo' => 'Acadêmico', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao5 = DB::table('formacao')->insert($formacao5);
+
+        $formacao6 = ['id' => 6, 'tipo' => 'Profissional', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $db_formacao6 = DB::table('formacao')->insert($formacao6);
 
         $this->call(CountriesTableSeeder::class);
         $this->call(StatesTableSeeder::class);
