@@ -7,6 +7,7 @@
 
 return [
 	'tela_escolhas' => 'Escolha',
+	'programa_disponivel' => 'Programa Pretendido',
     'menu_registro' => 'Registrar',
     'menu_nome' => 'Nome Completo',
     'menu_email' => 'E-mail',
