@@ -8,7 +8,15 @@
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.programa_disponivel')}}</legend>
       {!! Form::open(array('route' => 'dados.escolhas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-
+      
+      <div class="row">
+        
+          @foreach($programa_para_inscricao as $programa)
+          <div class="col-md-4">
+            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, ['class' => 'col-md-4 control-label']) !!} Teste</label>
+          </div>
+          @endforeach
+      </div>
 
       
       <div class="form-group">
