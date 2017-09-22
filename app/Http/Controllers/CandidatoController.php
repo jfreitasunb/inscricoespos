@@ -12,7 +12,7 @@ use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPosMat;
+use Posmat\Models\ProgramaPos;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoBancario;
@@ -330,16 +330,20 @@ class CandidatoController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
-		$programa_para_inscricao = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
+		$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
+
+		$nome_programa_pos = new ProgramaPos();
+
+		foreach ($programas_disponiveis as $programa) {
+			echo $programa;
+		}
+
+
 		
 		// $disciplinas_escolhas = new ProgramaPosMat();
 		// $escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
 
-		// $array_horarios_disponiveis = array('12:00 às 13:00','13:00 às 14:00','18:00 às 19:00');
-
-    
-  //   	$array_dias_semana = array('Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira');
-
+		
   //   	$escolhas_candidato = new EscolhaMonitoria();
 		// $fez_escolhas = $escolhas_candidato->retorna_escolha_monitoria($id_user,$id_monitoria);
 		
@@ -374,7 +378,7 @@ class CandidatoController extends BaseController
 		// 	$disable=[];
 			$disable[] = '';
 			
-			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable'));
+			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
 
 			// return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
 		// }
