@@ -49,13 +49,18 @@ class ConfiguraInscricaoPos extends Model
     public function retorna_periodo_inscricao()
     {
 
-        $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
-        $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
+        if (is_null($this->retorna_inscricao_ativa())){
+            $data_inicio = '3000-01-01';
+        }else{
+            $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
+            $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
+            
+            $data_inicio = $inicio->format('Y-m-d');
+            $data_fim = $fim->format('Y-m-d');    
+        }
 
         $data_hoje = (new Carbon())->format('Y-m-d');
         
-        $data_inicio = $inicio->format('Y-m-d');
-        $data_fim = $fim->format('Y-m-d');
 
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
