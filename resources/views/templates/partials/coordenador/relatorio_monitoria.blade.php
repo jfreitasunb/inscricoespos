@@ -27,5 +27,8 @@
 		    	@endforeach
 		  	</tbody>
 		</table>
+		<div class="text-center">
+			{!! $relatorio_disponivel->links(); !!}
+		</div>
   </form>
 @stop
