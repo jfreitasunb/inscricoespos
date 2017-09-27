@@ -32,7 +32,7 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_lista_para_relatorio()
     {
-        $lista_relatorio = $this->take(10)->get()->sortByDesc('id_inscricao_pos');
+        $lista_relatorio = $this->orderBy('id_inscricao_pos','desc')->paginate(5);
 
         return $lista_relatorio;
 
