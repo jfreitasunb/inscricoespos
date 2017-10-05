@@ -59,4 +59,41 @@ class User extends Authenticatable
     {
         return $this->groupBy('user_type')->orderBy('user_type')->pluck('user_type');
     }
+
+    public function isAdmin()
+    {
+        if (auth()->user()->user_type === 'admin') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isCoordenador()
+    {
+
+        if (auth()->user()->user_type === 'coordenador') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isAluno()
+    {
+        if (auth()->user()->user_type === 'aluno') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isRecomendante()
+    {
+        if (auth()->user()->user_type === 'recomendante') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
 }
