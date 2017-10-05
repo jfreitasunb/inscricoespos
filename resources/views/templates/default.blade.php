@@ -16,26 +16,26 @@
   <div class="container">
     @if (Auth::check())
       {{-- @include($templatemenu) --}}
-      @if (Session::has('user_type') && Session::get('user_type')==='aluno')
+      @aluno
         @include('templates.partials.candidato.menu_candidato')
         @yield('dados_pessoais')
         @yield('dados_bancarios')
         @yield('dados_academicos')
         @yield('escolha_monitoria')
-      @endif
-      @if (Session::has('user_type') && Session::get('user_type')==='coordenador')
+      @endaluno
+      @coordenador(Auth()->user())
         @include('templates.partials.coordenador.menu_coordenador')
         @yield('cadastra_disciplina')
         @yield('configura_inscricao')
         @yield('relatorio_monitoria')
-      @endif
-      @if (Session::has('user_type') && Session::get('user_type')==='admin')
+      @endcoordenador
+      @admin(Auth()->user())
         @include('templates.partials.admin.menu_admin')
         @yield('ativa_conta')
         @yield('cadastra_disciplina')
         @yield('configura_monitoria')
         @yield('relatorio_monitoria')
-      @endif
+      @endadmin
     @else
       @yield('inicio')
       @yield('content')
