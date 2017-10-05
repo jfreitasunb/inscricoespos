@@ -14,7 +14,57 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::if('admin', function ( $user = null ){
+
+            if (!$user && auth()->check()) {
+                $user = auth()->user();
+            }
+
+            if (!$user) {
+                return false;
+            }
+
+            return $user->isAdmin();
+        });
+
+        Blade::if('coordenador', function ( $user = null ){
+
+            if (!$user && auth()->check()) {
+                $user = auth()->user();
+            }
+
+            if (!$user) {
+                return false;
+            }
+
+            return $user->isCoordenador();
+        });
+
+         Blade::if('aluno', function ( $user = null ){
+
+            if (!$user && auth()->check()) {
+                $user = auth()->user();
+            }
+
+            if (!$user) {
+                return false;
+            }
+
+            return $user->isAluno();
+        });
+
+        Blade::if('recomendante', function ( $user = null ){
+
+            if (!$user && auth()->check()) {
+                $user = auth()->user();
+            }
+
+            if (!$user) {
+                return false;
+            }
+
+            return $user->isRecomendante();
+        });
     }
 
     /**
