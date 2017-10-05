@@ -183,6 +183,7 @@ return [
         ValidadorCpf\CpfServiceProvider54::class,
         Posmat\Providers\ViewComposerServiceProvider::class,
         Codecourse\Notify\NotifyServiceProvider::class,
+        Posmat\Providers\BladeServiceProvider::class,
 
     ],
 
