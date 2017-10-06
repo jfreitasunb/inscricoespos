@@ -34,6 +34,52 @@
         </div>
       </div>
   </fieldset>
+
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_escolha_candidato.recomendante')}}</legend>
+      <div class="row">
+        <div class="col-md-4">
+          {!! Form::label('recomendante_1', '1) '.trans('tela_escolha_candidato.nome'), ['class' => 'control-label emailrecomendante']) !!}
+          {!! Form::text('nome_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_1', 'E-mail: ', ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_1', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          {!! Form::label('recomendante_2', '2) '.trans('tela_escolha_candidato.nome'), ['class' => 'control-label emailrecomendante']) !!}
+          {!! Form::text('nome_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_2', 'E-mail: ', ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_2', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          {!! Form::label('recomendante_3', '3) '.trans('tela_escolha_candidato.nome'), ['class' => 'control-label emailrecomendante']) !!}
+          {!! Form::text('nome_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_3', 'E-mail: ', ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('email_3', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
+          {!! Form::text('email_recomendante[]',null , ['class' => 'control-label emailrecomendante']) !!}
+        </div>
+      </div>
+  </fieldset>
       
       <div class="form-group">
         <div class="row">
