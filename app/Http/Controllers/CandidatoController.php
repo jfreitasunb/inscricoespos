@@ -334,10 +334,6 @@ class CandidatoController extends BaseController
 
 		$nome_programa_pos = new ProgramaPos();
 
-		if (in_array(2, $programas_disponiveis)) {
-			$areas_pos = AreaPosMat::get();	
-		}
-
 		foreach ($programas_disponiveis as $programa) {
 			$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
 		}
@@ -381,8 +377,16 @@ class CandidatoController extends BaseController
 
 		// 	$disable=[];
 			$disable[] = '';
-			
+
+		if (in_array(2, $programas_disponiveis)) {
+			$areas_pos = AreaPosMat::pluck('nome','id_area_pos');
+			// dd($areas_pos);
+			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos'));
+		}else{
 			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
+		}
+			
+			
 
 			// return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
 		// }
