@@ -8,9 +8,9 @@
 
 @section('dados_pessoais')
 <div class="row">
+  {!! Form::open(array('route' => 'dados.pessoais', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Dados Pessoais</legend>
-      {!! Form::open(array('route' => 'dados.pessoais', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
         
         <div class="row">
           {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
