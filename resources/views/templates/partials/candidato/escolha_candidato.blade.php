@@ -10,13 +10,12 @@
       {!! Form::open(array('route' => 'dados.escolhas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
       
       <div class="row">
-        
-          @foreach($programa_para_inscricao as $programa => $key)
+        @foreach($programa_para_inscricao as $programa => $key)
           <div class="col-md-4">
             <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, ['class' => 'col-md-4 control-label']) !!} {{$key}}</label>
           </div>
-          @endforeach
-          @if(isset($areas_pos))
+        @endforeach
+        @if(isset($areas_pos))
           <div class="col-md-4">
             <label class="radio">{!! Form::select('areas_pos', $areas_pos, ['class' => 'col-md-4 control-label']) !!}</label>
           </div>    
