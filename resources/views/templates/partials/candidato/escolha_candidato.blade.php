@@ -13,7 +13,7 @@
       <div class="row">
         @foreach($programa_para_inscricao as $programa => $key)
           <div class="col-md-4">
-            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, false , ['class' => 'col-md-4 control-label', 'required' => '']) !!} {!! $key !!}</label>
+            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, false, ['required' => '']) !!} {!! $key !!}</label>
           </div>
         @endforeach
         @if(isset($areas_pos))
