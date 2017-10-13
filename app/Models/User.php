@@ -51,7 +51,7 @@ class User extends Authenticatable
 
     public function retorna_user_por_email($email)
     {
-        return $this->get()->where('email',"=",$email)->first();
+        return $this->get()->where('email',$email)->first();
 
     }
 
