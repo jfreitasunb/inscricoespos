@@ -17,6 +17,7 @@ use Posmat\Models\DadoPessoal;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
+use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\FinalizaEscolha;
 use Posmat\Models\Documento;
 use Illuminate\Http\Request;
@@ -416,14 +417,33 @@ class CandidatoController extends BaseController
 					return redirect()->back();
 				}
 
+
+				
 				$escolhas_candidato = new EscolhaCandidato();
 
-				$escolhas_candidato->id_user = $id_user;
-				$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
-				$escolhas_candidato->area_pos = (int)$request->areas_pos;
-				$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
-				$escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
-				$escolhas_candidato->save();
+				$candidato_fez_escolhas = $escolhas_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos);
+
+				if (count($candidato_fez_escolhas) > 0) {
+					
+					$atualiza_escolhas = EscolhaCandidato::where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos);
+					$dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
+					$dados_escolhas['area_pos'] = (int)$request->areas_pos;
+					$dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
+					$atualiza_escolhas->update($dados_escolhas);
+
+				}else{
+					$escolhas_candidato = new EscolhaCandidato();
+					$escolhas_candidato->id_user = $id_user;
+					$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
+					$escolhas_candidato->area_pos = (int)$request->areas_pos;
+					$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
+					$escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
+					$escolhas_candidato->save();
+				}
+
+				
+
+				 $contatos_recomendantes = new ContatoRecomendante();
 
 
 
