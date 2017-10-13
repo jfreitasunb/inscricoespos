@@ -15,11 +15,8 @@ use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\Estado;
-use Posmat\Models\DadoBancario;
 use Posmat\Models\DadoAcademico;
-use Posmat\Models\AtuacaoMonitoria;
-use Posmat\Models\EscolhaMonitoria;
-use Posmat\Models\HorarioEscolhido;
+use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\FinalizaEscolha;
 use Posmat\Models\Documento;
 use Illuminate\Http\Request;
@@ -418,6 +415,16 @@ class CandidatoController extends BaseController
 
 					return redirect()->back();
 				}
+
+				$escolhas_candidato = new EscolhaCandidato();
+
+				$escolhas_candidato->id_user = $id_user;
+				$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
+				$escolhas_candidato->area_pos = (int)$request->areas_pos;
+				$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
+				$escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
+				$escolhas_candidato->save();
+
 
 
 
