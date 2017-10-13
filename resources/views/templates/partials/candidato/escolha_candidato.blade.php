@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-4">
           {!! Form::label('email_1', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
-          {!! Form::text('confirmar_email_recomendante_1',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_1']) !!}
+          {!! Form::text('confirmar_email_recomendante[]',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_1']) !!}
         </div>
       </div>
       <div class="row">
@@ -63,7 +63,7 @@
         </div>
         <div class="col-md-4">
           {!! Form::label('email_2', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
-          {!! Form::text('confirmar_email_recomendante_2',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_2']) !!}
+          {!! Form::text('confirmar_email_recomendante[]',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_2']) !!}
         </div>
       </div>
       <div class="row">
@@ -77,7 +77,7 @@
         </div>
         <div class="col-md-4">
           {!! Form::label('email_3', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
-          {!! Form::text('confirmar_email_recomendante_3',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_3']) !!}
+          {!! Form::text('confirmar_email_recomendante[]',null , ['class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email', 'data-parsley-equalto' => '#email_recomendante_3']) !!}
         </div>
       </div>
   </fieldset>
