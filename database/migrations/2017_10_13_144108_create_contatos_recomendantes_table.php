@@ -18,6 +18,7 @@ class CreateContatosRecomendantesTable extends Migration
             $table->integer('id_user');
             $table->integer('id_recomendante');
             $table->integer('id_inscricao_pos');
+            $table->boolean('email_enviado')->default(false);
             $table->timestamps();
         });
     }
