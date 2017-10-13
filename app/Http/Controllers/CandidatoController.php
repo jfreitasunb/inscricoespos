@@ -497,8 +497,6 @@ class CandidatoController extends BaseController
 						$novo_recomendante->save();
 					}
 				}
-
-
 			}
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
