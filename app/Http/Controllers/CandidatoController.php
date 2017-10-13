@@ -441,9 +441,35 @@ class CandidatoController extends BaseController
 					$escolhas_candidato->save();
 				}
 
+
+				$contatos_recomendantes = $request->email_recomendante;
+
+				for ($i=0; $i < count($contatos_recomendantes); $i++) { 
+					$novo_usuario = new User();
+					$novo_usuario->email = Purifier::clean(strtolower(trim($contatos_recomendantes[$i])));
+        			$novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
+        			$novo_usuario->user_type =  "recomendante";
+        			$novo_usuario->ativo = true;
+
+        			$novo_usuario->save();
+				}
+				
+				
+		
 				
 
-				 $contatos_recomendantes = new ContatoRecomendante();
+				// $contatos_recomendantes = new ContatoRecomendante();
+
+				// $candidato_recomendantes = $escolhascontatos_recomendantes->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+
+				// if (count($candidato_recomendantes) > 0) {
+					
+				// 	$atualiza_recomendantes = ContatoRecomendante::where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos);
+
+
+				// }
+
+
 
 
 
