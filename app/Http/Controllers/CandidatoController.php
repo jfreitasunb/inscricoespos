@@ -330,13 +330,22 @@ class CandidatoController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
-		$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
+		if ($autoriza_inscricao) {
+			$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
 
-		$nome_programa_pos = new ProgramaPos();
+			$nome_programa_pos = new ProgramaPos();
 
-		foreach ($programas_disponiveis as $programa) {
-			$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+			foreach ($programas_disponiveis as $programa) {
+				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+			}
+		}else{
+			
+			notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
+			
+			return redirect()->route('home');
 		}
+
+		
 
 
 		
