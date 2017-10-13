@@ -16,13 +16,13 @@ class CreateDadosRecomendantesTable extends Migration
         Schema::create('dados_recomendantes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_prof');
-            $table->string('nome_recomendante',200);
-            $table->string('instituicao_recomendante',500);
-            $table->string('titulacao_recomendante',200);
-            $table->string('area_recomendante',200);
-            $table->integer('ano_titulacao');
-            $table->string('inst_obtencao_titulo',500);
-            $table->text('endereco_recomendante');
+            $table->string('nome_recomendante',200)->nullable();
+            $table->string('instituicao_recomendante',500)->nullable();
+            $table->string('titulacao_recomendante',200)->nullable();
+            $table->string('area_recomendante',200)->nullable();
+            $table->integer('ano_titulacao')->nullable();
+            $table->string('inst_obtencao_titulo',500)->nullable();
+            $table->text('endereco_recomendante')->nullable();
             $table->timestamps();
         });
     }
