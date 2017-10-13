@@ -7,19 +7,22 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class EscolhaMonitoria extends Model
+class EscolhaCandidato extends Model
 {
     protected $primaryKey = 'id_user';
 
     protected $table = 'escolhas_candidato';
 
     protected $fillable = [
-        'escolha_aluno',
+        'programa_pretendido',
+        'area_pos',
+        'interesse_bolsa',
+        'id_inscricao_pos',
     ];
 
-public function retorna_escolha_monitoria($id_user,$id_monitoria)
+public function retorna_escolha_candidato($id_user,$id_inscricao_pos)
     {
-        $escolheu_monitoria = $this->where("id_user", $id_user)->where("id_monitoria", $id_monitoria)->get();
+        $escolheu_monitoria = $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
 
         return $escolheu_monitoria;
 
