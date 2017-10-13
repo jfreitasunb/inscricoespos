@@ -8,7 +8,7 @@ class ContatoRecomendante extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'escolhas_candidato';
+    protected $table = 'contatos_recomendantes';
 
     protected $fillable = [
         'id_recomendante',
