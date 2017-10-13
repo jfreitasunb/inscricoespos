@@ -340,7 +340,7 @@ class CandidatoController extends BaseController
 			}
 		}else{
 			
-			notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
 			return redirect()->route('home');
 		}
