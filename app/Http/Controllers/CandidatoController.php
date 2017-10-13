@@ -350,70 +350,20 @@ class CandidatoController extends BaseController
 				return redirect()->back();
 			}
 
-
-
+			if (in_array(2, $programas_disponiveis)) {
+				
+				$areas_pos = AreaPosMat::pluck('nome','id_area_pos');
+			
+				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos'));
+			}else{
+				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
+			}
 		}else{
 			
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
 			return redirect()->route('home');
 		}
-
-		
-
-
-		
-		// $disciplinas_escolhas = new ProgramaPosMat();
-		// $escolhas = $disciplinas_escolhas->pega_disciplinas_monitoria($id_monitoria);	
-
-		
-  //   	$escolhas_candidato = new EscolhaMonitoria();
-		// $fez_escolhas = $escolhas_candidato->retorna_escolha_monitoria($id_user,$id_monitoria);
-		
-
-		// $disable[] = 'disabled="disabled"';
-
-		// $finaliza_inscricao = new FinalizaEscolha();
-
-		// $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_monitoria);
-
-		// if (!$autoriza_inscricao) {
-
-		// 	notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
-			
-		// 	return redirect()->route('home');
-		// }
-
-		// if ($status_inscricao) {
-
-		// 	notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','warning');
-
-		// 	return redirect()->back();
-		// }
-
-		// if (count($fez_escolhas)==3) {
-			
-		// 	notify()->flash('Você já realizou as 03 (três) escolhas possíveis. Não é possível escolher mais nenhuma disciplina.','error');
-
-		// 	return redirect()->back();
-		// }else{
-
-		// 	$disable=[];
-			$disable[] = '';
-
-		if (in_array(2, $programas_disponiveis)) {
-			$areas_pos = AreaPosMat::pluck('nome','id_area_pos');
-			// dd($areas_pos);
-			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos'));
-		}else{
-			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
-		}
-			
-			
-
-			// return view('templates.partials.candidato.escolha_monitoria')->with(compact('disable','escolhas','array_horarios_disponiveis','array_dias_semana'));
-		// }
-		
 	}
 
 	public function postEscolhaCandidato(Request $request)
