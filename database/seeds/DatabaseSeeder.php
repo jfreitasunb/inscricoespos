@@ -70,6 +70,11 @@ class DatabaseSeeder extends Seeder
 
         $db_programa_pos2 = DB::table('programa_pos_mat')->insert($programa_pos2);
 
+
+        $programa_pos3 = ['id_programa_pos' => 3, 'tipo_programa_pos' => 'Verão', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+
+        $db_programa_pos3 = DB::table('programa_pos_mat')->insert($programa_pos3);
+
         $formacao1 = ['id' => 1, 'tipo' => 'Bacharelado', 'nivel' => 'Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_formacao1 = DB::table('formacao')->insert($formacao1);
 
