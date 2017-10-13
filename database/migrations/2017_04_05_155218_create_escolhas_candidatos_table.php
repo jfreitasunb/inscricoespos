@@ -17,6 +17,8 @@ class CreateEscolhasCandidatosTable extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->integer('programa');
+            $table->integer('area_pos')->default(1);
+            $table->boolean('interesse_bolsa')
             $table->integer('id_inscricao_pos');
             $table->timestamps();
         });
