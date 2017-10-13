@@ -338,6 +338,17 @@ class CandidatoController extends BaseController
 			foreach ($programas_disponiveis as $programa) {
 				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
 			}
+
+			$finaliza_inscricao = new FinalizaEscolha();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+
+			notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','warning');
+
+			return redirect()->back();
+		}
 		}else{
 			
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');

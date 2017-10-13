@@ -18,9 +18,9 @@ class FinalizaEscolha extends Model
         'concorda_termos',
     ];
 
-    public function retorna_inscricao_finalizada($id_user,$id_monitoria)
+    public function retorna_inscricao_finalizada($id_user,$id_inscricao_pos)
     {
-        $finalizou_inscricao = $this->select('finalizar')->where("id_user", $id_user)->where("id_monitoria", $id_monitoria)->get();
+        $finalizou_inscricao = $this->select('finalizar')->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
 
         if (count($finalizou_inscricao)>0 and $finalizou_inscricao[0]['finalizar']) {
         	return TRUE;
@@ -30,9 +30,9 @@ class FinalizaEscolha extends Model
 
     }
 
-    public function retorna_usuarios_relatorios($id_monitoria)
+    public function retorna_usuarios_relatorios($id_inscricao_pos)
     {
-        $usarios_relatorios = $this->get()->where("id_monitoria", $id_monitoria)->where('finalizar',TRUE);
+        $usarios_relatorios = $this->get()->where("id_inscricao_pos", $id_inscricao_pos)->where('finalizar',TRUE);
 
         return $usarios_relatorios;
 
