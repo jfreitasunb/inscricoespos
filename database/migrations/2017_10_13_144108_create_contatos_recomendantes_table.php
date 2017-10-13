@@ -16,7 +16,6 @@ class CreateContatosRecomendantesTable extends Migration
         Schema::create('contatos_recomendantes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user');
-            $table->integer('programa');
             $table->integer('id_recomendante');
             $table->integer('id_inscricao_pos');
             $table->timestamps();
