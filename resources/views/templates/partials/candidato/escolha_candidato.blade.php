@@ -86,8 +86,16 @@
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.motivacao')}}</legend>
       <div class="row">
         <div class="col-md-12">
-          {!! Form::textarea('motivacao',null , ['required' => '']) !!} 
+          {!! Form::textarea('motivacao',null , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
         </div>
+      </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_escolha_candidato.declaracao_concordancia')}}</legend>
+      <div class="row">
+        <p> {{ trans('tela_escolha_candidato.concordancia_1') }}{{ trans('tela_escolha_candidato.texto_link_edital') }} {{ trans('tela_escolha_candidato.concordancia_2') }}</p>
+        {!! Form::checkbox('concorda_termos', '1', null, ['required' => '']) !!} {{ trans('tela_escolha_candidato.concordancia_3') }}
       </div>
   </fieldset>
 
