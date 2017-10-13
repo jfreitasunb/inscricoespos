@@ -16,9 +16,8 @@ class CreateEscolhasCandidatosTable extends Migration
         Schema::create('escolhas_candidato', function (Blueprint $table){
             $table->increments('id');
             $table->integer('id_user');
-            $table->string('escolha_aluno',20);
-            $table->string('mencao_aluno',2);
-            $table->integer('id_monitoria');
+            $table->integer('programa');
+            $table->integer('id_inscricao_pos');
             $table->timestamps();
         });
     }

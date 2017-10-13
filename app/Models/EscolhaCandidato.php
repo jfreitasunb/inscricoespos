@@ -15,7 +15,6 @@ class EscolhaMonitoria extends Model
 
     protected $fillable = [
         'escolha_aluno',
-        'mencao_aluno',
     ];
 
 public function retorna_escolha_monitoria($id_user,$id_monitoria)
