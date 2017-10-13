@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EscolhaCandidato extends Model
 {
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id';
 
     protected $table = 'escolhas_candidato';
 
