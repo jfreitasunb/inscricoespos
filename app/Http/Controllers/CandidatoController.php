@@ -377,6 +377,35 @@ class CandidatoController extends BaseController
 
 	public function postEscolhaCandidato(Request $request)
 	{
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+		
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		if ($autoriza_inscricao) {
+			
+			$finaliza_inscricao = new FinalizaEscolha();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
+			}
+			
+		}else{
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
+			
+			return redirect()->route('home');
+		}
+		
+
 		$this->validate($request, [
 			'escolha_aluno_1' => 'required',
 			'mencao_aluno_1' => 'required',
