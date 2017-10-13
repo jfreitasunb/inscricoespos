@@ -398,7 +398,32 @@ class CandidatoController extends BaseController
 
 				return redirect()->back();
 			}
-			
+
+			$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
+
+			if (!in_array(3, $programas_disponiveis)) {
+				
+				
+				$this->validate($request, [
+					'programa_pretendido' => 'required',
+					'interesse_bolsa' => 'required',
+					'nome_recomendante' => 'required',
+					'email_recomendante' => 'required',
+					'confirmar_email_recomendante' => 'required|same:email_recomendante',
+				]);
+
+				if ($request->areas_pos === '1' and $request->programa_pretendido === '2') {
+					
+					notify()->flash(trans('mensagens_gerais.informe_area'),'warning');
+
+					return redirect()->back();
+				}
+
+
+
+			}
+
+
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
@@ -406,158 +431,149 @@ class CandidatoController extends BaseController
 		}
 		
 
-		$this->validate($request, [
-			'escolha_aluno_1' => 'required',
-			'mencao_aluno_1' => 'required',
-			'monitor_convidado' => 'required',
-			'nome_hora_monitoria' => 'required',
-			'nome_professor' => 'required_if:monitor_convidado,==,sim',
-			'tipo_monitoria' => 'required|is_voluntario:monitor_convidado',
-			'concorda_termos' => 'required',
-
-		]);
-
-
-		$user = Auth::user();
-		$id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricaoPos();
-		$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
-		$autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 
-		$finaliza_inscricao = new FinalizaEscolha();
 
-		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_monitoria);
+		// $user = Auth::user();
+		// $id_user = $user->id_user;
+		
+		// $monitoria_ativa = new ConfiguraInscricaoPos();
+		// $id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
+		// $autoriza_inscricao = $monitoria_ativa->autoriza_inscricao();
 
-		$informou_dados_academicos = DadoAcademico::find($id_user);
+		// $finaliza_inscricao = new FinalizaEscolha();
 
-		if (is_null($informou_dados_academicos)) {
+		// $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_monitoria);
+
+		// $informou_dados_academicos = DadoAcademico::find($id_user);
+
+		// if (is_null($informou_dados_academicos)) {
 			
-			notify()->flash('Por favor informe seus dados acadêmicos antes de efetuar suas escolhas.','warning');
+		// 	notify()->flash('Por favor informe seus dados acadêmicos antes de efetuar suas escolhas.','warning');
 
-			return redirect()->route('dados.academicos');
-		}
+		// 	return redirect()->route('dados.academicos');
+		// }
 
 
-		if ($status_inscricao) {
+		// if ($status_inscricao) {
 			
-			notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','error');
+		// 	notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','error');
 
-			return redirect()->route('home');
-		}
+		// 	return redirect()->route('home');
+		// }
 
-		if (!$autoriza_inscricao) {
+		// if (!$autoriza_inscricao) {
 
-			notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
+		// 	notify()->flash('O período de inscrição já está encerrado ou ainda não começou.','warning');
 
-			return redirect()->route('home');
-		}
+		// 	return redirect()->route('home');
+		// }
 
-		if ($request->input('tipo_monitoria')!== "somentevoluntaria") {
-			$informou_banco =  DadoBancario::find($id_user);
+		// if ($request->input('tipo_monitoria')!== "somentevoluntaria") {
+		// 	$informou_banco =  DadoBancario::find($id_user);
 
-			if (is_null($informou_banco)) {
+		// 	if (is_null($informou_banco)) {
 
-				notify()->flash('Por favor informe seus dados bancários antes de efetuar suas escolhas.','error');
+		// 		notify()->flash('Por favor informe seus dados bancários antes de efetuar suas escolhas.','error');
 
-				return redirect()->route('dados.bancarios');
-			}
+		// 		return redirect()->route('dados.bancarios');
+		// 	}
 
-		}
-
-
-		if (isset($request->nome_professor)) {
-			$monitor_projeto = [
-				'monitor_convidado' => $request->input('monitor_convidado'),
-				'nome_professor' => $request->input('nome_professor'),
-			];
-		}else{
-			$monitor_projeto = [
-				'monitor_convidado' => $request->input('monitor_convidado'),
-			];
-		}
-
-		if (($monitor_projeto['monitor_convidado']) AND ($request->input('tipo_monitoria') != "somentevoluntaria")) {
-
-			notify()->flash('Como você atua em projeto, somente é possível solicitar monitoria voluntária.','warning');
-			return redirect()->back();
-
-		}
-
-		$atualiza_dados_academicos = DadoAcademico::where('id_user', '=', $id_user)->where('id_monitoria', '=', $id_monitoria)->first();
-
-		if (is_null($atualiza_dados_academicos)) {
-
-			notify()->flash('Por favor atualize seus dados acadêmicos antes de fazer suas escolhas para a monitoria.','error');
-
-			return redirect()->route('dados.academicos');
-		}
+		// }
 
 
-		$escolhas = new EscolhaMonitoria();
-		$fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
+		// if (isset($request->nome_professor)) {
+		// 	$monitor_projeto = [
+		// 		'monitor_convidado' => $request->input('monitor_convidado'),
+		// 		'nome_professor' => $request->input('nome_professor'),
+		// 	];
+		// }else{
+		// 	$monitor_projeto = [
+		// 		'monitor_convidado' => $request->input('monitor_convidado'),
+		// 	];
+		// }
+
+		// if (($monitor_projeto['monitor_convidado']) AND ($request->input('tipo_monitoria') != "somentevoluntaria")) {
+
+		// 	notify()->flash('Como você atua em projeto, somente é possível solicitar monitoria voluntária.','warning');
+		// 	return redirect()->back();
+
+		// }
+
+		// $atualiza_dados_academicos = DadoAcademico::where('id_user', '=', $id_user)->where('id_monitoria', '=', $id_monitoria)->first();
+
+		// if (is_null($atualiza_dados_academicos)) {
+
+		// 	notify()->flash('Por favor atualize seus dados acadêmicos antes de fazer suas escolhas para a monitoria.','error');
+
+		// 	return redirect()->route('dados.academicos');
+		// }
+
+
+		// $escolhas = new EscolhaMonitoria();
+		// $fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
 
 		
-		if (count($fez_escolhas)==0 or count($fez_escolhas)<3) {
-			$grava_escolhas = new EscolhaMonitoria();
-			$grava_escolhas->id_user = $id_user;
-			$grava_escolhas->id_monitoria = $id_monitoria;
-			$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_1');
-			$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_1');
-			$grava_escolhas->save();
+		// if (count($fez_escolhas)==0 or count($fez_escolhas)<3) {
+		// 	$grava_escolhas = new EscolhaMonitoria();
+		// 	$grava_escolhas->id_user = $id_user;
+		// 	$grava_escolhas->id_monitoria = $id_monitoria;
+		// 	$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_1');
+		// 	$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_1');
+		// 	$grava_escolhas->save();
 
-			$fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
+		// 	$fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
 
-			if (isset($request->escolha_aluno_2) and isset($request->mencao_aluno_2) and count($fez_escolhas) < 3) {
-				$grava_escolhas = new EscolhaMonitoria();
-				$grava_escolhas->id_user = $id_user;
-				$grava_escolhas->id_monitoria = $id_monitoria;
-				$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_2');
-				$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_2');
-				$grava_escolhas->save();
-			}
+		// 	if (isset($request->escolha_aluno_2) and isset($request->mencao_aluno_2) and count($fez_escolhas) < 3) {
+		// 		$grava_escolhas = new EscolhaMonitoria();
+		// 		$grava_escolhas->id_user = $id_user;
+		// 		$grava_escolhas->id_monitoria = $id_monitoria;
+		// 		$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_2');
+		// 		$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_2');
+		// 		$grava_escolhas->save();
+		// 	}
 
-			$fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
+		// 	$fez_escolhas = $escolhas->retorna_escolha_monitoria($id_user,$id_monitoria);
 
-			if (isset($request->escolha_aluno_3) and isset($request->mencao_aluno_3) and count($fez_escolhas) < 3) {
-				$grava_escolhas = new EscolhaMonitoria();
-				$grava_escolhas->id_user = $id_user;
-				$grava_escolhas->id_monitoria = $id_monitoria;
-				$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_3');
-				$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_3');
-				$grava_escolhas->save();
-			}
-		}
+		// 	if (isset($request->escolha_aluno_3) and isset($request->mencao_aluno_3) and count($fez_escolhas) < 3) {
+		// 		$grava_escolhas = new EscolhaMonitoria();
+		// 		$grava_escolhas->id_user = $id_user;
+		// 		$grava_escolhas->id_monitoria = $id_monitoria;
+		// 		$grava_escolhas->escolha_aluno = $request->input('escolha_aluno_3');
+		// 		$grava_escolhas->mencao_aluno = $request->input('mencao_aluno_3');
+		// 		$grava_escolhas->save();
+		// 	}
+		// }
 
-		$atualiza_dados_academicos->update($monitor_projeto);
+		// $atualiza_dados_academicos->update($monitor_projeto);
 		
-		$horario = $request->input('nome_hora_monitoria');
+		// $horario = $request->input('nome_hora_monitoria');
 
-		foreach ($horario as $key) {
-			$temp = explode('_', $key);
-			$horario_escolhido = new HorarioEscolhido();
-			$horario_escolhido->id_user = $id_user;
-			$horario_escolhido->horario_monitoria = $temp[1];
-			$horario_escolhido->dia_semana = $temp[0];
-			$horario_escolhido->id_monitoria = $id_monitoria;
+		// foreach ($horario as $key) {
+		// 	$temp = explode('_', $key);
+		// 	$horario_escolhido = new HorarioEscolhido();
+		// 	$horario_escolhido->id_user = $id_user;
+		// 	$horario_escolhido->horario_monitoria = $temp[1];
+		// 	$horario_escolhido->dia_semana = $temp[0];
+		// 	$horario_escolhido->id_monitoria = $id_monitoria;
 
-			$horario_escolhido->save();
-		}
+		// 	$horario_escolhido->save();
+		// }
 		
-		$finalizar = new FinalizaEscolha();
+		// $finalizar = new FinalizaEscolha();
 
-		$finalizar->id_user = $id_user;
-		$finalizar->tipo_monitoria = $request->input('tipo_monitoria');
-		$finalizar->concorda_termos = $request->input('concorda_termos');
-		$finalizar->id_monitoria = $id_monitoria;
+		// $finalizar->id_user = $id_user;
+		// $finalizar->tipo_monitoria = $request->input('tipo_monitoria');
+		// $finalizar->concorda_termos = $request->input('concorda_termos');
+		// $finalizar->id_monitoria = $id_monitoria;
 
-		$finalizar->finalizar = 1;
+		// $finalizar->finalizar = 1;
 
-		$finalizar->save();
+		// $finalizar->save();
 
-		notify()->flash('Suas escolhas foram gravadas com sucesso.','success');
+		// notify()->flash('Suas escolhas foram gravadas com sucesso.','success');
 
-		return redirect()->route('home');
+		// return redirect()->route('home');
 
 	}
 
