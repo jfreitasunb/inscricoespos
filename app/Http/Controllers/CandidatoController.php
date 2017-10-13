@@ -345,10 +345,13 @@ class CandidatoController extends BaseController
 
 			if ($status_inscricao) {
 
-			notify()->flash('Você já finalizou sua inscrição. Não é possível fazer novas escolhas de disciplinas para candidatura à Monitoria do MAT.','warning');
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
 
-			return redirect()->back();
-		}
+				return redirect()->back();
+			}
+
+
+
 		}else{
 			
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
