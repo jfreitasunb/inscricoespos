@@ -17,6 +17,7 @@ use Posmat\Models\DadoPessoal;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
+use Posmat\Models\DadoRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\FinalizaEscolha;
 use Posmat\Models\Documento;
@@ -453,6 +454,14 @@ class CandidatoController extends BaseController
         				$novo_usuario->user_type =  "recomendante";
         				$novo_usuario->ativo = true;
         				$novo_usuario->save();
+
+        				$dados_recomendantes = new DadoRecomendante();
+
+        				$dados_recomendantes->id_prof = $novo_usuario->id_user;
+
+        				$dados_recomendantes->nome_recomendante = Purifier::clean($request->nome_recomendante[$i]);
+
+        				$dados_recomendantes->save();
 					}
 					
 				}
@@ -470,9 +479,9 @@ class CandidatoController extends BaseController
 						
 						$acha_recomendante = new User();
 
-						
+						$novo_recomendante['id_recomendante'] = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-						$atualiza_recomendantes->update($dados_escolhas);
+						$atualiza_recomendantes->update($novo_recomendante);
 					}
 				}else{
 
@@ -490,13 +499,7 @@ class CandidatoController extends BaseController
 				}
 
 
-
-
-
-
 			}
-
-
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
