@@ -168,7 +168,7 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 			
-		return view('templates.partials.candidato.dados_bancarios');
+		return view('templates.partials.candidato.finalizar_inscricao');
 		
 		
 	}
