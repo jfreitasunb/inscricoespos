@@ -246,9 +246,9 @@ class CandidatoController extends BaseController
 
 		$tipo_formacao = new Formacao();
 
-		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck('tipo','id');
+		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');
 
-		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck('tipo','id');
+		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');;
 
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
 
@@ -257,7 +257,7 @@ class CandidatoController extends BaseController
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}else{
 			
-			return view('templates.partials.candidato.dados_academicos')->with(compact 'dados', 'graduacao','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}
 
 		
@@ -266,51 +266,43 @@ class CandidatoController extends BaseController
 
 	public function postDadosAcademicos(Request $request)
 	{
-		$this->validate($request, [
-			'ira' => 'required|regex:/^\d+(,\d+)*(\.\d+)?$/|min:0',
-			'curso_graduacao' => 'required|max:201',
-			'checkbox_foi_monitor' => 'required',
-			'arquivo' => 'required|max:20000'
-		]);
+		// $this->validate($request, [
+		// 	'curso_graduacao' => 'required|max:201',
+		// 	'checkbox_foi_monitor' => 'required',
+		// 	'arquivo' => 'required|max:20000'
+		// ]);
 
 			$user = Auth::user();
 			$id_user = $user->id_user;
+			
+			$dados_academicos = DadoAcademico::find($id_user);
 
+			$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
+			$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+			$cria_dados_academicos['instituicao_graduacao'] = Purifier::clean(trim($request->input('instituicao_graduacao')));
+			$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+			$cria_dados_academicos['curso_pos'] = Purifier::clean(trim($request->input('curso_pos')));
+			$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
+			$cria_dados_academicos['instituicao_pos'] = Purifier::clean(trim($request->input('instituicao_pos')));
+			$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
 
-			for ($i=0; $i < sizeof($request->checkbox_foi_monitor); $i++) {
-				$atuacao = new AtuacaoMonitoria;
+			if (is_null($dados_academicos)) {
+				$cria_dados_academicos = new DadoAcademico();
+				$cria_dados_academicos->id_user = $id_user;
+				$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
+				$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+				$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
+				$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+				$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
+				$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
+				$cria_dados_academicos->instituicao_pos = Purifier::clean(trim($request->input('instituicao_pos')));
+				$cria_dados_academicos->ano_conclusao_pos = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
+				$cria_dados_academicos->save();
+			}else{
+				
 
-				$atuacao->id_user = $id_user;
-				$atuacao->atuou_monitoria = $request->checkbox_foi_monitor[$i];
-
-				$atuacao->save();
+				$dados_academicos->update($cria_dados_academicos);
 			}
-
-			$monitoria_ativa = new ConfiguraInscricaoPos();
-
-			$id_monitoria = $monitoria_ativa->retorna_inscricao_ativa()->id_monitoria;
-			
-			$cria_dados_academicos = new DadoAcademico();
-			$cria_dados_academicos->id_user = $id_user;
-			$cria_dados_academicos->ira = str_replace(',', '.', $request->input('ira'));
-			$cria_dados_academicos->curso_graduacao = $request->input('curso_graduacao');
-			$cria_dados_academicos->id_monitoria = $id_monitoria;
-			$cria_dados_academicos->save();
-
-			$filename = $request->arquivo->store('documentos');
-			$arquivo = new Documento();
-			$arquivo->id_user = $id_user;
-			$arquivo->nome_arquivo = $filename;
-			$arquivo->save();
-			
-			notify()->flash('Seus dados acadêmicos foram atualizados.','success',[
-				'showCancelButton' => false,
-				'confirmButtonColor' => '#3085d6',
-				'confirmButtonText' => 'OK',
-				'notifica' => true,
-				'notifica_mensagem' =>'Agora você pode fazer as escolhas das disciplinas para as quais irá se candidatar à Monitoria do MAT.',
-				'notifica_tipo' => 'info'
-			]);
 
 			return redirect()->route('dados.escolhas');
 	}
@@ -351,7 +343,7 @@ class CandidatoController extends BaseController
 
 			if (in_array(2, $programas_disponiveis)) {
 				
-				$areas_pos = AreaPosMat::pluck('nome','id_area_pos');
+				$areas_pos = AreaPosMat::pluck('nome','id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
 			
 				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos'));
 			}else{
