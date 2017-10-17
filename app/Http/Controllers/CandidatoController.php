@@ -163,31 +163,17 @@ class CandidatoController extends BaseController
 /Gravação dos dados Bancários
  */
 
-	public function getDadosBancarios()
+	public function getFinalizarInscricao()
 	{
 		$user = Auth::user();
 		$id_user = $user->id_user;
-		
-		$candidato = new DadoBancario();
-		$dados_bancarios = $candidato->retorna_dados_bancarios($id_user);
-
-		if (!is_null($dados_bancarios)) {
-			$dados = [
-				'nome_banco' => $dados_bancarios->nome_banco,
-				'numero_banco' => $dados_bancarios->numero_banco,
-				'agencia_bancaria' => $dados_bancarios->agencia_bancaria,
-				'numero_conta_corrente' => $dados_bancarios->numero_conta_corrente,
-			];
-
-			return view('templates.partials.candidato.dados_bancarios')->with('dados', $dados);	
-		}else{
 			
-			return view('templates.partials.candidato.dados_bancarios');
-		}
+		return view('templates.partials.candidato.dados_bancarios');
+		
 		
 	}
 
-	public function postDadosBancarios(Request $request)
+	public function postFinalizarInscricao(Request $request)
 	{
 		$this->validate($request, [
 			'nome_banco' => 'required|max:21',
