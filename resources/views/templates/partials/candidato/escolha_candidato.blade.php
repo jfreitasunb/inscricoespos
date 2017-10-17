@@ -37,6 +37,18 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_escolha_candidato.vinculo_empregaticio')}}</legend>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 0, false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
+        </div>
+        <div class="col-md-4">
+          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 1, false, ['class' => 'col-md-4 control-label']) !!}Sim</label>
+        </div>
+      </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.recomendante')}}</legend>
       <div class="row">
         <div class="col-md-4">

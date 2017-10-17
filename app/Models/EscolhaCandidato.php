@@ -17,6 +17,7 @@ class EscolhaCandidato extends Model
         'programa_pretendido',
         'area_pos',
         'interesse_bolsa',
+        'vinculo_empregaticio',
         'id_inscricao_pos',
     ];
 

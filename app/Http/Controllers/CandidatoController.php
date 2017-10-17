@@ -406,6 +406,7 @@ class CandidatoController extends BaseController
 				$this->validate($request, [
 					'programa_pretendido' => 'required',
 					'interesse_bolsa' => 'required',
+					'vinculo_empregaticio' => 'required',
 					'nome_recomendante' => 'required',
 					'email_recomendante' => 'required',
 					'confirmar_email_recomendante' => 'required|same:email_recomendante',
@@ -430,6 +431,7 @@ class CandidatoController extends BaseController
 					$dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
 					$dados_escolhas['area_pos'] = (int)$request->areas_pos;
 					$dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
+					$dados_escolhas['vinculo_empregaticio'] = (bool)$request->vinculo_empregaticio;
 					$atualiza_escolhas->update($dados_escolhas);
 
 				}else{
@@ -438,6 +440,7 @@ class CandidatoController extends BaseController
 					$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
 					$escolhas_candidato->area_pos = (int)$request->areas_pos;
 					$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
+					$escolhas_candidato->vinculo_empregaticio = (bool)$request->vinculo_empregaticio;
 					$escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
 					$escolhas_candidato->save();
 				}
