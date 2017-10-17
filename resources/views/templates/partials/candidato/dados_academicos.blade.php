@@ -19,9 +19,9 @@
   </div>
 
   <div class="row">
-    {!! Form::label('tipo_graduacao', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
+    {!! Form::label('tipo_curso_graduacao', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso', $graduacao, ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+        {!! Form::select('tipo_curso_graduacao', $graduacao, ['class' => 'col-md-4 control-label']) !!}
     </div>
   </div>
 
@@ -35,7 +35,7 @@
   <div class="row">
     {!! Form::label('ano_conclusao_graduacao', trans('tela_dados_academicos.ano_conclusao'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-      {!! Form::text('ano_conclusao_graduacao', null, ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+      {!! Form::text('ano_conclusao_graduacao', null, ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 </fieldset>
@@ -50,9 +50,9 @@
   </div>
 
   <div class="row">
-    {!! Form::label('tipo_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
+    {!! Form::label('tipo_curso_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso', $pos, ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+        {!! Form::select('tipo_curso_pos', $pos, ['class' => 'col-md-4 control-label']) !!}
     </div>
   </div>
 
@@ -66,7 +66,7 @@
   <div class="row">
     {!! Form::label('ano_conclusao_pos', trans('tela_dados_academicos.ano_conclusao'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-      {!! Form::text('ano_conclusao_pos', null, ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+      {!! Form::text('ano_conclusao_pos', null, ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 </fieldset>

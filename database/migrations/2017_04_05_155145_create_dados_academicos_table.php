@@ -16,11 +16,13 @@ class CreateDadosAcademicosTable extends Migration
         Schema::create('dados_academicos', function (Blueprint $table){
             $table->increments('id');
             $table->integer('id_user');
-            $table->double('ira',2,5);
-            $table->boolean('monitor_convidado')->nullable();
-            $table->string('nome_professor',255)->nullable();
-            $table->string('curso_graduacao',255);
-            $table->integer('id_monitoria');
+            $table->string('curso_graduacao',255)->nullable();
+            $table->integer('tipo_curso_graduacao')->nullable();
+            $table->string('instituicao_graduacao',255)->nullable();
+            $table->integer('ano_conclusao_graduacao')->nullable();
+            $table->integer('tipo_curso_pos')->nullable();
+            $table->string('instituicao_pos',255)->nullable();
+            $table->integer('ano_conclusao_pos')->nullable();
             $table->timestamps();
         });
     }
