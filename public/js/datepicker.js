@@ -21,6 +21,11 @@ $(function () {
             format: 'YYYY',
             viewMode: 'years'
         });
+        $('#ano_conclusao_pos').datetimepicker({
+            locale: 'pt-br',
+            format: 'YYYY',
+            viewMode: 'years'
+        });
 });
 
 $('#disciplinas').click(function() {
