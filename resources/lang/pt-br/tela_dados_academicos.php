@@ -6,8 +6,12 @@
 
 
 return [
-	'tela_escolhas' => 'Escolha',
-	'programa_disponivel' => 'Programa Pretendido',
+	'tela_dados_academicos' => 'Dados Acadêmicos',
+    'curso_graduacao' => 'Graduação',
+	'curso' => 'Curso',
+    'tipo_curso' => 'Tipo',
+    'instituicao_graduacao' => 'Instituição',
+    'ano_conclusao' => 'Ano de conclusão (ou previsão)',
     'interesse_bolsa' => 'Tem interesse em bolsa?',
     'vinculo_empregaticio' => 'Possui vínculo empregatício?',
     'recomendante' => 'Nome completo e e-mail de três professores que, por sua solicitação, enviarão cartas de recomendação. ',
