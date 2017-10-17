@@ -20,6 +20,7 @@ class CreateDadosAcademicosTable extends Migration
             $table->integer('tipo_curso_graduacao')->nullable();
             $table->string('instituicao_graduacao',255)->nullable();
             $table->integer('ano_conclusao_graduacao')->nullable();
+            $table->string('curso_pos',255)->nullable();
             $table->integer('tipo_curso_pos')->nullable();
             $table->string('instituicao_pos',255)->nullable();
             $table->integer('ano_conclusao_pos')->nullable();
