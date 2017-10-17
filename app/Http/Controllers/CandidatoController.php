@@ -167,8 +167,37 @@ class CandidatoController extends BaseController
 	{
 		$user = Auth::user();
 		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$arquivos_editais = public_path("/editais/");
+		
+		if ($autoriza_inscricao) {
+		
+			$finaliza_inscricao = new FinalizaEscolha();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
+			}else{
+				return view('templates.partials.candidato.finalizar_inscricao',compact('arquivos_editais','edital'));
+			}
+		}else{
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
-		return view('templates.partials.candidato.finalizar_inscricao');
+			return redirect()->route('home');
+		}
+
+
+			
+		
 		
 		
 	}
