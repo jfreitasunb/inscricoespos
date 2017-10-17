@@ -16,6 +16,11 @@ $(function () {
             format: 'DD/MM/YYYY',
             viewMode: 'years'
         });
+        $('#ano_conclusao_graduacao').datetimepicker({
+            locale: 'pt-br',
+            format: 'YYYY',
+            viewMode: 'years'
+        });
 });
 
 $('#disciplinas').click(function() {
