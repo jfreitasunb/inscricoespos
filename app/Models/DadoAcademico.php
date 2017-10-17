@@ -14,10 +14,14 @@ class DadoAcademico extends Model
     protected $table = 'dados_academicos';
 
     protected $fillable = [
-        'ira',
-        'monitor_convidado',
-        'nome_professor' ,
         'curso_graduacao',
+        'tipo_curso_graduacao',
+        'instituicao_graduacao',
+        'ano_conclusao_graduacao',
+        'curso_pos',
+        'tipo_curso_pos',
+        'instituicao_pos',
+        'ano_conclusao_pos',
     ];
 
 public function retorna_dados_academicos($id_user)
