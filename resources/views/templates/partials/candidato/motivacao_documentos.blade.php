@@ -8,7 +8,7 @@
 {!! Form::open(array('route' => 'motivacao.documentos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
       
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.motivacao')}}</legend>
+    <legend class="scheduler-border">{{trans('tela_motivacao_documentos.motivacao')}}</legend>
       <div class="row">
         <div class="col-md-12">
           {!! Form::textarea('motivacao',null , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
@@ -17,7 +17,7 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_finalizar_inscricao.documentos_pessoais') }}</legend>
+        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.documentos_pessoais') }}</legend>
         <div class="form-horizontal"{{ $errors->has('documentos_pessoais') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
@@ -38,7 +38,7 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_finalizar_inscricao.historico') }}</legend>
+        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.historico') }}</legend>
         <div class="form-horizontal"{{ $errors->has('historico') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
@@ -60,15 +60,15 @@
 
   <fieldset class="scheduler-border">
       <div class="row">
-        <p> {{ trans('tela_finalizar_inscricao.concordancia_1') }} {{ link_to($arquivos_editais.'Edital_MAT_'.$edital.'.pdf',trans('tela_finalizar_inscricao.texto_link_edital') ) }} {{ trans('tela_finalizar_inscricao.concordancia_2') }}</p>
-        {!! Form::checkbox('concorda_termos', '1', null, ['class' => 'control-label', 'required' => '']) !!} {{ trans('tela_finalizar_inscricao.concordancia_3') }}
+        <p> {{ trans('tela_motivacao_documentos.concordancia_1') }} {{ link_to($arquivos_editais.'Edital_MAT_'.$edital.'.pdf',trans('tela_motivacao_documentos.texto_link_edital') ) }} {{ trans('tela_motivacao_documentos.concordancia_2') }}</p>
+        {!! Form::checkbox('concorda_termos', '1', null, ['class' => 'control-label', 'required' => '']) !!} {{ trans('tela_motivacao_documentos.concordancia_3') }}
       </div>
   </fieldset>
 
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            {!! Form::submit(trans('tela_finalizar_inscricao.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+            {!! Form::submit(trans('tela_motivacao_documentos.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
           </div>
         </div>
       </div>

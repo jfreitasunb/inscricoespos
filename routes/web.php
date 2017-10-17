@@ -39,6 +39,18 @@ Route::post('/candidato/dados/academicos', [
 	'middleware' => ['user.role:aluno'],
 ]);
 
+Route::get('/candidato/motivacao/documentos', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMotivacaoDocumentos',
+	'as'   => 'motivacao.documentos',
+	'middleware' => ['user.role:aluno'],
+]);
+
+Route::post('/candidato/motivacao/documentos', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postMotivacaoDocumentos',
+	'as'   => 'motivacao.documentos',
+	'middleware' => ['user.role:aluno'],
+]);
+
 Route::get('/candidato/finalizar/inscricao', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getFinalizarInscricao',
 	'as'   => 'finalizar.inscricao',

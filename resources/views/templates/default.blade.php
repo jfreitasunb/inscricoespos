@@ -21,7 +21,7 @@
         @yield('dados_pessoais')
         @yield('dados_academicos')
         @yield('escolha_monitoria')
-        @yield('finaliza_inscricao')
+        @yield('motivacao_documentos')
       @endaluno
       @coordenador(Auth()->user())
         @include('templates.partials.coordenador.menu_coordenador')

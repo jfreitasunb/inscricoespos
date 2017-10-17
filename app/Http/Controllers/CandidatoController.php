@@ -163,7 +163,7 @@ class CandidatoController extends BaseController
 /Gravação dos dados Bancários
  */
 
-	public function getFinalizarInscricao()
+	public function getMotivacaoDocumentos()
 	{
 		$user = Auth::user();
 		$id_user = $user->id_user;
@@ -187,7 +187,7 @@ class CandidatoController extends BaseController
 
 				return redirect()->back();
 			}else{
-				return view('templates.partials.candidato.finalizar_inscricao',compact('arquivos_editais','edital'));
+				return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital'));
 			}
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
@@ -202,7 +202,7 @@ class CandidatoController extends BaseController
 		
 	}
 
-	public function postFinalizarInscricao(Request $request)
+	public function postMotivacaoDocumentos(Request $request)
 	{
 		$this->validate($request, [
 			'nome_banco' => 'required|max:21',
