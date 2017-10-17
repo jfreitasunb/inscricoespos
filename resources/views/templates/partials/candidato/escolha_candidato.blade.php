@@ -103,15 +103,6 @@
       </div>
   </fieldset>
 
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_escolha_candidato.declaracao_concordancia')}}</legend>
-      <div class="row">
-        <p> {{ trans('tela_escolha_candidato.concordancia_1') }}{{ trans('tela_escolha_candidato.texto_link_edital') }} {{ trans('tela_escolha_candidato.concordancia_2') }}</p>
-        {!! Form::checkbox('concorda_termos', '1', null, ['required' => '']) !!} {{ trans('tela_escolha_candidato.concordancia_3') }}
-      </div>
-  </fieldset>
-
-      
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
