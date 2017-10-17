@@ -26,7 +26,7 @@
   </div>
 
   <div class="row">
-    {!! Form::label('instituicao_graduacao', trans('tela_dados_academicos.instituicao_graduacao'), ['class' => 'col-md-4 control-label'])!!}
+    {!! Form::label('instituicao_graduacao', trans('tela_dados_academicos.instituicao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
         {!! Form::text('instituicao_graduacao', null , ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
@@ -38,7 +38,37 @@
       {!! Form::text('ano_conclusao_graduacao', null, ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
     </div>
   </div>
+</fieldset>
 
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">{{trans('tela_dados_academicos.curso_pos')}}</legend>
+  <div class="row">
+    {!! Form::label('curso_pos', trans('tela_dados_academicos.curso'), ['class' => 'col-md-4 control-label'])!!}
+      <div class="col-md-4">
+        {!! Form::text('curso_pos', null , ['class' => 'form-control input-md formhorizontal']) !!}
+    </div>
+  </div>
+
+  <div class="row">
+    {!! Form::label('tipo_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
+      <div class="col-md-4">
+        {!! Form::select('tipo_curso', $pos, ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+    </div>
+  </div>
+
+  <div class="row">
+    {!! Form::label('instituicao_pos', trans('tela_dados_academicos.instituicao'), ['class' => 'col-md-4 control-label'])!!}
+      <div class="col-md-4">
+        {!! Form::text('instituicao_pos', null , ['class' => 'form-control input-md formhorizontal']) !!}
+    </div>
+  </div>
+
+  <div class="row">
+    {!! Form::label('ano_conclusao_pos', trans('tela_dados_academicos.ano_conclusao'), ['class' => 'col-md-4 control-label'])!!}
+    <div class="col-md-4">
+      {!! Form::text('ano_conclusao_pos', null, ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+    </div>
+  </div>
 </fieldset>
 
 <div class="form-group">
