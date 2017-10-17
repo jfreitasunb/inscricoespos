@@ -242,9 +242,6 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 		
-		$monitoria_ativa = new ConfiguraInscricaoPos();
-		$ano_semestre_ira = $monitoria_ativa->ira_ano_semestre();
-
 		$dados_academicos = new DadoAcademico();
 
 		$tipo_formacao = new Formacao();
@@ -257,14 +254,10 @@ class CandidatoController extends BaseController
 
 		if (is_null($dados_academicos_candidato)) {
 			$dados = [];
-			return view('templates.partials.candidato.dados_academicos')->with(compact('ano_semestre_ira', 'dados', 'graduacao','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}else{
 			
-			$dados = [
-				'ira' => str_replace('.', ',', $dados_academicos_candidato->ira),
-				'curso_graduacao' => $dados_academicos_candidato->curso_graduacao,
-			];
-			return view('templates.partials.candidato.dados_academicos')->with(compact('ano_semestre_ira', 'dados', 'graduacao','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact 'dados', 'graduacao','pos'));
 		}
 
 		

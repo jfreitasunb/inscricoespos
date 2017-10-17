@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         $db_configura_inscricao_pos = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos);
 
 
-        $lista_areas_pos = [1 => 'Selecione uma opção', 2 => 'Álgebra', 3 => 'Análise', 4 => 'Análise Numérica', 5 => 'Geometria', 6 => 'Matemática Aplicada', 7 => 'Probabilidade', 8 => 'Sistemas Dinâmicos', 9 => 'Teoria da Computação', 10 => 'Teoria dos Números', ];
+        $lista_areas_pos = [1 => 'Álgebra', 2 => 'Análise', 3 => 'Análise Numérica', 4 => 'Geometria', 5 => 'Matemática Aplicada', 6 => 'Probabilidade', 7 => 'Sistemas Dinâmicos', 8 => 'Teoria da Computação', 9 => 'Teoria dos Números'];
 
         for ($i=1; $i < sizeof($lista_areas_pos)+1; $i++) { 
             
