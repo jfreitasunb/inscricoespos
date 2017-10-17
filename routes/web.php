@@ -39,15 +39,15 @@ Route::post('/candidato/dados/academicos', [
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::get('/candidato/dados/bancarios', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosBancarios',
-	'as'   => 'dados.bancarios',
+Route::get('/candidato/finalizar/inscricao', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getFinalizarInscricao',
+	'as'   => 'finalizar.inscricao',
 	'middleware' => ['user.role:aluno'],
 ]);
 
-Route::post('/candidato/dados/bancarios', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosBancarios',
-	'as'   => 'dados.bancarios',
+Route::post('/candidato/finalizar/inscricao', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postFinalizarInscricao',
+	'as'   => 'finalizar.inscricao',
 	'middleware' => ['user.role:aluno'],
 ]);
 
