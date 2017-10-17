@@ -19,9 +19,9 @@
       @aluno
         @include('templates.partials.candidato.menu_candidato')
         @yield('dados_pessoais')
-        @yield('dados_bancarios')
         @yield('dados_academicos')
         @yield('escolha_monitoria')
+        @yield('finaliza_inscricao')
       @endaluno
       @coordenador(Auth()->user())
         @include('templates.partials.coordenador.menu_coordenador')
