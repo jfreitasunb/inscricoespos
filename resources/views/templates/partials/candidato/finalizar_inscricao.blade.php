@@ -8,7 +8,7 @@
 {!! Form::open(array('route' => 'finalizar.inscricao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
       
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_escolha_candidato.motivacao')}}</legend>
+    <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.motivacao')}}</legend>
       <div class="row">
         <div class="col-md-12">
           {!! Form::textarea('motivacao',null , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
@@ -16,10 +16,59 @@
       </div>
   </fieldset>
 
+  <fieldset class="scheduler-border">
+        <legend class="scheduler-border">{{ trans('tela_finalizar_inscricao.documentos_pessoais') }}</legend>
+        <div class="form-horizontal"{{ $errors->has('documentos_pessoais') ? ' has-error' : '' }}>
+          <div class="row">
+            <span class="input-group-btn">
+                <!-- image-preview-clear button -->
+                <button type="button" class="btn btn-primary" style="display:none;">
+                    <span class="glyphicon glyphicon-remove"></span> Clear
+                </button>
+                <!-- image-preview-input -->
+                <div class="btn btn-primary">
+                    <input type="file" accept="application/pdf, image/png, image/jpeg, image/jpg, image/gif" name="documentos_pessoais" required=""/> <!-- rename it -->
+                </div>
+            </span>
+          </div>
+           @if ($errors->has('documentos_pessoais'))
+            <span class="help-block">{{ $errors->first('documentos_pessoais') }}</span>
+          @endif
+        </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
+        <legend class="scheduler-border">{{ trans('tela_finalizar_inscricao.historico') }}</legend>
+        <div class="form-horizontal"{{ $errors->has('historico') ? ' has-error' : '' }}>
+          <div class="row">
+            <span class="input-group-btn">
+                <!-- image-preview-clear button -->
+                <button type="button" class="btn btn-primary" style="display:none;">
+                    <span class="glyphicon glyphicon-remove"></span> Clear
+                </button>
+                <!-- image-preview-input -->
+                <div class="btn btn-primary">
+                    <input type="file" accept="application/pdf, image/png, image/jpeg, image/jpg, image/gif" name="historico" required=""/> <!-- rename it -->
+                </div>
+            </span>
+          </div>
+           @if ($errors->has('historico'))
+            <span class="help-block">{{ $errors->first('historico') }}</span>
+          @endif
+        </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
+      <div class="row">
+        <p> {{ trans('tela_finalizar_inscricao.concordancia_1') }} {{ link_to($arquivos_editais.'Edital_MAT_'.$edital.'.pdf',trans('tela_finalizar_inscricao.texto_link_edital') ) }} {{ trans('tela_finalizar_inscricao.concordancia_2') }}</p>
+        {!! Form::checkbox('concorda_termos', '1', null, ['class' => 'control-label', 'required' => '']) !!} {{ trans('tela_finalizar_inscricao.concordancia_3') }}
+      </div>
+  </fieldset>
+
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            {!! Form::submit(trans('tela_escolha_candidato.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+            {!! Form::submit(trans('tela_finalizar_inscricao.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
           </div>
         </div>
       </div>
