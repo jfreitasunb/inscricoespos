@@ -93,16 +93,7 @@
         </div>
       </div>
   </fieldset>
-
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_escolha_candidato.motivacao')}}</legend>
-      <div class="row">
-        <div class="col-md-12">
-          {!! Form::textarea('motivacao',null , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
-        </div>
-      </div>
-  </fieldset>
-
+  
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
