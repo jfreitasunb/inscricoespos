@@ -17,3 +17,4 @@ vendor/composer/LICENSE
 vendor/composer/autoload_static.php
 vendor/composer/ClassLoader.php
 vendor/composer/autoload_files.php
+vendor/
