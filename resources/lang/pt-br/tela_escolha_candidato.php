@@ -9,6 +9,7 @@ return [
 	'tela_escolhas' => 'Escolha',
 	'programa_disponivel' => 'Programa Pretendido',
     'interesse_bolsa' => 'Tem interesse em bolsa?',
+    'vinculo_empregaticio' => 'Possui vínculo empregatício?',
     'recomendante' => 'Nome completo e e-mail de três professores que, por sua solicitação, enviarão cartas de recomendação. ',
     'nome' => 'Nome: ',
     'confirmar_email' => 'Confirmar e-mail:',
