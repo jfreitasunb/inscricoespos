@@ -519,4 +519,54 @@ class CandidatoController extends BaseController
 			return redirect()->route('home');
 		}
 	}
+
+
+	public function getFinalizarInscricao(){
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$arquivos_editais = public_path("/editais/");
+
+		if ($autoriza_inscricao) {
+
+			$finaliza_inscricao = new FinalizaEscolha();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
+			}
+
+			$ficha_inscricao = $arquivos_editais."Ficha_aluno.pdf";
+
+			$dados_pessoais = new DadoPessoal();
+
+			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_user);
+
+			$nome_candidato = $dados_pessoais_candidato->nome;
+
+			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
+
+		}else{
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
+			
+			return redirect()->route('home');
+		}
+
+
+		
+	}
+
+	public function postFinalizarInscricao(Request $request){
+
+	}
 }
