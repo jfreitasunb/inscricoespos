@@ -14,12 +14,17 @@
       </div>
   </fieldset>
 
-  
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.ficha_inscricao')}}</legend>
+      <div class="row">
+        {{ link_to($ficha_inscricao,$nome_candidato ) }}
+      </div>
+  </fieldset>
 
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
-            {!! Form::submit(trans('tela_finalizar_inscricao.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+            {!! Form::button(trans('tela_finalizar_inscricao.menu_envio_definitivo'), ['class' => 'btn btn-warning btn-lg register-submit']) !!}
           </div>
         </div>
       </div>
