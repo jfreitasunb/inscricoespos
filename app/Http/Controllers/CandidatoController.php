@@ -21,7 +21,7 @@ use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\DadoRecomendante;
 use Posmat\Models\ContatoRecomendante;
-use Posmat\Models\FinalizaEscolha;
+use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\Documento;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
@@ -178,7 +178,7 @@ class CandidatoController extends BaseController
 		
 		if ($autoriza_inscricao) {
 		
-			$finaliza_inscricao = new FinalizaEscolha();
+			$finaliza_inscricao = new FinalizaInscricao();
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
@@ -350,7 +350,7 @@ class CandidatoController extends BaseController
 				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
 			}
 
-			$finaliza_inscricao = new FinalizaEscolha();
+			$finaliza_inscricao = new FinalizaInscricao();
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
@@ -399,7 +399,7 @@ class CandidatoController extends BaseController
 
 		if ($autoriza_inscricao) {
 			
-			$finaliza_inscricao = new FinalizaEscolha();
+			$finaliza_inscricao = new FinalizaInscricao();
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
@@ -535,7 +535,7 @@ class CandidatoController extends BaseController
 
 		if ($autoriza_inscricao) {
 
-			$finaliza_inscricao = new FinalizaEscolha();
+			$finaliza_inscricao = new FinalizaInscricao();
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 

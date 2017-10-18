@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFinalizaEscolhasTable extends Migration
+class CreateFinalizaInscricaoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateFinalizaEscolhasTable extends Migration
      */
     public function up()
     {
-        Schema::create('finaliza_escolhas', function (Blueprint $table){
+        Schema::create('finaliza_inscricao', function (Blueprint $table){
             $table->increments('id');
             $table->integer('id_user');
-            $table->boolean('concorda_termos');
             $table->integer('id_inscricao_pos');
-            $table->boolean('finalizar');
+            $table->boolean('finalizada');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateFinalizaEscolhasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('finaliza_escolhas');
+        Schema::drop('finaliza_inscricao');
     }
 }
