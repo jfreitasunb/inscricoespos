@@ -5,7 +5,7 @@
 @endsection
 
 @section('motivacao_documentos')
-{!! Form::open(array('route' => 'motivacao.documentos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+{!! Form::open(array('route' => 'motivacao.documentos', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
       
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_motivacao_documentos.motivacao')}}</legend>
