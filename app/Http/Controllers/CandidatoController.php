@@ -157,7 +157,7 @@ class CandidatoController extends BaseController
 				'notifica_tipo' => 'info'
 			]);
 
-			return redirect()->route('dados.bancarios');
+			return redirect()->route('dados.academicos');
 	}
 
 /*
@@ -568,5 +568,7 @@ class CandidatoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
+
+		dd("aqui");
 	}
 }
