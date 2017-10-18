@@ -15,6 +15,7 @@ class Documento extends Model
 
     protected $fillable = [
         'nome_arquivo',
+        'tipo_arquivo',
     ];
 
     public function retorna_arquivo_enviado($id_user)
