@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_finaliza' => 'Finalizar Inscrição',
+	'tela_motivacao_documentos' => 'Motivação e Documentos',
     'motivacao' => 'Escreva no espaço abaixo a sua motivação e expectativa em relação ao programa pretendido:',
     'documentos_pessoais' => 'RG e foto em um mesmo arquivo',
     'historico' => 'Histórico da maior titulação',
