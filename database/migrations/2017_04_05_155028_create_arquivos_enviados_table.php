@@ -17,6 +17,8 @@ class CreateArquivosEnviadosTable extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->string('nome_arquivo',255);
+            $table->string('tipo_arquivo',10);
+            $table->integer('id_inscricao_pos');
             $table->timestamps();
         });
     }
