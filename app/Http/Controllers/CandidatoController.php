@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
+use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\Formacao;
@@ -194,59 +195,63 @@ class CandidatoController extends BaseController
 			
 			return redirect()->route('home');
 		}
-
-
-			
-		
-		
-		
 	}
 
 	public function postMotivacaoDocumentos(Request $request)
 	{
 		$this->validate($request, [
-			'nome_banco' => 'required|max:21',
-			'numero_banco' => 'required|max:201',
-			'agencia_bancaria' => 'required',
-			'numero_conta_corrente' => 'required|max:256',
+			'motivacao' => 'required',
+			'documentos_pessoais' => 'required|max:20000',
+			'historico' => 'required|max:20000',
+			'concorda_termos' => 'required',
 		]);
 
 			$user = Auth::user();
 			$id_user = $user->id_user;
+
+			$edital_ativo = new ConfiguraInscricaoPos();
+
+			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 			
-			$dados_bancarios = [
-				'id_user' => $id_user,
-				'nome_banco' => $request->input('nome_banco'),
-				'numero_banco' => $request->input('numero_banco'),
-				'agencia_bancaria' => $request->input('agencia_bancaria'),
-				'numero_conta_corrente' => $request->input('numero_conta_corrente'),
-			];
+			
+			
 
-			$banco =  DadoBancario::find($id_user);
+			$doc_pessoais = $request->documentos_pessoais->store('uploads');
+			$arquivo = new Documento();
+			$arquivo->id_user = $id_user;
+			$arquivo->nome_arquivo = $doc_pessoais;
+			$arquivo->tipo_arquivo = "Documentos";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
 
-			if (is_null($banco)) {
-				$cria_banco = new DadoBancario();
-				$cria_banco->id_user = $id_user;
-				$cria_banco->nome_banco = $request->input('nome_banco');
-				$cria_banco->numero_banco = $request->input('numero_banco');
-				$cria_banco->agencia_bancaria = $request->input('agencia_bancaria');
-				$cria_banco->numero_conta_corrente = $request->input('numero_conta_corrente');
-				$cria_banco->save();
+			$hist = $request->historico->store('uploads');
+			$arquivo = new Documento();
+			$arquivo->id_user = $id_user;
+			$arquivo->nome_arquivo = $hist;
+			$arquivo->tipo_arquivo = "Histórico";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
+
+			$motivacao = CartaMotivacao::find($id_user);
+
+			if (is_null($motivacao)) {
+				$nova_motivacao = new CartaMotivacao();
+				$nova_motivacao->id_user = $id_user;
+				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
+				$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
+				$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
+				$nova_motivacao->save();
 			}else{
-				
-				$banco->update($dados_bancarios);
+				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
+				$motivacao->update($dados_motivacao);
 			}
 
-			notify()->flash('Seus dados bancários foram atualizados.','success',[
-				'showCancelButton' => false,
-				'confirmButtonColor' => '#3085d6',
-				'confirmButtonText' => 'OK',
-				'notifica' => true,
-				'notifica_mensagem' =>'Agora você deve informar seus dados acadêmicos.',
-				'notifica_tipo' => 'info'
-			]);
+			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 
-			return redirect()->route('dados.academicos');
+			return redirect()->route('finalizar.inscricao');
+
+			
+			
 	}
 
 /*
