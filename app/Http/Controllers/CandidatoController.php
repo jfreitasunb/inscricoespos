@@ -490,16 +490,19 @@ class CandidatoController extends BaseController
 
 				if (count($candidato_recomendantes) > 0) {
 					
-					$atualiza_recomendantes = ContatoRecomendante::where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos);
+					$atualiza_recomendantes = new ContatoRecomendante();
 
-					for ($i=0; $i < count($contatos_recomendantes); $i++) { 
+						$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
 						
 						$acha_recomendante = new User();
 
-						$novo_recomendante['id_recomendante'] = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+						$novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-						$atualiza_recomendantes->update($novo_recomendante);
+						DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
 					}
+					
 				}else{
 
 					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
@@ -508,12 +511,13 @@ class CandidatoController extends BaseController
 						$acha_recomendante = new User();
 
 						$novo_recomendante->id_user = $id_user;
-						$novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+						$acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 						$novo_recomendante->id_inscricao_pos = $id_inscricao_pos;
 
 						$novo_recomendante->save();
 					}
 				}
+
 			}
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 			
@@ -650,10 +654,9 @@ class CandidatoController extends BaseController
 				return redirect()->route('motivacao.documentos');
 			}
 
-
-
-
+			foreach ($informou_recomendantes as $recomendante) {
+				echo $recomendante->id_recomendante;
+			}
 		}
-		dd("aqui");
 	}
 }
