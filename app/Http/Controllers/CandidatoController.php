@@ -8,6 +8,7 @@ use Mail;
 use Session;
 use Validator;
 use Purifier;
+use Notification;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
@@ -23,6 +24,7 @@ use Posmat\Models\DadoRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\Documento;
+use Posmat\Notifications\NotificaRecomendante;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -655,7 +657,16 @@ class CandidatoController extends BaseController
 			}
 
 			foreach ($informou_recomendantes as $recomendante) {
-				echo $recomendante->id_recomendante;
+				
+				if (!$recomendante->email_enviado) {
+
+					echo $recomendante;
+					
+					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($id_user));
+
+					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_user', $recomendante->id_user)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => 'true']);
+
+				}
 			}
 		}
 	}
