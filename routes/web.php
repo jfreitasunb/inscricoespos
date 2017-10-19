@@ -87,6 +87,17 @@ Route::post('/candidato/dados/escolhas', [
 	'middleware' => ['user.role:aluno'],
 ]);
 
+Route::get('/candidato/status/cartas', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getStatusCartas',
+	'as'   => 'status.cartas',
+	'middleware' => ['user.role:aluno'],
+]);
+
+Route::post('/candidato/status/cartas', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@postStatusCartas',
+	'as'   => 'status.cartas',
+	'middleware' => ['user.role:aluno'],
+]);
 
 /*
 *Área do Admin
