@@ -515,6 +515,9 @@ class CandidatoController extends BaseController
 					}
 				}
 			}
+			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
+			
+			return redirect()->route('motivacao.documentos');
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
 			
@@ -608,7 +611,7 @@ class CandidatoController extends BaseController
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_escolha'),'warning');
 
-				return redirect()->back();
+				return redirect()->route('dados.escolhas');
 			}
 
 			$recomendantes_candidato = new ContatoRecomendante();
@@ -620,7 +623,7 @@ class CandidatoController extends BaseController
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_recomendante'),'warning');
 
-				return redirect()->back();
+				return redirect()->route('dados.escolhas');
 			}
 
 			$informou_motivacao = new CartaMotivacao();
