@@ -232,9 +232,11 @@ class CandidatoController extends BaseController
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
 			$arquivo->save();
 
-			$motivacao = CartaMotivacao::find($id_user);
+			$motivacao = new CartaMotivacao();
 
-			if (is_null($motivacao)) {
+			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
+
+			if (count($motivacao)==0) {
 				$nova_motivacao = new CartaMotivacao();
 				$nova_motivacao->id_user = $id_user;
 				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
@@ -568,7 +570,73 @@ class CandidatoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
+		$user = Auth::user();
+		$id_user = $user->id_user;
 
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		if ($autoriza_inscricao) {
+			
+			$finaliza_inscricao = new FinalizaInscricao();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
+			}
+
+			$informou_dados_academicos = DadoAcademico::find($id_user);
+
+			if (is_null($informou_dados_academicos)) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_academicos'),'warning');
+
+				return redirect()->back();
+			}
+
+			$informou_escolha = EscolhaCandidato();
+
+			$escolheu = $informou_escolha->retorna_escolha_candidato($id_user,$id_inscricao_pos);
+
+			if (count($informou_escolha) == 0) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_escolha'),'warning');
+
+				return redirect()->back();
+
+			}
+
+			$informou_motivacao = new CartaMotivacao();
+
+			$fez_carta_motivacao = $informou_motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
+
+			if (count($fez_carta_motivacao) == 0) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_motivacao'),'warning');
+
+				return redirect()->back();
+			}
+
+			$documentos = new Documento();
+
+			$enviou_historico = $documentos->retorna_historico($id_user, $id_inscricao_pos);
+
+			$enviou_documentos = $documentos->retorna_documento($id_user, $id_inscricao_pos);
+
+			dump($enviou_historico);
+
+			dump($enviou_documentos);
+
+
+
+
+		}
 		dd("aqui");
 	}
 }
