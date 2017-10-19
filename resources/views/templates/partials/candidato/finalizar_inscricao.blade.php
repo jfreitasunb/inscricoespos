@@ -58,6 +58,8 @@ var form = event.target.form; // storing the form
 });
 }
 </script>
+@endsection
+@section('scripts')
   {!! Html::script( asset('js/parsley.min.js') ) !!}
   {!! Html::script( asset('i18n/pt-br.js') ) !!}
 @endsection
