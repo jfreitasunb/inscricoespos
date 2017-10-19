@@ -600,7 +600,7 @@ class CandidatoController extends BaseController
 				return redirect()->route('dados.academicos');
 			}
 
-			$informou_escolha = EscolhaCandidato();
+			$informou_escolha = new EscolhaCandidato();
 
 			$escolheu = $informou_escolha->retorna_escolha_candidato($id_user,$id_inscricao_pos);
 
@@ -609,7 +609,18 @@ class CandidatoController extends BaseController
 				notify()->flash(trans('tela_finalizar_inscricao.falta_escolha'),'warning');
 
 				return redirect()->back();
+			}
 
+			$recomendantes_candidato = new ContatoRecomendante();
+
+			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+
+
+			if (count($informou_recomendantes) < 3) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_recomendante'),'warning');
+
+				return redirect()->back();
 			}
 
 			$informou_motivacao = new CartaMotivacao();
@@ -629,9 +640,12 @@ class CandidatoController extends BaseController
 
 			$enviou_documentos = $documentos->retorna_documento($id_user, $id_inscricao_pos);
 
-			dump($enviou_historico);
+			if (count($enviou_historico) == 0 or count($enviou_documentos) == 0) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_documentos'),'warning');
 
-			dump($enviou_documentos);
+				return redirect()->route('motivacao.documentos');
+			}
 
 
 
