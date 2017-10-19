@@ -660,21 +660,27 @@ class CandidatoController extends BaseController
 				
 				if (!$recomendante->email_enviado) {
 					
-					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($id_user));
+					$dados_email['nome_professor'] = 'Professor';
+        			$dados_email['nome_candidato'] = "Eu";
+			        $dados_email['programa'] = 'Doutorado';
+        			$dados_email['email_recomendante'] = '1@mail.com';
+        			$dados_email['prazo_envio'] = '01/01/2018';
 
-					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_user', $recomendante->id_user)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => 'true']);
+					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
+
+					// DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_user', $recomendante->id_user)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => 'true']);
 
 				}
 			}
+			dd();
+			// $finalizar_inscricao = new FinalizaInscricao();
 
-			$finalizar_inscricao = new FinalizaInscricao();
+			// $finalizar_inscricao->id_user = $id_user;
+			// $finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
+			// $finalizar_inscricao->finalizada = true;
+			// $finalizar_inscricao->save();
 
-			$finalizar_inscricao->id_user = $id_user;
-			$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
-			$finalizar_inscricao->finalizada = true;
-			$finalizar_inscricao->save();
-
-			notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'succes');
+			notify()->flash(trans('mensagens_gerais.envio_final'),'succes');
 
 			return redirect()->route('home');
 
