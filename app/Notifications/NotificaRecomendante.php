@@ -32,9 +32,9 @@ class NotificaRecomendante extends Notification
     {
         return (new MailMessage)
             ->subject(trans('mensagens_gerais.carta_recomendacao'))
-            ->line('Você está recebendo essa mensagem porquê você acabou de criar uma conta em nosso sistema.')
+            ->line(trans('mensagens_gerais.motivo_mensagem'))
             ->line('A ativação é necessária para poder efetuar login no sistema.')
-            ->action('Clique no link', url('register/verify', $this->token), 'para que sua conta seja ativada.')
+            ->action('Clique no link',  'para que sua conta seja ativada.')
             ->line('Se você não criou nenhuma conta, por favor ignore essa mensagem.');
     }
 }
