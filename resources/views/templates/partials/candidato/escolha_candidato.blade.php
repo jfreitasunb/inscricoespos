@@ -85,7 +85,7 @@
         </div>
         <div class="col-md-4">
           {!! Form::label('email_3', 'E-mail: ', ['class' => 'control-label']) !!}
-          {!! Form::text('email_recomendante[]',null , ['id' => 'email_recomendante_3', 'class' => 'control-label emailrecomendante', 'required' => '', 'data-parsley-type' => 'email']) !!}
+          {!! Form::text('email_recomendante[]',null , ['id' => 'email_recomendante_3', 'class' => 'emailrecomendante', 'required' => '', 'data-parsley-type' => 'email']) !!}
         </div>
         <div class="col-md-4">
           {!! Form::label('email_3', trans('tela_escolha_candidato.confirmar_email'), ['class' => 'control-label']) !!}
