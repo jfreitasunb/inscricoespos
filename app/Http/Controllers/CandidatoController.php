@@ -597,7 +597,7 @@ class CandidatoController extends BaseController
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_academicos'),'warning');
 
-				return redirect()->back();
+				return redirect()->route('dados.academicos');
 			}
 
 			$informou_escolha = EscolhaCandidato();
