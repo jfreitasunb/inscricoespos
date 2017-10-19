@@ -659,8 +659,6 @@ class CandidatoController extends BaseController
 			foreach ($informou_recomendantes as $recomendante) {
 				
 				if (!$recomendante->email_enviado) {
-
-					echo $recomendante;
 					
 					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($id_user));
 
@@ -668,6 +666,18 @@ class CandidatoController extends BaseController
 
 				}
 			}
+
+			$finalizar_inscricao = new FinalizaInscricao();
+
+			$finalizar_inscricao->id_user = $id_user;
+			$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
+			$finalizar_inscricao->finalizada = true;
+			$finalizar_inscricao->save();
+
+			notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'succes');
+
+			return redirect()->route('home');
+
 		}
 	}
 }
