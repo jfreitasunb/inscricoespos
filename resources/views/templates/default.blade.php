@@ -16,7 +16,7 @@
   <div class="container">
     @if (Auth::check())
       {{-- @include($templatemenu) --}}
-      @aluno
+      @aluno(Auth()->user())
         @include('templates.partials.candidato.menu_candidato')
         @yield('dados_pessoais')
         @yield('dados_academicos')
