@@ -14,5 +14,12 @@ return [
     'mensagem_sucesso' => 'Dados salvos com sucesso',
     'envio_final' => 'Sua inscrição foi envidada corretamente para nosso sistema.',
     'carta_recomendacao' => 'Carta de Recomendação ao MAT/UnB',
-    'motivo_mensagem' => 'Você está recebendo essa mensagem porquê você acabou de criar uma conta em nosso sistema.',
+    'motivo_mensagem_1' => 'Prezado(a) professor(a) ',
+    'motivo_mensagem_2' => 'O(A) senhor(a) foi indicado(a) como recomendante pelo candidato(a) ao programa de  ',
+    'motivo_mensagem_3' => ' no MAT/UnB, ',
+    'motivo_mensagem_4' => 'A carta deve ser enviada pelo site: ',
+    'motivo_mensagem_5' => 'Para entrar no sistema use como login: ',
+    'prazo_envio' => 'A carta deve ser enviada até o dia: ',
+    'recupera_senha' => 'Clique aqui para criar a sua senha',
+    'saudacoes_finais' => 'Atenciosamente, Coordenação de Pós-Graduação do MAT/UnB.',
 ];
