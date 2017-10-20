@@ -745,7 +745,28 @@ class CandidatoController extends BaseController
 				return redirect()->back();
 			}
 
-			return view('templates.partials.candidato.status_cartas');
+			$recomendante_candidato = new ContatoRecomendante();
+
+			$recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+			
+			$dados_para_template = [];
+
+			foreach ($recomendantes_candidato as $recomendante) {
+
+				$dado_pessoal_recomendante = new DadoRecomendante();
+
+				$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+
+				$carta_recomendacao = new CartaRecomendacao();
+				
+				$carta_aluno = $carta_recomendacao->retorna_cara_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
+
+				$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
+
+			}
+			
+
+			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
 
 		}else{
 			return redirect()->back();
