@@ -6,14 +6,10 @@
 
 
 return [
-	'tela_status_cartas' => 'Status das Cartas de Recomendação',
-    'curso_graduacao' => 'Graduação',
-	'curso' => 'Curso',
-    'tipo_curso' => 'Tipo',
-    'instituicao' => 'Instituição',
-    'ano_conclusao' => 'Ano de conclusão (ou previsão)',
-    'curso_pos' => 'Pós-Graduação',
-    'menu_enviar' => 'Enviar',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
-    'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
+	'status_cartas' => 'Status das Cartas de Recomendação',
+    'mensagem_status_cartas' => 'Abaixo você pode conferir se suas cartas já foram enviadas',
+    'nome_recomendante' => 'Nome do recomendante',
+    'situacao_carta' => 'Situação da Carta',
+    'status_enviada' => 'Enviada',
+    'status_nao_enviada' => 'Não enviada',
 ];
