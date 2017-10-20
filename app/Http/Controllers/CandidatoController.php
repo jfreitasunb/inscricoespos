@@ -216,9 +216,6 @@ class CandidatoController extends BaseController
 
 			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 			
-			
-			
-
 			$doc_pessoais = $request->documentos_pessoais->store('uploads');
 			$arquivo = new Documento();
 			$arquivo->id_user = $id_user;
@@ -239,7 +236,7 @@ class CandidatoController extends BaseController
 
 			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
 
-			if (count($motivacao)==0) {
+			if (count($carta_motivacao)==0) {
 				$nova_motivacao = new CartaMotivacao();
 				$nova_motivacao->id_user = $id_user;
 				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
@@ -535,7 +532,7 @@ class CandidatoController extends BaseController
 
 						$nova_carta_recomendacao->id_aluno = $id_user;
 
-						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos)[0]['programa_pretendido'];
+						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos)->programa_pretendido;
 
 						$nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
 
@@ -664,7 +661,7 @@ class CandidatoController extends BaseController
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_motivacao'),'warning');
 
-				return redirect()->back();
+				return redirect()->route('motivacao.documentos');
 			}
 
 			$documentos = new Documento();
@@ -683,12 +680,27 @@ class CandidatoController extends BaseController
 			foreach ($informou_recomendantes as $recomendante) {
 				
 				if (!$recomendante->email_enviado) {
-					
-					$dados_email['nome_professor'] = 'Professor';
-        			$dados_email['nome_candidato'] = "Eu";
-			        $dados_email['programa'] = 'Doutorado';
-        			$dados_email['email_recomendante'] = '1@mail.com';
-        			$dados_email['prazo_envio'] = '01/01/2018';
+
+					$dado_pessoal_candidato = new DadoPessoal();
+
+					$dados_pessoais_candidato = $dado_pessoal_candidato->retorna_dados_pessoais($id_user);
+
+					$dado_pessoal_recomendante = new DadoRecomendante();
+
+					$escolha_candidato = new EscolhaCandidato();
+
+					$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos)->programa_pretendido;
+
+					$programa_pos = new ProgramaPos();
+
+
+					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
+
+					$dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+        			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
+			        $dados_email['programa'] = $programa_pos->pega_programa_pos_mat($programa_pretendido);
+        			$dados_email['email_recomendante'] = User::find($recomendante->id_recomendante)->email;
+        			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
 					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
 
