@@ -151,7 +151,7 @@ class CandidatoController extends BaseController
 			}
 
 
-			notify()->flash('Seus dados pessoais foram atualizados.','success']);
+			notify()->flash('Seus dados pessoais foram atualizados.','success');
 
 			$edital_ativo = new ConfiguraInscricaoPos();
 
@@ -163,7 +163,7 @@ class CandidatoController extends BaseController
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
-			if ($autoriza_inscricao or !$status_inscricao) {
+			if ($autoriza_inscricao and !$status_inscricao) {
 				return redirect()->route('dados.academicos');
 			}else{
 
