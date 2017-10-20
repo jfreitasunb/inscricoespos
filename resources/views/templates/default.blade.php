@@ -23,6 +23,7 @@
         @yield('escolha_monitoria')
         @yield('motivacao_documentos')
         @yield('finaliza_inscricao')
+        @yield('status_cartas')
       @endaluno
       @coordenador(Auth()->user())
         @include('templates.partials.coordenador.menu_coordenador')
