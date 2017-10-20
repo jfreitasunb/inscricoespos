@@ -722,4 +722,34 @@ class CandidatoController extends BaseController
 
 		}
 	}
+
+	public function getStatusCartas(){
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		if ($autoriza_inscricao) {
+			
+			$finaliza_inscricao = new FinalizaInscricao();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if (!$status_inscricao) {
+
+				return redirect()->back();
+			}
+
+			return view('templates.partials.candidato.status_cartas');
+
+		}else{
+			return redirect()->back();
+		}
+
+	}
 }
