@@ -38,7 +38,7 @@ class NotificaRecomendante extends Notification
             ->line(trans('mensagens_gerais.motivo_mensagem_2').$this->dados_email['programa'].trans('mensagens_gerais.motivo_mensagem_3').$this->dados_email['nome_candidato'].'.')
             ->line(trans('mensagens_gerais.motivo_mensagem_4').url('/'))
             ->line(trans('mensagens_gerais.motivo_mensagem_5').$this->dados_email['email_recomendante'])
-            ->line(trans('mensagens_gerais.prazo_envio').$this->dados_email['prazo_envio'])
+            ->line(trans('mensagens_gerais.prazo_envio').$this->dados_email['prazo_envio'].'.')
             ->action(trans('mensagens_gerais.recupera_senha'),url('esqueci/senha'))
             ->line(trans('mensagens_gerais.saudacoes_finais'));
     }
