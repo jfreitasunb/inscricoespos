@@ -22,6 +22,7 @@ use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\DadoRecomendante;
 use Posmat\Models\ContatoRecomendante;
+use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\Documento;
 use Posmat\Notifications\NotificaRecomendante;
@@ -494,7 +495,11 @@ class CandidatoController extends BaseController
 					
 					$atualiza_recomendantes = new ContatoRecomendante();
 
-						$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+					$atualiza_cartas_recomendacoes = new CartaRecomendacao();
+
+					$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->where('completa',false)->pluck('id');
 
 					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
 						
@@ -503,6 +508,8 @@ class CandidatoController extends BaseController
 						$novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
 						DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+
+						DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
 					}
 					
 				}else{
@@ -513,14 +520,31 @@ class CandidatoController extends BaseController
 						$acha_recomendante = new User();
 
 						$novo_recomendante->id_user = $id_user;
-						$acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+						$novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+						
 						$novo_recomendante->id_inscricao_pos = $id_inscricao_pos;
 
 						$novo_recomendante->save();
+
+						$nova_carta_recomendacao = new CartaRecomendacao();
+
+						$escolhas_candidato = new EscolhaCandidato();
+
+						$nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+						$nova_carta_recomendacao->id_aluno = $id_user;
+
+						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos)[0]['programa_pretendido'];
+
+						$nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
+
+						$nova_carta_recomendacao->save();
 					}
 				}
 
 			}
+			
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 			
 			return redirect()->route('motivacao.documentos');
