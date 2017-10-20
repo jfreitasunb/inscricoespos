@@ -11,7 +11,7 @@
     <legend class="scheduler-border">{{trans('tela_motivacao_documentos.motivacao')}}</legend>
       <div class="row">
         <div class="col-md-12">
-          {!! Form::textarea('motivacao',null , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
+          {!! Form::textarea('motivacao', $dados['motivacao'] ?: '' , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
         </div>
       </div>
   </fieldset>
