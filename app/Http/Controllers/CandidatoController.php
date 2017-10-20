@@ -288,10 +288,51 @@ class CandidatoController extends BaseController
 			}
 
 			if (in_array(2, $programas_disponiveis)) {
-				
+
 				$areas_pos = AreaPosMat::pluck('nome','id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
+
+				$escolha_candidato = new EscolhaCandidato();
+
+				$candidato_ja_escolheu = $escolha_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos);
+
+
+				if (is_null($candidato_ja_escolheu)) {
+					
+					$dados = [];
+
+					return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
+				}else{
+
+					$canditato_recomendante = new ContatoRecomendante();
+
+					$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+
+					$i = 1;
+					foreach ($contatos_recomendantes as $recomendante) {
+					
+						$usuario_recomendante = User::find($recomendante->id_recomendante);
+						
+						$dado_recomendante = new DadoRecomendante();
+
+						$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
+						
+						$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
+						
+						$dados['nome_recomendante_'.$i] = $dados_recomendante->nome_recomendante;
+
+						$i++;
+					}
+
+					$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
+					$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
+					$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
+					$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
+
+					return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
+				}
+				
 			
-				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos'));
+				
 			}else{
 				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
 			}
@@ -420,9 +461,10 @@ class CandidatoController extends BaseController
 
 					$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
-					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->where('completa',false)->pluck('id');
+					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
 
 					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
+						
 						
 						$acha_recomendante = new User();
 
@@ -505,7 +547,22 @@ class CandidatoController extends BaseController
 
 				return redirect()->back();
 			}else{
-				return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital'));
+
+				$motivacao = new CartaMotivacao();
+
+				$fez_carta_motivacao = $motivacao->retorna_carta_motivacao($id_user,$id_inscricao_pos);
+
+				if (is_null($fez_carta_motivacao)) {
+					$dados = [];
+
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital', 'dados'));
+				}else{
+
+					$dados['motivacao'] = $fez_carta_motivacao->motivacao;
+
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital','dados'));
+				}
+				
 			}
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
