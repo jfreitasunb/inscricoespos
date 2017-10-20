@@ -716,7 +716,7 @@ class CandidatoController extends BaseController
 			$finalizar_inscricao->finalizada = true;
 			$finalizar_inscricao->save();
 
-			notify()->flash(trans('mensagens_gerais.envio_final'),'succes');
+			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
 			return redirect()->route('home');
 
