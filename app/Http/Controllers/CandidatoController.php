@@ -244,97 +244,6 @@ class CandidatoController extends BaseController
 
 			return redirect()->route('dados.escolhas');
 	}
-	
-/*
-/Gravação dos dados Bancários
- */
-
-	public function getMotivacaoDocumentos()
-	{
-		$user = Auth::user();
-		$id_user = $user->id_user;
-
-		$edital_ativo = new ConfiguraInscricaoPos();
-
-		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-		$arquivos_editais = public_path("/editais/");
-		
-		if ($autoriza_inscricao) {
-		
-			$finaliza_inscricao = new FinalizaInscricao();
-
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
-
-			if ($status_inscricao) {
-
-				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
-
-				return redirect()->back();
-			}else{
-				return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital'));
-			}
-		}else{
-			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
-			
-			return redirect()->route('home');
-		}
-	}
-
-	public function postMotivacaoDocumentos(Request $request)
-	{
-		$this->validate($request, [
-			'motivacao' => 'required',
-			'documentos_pessoais' => 'required|max:20000',
-			'historico' => 'required|max:20000',
-			'concorda_termos' => 'required',
-		]);
-
-			$user = Auth::user();
-			$id_user = $user->id_user;
-
-			$edital_ativo = new ConfiguraInscricaoPos();
-
-			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-			
-			$doc_pessoais = $request->documentos_pessoais->store('uploads');
-			$arquivo = new Documento();
-			$arquivo->id_user = $id_user;
-			$arquivo->nome_arquivo = $doc_pessoais;
-			$arquivo->tipo_arquivo = "Documentos";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$hist = $request->historico->store('uploads');
-			$arquivo = new Documento();
-			$arquivo->id_user = $id_user;
-			$arquivo->nome_arquivo = $hist;
-			$arquivo->tipo_arquivo = "Histórico";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$motivacao = new CartaMotivacao();
-
-			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
-
-			if (count($carta_motivacao)==0) {
-				$nova_motivacao = new CartaMotivacao();
-				$nova_motivacao->id_user = $id_user;
-				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
-				$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
-				$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
-				$nova_motivacao->save();
-			}else{
-				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
-				$motivacao->update($dados_motivacao);
-			}
-
-			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
-
-			return redirect()->route('finalizar.inscricao');		
-	}
-
 
 	/*
 /Gravação dos escolhas do Candidato
@@ -556,6 +465,97 @@ class CandidatoController extends BaseController
 			
 			return redirect()->route('home');
 		}
+	}
+
+
+/*
+/Gravação dos dados Bancários
+ */
+
+	public function getMotivacaoDocumentos()
+	{
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$arquivos_editais = public_path("/editais/");
+		
+		if ($autoriza_inscricao) {
+		
+			$finaliza_inscricao = new FinalizaInscricao();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
+			}else{
+				return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital'));
+			}
+		}else{
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
+			
+			return redirect()->route('home');
+		}
+	}
+
+	public function postMotivacaoDocumentos(Request $request)
+	{
+		$this->validate($request, [
+			'motivacao' => 'required',
+			'documentos_pessoais' => 'required|max:20000',
+			'historico' => 'required|max:20000',
+			'concorda_termos' => 'required',
+		]);
+
+			$user = Auth::user();
+			$id_user = $user->id_user;
+
+			$edital_ativo = new ConfiguraInscricaoPos();
+
+			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+			
+			$doc_pessoais = $request->documentos_pessoais->store('uploads');
+			$arquivo = new Documento();
+			$arquivo->id_user = $id_user;
+			$arquivo->nome_arquivo = $doc_pessoais;
+			$arquivo->tipo_arquivo = "Documentos";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
+
+			$hist = $request->historico->store('uploads');
+			$arquivo = new Documento();
+			$arquivo->id_user = $id_user;
+			$arquivo->nome_arquivo = $hist;
+			$arquivo->tipo_arquivo = "Histórico";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
+
+			$motivacao = new CartaMotivacao();
+
+			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
+
+			if (count($carta_motivacao)==0) {
+				$nova_motivacao = new CartaMotivacao();
+				$nova_motivacao->id_user = $id_user;
+				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
+				$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
+				$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
+				$nova_motivacao->save();
+			}else{
+				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
+				$motivacao->update($dados_motivacao);
+			}
+
+			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
+
+			return redirect()->route('finalizar.inscricao');		
 	}
 
 
