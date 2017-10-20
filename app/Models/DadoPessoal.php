@@ -27,9 +27,8 @@ class DadoPessoal extends Model
 
 public function retorna_dados_pessoais($id_user)
     {
-        $dados_pessoais = $this->find($id_user);
-
-        return $dados_pessoais;
+        
+        return $this->find($id_user);
 
     }
 

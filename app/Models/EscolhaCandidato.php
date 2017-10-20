@@ -23,7 +23,7 @@ class EscolhaCandidato extends Model
 
 public function retorna_escolha_candidato($id_user,$id_inscricao_pos)
     {
-       return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
+       return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
 
     }
 
