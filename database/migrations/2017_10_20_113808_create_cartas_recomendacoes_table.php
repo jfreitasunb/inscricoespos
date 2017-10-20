@@ -17,7 +17,8 @@ class CreateCartasRecomendacoesTable extends Migration
             $table->increments('id');
             $table->integer('id_prof');
             $table->integer('id_aluno');
-            $table->integer('programa');
+            $table->integer('programa_pretendido');
+            $table->integer('id_inscricao_pos');
             $table->string('tempo_conhece_candidato',50)->nullable();
             $table->string('circunstancia_1', 10)->nullable();
             $table->string('circunstancia_2', 10)->nullable();
@@ -39,8 +40,7 @@ class CreateCartasRecomendacoesTable extends Migration
             $table->string('como_aluno', 7)->nullable();
             $table->string('como_orientando', 7)->nullable();
             $table->string('outra_situacao', 7)->nullable();
-            $table->boolean('completada')->->default(0);;
-            $table->integer('id_inscricao_pos');
+            $table->boolean('completada')->default(0);;
             $table->timestamps();
         });
     }
