@@ -173,6 +173,79 @@ class CandidatoController extends BaseController
 	}
 
 /*
+/Gravação dos dados Acadêmicos
+ */
+	public function getDadosAcademicos()
+	{
+		$user = Auth::user();
+		$id_user = $user->id_user;
+		
+		$dados_academicos = new DadoAcademico();
+
+		$tipo_formacao = new Formacao();
+
+		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');
+
+		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');;
+
+		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
+
+		if (is_null($dados_academicos_candidato)) {
+			$dados = [];
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
+		}else{
+			
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
+		}
+
+		
+		
+	}
+
+	public function postDadosAcademicos(Request $request)
+	{
+		// $this->validate($request, [
+		// 	'curso_graduacao' => 'required|max:201',
+		// 	'checkbox_foi_monitor' => 'required',
+		// 	'arquivo' => 'required|max:20000'
+		// ]);
+
+			$user = Auth::user();
+			$id_user = $user->id_user;
+			
+			$dados_academicos = DadoAcademico::find($id_user);
+
+			$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
+			$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+			$cria_dados_academicos['instituicao_graduacao'] = Purifier::clean(trim($request->input('instituicao_graduacao')));
+			$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+			$cria_dados_academicos['curso_pos'] = Purifier::clean(trim($request->input('curso_pos')));
+			$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
+			$cria_dados_academicos['instituicao_pos'] = Purifier::clean(trim($request->input('instituicao_pos')));
+			$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
+
+			if (is_null($dados_academicos)) {
+				$cria_dados_academicos = new DadoAcademico();
+				$cria_dados_academicos->id_user = $id_user;
+				$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
+				$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+				$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
+				$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+				$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
+				$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
+				$cria_dados_academicos->instituicao_pos = Purifier::clean(trim($request->input('instituicao_pos')));
+				$cria_dados_academicos->ano_conclusao_pos = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
+				$cria_dados_academicos->save();
+			}else{
+				
+
+				$dados_academicos->update($cria_dados_academicos);
+			}
+
+			return redirect()->route('dados.escolhas');
+	}
+	
+/*
 /Gravação dos dados Bancários
  */
 
@@ -259,83 +332,7 @@ class CandidatoController extends BaseController
 
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 
-			return redirect()->route('finalizar.inscricao');
-
-			
-			
-	}
-
-/*
-/Gravação dos dados Acadêmicos
- */
-	public function getDadosAcademicos()
-	{
-		$user = Auth::user();
-		$id_user = $user->id_user;
-		
-		$dados_academicos = new DadoAcademico();
-
-		$tipo_formacao = new Formacao();
-
-		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');
-
-		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');;
-
-		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
-
-		if (is_null($dados_academicos_candidato)) {
-			$dados = [];
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
-		}else{
-			
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
-		}
-
-		
-		
-	}
-
-	public function postDadosAcademicos(Request $request)
-	{
-		// $this->validate($request, [
-		// 	'curso_graduacao' => 'required|max:201',
-		// 	'checkbox_foi_monitor' => 'required',
-		// 	'arquivo' => 'required|max:20000'
-		// ]);
-
-			$user = Auth::user();
-			$id_user = $user->id_user;
-			
-			$dados_academicos = DadoAcademico::find($id_user);
-
-			$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
-			$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
-			$cria_dados_academicos['instituicao_graduacao'] = Purifier::clean(trim($request->input('instituicao_graduacao')));
-			$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
-			$cria_dados_academicos['curso_pos'] = Purifier::clean(trim($request->input('curso_pos')));
-			$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
-			$cria_dados_academicos['instituicao_pos'] = Purifier::clean(trim($request->input('instituicao_pos')));
-			$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
-
-			if (is_null($dados_academicos)) {
-				$cria_dados_academicos = new DadoAcademico();
-				$cria_dados_academicos->id_user = $id_user;
-				$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
-				$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
-				$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
-				$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
-				$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
-				$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
-				$cria_dados_academicos->instituicao_pos = Purifier::clean(trim($request->input('instituicao_pos')));
-				$cria_dados_academicos->ano_conclusao_pos = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
-				$cria_dados_academicos->save();
-			}else{
-				
-
-				$dados_academicos->update($cria_dados_academicos);
-			}
-
-			return redirect()->route('dados.escolhas');
+			return redirect()->route('finalizar.inscricao');		
 	}
 
 
