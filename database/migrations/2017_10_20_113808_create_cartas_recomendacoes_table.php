@@ -19,10 +19,10 @@ class CreateCartasRecomendacoesTable extends Migration
             $table->integer('id_aluno');
             $table->integer('programa');
             $table->string('tempo_conhece_candidato',50)->nullable();
-            $table->string('circunstancia1', 10)->nullable();
-            $table->string('circunstancia2', 10)->nullable();
-            $table->string('circunstancia3', 10)->nullable();
-            $table->string('circunstancia4', 10)->nullable();
+            $table->string('circunstancia_1', 10)->nullable();
+            $table->string('circunstancia_2', 10)->nullable();
+            $table->string('circunstancia_3', 10)->nullable();
+            $table->string('circunstancia_4', 10)->nullable();
             $table->string('circunstancia_outra', 256)->nullable();
             $table->string('desempenho_academico', 7)->nullable();
             $table->string('capacidade_aprender', 7)->nullable();
