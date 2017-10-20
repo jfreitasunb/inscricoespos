@@ -194,7 +194,16 @@ class CandidatoController extends BaseController
 			$dados = [];
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}else{
-			
+			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+			$dados['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
+			$dados['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+			$dados['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+			$dados['curso_pos'] = $dados_academicos_candidato->curso_pos;
+			$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
+			$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+
+
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}
 
