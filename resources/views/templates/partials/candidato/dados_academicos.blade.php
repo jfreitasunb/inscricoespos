@@ -14,28 +14,28 @@
   <div class="row">
     {!! Form::label('curso_graduacao', trans('tela_dados_academicos.curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::text('curso_graduacao', null , ['class' => 'form-control input-md formhorizontal']) !!}
+        {!! Form::text('curso_graduacao', $dados['curso_graduacao'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('tipo_curso_graduacao', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso_graduacao', $graduacao, ['class' => 'col-md-4 control-label']) !!}
+        {!! Form::select('tipo_curso_graduacao', $graduacao, $dados['tipo_curso_graduacao'] ?: '', ['class' => 'col-md-6']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('instituicao_graduacao', trans('tela_dados_academicos.instituicao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::text('instituicao_graduacao', null , ['class' => 'form-control input-md formhorizontal']) !!}
+        {!! Form::text('instituicao_graduacao', $dados['instituicao_graduacao'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('ano_conclusao_graduacao', trans('tela_dados_academicos.ano_conclusao'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-      {!! Form::text('ano_conclusao_graduacao', null, ['class' => 'form-control input-md formhorizontal']) !!}
+      {!! Form::text('ano_conclusao_graduacao', $dados['ano_conclusao_graduacao'] ?: '', ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 </fieldset>
@@ -45,28 +45,28 @@
   <div class="row">
     {!! Form::label('curso_pos', trans('tela_dados_academicos.curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::text('curso_pos', null , ['class' => 'form-control input-md formhorizontal']) !!}
+        {!! Form::text('curso_pos', $dados['curso_pos'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('tipo_curso_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso_pos', $pos, ['class' => 'col-md-4 control-label']) !!}
+        {!! Form::select('tipo_curso_pos', $pos, $dados['tipo_curso_pos'] ?: '', ['class' => 'col-md-6l']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('instituicao_pos', trans('tela_dados_academicos.instituicao'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::text('instituicao_pos', null , ['class' => 'form-control input-md formhorizontal']) !!}
+        {!! Form::text('instituicao_pos', $dados['instituicao_pos'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('ano_conclusao_pos', trans('tela_dados_academicos.ano_conclusao'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-      {!! Form::text('ano_conclusao_pos', null, ['class' => 'form-control input-md formhorizontal']) !!}
+      {!! Form::text('ano_conclusao_pos', $dados['ano_conclusao_pos'] ?: '', ['class' => 'form-control input-md formhorizontal']) !!}
     </div>
   </div>
 </fieldset>
