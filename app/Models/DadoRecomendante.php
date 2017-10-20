@@ -19,4 +19,9 @@ class DadoRecomendante extends Model
         'inst_obtencao_titulo',
         'endereco_recomendante',
     ];
+
+    public function retorna_dados_pessoais_recomendante($id_user)
+    {
+        return $this->where("id_prof", $id_user)->get()->first();
+    }
 }
