@@ -151,16 +151,25 @@ class CandidatoController extends BaseController
 			}
 
 
-			notify()->flash('Seus dados pessoais foram atualizados.','success',[
-				'showCancelButton' => false,
-				'confirmButtonColor' => '#3085d6',
-				'confirmButtonText' => 'OK',
-				'notifica' => true,
-				'notifica_mensagem' =>'Caso você esteja se candidantando à monitoria voluntária não é necessário informar os dados bancários.',
-				'notifica_tipo' => 'info'
-			]);
+			notify()->flash('Seus dados pessoais foram atualizados.','success']);
 
-			return redirect()->route('dados.academicos');
+			$edital_ativo = new ConfiguraInscricaoPos();
+
+			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+			$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+			$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+			$finaliza_inscricao = new FinalizaInscricao();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+			if ($autoriza_inscricao or !$status_inscricao) {
+				return redirect()->route('dados.academicos');
+			}else{
+
+				return redirect()->back();
+
+			}
 	}
 
 /*
