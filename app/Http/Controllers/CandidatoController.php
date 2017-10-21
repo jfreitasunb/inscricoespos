@@ -783,10 +783,18 @@ class CandidatoController extends BaseController
 			
 			$finalizar_inscricao = new FinalizaInscricao();
 
-			$finalizar_inscricao->id_user = $id_user;
-			$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
-			$finalizar_inscricao->finalizada = true;
-			$finalizar_inscricao->save();
+			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_user',$id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+			if (count($id_finalizada_anteriormente)>0){
+
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True]);
+			}else{
+				
+				$finalizar_inscricao->id_user = $id_user;
+				$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
+				$finalizar_inscricao->finalizada = true;
+				$finalizar_inscricao->save();
+			}
 
 			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
