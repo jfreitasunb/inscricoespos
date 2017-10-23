@@ -90,6 +90,23 @@ class BladeServiceProvider extends ServiceProvider
             }         
         });
 
+         Blade::if('liberacarta', function ( $user = null ){
+
+            $user = auth()->user();
+            $id_user = $user->id_user;
+
+            $edital_ativo = new ConfiguraInscricaoPos();
+
+            $autoriza_preenchimento_carta = $edital_ativo->autoriza_carta();
+
+
+            if ($autoriza_preenchimento_carta) {
+                return true;
+            }else{
+                return false;
+            }         
+        });
+
          Blade::if('statuscarta', function ( $user = null ){
 
             $user = auth()->user();
