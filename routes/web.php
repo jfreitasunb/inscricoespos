@@ -100,6 +100,22 @@ Route::post('/candidato/status/cartas', [
 ]);
 
 /*
+*Área do Recomendante
+*/
+
+Route::get('/recomendante/dados/pessoais', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante',
+	'as'   => 'dados.recomendante',
+	'middleware' => ['user.role:recomendante'],
+]);
+
+Route::post('/recomendante/dados/pessoais', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postDadosPessoaisRecomendante',
+	'as'   => 'dados.recomendante',
+	'middleware' => ['user.role:recomendante'],
+]);
+
+/*
 *Área do Admin
  */
 
