@@ -115,6 +115,19 @@ Route::post('/recomendante/dados/pessoais', [
 	'middleware' => ['user.role:recomendante'],
 ]);
 
+
+Route::get('/recomendante/cartas/pendentes', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getCartasPendentes',
+	'as'   => 'cartas.pendentes',
+	'middleware' => ['user.role:recomendante'],
+]);
+
+Route::post('/recomendante/cartas/pendentes', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postCartasPendentes',
+	'as'   => 'cartas.pendentes',
+	'middleware' => ['user.role:recomendante'],
+]);
+
 /*
 *Área do Admin
  */
