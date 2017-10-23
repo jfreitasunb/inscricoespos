@@ -23,6 +23,7 @@ class CreateDadosRecomendantesTable extends Migration
             $table->integer('ano_titulacao')->nullable();
             $table->string('inst_obtencao_titulo',500)->nullable();
             $table->text('endereco_recomendante')->nullable();
+            $table->boolean('atualizado')->default(false);
             $table->timestamps();
         });
     }
