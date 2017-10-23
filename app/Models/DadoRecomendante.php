@@ -24,4 +24,9 @@ class DadoRecomendante extends Model
     {
         return $this->where("id_prof", $id_user)->get()->first();
     }
+
+    public function dados_atualizados_recomendante($id_user)
+    {
+        return $this->select('atualizado')->where("id_prof", $id_user)->get()->first();
+    }
 }
