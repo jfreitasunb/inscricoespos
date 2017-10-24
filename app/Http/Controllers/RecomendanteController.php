@@ -59,11 +59,6 @@ class RecomendanteController extends BaseController
 		$recomendante = new DadoRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
-		$edital_ativo = new ConfiguraInscricaoPos();
-
-		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-		$autoriza_carta = $edital_ativo->autoriza_carta();
-
 		$dados = $recomendante->retorna_dados_pessoais_recomendante($id_user);
 
 		return view('templates.partials.recomendante.dados_pessoais')->with(compact('countries','dados'));
@@ -104,7 +99,7 @@ class RecomendanteController extends BaseController
 
 	public function getCartasPendentes()
 	{
-		
+
 	}
 
 }
