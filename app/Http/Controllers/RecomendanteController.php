@@ -42,6 +42,10 @@ use Illuminate\Support\Facades\Response;
 class RecomendanteController extends BaseController
 {
 
+	public function getMenu()
+	{	
+		return view('home');
+	}
 /*
 /Gravação dos dados Pessoais
  */
@@ -60,26 +64,47 @@ class RecomendanteController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$autoriza_carta = $edital_ativo->autoriza_carta();
 
-		if ($status_dados_pessoais) {
-			
-			notify()->flash(trans('tela_recomendante_dados_pessoais.atualizar_dados'),'info');
+		$dados = $recomendante->retorna_dados_pessoais_recomendante($id_user);
 
-			$dados = $recomendante->retorna_dados_pessoais_recomendante($id_user);
-
-			return view('templates.partials.recomendante.dados_pessoais')->with(compact('countries','dados'));
-		}else{
-
-			if ($autoriza_carta) {
-				return redirect()->route('cartas.pendentes');	
-			}else{
-
-				return redirect()->back();
-			}
-			
-		}
-		
+		return view('templates.partials.recomendante.dados_pessoais')->with(compact('countries','dados'));
 		
 	}
 
-	
+	public function postDadosPessoaisRecomendante(Request $request)
+	{
+		$this->validate($request, [
+			'nome_recomendante' => 'required',
+			'instituicao_recomendante' => 'required',
+			'titulacao_recomendante' => 'required',
+			'area_recomendante' => 'required',
+			'ano_titulacao' => 'required',
+			'inst_obtencao_titulo' => 'required',
+			'endereco_recomendante' => 'required',
+		]);
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+		
+		$recomendante = new DadoRecomendante();
+
+		$id_recomendante = $recomendante->select('id')->where('id_prof', $id_user)->pluck('id');
+
+		
+
+		$atualiza_dados_recomendantes['nome_recomendante'] = Purifier::clean(trim($request->input('nome_recomendante')));
+		$atualiza_dados_recomendantes['instituicao_recomendante'] = Purifier::clean(trim($request->input('instituicao_recomendante')));
+		$atualiza_dados_recomendantes['titulacao_recomendante'] = Purifier::clean(trim($request->input('titulacao_recomendante')));
+		$atualiza_dados_recomendantes['area_recomendante'] = Purifier::clean(trim($request->input('area_recomendante')));
+		$atualiza_dados_recomendantes['ano_titulacao'] = Purifier::clean(trim($request->input('ano_titulacao')));
+		$atualiza_dados_recomendantes['endereco_recomendante'] = Purifier::clean(trim($request->input('endereco_recomendante')));
+		$atualiza_dados_recomendantes['atualizado'] = true;
+
+		DB::table('dados_recomendantes')->where('id', $id_recomendante[0])->where('id_prof', $id_user)->update($atualiza_dados_recomendantes);
+	}
+
+	public function getCartasPendentes()
+	{
+		
+	}
+
 }
