@@ -34,7 +34,7 @@
       @recomendante(Auth()->user())
         @include('templates.partials.recomendante.menu_recomendante')
         @yield('dados_pessoais_recomendante')
-        @yield('status_cartas')
+        @yield('cartas_pendentes')
         @yield('cartas_anteriores')
       @endrecomendante
       @admin(Auth()->user())
