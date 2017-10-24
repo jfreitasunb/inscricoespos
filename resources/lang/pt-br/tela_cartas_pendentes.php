@@ -7,7 +7,7 @@
 
 return [
     'tela_pendentes' => 'Cartas Pendentes',
-	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
+	'prazo_carta' => 'Prezado(a) recomendante, o prazo para envio das cartas está encerrado.',
     'curso_graduacao' => 'Graduação',
 	'curso' => 'Curso',
     'tipo_curso' => 'Tipo',
