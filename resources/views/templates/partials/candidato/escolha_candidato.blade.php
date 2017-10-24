@@ -18,7 +18,7 @@
         @endforeach
         @if(isset($areas_pos))
           <div class="col-md-3">
-            <label class="radio">{!! Form::select('area_pos', $areas_pos, $dados['area_pos'] ?: '',  ['class' => 'col-md-6', 'required' => '']) !!}</label>
+            <label class="radio">{!! Form::select('area_pos', $areas_pos, $dados['area_pos'] ?: '',  ['class' => 'col-md-6']) !!}</label>
           </div>    
         @endif
       </div>
