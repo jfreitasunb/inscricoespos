@@ -21,4 +21,11 @@ class ContatoRecomendante extends Model
         return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
 
     }
+
+     public function retorna_indicacoes($id_user,$id_inscricao_pos)
+    {
+
+        return $this->where("id_recomendante", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
+
+    }
 }
