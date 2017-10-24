@@ -33,7 +33,7 @@
       @endcoordenador
       @recomendante(Auth()->user())
         @include('templates.partials.recomendante.menu_recomendante')
-        @yield('dados_pessoais')
+        @yield('dados_pessoais_recomendante')
         @yield('status_cartas')
         @yield('cartas_anteriores')
       @endrecomendante
