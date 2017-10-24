@@ -112,13 +112,63 @@ class RecomendanteController extends BaseController
 		$autoriza_carta = $edital_ativo->autoriza_carta();
 
 		if ($autoriza_carta) {
-			# code...
+			
+			$recomendante_indicado = new ContatoRecomendante();
+
+			$indicacoes = $recomendante_indicado->retorna_indicacoes($id_user,$id_inscricao_pos);
+
+			foreach ($indicacoes as $indicado) {
+				
+				$indicador = new DadoPessoal();
+
+				$dados_indicador = $indicador->retorna_dados_pessoais($indicado->id_user);
+
+				$dados_para_template[$indicado->id_user]['id_candidato'] = $indicado->id_user;
+
+				$dados_para_template[$indicado->id_user]['nome_candidato'] = $dados_indicador->nome;
+
+				$dados_cartas = new CartaRecomendacao();
+
+				$carta_aluno = $dados_cartas->retorna_carta_recomendacao($id_user,$indicado->id_user,$id_inscricao_pos);
+
+				$dados_para_template[$indicado->id_user]['status_carta'] = $carta_aluno->completada;
+
+			}
+
+			return view('templates.partials.recomendante.cartas_pendentes',compact('dados_para_template'));
+
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'), 'info');
 
 			return redirect()->back();
 		}
+	}
+
+	public function getPreencherCarta()
+	{
+		$id_candidato= (int)$_GET['id_candidato'];
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+		
+		$recomendante = new DadoRecomendante();
+		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_carta = $edital_ativo->autoriza_carta();
+
+		if ($autoriza_carta) {
+			return view('templates.partials.recomendante.cartas_parte_inicial');
+		}else{
+
+			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
+			return redirect()->back();
+		}
+
+		
 	}
 
 }
