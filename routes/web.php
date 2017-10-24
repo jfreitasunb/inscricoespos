@@ -102,6 +102,11 @@ Route::post('/candidato/status/cartas', [
 /*
 *Área do Recomendante
 */
+Route::get('/recomendante', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getMenu',
+	'as'   => 'menu.recomendante',
+	'middleware' => ['user.role:recomendante','define.locale'],
+]);
 
 Route::get('/recomendante/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante',
