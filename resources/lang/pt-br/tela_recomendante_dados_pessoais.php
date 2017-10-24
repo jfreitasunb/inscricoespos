@@ -6,6 +6,7 @@
 
 
 return [
+    'tela_dados_pessoais' => 'Dados Pessoais',
 	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
     'curso_graduacao' => 'Graduação',
 	'curso' => 'Curso',
