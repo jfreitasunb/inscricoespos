@@ -6,79 +6,65 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('dados_pessoais')
+@section('dados_pessoais_recomendante')
 <div class="row">
-  {!! Form::open(array('route' => 'dados.pessoais', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+  {!! Form::open(array('route' => 'dados.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Dados Pessoais</legend>
         
         <div class="row">
-          {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            {!! Form::text('nome', $dados['nome_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('instituicao_recomendante', trans('tela_recomendante_dados_pessoais.instituicao_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            {!! Form::text('instituicao_recomendante', $dados['instituicao_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('titulacao_recomendante', trans('tela_recomendante_dados_pessoais.titulacao_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            {!! Form::text('titulacao_recomendante', $dados['titulacao_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         
         <div class="row">
-          {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('area_recomendante', trans('tela_recomendante_dados_pessoais.area_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            {!! Form::text('area_recomendante', $dados['area_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
 
         <div class="row">
-          {!! Form::label('cep', trans('tela_dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('ano_titulacao', trans('tela_recomendante_dados_pessoais.ano_titulacao'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
-          </div>
-        </div>
-
-        <div class="row">
-          {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
-          <div class="col-md-4">
-            {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
-          </div>
-        </div>
-
-        <div class="row">
-          {!! Form::label('estado', trans('tela_dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
-          <div class="col-md-4">
-            <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
-          </div>
-        </div>
-
-        <div class="row">
-          {!! Form::label('cidade', trans('tela_dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
-          <div class="col-md-4">
-            <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
+            {!! Form::text('ano_titulacao', $dados['ano_titulacao'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         
         <div class="row">
-          {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('inst_obtencao_titulo', trans('tela_recomendante_dados_pessoais.inst_obtencao_titulo'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######', 'required' => '']) !!}
+            {!! Form::textarea('inst_obtencao_titulo', $dados['inst_obtencao_titulo'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' =>'2', 'required' => '']) !!}
+          </div>
+        </div>
+
+        <div class="row">
+          {!! Form::label('endereco_recomendante', trans('tela_recomendante_dados_pessoais.endereco_recomendante'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::textarea('endereco_recomendante', $dados['endereco_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
           </div>
         </div>
         
         <div class="form-group">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center">
-              {!! Form::submit(trans('tela_dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+              {!! Form::submit(trans('tela_recomendante_dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
             </div>
           </div>
         </div>
@@ -91,58 +77,6 @@
 @section('scripts')
   <script src="{{ asset('js/parsley.min.js') }}"></script>
   <script src="{{ asset('i18n/pt-br.js') }}"></script>
-@endsection
-
-@section('post-script')
-<script type="text/javascript">
-    $('#pais').change(function(){
-    var paisID = $(this).val();    
-    if(paisID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('api/get-state-list')}}?country_id="+paisID,
-           success:function(res){               
-            if(res){
-                $("#estado").empty();
-                $("#estado").append('<option>Select</option>');
-                $.each(res,function(key,value){
-                    $("#estado").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               $("#estado").empty();
-            }
-           }
-        });
-    }else{
-        $("#estado").empty();
-        $("#cidade").empty();
-    }      
-   });
-    $('#estado').on('change',function(){
-    var estadoID = $(this).val();    
-    if(estadoID){
-        $.ajax({
-           type:"GET",
-           url:"{{url('api/get-city-list')}}?state_id="+estadoID,
-           success:function(res){               
-            if(res){
-                $("#cidade").empty();
-                $.each(res,function(key,value){
-                    $("#cidade").append('<option value="'+key+'">'+value+'</option>');
-                });
-           
-            }else{
-               $("#cidade").empty();
-            }
-           }
-        });
-    }else{
-        $("#cidade").empty();
-    }
-        
-   });
-</script>
   {!! Html::script( asset('bower_components/moment/min/moment.min.js') ) !!}
   {!! Html::script( asset('bower_components/moment/locale/pt-br.js') ) !!}
   {!! Html::script( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ) !!}
