@@ -130,6 +130,13 @@ class AuthController extends BaseController
 			return redirect()->intended('candidato');
 		}
 
+		if ($user_type === 'recomendante') {
+			notify()->flash('Bem vindo!','success',[
+				'timer' => 1500,
+			]);
+			return redirect()->intended('recomendante');
+		}
+
 		notify()->flash('Você não se identificou ainda.','warning',[
 				'timer' => 1500,
 			]);
