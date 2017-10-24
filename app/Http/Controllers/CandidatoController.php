@@ -190,8 +190,17 @@ class CandidatoController extends BaseController
 
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
 
+
 		if (is_null($dados_academicos_candidato)) {
 			$dados = [];
+			$dados['curso_graduacao'] = '';
+			$dados['tipo_curso_graduacao'] = '';
+			$dados['instituicao_graduacao'] = '';
+			$dados['ano_conclusao_graduacao'] = '';
+			$dados['curso_pos'] = '';
+			$dados['tipo_curso_pos'] = '';
+			$dados['instituicao_pos'] = '';
+			$dados['ano_conclusao_pos'] = '';
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
 		}else{
 			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
@@ -299,6 +308,18 @@ class CandidatoController extends BaseController
 				if (is_null($candidato_ja_escolheu)) {
 					
 					$dados = [];
+					$dados['programa_pretendido'] = '';
+					$dados['area_pos'] = '';
+					$dados['interesse_bolsa'] = '';
+					$dados['vinculo_empregaticio'] = '';
+					
+					$dados['nome_recomendante_1'] = '';
+					$dados['nome_recomendante_2'] = '';
+					$dados['nome_recomendante_3'] = '';
+					$dados['email_recomendante_1'] = '';
+					$dados['email_recomendante_2'] = '';
+					$dados['email_recomendante_3'] = '';
+						
 
 					return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
 				}else{
@@ -553,7 +574,7 @@ class CandidatoController extends BaseController
 				$fez_carta_motivacao = $motivacao->retorna_carta_motivacao($id_user,$id_inscricao_pos);
 
 				if (is_null($fez_carta_motivacao)) {
-					$dados = [];
+					$dados['motivacao'] = '';
 
 					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital', 'dados'));
 				}else{
