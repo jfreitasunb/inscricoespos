@@ -128,6 +128,18 @@ Route::post('/recomendante/cartas/pendentes', [
 	'middleware' => ['user.role:recomendante'],
 ]);
 
+Route::get('/recomendante/cartas/anteriores', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getCartasAnteriores',
+	'as'   => 'cartas.anteriores',
+	'middleware' => ['user.role:recomendante'],
+]);
+
+Route::post('/recomendante/cartas/anteriores', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postCartasAnteriores',
+	'as'   => 'cartas.anteriores',
+	'middleware' => ['user.role:recomendante'],
+]);
+
 /*
 *Área do Admin
  */
