@@ -13,9 +13,9 @@
       <legend class="scheduler-border">Dados Pessoais</legend>
         
         <div class="row">
-          {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('nome_recomendante', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('nome', $dados['nome_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            {!! Form::text('nome_recomendante', $dados['nome_recomendante'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
           </div>
         </div>
 
