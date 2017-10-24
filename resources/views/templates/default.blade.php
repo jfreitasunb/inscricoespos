@@ -36,6 +36,7 @@
         @yield('dados_pessoais_recomendante')
         @yield('cartas_pendentes')
         @yield('cartas_anteriores')
+        @yield('carta_parte_inicial')
       @endrecomendante
       @admin(Auth()->user())
         @include('templates.partials.admin.menu_admin')
