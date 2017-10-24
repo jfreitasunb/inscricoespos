@@ -31,6 +31,12 @@
         @yield('configura_inscricao')
         @yield('relatorio_monitoria')
       @endcoordenador
+      @recomendante(Auth()->user())
+        @include('templates.partials.recomendante.menu_recomendante')
+        @yield('dados_pessoais')
+        @yield('status_cartas')
+        @yield('cartas_anteriores')
+      @endrecomendante
       @admin(Auth()->user())
         @include('templates.partials.admin.menu_admin')
         @yield('ativa_conta')
