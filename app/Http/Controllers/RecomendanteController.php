@@ -161,7 +161,13 @@ class RecomendanteController extends BaseController
 		$autoriza_carta = $edital_ativo->autoriza_carta();
 
 		if ($autoriza_carta) {
-			return view('templates.partials.recomendante.carta_parte_inicial');
+			$dados['tempo_conhece_candidato'] = '';
+			$dados['circunstancia_1'] = '';
+			$dados['circunstancia_2'] = '';
+			$dados['circunstancia_3'] = '';
+			$dados['circunstancia_4'] = '';
+			$dados['circunstancia_5'] = '';
+			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados'));
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
