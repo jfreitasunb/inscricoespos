@@ -100,6 +100,25 @@ class RecomendanteController extends BaseController
 	public function getCartasPendentes()
 	{
 
+		$user = Auth::user();
+		$id_user = $user->id_user;
+		
+		$recomendante = new DadoRecomendante();
+		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_carta = $edital_ativo->autoriza_carta();
+
+		if ($autoriza_carta) {
+			# code...
+		}else{
+
+			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'), 'info');
+
+			return redirect()->back();
+		}
 	}
 
 }
