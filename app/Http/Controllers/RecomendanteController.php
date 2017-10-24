@@ -161,12 +161,11 @@ class RecomendanteController extends BaseController
 		$autoriza_carta = $edital_ativo->autoriza_carta();
 
 		if ($autoriza_carta) {
-			$dados['tempo_conhece_candidato'] = '';
-			$dados['circunstancia_1'] = '';
-			$dados['circunstancia_2'] = '';
-			$dados['circunstancia_3'] = '';
-			$dados['circunstancia_4'] = '';
-			$dados['circunstancia_5'] = '';
+
+			$carta_recomendacao = new CartaRecomendacao();
+
+			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			
 			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados'));
 		}else{
 
