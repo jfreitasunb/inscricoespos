@@ -860,7 +860,7 @@ class CandidatoController extends BaseController
 
 				$carta_recomendacao = new CartaRecomendacao();
 				
-				$carta_aluno = $carta_recomendacao->retorna_cara_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
+				$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
 
 				$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
 

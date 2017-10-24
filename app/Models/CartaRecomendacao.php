@@ -34,7 +34,7 @@ class CartaRecomendacao extends Model
         'outra_situacao',
     ];
 
-    public function retorna_cara_recomendacao($id_prof,$id_aluno,$id_inscricao_pos)
+    public function retorna_carta_recomendacao($id_prof,$id_aluno,$id_inscricao_pos)
     {
 
         return $this->where("id_prof", $id_prof)->where('id_aluno',$id_aluno)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
