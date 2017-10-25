@@ -7,6 +7,8 @@
 
 return [
     'tela_pendentes' => 'Preencher Carta',
+    'programa_pretendido_candidato' => 'Programa pretendido pelo candidato',
+    'nome_candidato' => 'Nome do candidato',
     'tempo_conhece_candidato' => 'Conhece-o há quanto tempo (meses, anos)',
     'circunstancia' => 'Conhece-o sob que circunstâncias',
     'circunstancia_1' => 'Aulas',
