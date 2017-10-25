@@ -270,4 +270,17 @@ class RecomendanteController extends BaseController
 		}
 	}
 
+	public function postFinalizarCarta(Request $request)
+	{
+
+		$this->validate($request, [
+			'antecedentes_academicos' => 'required',
+			'possivel_aproveitamento' => 'required',
+			'informacoes_relevantes' => 'required',
+			'como_aluno' => 'required',
+			'como_orientando' => 'required',
+		]);
+
+	}
+
 }
