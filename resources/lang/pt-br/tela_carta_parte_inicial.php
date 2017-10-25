@@ -21,7 +21,7 @@ return [
     'nao_sabe' => 'Não sabe',
     'desempenho_academico' => 'Desempenho acadêmico',
     'capacidade_aprender' => 'Capacidade de aprender novos conceitos',
-    'trabalhar_sozinho' => 'Capacidade de trabalhar sozinho',
+    'capacidade_trabalhar' => 'Capacidade de trabalhar sozinho',
     'criatividade' => 'Criatividade',
     'curiosidade' => 'Curiosidade, interesse',
     'esforco' => 'Esforço, persistência',
@@ -35,6 +35,6 @@ return [
     'nome_candidato' => 'Nome do candidato',
     'mensagem_status_cartas' => 'Selecione a carta que deseja preencher',
     'menu_enviar' => 'Salvar',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
+    'carta_enviada' => 'Carta já enviada.',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
 ];
