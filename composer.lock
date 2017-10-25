@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "28a3c867cebb5e23bc9b5ad1d63f50eb",
+    "content-hash": "fa59fefd21614d12f395e16759f13fa3",
     "packages": [
         {
             "name": "codecourse/notify",
@@ -45,6 +45,48 @@
             ],
             "description": "Flexible flash notifications for Laravel",
             "time": "2015-12-01T09:20:03+00:00"
+        },
+        {
+            "name": "codedge/laravel-fpdf",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/codedge/laravel-fpdf.git",
+                "reference": "646f4d8d4763896e60e3022fb29d27abceec79da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/codedge/laravel-fpdf/zipball/646f4d8d4763896e60e3022fb29d27abceec79da",
+                "reference": "646f4d8d4763896e60e3022fb29d27abceec79da",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Codedge\\Fpdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Holger Lösken",
+                    "email": "holger.loesken@codedge.de"
+                }
+            ],
+            "description": "Laravel 5 package for use with Fpdf. It ships with Fpdf 1.81.",
+            "keywords": [
+                "fpdf",
+                "laravel",
+                "pdf"
+            ],
+            "time": "2017-06-02T21:38:56+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
