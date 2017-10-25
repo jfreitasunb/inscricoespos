@@ -157,6 +157,18 @@ Route::post('/recomendante/preencher/carta', [
 		'middleware' => ['user.role:recomendante'],
 ]);
 
+Route::get('/recomendante/preencher/carta/final', [
+		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@getFinalizarCarta',
+		'as' => 'finalizar.carta',
+		'middleware' => ['user.role:recomendante'],
+]);
+
+Route::post('/recomendante/preencher/carta/final', [
+		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postFinalizarCarta',
+		'as' => 'finalizar.carta',
+		'middleware' => ['user.role:recomendante'],
+]);
+
 /*
 *Área do Admin
  */
