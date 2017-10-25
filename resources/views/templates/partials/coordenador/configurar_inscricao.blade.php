@@ -58,7 +58,7 @@
         <div class="col-xs-6">
           
           {!! Form::label('edital_ano', 'Ano', ['class' => 'form-group form-inline']) !!}
-          {!! Form::text('edital_ano', null, ['class' => 'form-group', 'required' => '', 'data-parsley-type' => 'integer']) !!}
+          {!! Form::text('edital_ano', null, ['class' => 'form-group', 'required' => '']) !!}
         </div>
         <div class="col-xs-6">
           {!! Form::label('edital_numero', 'Número', ['class' => 'form-group form-inline']) !!}
