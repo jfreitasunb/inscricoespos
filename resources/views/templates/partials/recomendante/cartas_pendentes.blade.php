@@ -19,6 +19,7 @@
     <tr>
       <th scope="col">{{ trans('tela_cartas_pendentes.selecionar') }}</th>
       <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
+      <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
       <th scope="col">{{ trans('tela_cartas_pendentes.situacao_carta') }}</th>
     </tr>
   </thead>
@@ -31,6 +32,7 @@
       @endif
       <td> {!! Form::radio('id_candidato', $status['id_candidato'], false,  $status['status_carta'] ? ['disabled'=> 'disabled'] : []) !!} </td>
       <td>{{ $status['nome_candidato'] }}</td>
+      <td>{{ $status['programa_pretendido'] }}</td>
       <td>@if ($status['status_carta'])
           {{ trans('tela_cartas_pendentes.status_enviada') }}
         @else
