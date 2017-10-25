@@ -166,7 +166,7 @@ class RecomendanteController extends BaseController
 
 			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
 			
-			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados'));
+			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados','id_candidato'));
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
@@ -174,24 +174,100 @@ class RecomendanteController extends BaseController
 		}
 	}
 
-	public function postPreecherCarta(Request $request)
+	public function postPreencherCarta(Request $request)
 	{
 		$this->validate($request, [
 			'tempo_conhece_candidato' => 'required',
-			'circunstancia_1' => 'required',
-			'circunstancia_2' => 'required',
-			'circunstancia_3' => 'required',
-			'circunstancia_4' => 'required',
 			'desempenho_academico' => 'required',
 			'capacidade_aprender' => 'required',
-			'trabalhar_sozinho' => 'required',
+			'capacidade_trabalhar' => 'required',
 			'criatividade' => 'required',
 			'curiosidade' => 'required',
 			'esforco' => 'required',
 			'expressao_escrita' => 'required',
 			'expressao_oral' => 'required',
 			'relacionamento' => 'required',
+			'circunstancia_outra' => 'required_without_all:circunstancia_1,circunstancia_2,circunstancia_3,circunstancia_4',
 		]);
+
+		$id_candidato = (int)$request->input('id_candidato');
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_carta = $edital_ativo->autoriza_carta();
+
+		if ($autoriza_carta) {
+
+			$carta_recomendacao = new CartaRecomendacao();
+
+			$carta_atual = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+
+			if ($carta_atual->completada) {
+				
+				notify()->flash(trans('tela_cartas_parte_inicial.carta_enviada'),'info');
+				return redirect()->back();
+			}else{
+
+				$atualiza_carta['tempo_conhece_candidato'] = Purifier::clean(trim($request->input('tempo_conhece_candidato')));
+				$atualiza_carta['circunstancia_1'] = Purifier::clean(trim($request->input('circunstancia_1')));
+				$atualiza_carta['circunstancia_2'] = Purifier::clean(trim($request->input('circunstancia_2')));
+				$atualiza_carta['circunstancia_3'] = Purifier::clean(trim($request->input('circunstancia_3')));
+				$atualiza_carta['circunstancia_4'] = Purifier::clean(trim($request->input('circunstancia_4')));
+				$atualiza_carta['circunstancia_outra'] = Purifier::clean(trim($request->input('circunstancia_outra')));
+				$atualiza_carta['desempenho_academico'] = Purifier::clean(trim($request->input('desempenho_academico')));
+				$atualiza_carta['capacidade_aprender'] = Purifier::clean(trim($request->input('capacidade_aprender')));
+				$atualiza_carta['capacidade_trabalhar'] = Purifier::clean(trim($request->input('capacidade_trabalhar')));
+				$atualiza_carta['criatividade'] = Purifier::clean(trim($request->input('criatividade')));
+				$atualiza_carta['curiosidade'] = Purifier::clean(trim($request->input('curiosidade')));
+				$atualiza_carta['esforco'] = Purifier::clean(trim($request->input('esforco')));
+				$atualiza_carta['expressao_escrita'] = Purifier::clean(trim($request->input('expressao_escrita')));
+				$atualiza_carta['expressao_oral'] = Purifier::clean(trim($request->input('expressao_oral')));
+				$atualiza_carta['relacionamento'] = Purifier::clean(trim($request->input('relacionamento')));
+
+				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
+
+				return redirect()->route('finalizar.carta', ['id_candidato' => $id_candidato]);
+			}
+		}else{
+
+			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
+			return redirect()->back();
+		}
+	}
+
+	public function getFinalizarCarta()
+	{
+		$id_candidato = (int)$_GET['id_candidato'];
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_carta = $edital_ativo->autoriza_carta();
+
+		if ($autoriza_carta) {
+
+			$carta_recomendacao = new CartaRecomendacao();
+
+			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+
+			if ($dados->completada) {
+				notify()->flash(trans('tela_cartas_parte_inicial.carta_enviada'),'info');
+				return redirect()->back();
+			}else{
+				return view('templates.partials.recomendante.carta_parte_final', compact('dados','id_candidato'));
+			}
+		}else{
+
+			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
+			return redirect()->back();
+		}
 	}
 
 }
