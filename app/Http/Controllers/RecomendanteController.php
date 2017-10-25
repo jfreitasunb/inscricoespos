@@ -173,9 +173,24 @@ class RecomendanteController extends BaseController
 
 			$carta_recomendacao = new CartaRecomendacao();
 
+			$candidato = new DadoPessoal();
+
+			$programa = new EscolhaCandidato();
+
+			$programa_pretendido_candidato = $programa->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
+
+			$nome_programa_pos = new ProgramaPos();
+
+			$dados_pessoais_candidato = $candidato->retorna_dados_pessoais($id_candidato);
+
+			$dados_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
+
+			$dados_candidato['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido);
+
+
 			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
 			
-			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados','id_candidato'));
+			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados_candidato','dados','id_candidato'));
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
