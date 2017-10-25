@@ -123,11 +123,18 @@ class RecomendanteController extends BaseController
 				
 				$indicador = new DadoPessoal();
 
+				$programa = new EscolhaCandidato();
+
+				$programa_pretendido_candidato = $programa->retorna_escolha_candidato($indicado->id_user,$id_inscricao_pos);
+
+				$nome_programa_pos = new ProgramaPos();
+
 				$dados_indicador = $indicador->retorna_dados_pessoais($indicado->id_user);
 
 				$dados_para_template[$indicado->id_user]['id_candidato'] = $indicado->id_user;
 
 				$dados_para_template[$indicado->id_user]['nome_candidato'] = $dados_indicador->nome;
+				$dados_para_template[$indicado->id_user]['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido);
 
 				$dados_cartas = new CartaRecomendacao();
 
@@ -328,7 +335,6 @@ class RecomendanteController extends BaseController
 
 					return redirect()->route('dados.recomendante');
 				}
-				
 			}
 		}else{
 
