@@ -145,15 +145,15 @@ Route::post('/recomendante/cartas/anteriores', [
 	'middleware' => ['user.role:recomendante'],
 ]);
 
-Route::get('/recomendante/preencher/carta', [
-		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@getPreencherCarta',
-		'as' => 'preencher.carta',
+Route::post('/recomendante/carta/inicial', [
+		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postCartaInicial',
+		'as' => 'carta.inicial',
 		'middleware' => ['user.role:recomendante'],
 ]);
 
-Route::post('/recomendante/preencher/carta', [
+Route::post('/recomendante/salva/carta/inicial', [
 		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postPreencherCarta',
-		'as' => 'preencher.carta',
+		'as' => 'salva.carta.inicial',
 		'middleware' => ['user.role:recomendante'],
 ]);
 

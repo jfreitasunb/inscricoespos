@@ -8,7 +8,7 @@
 
 @section('carta_parte_inicial')
 
-{!! Form::open(array('route' => 'preencher.carta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+{!! Form::open(array('route' => 'salva.carta.inicial', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_carta_parte_inicial.tela_pendentes')}}</legend>
 

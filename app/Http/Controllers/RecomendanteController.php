@@ -154,9 +154,9 @@ class RecomendanteController extends BaseController
 		}
 	}
 
-	public function getPreencherCarta()
+	public function postCartaInicial()
 	{
-		$id_candidato= (int)$_GET['id_candidato'];
+		$id_candidato= (int)$_POST['id_candidato'];
 
 		$user = Auth::user();
 		$id_user = $user->id_user;
