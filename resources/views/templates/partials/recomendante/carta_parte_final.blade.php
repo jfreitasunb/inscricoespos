@@ -65,8 +65,6 @@
     </tr>    
   </tbody>
   </table>
-  
-{!! Form::hidden('id_candidato', $id_candidato, []) !!}
  
 </fieldset>
 <div class="form-group">
