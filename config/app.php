@@ -184,6 +184,7 @@ return [
         Posmat\Providers\ViewComposerServiceProvider::class,
         Codecourse\Notify\NotifyServiceProvider::class,
         Posmat\Providers\BladeServiceProvider::class,
+        Codedge\Fpdf\FpdfServiceProvider::class,
 
     ],
 
@@ -236,6 +237,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
+        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
 
     ],
 
