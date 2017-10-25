@@ -8,6 +8,7 @@ use Mail;
 use Session;
 use File;
 use ZipArchive;
+use Fpdf;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
@@ -16,7 +17,7 @@ use Posmat\Models\DadoBancario;
 use Posmat\Models\Documento;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPosMat;
+use Posmat\Models\ProgramaPos;
 use Posmat\Models\EscolhaMonitoria;
 use Posmat\Models\HorarioEscolhido;
 use Posmat\Models\AtuacaoMonitoria;
@@ -40,15 +41,26 @@ class RelatorioController extends BaseController
 
 		$relatorio = new ConfiguraInscricaoPos();
 
-		$relatorio_disponivel = $relatorio->retorna_lista_para_relatorio();
+		$relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+              $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
+
+              $nome_programa_pos = new ProgramaPos();
+
+              foreach ($programas_disponiveis as $programa) {
+                     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+              }
+
+              $programa = implode('/', $programa_para_inscricao);
 
               $arquivo_relatorio = "";
 
               $documentos_zipados = "";
 
               $monitoria = "";
+              $arquivo_dados_pessoais_bancario = "";
 
-		return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel', 'arquivo_relatorio','documentos_zipados'));
+		return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
 	}
 
 
