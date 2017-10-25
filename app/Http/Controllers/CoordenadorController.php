@@ -7,12 +7,14 @@ use DB;
 use Mail;
 use Session;
 use File;
+use Notification;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Posmat\Models\RelatorioController;
+use Posmat\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -123,8 +125,24 @@ class CoordenadorController extends BaseController
 				File::delete($nome_temporario_edital);
 				$configura_nova_inscricao_pos->save();
 
+				$dados_email['inicio_inscricao'] = $request->inicio_inscricao;
+				$dados_email['fim_inscricao'] = $request->fim_inscricao;
+				$dados_email['prazo_carta'] = $request->prazo_carta;
+
+				
+				foreach ($request->escolhas_coordenador as $key) {
+					
+					$nome_programa_pos = new ProgramaPos();
+
+					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key);
+				}
+
+				$dados_email['programa'] = implode('/', $temp);
+
+				Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
+
 				notify()->flash('Inscrição configurada com sucesso.','success');
-			return redirect()->route('configura.inscricao');
+				return redirect()->route('configura.inscricao');
 
 
 			}else{
