@@ -274,4 +274,7 @@ legend.scheduler-border {
 .emailrecomendante{
     margin-bottom: 10px;
 }
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #3498db;
+}
 /* Required field END */
