@@ -58,9 +58,8 @@ class RelatorioController extends BaseController
               $documentos_zipados = "";
 
               $monitoria = "";
-              $arquivo_dados_pessoais_bancario = "";
 
-		return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
+		return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivo_relatorio','documentos_zipados'));
 	}
 
 

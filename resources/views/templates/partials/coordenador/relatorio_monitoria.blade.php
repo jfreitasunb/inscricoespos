@@ -10,8 +10,7 @@
 			      <th>Programa</th>
 			      <th>Período de Inscrição</th>
 			      <th>Relatório de Inscritos</th>
-			      <th>Documentos</th>
-			      <th>Dados Pessoais/Bancários</th>
+			      <th>Lista de Inscritos</th>
 			    </tr>
 		  	</thead>
 		  	<tbody>
@@ -21,7 +20,6 @@
 			      	<td><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio_disponivel['id_inscricao_pos']]) !!}">{{\Carbon\Carbon::parse($relatorio_disponivel['inicio_inscricao'])->format('d/m/Y')." à ".\Carbon\Carbon::parse($relatorio_disponivel['fim_inscricao'])->format('d/m/Y')}}</a></td>
 			      	<td>@if($monitoria == $relatorio_disponivel['id_inscricao_pos']) <a target="_blank" href="{{asset('relatorios/csv/'.$arquivo_relatorio)}}" >{{$arquivo_relatorio}}</a> @endif</td>
 			      	<td>@if($monitoria == $relatorio_disponivel['id_inscricao_pos']) <a target="_blank" href="{{asset('relatorios/zip/'.$documentos_zipados)}}">{{$documentos_zipados}}</a> @endif</td>
-			      	<td>@if($monitoria == $relatorio_disponivel['id_inscricao_pos']) <a target="_blank" href="{{asset('relatorios/csv/'.$arquivo_dados_pessoais_bancario)}}" >{{$arquivo_dados_pessoais_bancario}}</a> @endif</td>
 			    	</tr>
 		  	</tbody>
 		</table>
