@@ -37,6 +37,7 @@
         @yield('cartas_pendentes')
         @yield('cartas_anteriores')
         @yield('carta_parte_inicial')
+        @yield('carta_parte_final')
       @endrecomendante
       @admin(Auth()->user())
         @include('templates.partials.admin.menu_admin')
