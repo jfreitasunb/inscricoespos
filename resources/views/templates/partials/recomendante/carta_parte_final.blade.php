@@ -35,7 +35,7 @@
 
   <strong><p>{{ trans('tela_carta_parte_final.classifica_candidato') }}</p></strong>
 
-    <table class="table">
+    <table class="table table-bordered table-striped table-hover">
     <thead>
     <tr>
       <th scope="col"></th>

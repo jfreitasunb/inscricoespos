@@ -46,7 +46,7 @@
 
   <strong><p>{{ trans('tela_carta_parte_inicial.tabela_avaliacao') }}</p></strong>
 
-    <table class="table">
+    <table class="table table-bordered table-striped table-hover">
     <thead>
     <tr>
       <th scope="col"></th>
