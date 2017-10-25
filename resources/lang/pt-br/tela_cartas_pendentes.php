@@ -13,6 +13,7 @@ return [
     'status_enviada' => 'Carta enviada',
 	'status_nao_enviada' => 'Carta não enviada',
     'nome_candidato' => 'Nome do candidato',
+    'tipo_programa' => 'Programa pretendido',
     'mensagem_status_cartas' => 'Selecione a carta que deseja preencher',
     'menu_enviar' => 'Preencher carta',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
