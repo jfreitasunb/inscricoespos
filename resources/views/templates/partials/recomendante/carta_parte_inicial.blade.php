@@ -61,12 +61,12 @@
       <td>{!! Form::radio('capacidade_aprender', 'Não Sabe', $dados['capacidade_aprender']!='Não Sabe' ? false: true, []) !!}</td>
     </tr>
     <tr>
-      <td>{{ trans('tela_carta_parte_inicial.trabalhar_sozinho') }}</td>
-       <td>{!! Form::radio('trabalhar_sozinho', 'Excelente', $dados['trabalhar_sozinho']!='Excelente' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('trabalhar_sozinho', 'Bom', $dados['trabalhar_sozinho']!='Bom' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('trabalhar_sozinho', 'Regular', $dados['trabalhar_sozinho']!='Regular' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('trabalhar_sozinho', 'Insuficiente', $dados['trabalhar_sozinho']!='Insuficiente' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('trabalhar_sozinho', 'Não Sabe', $dados['trabalhar_sozinho']!='Não Sabe' ? false: true, []) !!}</td>
+      <td>{{ trans('tela_carta_parte_inicial.capacidade_trabalhar') }}</td>
+       <td>{!! Form::radio('capacidade_trabalhar', 'Excelente', $dados['capacidade_trabalhar']!='Excelente' ? false: true, []) !!}</td>
+      <td>{!! Form::radio('capacidade_trabalhar', 'Bom', $dados['capacidade_trabalhar']!='Bom' ? false: true, []) !!}</td>
+      <td>{!! Form::radio('capacidade_trabalhar', 'Regular', $dados['capacidade_trabalhar']!='Regular' ? false: true, []) !!}</td>
+      <td>{!! Form::radio('capacidade_trabalhar', 'Insuficiente', $dados['capacidade_trabalhar']!='Insuficiente' ? false: true, []) !!}</td>
+      <td>{!! Form::radio('capacidade_trabalhar', 'Não Sabe', $dados['capacidade_trabalhar']!='Não Sabe' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.criatividade') }}</td>
@@ -120,6 +120,7 @@
   </tbody>
   </table>
   
+  {!! Form::hidden('id_candidato', $id_candidato, []) !!}
 
  
 </fieldset>
