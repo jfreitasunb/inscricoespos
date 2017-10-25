@@ -13,23 +13,23 @@
   <legend class="scheduler-border">{{trans('tela_carta_parte_final.tela_pendentes')}}</legend>
 
   <div class="row">
-    {!! Form::label('antecedentes_academicos', trans('tela_carta_parte_final.opiniao_antecedentes_academicos'), ['class' => 'col-md-4 control-label'])!!}
+    {!! Form::label('antecedentes_academicos', trans('tela_carta_parte_final.opiniao_antecedentes_academicos'), ['class' => 'col-md-4 control-label', 'required' => ''])!!}
     <div class="col-md-4">
-    {!! Form::textarea('antecedentes_academicos', $dados['antecedentes_academicos'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5']) !!}
+    {!! Form::textarea('antecedentes_academicos', $dados['antecedentes_academicos'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('possivel_aproveitamento', trans('tela_carta_parte_final.opiniao_desempenho_candidato'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-    {!! Form::textarea('possivel_aproveitamento', $dados['possivel_aproveitamento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5']) !!}
+    {!! Form::textarea('possivel_aproveitamento', $dados['possivel_aproveitamento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
     </div>
   </div>
 
   <div class="row">
     {!! Form::label('informacoes_relevantes', trans('tela_carta_parte_final.outras_informacoes_relevantes'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
-    {!! Form::textarea('informacoes_relevantes', $dados['informacoes_relevantes'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5']) !!}
+    {!! Form::textarea('informacoes_relevantes', $dados['informacoes_relevantes'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'rows' => '5', 'required' => '']) !!}
     </div>
   </div>
 
@@ -49,7 +49,7 @@
   <tbody>
     <tr>
       <td>{{ trans('tela_carta_parte_final.como_aluno') }}</td>
-      <td>{!! Form::radio('como_aluno', 'Top 5%', $dados['como_aluno']!='Top 5%' ? false: true, []) !!}</td>
+      <td>{!! Form::radio('como_aluno', 'Top 5%', $dados['como_aluno']!='Top 5%' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
       <td>{!! Form::radio('como_aluno', 'Top 10%', $dados['como_aluno']!='Top 10%' ? false: true, []) !!}</td>
       <td>{!! Form::radio('como_aluno', 'Top 25%', $dados['como_aluno']!='Top 25%' ? false: true, []) !!}</td>
       <td>{!! Form::radio('como_aluno', 'Top 50%', $dados['como_aluno']!='Top 50%' ? false: true, []) !!}</td>
@@ -57,7 +57,7 @@
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_final.como_orientando') }}</td>
-       <td>{!! Form::radio('como_orientando', 'Top 5%', $dados['como_orientando']!='Top 5%' ? false: true, []) !!}</td>
+       <td>{!! Form::radio('como_orientando', 'Top 5%', $dados['como_orientando']!='Top 5%' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
       <td>{!! Form::radio('como_orientando', 'Top 10%', $dados['como_orientando']!='Top 10%' ? false: true, []) !!}</td>
       <td>{!! Form::radio('como_orientando', 'Top 25%', $dados['como_orientando']!='Top 25%' ? false: true, []) !!}</td>
       <td>{!! Form::radio('como_orientando', 'Top 50%', $dados['como_orientando']!='Top 50%' ? false: true, []) !!}</td>
@@ -66,6 +66,8 @@
   </tbody>
   </table>
  
+ <div id="checkbox-errors"></div>
+
  {!! Form::hidden('id_candidato', $id_candidato, []) !!}
 </fieldset>
 <div class="form-group">
