@@ -95,6 +95,8 @@ class RecomendanteController extends BaseController
 		$atualiza_dados_recomendantes['atualizado'] = true;
 
 		DB::table('dados_recomendantes')->where('id', $id_recomendante[0])->where('id_prof', $id_user)->update($atualiza_dados_recomendantes);
+
+		return redirect()->route('cartas.pendentes');
 	}
 
 	public function getCartasPendentes()
@@ -280,6 +282,59 @@ class RecomendanteController extends BaseController
 			'como_aluno' => 'required',
 			'como_orientando' => 'required',
 		]);
+
+		$id_candidato = (int)$request->input('id_candidato');
+
+		$user = Auth::user();
+		$id_user = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$autoriza_carta = $edital_ativo->autoriza_carta();
+
+		if ($autoriza_carta) {
+
+			$carta_recomendacao = new CartaRecomendacao();
+
+			$carta_atual = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+
+			if ($carta_atual->completada) {
+				
+				notify()->flash(trans('tela_carta_parte_inicial.carta_enviada'),'info');
+				return redirect()->back();
+			}else{
+
+				$atualiza_carta['antecedentes_academicos'] = Purifier::clean(trim($request->input('antecedentes_academicos')));
+				$atualiza_carta['possivel_aproveitamento'] = Purifier::clean(trim($request->input('possivel_aproveitamento')));
+				$atualiza_carta['informacoes_relevantes'] = Purifier::clean(trim($request->input('informacoes_relevantes')));
+				$atualiza_carta['como_aluno'] = Purifier::clean(trim($request->input('como_aluno')));
+				$atualiza_carta['como_orientando'] = Purifier::clean(trim($request->input('como_orientando')));
+				$atualiza_carta['completada'] = true;
+
+				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
+
+				$recomendante = new DadoRecomendante();
+				$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
+
+				if ($status_dados_pessoais->atualizado) {
+
+					notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
+
+					return redirect()->route('cartas.pendentes');
+				}else{
+
+					notify()->flash(trans('tela_recomendante_dados_pessoais.atualizar_dados'));
+
+					return redirect()->route('dados.recomendante');
+				}
+				
+			}
+		}else{
+
+			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
+			return redirect()->route('/');
+		}
 
 	}
 
