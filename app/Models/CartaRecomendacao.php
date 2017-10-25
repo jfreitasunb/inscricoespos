@@ -31,7 +31,6 @@ class CartaRecomendacao extends Model
         'informacoes_relevantes',
         'como_aluno',
         'como_orientando',
-        'outra_situacao',
     ];
 
     public function retorna_carta_recomendacao($id_prof,$id_aluno,$id_inscricao_pos)

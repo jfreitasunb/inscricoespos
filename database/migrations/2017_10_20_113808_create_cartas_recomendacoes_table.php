@@ -39,7 +39,6 @@ class CreateCartasRecomendacoesTable extends Migration
             $table->text('informacoes_relevantes')->nullable();
             $table->string('como_aluno', 7)->nullable();
             $table->string('como_orientando', 7)->nullable();
-            $table->string('outra_situacao', 7)->nullable();
             $table->boolean('completada')->default(0);;
             $table->timestamps();
         });
