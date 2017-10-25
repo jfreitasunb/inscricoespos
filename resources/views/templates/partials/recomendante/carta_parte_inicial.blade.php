@@ -13,6 +13,20 @@
   <legend class="scheduler-border">{{trans('tela_carta_parte_inicial.tela_pendentes')}}</legend>
 
   <div class="row">
+    {!! Form::label('nome_candidato', trans('tela_carta_parte_inicial.nome_candidato'), ['class' => 'col-md-4 control-label'])!!}
+    <div class="col-md-4">
+    {!! Form::text('nome_candidato', $dados_candidato['nome_candidato'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled']) !!}
+    </div>
+  </div>
+
+  <div class="row">
+    {!! Form::label('programa_pretendido', trans('tela_carta_parte_inicial.programa_pretendido_candidato'), ['class' => 'col-md-4 control-label'])!!}
+    <div class="col-md-4">
+    {!! Form::text('programa_pretendido', $dados_candidato['programa_pretendido'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled']) !!}
+    </div>
+  </div>
+
+  <div class="row">
     {!! Form::label('tempo_conhece_candidato', trans('tela_carta_parte_inicial.tempo_conhece_candidato'), ['class' => 'col-md-4 control-label'])!!}
     <div class="col-md-4">
     {!! Form::text('tempo_conhece_candidato', $dados['tempo_conhece_candidato'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
