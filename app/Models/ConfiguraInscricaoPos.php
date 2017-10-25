@@ -38,6 +38,13 @@ class ConfiguraInscricaoPos extends Model
 
     }
 
+     public function retorna_edital_vigente()
+    {
+
+        return $this->orderBy('id_inscricao_pos','desc')->get()->first();
+
+    }
+
     public function retorna_inscricao_ativa()
     {
         $inscricao_pos_ativa = $this->get()->sortByDesc('id_inscricao_pos')->first();
