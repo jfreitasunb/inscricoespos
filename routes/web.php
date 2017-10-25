@@ -151,6 +151,12 @@ Route::get('/recomendante/preencher/carta', [
 		'middleware' => ['user.role:recomendante'],
 ]);
 
+Route::post('/recomendante/preencher/carta', [
+		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postPreencherCarta',
+		'as' => 'preencher.carta',
+		'middleware' => ['user.role:recomendante'],
+]);
+
 /*
 *Área do Admin
  */
