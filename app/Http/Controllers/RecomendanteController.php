@@ -172,8 +172,26 @@ class RecomendanteController extends BaseController
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
 			return redirect()->back();
 		}
+	}
 
-		
+	public function postPreecherCarta(Request $request)
+	{
+		$this->validate($request, [
+			'tempo_conhece_candidato' => 'required',
+			'circunstancia_1' => 'required',
+			'circunstancia_2' => 'required',
+			'circunstancia_3' => 'required',
+			'circunstancia_4' => 'required',
+			'desempenho_academico' => 'required',
+			'capacidade_aprender' => 'required',
+			'trabalhar_sozinho' => 'required',
+			'criatividade' => 'required',
+			'curiosidade' => 'required',
+			'esforco' => 'required',
+			'expressao_escrita' => 'required',
+			'expressao_oral' => 'required',
+			'relacionamento' => 'required',
+		]);
 	}
 
 }
