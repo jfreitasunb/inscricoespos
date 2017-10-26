@@ -378,7 +378,7 @@ class CandidatoController extends BaseController
 	{
 
 		$user = Auth::user();
-		$id_user = $user->id_user;
+		$id_aluno = $user->id_user;
 		
 		$edital_ativo = new ConfiguraInscricaoPos();
 
@@ -389,7 +389,7 @@ class CandidatoController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_aluno,$id_inscricao_pos);
 
 			if ($status_inscricao) {
 
@@ -423,11 +423,11 @@ class CandidatoController extends BaseController
 				
 				$escolhas_candidato = new EscolhaCandidato();
 
-				$candidato_fez_escolhas = $escolhas_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos);
+				$candidato_fez_escolhas = $escolhas_candidato->retorna_escolha_candidato($id_aluno,$id_inscricao_pos);
 
 				if (count($candidato_fez_escolhas) > 0) {
 					
-					$atualiza_escolhas = EscolhaCandidato::where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos);
+					$atualiza_escolhas = EscolhaCandidato::where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos);
 					$dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
 					$dados_escolhas['area_pos'] = (int)$request->areas_pos;
 					$dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
@@ -436,7 +436,7 @@ class CandidatoController extends BaseController
 
 				}else{
 					$escolhas_candidato = new EscolhaCandidato();
-					$escolhas_candidato->id_user = $id_user;
+					$escolhas_candidato->id_user = $id_aluno;
 					$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
 					$escolhas_candidato->area_pos = (int)$request->areas_pos;
 					$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
@@ -472,7 +472,7 @@ class CandidatoController extends BaseController
 
 				$contatos_recomendantes = new ContatoRecomendante();
 
-				$candidato_recomendantes = $contatos_recomendantes->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+				$candidato_recomendantes = $contatos_recomendantes->retorna_recomendante_candidato($id_aluno,$id_inscricao_pos);
 
 				if (count($candidato_recomendantes) > 0) {
 					
@@ -480,9 +480,9 @@ class CandidatoController extends BaseController
 
 					$atualiza_cartas_recomendacoes = new CartaRecomendacao();
 
-					$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+					$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
-					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_user)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
+					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
 
 					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
 						
@@ -491,9 +491,9 @@ class CandidatoController extends BaseController
 
 						$novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-						DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+						DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
 
-						DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
+						DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
 					}
 					
 				}else{
@@ -503,7 +503,7 @@ class CandidatoController extends BaseController
 						$novo_recomendante = new ContatoRecomendante();
 						$acha_recomendante = new User();
 
-						$novo_recomendante->id_user = $id_user;
+						$novo_recomendante->id_user = $id_aluno;
 
 						$novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 						
@@ -517,9 +517,9 @@ class CandidatoController extends BaseController
 
 						$nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-						$nova_carta_recomendacao->id_aluno = $id_user;
+						$nova_carta_recomendacao->id_aluno = $id_aluno;
 
-						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos)->programa_pretendido;
+						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
 
 						$nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
 
