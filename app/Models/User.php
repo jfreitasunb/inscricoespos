@@ -96,4 +96,21 @@ class User extends Authenticatable
             return FALSE;
         }
     }
+
+    public function registra_recomendante($email_contatos_recomendantes)
+    {
+        for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
+                    
+            if (is_null($this->retorna_user_por_email($email_contatos_recomendantes[$i]))){
+                
+                $novo_usuario = new User();
+                $novo_usuario->email = $email_contatos_recomendantes[$i];
+                $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
+                $novo_usuario->user_type =  "recomendante";
+                $novo_usuario->ativo = true;
+                $novo_usuario->save();
+            }
+                    
+        }
+    }
 }
