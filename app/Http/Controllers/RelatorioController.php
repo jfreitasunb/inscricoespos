@@ -13,6 +13,9 @@ use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\DadoPessoal;
+use Posmat\Models\Paises;
+use Posmat\Models\Estado;
+use Posmat\Models\Cidade;
 use Posmat\Models\Documento;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\AreaPosMat;
@@ -94,6 +97,34 @@ class RelatorioController extends BaseController
 
               $finaliza = new FinalizaInscricao();
               $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
+
+              foreach ($usuarios_finalizados as $candidato) {
+                     
+                     $id_aluno = $candidato->id_user;
+
+                     $dado_pessoal = new DadoPessoal();
+
+                     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_aluno);
+
+                     $paises = new Paises();
+
+                     $estado = new Estado();
+
+                     $cidade = new Cidade();
+
+                     $nome_pais = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+
+                     $nome_estado = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+                     
+                     $nome_cidade = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+
+
+
+                     echo $id_aluno."</br>";
+                     echo $nome_pais."</br>";
+                     echo $nome_estado."</br>";
+                     echo $nome_cidade."</br>";
+              }
 
               // $cabecalho = ["Nome","E-mail","Celular","Curso de Graduação", "IRA", "Tipo de Monitoria", "Monitor Convidado", "Nome do Professor", "Escolhas", "Horários", "Atuações Anteoriores"];
 
