@@ -426,70 +426,33 @@ class CandidatoController extends BaseController
 				$registra_escolhas_candidato = $escolhas_candidato->grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request);
 
 
-				$email_contatos_recomendantes = $request->email_recomendante;
+				$email_contatos_recomendantes = [];
+
+				for ($i=0; $i < count($request->email_recomendante); $i++) { 
+					
+					$email_contatos_recomendantes[$i] = Purifier::clean(strtolower(trim($request->email_recomendante[$i])));
+				}
+
 
 				$novo_usuario = new User();
 
 				$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes);
 
+				$dados_iniciais_recomendante = new DadoRecomendante();
+
+				for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
+
+					$id_recomendante = $novo_usuario->retorna_user_por_email($email_contatos_recomendantes[$j]);
+					
+					$grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_recomendante->id_user, Purifier::clean($request->nome_recomendante[$j]));
+				}
+				
 				dd("aqui");
+
 
 				$contatos_recomendantes = new ContatoRecomendante();
 
-				$candidato_recomendantes = $contatos_recomendantes->retorna_recomendante_candidato($id_aluno,$id_inscricao_pos);
-
-				if (count($candidato_recomendantes) > 0) {
-					
-					$atualiza_recomendantes = new ContatoRecomendante();
-
-					$atualiza_cartas_recomendacoes = new CartaRecomendacao();
-
-					$id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
-
-					$id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
-
-					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-						
-						
-						$acha_recomendante = new User();
-
-						$novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
-
-						DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
-
-						DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
-					}
-					
-				}else{
-
-					for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-						
-						$novo_recomendante = new ContatoRecomendante();
-						$acha_recomendante = new User();
-
-						$novo_recomendante->id_user = $id_aluno;
-
-						$novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
-						
-						$novo_recomendante->id_inscricao_pos = $id_inscricao_pos;
-
-						$novo_recomendante->save();
-
-						$nova_carta_recomendacao = new CartaRecomendacao();
-
-						$escolhas_candidato = new EscolhaCandidato();
-
-						$nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
-
-						$nova_carta_recomendacao->id_aluno = $id_aluno;
-
-						$nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
-
-						$nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
-
-						$nova_carta_recomendacao->save();
-					}
-				}
+				$candidato_recomendantes = $contatos_recomendantes->processa_indicacoes($id_aluno,$id_inscricao_pos);
 
 			}
 			
