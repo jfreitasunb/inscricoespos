@@ -100,13 +100,13 @@ class RelatorioController extends BaseController
 
               foreach ($usuarios_finalizados as $candidato) {
                      
-                     $dados_para_relatorio = [];
+                     $dados_candidato_para_relatorio = [];
 
                      $dados_para_relatorio['id_aluno'] = $candidato->id_user;
 
                      $dado_pessoal = new DadoPessoal();
 
-                     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_aluno);
+                     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_para_relatorio['id_aluno']);
 
                      $paises = new Paises();
 
@@ -114,12 +114,25 @@ class RelatorioController extends BaseController
 
                      $cidade = new Cidade();
 
-                     $dados_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+                     $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
 
-                     $dados_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+                     $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
+
+                     $dados_candidato_para_relatorio['numerorg'] = $dados_pessoais_candidato->numerorg;
+
+                     $dados_candidato_para_relatorio['endereco'] = $dados_pessoais_candidato->endereco;
+
+                     $dados_candidato_para_relatorio['cep'] = $dados_pessoais_candidato->cep;
+
+                     $dados_candidato_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+
+                     $dados_candidato_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
                      
-                     $dados_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+                     $dados_candidato_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
 
+                     $dados_candidato_para_relatorio['celular'] = $dados_pessoais_candidato->celular;
+
+                     dd($dados_candidato_para_relatorio);
 
               }
 
