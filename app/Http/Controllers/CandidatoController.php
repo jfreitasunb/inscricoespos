@@ -425,52 +425,14 @@ class CandidatoController extends BaseController
 
 				$registra_escolhas_candidato = $escolhas_candidato->grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request);
 
-				// $candidato_fez_escolhas = $escolhas_candidato->retorna_escolha_candidato($id_aluno,$id_inscricao_pos);
-
-				// if (count($candidato_fez_escolhas) > 0) {
-					
-				// 	$atualiza_escolhas = EscolhaCandidato::where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos);
-				// 	$dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
-				// 	$dados_escolhas['area_pos'] = (int)$request->areas_pos;
-				// 	$dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
-				// 	$dados_escolhas['vinculo_empregaticio'] = (bool)$request->vinculo_empregaticio;
-				// 	$atualiza_escolhas->update($dados_escolhas);
-
-				// }else{
-				// 	$escolhas_candidato = new EscolhaCandidato();
-				// 	$escolhas_candidato->id_user = $id_aluno;
-				// 	$escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
-				// 	$escolhas_candidato->area_pos = (int)$request->areas_pos;
-				// 	$escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
-				// 	$escolhas_candidato->vinculo_empregaticio = (bool)$request->vinculo_empregaticio;
-				// 	$escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
-				// 	$escolhas_candidato->save();
-				// }
-
 
 				$email_contatos_recomendantes = $request->email_recomendante;
 
-				for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-					$novo_usuario = new User();
-					
-					if (is_null($novo_usuario->retorna_user_por_email($email_contatos_recomendantes[$i]))){
-						$novo_usuario->email = Purifier::clean(strtolower(trim($email_contatos_recomendantes[$i])));
-        				$novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
-        				$novo_usuario->user_type =  "recomendante";
-        				$novo_usuario->ativo = true;
-        				$novo_usuario->save();
+				$novo_usuario = new User();
 
-        				$dados_recomendantes = new DadoRecomendante();
+				$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes);
 
-        				$dados_recomendantes->id_prof = $novo_usuario->id_user;
-
-        				$dados_recomendantes->nome_recomendante = Purifier::clean($request->nome_recomendante[$i]);
-
-        				$dados_recomendantes->save();
-					}
-					
-				}
-
+				dd("aqui");
 
 				$contatos_recomendantes = new ContatoRecomendante();
 
