@@ -9,21 +9,21 @@ class APIController extends Controller
 {
     public function index()
     {
-        return DB::table("countries")->pluck("name","id")->all();
+        return DB::table("paises")->pluck("name","id")->all();
         
     }
     public function getStateList(Request $request)
     {
-        $states = DB::table("states")
+        $estados = DB::table("estados")
                     ->where("country_id",$request->country_id)
                     ->pluck("name","id_state");
-        return response()->json($states);
+        return response()->json($estados);
     }
     public function getCityList(Request $request)
     {
-        $cities = DB::table("cities")
+        $cidades = DB::table("cidades")
                     ->where("state_id",$request->state_id)
                     ->pluck("name","id");
-        return response()->json($cities);
+        return response()->json($cidades);
     }
 }
