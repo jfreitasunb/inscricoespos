@@ -2,6 +2,7 @@
 
 namespace Posmat\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class CartaRecomendacao extends Model
@@ -38,5 +39,79 @@ class CartaRecomendacao extends Model
 
         return $this->where("id_prof", $id_prof)->where('id_aluno',$id_aluno)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
 
+    }
+
+    public function inicia_carta_candidato($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes)
+    {
+        
+        $cartas_inicializadas = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+        if (count($cartas_inicializadas) == 0) {
+
+            for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
+                        
+                $nova_carta_recomendacao = new CartaRecomendacao();
+
+                $escolhas_candidato = new EscolhaCandidato();
+
+                $acha_recomendante = new User();
+
+                $nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+                $nova_carta_recomendacao->id_aluno = $id_aluno;
+
+                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
+
+                $nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
+
+                $nova_carta_recomendacao->save();
+            }
+        }
+
+        if (count($cartas_inicializadas) == 1 or count($cartas_inicializadas) == 2 ) {
+           
+           $id_carta_recomendacoes = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
+
+           for ($i=0; $i < count($id_carta_recomendacoes); $i++) { 
+               
+                $acha_recomendante = new User();
+
+                $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+                
+                DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
+            }
+
+            
+            for ($j=0; $j < count($email_contatos_recomendantes) - count($cartas_inicializadas); $j++) { 
+                
+                $nova_carta_recomendacao = new CartaRecomendacao();
+
+                $escolhas_candidato = new EscolhaCandidato();
+
+                $nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[($j+count($cartas_inicializadas))])->id_user;
+
+                $nova_carta_recomendacao->id_aluno = $id_aluno;
+
+                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
+
+                $nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
+
+                $nova_carta_recomendacao->save();
+            }
+        }
+
+        if (count($cartas_inicializadas) == 3) {
+
+           $id_carta_recomendacoes = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
+
+
+           for ($i=0; $i < count($email_contatos_recomendantes); $i++) {        
+                $acha_recomendante = new User();
+
+                $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+               DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
+            }
+        }
     }
 }
