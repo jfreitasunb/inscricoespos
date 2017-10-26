@@ -63,30 +63,30 @@ class RelatorioController extends BaseController
 	}
 
 
-       public function getArquivosRelatorios($id_monitoria,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario)
+       public function getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario)
        {
 
               $relatorio = new ConfiguraInscricaoPos();
 
               $relatorio_disponivel = $relatorio->retorna_lista_para_relatorio();
 
-              $monitoria = $id_monitoria;
+              $monitoria = $id_inscricao_pos;
 
               return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel','arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
        }
 
 
-	public function geraRelatorio($id_monitoria)
+	public function geraRelatorio($id_inscricao_pos)
        {
 
-       	$arquivo_relatorio = "Relatorio_inscritos_".$id_monitoria.".csv";
-              $arquivo_dados_pessoais_bancario = "Dados_pessoais-bancarios_".$id_monitoria.".csv";
+       	$arquivo_relatorio = "Relatorio_inscritos_".$id_inscricao_pos.".csv";
+              $arquivo_dados_pessoais_bancario = "Dados_pessoais-bancarios_".$id_inscricao_pos.".csv";
               $local_relatorios = 'relatorios/csv/';
               $local_documentos = storage_path('app/');
               $arquivos_temporarios = public_path("/relatorios/temporario");
               $arquivo_zip = public_path('/relatorios/zip/');
 
-              $documentos_zipados = 'Documentos_'.$id_monitoria.'.zip';
+              $documentos_zipados = 'Documentos_'.$id_inscricao_pos.'.zip';
 
 
               $csv_relatorio = Writer::createFromPath($local_relatorios.$arquivo_relatorio, 'w+');
@@ -94,7 +94,7 @@ class RelatorioController extends BaseController
 
 
               $relatorio = new FinalizaEscolha();
-              $usuarios_finalizados = $relatorio->retorna_usuarios_relatorios($id_monitoria);
+              $usuarios_finalizados = $relatorio->retorna_usuarios_relatorios($id_inscricao_pos);
 
               $cabecalho = ["Nome","E-mail","Celular","Curso de Graduação", "IRA", "Tipo de Monitoria", "Monitor Convidado", "Nome do Professor", "Escolhas", "Horários", "Atuações Anteoriores"];
 
@@ -169,7 +169,7 @@ class RelatorioController extends BaseController
 
        		$escolheu = new EscolhaMonitoria();
 
-       		$escolhas_candidato = $escolheu->retorna_escolha_monitoria($id_user,$id_monitoria);
+       		$escolhas_candidato = $escolheu->retorna_escolha_monitoria($id_user,$id_inscricao_pos);
 
        		$disciplina = new AreaPosMat();
 
@@ -188,7 +188,7 @@ class RelatorioController extends BaseController
 
        		$horario = new HorarioEscolhido();
 
-       		$horarios_escolhidos = $horario->retorna_horarios_escolhidos($id_user,$id_monitoria);
+       		$horarios_escolhidos = $horario->retorna_horarios_escolhidos($id_user,$id_inscricao_pos);
 
        		for ($j=0; $j < sizeof($horarios_escolhidos); $j++) { 
        			
@@ -232,7 +232,7 @@ class RelatorioController extends BaseController
 
               // File::cleanDirectory($arquivos_temporarios);
 
-              return $this->getArquivosRelatorios($id_monitoria,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
+              return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
        
     }
