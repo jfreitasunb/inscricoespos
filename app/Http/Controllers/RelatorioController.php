@@ -20,6 +20,7 @@ use Posmat\Models\Cidade;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\ContatoRecomendante;
+use Posmat\Models\CartaMotivacao;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Illuminate\Http\Request;
@@ -162,6 +163,13 @@ class RelatorioController extends BaseController
                             $i++;
                      }
 
+
+                     $carta_motivacao = new CartaMotivacao();
+
+                     $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+                     $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
+                     
                      dd($dados_candidato_para_relatorio);
 
               }
