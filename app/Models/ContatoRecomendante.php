@@ -2,6 +2,8 @@
 
 namespace Posmat\Models;
 
+use DB;
+
 use Illuminate\Database\Eloquent\Model;
 
 class ContatoRecomendante extends Model
@@ -51,28 +53,33 @@ class ContatoRecomendante extends Model
             }
         }
 
-        dd("aqui");
+        if (count($candidato_recomendantes) == 1) {
+            # code...
+        }
+
+        if (count($candidato_recomendantes) == 2) {
+            # code...
+        }
+
+        if (count($candidato_recomendantes) == 3) {
+
+           $id_atualizacao = $this->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+
+           for ($i=0; $i < count($email_contatos_recomendantes); $i++) {        
+                $acha_recomendante = new User();
+
+                $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+
+            }
+        }
+
+        dd(count($candidato_recomendantes));
 
 
 
-                // $atualiza_recomendantes = new ContatoRecomendante();
-
-                //     $atualiza_cartas_recomendacoes = new CartaRecomendacao();
-
-                //     $id_atualizacao = $atualiza_recomendantes->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
-
-                //     $id_carta_recomendacoes = $atualiza_cartas_recomendacoes->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
-
-                //     for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-                        
-                        
-                //         $acha_recomendante = new User();
-
-                //         $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
-
-                //         DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
-
-                //         DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
-                //     }
+                
     }
 }
