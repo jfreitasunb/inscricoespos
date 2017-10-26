@@ -446,13 +446,11 @@ class CandidatoController extends BaseController
 					
 					$grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_recomendante->id_user, Purifier::clean($request->nome_recomendante[$j]));
 				}
-				
-				dd("aqui");
 
 
 				$contatos_recomendantes = new ContatoRecomendante();
 
-				$candidato_recomendantes = $contatos_recomendantes->processa_indicacoes($id_aluno,$id_inscricao_pos);
+				$candidato_recomendantes = $contatos_recomendantes->processa_indicacoes($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes);
 
 			}
 			
