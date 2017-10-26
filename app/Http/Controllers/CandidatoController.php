@@ -454,6 +454,10 @@ class CandidatoController extends BaseController
 
 				$candidato_recomendantes = $contatos_recomendantes->processa_indicacoes($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes);
 
+				$carta_recomendacao = new CartaRecomendacao();
+
+				$inicia_carta = $carta_recomendacao->inicia_carta_candidato($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes);
+
 			}
 			
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
