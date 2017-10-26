@@ -19,6 +19,7 @@ use Posmat\Models\Estado;
 use Posmat\Models\Cidade;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
+use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Illuminate\Http\Request;
@@ -150,6 +151,16 @@ class RelatorioController extends BaseController
                      $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
                      $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
                      $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
+
+                     $contato_recomendante = new ContatoRecomendante();
+
+                     $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+                     $i=1;
+                     foreach ($contatos_indicados as $recomendante) {
+                            $dados_candidato_para_relatorio['recomendante_'.$i] = $recomendante->id_recomendante;
+                            $i++;
+                     }
 
                      dd($dados_candidato_para_relatorio);
 
