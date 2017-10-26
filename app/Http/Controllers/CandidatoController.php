@@ -328,20 +328,29 @@ class CandidatoController extends BaseController
 
 					$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
 
-					$i = 1;
-					foreach ($contatos_recomendantes as $recomendante) {
+					if (count($contatos_recomendantes) == 0) {
+						$dados['nome_recomendante_1'] = '';
+						$dados['nome_recomendante_2'] = '';
+						$dados['nome_recomendante_3'] = '';
+						$dados['email_recomendante_1'] = '';
+						$dados['email_recomendante_2'] = '';
+						$dados['email_recomendante_3'] = '';
+					}else{
+						$i = 1;
+						foreach ($contatos_recomendantes as $recomendante) {
 					
-						$usuario_recomendante = User::find($recomendante->id_recomendante);
+							$usuario_recomendante = User::find($recomendante->id_recomendante);
 						
-						$dado_recomendante = new DadoRecomendante();
+							$dado_recomendante = new DadoRecomendante();
 
-						$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
+							$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
 						
-						$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
+							$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
 						
-						$dados['nome_recomendante_'.$i] = $dados_recomendante->nome_recomendante;
+							$dados['nome_recomendante_'.$i] = $dados_recomendante->nome_recomendante;
 
-						$i++;
+							$i++;
+						}
 					}
 
 					$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
