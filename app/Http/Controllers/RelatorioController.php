@@ -129,6 +129,21 @@ class RelatorioController extends BaseController
 
                      $dados_candidato_para_relatorio['celular'] = $dados_pessoais_candidato->celular;
 
+                     $dado_academico = new DadoAcademico();
+
+                     $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_para_relatorio['id_aluno']);
+
+                     $dados_candidato_para_relatorio['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+                     $dados_candidato_para_relatorio['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
+                     $dados_candidato_para_relatorio['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+                     $dados_candidato_para_relatorio['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+                     $dados_candidato_para_relatorio['curso_pos'] = $dados_academicos_candidato->curso_pos;
+                     $dados_candidato_para_relatorio['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
+                     $dados_candidato_para_relatorio['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+                     $dados_candidato_para_relatorio['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+
+                     // dd($dados_academicos_candidato);
+
                      dd($dados_candidato_para_relatorio);
 
               }
