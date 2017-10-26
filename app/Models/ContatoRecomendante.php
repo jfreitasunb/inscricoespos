@@ -63,7 +63,6 @@ class ContatoRecomendante extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                $acha_recomendante->registra_recomendante($email_contatos_recomendantes[$i]);
                 DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
             }
 
@@ -80,7 +79,6 @@ class ContatoRecomendante extends Model
 
                 $novo_recomendante->save();   
             }
-
         }
 
         if (count($candidato_recomendantes) == 3) {
@@ -94,14 +92,7 @@ class ContatoRecomendante extends Model
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
                 DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
-
             }
         }
-
-        dd(count($candidato_recomendantes));
-
-
-
-                
     }
 }
