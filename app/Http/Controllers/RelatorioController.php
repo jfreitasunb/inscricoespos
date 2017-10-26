@@ -100,7 +100,9 @@ class RelatorioController extends BaseController
 
               foreach ($usuarios_finalizados as $candidato) {
                      
-                     $id_aluno = $candidato->id_user;
+                     $dados_para_relatorio = [];
+
+                     $dados_para_relatorio['id_aluno'] = $candidato->id_user;
 
                      $dado_pessoal = new DadoPessoal();
 
@@ -112,18 +114,13 @@ class RelatorioController extends BaseController
 
                      $cidade = new Cidade();
 
-                     $nome_pais = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+                     $dados_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
 
-                     $nome_estado = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+                     $dados_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
                      
-                     $nome_cidade = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+                     $dados_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
 
 
-
-                     echo $id_aluno."</br>";
-                     echo $nome_pais."</br>";
-                     echo $nome_estado."</br>";
-                     echo $nome_cidade."</br>";
               }
 
               // $cabecalho = ["Nome","E-mail","Celular","Curso de Graduação", "IRA", "Tipo de Monitoria", "Monitor Convidado", "Nome do Professor", "Escolhas", "Horários", "Atuações Anteoriores"];
