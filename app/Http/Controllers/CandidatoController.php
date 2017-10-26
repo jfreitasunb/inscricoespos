@@ -436,8 +436,10 @@ class CandidatoController extends BaseController
 
 				$novo_usuario = new User();
 
-				$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes);
-
+				for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
+					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes[$i]);	
+				}
+				
 				$dados_iniciais_recomendante = new DadoRecomendante();
 
 				for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
