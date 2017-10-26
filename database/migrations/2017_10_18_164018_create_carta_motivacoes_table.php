@@ -13,7 +13,7 @@ class CreateCartaMotivacaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('carta_motivacaos', function (Blueprint $table) {
+        Schema::create('carta_motivacoes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_user');
             $table->text('motivacao');
@@ -30,6 +30,6 @@ class CreateCartaMotivacaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carta_motivacaos');
+        Schema::dropIfExists('carta_motivacoes');
     }
 }

@@ -8,7 +8,7 @@ class CartaMotivacao extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'carta_motivacaos';
+    protected $table = 'carta_motivacoes';
 
     protected $fillable = [
         'motivacao',
