@@ -21,7 +21,7 @@ use Posmat\Models\ProgramaPos;
 use Posmat\Models\EscolhaMonitoria;
 use Posmat\Models\HorarioEscolhido;
 use Posmat\Models\AtuacaoMonitoria;
-use Posmat\Models\FinalizaEscolha;
+use Posmat\Models\FinalizaInscricao;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -93,8 +93,8 @@ class RelatorioController extends BaseController
               $csv_dados_pessoais_bancarios = Writer::createFromPath($local_relatorios.$arquivo_dados_pessoais_bancario, 'w+');
 
 
-              $relatorio = new FinalizaEscolha();
-              $usuarios_finalizados = $relatorio->retorna_usuarios_relatorios($id_inscricao_pos);
+              $finaliza = new FinalizaInscricao();
+              $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
 
               $cabecalho = ["Nome","E-mail","Celular","Curso de Graduação", "IRA", "Tipo de Monitoria", "Monitor Convidado", "Nome do Professor", "Escolhas", "Horários", "Atuações Anteoriores"];
 
