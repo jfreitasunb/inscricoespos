@@ -12,15 +12,15 @@ use Fpdf;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
+use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\DadoPessoal;
 use Posmat\Models\Paises;
 use Posmat\Models\Estado;
 use Posmat\Models\Cidade;
-use Posmat\Models\Documento;
 use Posmat\Models\DadoAcademico;
+use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\FinalizaInscricao;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -142,7 +142,14 @@ class RelatorioController extends BaseController
                      $dados_candidato_para_relatorio['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
                      $dados_candidato_para_relatorio['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
-                     // dd($dados_academicos_candidato);
+                     $escolha_candidato = new EscolhaCandidato();
+
+                     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+                     $dados_candidato_para_relatorio['programa_pretendido'] = $escolha_feita_candidato->programa_pretendido;
+                     $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
+                     $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
+                     $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
 
                      dd($dados_candidato_para_relatorio);
 
