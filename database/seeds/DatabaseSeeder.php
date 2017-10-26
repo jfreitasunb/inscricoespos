@@ -93,9 +93,9 @@ class DatabaseSeeder extends Seeder
         $formacao6 = ['id' => 6, 'tipo' => 'Profissional', 'nivel' => 'Pós-Graduação', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_formacao6 = DB::table('formacao')->insert($formacao6);
 
-        $this->call(CountriesTableSeeder::class);
-        $this->call(StatesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
+        $this->call(PaisesTableSeeder::class);
+        $this->call(EstadosTableSeeder::class);
+        $this->call(CidadesTableSeeder::class);
 
     }
 }

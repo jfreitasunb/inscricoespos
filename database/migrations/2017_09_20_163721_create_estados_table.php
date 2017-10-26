@@ -17,7 +17,7 @@ class CreateEstadosTable extends Migration
             $table->increments('id_state');
             $table->string('name');
             $table->integer('country_id')->unsigned()->default(0);
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('paises');
         });
     }
 
