@@ -29,4 +29,15 @@ class DadoRecomendante extends Model
     {
         return $this->select('atualizado')->where("id_prof", $id_user)->get()->first();
     }
+
+    public function grava_dados_iniciais_recomendante($id_prof, $nome_recomendante)
+    {
+        $dados_recomendantes = new DadoRecomendante();
+
+        $dados_recomendantes->id_prof = $id_prof;
+
+        $dados_recomendantes->nome_recomendante = $nome_recomendante;
+
+        $dados_recomendantes->save();
+    }
 }
