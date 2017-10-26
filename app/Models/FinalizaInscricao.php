@@ -30,9 +30,7 @@ class FinalizaInscricao extends Model
 
     public function retorna_usuarios_relatorios($id_inscricao_pos)
     {
-        $usarios_relatorios = $this->get()->where("id_inscricao_pos", $id_inscricao_pos)->where('finalizada',TRUE);
 
-        return $usarios_relatorios;
-
+        return $this->get()->where("id_inscricao_pos", $id_inscricao_pos)->where('finalizada',TRUE);
     }
 }
