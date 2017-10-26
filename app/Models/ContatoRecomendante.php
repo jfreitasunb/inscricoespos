@@ -53,12 +53,34 @@ class ContatoRecomendante extends Model
             }
         }
 
-        if (count($candidato_recomendantes) == 1) {
-            # code...
-        }
+        if (count($candidato_recomendantes) == 1 or count($candidato_recomendantes) == 2 ) {
+           
+           $id_atualizacao = $this->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
-        if (count($candidato_recomendantes) == 2) {
-            # code...
+           for ($i=0; $i < count($id_atualizacao); $i++) { 
+               
+                $acha_recomendante = new User();
+
+                $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
+
+                $acha_recomendante->registra_recomendante($email_contatos_recomendantes[$i]);
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+            }
+
+            
+            for ($j=0; $j < count($email_contatos_recomendantes) - count($candidato_recomendantes); $j++) { 
+                $novo_recomendante = new ContatoRecomendante();
+                $acha_recomendante = new User();
+
+                $novo_recomendante->id_user = $id_aluno;
+
+                $novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[($j+count($candidato_recomendantes))])->id_user;
+                        
+                $novo_recomendante->id_inscricao_pos = $id_inscricao_pos;
+
+                $novo_recomendante->save();   
+            }
+
         }
 
         if (count($candidato_recomendantes) == 3) {
