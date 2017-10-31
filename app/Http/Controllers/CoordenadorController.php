@@ -155,10 +155,10 @@ class CoordenadorController extends BaseController
     	}
 	}
 
-	public function getRelatorioMonitoria()
+	public function getRelatorioPos()
 	{
 
-		return view('templates.partials.coordenador.relatorio_monitoria');
+		return view('templates.partials.coordenador.relatorio_pos');
 	}
 
 }

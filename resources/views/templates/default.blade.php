@@ -29,7 +29,7 @@
         @include('templates.partials.coordenador.menu_coordenador')
         @yield('cadastra_disciplina')
         @yield('configura_inscricao')
-        @yield('relatorio_monitoria')
+        @yield('relatorio_pos')
       @endcoordenador
       @recomendante(Auth()->user())
         @include('templates.partials.recomendante.menu_recomendante')
@@ -44,7 +44,7 @@
         @yield('ativa_conta')
         @yield('cadastra_disciplina')
         @yield('configura_monitoria')
-        @yield('relatorio_monitoria')
+        @yield('relatorio_pos')
       @endadmin
     @else
       @yield('inicio')

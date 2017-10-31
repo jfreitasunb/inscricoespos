@@ -40,39 +40,25 @@ class FPDFController extends Fpdf
 	public function pdfRelatorio()
 	{
 
-    $local_documentos = storage_path('app/');
-    $arquivos_editais = public_path("/editais/");
-		
-    Fpdf::AddPag();
-    Fpdf::SetFont('Courier', 'B', 18);
-    Fpdf::Cell(50, 25, 'Hello World!');
-    $localarquivo = $arquivos_editais.'Teste.pdf';
-    Fpdf::Output($localarquivo,'F');
+        $local_documentos = storage_path('app/');
+        $arquivos_editais = public_path("/editais/");
 
-    // $pdf = new FPDF();
-    // $pdf->AddPage();
-    // $pdf->SetFont('Arial','B',16);
-    // $pdf->Cell(40,10,'Hello World!');
-    // $pdf->Output();
+        Fpdf::AddPage();
+        Fpdf::SetTitle(utf8_decode('Relatório Inscrição Pós'));
 
-    // $pdf = new Fpdf();
-    // $pdf->Open();
-    // $pdf->AddPage();
-    // $pdf->SetTitle(utf8_decode('Relatório Inscrição Pós'));
-
-    // $pdf->SetFont('Arial', '', 12);
+        Fpdf::SetFont('Arial', '', 12);
 
 
-    // //Restore font and colors
-    // $pdf->SetFont('Arial', '', 10);
+        //Restore font and colors
+        Fpdf::SetFont('Arial', '', 10);
 
-    // $pdf->SetTextColor(0);
+        Fpdf::SetTextColor(0);
 
-    // $pdf->SetFont('Arial', 'B', 10);
-    // $texto = "Cod: 1";
-    // $pdf->Cell(20, 2, utf8_decode($texto),0,1,'C');
+        Fpdf::SetFont('Arial', 'I', 10);
+        $texto = "Cod: 1";
+        Fpdf::Cell(20, 2, utf8_decode($texto),0,1,'C');
 
-    // $localarquivo = $arquivos_editais.'Teste.pdf';
-    // $Fpdf::Output($localarquivo,'F');
+        $localarquivo = $arquivos_editais.'Teste.pdf';
+        Fpdf::Output($localarquivo,'F');
   }
 }

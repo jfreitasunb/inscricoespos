@@ -9,6 +9,7 @@ use Session;
 use File;
 use ZipArchive;
 use Fpdf;
+use Posmat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
@@ -60,7 +61,7 @@ class RelatorioController extends BaseController
 
               $monitoria = "";
 
-		return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivo_relatorio','documentos_zipados'));
+		return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivo_relatorio','documentos_zipados'));
 	}
 
 
@@ -73,7 +74,7 @@ class RelatorioController extends BaseController
 
               $monitoria = $id_inscricao_pos;
 
-              return view('templates.partials.coordenador.relatorio_monitoria')->with(compact('monitoria','relatorio_disponivel','arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
+              return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','relatorio_disponivel','arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
        }
 
 
@@ -98,220 +99,87 @@ class RelatorioController extends BaseController
               $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
 
               foreach ($usuarios_finalizados as $candidato) {
+     
+                $dados_candidato_para_relatorio = [];
+
+                $dados_para_relatorio['id_aluno'] = $candidato->id_user;
+
+                $dado_pessoal = new DadoPessoal();
+
+                $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_para_relatorio['id_aluno']);
+
+                $paises = new Paises();
+
+                $estado = new Estado();
+
+                $cidade = new Cidade();
+
+                $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
+
+                $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
+
+                $dados_candidato_para_relatorio['numerorg'] = $dados_pessoais_candidato->numerorg;
+
+                $dados_candidato_para_relatorio['endereco'] = $dados_pessoais_candidato->endereco;
+
+                $dados_candidato_para_relatorio['cep'] = $dados_pessoais_candidato->cep;
+
+                $dados_candidato_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+
+                $dados_candidato_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
                      
-                     $dados_candidato_para_relatorio = [];
+                $dados_candidato_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
 
-                     $dados_para_relatorio['id_aluno'] = $candidato->id_user;
+                $dados_candidato_para_relatorio['celular'] = $dados_pessoais_candidato->celular;
 
-                     $dado_pessoal = new DadoPessoal();
+                $dado_academico = new DadoAcademico();
 
-                     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_para_relatorio['id_aluno']);
+                $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_para_relatorio['id_aluno']);
 
-                     $paises = new Paises();
+                $dados_candidato_para_relatorio['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+                $dados_candidato_para_relatorio['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
+                $dados_candidato_para_relatorio['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+                $dados_candidato_para_relatorio['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+                $dados_candidato_para_relatorio['curso_pos'] = $dados_academicos_candidato->curso_pos;
+                $dados_candidato_para_relatorio['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
+                $dados_candidato_para_relatorio['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+                $dados_candidato_para_relatorio['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
-                     $estado = new Estado();
+                $escolha_candidato = new EscolhaCandidato();
 
-                     $cidade = new Cidade();
+                $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-                     $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
+                $dados_candidato_para_relatorio['programa_pretendido'] = $escolha_feita_candidato->programa_pretendido;
+                $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
+                $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
+                $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
 
-                     $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
+                $contato_recomendante = new ContatoRecomendante();
 
-                     $dados_candidato_para_relatorio['numerorg'] = $dados_pessoais_candidato->numerorg;
+                $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-                     $dados_candidato_para_relatorio['endereco'] = $dados_pessoais_candidato->endereco;
+                $i=1;
+                foreach ($contatos_indicados as $recomendante) {
+                  $dados_candidato_para_relatorio['recomendante_'.$i] = $recomendante->id_recomendante;
+                  $i++;
+                }
 
-                     $dados_candidato_para_relatorio['cep'] = $dados_pessoais_candidato->cep;
 
-                     $dados_candidato_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+                $carta_motivacao = new CartaMotivacao();
 
-                     $dados_candidato_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+                $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+                $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
                      
-                     $dados_candidato_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+                $fpdf = new FPDFController();
 
-                     $dados_candidato_para_relatorio['celular'] = $dados_pessoais_candidato->celular;
+                $arquivo_pdf = $fpdf->pdfRelatorio();
 
-                     $dado_academico = new DadoAcademico();
 
-                     $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_para_relatorio['id_aluno']);
 
-                     $dados_candidato_para_relatorio['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
-                     $dados_candidato_para_relatorio['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
-                     $dados_candidato_para_relatorio['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
-                     $dados_candidato_para_relatorio['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
-                     $dados_candidato_para_relatorio['curso_pos'] = $dados_academicos_candidato->curso_pos;
-                     $dados_candidato_para_relatorio['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
-                     $dados_candidato_para_relatorio['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
-                     $dados_candidato_para_relatorio['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+              }             
 
-                     $escolha_candidato = new EscolhaCandidato();
-
-                     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
-
-                     $dados_candidato_para_relatorio['programa_pretendido'] = $escolha_feita_candidato->programa_pretendido;
-                     $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
-                     $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
-                     $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
-
-                     $contato_recomendante = new ContatoRecomendante();
-
-                     $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
-
-                     $i=1;
-                     foreach ($contatos_indicados as $recomendante) {
-                            $dados_candidato_para_relatorio['recomendante_'.$i] = $recomendante->id_recomendante;
-                            $i++;
-                     }
-
-
-                     $carta_motivacao = new CartaMotivacao();
-
-                     $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
-
-                     $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
-                     
-                     dd($dados_candidato_para_relatorio);
-
-              }
-
-              // $cabecalho = ["Nome","E-mail","Celular","Curso de Graduação", "IRA", "Tipo de Monitoria", "Monitor Convidado", "Nome do Professor", "Escolhas", "Horários", "Atuações Anteoriores"];
-
-              // $cabecalho_dados_pessoais_bancario = ["Nome","E-mail","Matrícula","Celular","CPF", "Banco", "Número", "Agência", "Conta Corrente"];
-
-              // $csv_relatorio->insertOne($cabecalho);
-              // $csv_dados_pessoais_bancarios->insertOne($cabecalho_dados_pessoais_bancario);
-
-
-              // foreach ($usuarios_finalizados as $usuario) {
-              //        $usuario->id_user;
-         //             $linha_arquivo = [];
-       		// $id_user = $usuario->id_user;
-
-         //             $user = New User();
-
-         //             $email = $user->find($id_user)->email;
-         //             $matricula = $user->find($id_user)->login;
-
-       		// $dado_pessoal = new DadoPessoal();
-       		// $dados_pessoais = $dado_pessoal->retorna_dados_pessoais($id_user);
-
-         //             $linha_arquivo['nome'] = $dados_pessoais->nome;
-
-         //             $linha_arquivo_DPB['nome'] = $dados_pessoais->nome;
-                     
-         //             $linha_arquivo['email'] = $email;
-
-         //             $linha_arquivo_DPB['email'] = $email;
-         //             $linha_arquivo_DPB['matricula'] = $matricula;
-
-         //             $linha_arquivo['celular'] = $dados_pessoais->celular;
-
-         //             $linha_arquivo_DPB['celular'] = $dados_pessoais->celular;
-         //             $linha_arquivo_DPB['CPF'] = $dados_pessoais->cpf;
-
-         //             $dado_bancario = new DadoBancario();
-
-         //             $dados_bancarios = $dado_bancario->retorna_dados_bancarios($id_user);
-
-         //             if (!is_null($dados_bancarios)) {
-         //                    $linha_arquivo_DPB['nome_banco'] = $dados_bancarios->nome_banco;
-         //                    $linha_arquivo_DPB['numero_banco'] = $dados_bancarios->numero_banco;
-         //                    $linha_arquivo_DPB['agencia_bancaria'] = $dados_bancarios->agencia_bancaria;
-         //                    $linha_arquivo_DPB['numero_conta_corrente'] = $dados_bancarios->numero_conta_corrente;
-         //             }
-                     
-
-       		// $dado_academico = new DadoAcademico();
-
-       		// $dados_academicos = $dado_academico->retorna_dados_academicos($id_user);
-
-         //             $linha_arquivo['curso_graduacao'] = $dados_academicos->curso_graduacao;
-
-         //             $linha_arquivo['ira'] = $dados_academicos->ira;
-
-         //             $linha_arquivo['tipo_monitoria'] = $usuario->tipo_monitoria;
-
-         //             if ($dados_academicos->monitor_convidado) {
-         //                    $linha_arquivo['monitor_convidado'] = "Sim";
-
-         //                    $linha_arquivo['nome_professor'] = $dados_academicos->nome_professor;
-
-         //             }else{
-                            
-         //                    $linha_arquivo['monitor_convidado'] = "Não";
-
-         //                    $linha_arquivo['nome_professor'] = "";
-         //             }
-                     
-
-
-       		// $escolheu = new EscolhaMonitoria();
-
-       		// $escolhas_candidato = $escolheu->retorna_escolha_monitoria($id_user,$id_inscricao_pos);
-
-       		// $disciplina = new AreaPosMat();
-
-
-       		// for ($i=0; $i < sizeof($escolhas_candidato); $i++) { 
-       			
-       		// 	$codigo = $escolhas_candidato[$i]->escolha_aluno;
-
-       		// 	$nome_disciplina = $disciplina->retorna_nome_pelo_codigo($codigo);
-
-       		// 	$nome = $nome_disciplina[0]->nome;
-
-       		// 	$linha_arquivo['escolha_'.($i+1)] = $nome.",".$escolhas_candidato[$i]->mencao_aluno;
-
-       		// }
-
-       		// $horario = new HorarioEscolhido();
-
-       		// $horarios_escolhidos = $horario->retorna_horarios_escolhidos($id_user,$id_inscricao_pos);
-
-       		// for ($j=0; $j < sizeof($horarios_escolhidos); $j++) { 
-       			
-       		// 	$linha_arquivo['horario'.($j+1)] = $horarios_escolhidos[$j]->dia_semana.",".$horarios_escolhidos[$j]->horario_monitoria;
-       		// }
-
-         //             $atuacoes = new AtuacaoMonitoria();
-         //             $lista_de_atuacoes = $atuacoes->retorna_atuacao_monitoria($id_user);
-
-         //             for ($l=0; $l < sizeof($lista_de_atuacoes); $l++) { 
-         //                    $linha_arquivo['atuou_monitoria'.($l+1)] = $lista_de_atuacoes[$l]->atuou_monitoria;
-         //             }
-
-         //             $csv_relatorio->insertOne($linha_arquivo);
-         //             $csv_dados_pessoais_bancarios->insertOne($linha_arquivo_DPB);
-
-         //             $documento = new Documento();
-
-         //             $nome_historico_banco = $local_documentos.$documento->retorna_arquivo_enviado($id_user)->nome_arquivo;
-
-         //             $nome_historico = $arquivos_temporarios."/".str_replace(' ', '_', $dados_pessoais->nome).".".File::extension($nome_historico_banco);
-
-         //             File::copy($nome_historico_banco,$nome_historico);
-              // }
-
-              dd();
-
-
-              // Create "MyCoolName.zip" file in public directory of project.
-              // $zip = new ZipArchive;
-
-              // if ( $zip->open( $arquivo_zip.$documentos_zipados, ZipArchive::CREATE ) === true )
-              // {
-              //        // Copy all the files from the folder and place them in the archive.
-              //        foreach (glob( $arquivos_temporarios.'/*') as $fileName )
-              //        {
-              //               $file = basename( $fileName );
-              //               $zip->addFile( $fileName, $file );
-              //        }
-
-              //        $zip->close();
-              // }
-
-              // File::cleanDirectory($arquivos_temporarios);
-
+              dd("aqui");
               return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
        
@@ -319,10 +187,10 @@ class RelatorioController extends BaseController
 
 	
 
-	public function getRelatorioMonitoria()
+	public function getRelatorioPos()
 	{
 
-		return view('templates.partials.coordenador.relatorio_monitoria');
+		return view('templates.partials.coordenador.relatorio_pos');
 	}
 
 }

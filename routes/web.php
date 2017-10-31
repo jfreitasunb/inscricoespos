@@ -245,7 +245,7 @@ Route::get('/coordenador/relatorio/{id_monitoria}',[
 
 Route::get('/coordenador/relatorio', [
 	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios',
-	'as' => 'relatorio.monitoria',
+	'as' => 'relatorio.pos',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
