@@ -184,7 +184,7 @@ class RelatorioController extends BaseController
                 $arquivo_pdf = $teste_pdf->pdfRelatorio();
                 $arquivo_pdf = $teste_pdf->fechaPDF();
 
-                unset($teste_pdf);
+                unset($arquivo_pdf);
 
               }
               

@@ -71,5 +71,6 @@ class FPDFController extends Fpdf
         $arquivo_relatorio = $local_relatorios.'Relatorio_'.$this->dados['id_aluno'].'.pdf';
 
         Fpdf::Output($arquivo_relatorio,'F');
+        Fpdf::Close($arquivo_relatorio);
     }
 }
