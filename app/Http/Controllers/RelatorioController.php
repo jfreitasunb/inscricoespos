@@ -81,6 +81,10 @@ class RelatorioController extends BaseController
 	public function geraRelatorio($id_inscricao_pos)
        {
 
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
        	$arquivo_relatorio = "Relatorio_inscritos_".$id_inscricao_pos.".csv";
               $arquivo_dados_pessoais_bancario = "Dados_pessoais-bancarios_".$id_inscricao_pos.".csv";
               $local_relatorios = 'relatorios/csv/';
@@ -98,15 +102,19 @@ class RelatorioController extends BaseController
               $finaliza = new FinalizaInscricao();
               $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
 
+
+
               foreach ($usuarios_finalizados as $candidato) {
      
                 $dados_candidato_para_relatorio = [];
 
-                $dados_para_relatorio['id_aluno'] = $candidato->id_user;
+                $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
+
+                $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_user;
 
                 $dado_pessoal = new DadoPessoal();
 
-                $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_para_relatorio['id_aluno']);
+                $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_candidato_para_relatorio['id_aluno']);
 
                 $paises = new Paises();
 
@@ -134,7 +142,7 @@ class RelatorioController extends BaseController
 
                 $dado_academico = new DadoAcademico();
 
-                $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_para_relatorio['id_aluno']);
+                $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_candidato_para_relatorio['id_aluno']);
 
                 $dados_candidato_para_relatorio['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
                 $dados_candidato_para_relatorio['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
@@ -147,7 +155,7 @@ class RelatorioController extends BaseController
 
                 $escolha_candidato = new EscolhaCandidato();
 
-                $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+                $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
                 $dados_candidato_para_relatorio['programa_pretendido'] = $escolha_feita_candidato->programa_pretendido;
                 $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
@@ -156,7 +164,7 @@ class RelatorioController extends BaseController
 
                 $contato_recomendante = new ContatoRecomendante();
 
-                $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+                $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
                 $i=1;
                 foreach ($contatos_indicados as $recomendante) {
@@ -167,19 +175,20 @@ class RelatorioController extends BaseController
 
                 $carta_motivacao = new CartaMotivacao();
 
-                $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_para_relatorio['id_aluno'],$id_inscricao_pos);
+                $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
                 $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
                      
-                $fpdf = new FPDFController();
+                
+                $teste_pdf = new FPDFController($dados_candidato_para_relatorio);
+                $arquivo_pdf = $teste_pdf->pdfRelatorio();
+                $arquivo_pdf = $teste_pdf->fechaPDF();
 
-                $arquivo_pdf = $fpdf->pdfRelatorio();
+                unset($teste_pdf);
 
-
-
-              }             
-
-              dd("aqui");
+              }
+              
+              dd();
               return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
        

@@ -37,12 +37,13 @@ use Storage;
 class FPDFController extends Fpdf
 {
 
-	public function pdfRelatorio()
-	{
+    public function __construct(array &$dados_candidato_para_relatorio)
+    {
+        $this->dados = $dados_candidato_para_relatorio;
+    }
 
-        $local_documentos = storage_path('app/');
-        $arquivos_editais = public_path("/editais/");
-
+    public function pdfRelatorio()
+    {
         Fpdf::AddPage();
         Fpdf::SetTitle(utf8_decode('Relatório Inscrição Pós'));
 
@@ -55,10 +56,20 @@ class FPDFController extends Fpdf
         Fpdf::SetTextColor(0);
 
         Fpdf::SetFont('Arial', 'I', 10);
-        $texto = "Cod: 1";
+        $texto = "Cod: 12dfsdfdf";
         Fpdf::Cell(20, 2, utf8_decode($texto),0,1,'C');
+    }
 
-        $localarquivo = $arquivos_editais.'Teste.pdf';
-        Fpdf::Output($localarquivo,'F');
-  }
+
+    public function fechaPDF()
+    {
+        $local_relatorios = public_path("/relatorios/edital_".$this->dados['edital']."/");
+
+        File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
+        
+
+        $arquivo_relatorio = $local_relatorios.'Relatorio_'.$this->dados['id_aluno'].'.pdf';
+
+        Fpdf::Output($arquivo_relatorio,'F');
+    }
 }
