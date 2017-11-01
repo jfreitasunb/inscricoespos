@@ -157,10 +157,12 @@ class RelatorioController extends BaseController
 
                 $programa_pos = new ProgramaPos();
 
+                $area_pos_mat = new AreaPosMat();
+
                 $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-                $dados_candidato_para_relatorio['programa_pretendido'] = pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
-                $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
+                $dados_candidato_para_relatorio['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
+                $dados_candidato_para_relatorio['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
                 $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
                 $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
 
