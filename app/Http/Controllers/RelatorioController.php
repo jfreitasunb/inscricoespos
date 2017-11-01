@@ -229,21 +229,18 @@ class RelatorioController extends BaseController
 
                 $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
                 
-              $local_relatorios = public_path("/relatorios/edital_".$dados_candidato_para_relatorio['edital']."/");
+                $local_relatorios = public_path("/relatorios/edital_".$dados_candidato_para_relatorio['edital']."/");
 
-        File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
+                File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
         
 
-        $arquivo_relatorio = $local_relatorios.'Relatorio_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
-                $pdf = PDF::loadView('templates.partials.coordenador.pdf', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-                $pdf->save($arquivo_relatorio);
+                $arquivo_relatorio_candidato = $local_relatorios.'Relatorio_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+                $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
+                $pdf->save($arquivo_relatorio_candidato);
                 
               }
-              // dd();
-              dd($recomendantes_candidato);
-              return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
-       
+              return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
     }
 
 	
