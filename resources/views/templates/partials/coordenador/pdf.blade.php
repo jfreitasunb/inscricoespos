@@ -59,6 +59,16 @@
     <div>
     	<label>Possui vínculo empregatício: </label> {{ $dados_candidato_para_relatorio['vinculo_empregaticio'] ? 'Sim' : 'Não' }}
     </div>
+
+    <hr>
+    <h3>Dados dos Recomendantes</h3>
+    @foreach ($recomendantes_candidato as $recomendante)
+    	<div>
+    	<label> Nome: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
+    </div>
+    @endforeach
+    
+
 </body>
 
 </html>
