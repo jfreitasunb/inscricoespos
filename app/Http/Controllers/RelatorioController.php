@@ -19,6 +19,7 @@ use Posmat\Models\Paises;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\Cidade;
+use Posmat\Models\DadoRecomendante;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\ContatoRecomendante;
@@ -179,10 +180,13 @@ class RelatorioController extends BaseController
 
                 $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-                $i=1;
+                $recomendantes_candidato = [];
                 foreach ($contatos_indicados as $recomendante) {
-                  $dados_candidato_para_relatorio['recomendante_'.$i] = $recomendante->id_recomendante;
-                  $i++;
+                  $dado_recomendante = new DadoRecomendante();
+                  $usuario_recomendante = User::find($recomendante->id_recomendante);
+
+                  $recomendantes_candidato[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
                 }
 
 
@@ -198,12 +202,12 @@ class RelatorioController extends BaseController
         
 
         $arquivo_relatorio = $local_relatorios.'Relatorio_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
-                $pdf = PDF::loadView('templates.partials.coordenador.pdf', compact('dados_candidato_para_relatorio'));
+                $pdf = PDF::loadView('templates.partials.coordenador.pdf', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
                 $pdf->save($arquivo_relatorio);
                 
               }
               // dd();
-              dd($dados_candidato_para_relatorio);
+              dd($recomendantes_candidato);
               return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
        
