@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use File;
 use ZipArchive;
-use Fpdf;
+use PDF;
 use Posmat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use Posmat\Models\User;
@@ -155,9 +155,11 @@ class RelatorioController extends BaseController
 
                 $escolha_candidato = new EscolhaCandidato();
 
+                $programa_pos = new ProgramaPos();
+
                 $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-                $dados_candidato_para_relatorio['programa_pretendido'] = $escolha_feita_candidato->programa_pretendido;
+                $dados_candidato_para_relatorio['programa_pretendido'] = pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
                 $dados_candidato_para_relatorio['area_pos'] = $escolha_feita_candidato->area_pos;
                 $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
                 $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
@@ -178,17 +180,19 @@ class RelatorioController extends BaseController
                 $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
                 $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
-                     
                 
-                $teste_pdf = new FPDFController($dados_candidato_para_relatorio);
-                $arquivo_pdf = $teste_pdf->pdfRelatorio();
-                $arquivo_pdf = $teste_pdf->fechaPDF();
+              $local_relatorios = public_path("/relatorios/edital_".$dados_candidato_para_relatorio['edital']."/");
 
-                unset($arquivo_pdf);
+        File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
+        
 
+        $arquivo_relatorio = $local_relatorios.'Relatorio_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+                $pdf = PDF::loadView('templates.partials.coordenador.pdf', compact('dados_candidato_para_relatorio'));
+                $pdf->save($arquivo_relatorio);
+                
               }
-              
-              dd();
+              // dd();
+              dd($dados_candidato_para_relatorio);
               return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
 
        
