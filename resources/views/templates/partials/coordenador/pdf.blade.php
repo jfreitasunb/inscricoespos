@@ -19,7 +19,7 @@
         <label class="control-label">Idade: </label>{{ $dados_candidato_para_relatorio['idade'].' anos' }}
     </div>
     <hr>
-    <h3>Endereço</h3>
+    <h3>Endereço Pessoal</h3>
     <div>
     	<label>Endereço: </label>{{ $dados_candidato_para_relatorio['endereco'] }}
     </div>
