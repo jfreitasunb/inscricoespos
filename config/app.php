@@ -185,6 +185,7 @@ return [
         Codecourse\Notify\NotifyServiceProvider::class,
         Posmat\Providers\BladeServiceProvider::class,
         Codedge\Fpdf\FpdfServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -238,6 +239,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
