@@ -24,6 +24,7 @@ use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaMotivacao;
+use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Illuminate\Http\Request;
@@ -181,12 +182,44 @@ class RelatorioController extends BaseController
                 $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
                 $recomendantes_candidato = [];
+
                 foreach ($contatos_indicados as $recomendante) {
                   $dado_recomendante = new DadoRecomendante();
+                  $carta_recomendacao = new CartaRecomendacao();
+
+                  $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+
                   $usuario_recomendante = User::find($recomendante->id_recomendante);
 
-                  $recomendantes_candidato[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
                   $recomendantes_candidato[$recomendante->id_recomendante]['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_1'] = $carta_candidato->circunstancia_1;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_2'] = $carta_candidato->circunstancia_2;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_3'] = $carta_candidato->circunstancia_3;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_4'] = $carta_candidato->circunstancia_4;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_outra'] = $carta_candidato->circunstancia_outra;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['desempenho_academico'] = $carta_candidato->desempenho_academico;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['capacidade_aprender'] = $carta_candidato->capacidade_aprender;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['capacidade_trabalhar'] = $carta_candidato->capacidade_trabalhar;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['criatividade'] = $carta_candidato->criatividade;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['curiosidade'] = $carta_candidato->curiosidade;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['esforco'] = $carta_candidato->esforco;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['expressao_escrita'] = $carta_candidato->expressao_escrita;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['expressao_oral'] = $carta_candidato->expressao_oral;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['relacionamento'] = $carta_candidato->relacionamento;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['antecedentes_academicos'] = $carta_candidato->antecedentes_academicos;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['possivel_aproveitamento'] = $carta_candidato->possivel_aproveitamento;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['informacoes_relevantes'] = $carta_candidato->informacoes_relevantes;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['como_aluno'] = $carta_candidato->como_aluno;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['como_orientando'] = $carta_candidato->como_orientando;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->instituicao_recomendante;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->titulacao_recomendante;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->area_recomendante;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->ano_titulacao;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->inst_obtencao_titulo;
+                  $recomendantes_candidato[$recomendante->id_recomendante]['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->endereco_recomendante;
+
                 }
 
 
