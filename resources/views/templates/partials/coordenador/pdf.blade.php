@@ -6,6 +6,8 @@
     <style>
         h2 {text-align:center;}
         label {font-weight: bold;}
+        label.motivacao {font-weight: normal;text-align:justify;}
+        .page_break { page-break-before: always; }
     </style>
 </head>
 
@@ -67,6 +69,114 @@
     	<label> Nome: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
     </div>
     @endforeach
+
+    <hr>
+    <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
+    <div>
+    	<label class="motivacao">{{ $dados_candidato_para_relatorio['motivacao'] }}</label>
+    </div>
+
+    @foreach ($recomendantes_candidato as $recomendante)
+    	<div class="page_break"></div>
+    	<h3>Carta de Recomendação - {{ $recomendante['nome'] }}</h3>
+    	<div>
+    		<label>Conhece o candidato há quanto tempo? </label> {{ $recomendante['tempo_conhece_candidato'] }}
+    	</div>
+    	<div>
+    		<label>Conhece o candidato sob as seguintes circunstâncias: </label> {{ $recomendante['circunstancia_1'] }} {{ $recomendante['circunstancia_2'] }} {{ $recomendante['circunstancia_3'] }} {{ $recomendante['circunstancia_4'] }}
+    	</div>
+    	<div>
+    		<label>Conhece o candidato sob outras circunstâncias: </label> {{ $recomendante['circunstancia_outra'] }}
+    	</div>
+    	<hr size="0">
+    	<label>Avaliações</label>
+    	<div>
+    		<label>Desempenho acadêmico: </label> {{ $recomendante['desempenho_academico'] }}
+    	</div>
+    	<div>
+    		<label>Capacidade de aprender novos conceitos: </label> {{ $recomendante['capacidade_aprender'] }}
+    	</div>
+    	<div>
+    		<label>Capacidade de trabalhar sozinho: </label> {{ $recomendante['capacidade_trabalhar'] }}
+    	</div>
+    	<div>
+    		<label>Criatividade: </label> {{ $recomendante['criatividade'] }}
+    	</div>
+    	<div>
+    		<label>Curiosidade: </label> {{ $recomendante['curiosidade'] }}
+    	</div>
+    	<div>
+    		<label>Esforço, persistência: </label> {{ $recomendante['esforco'] }}
+    	</div>
+    	<div>
+    		<label>Expressão escrita: </label> {{ $recomendante['expressao_escrita'] }}
+    	</div>
+    	<div>
+    		<label>Expressão oral: </label> {{ $recomendante['expressao_oral'] }}
+    	</div>
+    	<div>
+    		<label>Relacionamento com colegas: </label> {{ $recomendante['relacionamento'] }}
+    	</div>
+
+    	<hr size="0">
+    	<div>
+    		<label>Opinião sobre os antecedentes acadêmicos, profissionais e/ou técnicos do candidato:</label>
+    		<label class="motivacao"> {{ $recomendante['antecedentes_academicos'] }} </label>
+    	</div>
+
+    	<hr size="0">
+    	<div>
+    		<label>Opinião sobre seu possível aproveitamento, se aceito no Programa:</label>
+    		<label class="motivacao"> {{ $recomendante['possivel_aproveitamento'] }} </label>
+    	</div>
+
+    	<hr size="0">
+    	<div>
+    		<label>Outras informaçõoes relevantes:</label>
+    		<label class="motivacao"> {{ $recomendante['informacoes_relevantes'] }} </label>
+    	</div>
+
+    	<hr size="0">
+    	<div>
+    		<label>Entre os estudantes que já conheceu, você diria que o candidato está entre os:</label>
+    		<div>
+    			<label>Como aluno, em aulas: </label> {{ $recomendante['como_aluno'] }}
+    		</div>
+    		<div>
+    			<label>Como orientando: </label> {{ $recomendante['como_orientando'] }}
+    		</div>
+    	</div>
+
+    	<hr size="0">
+    	<div>
+    		<label>Dados do Recomendante</label>
+    		<div>
+    			<label>Nome: </label> {{ $recomendante['nome'] }}
+    		</div>
+    		<div>
+    			<label>Instituição: </label> {{ $recomendante['instituicao_recomendante'] }}
+    		</div>
+    		<div>
+    			<label>Grau acadêmico mais alto obtido: </label> {{ $recomendante['titulacao_recomendante'] }}
+    		</div>
+    		<div>
+    			<label>Área: </label> {{ $recomendante['area_recomendante'] }}
+    		</div>
+    		<div>
+    			<label>Ano de obtenção deste grau: </label> {{ $recomendante['ano_titulacao'] }}
+    		</div>
+    		<div>
+    			<label>Instituição de obtenção deste grau:  </label> {{ $recomendante['inst_obtencao_titulo'] }}
+    		</div>
+    		<div>
+    			<label>Endereço institucional do recomendante: </label> {{ $recomendante['endereco_recomendante'] }}
+    		</div>
+    	</div>
+    	
+
+
+    @endforeach
+    
     
 
 </body>
