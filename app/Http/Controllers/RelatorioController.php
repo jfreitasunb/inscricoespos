@@ -122,9 +122,15 @@ class RelatorioController extends BaseController
 
                 $cidade = new Cidade();
 
+                $data_hoje = (new Carbon())->format('Y-m-d');
+
+                $idade_candidato = $data_hoje - $dados_pessoais_candidato->data_nascimento;
+
                 $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
 
                 $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
+
+                $dados_candidato_para_relatorio['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
 
                 $dados_candidato_para_relatorio['numerorg'] = $dados_pessoais_candidato->numerorg;
 
