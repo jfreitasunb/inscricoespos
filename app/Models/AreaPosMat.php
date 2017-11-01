@@ -25,6 +25,17 @@ class AreaPosMat extends Model
         'nome',
     ];
 
+     public function pega_area_pos_mat($area_pos){
+
+        if ($area_pos == 0) {
+            return null;
+        }else{
+            return $this->select('nome')
+            ->where('id_area_pos', $area_pos)
+            ->value('nome');
+        }   
+    }
+
     // public function pega_disciplinas_monitoria()
     // {
     
