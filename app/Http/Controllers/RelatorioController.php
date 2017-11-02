@@ -248,9 +248,9 @@ public function geraRelatorio($id_inscricao_pos)
 
 
     if (is_null($dados_candidato_para_relatorio['area_pos'])) {
-      $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.strtr($dados_candidato_para_relatorio['nome'], $normalizeChars).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+      $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
     }else{
-      $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars).'_'.strtr($dados_candidato_para_relatorio['nome'], $normalizeChars).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+      $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.strtr($dados_candidato_para_relatorio['nome'], $normalizeChars).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
     }
     
     $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
