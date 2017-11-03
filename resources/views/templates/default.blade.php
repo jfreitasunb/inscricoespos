@@ -30,7 +30,7 @@
         @yield('cadastra_disciplina')
         @yield('configura_inscricao')
         @yield('relatorio_pos_edital_vigente')
-        @yield('relatorio_editais_anteriores')
+        @yield('relatorio_pos_editais_anteriores')
       @endcoordenador
       @recomendante(Auth()->user())
         @include('templates.partials.recomendante.menu_recomendante')
