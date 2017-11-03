@@ -1,0 +1,36 @@
+@extends('templates.default')
+
+@section('relatorio_pos_editais_anteriores')
+  <form action="" method="POST">
+    <legend>Relatório de inscritos</legend>
+	    <table class="table table-striped">
+		  	<thead>
+			    <tr>
+			      <th>Edital</th>
+			      <th>Período de Inscrição</th>
+			      <th>Relatório de Inscritos</th>
+			      <th>Lista de Inscritos</th>
+			    </tr>
+		  	</thead>
+		  	<tbody>
+		  			@foreach ($relatorios_anteriores as $relatorio)
+		  				<tr>
+				      	<th scope="row"><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio['id_inscricao_pos']]) !!}">{{$relatorio['edital']}}</a></th>
+				      	<td><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio['id_inscricao_pos']]) !!}">{{\Carbon\Carbon::parse($relatorio['inicio_inscricao'])->format('d/m/Y')." à ".\Carbon\Carbon::parse($relatorio['fim_inscricao'])->format('d/m/Y')}}</a></td>
+				      	<td>@if($monitoria == $relatorio['id_inscricao_pos']) 
+				      		@if (is_array($arquivos_zipados_para_view))
+				      			@foreach ($arquivos_zipados_para_view as $zip_relatorio)
+				      		 		<a target="_blank" href="{{asset('relatorios/edital_'.$relatorio['edital'].'/zip/'.$zip_relatorio)}}" >{{$zip_relatorio}}</a>
+				      			@endforeach
+				      		@endif
+				      		@endif</td>
+				      	<td>@if($monitoria == $relatorio['id_inscricao_pos']) <a target="_blank" href="{{asset('relatorios/edital_'.$relatorio['edital'].'/'.$relatorio_csv)}}">{{$relatorio_csv}}</a> @endif</td>
+				    	</tr>
+		  			@endforeach
+		  	</tbody>
+		</table>
+		<div class="text-center">
+			{!! $relatorios_anteriores->links(); !!}
+		</div>
+  </form>
+@stop
