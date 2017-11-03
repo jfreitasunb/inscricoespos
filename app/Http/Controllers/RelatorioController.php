@@ -71,7 +71,7 @@ class RelatorioController extends BaseController
  }
 
 
-  public function getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario)
+  public function getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$arquivos_zipados_para_view,$relatorio_csv)
   {
 
   $relatorio = new ConfiguraInscricaoPos();
@@ -80,7 +80,7 @@ class RelatorioController extends BaseController
 
   $monitoria = $id_inscricao_pos;
 
-  return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','relatorio_disponivel','arquivo_relatorio','documentos_zipados','arquivo_dados_pessoais_bancario'));
+  return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','arquivo_dados_pessoais_bancario'));
   }
 
 
@@ -95,6 +95,7 @@ class RelatorioController extends BaseController
     $arquivo_zip = public_path('/relatorios/zip/');
 
     $local_relatorios = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
+    $arquivo_relatorio_csv = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'csv';
 
     $local_documentos = storage_path('app/');
 
@@ -116,8 +117,8 @@ class RelatorioController extends BaseController
     );
 
 
-  // $csv_relatorio = Writer::createFromPath($local_relatorios.$arquivo_relatorio, 'w+');
-  // $csv_dados_pessoais_bancarios = Writer::createFromPath($local_relatorios.$arquivo_dados_pessoais_bancario, 'w+');
+    $csv_relatorio = Writer::createFromPath($local_relatorios.$arquivo_relatorio_csv, 'w+');
+    
 
 
     $finaliza = new FinalizaInscricao();
@@ -314,6 +315,7 @@ class RelatorioController extends BaseController
 
     foreach ($programa_para_relatorio as $nome_programa) {
       $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$dados_candidato_para_relatorio['edital'].'.zip';
+      $arquivos_zipados_para_view[$nome_programa] = $inscricoes_zipadas;
 
       $zip = new ZipArchive;
 
@@ -331,8 +333,9 @@ class RelatorioController extends BaseController
       }
     }
     
+    dd();
 
-    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$documentos_zipados,$arquivo_dados_pessoais_bancario);
+    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivo_relatorio,$arquivos_zipados_para_view,$relatorio_csv);
   }
 
 
