@@ -245,7 +245,19 @@ Route::get('/coordenador/relatorio/{id_monitoria}',[
 
 Route::get('/coordenador/relatorio', [
 	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios',
-	'as' => 'relatorio.pos',
+	'as' => 'relatorio.atual',
+	'middleware' => ['user.role:coordenador,admin'],
+]);
+
+Route::get('/coordenador/relatorios/anteriores/{id_monitoria}',[
+    'uses' => '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores',
+    'as'   => 'gera.anteriores',
+    'middleware' => ['user.role:coordenador,admin'],
+]);
+
+Route::get('/coordenador/relatorios/anteriores', [
+	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores',
+	'as' => 'relatorio.anteriores',
 	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
