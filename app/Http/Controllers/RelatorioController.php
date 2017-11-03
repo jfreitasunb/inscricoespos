@@ -118,7 +118,9 @@ class RelatorioController extends BaseController
 
 
     $csv_relatorio = Writer::createFromPath($local_relatorios.$arquivo_relatorio_csv, 'w+');
-    
+    $cabecalho = ["Nome","E-mail","Programa Pretendido"];
+
+    $csv_relatorio->insertOne($cabecalho);
 
 
     $finaliza = new FinalizaInscricao();
