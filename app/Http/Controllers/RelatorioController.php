@@ -70,6 +70,24 @@ class RelatorioController extends BaseController
    $monitoria = "";
 
    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivos_zipados_para_view','relatorio_csv'));
+  }
+
+   public function getListaRelatoriosAnteriores()
+  {
+
+    $relatorio = new ConfiguraInscricaoPos();
+
+    $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
+
+    $arquivos_zipados_para_view = "";
+
+    $documentos_zipados = "";
+
+    $relatorio_csv = "";
+
+    $monitoria = "";
+
+    return view('templates.partials.coordenador.relatorio_pos_editais_anteriores')->with(compact('monitoria','relatorios_anteriores', 'arquivos_zipados_para_view','relatorio_csv'));
  }
 
 
