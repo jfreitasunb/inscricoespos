@@ -69,7 +69,7 @@ class RelatorioController extends BaseController
 
    $monitoria = "";
 
-   return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivos_zipados_para_view','relatorio_csv'));
+   return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivos_zipados_para_view','relatorio_csv'));
  }
 
 
@@ -91,7 +91,7 @@ class RelatorioController extends BaseController
   $programa = implode('/', $programa_para_inscricao);
   $monitoria = $id_inscricao_pos;
 
-  return view('templates.partials.coordenador.relatorio_pos')->with(compact('monitoria','programa','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv'));
+  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','programa','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv'));
   }
 
 
@@ -364,7 +364,7 @@ class RelatorioController extends BaseController
   public function getRelatorioPos()
   {
 
-    return view('templates.partials.coordenador.relatorio_pos');
+    return view('templates.partials.coordenador.relatorio_pos_edital_vigente');
   }
 
 }

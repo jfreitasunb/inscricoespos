@@ -29,7 +29,8 @@
         @include('templates.partials.coordenador.menu_coordenador')
         @yield('cadastra_disciplina')
         @yield('configura_inscricao')
-        @yield('relatorio_pos')
+        @yield('relatorio_pos_edital_vigente')
+        @yield('relatorio_editais_anteriores')
       @endcoordenador
       @recomendante(Auth()->user())
         @include('templates.partials.recomendante.menu_recomendante')
