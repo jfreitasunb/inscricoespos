@@ -95,7 +95,7 @@ class RelatorioController extends BaseController
     $arquivo_zip = public_path('/relatorios/zip/');
 
     $local_relatorios = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
-    $arquivo_relatorio_csv = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'csv';
+    $arquivo_relatorio_csv = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'.csv';
 
     $local_documentos = storage_path('app/');
 
@@ -130,6 +130,8 @@ class RelatorioController extends BaseController
 
     foreach ($usuarios_finalizados as $candidato) {
 
+      $linha_arquivo = [];
+
       $dados_candidato_para_relatorio = [];
 
       $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
@@ -151,6 +153,10 @@ class RelatorioController extends BaseController
       $idade_candidato = $data_hoje - $dados_pessoais_candidato->data_nascimento;
 
       $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
+
+      $linha_arquivo['nome'] = $dados_pessoais_candidato->nome;
+
+      $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
 
       $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
 
@@ -197,6 +203,8 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
       $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
       $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
+
+      $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
 
       $contato_recomendante = new ContatoRecomendante();
 
@@ -304,6 +312,8 @@ class RelatorioController extends BaseController
         }
 
         // echo $process->getOutput();
+
+        $csv_relatorio->insertOne($linha_arquivo);
       
     }
 
