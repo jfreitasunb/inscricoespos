@@ -1,6 +1,6 @@
 @extends('templates.default')
 
-@section('relatorio_pos')
+@section('relatorio_pos_edital_vigente')
   <form action="" method="POST">
     <legend>Relatório de inscritos</legend>
 	    <table class="table table-striped">
