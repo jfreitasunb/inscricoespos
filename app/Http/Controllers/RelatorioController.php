@@ -21,6 +21,7 @@ use Posmat\Models\Estado;
 use Posmat\Models\Cidade;
 use Posmat\Models\DadoRecomendante;
 use Posmat\Models\DadoAcademico;
+use Posmat\Models\Documento;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaMotivacao;
@@ -34,6 +35,8 @@ use Posmat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 
 /**
 * Classe para visualização da página inicial.
@@ -92,6 +95,8 @@ class RelatorioController extends BaseController
     $arquivo_zip = public_path('/relatorios/zip/');
 
     $local_relatorios = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
+
+    $local_documentos = storage_path('app/');
 
     File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
 
@@ -243,13 +248,60 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
 
       if (is_null($dados_candidato_para_relatorio['area_pos'])) {
-        $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       }else{
-        $arquivo_relatorio_candidato = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       }
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-      $pdf->save($arquivo_relatorio_candidato);
+      $pdf->save($arquivo_relatorio_candidato_temporario);
+
+      $documento = new Documento();
+
+      $nome_documento_banco = $local_documentos.$documento->retorna_documento($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos)->nome_arquivo;
+
+      $nome_historico_banco = $local_documentos.$documento->retorna_historico($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos)->nome_arquivo;
+
+      if (File::extension($nome_documento_banco) != 'pdf')
+        {
+          $nome_historico_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
+          $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+          $converte_jpg->run();
+          if (!$converte_jpg->isSuccessful()) {
+            throw new ProcessFailedException($converte_jpg);
+          }
+
+          // echo $converte_jpg->getOutput();
+        }
+
+        if (File::extension($nome_historico_banco) != 'pdf')
+        {
+          $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
+          $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+          $converte_jpg->run();
+          if (!$converte_jpg->isSuccessful()) {
+            throw new ProcessFailedException($converte_jpg);
+          }
+
+          // echo $converte_jpg->getOutput();
+        }
+
+        $nome_documento_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
+        $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
+
+       
+        $process = new Process('pdftk '.$arquivo_relatorio_candidato_temporario.' '.$nome_documento_pdf.' '.$nome_historico_pdf.' cat output '.$arquivo_relatorio_candidato_final);
+
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+          throw new ProcessFailedException($process);
+        }
+
+        // echo $process->getOutput();
+      
     }
 
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
