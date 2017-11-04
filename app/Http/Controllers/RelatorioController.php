@@ -120,6 +120,70 @@ class RelatorioController extends BaseController
     return $consolida_academico;
   }
 
+  public function ConsolidaEscolhaCandidato($id_candidato,$id_inscricao_pos)
+  {
+    $consolida_escolha = [];
+
+    $escolha_candidato = new EscolhaCandidato();
+
+    $programa_pos = new ProgramaPos();
+
+    $area_pos_mat = new AreaPosMat();
+
+    $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
+
+    $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
+    $consolida_escolha['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
+    $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
+    $consolida_escolha['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
+
+    return $consolida_escolha;
+  }
+
+  public function ConsolidaCartaRecomendacao($contatos_indicados,$id_candidato,$id_inscricao_pos)
+  {
+    $consolida_recomendacao = [];
+
+    foreach ($contatos_indicados as $recomendante) {
+      $dado_recomendante = new DadoRecomendante();
+      $carta_recomendacao = new CartaRecomendacao();
+
+      $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_candidato,$id_inscricao_pos);
+
+      $usuario_recomendante = User::find($recomendante->id_recomendante);
+
+      $consolida_recomendacao[$recomendante->id_recomendante]['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+      $consolida_recomendacao[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
+      $consolida_recomendacao[$recomendante->id_recomendante]['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
+      $consolida_recomendacao[$recomendante->id_recomendante]['circunstancia_1'] = $carta_candidato->circunstancia_1;
+      $consolida_recomendacao[$recomendante->id_recomendante]['circunstancia_2'] = $carta_candidato->circunstancia_2;
+      $consolida_recomendacao[$recomendante->id_recomendante]['circunstancia_3'] = $carta_candidato->circunstancia_3;
+      $consolida_recomendacao[$recomendante->id_recomendante]['circunstancia_4'] = $carta_candidato->circunstancia_4;
+      $consolida_recomendacao[$recomendante->id_recomendante]['circunstancia_outra'] = $carta_candidato->circunstancia_outra;
+      $consolida_recomendacao[$recomendante->id_recomendante]['desempenho_academico'] = $carta_candidato->desempenho_academico;
+      $consolida_recomendacao[$recomendante->id_recomendante]['capacidade_aprender'] = $carta_candidato->capacidade_aprender;
+      $consolida_recomendacao[$recomendante->id_recomendante]['capacidade_trabalhar'] = $carta_candidato->capacidade_trabalhar;
+      $consolida_recomendacao[$recomendante->id_recomendante]['criatividade'] = $carta_candidato->criatividade;
+      $consolida_recomendacao[$recomendante->id_recomendante]['curiosidade'] = $carta_candidato->curiosidade;
+      $consolida_recomendacao[$recomendante->id_recomendante]['esforco'] = $carta_candidato->esforco;
+      $consolida_recomendacao[$recomendante->id_recomendante]['expressao_escrita'] = $carta_candidato->expressao_escrita;
+      $consolida_recomendacao[$recomendante->id_recomendante]['expressao_oral'] = $carta_candidato->expressao_oral;
+      $consolida_recomendacao[$recomendante->id_recomendante]['relacionamento'] = $carta_candidato->relacionamento;
+      $consolida_recomendacao[$recomendante->id_recomendante]['antecedentes_academicos'] = $carta_candidato->antecedentes_academicos;
+      $consolida_recomendacao[$recomendante->id_recomendante]['possivel_aproveitamento'] = $carta_candidato->possivel_aproveitamento;
+      $consolida_recomendacao[$recomendante->id_recomendante]['informacoes_relevantes'] = $carta_candidato->informacoes_relevantes;
+      $consolida_recomendacao[$recomendante->id_recomendante]['como_aluno'] = $carta_candidato->como_aluno;
+      $consolida_recomendacao[$recomendante->id_recomendante]['como_orientando'] = $carta_candidato->como_orientando;
+      $consolida_recomendacao[$recomendante->id_recomendante]['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->instituicao_recomendante;
+      $consolida_recomendacao[$recomendante->id_recomendante]['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->titulacao_recomendante;
+      $consolida_recomendacao[$recomendante->id_recomendante]['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->area_recomendante;
+      $consolida_recomendacao[$recomendante->id_recomendante]['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->ano_titulacao;
+      $consolida_recomendacao[$recomendante->id_recomendante]['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->inst_obtencao_titulo;
+      $consolida_recomendacao[$recomendante->id_recomendante]['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->endereco_recomendante;
+    }
+
+    return $consolida_recomendacao;
+  }
 
   public function getListaRelatorios()
   {
@@ -246,18 +310,9 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      $escolha_candidato = new EscolhaCandidato();
-
-      $programa_pos = new ProgramaPos();
-
-      $area_pos_mat = new AreaPosMat();
-
-      $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
-
-      $dados_candidato_para_relatorio['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
-      $dados_candidato_para_relatorio['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
-      $dados_candidato_para_relatorio['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
-      $dados_candidato_para_relatorio['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos) as $key => $value) {
+        $dados_candidato_para_relatorio[$key] = $value;
+      }
 
       $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
 
@@ -265,47 +320,7 @@ class RelatorioController extends BaseController
 
       $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-      $recomendantes_candidato = [];
-
-      foreach ($contatos_indicados as $recomendante) {
-        $dado_recomendante = new DadoRecomendante();
-        $carta_recomendacao = new CartaRecomendacao();
-
-        $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
-
-        $usuario_recomendante = User::find($recomendante->id_recomendante);
-
-        $recomendantes_candidato[$recomendante->id_recomendante]['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
-        $recomendantes_candidato[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
-        $recomendantes_candidato[$recomendante->id_recomendante]['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
-        $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_1'] = $carta_candidato->circunstancia_1;
-        $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_2'] = $carta_candidato->circunstancia_2;
-        $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_3'] = $carta_candidato->circunstancia_3;
-        $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_4'] = $carta_candidato->circunstancia_4;
-        $recomendantes_candidato[$recomendante->id_recomendante]['circunstancia_outra'] = $carta_candidato->circunstancia_outra;
-        $recomendantes_candidato[$recomendante->id_recomendante]['desempenho_academico'] = $carta_candidato->desempenho_academico;
-        $recomendantes_candidato[$recomendante->id_recomendante]['capacidade_aprender'] = $carta_candidato->capacidade_aprender;
-        $recomendantes_candidato[$recomendante->id_recomendante]['capacidade_trabalhar'] = $carta_candidato->capacidade_trabalhar;
-        $recomendantes_candidato[$recomendante->id_recomendante]['criatividade'] = $carta_candidato->criatividade;
-        $recomendantes_candidato[$recomendante->id_recomendante]['curiosidade'] = $carta_candidato->curiosidade;
-        $recomendantes_candidato[$recomendante->id_recomendante]['esforco'] = $carta_candidato->esforco;
-        $recomendantes_candidato[$recomendante->id_recomendante]['expressao_escrita'] = $carta_candidato->expressao_escrita;
-        $recomendantes_candidato[$recomendante->id_recomendante]['expressao_oral'] = $carta_candidato->expressao_oral;
-        $recomendantes_candidato[$recomendante->id_recomendante]['relacionamento'] = $carta_candidato->relacionamento;
-        $recomendantes_candidato[$recomendante->id_recomendante]['antecedentes_academicos'] = $carta_candidato->antecedentes_academicos;
-        $recomendantes_candidato[$recomendante->id_recomendante]['possivel_aproveitamento'] = $carta_candidato->possivel_aproveitamento;
-        $recomendantes_candidato[$recomendante->id_recomendante]['informacoes_relevantes'] = $carta_candidato->informacoes_relevantes;
-        $recomendantes_candidato[$recomendante->id_recomendante]['como_aluno'] = $carta_candidato->como_aluno;
-        $recomendantes_candidato[$recomendante->id_recomendante]['como_orientando'] = $carta_candidato->como_orientando;
-        $recomendantes_candidato[$recomendante->id_recomendante]['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->instituicao_recomendante;
-        $recomendantes_candidato[$recomendante->id_recomendante]['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->titulacao_recomendante;
-        $recomendantes_candidato[$recomendante->id_recomendante]['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->area_recomendante;
-        $recomendantes_candidato[$recomendante->id_recomendante]['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->ano_titulacao;
-        $recomendantes_candidato[$recomendante->id_recomendante]['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->inst_obtencao_titulo;
-        $recomendantes_candidato[$recomendante->id_recomendante]['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->endereco_recomendante;
-
-      }
-
+      $recomendantes_candidato = $this->ConsolidaCartaRecomendacao($contatos_indicados, $dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
       $carta_motivacao = new CartaMotivacao();
 
