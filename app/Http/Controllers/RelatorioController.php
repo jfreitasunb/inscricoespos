@@ -259,6 +259,19 @@ class RelatorioController extends BaseController
     return $nome_uploads;
   }
 
+  public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
+  {
+    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+
+    $process->run();
+
+    if (!$process->isSuccessful()) {
+      throw new ProcessFailedException($process);
+    }
+
+    // echo $process->getOutput();
+  }
+
   public function getListaRelatorios()
   {
 
@@ -402,16 +415,8 @@ class RelatorioController extends BaseController
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
       $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $local_documentos, $id_inscricao_pos);
-     
-      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
-      $process->run();
-
-      if (!$process->isSuccessful()) {
-        throw new ProcessFailedException($process);
-      }
-
-      // echo $process->getOutput();
+      $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
       $relatorio_csv->insertOne($linha_arquivo);
       
