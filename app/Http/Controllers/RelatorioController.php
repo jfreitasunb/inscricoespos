@@ -302,11 +302,11 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
 
       if (is_null($dados_candidato_para_relatorio['area_pos'])) {
-        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
-        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       }else{
-        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
-        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $this->normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
+        $arquivo_relatorio_candidato_final = $local_relatorios.'Inscricao_'.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['area_pos'], $this->normalizeChars)).'_'.str_replace(' ', '-',strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       }
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
