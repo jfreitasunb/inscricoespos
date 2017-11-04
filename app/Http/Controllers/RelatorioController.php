@@ -272,6 +272,43 @@ class RelatorioController extends BaseController
     // echo $process->getOutput();
   }
 
+  public function ConsolidaArquivosZIP($arquivo_zip, $local_relatorios)
+  {
+    $relatorio = new ConfiguraInscricaoPos();
+
+    $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+    $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
+
+    $nome_programa_pos = new ProgramaPos();
+
+    foreach ($programas_disponiveis as $programa) {
+       $programa_para_relatorio[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+    }
+
+    foreach ($programa_para_relatorio as $nome_programa) {
+      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$relatorio_disponivel->edital.'.zip';
+      $arquivos_zipados_para_view[$nome_programa] = $inscricoes_zipadas;
+
+      $zip = new ZipArchive;
+
+      if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true )
+      {
+             // Copy all the files from the folder and place them in the archive.
+        
+             foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName )
+             {
+                    $file = basename( $fileName );
+                    $zip->addFile( $fileName, $file );
+             }
+
+             $zip->close();
+      }
+    }
+
+    return $arquivos_zipados_para_view;
+  }
+
   public function getListaRelatorios()
   {
 
@@ -422,33 +459,8 @@ class RelatorioController extends BaseController
       
     }
 
-    $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
-
-    $nome_programa_pos = new ProgramaPos();
-
-    foreach ($programas_disponiveis as $programa) {
-       $programa_para_relatorio[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
-    }
-
-    foreach ($programa_para_relatorio as $nome_programa) {
-      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$relatorio_disponivel->edital.'.zip';
-      $arquivos_zipados_para_view[$nome_programa] = $inscricoes_zipadas;
-
-      $zip = new ZipArchive;
-
-      if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true )
-      {
-             // Copy all the files from the folder and place them in the archive.
-        
-             foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName )
-             {
-                    $file = basename( $fileName );
-                    $zip->addFile( $fileName, $file );
-             }
-
-             $zip->close();
-      }
-    }
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($arquivo_zip, $local_relatorios);
+    
 
     return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$arquivo_relatorio_csv);
   }
