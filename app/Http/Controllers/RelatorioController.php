@@ -355,7 +355,7 @@ class RelatorioController extends BaseController
     }
 
     foreach ($programa_para_relatorio as $nome_programa) {
-      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$dados_candidato_para_relatorio['edital'].'.zip';
+      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$relatorio_disponivel->edital.'.zip';
       $arquivos_zipados_para_view[$nome_programa] = $inscricoes_zipadas;
 
       $zip = new ZipArchive;
