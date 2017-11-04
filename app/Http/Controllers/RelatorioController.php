@@ -97,6 +97,29 @@ class RelatorioController extends BaseController
     return $consolida_dados;
   }
 
+  public function ConsolidaDadosAcademicos($id_candidato)
+  {
+
+    $consolida_academico = [];
+
+    $dado_academico = new DadoAcademico();
+
+    $formacao = new Formacao();
+
+    $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($id_candidato);
+
+    $consolida_academico['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+    $consolida_academico['tipo_curso_graduacao'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_graduacao,'Graduação');
+    $consolida_academico['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+    $consolida_academico['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+    $consolida_academico['curso_pos'] = $dados_academicos_candidato->curso_pos;
+    $consolida_academico['tipo_curso_pos'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_pos,'Pós-Graduação');
+    $consolida_academico['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+    $consolida_academico['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+
+    return $consolida_academico;
+  }
+
 
   public function getListaRelatorios()
   {
@@ -219,20 +242,9 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
 
-      $dado_academico = new DadoAcademico();
-
-      $formacao = new Formacao();
-
-      $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($dados_candidato_para_relatorio['id_aluno']);
-
-      $dados_candidato_para_relatorio['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
-      $dados_candidato_para_relatorio['tipo_curso_graduacao'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_graduacao,'Graduação');
-      $dados_candidato_para_relatorio['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
-      $dados_candidato_para_relatorio['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
-      $dados_candidato_para_relatorio['curso_pos'] = $dados_academicos_candidato->curso_pos;
-      $dados_candidato_para_relatorio['tipo_curso_pos'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_pos,'Pós-Graduação');
-      $dados_candidato_para_relatorio['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
-      $dados_candidato_para_relatorio['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
+      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+        $dados_candidato_para_relatorio[$key] = $value;
+      }
 
       $escolha_candidato = new EscolhaCandidato();
 
