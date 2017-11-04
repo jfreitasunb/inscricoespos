@@ -55,6 +55,49 @@ class RelatorioController extends BaseController
       'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
     );
 
+
+  public function ConsolidaDadosPessoais($id_candidato)
+  {
+    $consolida_dados = [];
+
+    $dado_pessoal = new DadoPessoal();
+
+    $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
+
+    $paises = new Paises();
+
+    $estado = new Estado();
+
+    $cidade = new Cidade();
+
+    $data_hoje = (new Carbon())->format('Y-m-d');
+
+    $idade_candidato = $data_hoje - $dados_pessoais_candidato->data_nascimento;
+
+    $consolida_dados['nome'] = $dados_pessoais_candidato->nome;
+
+    $consolida_dados['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
+
+    $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
+
+    $consolida_dados['numerorg'] = $dados_pessoais_candidato->numerorg;
+
+    $consolida_dados['endereco'] = $dados_pessoais_candidato->endereco;
+
+    $consolida_dados['cep'] = $dados_pessoais_candidato->cep;
+
+    $consolida_dados['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+
+    $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+    
+    $consolida_dados['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+
+    $consolida_dados['celular'] = $dados_pessoais_candidato->celular;
+
+    return $consolida_dados;
+  }
+
+
   public function getListaRelatorios()
   {
 
@@ -167,43 +210,14 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_user;
 
-      $dado_pessoal = new DadoPessoal();
+      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+         $dados_candidato_para_relatorio[$key] = $value;
 
-      $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($dados_candidato_para_relatorio['id_aluno']);
+       }
 
-      $paises = new Paises();
-
-      $estado = new Estado();
-
-      $cidade = new Cidade();
-
-      $data_hoje = (new Carbon())->format('Y-m-d');
-
-      $idade_candidato = $data_hoje - $dados_pessoais_candidato->data_nascimento;
-
-      $dados_candidato_para_relatorio['nome'] = $dados_pessoais_candidato->nome;
-
-      $linha_arquivo['nome'] = $dados_pessoais_candidato->nome;
+      $linha_arquivo['nome'] = $dados_candidato_para_relatorio['nome'];
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
-
-      $dados_candidato_para_relatorio['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
-
-      $dados_candidato_para_relatorio['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
-
-      $dados_candidato_para_relatorio['numerorg'] = $dados_pessoais_candidato->numerorg;
-
-      $dados_candidato_para_relatorio['endereco'] = $dados_pessoais_candidato->endereco;
-
-      $dados_candidato_para_relatorio['cep'] = $dados_pessoais_candidato->cep;
-
-      $dados_candidato_para_relatorio['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
-
-      $dados_candidato_para_relatorio['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
-      
-      $dados_candidato_para_relatorio['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
-
-      $dados_candidato_para_relatorio['celular'] = $dados_pessoais_candidato->celular;
 
       $dado_academico = new DadoAcademico();
 
