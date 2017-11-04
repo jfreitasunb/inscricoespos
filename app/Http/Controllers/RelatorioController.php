@@ -217,6 +217,48 @@ class RelatorioController extends BaseController
       return $nome_arquivos;
   }
 
+  public function ConsolidaDocumentosPDF($id_candidato, $local_documentos, $id_inscricao_pos)
+  {
+
+    $nome_uploads = [];
+
+    $documento = new Documento();
+
+    $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato,$id_inscricao_pos)->nome_arquivo;
+
+    $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato,$id_inscricao_pos)->nome_arquivo;
+
+    if (File::extension($nome_documento_banco) != 'pdf')
+      {
+        $nome_historico_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
+        $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+        $converte_jpg->run();
+        
+        if (!$converte_jpg->isSuccessful()) {
+          throw new ProcessFailedException($converte_jpg);
+        }
+
+        // echo $converte_jpg->getOutput();
+      }
+
+      if (File::extension($nome_historico_banco) != 'pdf')
+      {
+        $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
+        $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+        $converte_jpg->run();
+        if (!$converte_jpg->isSuccessful()) {
+          throw new ProcessFailedException($converte_jpg);
+        }
+
+        // echo $converte_jpg->getOutput();
+      }
+
+    $nome_uploads['documento_pdf'] = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
+    $nome_uploads['historico_pdf'] = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
+
+    return $nome_uploads;
+  }
+
   public function getListaRelatorios()
   {
 
@@ -359,51 +401,19 @@ class RelatorioController extends BaseController
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
-      $documento = new Documento();
+      $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $local_documentos, $id_inscricao_pos);
+     
+      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
-      $nome_documento_banco = $local_documentos.$documento->retorna_documento($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos)->nome_arquivo;
+      $process->run();
 
-      $nome_historico_banco = $local_documentos.$documento->retorna_historico($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos)->nome_arquivo;
+      if (!$process->isSuccessful()) {
+        throw new ProcessFailedException($process);
+      }
 
-      if (File::extension($nome_documento_banco) != 'pdf')
-        {
-          $nome_historico_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
-          $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
-          $converte_jpg->run();
-          if (!$converte_jpg->isSuccessful()) {
-            throw new ProcessFailedException($converte_jpg);
-          }
+      // echo $process->getOutput();
 
-          // echo $converte_jpg->getOutput();
-        }
-
-        if (File::extension($nome_historico_banco) != 'pdf')
-        {
-          $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
-          $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
-          $converte_jpg->run();
-          if (!$converte_jpg->isSuccessful()) {
-            throw new ProcessFailedException($converte_jpg);
-          }
-
-          // echo $converte_jpg->getOutput();
-        }
-
-        $nome_documento_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
-        $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
-
-       
-        $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_documento_pdf.' '.$nome_historico_pdf.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
-
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-          throw new ProcessFailedException($process);
-        }
-
-        // echo $process->getOutput();
-
-        $relatorio_csv->insertOne($linha_arquivo);
+      $relatorio_csv->insertOne($linha_arquivo);
       
     }
 
