@@ -193,6 +193,15 @@ class RelatorioController extends BaseController
     return $contato_recomendante->retorna_recomendante_candidato($id_candidato, $id_inscricao_pos);
   }
 
+  public function ConsolidaCartaMotivacao($id_candidato, $id_inscricao_pos)
+  {
+    $carta_motivacao = new CartaMotivacao();
+
+    $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($id_candidato,$id_inscricao_pos);
+
+    return $dados_carta_motivacao->motivacao;
+  }
+
   public function getListaRelatorios()
   {
 
@@ -326,13 +335,12 @@ class RelatorioController extends BaseController
 
 
       $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+
       $recomendantes_candidato = $this->ConsolidaCartaRecomendacao($contatos_indicados, $dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $carta_motivacao = new CartaMotivacao();
+      $dados_candidato_para_relatorio['motivacao'] = $this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $dados_carta_motivacao = $carta_motivacao->retorna_carta_motivacao($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
 
-      $dados_candidato_para_relatorio['motivacao'] = $dados_carta_motivacao->motivacao;
 
       if (is_null($dados_candidato_para_relatorio['area_pos'])) {
         $arquivo_relatorio_candidato_temporario = $local_relatorios.$dados_candidato_para_relatorio['programa_pretendido'].'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
