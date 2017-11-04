@@ -185,6 +185,14 @@ class RelatorioController extends BaseController
     return $consolida_recomendacao;
   }
 
+  public function ConsolidaIndicaoes($id_candidato, $id_inscricao_pos)
+  {
+
+    $contato_recomendante = new ContatoRecomendante();
+
+    return $contato_recomendante->retorna_recomendante_candidato($id_candidato, $id_inscricao_pos);
+  }
+
   public function getListaRelatorios()
   {
 
@@ -316,10 +324,8 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
 
-      $contato_recomendante = new ContatoRecomendante();
 
-      $contatos_indicados = $contato_recomendante->retorna_recomendante_candidato($dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
-
+      $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
       $recomendantes_candidato = $this->ConsolidaCartaRecomendacao($contatos_indicados, $dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
       $carta_motivacao = new CartaMotivacao();
