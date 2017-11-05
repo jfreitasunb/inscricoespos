@@ -395,3 +395,9 @@ Route::get('/es', [
 	'as'   => 'lang.spanish',
 	'middleware' => ['define.locale'],
 ]);
+
+Route::get('/migracao', [
+	'uses' => '\Posmat\Http\Controllers\MigracaoController@getMigracao',
+	'as'   => 'migra.dados',
+	'middleware' => ['user.role:admin'],
+]);
