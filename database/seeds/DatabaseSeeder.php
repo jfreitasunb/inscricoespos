@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
 
         $db_configura_inscricao_pos_7 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_7);
 
-        $configura_inscricao_pos_10 = ['inicio_inscricao' => '2015-02-09', 'fim_inscricao' => '2015-02-20', 'prazo_carta' => '2015-02-22','edital' => '2015-1', 'programa' => '1', 'id_coordenador' => '2','created_at' => '2015-02-02 14:00:00', 'updated_at' => '2015-02-02 14:00:00'];
+        $configura_inscricao_pos_8 = ['inicio_inscricao' => '2015-02-09', 'fim_inscricao' => '2015-02-20', 'prazo_carta' => '2015-02-22','edital' => '2015-1', 'programa' => '1', 'id_coordenador' => '2','created_at' => '2015-02-02 14:00:00', 'updated_at' => '2015-02-02 14:00:00'];
 
         $db_configura_inscricao_pos_8 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_8);
 
@@ -90,22 +90,21 @@ class DatabaseSeeder extends Seeder
 
         $db_configura_inscricao_pos_10 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_10);
 
-        $configura_inscricao_pos_11 = ['inicio_inscricao' => '2016-01-25', 'fim_inscricao' => '2015-02-03', 'prazo_carta' => '2016-02-06','edital' => '2016-1', 'programa' => '1', 'id_coordenador' => '2','created_at' => '2016-01-20 14:00:00', 'updated_at' => '2016-01-20 14:00:00'];
+        $configura_inscricao_pos_11 = ['inicio_inscricao' => '2016-01-25', 'fim_inscricao' => '2016-02-03', 'prazo_carta' => '2016-02-06','edital' => '2016-1', 'programa' => '1', 'id_coordenador' => '2','created_at' => '2016-01-20 14:00:00', 'updated_at' => '2016-01-20 14:00:00'];
 
         $db_configura_inscricao_pos_11 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_11);
 
 
-        $configura_inscricao_pos_12 = ['inicio_inscricao' => '2016-05-09', 'fim_inscricao' => '2015-05-30', 'prazo_carta' => '2016-06-04','edital' => '2016-2', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2016-04-20 14:00:00', 'updated_at' => '2016-04-20 14:00:00'];
+        $configura_inscricao_pos_12 = ['inicio_inscricao' => '2016-05-09', 'fim_inscricao' => '2016-05-30', 'prazo_carta' => '2016-06-04','edital' => '2016-2', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2016-04-20 14:00:00', 'updated_at' => '2016-04-20 14:00:00'];
 
         $db_configura_inscricao_pos_12 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_12);
 
 
-        $configura_inscricao_pos_13 = ['inicio_inscricao' => '2016-09-26', 'fim_inscricao' => '2015-10-20', 'prazo_carta' => '2016-10-28','edital' => '2016-3', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2016-09-20 14:00:00', 'updated_at' => '2016-09-20 14:00:00'];
+        $configura_inscricao_pos_13 = ['inicio_inscricao' => '2016-09-26', 'fim_inscricao' => '2016-10-20', 'prazo_carta' => '2016-10-28','edital' => '2016-3', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2016-09-20 14:00:00', 'updated_at' => '2016-09-20 14:00:00'];
 
         $db_configura_inscricao_pos_13 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_13);
 
         $configura_inscricao_pos_14 = ['inicio_inscricao' => '2017-02-01', 'fim_inscricao' => '2017-02-10', 'prazo_carta' => '2017-02-15','edital' => '2017-1', 'programa' => '1', 'id_coordenador' => '2','created_at' => '2017-01-20 14:00:00', 'updated_at' => '2017-01-20 14:00:00'];
-
 
         $db_configura_inscricao_pos_14 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_14);
 
