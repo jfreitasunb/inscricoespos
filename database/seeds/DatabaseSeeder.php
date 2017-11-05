@@ -49,9 +49,9 @@ class DatabaseSeeder extends Seeder
         ];
         $db_dados_coord = DB::table('dados_pessoais')->insert($dados_coord);
 
-        $configura_inscricao_pos = ['inicio_inscricao' => '2012-10-15', 'fim_inscricao' => '2012-11-01', 'prazo_carta' => '2012-11-05','edital' => '2012-2', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2012-10-10 14:00:00', 'updated_at' => '2012-10-10 14:00:00'];
+        $configura_inscricao_pos_1 = ['inicio_inscricao' => '2012-10-15', 'fim_inscricao' => '2012-11-01', 'prazo_carta' => '2012-11-05','edital' => '2012-2', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2012-10-10 14:00:00', 'updated_at' => '2012-10-10 14:00:00'];
 
-        $db_configura_inscricao_pos = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos);
+        $db_configura_inscricao_pos_1 = DB::table('configura_inscricao_pos')->insert($configura_inscricao_pos_1);
 
 
         $lista_areas_pos = [1 => 'Álgebra', 2 => 'Análise', 3 => 'Análise Numérica', 4 => 'Geometria', 5 => 'Matemática Aplicada', 6 => 'Probabilidade', 7 => 'Sistemas Dinâmicos', 8 => 'Teoria da Computação', 9 => 'Teoria dos Números'];
