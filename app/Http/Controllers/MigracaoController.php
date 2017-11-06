@@ -351,14 +351,14 @@ class MigracaoController extends BaseController
             $documento->save();
         }
 
-        foreach ($documentos_candidato as $documento_enviado) {
+        foreach ($historicos_candidato as $historico_enviado) {
             $documento = new Documento();
 
             $documento->id_user = $novo_id_usuario;
 
             foreach ($inscricoes_configuradas as $inscricao) {
             
-                if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
+                if ($historico_enviado->data >= $inscricao->inicio_inscricao and $historico_enviado->data <= $inscricao->fim_inscricao ) {
                     
                     $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
                 }
@@ -367,6 +367,8 @@ class MigracaoController extends BaseController
             if (is_null($documento->id_inscricao_pos)) {
                 $documento->id_inscricao_pos = 0;
             }
+
+            $historico_pessoais = File::copy(public_path('uploads_temporario/').$historico_enviado->nome_arquivo,storage_path('app/').'uploads/'.$historico_enviado->nome_arquivo);
 
             $documento->nome_arquivo = 'temp';
 
