@@ -76,7 +76,13 @@ class MigracaoController extends BaseController
 
          $dados_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_candidato')->where('id_aluno', $candidato->coduser)->get();
 
-         dd($dados_antigos_usuario);
+         $novo_usuario = new User();
+
+         $novo_id_usuario = $novo_usuario->retorna_user_por_email($candidato->email)->id_user;
+
+         $novos_dados_pessoais = new DadoPessoal();
+
+         $novos_dados_pessoais->id_user
     }
     
   }
