@@ -20,3 +20,4 @@ vendor/composer/autoload_files.php
 vendor/
 public/editais/
 public/relatorios/
+public/uploads_temporario/
