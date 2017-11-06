@@ -74,15 +74,56 @@ class MigracaoController extends BaseController
            $candidato->email = Purifier::clean(strtolower(trim($candidato->login)));
          }
 
-         $dados_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_candidato')->where('id_aluno', $candidato->coduser)->get();
+         $dados_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_candidato')->where('id_aluno', $candidato->coduser)->first();
 
-         $novo_usuario = new User();
+         
+         if (!is_null($dados_antigos_usuario)) {
+            $novo_usuario = new User();
 
-         $novo_id_usuario = $novo_usuario->retorna_user_por_email($candidato->email)->id_user;
+            $novo_id_usuario = $novo_usuario->retorna_user_por_email($candidato->email)->id_user;
 
-         $novos_dados_pessoais = new DadoPessoal();
+            $novos_dados_pessoais = new DadoPessoal();
 
-         $novos_dados_pessoais->id_user
+            $existe_dados_pessoais = $novos_dados_pessoais->retorna_dados_pessoais($novo_id_usuario);
+
+            if (is_null($existe_dados_pessoais)) {
+
+                $novos_dados_pessoais->id_user = $novo_id_usuario;
+
+                $novos_dados_pessoais->nome = trim($dados_antigos_usuario->name).' '.trim($dados_antigos_usuario->firstname);
+
+                $novos_dados_pessoais->data_nascimento = trim($dados_antigos_usuario->anonascimento).'-'.trim($dados_antigos_usuario->mesnascimento).'-'.trim($dados_antigos_usuario->dianascimento);
+
+                $novos_dados_pessoais->numerorg = trim($dados_antigos_usuario->identity);
+
+                $novos_dados_pessoais->endereco = trim($dados_antigos_usuario->adresse);
+
+                $novos_dados_pessoais->cep = trim($dados_antigos_usuario->cpendereco);
+
+                $novos_dados_pessoais->celular = trim($dados_antigos_usuario->ddd_cel).trim($dados_antigos_usuario->telcelular);
+
+                $novos_dados_pessoais->save();   
+            }else{
+
+                $atualiza_dados_pessoais['nome'] = trim($dados_antigos_usuario->name).' '.trim($dados_antigos_usuario->firstname);
+
+                $atualiza_dados_pessoais['data_nascimento'] = trim($dados_antigos_usuario->anonascimento).'-'.trim($dados_antigos_usuario->mesnascimento).'-'.trim($dados_antigos_usuario->dianascimento);
+
+                $atualiza_dados_pessoais['numerorg'] = trim($dados_antigos_usuario->identity);
+
+                $atualiza_dados_pessoais['endereco'] = trim($dados_antigos_usuario->adresse);
+
+                $atualiza_dados_pessoais['cep'] = trim($dados_antigos_usuario->cpendereco);
+
+                $atualiza_dados_pessoais['celular'] = trim($dados_antigos_usuario->ddd_cel).trim($dados_antigos_usuario->telcelular);
+
+                $existe_dados_pessoais->update($atualiza_dados_pessoais);
+            }
+
+            
+         }
+
+         
     }
     
   }
