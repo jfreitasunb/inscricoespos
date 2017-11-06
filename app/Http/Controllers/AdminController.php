@@ -157,9 +157,9 @@ class AdminController extends CoordenadorController
 
 				return redirect()->route('pesquisar.papel');
 
-			}elseif ($novo_papel=="aluno") {
+			}elseif ($novo_papel=="candidato") {
 				
-				$user->user_type = "aluno";
+				$user->user_type = "candidato";
 				
 				$user->save();
 

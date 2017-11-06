@@ -123,7 +123,7 @@ class AuthController extends BaseController
 			return redirect()->intended('admin');
 		}
 
-		if ($user_type === 'aluno') {
+		if ($user_type === 'candidato') {
 			notify()->flash('Bem vindo!','success',[
 				'timer' => 1500,
 			]);
