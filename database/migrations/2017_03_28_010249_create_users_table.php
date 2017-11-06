@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('locale', 5)->default('pt-br');
             $table->string('password');
             $table->string('validation_code')->nullable();
-            $table->string('user_type','12')->default('aluno');
+            $table->string('user_type','12')->default('candidato');
             $table->boolean('ativo')->default('0');
             $table->rememberToken();
             $table->timestamps();
