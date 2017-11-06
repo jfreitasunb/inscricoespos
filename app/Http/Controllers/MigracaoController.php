@@ -86,7 +86,7 @@ class MigracaoController extends BaseController
     //     if (!is_null($dados_antigos_usuario)) {
     //         $novo_usuario = new User();
 
-    //         $novo_id_usuario = $novo_usuario->retorna_user_por_email($candidato->login)->id_user;
+    //         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
     //         $novos_dados_pessoais = new DadoPessoal();
 
@@ -211,7 +211,7 @@ class MigracaoController extends BaseController
             
             $novo_usuario = new User();
 
-            $novo_id_usuario = $novo_usuario->retorna_user_por_email($candidato->login)->id_user;
+            $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
             $novos_dados_academicos = new DadoAcademico();
 
@@ -243,10 +243,6 @@ class MigracaoController extends BaseController
                     $novos_dados_academicos->ano_conclusao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
                 }
 
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
-                    
-                    $novos_dados_academicos->tipo_curso_graduacao = 7;   
-                }
 
                 if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
                     
@@ -256,11 +252,6 @@ class MigracaoController extends BaseController
                     $novos_dados_academicos->instituicao_pos = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
 
                     $novos_dados_academicos->ano_conclusao_pos = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
-                    
-                    $novos_dados_academicos->tipo_curso_pos = 8;   
                 }
 
                 $novos_dados_academicos->save();
@@ -291,7 +282,7 @@ class MigracaoController extends BaseController
 
                 if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
                     
-                    $atualiza_dados_pessoais['tipo_curso_graduacao'] = 7;   
+                    $atualiza_dados_pessoais['tipo_curso_graduacao'] = 7;
                 }
 
                 if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
