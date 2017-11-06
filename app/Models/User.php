@@ -81,7 +81,7 @@ class User extends Authenticatable
 
     public function isAluno()
     {
-        if (auth()->user()->user_type === 'aluno') {
+        if (auth()->user()->user_type === 'candidato') {
             return TRUE;
         }else{
             return FALSE;
