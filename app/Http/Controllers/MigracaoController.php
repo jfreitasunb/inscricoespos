@@ -198,114 +198,186 @@ class MigracaoController extends BaseController
 
     //Migra dados acadêmicos dos candidatos para o novo sistema.
 
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
+
+    // // dd($users_candidato);
+
+    // foreach ($users_candidato as $candidato) {
+
+    //     $dados_academicos_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->first();
+
+         
+    //     if (!is_null($dados_academicos_antigos_usuario)) {
+            
+    //         $novo_usuario = new User();
+
+    //         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+    //         $novos_dados_academicos = new DadoAcademico();
+
+    //         $existe_dados_academicos = $novos_dados_academicos->retorna_dados_academicos($novo_id_usuario);
+
+    //         if (is_null($existe_dados_academicos)) {
+
+    //             $novos_dados_academicos->id_user = $novo_id_usuario;
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'bacharel') {
+                    
+    //                 $novos_dados_academicos->tipo_curso_graduacao = 1;
+
+    //                 $novos_dados_academicos->curso_graduacao = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $novos_dados_academicos->instituicao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $novos_dados_academicos->ano_conclusao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'licenciado') {
+                    
+    //                 $novos_dados_academicos->tipo_curso_graduacao = 2;
+
+    //                 $novos_dados_academicos->curso_graduacao = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $novos_dados_academicos->instituicao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $novos_dados_academicos->ano_conclusao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
+                    
+    //                 $novos_dados_academicos->tipo_curso_pos = 5;
+    //                 $novos_dados_academicos->curso_pos = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $novos_dados_academicos->instituicao_pos = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $novos_dados_academicos->ano_conclusao_pos = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+    //             $novos_dados_academicos->save();
+
+    //         }else{
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'bacharel') {
+                    
+    //                 $atualiza_dados_pessoais['tipo_curso_graduacao'] = 1;
+
+    //                 $atualiza_dados_pessoais['curso_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $atualiza_dados_pessoais['instituicao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $atualiza_dados_pessoais['ano_conclusao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'licenciado') {
+                    
+    //                 $atualiza_dados_pessoais['tipo_curso_graduacao'] = 2;
+
+    //                 $atualiza_dados_pessoais['curso_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $atualiza_dados_pessoais['instituicao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $atualiza_dados_pessoais['ano_conclusao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
+                    
+    //                 $atualiza_dados_pessoais['tipo_curso_graduacao'] = 7;
+    //             }
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
+                    
+    //                 $atualiza_dados_pessoais['tipo_curso_pos'] = 5;
+    //                 $atualiza_dados_pessoais['curso_pos'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
+
+    //                 $atualiza_dados_pessoais['instituicao_pos'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+
+    //                 $atualiza_dados_pessoais['ano_conclusao_pos'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+    //             }
+
+    //             if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
+                    
+    //                 $atualiza_dados_pessoais['tipo_curso_pos'] = 8;   
+    //             }
+
+    //             $existe_dados_academicos->update($atualiza_dados_pessoais);
+    //         }            
+    //     }
+    // }
+
+    //Fim da migração dos dados acadêmicos dos candidatos para o novo sistema.
+
+    //Migra documentos para o novo sistema
+
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
 
-    // dd($users_candidato);
+    $inscricoes_configuradas = ConfiguraInscricaoPos::all();
+
 
     foreach ($users_candidato as $candidato) {
 
-        $dados_academicos_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->first();
+        $documentos_candidato = DB::connection('pos2')->table('inscricao_pos_anexos')->where('coduser', $candidato->coduser)->where('tipo', 'documentos')->get();
 
-         
-        if (!is_null($dados_academicos_antigos_usuario)) {
+
+        $historicos_candidato = DB::connection('pos2')->table('inscricao_pos_anexos')->where('coduser', $candidato->coduser)->where('tipo', 'historico')->get();
+
+        $novo_usuario = new User();
+
+        $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+        foreach ($documentos_candidato as $documento_enviado) {
+            $documento = new Documento();
+
+            $documento->id_user = $novo_id_usuario;
+
+            foreach ($inscricoes_configuradas as $inscricao) {
             
-            $novo_usuario = new User();
-
-            $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-            $novos_dados_academicos = new DadoAcademico();
-
-            $existe_dados_academicos = $novos_dados_academicos->retorna_dados_academicos($novo_id_usuario);
-
-            if (is_null($existe_dados_academicos)) {
-
-                $novos_dados_academicos->id_user = $novo_id_usuario;
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'bacharel') {
+                if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
                     
-                    $novos_dados_academicos->tipo_curso_graduacao = 1;
-
-                    $novos_dados_academicos->curso_graduacao = trim($dados_academicos_antigos_usuario->instrucaocurso);
-
-                    $novos_dados_academicos->instituicao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
-
-                    $novos_dados_academicos->ano_conclusao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
+                    $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
                 }
+            }
 
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'licenciado') {
-                    
-                    $novos_dados_academicos->tipo_curso_graduacao = 2;
+            if (is_null($documento->id_inscricao_pos)) {
+                $documento->id_inscricao_pos = 0;
+            }
 
-                    $novos_dados_academicos->curso_graduacao = trim($dados_academicos_antigos_usuario->instrucaocurso);
+            $doc_pessoais = File::copy(public_path('uploads_temporario/').$documento_enviado->nome_arquivo,storage_path('app/').'uploads/'.$documento_enviado->nome_arquivo);
 
-                    $novos_dados_academicos->instituicao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
+            $documento->nome_arquivo = $doc_pessoais;
 
-                    $novos_dados_academicos->ano_conclusao_graduacao = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
+            $documento->tipo_arquivo = 'Documentos';
 
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
-                    
-                    $novos_dados_academicos->tipo_curso_pos = 5;
-                    $novos_dados_academicos->curso_pos = trim($dados_academicos_antigos_usuario->instrucaocurso);
-
-                    $novos_dados_academicos->instituicao_pos = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
-
-                    $novos_dados_academicos->ano_conclusao_pos = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
-
-                $novos_dados_academicos->save();
-
-            }else{
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'bacharel') {
-                    
-                    $atualiza_dados_pessoais['tipo_curso_graduacao'] = 1;
-
-                    $atualiza_dados_pessoais['curso_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
-
-                    $atualiza_dados_pessoais['instituicao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
-
-                    $atualiza_dados_pessoais['ano_conclusao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'licenciado') {
-                    
-                    $atualiza_dados_pessoais['tipo_curso_graduacao'] = 2;
-
-                    $atualiza_dados_pessoais['curso_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
-
-                    $atualiza_dados_pessoais['instituicao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
-
-                    $atualiza_dados_pessoais['ano_conclusao_graduacao'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
-                    
-                    $atualiza_dados_pessoais['tipo_curso_graduacao'] = 7;
-                }
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'mestre' or $dados_academicos_antigos_usuario->instrucaograu == 'especialista') {
-                    
-                    $atualiza_dados_pessoais['tipo_curso_pos'] = 5;
-                    $atualiza_dados_pessoais['curso_pos'] = trim($dados_academicos_antigos_usuario->instrucaocurso);
-
-                    $atualiza_dados_pessoais['instituicao_pos'] = trim($dados_academicos_antigos_usuario->instrucaoinstituicao);
-
-                    $atualiza_dados_pessoais['ano_conclusao_pos'] = trim($dados_academicos_antigos_usuario->instrucaoanoconclusao);
-                }
-
-                if ($dados_academicos_antigos_usuario->instrucaograu == 'outro') {
-                    
-                    $atualiza_dados_pessoais['tipo_curso_pos'] = 8;   
-                }
-
-                $existe_dados_academicos->update($atualiza_dados_pessoais);
-            }            
+            $documento->save();
         }
+
+        foreach ($documentos_candidato as $documento_enviado) {
+            $documento = new Documento();
+
+            $documento->id_user = $novo_id_usuario;
+
+            foreach ($inscricoes_configuradas as $inscricao) {
+            
+                if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
+                    
+                    $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
+                }
+            }
+
+            if (is_null($documento->id_inscricao_pos)) {
+                $documento->id_inscricao_pos = 0;
+            }
+
+            $documento->nome_arquivo = 'temp';
+
+            $documento->tipo_arquivo = 'Histórico';
+
+            $documento->save();
+        }
+        
     }
 
-    //Fim da migração dos dados acadêmicos dos candidatos para o novo sistema.
+    //Fim da migração dos documentos para o novo sistema.
 
 
   }
