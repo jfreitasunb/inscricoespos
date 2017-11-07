@@ -309,6 +309,7 @@ class MigracaoController extends BaseController
 
     //Migra documentos para o novo sistema
 
+
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
@@ -326,56 +327,66 @@ class MigracaoController extends BaseController
         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
         foreach ($documentos_candidato as $documento_enviado) {
-            $documento = new Documento();
 
-            $documento->id_user = $novo_id_usuario;
+            if (File::exists(public_path('uploads_temporario/').$documento_enviado->nome_arquivo)) {
+                
+                $documento = new Documento();
 
-            foreach ($inscricoes_configuradas as $inscricao) {
-            
-                if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
-                    
-                    $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
+                $documento->id_user = $novo_id_usuario;
+
+                foreach ($inscricoes_configuradas as $inscricao) {
+                
+                    if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
+                        
+                        $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
+                    }
                 }
+
+                if (is_null($documento->id_inscricao_pos)) {
+                    $documento->id_inscricao_pos = 0;
+                }
+
+                $nome_crypt_arquivo = md5_file(public_path('uploads_temporario/').$documento_enviado->nome_arquivo);
+
+                $doc_pessoais = File::copy(public_path('uploads_temporario/').$documento_enviado->nome_arquivo,storage_path('app/').'uploads/'.$nome_crypt_arquivo.'.'.File::extension($documento_enviado->nome_arquivo));
+
+                $documento->nome_arquivo = 'uploads/'.$nome_crypt_arquivo.'.'.File::extension($documento_enviado->nome_arquivo);
+
+                $documento->tipo_arquivo = 'Documentos';
+
+                $documento->save();
             }
 
-            if (is_null($documento->id_inscricao_pos)) {
-                $documento->id_inscricao_pos = 0;
-            }
-
-            $doc_pessoais = File::copy(public_path('uploads_temporario/').$documento_enviado->nome_arquivo,storage_path('app/').'uploads/'.$documento_enviado->nome_arquivo);
-
-            $documento->nome_arquivo = $doc_pessoais;
-
-            $documento->tipo_arquivo = 'Documentos';
-
-            $documento->save();
+            
         }
 
-        foreach ($historicos_candidato as $historico_enviado) {
-            $documento = new Documento();
+        // foreach ($historicos_candidato as $historico_enviado) {
 
-            $documento->id_user = $novo_id_usuario;
+        //     $nome_crypt_historico = md5_file(public_path('uploads_temporario/').$historico_enviado->nome_arquivo);
+        //     $documento = new Documento();
 
-            foreach ($inscricoes_configuradas as $inscricao) {
+        //     $documento->id_user = $novo_id_usuario;
+
+        //     foreach ($inscricoes_configuradas as $inscricao) {
             
-                if ($historico_enviado->data >= $inscricao->inicio_inscricao and $historico_enviado->data <= $inscricao->fim_inscricao ) {
+        //         if ($historico_enviado->data >= $inscricao->inicio_inscricao and $historico_enviado->data <= $inscricao->fim_inscricao ) {
                     
-                    $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
-                }
-            }
+        //             $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
+        //         }
+        //     }
 
-            if (is_null($documento->id_inscricao_pos)) {
-                $documento->id_inscricao_pos = 0;
-            }
+        //     if (is_null($documento->id_inscricao_pos)) {
+        //         $documento->id_inscricao_pos = 0;
+        //     }
 
-            $historico_pessoais = File::copy(public_path('uploads_temporario/').$historico_enviado->nome_arquivo,storage_path('app/').'uploads/'.$historico_enviado->nome_arquivo);
+        //     $historico_pessoais = File::copy(public_path('uploads_temporario/').$historico_enviado->nome_arquivo,storage_path('app/').'uploads/'.$nome_crypt_historico.'.'.File::extension($historico_enviado->nome_arquivo));
 
-            $documento->nome_arquivo = 'temp';
+        //     $documento->nome_arquivo = $nome_crypt_historico;
 
-            $documento->tipo_arquivo = 'Histórico';
+        //     $documento->tipo_arquivo = 'Histórico';
 
-            $documento->save();
-        }
+        //     $documento->save();
+        // }
         
     }
 
