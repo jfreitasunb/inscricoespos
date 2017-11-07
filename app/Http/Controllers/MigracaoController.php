@@ -398,15 +398,47 @@ class MigracaoController extends BaseController
 
     //Migra as cartas de motivação dos candidatos
 
-    $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
+    $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','ASC')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
     foreach ($users_candidato as $candidato) {
         
-        $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('coduser', $candidato->coduser)->get();
+        $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->get()->all();
 
-        dd($motivacao_candidato);
+        $novo_usuario = new User();
+
+        $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+        foreach ($motivacao_candidato as $carta) {
+
+            $carta_motivao = new CartaMotivacao();
+
+            $carta_motivao->id_user = $novo_id_usuario;
+            
+            $array_edital = explode('-', $carta->edital);
+
+            $edital = (string)$array_edital[1].'-'.$array_edital[0];
+
+            foreach ($inscricoes_configuradas as $inscricao) {
+                
+                if ($inscricao->edital === $edital) {
+                    
+                    $carta_motivao->id_inscricao_pos = $inscricao->id_inscricao_pos;
+
+                }
+            }
+
+            if (is_null($carta_motivao->id_inscricao_pos)) {
+                
+                $carta_motivao->id_inscricao_pos = 0;
+            }
+
+            $carta_motivao->motivacao = Purifier::clean(trim($carta->motivacaoprogramapretendido));
+            $carta_motivao->concorda_termos = true;
+
+            $carta_motivao->save();
+        }
 
     }
 
