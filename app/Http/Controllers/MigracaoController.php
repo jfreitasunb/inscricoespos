@@ -48,23 +48,23 @@ class MigracaoController extends BaseController
   {
     //Migra usuários para novo sistema
 
-    $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
+    // $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
 
-    foreach ($users as $user) {
-      if ($user->coduser !=197) {
-        $novo_usuario = new User();
-        if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
-          $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
-        }else{
-          $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
-        }
-        $novo_usuario->password = bcrypt(1);
-        $novo_usuario->validation_code = null;
-        $novo_usuario->user_type = $user->status;
-        $novo_usuario->ativo = true;
-        $novo_usuario->save(); 
-      }
-    }
+    // foreach ($users as $user) {
+    //   if ($user->coduser !=197) {
+    //     $novo_usuario = new User();
+    //     if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
+    //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
+    //     }else{
+    //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
+    //     }
+    //     $novo_usuario->password = bcrypt(1);
+    //     $novo_usuario->validation_code = null;
+    //     $novo_usuario->user_type = $user->status;
+    //     $novo_usuario->ativo = true;
+    //     $novo_usuario->save(); 
+    //   }
+    // }
     
     //Fim da migração dos usuário para o novo sistema
 
@@ -398,25 +398,74 @@ class MigracaoController extends BaseController
 
     //Migra as cartas de motivação dos candidatos
 
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
+
+    // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
+
+    // foreach ($users_candidato as $candidato) {
+        
+    //     $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+
+    //     $novo_usuario = new User();
+
+    //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+    //     foreach ($motivacao_candidato as $carta) {
+
+    //         $carta_motivao = new CartaMotivacao();
+
+    //         $carta_motivao->id_user = $novo_id_usuario;
+            
+    //         $array_edital = explode('-', $carta->edital);
+
+    //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
+
+    //         foreach ($inscricoes_configuradas as $inscricao) {
+                
+    //             if ($inscricao->edital === $edital) {
+                    
+    //                 $carta_motivao->id_inscricao_pos = $inscricao->id_inscricao_pos;
+
+    //             }
+    //         }
+
+    //         if (is_null($carta_motivao->id_inscricao_pos)) {
+                
+    //             $carta_motivao->id_inscricao_pos = 0;
+    //         }
+
+    //         $carta_motivao->motivacao = Purifier::clean(trim($carta->motivacaoprogramapretendido));
+    //         $carta_motivao->concorda_termos = true;
+
+    //         $carta_motivao->save();
+    //     }
+
+    // }
+
+    //Fim da migração das cartas de motivação dos candidatos
+
+    //Migra as escolhas dos candidatos
+
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
     foreach ($users_candidato as $candidato) {
         
-        $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+
+        $escolhas_candidato_antigo = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
 
         $novo_usuario = new User();
 
         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
-        foreach ($motivacao_candidato as $carta) {
-
-            $carta_motivao = new CartaMotivacao();
-
-            $carta_motivao->id_user = $novo_id_usuario;
+        foreach ($escolhas_candidato_antigo as $escolha_antiga) {
             
-            $array_edital = explode('-', $carta->edital);
+            $nova_escolha = new EscolhaCandidato();
+
+            $nova_escolha->id_user = $novo_id_usuario;
+
+            $array_edital = explode('-', $escolha_antiga->edital);
 
             $edital = (string)$array_edital[1].'-'.$array_edital[0];
 
@@ -424,25 +473,84 @@ class MigracaoController extends BaseController
                 
                 if ($inscricao->edital === $edital) {
                     
-                    $carta_motivao->id_inscricao_pos = $inscricao->id_inscricao_pos;
+                    $nova_escolha->id_inscricao_pos = $inscricao->id_inscricao_pos;
 
                 }
             }
 
-            if (is_null($carta_motivao->id_inscricao_pos)) {
+            if (is_null($nova_escolha->id_inscricao_pos)) {
                 
-                $carta_motivao->id_inscricao_pos = 0;
+                $nova_escolha->id_inscricao_pos = 0;
             }
 
-            $carta_motivao->motivacao = Purifier::clean(trim($carta->motivacaoprogramapretendido));
-            $carta_motivao->concorda_termos = true;
+            if (!is_null($escolha_antiga->areadoutorado)) {
+                
+                $nova_escolha->programa_pretendido = 2;
 
-            $carta_motivao->save();
+            }
+
+            if (strtolower(trim($escolha_antiga->cursopos)) === '0') {
+                $nova_escolha->programa_pretendido = 3;
+            }
+
+            if (strtolower(trim($escolha_antiga->cursopos)) === 'doutorado') {
+                $nova_escolha->programa_pretendido = 2;
+            }
+
+            if (strtolower(trim($escolha_antiga->cursopos)) === 'mestrado') {
+                $nova_escolha->programa_pretendido = 1;
+            }
+
+            if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadosnumeros') {
+                    $nova_escolha->area_pos = 9;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadacomputacao') {
+                    $nova_escolha->area_pos = 8;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'sistemasdinamicos') {
+                    $nova_escolha->area_pos = 7;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'probabilidade') {
+                    $nova_escolha->area_pos = 6;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'algebra') {
+                    $nova_escolha->area_pos = 1;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analisenumerica') {
+                    $nova_escolha->area_pos = 3;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'matematicaaplicada') {
+                    $nova_escolha->area_pos = 5;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analise') {
+                    $nova_escolha->area_pos = 2;
+                }
+
+                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'geometriadiferencial') {
+                    $nova_escolha->area_pos = 4;
+                }
+
+            if ($escolha_antiga->interessebolsa === 'Sim') {
+                $nova_escolha->interesse_bolsa = true;
+            }else{
+                $nova_escolha->interesse_bolsa = false;
+            }
+
+            $nova_escolha->vinculo_empregaticio = false;
+            $nova_escolha->save();
+            
         }
 
     }
 
-    //Fim da migração das cartas de motivação dos candidatos
+    //Fim da migração das escolhas dos candidatos
 
 
   }
