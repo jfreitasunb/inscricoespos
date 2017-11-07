@@ -446,26 +446,133 @@ class MigracaoController extends BaseController
 
     //Migra as escolhas dos candidatos
 
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
+
+    // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
+
+    // foreach ($users_candidato as $candidato) {
+        
+
+    //     $escolhas_candidato_antigo = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+
+    //     $novo_usuario = new User();
+
+    //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+    //     foreach ($escolhas_candidato_antigo as $escolha_antiga) {
+            
+    //         $nova_escolha = new EscolhaCandidato();
+
+    //         $nova_escolha->id_user = $novo_id_usuario;
+
+    //         $array_edital = explode('-', $escolha_antiga->edital);
+
+    //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
+
+    //         foreach ($inscricoes_configuradas as $inscricao) {
+                
+    //             if ($inscricao->edital === $edital) {
+                    
+    //                 $nova_escolha->id_inscricao_pos = $inscricao->id_inscricao_pos;
+
+    //             }
+    //         }
+
+    //         if (is_null($nova_escolha->id_inscricao_pos)) {
+                
+    //             $nova_escolha->id_inscricao_pos = 0;
+    //         }
+
+    //         if (!is_null($escolha_antiga->areadoutorado)) {
+                
+    //             $nova_escolha->programa_pretendido = 2;
+
+    //         }
+
+    //         if (strtolower(trim($escolha_antiga->cursopos)) === '0') {
+    //             $nova_escolha->programa_pretendido = 3;
+    //         }
+
+    //         if (strtolower(trim($escolha_antiga->cursopos)) === 'doutorado') {
+    //             $nova_escolha->programa_pretendido = 2;
+    //         }
+
+    //         if (strtolower(trim($escolha_antiga->cursopos)) === 'mestrado') {
+    //             $nova_escolha->programa_pretendido = 1;
+    //         }
+
+    //         if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadosnumeros') {
+    //                 $nova_escolha->area_pos = 9;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadacomputacao') {
+    //                 $nova_escolha->area_pos = 8;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'sistemasdinamicos') {
+    //                 $nova_escolha->area_pos = 7;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'probabilidade') {
+    //                 $nova_escolha->area_pos = 6;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'algebra') {
+    //                 $nova_escolha->area_pos = 1;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analisenumerica') {
+    //                 $nova_escolha->area_pos = 3;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'matematicaaplicada') {
+    //                 $nova_escolha->area_pos = 5;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analise') {
+    //                 $nova_escolha->area_pos = 2;
+    //             }
+
+    //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'geometriadiferencial') {
+    //                 $nova_escolha->area_pos = 4;
+    //             }
+
+    //         if ($escolha_antiga->interessebolsa === 'Sim') {
+    //             $nova_escolha->interesse_bolsa = true;
+    //         }else{
+    //             $nova_escolha->interesse_bolsa = false;
+    //         }
+
+    //         $nova_escolha->vinculo_empregaticio = false;
+    //         $nova_escolha->save();
+            
+    //     }
+
+    // }
+
+    //Fim da migração das escolhas dos candidatos
+
+    //Migra os contatos dos recomendantes
+
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
     foreach ($users_candidato as $candidato) {
         
-
-        $escolhas_candidato_antigo = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+        $contatos_recomendantes_antigo = DB::connection('pos2')->table('inscricao_pos_contatos_recomendante')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
 
         $novo_usuario = new User();
 
         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
-        foreach ($escolhas_candidato_antigo as $escolha_antiga) {
-            
-            $nova_escolha = new EscolhaCandidato();
+        
 
-            $nova_escolha->id_user = $novo_id_usuario;
+        foreach ($contatos_recomendantes_antigo as $antigo_recomendante) {
 
-            $array_edital = explode('-', $escolha_antiga->edital);
+            $i = 1;
+
+            $array_edital = explode('-', $antigo_recomendante->edital);
 
             $edital = (string)$array_edital[1].'-'.$array_edital[0];
 
@@ -473,85 +580,44 @@ class MigracaoController extends BaseController
                 
                 if ($inscricao->edital === $edital) {
                     
-                    $nova_escolha->id_inscricao_pos = $inscricao->id_inscricao_pos;
+                    $id_inscricao_pos = $inscricao->id_inscricao_pos;
 
                 }
             }
 
-            if (is_null($nova_escolha->id_inscricao_pos)) {
+            if (!is_null($id_inscricao_pos)) {
                 
-                $nova_escolha->id_inscricao_pos = 0;
-            }
+                $novo_usuario_recomendante = new User();
 
-            if (!is_null($escolha_antiga->areadoutorado)) {
-                
-                $nova_escolha->programa_pretendido = 2;
+                $string = 'emailprofrecomendante'.$i;
 
-            }
+                if (!is_null($novo_usuario_recomendante->retorna_user_por_email(strtolower(trim($antigo_recomendante->$string))))) {
+                    $novo_id_recomendante = $novo_usuario_recomendante->retorna_user_por_email(strtolower(trim($antigo_recomendante->$string)))->id_user;
 
-            if (strtolower(trim($escolha_antiga->cursopos)) === '0') {
-                $nova_escolha->programa_pretendido = 3;
-            }
+                    $contatos_novos = new ContatoRecomendante();
 
-            if (strtolower(trim($escolha_antiga->cursopos)) === 'doutorado') {
-                $nova_escolha->programa_pretendido = 2;
-            }
+                    $contatos_novos->id_user = $novo_id_usuario;
 
-            if (strtolower(trim($escolha_antiga->cursopos)) === 'mestrado') {
-                $nova_escolha->programa_pretendido = 1;
-            }
+                    $contatos_novos->id_recomendante = $novo_id_recomendante;
 
-            if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadosnumeros') {
-                    $nova_escolha->area_pos = 9;
+                    $contatos_novos->id_inscricao_pos = $id_inscricao_pos;
+
+                    $contatos_novos->email_enviado = true;
+
+                    $contatos_novos->save();
                 }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadacomputacao') {
-                    $nova_escolha->area_pos = 8;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'sistemasdinamicos') {
-                    $nova_escolha->area_pos = 7;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'probabilidade') {
-                    $nova_escolha->area_pos = 6;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'algebra') {
-                    $nova_escolha->area_pos = 1;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analisenumerica') {
-                    $nova_escolha->area_pos = 3;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'matematicaaplicada') {
-                    $nova_escolha->area_pos = 5;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analise') {
-                    $nova_escolha->area_pos = 2;
-                }
-
-                if (strtolower(trim($escolha_antiga->areadoutorado)) === 'geometriadiferencial') {
-                    $nova_escolha->area_pos = 4;
-                }
-
-            if ($escolha_antiga->interessebolsa === 'Sim') {
-                $nova_escolha->interesse_bolsa = true;
-            }else{
-                $nova_escolha->interesse_bolsa = false;
-            }
-
-            $nova_escolha->vinculo_empregaticio = false;
-            $nova_escolha->save();
             
+                $i++;
+            
+            }
+
+            
+
+
         }
 
     }
-
-    //Fim da migração das escolhas dos candidatos
-
+    //Fim da migração dos contatos dos recomendantes
 
   }
 }
