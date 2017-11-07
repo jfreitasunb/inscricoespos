@@ -48,29 +48,29 @@ class MigracaoController extends BaseController
   {
     //Migra usuários para novo sistema
 
-    // $users = DB::connection('pos2')->table('inscricao_pos_login')->get();
+    $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
 
-    // foreach ($users as $user) {
-    //   if ($user->coduser !=197) {
-    //     $novo_usuario = new User();
-    //     if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
-    //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
-    //     }else{
-    //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
-    //     }
-    //     $novo_usuario->password = bcrypt(trim($user->senha));
-    //     $novo_usuario->validation_code = null;
-    //     $novo_usuario->user_type = $user->status;
-    //     $novo_usuario->ativo = true;
-    //     $novo_usuario->save(); 
-    //   }
-    // }
+    foreach ($users as $user) {
+      if ($user->coduser !=197) {
+        $novo_usuario = new User();
+        if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
+          $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
+        }else{
+          $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
+        }
+        $novo_usuario->password = bcrypt(1);
+        $novo_usuario->validation_code = null;
+        $novo_usuario->user_type = $user->status;
+        $novo_usuario->ativo = true;
+        $novo_usuario->save(); 
+      }
+    }
     
     //Fim da migração dos usuário para o novo sistema
 
     //Migra dados pessoais dos candidatos para o novo sistema
 
-    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     // foreach ($users_candidato as $candidato) {
 
@@ -132,7 +132,7 @@ class MigracaoController extends BaseController
     
     //Migra os dados pessoais dos recomendantes para o novo sistema
 
-    // $users_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->get();
+    // $users_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->orderBy('coduser','asc')->get();
 
     // foreach ($users_recomendante as $recomendante) {
 
@@ -198,7 +198,7 @@ class MigracaoController extends BaseController
 
     //Migra dados acadêmicos dos candidatos para o novo sistema.
 
-    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     // // dd($users_candidato);
 
@@ -310,7 +310,7 @@ class MigracaoController extends BaseController
     //Migra documentos para o novo sistema
 
 
-    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->get();
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
@@ -398,13 +398,13 @@ class MigracaoController extends BaseController
 
     //Migra as cartas de motivação dos candidatos
 
-    $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','ASC')->get();
+    $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
     foreach ($users_candidato as $candidato) {
         
-        $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->get()->all();
+        $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
 
         $novo_usuario = new User();
 
