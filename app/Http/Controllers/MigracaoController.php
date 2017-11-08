@@ -649,42 +649,231 @@ class MigracaoController extends BaseController
     
     //Início da migração das cartas de recomendação
     
+    // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
+
+    // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
+
+    // foreach ($users_candidato as $candidato) {
+
+    //     $cartas_recomendacoes_antigas = DB::connection('pos2')->table('inscricao_pos_recomendacoes')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+        
+    //     $novo_usuario = new User();
+
+    //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+    //     foreach ($cartas_recomendacoes_antigas as $carta_recomendacao) {
+            
+            
+    //         $array_edital = explode('-', $carta_recomendacao->edital);
+
+    //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
+
+    //         $id_inscricao_pos = null;
+
+    //         foreach ($inscricoes_configuradas as $inscricao) {
+                
+    //             if ($inscricao->edital === $edital) {
+                    
+    //                 $id_inscricao_pos = $inscricao->id_inscricao_pos;
+
+    //             }
+    //         }
+
+    //         if (is_null($id_inscricao_pos)) {
+    //             $id_inscricao_pos = 0;
+    //         }
+                
+    //         $novo_usuario_candidato = new User();
+
+    //         $id_novo_usuario_candidato = $novo_usuario_candidato->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
+
+    //         $email_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->where('coduser', $carta_recomendacao->id_prof)->get()->first();
+
+    //         $novo_usuario_recomendante = new User();
+
+    //         $id_novo_usuario_recomendante = $novo_usuario_recomendante->retorna_user_por_email(strtolower(trim($email_recomendante->login)));
+
+    //         $nova_carta = new CartaRecomendacao();
+
+    //         $nova_carta->id_prof = $id_novo_usuario_recomendante->id_user;
+            
+    //         $nova_carta->id_aluno = $novo_id_usuario;
+
+    //         $nova_carta->programa_pretendido = 0;
+
+    //         if (is_null($carta_recomendacao->nivel)) {
+    //             $nova_carta->programa_pretendido = 0;
+    //         }
+
+    //         if (strtolower(trim($carta_recomendacao->nivel)) === 'doutorado') {
+    //             $nova_carta->programa_pretendido = 2;
+    //         }
+
+    //         if (strtolower(trim($carta_recomendacao->nivel)) === 'mestrado') {
+    //             $nova_carta->programa_pretendido = 1;
+    //         }
+
+    //         if (strtolower(trim($carta_recomendacao->nivel)) === 'verão') {
+    //             $nova_carta->programa_pretendido = 3;
+    //         }
+            
+
+    //         $nova_carta->id_inscricao_pos = $id_inscricao_pos;
+
+    //         $nova_carta->tempo_conhece_candidato = $carta_recomendacao->tempoconhececandidato;
+
+    //         $nova_carta->circunstancia_1 = $carta_recomendacao->circunstancia1;
+
+    //         $nova_carta->circunstancia_2 = $carta_recomendacao->circunstancia2;
+
+    //         $nova_carta->circunstancia_3 = $carta_recomendacao->circunstancia3;
+
+    //         $nova_carta->circunstancia_4 = $carta_recomendacao->circunstancia4;
+
+    //         $nova_carta->circunstancia_outra = $carta_recomendacao->circunstanciaoutra;
+
+    //         $nova_carta->desempenho_academico = $carta_recomendacao->desempenhoacademico;
+
+    //         if ($carta_recomendacao->desempenhoacademico === 'naoinfo') {
+    //             $nova_carta->desempenho_academico = 5;
+    //         }
+            
+    //         $nova_carta->capacidade_aprender = $carta_recomendacao->capacidadeaprender;
+
+    //         if ($carta_recomendacao->capacidadeaprender === 'naoinfo') {
+    //             $nova_carta->capacidade_aprender = 5;
+    //         }
+
+    //         $nova_carta->capacidade_trabalhar = $carta_recomendacao->capacidadetrabalhar;
+
+    //         if ($carta_recomendacao->capacidadetrabalhar === 'naoinfo') {
+    //             $nova_carta->capacidade_trabalhar = 5;
+    //         }
+
+    //         $nova_carta->criatividade = $carta_recomendacao->criatividade;
+
+    //         if ($carta_recomendacao->criatividade === 'naoinfo') {
+    //             $nova_carta->criatividade = 5;
+    //         }
+
+    //         $nova_carta->curiosidade = $carta_recomendacao->curiosidade;
+
+    //         if ($carta_recomendacao->curiosidade === 'naoinfo') {
+    //             $nova_carta->curiosidade = 5;
+    //         }
+
+    //         $nova_carta->esforco = $carta_recomendacao->esforco;
+
+    //         if ($carta_recomendacao->esforco === 'naoinfo') {
+    //             $nova_carta->esforco = 5;
+    //         }
+
+    //         $nova_carta->expressao_escrita = $carta_recomendacao->expressaoescrita;
+
+    //         if ($carta_recomendacao->expressaoescrita === 'naoinfo') {
+    //             $nova_carta->expressao_escrita = 5;
+    //         }
+
+    //         $nova_carta->expressao_oral = $carta_recomendacao->expressaooral;
+
+    //         if ($carta_recomendacao->expressaooral === 'naoinfo') {
+    //             $nova_carta->expressao_oral = 5;
+    //         }
+
+    //         $nova_carta->relacionamento = $carta_recomendacao->relacionamento;
+
+    //         if ($carta_recomendacao->relacionamento === 'naoinfo') {
+    //             $nova_carta->relacionamento = 5;
+    //         }
+
+    //         $nova_carta->antecedentes_academicos = $carta_recomendacao->antecedentesacademicos;
+
+    //         $nova_carta->possivel_aproveitamento = $carta_recomendacao->possivelaproveitamento;
+
+    //         $nova_carta->informacoes_relevantes = $carta_recomendacao->informacoesrelevantes;
+
+    //         $nova_carta->como_aluno = $carta_recomendacao->comoaluno;
+
+    //         if ($carta_recomendacao->comoaluno === 'naoinfo') {
+    //             $nova_carta->como_aluno = 5;
+    //         }
+
+    //         if (is_null($carta_recomendacao->comoaluno)) {
+    //             $nova_carta->como_aluno = 5;
+    //         }
+
+    //         $nova_carta->como_orientando = $carta_recomendacao->comoorientando;
+
+    //         if ($carta_recomendacao->comoorientando === 'naoinfo') {
+    //             $nova_carta->como_orientando = 5;
+    //         }
+
+    //         if (is_null($carta_recomendacao->comoorientando)) {
+    //             $nova_carta->como_orientando = 5;
+    //         }
+
+    //         $nova_carta->completada = true;
+
+    //         $nova_carta->save();
+    //     }
+    // }
+
+    //Fim da migração das cartas de recomendação
+
+
+    //Migra finalização das inscrições
+    
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
     $inscricoes_configuradas = ConfiguraInscricaoPos::all();
 
     foreach ($users_candidato as $candidato) {
 
-        $cartas_recomendacoes_antigas = DB::connection('pos2')->table('inscricao_pos_recomendacoes')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
-
-        dd($cartas_recomendacoes_antigas);
+        $finalizada_antigas = DB::connection('pos2')->table('inscricao_pos_finaliza')->where('coduser', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
         
         $novo_usuario = new User();
 
         $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
 
-        foreach ($cartas_recomendacoes_antigas as $carta_recomendacao) {
-            
-            $array_edital = explode('-', $carta_recomendacao->edital);
+        
+
+        foreach ($finalizada_antigas as $antigas) {
+
+            $array_edital = explode('-', $antigas->edital);
 
             $edital = (string)$array_edital[1].'-'.$array_edital[0];
 
             $id_inscricao_pos = null;
-
+            
             foreach ($inscricoes_configuradas as $inscricao) {
-                
+            
                 if ($inscricao->edital === $edital) {
-                    
+                
                     $id_inscricao_pos = $inscricao->id_inscricao_pos;
-
                 }
             }
 
+            if (is_null($id_inscricao_pos)) {
+                $id_inscricao_pos = 0;
+            }
             
-        }
-    }
+            $nova_finalizada = new FinalizaInscricao();
 
-    //Fim da migração das cartas de recomendação
+            $nova_finalizada->id_user = $novo_id_usuario;
+
+            $nova_finalizada->id_inscricao_pos = $id_inscricao_pos;
+
+            $nova_finalizada->finalizada = true;
+
+            $nova_finalizada->created_at = $antigas->data.' '.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
+
+            $nova_finalizada->save();
+        }
+        
+
+    }
+    
+    //Fim da migração da finalização das inscrições
 
   }
 }
