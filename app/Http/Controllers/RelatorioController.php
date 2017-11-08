@@ -55,6 +55,26 @@ class RelatorioController extends BaseController
       'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
     );
 
+  public function ConsolidaLocaisArquivos($relatorio_disponivel)
+  {
+
+    $locais_arquivos = [];
+    $locais_arquivos['arquivos_temporarios'] = public_path("/relatorios/temporario");
+
+    $locais_arquivos['local_relatorios'] = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
+    $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'.csv';
+
+    $locais_arquivos['local_documentos'] = storage_path('app/');
+
+    File::isDirectory($locais_arquivos['local_relatorios']) or File::makeDirectory($locais_arquivos['local_relatorios'],077,true,true);
+
+    $locais_arquivos['arquivo_zip'] = $local_relatorios.'zip/';
+
+    File::isDirectory($locais_arquivos['arquivo_zip']) or File::makeDirectory($locais_arquivos['arquivo_zip'],077,true,true);
+
+    return $locais_arquivos;
+  }
+
 
   public function ConsolidaDadosPessoais($id_candidato)
   {
@@ -385,22 +405,9 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-    $arquivos_temporarios = public_path("/relatorios/temporario");
-    $arquivo_zip = public_path('/relatorios/zip/');
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel);
 
-    $local_relatorios = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
-    $arquivo_relatorio_csv = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'.csv';
-
-    $local_documentos = storage_path('app/');
-
-    File::isDirectory($local_relatorios) or File::makeDirectory($local_relatorios,077,true,true);
-
-    $arquivo_zip = $local_relatorios.'zip/';
-
-    File::isDirectory($arquivo_zip) or File::makeDirectory($arquivo_zip,077,true,true);
-
-
-    $relatorio_csv = Writer::createFromPath($local_relatorios.$arquivo_relatorio_csv, 'w+');
+    $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     $cabecalho = ["Nome","E-mail","Programa Pretendido"];
 
     $relatorio_csv->insertOne($cabecalho);
@@ -446,7 +453,7 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['motivacao'] = $this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $nome_arquivos = $this->ConsolidaNomeArquivos($local_relatorios, $dados_candidato_para_relatorio);
+      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
@@ -468,13 +475,13 @@ class RelatorioController extends BaseController
   public function getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$relatorio_csv)
   {
 
-  $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoPos();
 
-  $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
+    $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
 
-  $monitoria = $id_inscricao_pos;
+    $monitoria = $id_inscricao_pos;
 
-  return redirect()->back()->with(compact('monitoria','relatorios_anteriores','arquivos_zipados_para_view','relatorio_csv'));
+    return redirect()->back()->with(compact('monitoria','relatorios_anteriores','arquivos_zipados_para_view','relatorio_csv'));
   }
 
 
