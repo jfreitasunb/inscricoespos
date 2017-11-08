@@ -44,8 +44,9 @@
         @include('templates.partials.admin.menu_admin')
         @yield('ativa_conta')
         @yield('cadastra_disciplina')
-        @yield('configura_monitoria')
-        @yield('relatorio_pos')
+        @yield('configura_inscricao')
+        @yield('relatorio_pos_edital_vigente')
+        @yield('relatorio_pos_editais_anteriores')
       @endadmin
     @else
       @yield('inicio')
