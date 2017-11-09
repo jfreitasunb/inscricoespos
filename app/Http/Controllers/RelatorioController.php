@@ -68,7 +68,7 @@ class RelatorioController extends BaseController
 
     File::isDirectory($locais_arquivos['local_relatorios']) or File::makeDirectory($locais_arquivos['local_relatorios'],077,true,true);
 
-    $locais_arquivos['arquivo_zip'] = $local_relatorios.'zip/';
+    $locais_arquivos['arquivo_zip'] = $locais_arquivos['local_relatorios'].'zip/';
 
     File::isDirectory($locais_arquivos['arquivo_zip']) or File::makeDirectory($locais_arquivos['arquivo_zip'],077,true,true);
 
