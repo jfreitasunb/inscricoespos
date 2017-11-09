@@ -255,7 +255,7 @@ class RelatorioController extends BaseController
     $nome_uploads = [];
 
     $documento = new Documento();
-    
+
     $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato,$id_inscricao_pos)->nome_arquivo;
 
     $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato,$id_inscricao_pos)->nome_arquivo;
@@ -478,10 +478,10 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($arquivo_zip, $local_relatorios);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios']);
     
 
-    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$arquivo_relatorio_csv);
+    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
   }
 
   public function getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$relatorio_csv)
