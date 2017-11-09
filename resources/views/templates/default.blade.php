@@ -27,7 +27,7 @@
       @endcandidato
       @coordenador(Auth()->user())
         @include('templates.partials.coordenador.menu_coordenador')
-        @yield('cadastra_disciplina')
+        {{-- @yield('cadastra_disciplina') --}}
         @yield('configura_inscricao')
         @yield('relatorio_pos_edital_vigente')
         @yield('relatorio_pos_editais_anteriores')
