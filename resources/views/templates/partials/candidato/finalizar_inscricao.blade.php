@@ -38,21 +38,19 @@ function archiveFunction(event) {
 event.preventDefault(); // prevent form submit
 var form = event.target.form; // storing the form
         swal({
-  title: "Are you sure?",
-  text: "But you will still be able to retrieve this file.",
+  title: '{{ trans('tela_finalizar_inscricao.confirma_envio') }}',
+  text: '{{ trans('tela_finalizar_inscricao.texto_confirma_envio') }}',
   type: "warning",
   showCancelButton: true,
   confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Yes, archive it!",
-  cancelButtonText: "No, cancel please!",
+  confirmButtonText: '{{ trans('tela_finalizar_inscricao.sim_envia') }}',
+  cancelButtonText: '{{ trans('tela_finalizar_inscricao.nao_envia') }}',
 }).then(function () {
   form.submit();          // submitting the form when user press yes
 },function(dismiss){
   if (dismiss === 'cancel') {
     swal(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
+      '{{ trans('tela_finalizar_inscricao.envio_cancelado') }}'
     )
   } 
 });
