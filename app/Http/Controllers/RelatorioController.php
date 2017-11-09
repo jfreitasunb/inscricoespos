@@ -55,6 +55,12 @@ class RelatorioController extends BaseController
       'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
     );
 
+  public function ConsolidaCabecalhoCSV()
+  {
+
+    return $cabecalho = ["Nome","E-mail","Programa Pretendido"];
+  }
+  
   public function ConsolidaLocaisArquivos($relatorio_disponivel)
   {
 
@@ -420,9 +426,9 @@ class RelatorioController extends BaseController
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel);
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
-    $cabecalho = ["Nome","E-mail","Programa Pretendido"];
+    
 
-    $relatorio_csv->insertOne($cabecalho);
+    $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
 
 
     $finaliza = new FinalizaInscricao();
