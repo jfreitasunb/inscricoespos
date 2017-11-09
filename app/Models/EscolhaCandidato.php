@@ -29,12 +29,13 @@ class EscolhaCandidato extends Model
 
     public function grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request)
     {
+
         $candidato_fez_escolhas = $this->retorna_escolha_candidato($id_aluno,$id_inscricao_pos);
 
         if (count($candidato_fez_escolhas) > 0) {
             $atualiza_escolhas = $this->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos);
             $dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
-            $dados_escolhas['area_pos'] = (int)$request->areas_pos;
+            $dados_escolhas['area_pos'] = (int)$request->area_pos;
             $dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
             $dados_escolhas['vinculo_empregaticio'] = (bool)$request->vinculo_empregaticio;
             $atualiza_escolhas->update($dados_escolhas);
