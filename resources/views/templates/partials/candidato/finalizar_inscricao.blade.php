@@ -20,7 +20,7 @@
         {{ link_to($ficha_inscricao,$nome_candidato ) }}
       </div>
   </fieldset>
-
+  {!! Form::hidden('ficha_inscricao', $ficha_inscricao, []) !!}
       <div class="form-group">
         <div class="row">
           <div class="col-md-6 col-md-offset-3 text-center">
