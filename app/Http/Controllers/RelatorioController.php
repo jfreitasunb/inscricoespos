@@ -255,7 +255,7 @@ class RelatorioController extends BaseController
     $nome_uploads = [];
 
     $documento = new Documento();
-
+    
     $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato,$id_inscricao_pos)->nome_arquivo;
 
     $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato,$id_inscricao_pos)->nome_arquivo;
@@ -470,7 +470,7 @@ class RelatorioController extends BaseController
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
-      $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $local_documentos, $id_inscricao_pos);
+      $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos);
 
       $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
