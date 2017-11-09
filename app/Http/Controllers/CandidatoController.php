@@ -26,6 +26,7 @@ use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\Documento;
 use Posmat\Notifications\NotificaRecomendante;
+use Posmat\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -106,7 +107,7 @@ class CandidatoController extends BaseController
 				'endereco' => 'required|max:256',
 				'cep' => 'required|max:20',
 				'pais' => 'required',
-				'estado' => 'required|max:3',
+				'estado' => 'required|max:5',
 				'cidade' => 'required',
 				'celular' => 'required|max:21',
 			]);
@@ -225,7 +226,7 @@ class CandidatoController extends BaseController
 	{
 		$this->validate($request, [
 			'curso_pos' => 'required_without_all:curso_graduacao',
-			'curstipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
+			'tipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
 			'instituicao_pos' => 'required_without_all:instituicao_graduacao',
 			'ano_conclusao_pos' => 'required_without_all:ano_conclusao_graduacao',
 		]);
@@ -423,7 +424,7 @@ class CandidatoController extends BaseController
 					'confirmar_email_recomendante' => 'required|same:email_recomendante',
 				]);
 
-				if ($request->areas_pos === '1' and $request->programa_pretendido === '2') {
+				if (!is_null($request->areas_pos) and $request->programa_pretendido === '2') {
 					
 					notify()->flash(trans('mensagens_gerais.informe_area'),'warning');
 
@@ -613,7 +614,9 @@ class CandidatoController extends BaseController
 				return redirect()->back();
 			}
 
-			$ficha_inscricao = $arquivos_editais."Ficha_aluno.pdf";
+			$novo_relatorio = new RelatorioController;
+
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos);
 
 			$dados_pessoais = new DadoPessoal();
 
@@ -712,28 +715,32 @@ class CandidatoController extends BaseController
 				return redirect()->route('motivacao.documentos');
 			}
 
+			$dado_pessoal_candidato = new DadoPessoal();
+
+			$dados_pessoais_candidato = $dado_pessoal_candidato->retorna_dados_pessoais($id_user);
+
+			$escolha_candidato = new EscolhaCandidato();
+
+			$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos)->programa_pretendido;
+			$programa_pos = new ProgramaPos();
+
+			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido);
+
+			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
+			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
+
 			foreach ($informou_recomendantes as $recomendante) {
 				
 				if (!$recomendante->email_enviado) {
 
-					$dado_pessoal_candidato = new DadoPessoal();
-
-					$dados_pessoais_candidato = $dado_pessoal_candidato->retorna_dados_pessoais($id_user);
-
 					$dado_pessoal_recomendante = new DadoRecomendante();
-
-					$escolha_candidato = new EscolhaCandidato();
-
-					$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos)->programa_pretendido;
-
-					$programa_pos = new ProgramaPos();
 
 
 					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
 
 					$dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
         			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
-			        $dados_email['programa'] = $programa_pos->pega_programa_pos_mat($programa_pretendido);
+			        $dados_email['programa'] = $nome_programa_pos_candidato;
         			$dados_email['email_recomendante'] = User::find($recomendante->id_recomendante)->email;
         			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
@@ -744,6 +751,11 @@ class CandidatoController extends BaseController
 				}
 			}
 			
+
+			$dados_email_candidato['ficha_inscricao'] = $request->ficha_inscricao;
+			
+			Notification::send(User::find($id_user), new NotificaCandidato($dados_email_candidato));
+
 			$finalizar_inscricao = new FinalizaInscricao();
 
 			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_user',$id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
@@ -758,6 +770,8 @@ class CandidatoController extends BaseController
 				$finalizar_inscricao->finalizada = true;
 				$finalizar_inscricao->save();
 			}
+
+
 
 			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
@@ -814,6 +828,5 @@ class CandidatoController extends BaseController
 		}else{
 			return redirect()->back();
 		}
-
 	}
 }
