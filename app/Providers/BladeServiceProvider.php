@@ -42,7 +42,7 @@ class BladeServiceProvider extends ServiceProvider
             return $user->isCoordenador();
         });
 
-         Blade::if('aluno', function ( $user = null ){
+         Blade::if('candidato', function ( $user = null ){
 
             if (!$user && auth()->check()) {
                 $user = auth()->user();
@@ -52,7 +52,7 @@ class BladeServiceProvider extends ServiceProvider
                 return false;
             }
 
-            return $user->isAluno();
+            return $user->isCandidato();
         });
 
         Blade::if('recomendante', function ( $user = null ){

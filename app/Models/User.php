@@ -79,7 +79,7 @@ class User extends Authenticatable
         }
     }
 
-    public function isAluno()
+    public function isCandidato()
     {
         if (auth()->user()->user_type === 'candidato') {
             return TRUE;
