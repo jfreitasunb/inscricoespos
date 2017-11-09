@@ -61,14 +61,14 @@ class RelatorioController extends BaseController
     return $cabecalho = ["Nome","E-mail","Programa Pretendido"];
   }
 
-  public function ConsolidaLocaisArquivos($relatorio_disponivel)
+  public function ConsolidaLocaisArquivos($edital)
   {
 
     $locais_arquivos = [];
     $locais_arquivos['arquivos_temporarios'] = public_path("/relatorios/temporario");
 
-    $locais_arquivos['local_relatorios'] = public_path("/relatorios/edital_".$relatorio_disponivel->edital."/");
-    $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$relatorio_disponivel->edital.'.csv';
+    $locais_arquivos['local_relatorios'] = public_path("/relatorios/edital_".$edital."/");
+    $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
     $locais_arquivos['local_documentos'] = storage_path('app/');
 
@@ -423,7 +423,7 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel);
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     
@@ -508,7 +508,7 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
-    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel['edital']);
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
 
