@@ -106,11 +106,23 @@ class RelatorioController extends BaseController
 
     $consolida_dados['cep'] = $dados_pessoais_candidato->cep;
 
-    $consolida_dados['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+    if (!is_null($dados_pessoais_candidato->pais)) {
+      $consolida_dados['nome_pais'] = $paises->retorna_nome_pais_por_id($dados_pessoais_candidato->pais);
+    }else{
+      $consolida_dados['nome_pais'] = null;
+    }
 
-    $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
-    
-    $consolida_dados['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+    if (!is_null($dados_pessoais_candidato->estado)) {
+      $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+    }else{
+      $consolida_dados['nome_estado'] = null;
+    }
+
+    if (!is_null($dados_pessoais_candidato->cidade)) {
+      $consolida_dados['nome_cidade'] = $cidade->retorna_nome_cidade_por_id($dados_pessoais_candidato->cidade, $dados_pessoais_candidato->estado);
+    }else{
+      $consolida_dados['nome_cidade'] = null;
+    }
 
     $consolida_dados['celular'] = $dados_pessoais_candidato->celular;
 
