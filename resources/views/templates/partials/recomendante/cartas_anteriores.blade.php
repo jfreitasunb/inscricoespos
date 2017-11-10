@@ -8,7 +8,6 @@
 
 @section('cartas_anteriores')
 
-{!! Form::open(array('route' => 'carta.inicial', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_cartas_pendentes.tela_pendentes')}}</legend>
 
@@ -23,17 +22,16 @@
   </thead>
   <tbody>
     @foreach( $indicacoes_anteriores as $indicacoes)
-      <td>{{ $indicacoes['nome'] }}</td>
-      <td>{{ $indicacoes['tipo_programa_pos'] }}</td>
+      <td><a href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['nome'] }}</a></td>
+      <td><a href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['tipo_programa_pos'] }}</a></td>
     </tr>
     @endforeach
   </tbody>
 </table>
 <div class="text-center">
-  {!! $indicacoes_anteriores->render(); !!}
+  {{ $indicacoes_anteriores->render() }}
 </div>
 </fieldset>
-{!! Form::close() !!}
 
 @endsection
 
