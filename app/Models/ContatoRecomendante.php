@@ -19,7 +19,7 @@ class ContatoRecomendante extends Model
 
     public function retorna_candidatos_por_recomendante($id_prof)
     {
-        return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'id_aluno','id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_aluno')->get();
+        return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'id_aluno','id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->get();
         // ->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')
     }
 
