@@ -19,7 +19,7 @@ class ContatoRecomendante extends Model
 
     public function retorna_candidatos_por_recomendante($id_prof)
     {
-        return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('contatos_recomendantes.id_user')->get();
+        return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos')->get();
     }
 
     public function retorna_recomendante_candidato($id_user,$id_inscricao_pos)
