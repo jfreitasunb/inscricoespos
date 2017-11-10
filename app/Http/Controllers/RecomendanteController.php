@@ -331,8 +331,8 @@ class RecomendanteController extends BaseController
 				$atualiza_carta['antecedentes_academicos'] = Purifier::clean(trim($request->input('antecedentes_academicos')));
 				$atualiza_carta['possivel_aproveitamento'] = Purifier::clean(trim($request->input('possivel_aproveitamento')));
 				$atualiza_carta['informacoes_relevantes'] = Purifier::clean(trim($request->input('informacoes_relevantes')));
-				$atualiza_carta['como_aluno'] = Purifier::clean(trim($request->input('como_aluno')));
-				$atualiza_carta['como_orientando'] = Purifier::clean(trim($request->input('como_orientando')));
+				$atualiza_carta['como_aluno'] = (int) Purifier::clean(trim($request->input('como_aluno')));
+				$atualiza_carta['como_orientando'] = (int) Purifier::clean(trim($request->input('como_orientando')));
 				$atualiza_carta['completada'] = true;
 
 				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
