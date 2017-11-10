@@ -243,15 +243,15 @@ class RecomendanteController extends BaseController
 				$atualiza_carta['circunstancia_3'] = Purifier::clean(trim($request->input('circunstancia_3')));
 				$atualiza_carta['circunstancia_4'] = Purifier::clean(trim($request->input('circunstancia_4')));
 				$atualiza_carta['circunstancia_outra'] = Purifier::clean(trim($request->input('circunstancia_outra')));
-				$atualiza_carta['desempenho_academico'] = Purifier::clean(trim($request->input('desempenho_academico')));
-				$atualiza_carta['capacidade_aprender'] = Purifier::clean(trim($request->input('capacidade_aprender')));
-				$atualiza_carta['capacidade_trabalhar'] = Purifier::clean(trim($request->input('capacidade_trabalhar')));
-				$atualiza_carta['criatividade'] = Purifier::clean(trim($request->input('criatividade')));
-				$atualiza_carta['curiosidade'] = Purifier::clean(trim($request->input('curiosidade')));
-				$atualiza_carta['esforco'] = Purifier::clean(trim($request->input('esforco')));
-				$atualiza_carta['expressao_escrita'] = Purifier::clean(trim($request->input('expressao_escrita')));
-				$atualiza_carta['expressao_oral'] = Purifier::clean(trim($request->input('expressao_oral')));
-				$atualiza_carta['relacionamento'] = Purifier::clean(trim($request->input('relacionamento')));
+				$atualiza_carta['desempenho_academico'] = (int) Purifier::clean(trim($request->input('desempenho_academico')));
+				$atualiza_carta['capacidade_aprender'] = (int) Purifier::clean(trim($request->input('capacidade_aprender')));
+				$atualiza_carta['capacidade_trabalhar'] = (int) Purifier::clean(trim($request->input('capacidade_trabalhar')));
+				$atualiza_carta['criatividade'] = (int) Purifier::clean(trim($request->input('criatividade')));
+				$atualiza_carta['curiosidade'] = (int) Purifier::clean(trim($request->input('curiosidade')));
+				$atualiza_carta['esforco'] = (int) Purifier::clean(trim($request->input('esforco')));
+				$atualiza_carta['expressao_escrita'] = (int) Purifier::clean(trim($request->input('expressao_escrita')));
+				$atualiza_carta['expressao_oral'] = (int) Purifier::clean(trim($request->input('expressao_oral')));
+				$atualiza_carta['relacionamento'] = (int) Purifier::clean(trim($request->input('relacionamento')));
 
 				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
