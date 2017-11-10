@@ -365,13 +365,15 @@ class RecomendanteController extends BaseController
 		
 		// $id_prof = $user->id_user;
 		
-		$id_prof = 152;
+		$id_prof = 25;
 
-		$indicacoes = new ContatoRecomendante;
+		$indicacoes = new CartaRecomendacao;
 
-		$indicacoes_anteriores = $indicacoes->retorna_candidatos_por_recomendante($id_prof);
+		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof);
 
 		dd($indicacoes_anteriores);
+
+		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
 	}
 
 	public function postCartasAnteriores(Request $request)
