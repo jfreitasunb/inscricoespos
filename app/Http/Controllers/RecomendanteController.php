@@ -357,7 +357,25 @@ class RecomendanteController extends BaseController
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
 			return redirect()->route('/');
 		}
-
 	}
 
+	public function getCartasAnteriores()
+	{
+		$user = Auth::user();
+		
+		// $id_prof = $user->id_user;
+		
+		$id_prof = 152;
+
+		$indicacoes = new ContatoRecomendante;
+
+		$indicacoes_anteriores = $indicacoes->retorna_candidatos_por_recomendante($id_prof);
+
+		dd($indicacoes_anteriores);
+	}
+
+	public function postCartasAnteriores(Request $request)
+	{
+
+	}
 }
