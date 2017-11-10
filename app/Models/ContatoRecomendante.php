@@ -17,6 +17,11 @@ class ContatoRecomendante extends Model
         'id_inscricao_pos',
     ];
 
+    public function retorna_candidatos_por_recomendante($id_prof)
+    {
+        return $this->where('id_recomendante', $id_prof)->get();
+    }
+
     public function retorna_recomendante_candidato($id_user,$id_inscricao_pos)
     {
 
