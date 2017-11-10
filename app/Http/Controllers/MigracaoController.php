@@ -1141,55 +1141,55 @@ class MigracaoController extends BaseController
 
             $nova_carta->circunstancia_outra = $carta_recomendacao->circunstanciaoutra;
 
-            $nova_carta->desempenho_academico = $carta_recomendacao->desempenhoacademico;
+            $nova_carta->desempenho_academico = (int) $carta_recomendacao->desempenhoacademico;
 
             if ($carta_recomendacao->desempenhoacademico === 'naoinfo') {
                 $nova_carta->desempenho_academico = 5;
             }
             
-            $nova_carta->capacidade_aprender = $carta_recomendacao->capacidadeaprender;
+            $nova_carta->capacidade_aprender = (int) $carta_recomendacao->capacidadeaprender;
 
             if ($carta_recomendacao->capacidadeaprender === 'naoinfo') {
                 $nova_carta->capacidade_aprender = 5;
             }
 
-            $nova_carta->capacidade_trabalhar = $carta_recomendacao->capacidadetrabalhar;
+            $nova_carta->capacidade_trabalhar = (int) $carta_recomendacao->capacidadetrabalhar;
 
             if ($carta_recomendacao->capacidadetrabalhar === 'naoinfo') {
                 $nova_carta->capacidade_trabalhar = 5;
             }
 
-            $nova_carta->criatividade = $carta_recomendacao->criatividade;
+            $nova_carta->criatividade = (int) $carta_recomendacao->criatividade;
 
             if ($carta_recomendacao->criatividade === 'naoinfo') {
                 $nova_carta->criatividade = 5;
             }
 
-            $nova_carta->curiosidade = $carta_recomendacao->curiosidade;
+            $nova_carta->curiosidade = (int) $carta_recomendacao->curiosidade;
 
             if ($carta_recomendacao->curiosidade === 'naoinfo') {
                 $nova_carta->curiosidade = 5;
             }
 
-            $nova_carta->esforco = $carta_recomendacao->esforco;
+            $nova_carta->esforco = (int) $carta_recomendacao->esforco;
 
             if ($carta_recomendacao->esforco === 'naoinfo') {
                 $nova_carta->esforco = 5;
             }
 
-            $nova_carta->expressao_escrita = $carta_recomendacao->expressaoescrita;
+            $nova_carta->expressao_escrita = (int) $carta_recomendacao->expressaoescrita;
 
             if ($carta_recomendacao->expressaoescrita === 'naoinfo') {
                 $nova_carta->expressao_escrita = 5;
             }
 
-            $nova_carta->expressao_oral = $carta_recomendacao->expressaooral;
+            $nova_carta->expressao_oral = (int) $carta_recomendacao->expressaooral;
 
             if ($carta_recomendacao->expressaooral === 'naoinfo') {
                 $nova_carta->expressao_oral = 5;
             }
 
-            $nova_carta->relacionamento = $carta_recomendacao->relacionamento;
+            $nova_carta->relacionamento = (int) $carta_recomendacao->relacionamento;
 
             if ($carta_recomendacao->relacionamento === 'naoinfo') {
                 $nova_carta->relacionamento = 5;
@@ -1201,7 +1201,7 @@ class MigracaoController extends BaseController
 
             $nova_carta->informacoes_relevantes = $carta_recomendacao->informacoesrelevantes;
 
-            $nova_carta->como_aluno = $carta_recomendacao->comoaluno;
+            $nova_carta->como_aluno = (int) $carta_recomendacao->comoaluno;
 
             if ($carta_recomendacao->comoaluno === 'naoinfo') {
                 $nova_carta->como_aluno = 5;
@@ -1211,7 +1211,7 @@ class MigracaoController extends BaseController
                 $nova_carta->como_aluno = 5;
             }
 
-            $nova_carta->como_orientando = $carta_recomendacao->comoorientando;
+            $nova_carta->como_orientando = (int) $carta_recomendacao->comoorientando;
 
             if ($carta_recomendacao->comoorientando === 'naoinfo') {
                 $nova_carta->como_orientando = 5;
