@@ -371,8 +371,6 @@ class RecomendanteController extends BaseController
 
 		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof);
 
-		dd($indicacoes_anteriores);
-
 		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
 	}
 
