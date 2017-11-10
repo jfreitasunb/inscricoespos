@@ -139,9 +139,9 @@ Route::get('/recomendante/cartas/anteriores', [
 	'middleware' => ['user.role:recomendante'],
 ]);
 
-Route::post('/recomendante/cartas/anteriores', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postCartasAnteriores',
-	'as'   => 'cartas.anteriores',
+Route::get('/recomendante/visualiza/anteriores', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@GeraCartasAnteriores',
+	'as'   => 'ver.anterior',
 	'middleware' => ['user.role:recomendante'],
 ]);
 
