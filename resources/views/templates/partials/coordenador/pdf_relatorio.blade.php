@@ -108,75 +108,75 @@
                 </tr>
                 <tr>
                     <td>Desempenho acadêmico</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Capacidade de aprender novos conceitos</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Capacidade de trabalhar sozinho</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Criatividade</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['criatividade'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['criatividade'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['criatividade'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['criatividade'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['criatividade'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Curiosidade</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Esforço, persistência</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['esforco'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['esforco'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['esforco'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['esforco'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['esforco'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Expressão escrita</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Expressão oral</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '5' ? 'X' : '' }}</td>
                 </tr>
                 <tr>
                     <td>Relacionamento com colegas</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == 'Excelente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == 'Bom' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == 'Regular' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == 'Insuficiente' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == 'Não Sabe' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '1' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '2' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '3' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '4' ? 'X' : '' }}</td>
+                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '5' ? 'X' : '' }}</td>
                 </tr>
             </tbody>
         </table>
@@ -215,19 +215,19 @@
                     </tr>
                     <tr>
                         <td>Como aluno, em aulas</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == 'Top 5%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == 'Top 10%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == 'Top 25%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == 'Top 50%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == 'Não Sabe' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '5' ? 'X' : '' }}</td>
                     </tr>
                     <tr>
                         <td>Como orientado</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == 'Top 5%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == 'Top 10%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == 'Top 25%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == 'Top 50%' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == 'Não Sabe' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '5' ? 'X' : '' }}</td>
                     </tr>
                 </tbody>
             </table>
