@@ -50,85 +50,85 @@
     <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">{{ trans('tela_carta_parte_inicial.excelente') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_inicial.bom') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_inicial.regular') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_inicial.insuficiente') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_inicial.nao_sabe') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_inicial.excelente') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_inicial.bom') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_inicial.regular') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_inicial.insuficiente') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_inicial.nao_sabe') }}</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.desempenho_academico') }}</td>
-      <td>{!! Form::radio('desempenho_academico', 1, $dados['desempenho_academico'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('desempenho_academico', 2, $dados['desempenho_academico'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('desempenho_academico', 3, $dados['desempenho_academico'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('desempenho_academico', 4, $dados['desempenho_academico'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('desempenho_academico', 5, $dados['desempenho_academico'] != '5' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('desempenho_academico', 1, $dados['desempenho_academico'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('desempenho_academico', 2, $dados['desempenho_academico'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('desempenho_academico', 3, $dados['desempenho_academico'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('desempenho_academico', 4, $dados['desempenho_academico'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('desempenho_academico', 5, $dados['desempenho_academico'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.capacidade_aprender') }}</td>
-       <td>{!! Form::radio('capacidade_aprender', 1, $dados['capacidade_aprender'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('capacidade_aprender', 2, $dados['capacidade_aprender'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_aprender', 3, $dados['capacidade_aprender'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_aprender', 4, $dados['capacidade_aprender'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_aprender', 5, $dados['capacidade_aprender'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('capacidade_aprender', 1, $dados['capacidade_aprender'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_aprender', 2, $dados['capacidade_aprender'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_aprender', 3, $dados['capacidade_aprender'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_aprender', 4, $dados['capacidade_aprender'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_aprender', 5, $dados['capacidade_aprender'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.capacidade_trabalhar') }}</td>
-       <td>{!! Form::radio('capacidade_trabalhar', 1, $dados['capacidade_trabalhar'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('capacidade_trabalhar', 2, $dados['capacidade_trabalhar'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_trabalhar', 3, $dados['capacidade_trabalhar'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_trabalhar', 4, $dados['capacidade_trabalhar'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('capacidade_trabalhar', 5, $dados['capacidade_trabalhar'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('capacidade_trabalhar', 1, $dados['capacidade_trabalhar'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_trabalhar', 2, $dados['capacidade_trabalhar'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_trabalhar', 3, $dados['capacidade_trabalhar'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_trabalhar', 4, $dados['capacidade_trabalhar'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('capacidade_trabalhar', 5, $dados['capacidade_trabalhar'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.criatividade') }}</td>
-       <td>{!! Form::radio('criatividade', 1, $dados['criatividade'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('criatividade', 2, $dados['criatividade'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('criatividade', 3, $dados['criatividade'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('criatividade', 4, $dados['criatividade'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('criatividade', 5, $dados['criatividade'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('criatividade', 1, $dados['criatividade'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('criatividade', 2, $dados['criatividade'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('criatividade', 3, $dados['criatividade'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('criatividade', 4, $dados['criatividade'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('criatividade', 5, $dados['criatividade'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.curiosidade') }}</td>
-       <td>{!! Form::radio('curiosidade', 1, $dados['curiosidade'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('curiosidade', 2, $dados['curiosidade'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('curiosidade', 3, $dados['curiosidade'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('curiosidade', 4, $dados['curiosidade'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('curiosidade', 5, $dados['curiosidade'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('curiosidade', 1, $dados['curiosidade'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('curiosidade', 2, $dados['curiosidade'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('curiosidade', 3, $dados['curiosidade'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('curiosidade', 4, $dados['curiosidade'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('curiosidade', 5, $dados['curiosidade'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.esforco') }}</td>
-       <td>{!! Form::radio('esforco', 1, $dados['esforco'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('esforco', 2, $dados['esforco'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('esforco', 3, $dados['esforco'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('esforco', 4, $dados['esforco'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('esforco', 5, $dados['esforco'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('esforco', 1, $dados['esforco'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('esforco', 2, $dados['esforco'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('esforco', 3, $dados['esforco'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('esforco', 4, $dados['esforco'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('esforco', 5, $dados['esforco'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.expressao_escrita') }}</td>
-       <td>{!! Form::radio('expressao_escrita', 1, $dados['expressao_escrita'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('expressao_escrita', 2, $dados['expressao_escrita'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_escrita', 3, $dados['expressao_escrita'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_escrita', 4, $dados['expressao_escrita'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_escrita', 5, $dados['expressao_escrita'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('expressao_escrita', 1, $dados['expressao_escrita'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_escrita', 2, $dados['expressao_escrita'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_escrita', 3, $dados['expressao_escrita'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_escrita', 4, $dados['expressao_escrita'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_escrita', 5, $dados['expressao_escrita'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.expressao_oral') }}</td>
-       <td>{!! Form::radio('expressao_oral', 1, $dados['expressao_oral'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('expressao_oral', 2, $dados['expressao_oral'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_oral', 3, $dados['expressao_oral'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_oral', 4, $dados['expressao_oral'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('expressao_oral', 5, $dados['expressao_oral'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('expressao_oral', 1, $dados['expressao_oral'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_oral', 2, $dados['expressao_oral'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_oral', 3, $dados['expressao_oral'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_oral', 4, $dados['expressao_oral'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('expressao_oral', 5, $dados['expressao_oral'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_inicial.relacionamento') }}</td>
-       <td>{!! Form::radio('relacionamento', 1, $dados['relacionamento'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('relacionamento', 2, $dados['relacionamento'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('relacionamento', 3, $dados['relacionamento'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('relacionamento', 4, $dados['relacionamento'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('relacionamento', 5, $dados['relacionamento'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('relacionamento', 1, $dados['relacionamento'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('relacionamento', 2, $dados['relacionamento'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('relacionamento', 3, $dados['relacionamento'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('relacionamento', 4, $dados['relacionamento'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('relacionamento', 5, $dados['relacionamento'] != '5' ? false: true, []) !!}</td>
     </tr>
   </tbody>
   </table>

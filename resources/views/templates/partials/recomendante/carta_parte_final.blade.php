@@ -39,29 +39,29 @@
     <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">{{ trans('tela_carta_parte_final.top_5') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_final.top_10') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_final.top_25') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_final.top_50') }}</th>
-      <th scope="col">{{ trans('tela_carta_parte_final.nao_sabe') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_final.top_5') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_final.top_10') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_final.top_25') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_final.top_50') }}</th>
+      <th class="tdcenter" scope="col">{{ trans('tela_carta_parte_final.nao_sabe') }}</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>{{ trans('tela_carta_parte_final.como_aluno') }}</td>
-      <td>{!! Form::radio('como_aluno', 1, $dados['como_aluno'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('como_aluno', 2, $dados['como_aluno'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_aluno', 3, $dados['como_aluno'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_aluno', 4, $dados['como_aluno'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_aluno', 5, $dados['como_aluno'] != '5' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_aluno', 1, $dados['como_aluno'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_aluno', 2, $dados['como_aluno'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_aluno', 3, $dados['como_aluno'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_aluno', 4, $dados['como_aluno'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_aluno', 5, $dados['como_aluno'] != '5' ? false: true, []) !!}</td>
     </tr>
     <tr>
       <td>{{ trans('tela_carta_parte_final.como_orientando') }}</td>
-       <td>{!! Form::radio('como_orientando', 1, $dados['como_orientando'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
-      <td>{!! Form::radio('como_orientando', 2, $dados['como_orientando'] != '2' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_orientando', 3, $dados['como_orientando'] != '3' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_orientando', 4, $dados['como_orientando'] != '4' ? false: true, []) !!}</td>
-      <td>{!! Form::radio('como_orientando', 5, $dados['como_orientando'] != '5' ? false: true, []) !!}</td>
+       <td class="tdcenter">{!! Form::radio('como_orientando', 1, $dados['como_orientando'] != '1' ? false: true, ['data-parsley-errors-container' => '#checkbox-errors', 'required' => '']) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_orientando', 2, $dados['como_orientando'] != '2' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_orientando', 3, $dados['como_orientando'] != '3' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_orientando', 4, $dados['como_orientando'] != '4' ? false: true, []) !!}</td>
+      <td class="tdcenter">{!! Form::radio('como_orientando', 5, $dados['como_orientando'] != '5' ? false: true, []) !!}</td>
     </tr>    
   </tbody>
   </table>
