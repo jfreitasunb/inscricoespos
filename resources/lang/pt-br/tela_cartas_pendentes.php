@@ -15,6 +15,7 @@ return [
     'nome_candidato' => 'Nome do candidato',
     'tipo_programa' => 'Programa pretendido',
     'mensagem_status_cartas' => 'Selecione a carta que deseja preencher',
+    'mensagem_carta_anteriores' => 'Clique na carta que deseja visualizar',
     'menu_enviar' => 'Preencher carta',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
