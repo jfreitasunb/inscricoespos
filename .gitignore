@@ -21,3 +21,4 @@ vendor/
 public/editais/
 public/relatorios/
 public/uploads_temporario/
+public/*.pdf
