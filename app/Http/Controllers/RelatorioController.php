@@ -252,12 +252,15 @@ class RelatorioController extends BaseController
   {
     $consolida_recomendacao = [];
 
+    $usuario_recomendante = User::find($id_recomendante);
+
     $dado_recomendante = new DadoRecomendante();
     $carta_recomendacao = new CartaRecomendacao();
 
     $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
 
     $consolida_recomendacao['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->nome_recomendante;
+    $consolida_recomendacao['email'] = $usuario_recomendante->email;
     $consolida_recomendacao['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
     $consolida_recomendacao['circunstancia_1'] = $carta_candidato->circunstancia_1;
     $consolida_recomendacao['circunstancia_2'] = $carta_candidato->circunstancia_2;
@@ -534,7 +537,9 @@ class RelatorioController extends BaseController
 
       $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $recomendantes_candidato = $this->ConsolidaCartaRecomendacao($contatos_indicados, $dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+      foreach ($contatos_indicados  as $id ) {
+        $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+      }
 
       $dados_candidato_para_relatorio['motivacao'] = $this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
@@ -617,7 +622,9 @@ class RelatorioController extends BaseController
 
       $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $recomendantes_candidato = $this->ConsolidaCartaRecomendacao($contatos_indicados, $dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+      foreach ($contatos_indicados  as $id ) {
+        $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+      }
 
       $dados_candidato_para_relatorio['motivacao'] = $this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
