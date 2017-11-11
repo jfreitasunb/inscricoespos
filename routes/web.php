@@ -278,6 +278,12 @@ Route::get('/coordenador', [
 	'middleware' => ['user.role:coordenador'],
 ]);
 
+Route::get('/coordenador/gera/ficha/individual', [
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato',
+	'as' => 'gera.ficha.individual',
+	'middleware' => ['user.role:coordenador'],
+]);
+
 /**
 * Logout
  */
