@@ -369,7 +369,7 @@ class RecomendanteController extends BaseController
 
 		$indicacoes = new CartaRecomendacao;
 
-		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof)->paginate(2);
+		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof)->paginate(10);
 
 		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
 	}
