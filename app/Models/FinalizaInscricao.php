@@ -30,10 +30,6 @@ class FinalizaInscricao extends Model
 
     public function retorna_usuarios_relatorio_individual($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->get();
-
-        // ->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos')->orderBy('cartas_recomendacoes.created_at', 'desc')
-
-        // return $this->get()->where("id_inscricao_pos", $id_inscricao_pos)->where('finalizada',TRUE);
+        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'dados_pessoais.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id_user', 'finaliza_inscricao.id_inscricao_pos','dados_pessoais.nome','programa_pos_mat.tipo_programa_pos');
     }
 }
