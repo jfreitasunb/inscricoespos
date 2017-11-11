@@ -7,13 +7,13 @@ use DB;
 use Mail;
 use Session;
 use File;
+use PDF;
 use Notification;
 use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\RelatorioController;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
@@ -162,24 +162,75 @@ class CoordenadorController extends BaseController
 		return view('templates.partials.coordenador.relatorio_pos');
 	}
 
+	public function VerFichaIndividual($nome_pdf, $id_aluno_pdf)
+	{
+
+		$user = Auth::user();
+		
+		$relatorio = new ConfiguraInscricaoPos();
+
+      	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+
+		$finalizacoes = new FinalizaInscricao;
+
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(2);
+
+
+		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'nome_pdf', 'id_aluno_pdf'));
+
+	}
+
 	public function getFichaInscricaoPorCandidato()
 	{
 
 		$user = Auth::user();
 		
-		$id_prof = $user->id_user;
+		$relatorio = new ConfiguraInscricaoPos();
 
-		$id_inscricao_pos = 17;
+      	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
 
 		$finalizacoes = new FinalizaInscricao;
 
-		$inscricoes_finalizads = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos);
+		if (session()->has('nome_pdf')) {
+			$nome_pdf = session()->get('nome_pdf');
+		}else{
+			$nome_pdf = null;
+		}
 
-		dd($inscricoes_finalizads);
+		if (session()->has('id_aluno_pdf')) {
+			$id_aluno_pdf = session()->get('id_aluno_pdf');
+		}else{
+			$id_aluno_pdf = null;
+		}
+		
 
-		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(2);
+
+
+		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'nome_pdf', 'id_aluno_pdf'));
 		
 	}
+
+	public function GeraPdfFichaIndividual()
+	{
+		
+		$user = Auth::user();
+		
+
+		$id_inscricao_pos = (int) $_GET['id_inscricao_pos'];
+		
+		$id_aluno_pdf = (int) $_GET['id_aluno'];
+
+		$ficha = new RelatorioController;
+	
+		$nome_pdf = $ficha->geraFichaIndividual($id_aluno_pdf);
+      	
+      	
+      	return redirect()->back()->with(compact('nome_pdf','id_aluno_pdf'));
+	}
+
+
 
 }

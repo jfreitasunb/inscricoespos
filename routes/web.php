@@ -284,6 +284,12 @@ Route::get('/coordenador/gera/ficha/individual', [
 	'middleware' => ['user.role:coordenador'],
 ]);
 
+Route::get('/coordenador/ver/ficha/individual', [
+	'uses' => '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual',
+	'as' => 'ver.ficha.individual',
+	'middleware' => ['user.role:coordenador'],
+]);
+
 /**
 * Logout
  */
