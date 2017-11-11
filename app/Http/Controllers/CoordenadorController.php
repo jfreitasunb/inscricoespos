@@ -14,6 +14,7 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\ProgramaPos;
 use Posmat\Models\RelatorioController;
+use Posmat\Models\FinalizaInscricao;
 use Posmat\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
@@ -159,6 +160,26 @@ class CoordenadorController extends BaseController
 	{
 
 		return view('templates.partials.coordenador.relatorio_pos');
+	}
+
+	public function getFichaInscricaoPorCandidato()
+	{
+
+		$user = Auth::user();
+		
+		$id_prof = $user->id_user;
+
+		$id_inscricao_pos = 17;
+
+
+		$finalizacoes = new FinalizaInscricao;
+
+		$inscricoes_finalizads = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos);
+
+		dd($inscricoes_finalizads);
+
+		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
+		
 	}
 
 }
