@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password',
+        'password', 'validation_code', 'remember_token'
     ];
 
     public function verified()
