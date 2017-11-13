@@ -21,6 +21,8 @@ abstract class DataTableController extends Controller
 			throw new Exception("Entity builder not instance of Builder");
 
 		}
+
+		$this->builder = $builder;
 	}
 
     abstract public function builder();
@@ -28,5 +30,17 @@ abstract class DataTableController extends Controller
     public function index()
     {
 
+    	return response()->json([
+    		'data' => [
+    			'records' => $this->getRecords(),
+
+    		]
+    	]);
+    }
+
+    protected function getRecords()
+    {
+
+    	return $this->builder->get();
     }
 }
