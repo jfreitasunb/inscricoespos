@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Posmat\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
+use Schema;
 
 abstract class DataTableController extends Controller
 {
@@ -33,9 +34,17 @@ abstract class DataTableController extends Controller
     	return response()->json([
     		'data' => [
     			'records' => $this->getRecords(),
+    			'displayable' => $this->getDisplayableColumns()
 
     		]
     	]);
+    }
+
+    public function getDisplayableColumns()
+    {
+
+    	return Schema::getColumnListing($this->builder->getModel()->getTable());
+
     }
 
     protected function getRecords()
