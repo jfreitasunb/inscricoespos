@@ -2,7 +2,7 @@
 
 namespace Posmat\Http\Controllers\DataTable;
 
-use Posmat\User;
+use Posmat\Models\User;
 
 use Illuminate\Http\Request;
 use Posmat\Http\Controllers\Controller;
