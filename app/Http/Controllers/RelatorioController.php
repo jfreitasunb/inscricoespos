@@ -380,7 +380,7 @@ class RelatorioController extends BaseController
     // echo $process->getOutput();
   }
 
-  public function ConsolidaArquivosZIP($arquivo_zip, $local_relatorios, $programas)
+  public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)
   {
     
     $programas_disponiveis = explode("_", $programas);
@@ -392,7 +392,7 @@ class RelatorioController extends BaseController
     }
 
     foreach ($programa_para_relatorio as $nome_programa) {
-      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$relatorio_disponivel->edital.'.zip';
+      $inscricoes_zipadas = 'Inscricoes_'.$nome_programa.'_Edital_'.$edital.'.zip';
       $arquivos_zipados_para_view[$nome_programa] = $inscricoes_zipadas;
 
       $zip = new ZipArchive;
@@ -553,7 +553,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorios_disponivel->programa);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorios_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorios_disponivel->programa);
     
 
     return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
@@ -685,7 +685,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->programa);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->programa);
 
     return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
   }
