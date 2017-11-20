@@ -542,9 +542,9 @@ class MigracaoController extends BaseController
         }
     }
 
-    //Fim da Migração dos dados pessoais dos candidatos para o novo sistema
+    // //Fim da Migração dos dados pessoais dos candidatos para o novo sistema
     
-    //Migra os dados pessoais dos recomendantes para o novo sistema
+    // //Migra os dados pessoais dos recomendantes para o novo sistema
 
     $users_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->orderBy('coduser','asc')->get();
 
@@ -608,9 +608,9 @@ class MigracaoController extends BaseController
         }
     }
 
-    // //Fim da migração dos dados pessoais do candidato para o novo sistema
+    // // //Fim da migração dos dados pessoais do candidato para o novo sistema
 
-    // //Migra dados acadêmicos dos candidatos para o novo sistema.
+    // // //Migra dados acadêmicos dos candidatos para o novo sistema.
 
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
@@ -765,6 +765,8 @@ class MigracaoController extends BaseController
 
                 $documento->tipo_arquivo = 'Documentos';
 
+                $documento->created_at = $documento_enviado->data.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
+
                 $documento->save();
             }
 
@@ -795,9 +797,11 @@ class MigracaoController extends BaseController
 
                 $historico_pessoais = File::copy(public_path('uploads_temporario/').$historico_enviado->nome_arquivo,storage_path('app/').'uploads/'.$nome_crypt_historico.'.'.File::extension($historico_enviado->nome_arquivo));
 
-                $documento->nome_arquivo = 'uploads/'.$nome_crypt_historico.'.'.File::extension($documento_enviado->nome_arquivo);
+                $documento->nome_arquivo = 'uploads/'.$nome_crypt_historico.'.'.File::extension($historico_enviado->nome_arquivo);
 
                 $documento->tipo_arquivo = 'Histórico';
+
+                $documento->created_at = $historico_enviado->data.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
 
                 $documento->save();
             }
@@ -805,9 +809,9 @@ class MigracaoController extends BaseController
         
     }
 
-    // //Fim da migração dos documentos para o novo sistema.
+    // // //Fim da migração dos documentos para o novo sistema.
 
-    // //Migra as cartas de motivação dos candidatos
+    // // //Migra as cartas de motivação dos candidatos
 
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
@@ -853,9 +857,9 @@ class MigracaoController extends BaseController
 
     }
 
-    //Fim da migração das cartas de motivação dos candidatos
+    // //Fim da migração das cartas de motivação dos candidatos
 
-    //Migra as escolhas dos candidatos
+    // //Migra as escolhas dos candidatos
 
     $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
