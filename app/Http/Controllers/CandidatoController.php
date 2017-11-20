@@ -497,7 +497,7 @@ class CandidatoController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-		$arquivos_editais = public_path("/editais/");
+		$arquivos_editais = storage_path("app/editais/");
 		
 		if ($autoriza_inscricao) {
 		
