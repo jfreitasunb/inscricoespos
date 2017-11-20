@@ -95,7 +95,9 @@ class CoordenadorController extends BaseController
 		$user = Auth::user();
 
 		$local_documentos = storage_path('app/');
-        $arquivos_editais = public_path("/editais/");
+        $arquivos_editais = storage_path("app/editais/");
+
+        File::isDirectory($arquivos_editais) or File::makeDirectory($arquivos_editais,077,true,true);
     
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
     	$fim = Carbon::createFromFormat('d/m/Y', $request->fim_inscricao);
