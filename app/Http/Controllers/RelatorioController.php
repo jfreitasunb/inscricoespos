@@ -66,11 +66,11 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = [];
     
-    $locais_arquivos['arquivos_temporarios'] = public_path("/relatorios/temporario/");
+    $locais_arquivos['arquivos_temporarios'] = storage_path("app/relatorios/temporario/");
 
-    $locais_arquivos['ficha_inscricao'] = public_path("/relatorios/ficha_inscricao/");
+    $locais_arquivos['ficha_inscricao'] = storage_path("app/relatorios/ficha_inscricao/");
 
-    $locais_arquivos['local_relatorios'] = public_path("/relatorios/edital_".$edital."/");
+    $locais_arquivos['local_relatorios'] = storage_path("app/relatorios/edital_".$edital."/");
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
