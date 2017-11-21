@@ -46,27 +46,27 @@ class MigracaoController extends BaseController
 {
   public function getMigracao()
   {
-        //Migra usuários para novo sistema
+        // //Migra usuários para novo sistema
 
-        $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
+        // $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
 
-        foreach ($users as $user) {
-          if ($user->coduser !=197) {
-            $novo_usuario = new User();
-            if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
-              $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
-            }else{
-              $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
-            }
-            $novo_usuario->password = bcrypt(1);
-            $novo_usuario->validation_code = null;
-            $novo_usuario->user_type = $user->status;
-            $novo_usuario->ativo = true;
-            $novo_usuario->save(); 
-          }
-        }
+        // foreach ($users as $user) {
+        //   if ($user->coduser !=197) {
+        //     $novo_usuario = new User();
+        //     if ($user->coduser == 348 or $user->coduser == 567 or $user->coduser == 565 or $user->coduser == 566 or $user->coduser == 563 or $user->coduser == 557 or $user->coduser == 685 or $user->coduser == 632 or $user->coduser == 530 or $user->coduser == 989 or $user->coduser == 1339 or $user->coduser == 415 or $user->coduser == 470 or $user->coduser == 472 or $user->coduser == 2124 or $user->coduser == 2125 or $user->coduser == 667 or $user->coduser == 225 or $user->coduser == 350 or $user->coduser == 593 or $user->coduser == 1881) {
+        //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)).'.duplicado');
+        //     }else{
+        //       $novo_usuario->email = Purifier::clean(strtolower(trim($user->login)));
+        //     }
+        //     $novo_usuario->password = bcrypt(1);
+        //     $novo_usuario->validation_code = null;
+        //     $novo_usuario->user_type = $user->status;
+        //     $novo_usuario->ativo = true;
+        //     $novo_usuario->save(); 
+        //   }
+        // }
         
-        //Fim da migração dos usuário para o novo sistema
+        // //Fim da migração dos usuário para o novo sistema
 
         // //Migra dados pessoais dos candidatos para o novo sistema
 
@@ -608,7 +608,7 @@ class MigracaoController extends BaseController
         //     }
         // }
 
-        // // // //Fim da migração dos dados pessoais do candidato para o novo sistema
+        // // // //Fim da migração dos dados pessoais do recomendante para o novo sistema
 
         // // // //Migra dados acadêmicos dos candidatos para o novo sistema.
 
@@ -967,7 +967,7 @@ class MigracaoController extends BaseController
 
         // // //Fim da migração das escolhas dos candidatos
 
-        // // //Migra os contatos dos recomendantes
+        // //Migra os contatos dos recomendantes
 
         // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
 
@@ -1058,7 +1058,7 @@ class MigracaoController extends BaseController
         //         }
         //     }
         // }
-        // // //Fim da migração dos contatos dos recomendantes
+        // //Fim da migração dos contatos dos recomendantes
         
         // // //Início da migração das cartas de recomendação
         
@@ -1286,6 +1286,6 @@ class MigracaoController extends BaseController
 
         // }
         
-        //Fim da migração da finalização das inscrições
+        // // Fim da migração da finalização das inscrições
   }
 }
