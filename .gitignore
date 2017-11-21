@@ -11,3 +11,5 @@ npm-debug.log
 yarn-error.log
 .env
 public/uploads_temporario/
+public/editais/
+public/relatorios/
