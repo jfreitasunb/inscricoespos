@@ -14,7 +14,7 @@
 
                     <label for="limit">Exibir:</label>
 
-                    <select id="limit" class="form-control">
+                    <select id="limit" class="form-control" v-model="limit">
                         
                         <option value="50">50</option>
 
@@ -78,6 +78,8 @@
 
                     order: 'asc'
                 },
+
+                limit: 50,
 
                 quickSearchQuery: ''
             }
