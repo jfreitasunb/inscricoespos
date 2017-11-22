@@ -3,6 +3,18 @@
         <div class="panel-heading">{{ response.table }}</div>
 
         <div class="panel-body">
+
+            <div class="row">
+                <div class="form-group col-md-10">
+                    <label for="filter">Pesquisa rápida</label>
+                    <input type="text" id="filter" class="form-control" v-model="quickSearchQuery">
+                </div>
+
+                <div class="form-group col-md-2">
+                    {{ quickSearchQuery }}
+                </div>
+            </div>
+            
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -53,7 +65,9 @@
                     key: 'id_user',
 
                     order: 'asc'
-                }
+                },
+
+                quickSearchQuery: ''
             }
         },
 
