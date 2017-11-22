@@ -11,6 +11,19 @@
                 </div>
 
                 <div class="form-group col-md-2">
+
+                    <label for="limit">Exibir:</label>
+
+                    <select id="limit" class="form-control">
+                        
+                        <option value="50">50</option>
+
+                        <option value="500">500</option>
+
+                        <option value="1000">1000</option>
+
+                        <option value="">Todos</option>
+                    </select>
                 </div>
             </div>
             
