@@ -8,7 +8,15 @@
                     <thead>
                         <tr>
                             <th v-for="column in response.displayable">
-                                <span @click="sortBy(column)">{{ column }}</span>
+
+                                <span class="sortable" @click="sortBy(column)">{{ column }}</span>
+
+                                <div 
+                                    class="arrow" 
+                                    v-if="sort.key === column"
+                                    :class="{ 'arrow--asc' : sort.order === 'asc', 'arrow--desc' : sort.order === 'desc'}"
+
+                                ></div>
                             </th>
                         </tr>
                     </thead>
@@ -102,3 +110,44 @@
     }
 </script>
 
+<style lang="scss">
+    
+    .sortable{
+    
+        cursor: pointer;
+    }
+
+    .arrow{
+
+        display: inline-block;
+
+        vertical-align: middle;
+
+        width: 0;
+
+        height: 0;
+
+        margin-left: 5px;
+
+        opacity: .6;
+
+        &--asc {
+
+            border-left: 4px solid transparent;
+
+            border-right: 4px solid transparent;
+
+            border-bottom: 4px solid #222;
+        }
+
+        &--desc {
+
+            border-left: 4px solid transparent;
+
+            border-right: 4px solid transparent;
+
+            border-top: 4px solid #222;
+        }
+
+    }
+</style>
