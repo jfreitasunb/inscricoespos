@@ -14,7 +14,7 @@
 
                     <label for="limit">Exibir:</label>
 
-                    <select id="limit" class="form-control" v-model="limit">
+                    <select id="limit" class="form-control" v-model="limit" @change="getRecords">
                         
                         <option value="50">50</option>
 
@@ -56,6 +56,8 @@
 </template>
 
 <script>
+
+    import queryString from 'query-string'
     export default {
         
         props: ['endpoint'],
@@ -128,10 +130,19 @@
         methods: {
 
             getRecords () {
-                return axios.get(`${this.endpoint}`).then((response) => {
+
+                return axios.get(`${this.endpoint}?${this.getQueryParameters()}`).then((response) => {
 
                     this.response = response.data.data
 
+                })
+            },
+
+            getQueryParameters () {
+
+                return queryString.stringify({
+
+                    limit: this.limit
                 })
             },
 
