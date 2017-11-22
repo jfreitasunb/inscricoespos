@@ -8,9 +8,9 @@
   <link href="{{ asset('css/css_monitoria.css') }}" rel="stylesheet">
   <link href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
   <script>
-    window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>
+    window.Laravel = {!! json_encode([
+      'csrfToken' => csrf_token(),
+    ]) !!};
   </script>
 
   @yield('stylesheets')
