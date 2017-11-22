@@ -37,7 +37,10 @@ abstract class DataTableController extends Controller
 
     	return response()->json([
     		'data' => [
+                'table' => $this->builder->getModel()->getTable(),
+
     			'displayable' => array_values($this->getDisplayableColumns()),
+                
     			'records' => $this->getRecords()
 
     		]
