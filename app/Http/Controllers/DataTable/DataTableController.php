@@ -61,6 +61,6 @@ abstract class DataTableController extends Controller
     protected function getRecords()
     {
 
-    	return $this->builder->get($this->getDisplayableColumns())->paginate(10);
+    	return $this->builder->get($this->getDisplayableColumns());
     }
 }
