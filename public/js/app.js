@@ -43252,6 +43252,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -43280,7 +43302,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             limit: 50,
 
-            quickSearchQuery: ''
+            quickSearchQuery: '',
+
+            editing: {
+
+                id_user: null,
+
+                form: {},
+
+                errors: []
+            }
         };
     },
 
@@ -43345,6 +43376,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.sort.key = column;
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
+        },
+        edit: function edit(record) {
+
+            this.editing.errors = [];
+
+            this.editing.id_user = record.id_user;
+
+            this.editing.form = _.pick(record, this.response.updatable);
+        },
+        isUpdatable: function isUpdatable(column) {
+
+            return this.response.updatable.includes(column);
         }
     }
 });
@@ -43353,146 +43396,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [
-      _vm._v(_vm._s(_vm.response.table))
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "form-group col-md-10" }, [
-          _c("label", { attrs: { for: "filter" } }, [
-            _vm._v("Pesquisa rápida")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.quickSearchQuery,
-                expression: "quickSearchQuery"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text", id: "filter" },
-            domProps: { value: _vm.quickSearchQuery },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.quickSearchQuery = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group col-md-2" }, [
-          _c("label", { attrs: { for: "limit" } }, [_vm._v("Exibir:")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.limit,
-                  expression: "limit"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "limit" },
-              on: {
-                change: [
-                  function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.limit = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  },
-                  _vm.getRecords
-                ]
-              }
-            },
-            [
-              _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "500" } }, [_vm._v("500")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1000" } }, [_vm._v("1000")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "" } }, [_vm._v("Todos")])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "table-responsive" }, [
-        _c("table", { staticClass: "table table-striped" }, [
-          _c("thead", [
-            _c(
-              "tr",
-              _vm._l(_vm.response.displayable, function(column) {
-                return _c("th", [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "sortable",
-                      on: {
-                        click: function($event) {
-                          _vm.sortBy(column)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(column))]
-                  ),
-                  _vm._v(" "),
-                  _vm.sort.key === column
-                    ? _c("div", {
-                        staticClass: "arrow",
-                        class: {
-                          "arrow--asc": _vm.sort.order === "asc",
-                          "arrow--desc": _vm.sort.order === "desc"
-                        }
-                      })
-                    : _vm._e()
-                ])
-              })
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.filteredRecords, function(record) {
-              return _c(
-                "tr",
-                _vm._l(record, function(columnValue, column) {
-                  return _c("td", [_vm._v(" " + _vm._s(columnValue) + " ")])
-                })
-              )
-            })
-          )
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function(){},staticRenderFns:[]}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
