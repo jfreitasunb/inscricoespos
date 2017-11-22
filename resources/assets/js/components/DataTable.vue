@@ -3,7 +3,20 @@
         <div class="panel-heading">Name of Table</div>
 
         <div class="panel-body">
-            I'm an example component!
+            <table class="table-responsive">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
