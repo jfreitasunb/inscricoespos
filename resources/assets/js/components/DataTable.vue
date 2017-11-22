@@ -3,22 +3,22 @@
         <div class="panel-heading">Teste</div>
 
         <div class="panel-body">
-            <table class="table-responsive">
-                <thead>
-                    <tr>
-                        <th v-for="coluna in response.displayable">
-                            {{ coluna }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            dfsd
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th v-for="column in response.displayable">
+                                {{ column }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="record in response.records">
+                            <td v-for="columnValue, column in record"> {{ columnValue }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -32,7 +32,12 @@
 
             return {
 
-                response: []
+                response: {
+
+                    displayable: [],
+
+                    records: []
+                }
             }
         },
 
