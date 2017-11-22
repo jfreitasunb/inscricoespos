@@ -1,6 +1,6 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading">Teste</div>
+        <div class="panel-heading">{{ response.table }}</div>
 
         <div class="panel-body">
             <div class="table-responsive">
@@ -33,6 +33,8 @@
             return {
 
                 response: {
+
+                    table: '',
 
                     displayable: [],
 
