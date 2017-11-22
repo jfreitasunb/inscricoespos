@@ -21,6 +21,7 @@
     "dependencies": {
         "sass-loader": "^6.0.6",
         "babel-loader": "^7.1.2",
-        "vue-loader": "^13.5.0"
+        "vue-loader": "^13.5.0",
+        "query-string": "^5.0.1"
     }
 }
