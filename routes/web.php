@@ -175,6 +175,8 @@ Route::post('/recomendante/preencher/carta/final', [
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
 
+Route::get('admin/users', 'Admin\UserController@index');
+
 Route::get('/admin', [
 	'uses' => '\Posmat\Http\Controllers\AdminController@getMenu',
 	'as'   => 'menu.admin',

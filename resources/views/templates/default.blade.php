@@ -7,54 +7,62 @@
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/css_monitoria.css') }}" rel="stylesheet">
   <link href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
+  <script>
+    window.Laravel = <?php echo json_encode([
+        'csrfToken' => csrf_token(),
+    ]); ?>
+  </script>
 
   @yield('stylesheets')
 </head>
 <body>
-  @include('templates.partials.alertas_erros')
-  @include('templates.partials.cabecalho')
-  <div class="container">
-    @if (Auth::check())
-      {{-- @include($templatemenu) --}}
-      @candidato(Auth()->user())
-        @include('templates.partials.candidato.menu_candidato')
-        @yield('dados_pessoais')
-        @yield('dados_academicos')
-        @yield('escolha_monitoria')
-        @yield('motivacao_documentos')
-        @yield('finaliza_inscricao')
-        @yield('status_cartas')
-      @endcandidato
-      @coordenador(Auth()->user())
-        @include('templates.partials.coordenador.menu_coordenador')
-        {{-- @yield('cadastra_disciplina') --}}
-        @yield('configura_inscricao')
-        @yield('relatorio_pos_edital_vigente')
-        @yield('relatorio_pos_editais_anteriores')
-        @yield('ficha_individual')
-      @endcoordenador
-      @recomendante(Auth()->user())
-        @include('templates.partials.recomendante.menu_recomendante')
-        @yield('dados_pessoais_recomendante')
-        @yield('cartas_pendentes')
-        @yield('cartas_anteriores')
-        @yield('carta_parte_inicial')
-        @yield('carta_parte_final')
-      @endrecomendante
-      @admin(Auth()->user())
-        @include('templates.partials.admin.menu_admin')
-        @yield('ativa_conta')
-        @yield('cadastra_disciplina')
-        @yield('configura_inscricao')
-        @yield('relatorio_pos_edital_vigente')
-        @yield('relatorio_pos_editais_anteriores')
-      @endadmin
-    @else
-      @yield('inicio')
-      @yield('content')
-    @endif
+  <div id="app">
+    @include('templates.partials.alertas_erros')
+    @include('templates.partials.cabecalho')
+    <div class="container">
+      @if (Auth::check())
+        {{-- @include($templatemenu) --}}
+        @candidato(Auth()->user())
+          @include('templates.partials.candidato.menu_candidato')
+          @yield('dados_pessoais')
+          @yield('dados_academicos')
+          @yield('escolha_monitoria')
+          @yield('motivacao_documentos')
+          @yield('finaliza_inscricao')
+          @yield('status_cartas')
+        @endcandidato
+        @coordenador(Auth()->user())
+          @include('templates.partials.coordenador.menu_coordenador')
+          {{-- @yield('cadastra_disciplina') --}}
+          @yield('configura_inscricao')
+          @yield('relatorio_pos_edital_vigente')
+          @yield('relatorio_pos_editais_anteriores')
+          @yield('ficha_individual')
+        @endcoordenador
+        @recomendante(Auth()->user())
+          @include('templates.partials.recomendante.menu_recomendante')
+          @yield('dados_pessoais_recomendante')
+          @yield('cartas_pendentes')
+          @yield('cartas_anteriores')
+          @yield('carta_parte_inicial')
+          @yield('carta_parte_final')
+        @endrecomendante
+        @admin(Auth()->user())
+          @include('templates.partials.admin.menu_admin')
+          @yield('ativa_conta')
+          @yield('cadastra_disciplina')
+          @yield('configura_inscricao')
+          @yield('relatorio_pos_edital_vigente')
+          @yield('relatorio_pos_editais_anteriores')
+          @yield('datatable_users')
+        @endadmin
+      @else
+        @yield('inicio')
+        @yield('content')
+      @endif
+    </div>
+    @include('templates.partials.rodape')
   </div>
-  @include('templates.partials.rodape')
 </body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="{{ asset('jquery/jquery-3.1.1.min.js') }}"></script>
@@ -62,6 +70,7 @@
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/monitoria.js') }}"></script>
   <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   
   <script>
     @if (notify()->ready())

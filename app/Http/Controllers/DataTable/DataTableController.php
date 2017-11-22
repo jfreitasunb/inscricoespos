@@ -4,6 +4,8 @@ namespace Posmat\Http\Controllers\DataTable;
 
 use Exception;
 
+use View;
+
 use Illuminate\Http\Request;
 use Posmat\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,10 +33,12 @@ abstract class DataTableController extends Controller
     public function index()
     {
 
+        // $view = View::make('templates.partials.admin.user_datatable')->render();
+
     	return response()->json([
     		'data' => [
     			'displayable' => array_values($this->getDisplayableColumns()),
-    			'records' => $this->getRecords(),
+    			'records' => $this->getRecords()
 
     		]
     	]);
@@ -57,6 +61,6 @@ abstract class DataTableController extends Controller
     protected function getRecords()
     {
 
-    	return $this->builder->get($this->getDisplayableColumns());
+    	return $this->builder->get($this->getDisplayableColumns())->paginate(10);
     }
 }

@@ -17,5 +17,10 @@
         "laravel-mix": "^1.0",
         "lodash": "^4.17.4",
         "vue": "^2.1.10"
+    },
+    "dependencies": {
+        "sass-loader": "^6.0.6",
+        "babel-loader": "^7.1.2",
+        "vue-loader": "^13.5.0"
     }
 }

@@ -10,8 +10,12 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        props: ['endpoint'],
+
+        mounted () {
+            
+            console.log(this.endpoint)   
         }
     }
 </script>
+
