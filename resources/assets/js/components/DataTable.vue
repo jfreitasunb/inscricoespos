@@ -11,7 +11,6 @@
                 </div>
 
                 <div class="form-group col-md-2">
-                    {{ quickSearchQuery }}
                 </div>
             </div>
             
@@ -76,6 +75,15 @@
             filteredRecords() {
 
                 let data = this.response.records
+
+                data = data.filter((row) => {
+
+                    return Object.keys(row).some((key) => {
+
+                        return String(row[key]).toLowerCase().indexOf(this.quickSearchQuery.toLowerCase()) > -1
+
+                    })
+                })
 
                 if (this.sort.key){
 
