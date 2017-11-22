@@ -6,7 +6,9 @@
             <table class="table-responsive">
                 <thead>
                     <tr>
-                        <th>fsdfsd</th>
+                        <th v-for="coluna in response.displayable">
+                            {{ coluna }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
