@@ -30,7 +30,7 @@ abstract class DataTableController extends Controller
 
     abstract public function builder();
 
-    public function index()
+    public function index(Request $request)
     {
 
         // $view = View::make('templates.partials.admin.user_datatable')->render();
@@ -41,7 +41,7 @@ abstract class DataTableController extends Controller
 
     			'displayable' => array_values($this->getDisplayableColumns()),
                 
-    			'records' => $this->getRecords()
+    			'records' => $this->getRecords($request)
 
     		]
     	]);
@@ -61,9 +61,9 @@ abstract class DataTableController extends Controller
 
     }
 
-    protected function getRecords()
+    protected function getRecords(Request $request)
     {
 
-    	return $this->builder->get($this->getDisplayableColumns());
+    	return $this->builder->limit($request->limit)->get($this->getDisplayableColumns());
     }
 }
