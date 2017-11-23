@@ -65,6 +65,7 @@
                                 <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
 
                                 <template v-if="editing.id_user === record.id_user">
+                                    <a href="#" @click.prevent="update">Salvar</a><br>
                                     <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>
                                 </template>
                                 
@@ -199,6 +200,11 @@
 
                 return this.response.updatable.includes(column)
 
+            },
+
+            update () {
+
+                console.log(this.editing.form.id_user);
             }
 
         }
