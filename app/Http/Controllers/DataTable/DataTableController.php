@@ -80,6 +80,6 @@ abstract class DataTableController extends Controller
     protected function getRecords(Request $request)
     {
 
-    	return $this->builder->limit($request->limit)->get($this->getDisplayableColumns());
+    	return $this->builder->limit($request->limit)->orderBy('id_user', 'desc')->get($this->getDisplayableColumns());
     }
 }
