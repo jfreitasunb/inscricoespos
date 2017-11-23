@@ -49,6 +49,13 @@ abstract class DataTableController extends Controller
     	]);
     }
 
+    public function update($id_user, Request $request)
+    {
+
+        $this->builder->find($id_user)->update($request->only($this->getUpdatableColumns()));
+
+    }
+
     public function getDisplayableColumns()
     {
 
