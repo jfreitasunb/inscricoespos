@@ -8,7 +8,7 @@
                 <label>Pesquisar</label>
                 <div class="row row-fluid">
                     <div class="form-group col-md-3">
-                        <select>
+                        <select class="form-control">
                             <option :value="column" v-for="column in response.displayable">
                                 {{ column }}
                             </option>
