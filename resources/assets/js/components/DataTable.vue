@@ -66,7 +66,7 @@
                         <tr>
                             <th v-for="column in response.displayable">
 
-                                <span class="sortable" @click="sortBy(column)">{{ column }}</span>
+                                <span class="sortable" @click="sortBy(column)">{{ response.custom_columns[column] || column }}</span>
 
                                 <div 
                                     class="arrow" 
