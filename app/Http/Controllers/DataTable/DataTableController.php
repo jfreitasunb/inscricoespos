@@ -34,8 +34,6 @@ abstract class DataTableController extends Controller
     public function index(Request $request)
     {
 
-        // $view = View::make('templates.partials.admin.user_datatable')->render();
-
     	return response()->json([
     		'data' => [
                 'table' => $this->builder->getModel()->getTable(),
@@ -72,6 +70,7 @@ abstract class DataTableController extends Controller
         return [];
     }
 
+
     public function getUpdatableColumns()
     {
 
@@ -106,8 +105,6 @@ abstract class DataTableController extends Controller
 
         }
 
-
-    	
     }
 
     protected function hasSearchQuery(Request $request)
