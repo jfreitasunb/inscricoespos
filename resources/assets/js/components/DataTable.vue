@@ -15,8 +15,14 @@
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        <select class="form-control">
-                            <option value="equals" v-model="search.operator">=</option>
+                        <select class="form-control" v-model="search.operator">
+                            <option value="equals">=</option>
+                            <option value="contains">Contém</option>
+                            <option value="starts_with">Começa com</option>
+                            <option value="ends_with">Termina com</option>
+                            <option value="greater_than">Maior que</option>
+                            <option value="less_than">Menor que</option>
+
                         </select>
                     </div>
                     <div class="form-group col-md-6">
