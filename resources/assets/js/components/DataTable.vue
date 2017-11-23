@@ -4,6 +4,26 @@
 
         <div class="panel-body">
 
+            <form action="#">
+                <label>Pesquisar</label>
+                <div class="row row-fluid">
+                    <div class="form-group col-md-3">
+                        <select>
+                            <option :value="column" v-for="column in response.displayable">
+                                {{ column }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        dropdown
+                    </div>
+                    <div class="form-group col-md-6">
+                        query
+                    </div>
+                    
+                </div>
+            </form>
+
             <div class="row">
                 <div class="form-group col-md-10">
                     <label for="filter">Pesquisa rápida</label>
