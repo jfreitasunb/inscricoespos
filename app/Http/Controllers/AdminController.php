@@ -17,6 +17,7 @@ use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\AuthController;
 use Posmat\Http\Controllers\CoordenadorController;
+use Posmat\Http\Controllers\DataTable\UserController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ class AdminController extends CoordenadorController
 
 
 	public function getAtivaConta()
-	{
+	{	
 		
 		return view('templates.partials.admin.ativa_conta');
 	}
