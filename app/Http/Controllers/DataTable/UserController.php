@@ -30,4 +30,24 @@ class UserController extends DataTableController
         ];
     }
 
+    public function update($id_user, Request $request)
+    {
+
+        $this->validate($request,[
+            'email'  => 'required|unique:users|email|max:255',
+            'locale' => 'required',
+            'user_type' => 'required',
+            'ativo' => 'required',
+        ]);
+
+        $atualiza = $this->builder->find($id_user);
+
+        if ($request->ativo && !is_null($atualiza->validation_code)) {
+            $atualiza->update(['validation_code' => null]);
+        }
+
+        $atualiza->update($request->only($this->getUpdatableColumns()));
+
+    }
+
 }
