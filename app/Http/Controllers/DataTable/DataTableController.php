@@ -84,7 +84,7 @@ abstract class DataTableController extends Controller
 
         if ($this->hasSearchQuery($request)) {
             
-            $builder = $this->buildSearch($builder, $query);
+            $builder = $this->buildSearch($builder, $request);
         }
 
 
