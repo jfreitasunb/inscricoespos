@@ -5,20 +5,27 @@
         <div class="panel-body">
 
             <form action="#">
-                <label>Pesquisar</label>
+                <label for="search">Pesquisar</label>
                 <div class="row row-fluid">
                     <div class="form-group col-md-3">
-                        <select class="form-control">
+                        <select class="form-control" v-model="search.column">
                             <option :value="column" v-for="column in response.displayable">
                                 {{ column }}
                             </option>
                         </select>
                     </div>
                     <div class="form-group col-md-3">
-                        dropdown
+                        <select class="form-control">
+                            <option value="equals" v-model="search.operator">=</option>
+                        </select>
                     </div>
                     <div class="form-group col-md-6">
-                        query
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="search" v-model="search.value">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Pesquisar</button>
+                            </span>
+                        </div>
                     </div>
                     
                 </div>
@@ -138,6 +145,14 @@
                     form: {},
 
                     errors: []
+                },
+
+                search: {
+
+                    value: '',
+                    operator: 'equals',
+                    column: 'id_user'
+
                 }
             }
         },
@@ -197,7 +212,8 @@
 
                 return queryString.stringify({
 
-                    limit: this.limit
+                    limit: this.limit,
+                    ...this.search
                 })
             },
 
