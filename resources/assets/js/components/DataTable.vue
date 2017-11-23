@@ -4,7 +4,7 @@
 
         <div class="panel-body">
 
-            <form action="#">
+            <form action="#" @submit.prevent="getRecords">
                 <label for="search">Pesquisar</label>
                 <div class="row row-fluid">
                     <div class="form-group col-md-3">
