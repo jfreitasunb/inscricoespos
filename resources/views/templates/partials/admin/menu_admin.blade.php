@@ -11,6 +11,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bar1">
       <ul class="nav navbar-nav">
+        <li class="{{ Route::currentRouteNamed('lista.usuarios') ? 'active' : '' }}"><a href="{{ route('lista.usuarios') }}">Usuários</a></li>
         <li class="{{ Route::currentRouteNamed('ativa.conta') ? 'active' : '' }}"><a href="{{ route('ativa.conta') }}">Ativar Conta</a></li>
         <li class="{{ Route::currentRouteNamed('pesquisar.papel') ? 'active' : '' }}"><a href="{{ route('pesquisar.papel') }}">Atribuir Papel</a></li>
         <li class="{{ Route::currentRouteNamed('criar.coordenador') ? 'active' : '' }}"><a href="{{ route('criar.coordenador') }}">Cria Coordenador</a></li>
