@@ -204,7 +204,10 @@
 
             update () {
 
-                console.log(this.editing.form.id_user);
+                axios.patch(`${this.endpoint}/${this.editing.id_user}`).then(() => {
+
+
+                })
             }
 
         }
