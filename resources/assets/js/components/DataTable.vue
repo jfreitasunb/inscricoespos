@@ -51,8 +51,11 @@
                         <tr v-for="record in filteredRecords">
                             <td v-for="columnValue, column in record">
                                 <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
-                                    <div class="form-group">
+                                    <div class="form-group" :class="{ 'has-error': editing.errors[column]}">
                                         <input type="text" :value="columnValue" class="form-control" v-model="editing.form[column]">
+                                        <span class="help-block" v-if="editing.errors[column]">
+                                            <strong>{{ editing.errors[column][0] }}</strong>
+                                        </span>
                                     </div>
                                 </template>
                                 
@@ -211,8 +214,8 @@
                         this.editing.id_user = null
                         this.editing.form = {}
                     })
-
-
+                }).catch((error) => {
+                    this.editing.errors = error.response.data.errors
                 })
             }
 
