@@ -206,6 +206,12 @@
 
                 axios.patch(`${this.endpoint}/${this.editing.id_user}`, this.editing.form).then(() => {
 
+                    this.getRecords().then(() => {
+
+                        this.editing.id_user = null
+                        this.editing.form = {}
+                    })
+
 
                 })
             }
