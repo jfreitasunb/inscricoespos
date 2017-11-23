@@ -90,6 +90,10 @@ abstract class DataTableController extends Controller
 
         $builder = $this->builder;
 
+        if (is_null($request->limit)) {
+            $request->limit = 50;
+        }
+
         if ($this->hasSearchQuery($request)) {
             
             $builder = $this->buildSearch($builder, $request);
@@ -97,7 +101,8 @@ abstract class DataTableController extends Controller
 
         try {
             
-            return $this->builder->limit($request->limit)->orderBy('id_user', 'desc')->get($this->getDisplayableColumns());
+            return $this->builder->orderBy('id_user', 'desc')->paginate($request->limit, $this->getDisplayableColumns());
+            // return $this->builder->limit($request->limit)->orderBy('id_user', 'desc')->get($this->getDisplayableColumns());
 
         } catch (Exception $e) {
             
