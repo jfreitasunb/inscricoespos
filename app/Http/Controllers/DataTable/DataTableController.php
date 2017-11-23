@@ -102,6 +102,10 @@ abstract class DataTableController extends Controller
     protected function buildSearch(Builder $builder, Request $request)
     {
 
+        $queryParts = $this->resolveQueryParts($request->operator, $request->value);
+
+        return $builder->where($request->column, $queryParts['operator'], $queryParts['value']);
+
     }
 
     protected function resolveQueryParts($operator, $value)
@@ -112,6 +116,6 @@ abstract class DataTableController extends Controller
                 'operator' => '=',
                 'value' => $value
             ]
-        ], 'operator');
+        ], $operator);
     }
 }
