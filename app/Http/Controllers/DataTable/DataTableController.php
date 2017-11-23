@@ -103,4 +103,15 @@ abstract class DataTableController extends Controller
     {
 
     }
+
+    protected function resolveQueryParts($operator, $value)
+    {
+
+        return array_get([
+            'equals' => [
+                'operator' => '=',
+                'value' => $value
+            ]
+        ], 'operator');
+    }
 }
