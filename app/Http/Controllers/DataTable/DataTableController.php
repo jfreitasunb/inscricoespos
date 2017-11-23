@@ -84,7 +84,7 @@ abstract class DataTableController extends Controller
 
         if ($this->hasSearchQuery($request)) {
             
-            $builder = $builder;
+            $builder = $this->buildSearch($builder, $query);
         }
 
 
@@ -96,6 +96,11 @@ abstract class DataTableController extends Controller
 
         return count(array_filter($request->only(['column', 'operator', 'value']))) === 3;
 
+
+    }
+
+    protected function buildSearch(Builder $builder, Request $request)
+    {
 
     }
 }
