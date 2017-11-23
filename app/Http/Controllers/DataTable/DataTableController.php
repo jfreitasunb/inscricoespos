@@ -8,6 +8,7 @@ use View;
 
 use Illuminate\Http\Request;
 use Posmat\Http\Controllers\Controller;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
 use Schema;
 
@@ -87,8 +88,18 @@ abstract class DataTableController extends Controller
             $builder = $this->buildSearch($builder, $request);
         }
 
+        try {
+            
+            return $this->builder->limit($request->limit)->orderBy('id_user', 'desc')->get($this->getDisplayableColumns());
 
-    	return $this->builder->limit($request->limit)->orderBy('id_user', 'desc')->get($this->getDisplayableColumns());
+        } catch (Exception $e) {
+            
+            return [];
+
+        }
+
+
+    	
     }
 
     protected function hasSearchQuery(Request $request)
@@ -104,6 +115,7 @@ abstract class DataTableController extends Controller
 
         $queryParts = $this->resolveQueryParts($request->operator, $request->value);
 
+
         return $builder->where($request->column, $queryParts['operator'], $queryParts['value']);
 
     }
@@ -114,6 +126,26 @@ abstract class DataTableController extends Controller
         return array_get([
             'equals' => [
                 'operator' => '=',
+                'value' => $value
+            ],
+            'contains' => [
+                'operator' => 'LIKE',
+                'value' => "%{$value}%"
+            ],
+            'starts_with' => [
+                'operator' => 'LIKE',
+                'value' => "{$value}%"
+            ],
+            'ends_with' => [
+                'operator' => 'LIKE',
+                'value' => "%{$value}"
+            ],
+            'greater_than' => [
+                'operator' => '>',
+                'value' => $value
+            ],
+            'less_than' => [
+                'operator' => '<',
                 'value' => $value
             ]
         ], $operator);
