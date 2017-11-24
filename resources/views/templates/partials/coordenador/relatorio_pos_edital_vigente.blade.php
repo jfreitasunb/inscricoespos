@@ -3,6 +3,10 @@
 @section('relatorio_pos_edital_vigente')
   <form action="" method="POST">
     <legend>Relatório de inscritos</legend>
+
+    	@foreach ($programa_para_inscricao as $programa)
+    		<strong>Total de inscritos para o {{ $programa }}:</strong> {{ $contagem[$programa] }}<br>
+    	@endforeach
 	    <table class="table table-striped">
 		  	<thead>
 			    <tr>
