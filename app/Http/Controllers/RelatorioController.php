@@ -635,7 +635,7 @@ class RelatorioController extends BaseController
       
     }
 
-    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorios_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorios_disponivel->programa);
+    $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorios_disponivel->programa);
     
 
     return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
