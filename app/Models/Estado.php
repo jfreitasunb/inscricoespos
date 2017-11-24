@@ -17,8 +17,13 @@ class Estado extends Model
     }
 
     public function retorna_nome_estados_por_id($id_pais, $id_estado)
-    {
-    	return $this->select('name')->where('id_state',$id_estado)->where('country_id', $id_pais)->get()->first()->name;
+    {   
+        if (is_null($this->select('name')->where('id_state',$id_estado)->where('country_id', $id_pais)->get()->first())) {
+            return null;
+        }else{
+            return $this->select('name')->where('id_state',$id_estado)->where('country_id', $id_pais)->get()->first()->name;    
+        }
+    	
     }
 
 }
