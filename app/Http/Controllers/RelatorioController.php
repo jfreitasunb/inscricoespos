@@ -55,6 +55,17 @@ class RelatorioController extends BaseController
       'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
     );
 
+  public function ContaInscricoes($id_inscricao_pos, $programa)
+  {
+
+    return DB::table('escolhas_candidato')->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $programa)->count();
+
+
+    // ->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos')->orderBy('contatos_recomendantes.created_at', 'desc')->paginate(2);
+
+  }
+
+
   public function ConsolidaCabecalhoCSV()
   {
 
@@ -371,14 +382,18 @@ class RelatorioController extends BaseController
     
     $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
-
-
     $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
     if (File::extension($nome_documento_banco) != 'pdf')
       {
-        $nome_historico_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
-        $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+
+        
+        $nome_documento_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
+
+        DB::table('arquivos_enviados')->where('nome_arquivo', $nome_documento_banco)->where('tipo_arquivo', 'Documentos')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_documento_pdf]);
+
+        $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_documento_pdf);
+
         $converte_jpg->run();
         
         if (!$converte_jpg->isSuccessful()) {
@@ -390,7 +405,11 @@ class RelatorioController extends BaseController
 
       if (File::extension($nome_historico_banco) != 'pdf')
       {
+
         $nome_historico_pdf = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
+        
+        DB::table('arquivos_enviados')->where('nome_arquivo', $nome_historico_banco)->where('tipo_arquivo', 'Histórico')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_historico_pdf]);
+
         $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
         $converte_jpg->run();
         if (!$converte_jpg->isSuccessful()) {
@@ -460,13 +479,20 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+
     $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
 
     $nome_programa_pos = new ProgramaPos();
 
     foreach ($programas_disponiveis as $programa) {
-     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+
+      $programa_para_inscricao[$programa]['nome_programa'] = $nome_programa_pos->pega_programa_pos_mat($programa);
+      
+      $programa_para_inscricao[$programa]['contagem'] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
+
     }
+
+    dd($programa_para_inscricao);
 
    $programa = implode('/', $programa_para_inscricao);
 
