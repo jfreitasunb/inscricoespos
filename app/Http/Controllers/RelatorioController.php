@@ -59,7 +59,7 @@ class RelatorioController extends BaseController
   {
      
     return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_user', 'escolhas_candidato.id_user')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
-    
+
   }
 
 
@@ -483,25 +483,23 @@ class RelatorioController extends BaseController
 
     foreach ($programas_disponiveis as $programa) {
 
-      $programa_para_inscricao[$programa]['nome_programa'] = $nome_programa_pos->pega_programa_pos_mat($programa);
+      $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
       
-      $programa_para_inscricao[$programa]['contagem'] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
+      $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
 
     }
 
-    dd($programa_para_inscricao);
+    $programa = implode('/', $programa_para_inscricao);
 
-   $programa = implode('/', $programa_para_inscricao);
+    $arquivos_zipados_para_view = "";
 
-   $arquivos_zipados_para_view = "";
+    $documentos_zipados = "";
 
-   $documentos_zipados = "";
+    $relatorio_csv = "";
 
-   $relatorio_csv = "";
+    $monitoria = "";
 
-   $monitoria = "";
-
-   return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'programa', 'arquivos_zipados_para_view','relatorio_csv'));
+    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'programa', 'programa_para_inscricao', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
