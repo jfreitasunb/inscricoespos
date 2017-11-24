@@ -9,6 +9,7 @@ use Session;
 use File;
 use ZipArchive;
 use PDF;
+use Imagick;
 use Posmat\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use Posmat\Models\User;
@@ -389,13 +390,17 @@ class RelatorioController extends BaseController
 
         DB::table('arquivos_enviados')->where('nome_arquivo', $nome_documento_banco)->where('tipo_arquivo', 'Documentos')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_documento_pdf]);
 
-        $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_documento_pdf);
+        $img = new Imagick($nome_documento_banco);
+        $img->setImageFormat('pdf');
+        $success = $img->writeImage($nome_documento_pdf);
 
-        $converte_jpg->run();
+        // $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_documento_pdf);
+
+        // $converte_jpg->run();
         
-        if (!$converte_jpg->isSuccessful()) {
-          throw new ProcessFailedException($converte_jpg);
-        }
+        // if (!$converte_jpg->isSuccessful()) {
+        //   throw new ProcessFailedException($converte_jpg);
+        // }
 
         // echo $converte_jpg->getOutput();
       }
@@ -407,11 +412,15 @@ class RelatorioController extends BaseController
         
         DB::table('arquivos_enviados')->where('nome_arquivo', $nome_historico_banco)->where('tipo_arquivo', 'Histórico')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_historico_pdf]);
 
-        $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
-        $converte_jpg->run();
-        if (!$converte_jpg->isSuccessful()) {
-          throw new ProcessFailedException($converte_jpg);
-        }
+        $img = new Imagick($nome_historico_banco);
+        $img->setImageFormat('pdf');
+        $success = $img->writeImage($nome_historico_pdf);
+
+        // $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
+        // $converte_jpg->run();
+        // if (!$converte_jpg->isSuccessful()) {
+        //   throw new ProcessFailedException($converte_jpg);
+        // }
 
         // echo $converte_jpg->getOutput();
       }
@@ -426,6 +435,8 @@ class RelatorioController extends BaseController
   {
     $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
+    $process->setTimeout(3600);
+    
     $process->run();
 
     if (!$process->isSuccessful()) {
@@ -563,8 +574,6 @@ class RelatorioController extends BaseController
     $finaliza = new FinalizaInscricao();
     $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
 
-
-
     foreach ($usuarios_finalizados as $candidato) {
 
       $linha_arquivo = [];
@@ -593,16 +602,23 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['programa_pretendido'] = $dados_candidato_para_relatorio['programa_pretendido'];
 
+      $contatos_indicados = [];
 
       $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+
+      $recomendantes_candidato = [];
 
       foreach ($contatos_indicados  as $id ) {
         $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
       }
 
+
       $dados_candidato_para_relatorio['motivacao'] = $this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
+      $nome_arquivos = [];
+
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
+
       
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
