@@ -15,7 +15,7 @@
         <li class="{{ Route::currentRouteNamed('relatorio.atual') ? 'active' : '' }}"><a href="{{ route('relatorio.atual') }}">Relatórios Edital Vigente</a></li>
         <li class="{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active' : '' }}"><a href="{{ route('gera.ficha.individual') }}">Ficha Individual</a></li>
         <li class="{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active' : '' }}"><a href="{{ route('relatorio.anteriores') }}">Relatórios Editais Anteriores</a></li>
-        <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}""><a href="{{ route('auth.logout') }}">Sair</a></li>
+        <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
       </ul>
     </div>
   </nav>
