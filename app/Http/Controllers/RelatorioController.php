@@ -259,15 +259,16 @@ class RelatorioController extends BaseController
 
     $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
 
-    if (!is_null($dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante))) {
-      $consolida_recomendacao['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->nome_recomendante;
+    $dados_pessoais_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante);
+    if (!is_null($dados_pessoais_recomendante)) {
+      $consolida_recomendacao['nome'] = $dados_pessoais_recomendante->nome_recomendante;
       $consolida_recomendacao['email'] = $usuario_recomendante->email;
-      $consolida_recomendacao['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->instituicao_recomendante;
-      $consolida_recomendacao['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->titulacao_recomendante;
-      $consolida_recomendacao['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->area_recomendante;
-      $consolida_recomendacao['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->ano_titulacao;
-      $consolida_recomendacao['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->inst_obtencao_titulo;
-      $consolida_recomendacao['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->endereco_recomendante;
+      $consolida_recomendacao['instituicao_recomendante'] = $dados_pessoais_recomendante->instituicao_recomendante;
+      $consolida_recomendacao['titulacao_recomendante'] = $dados_pessoais_recomendante->titulacao_recomendante;
+      $consolida_recomendacao['area_recomendante'] = $dados_pessoais_recomendante->area_recomendante;
+      $consolida_recomendacao['ano_titulacao'] = $dados_pessoais_recomendante->ano_titulacao;
+      $consolida_recomendacao['inst_obtencao_titulo'] = $dados_pessoais_recomendante->inst_obtencao_titulo;
+      $consolida_recomendacao['endereco_recomendante'] = $dados_pessoais_recomendante->endereco_recomendante;
     }else{
       $consolida_recomendacao['nome'] = '';
       $consolida_recomendacao['email'] = '';
@@ -368,11 +369,11 @@ class RelatorioController extends BaseController
 
     $documento = new Documento();
     
-    $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato)->nome_arquivo;
+    $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
 
 
-    $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato)->nome_arquivo;
+    $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
     if (File::extension($nome_documento_banco) != 'pdf')
       {
