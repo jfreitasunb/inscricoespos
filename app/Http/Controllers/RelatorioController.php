@@ -57,12 +57,9 @@ class RelatorioController extends BaseController
 
   public function ContaInscricoes($id_inscricao_pos, $programa)
   {
-
-    return DB::table('escolhas_candidato')->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $programa)->count();
-
-
-    // ->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos')->orderBy('contatos_recomendantes.created_at', 'desc')->paginate(2);
-
+     
+    return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_user', 'escolhas_candidato.id_user')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
+    
   }
 
 
