@@ -259,28 +259,53 @@ class RelatorioController extends BaseController
 
     $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
 
+    
     $consolida_recomendacao['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->nome_recomendante;
     $consolida_recomendacao['email'] = $usuario_recomendante->email;
-    $consolida_recomendacao['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
-    $consolida_recomendacao['circunstancia_1'] = $carta_candidato->circunstancia_1;
-    $consolida_recomendacao['circunstancia_2'] = $carta_candidato->circunstancia_2;
-    $consolida_recomendacao['circunstancia_3'] = $carta_candidato->circunstancia_3;
-    $consolida_recomendacao['circunstancia_4'] = $carta_candidato->circunstancia_4;
-    $consolida_recomendacao['circunstancia_outra'] = $carta_candidato->circunstancia_outra;
-    $consolida_recomendacao['desempenho_academico'] = $carta_candidato->desempenho_academico;
-    $consolida_recomendacao['capacidade_aprender'] = $carta_candidato->capacidade_aprender;
-    $consolida_recomendacao['capacidade_trabalhar'] = $carta_candidato->capacidade_trabalhar;
-    $consolida_recomendacao['criatividade'] = $carta_candidato->criatividade;
-    $consolida_recomendacao['curiosidade'] = $carta_candidato->curiosidade;
-    $consolida_recomendacao['esforco'] = $carta_candidato->esforco;
-    $consolida_recomendacao['expressao_escrita'] = $carta_candidato->expressao_escrita;
-    $consolida_recomendacao['expressao_oral'] = $carta_candidato->expressao_oral;
-    $consolida_recomendacao['relacionamento'] = $carta_candidato->relacionamento;
-    $consolida_recomendacao['antecedentes_academicos'] = $carta_candidato->antecedentes_academicos;
-    $consolida_recomendacao['possivel_aproveitamento'] = $carta_candidato->possivel_aproveitamento;
-    $consolida_recomendacao['informacoes_relevantes'] = $carta_candidato->informacoes_relevantes;
-    $consolida_recomendacao['como_aluno'] = $carta_candidato->como_aluno;
-    $consolida_recomendacao['como_orientando'] = $carta_candidato->como_orientando;
+    
+    if (!is_null($carta_candidato)) {
+      $consolida_recomendacao['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
+      $consolida_recomendacao['circunstancia_1'] = $carta_candidato->circunstancia_1;
+      $consolida_recomendacao['circunstancia_2'] = $carta_candidato->circunstancia_2;
+      $consolida_recomendacao['circunstancia_3'] = $carta_candidato->circunstancia_3;
+      $consolida_recomendacao['circunstancia_4'] = $carta_candidato->circunstancia_4;
+      $consolida_recomendacao['circunstancia_outra'] = $carta_candidato->circunstancia_outra;
+      $consolida_recomendacao['desempenho_academico'] = $carta_candidato->desempenho_academico;
+      $consolida_recomendacao['capacidade_aprender'] = $carta_candidato->capacidade_aprender;
+      $consolida_recomendacao['capacidade_trabalhar'] = $carta_candidato->capacidade_trabalhar;
+      $consolida_recomendacao['criatividade'] = $carta_candidato->criatividade;
+      $consolida_recomendacao['curiosidade'] = $carta_candidato->curiosidade;
+      $consolida_recomendacao['esforco'] = $carta_candidato->esforco;
+      $consolida_recomendacao['expressao_escrita'] = $carta_candidato->expressao_escrita;
+      $consolida_recomendacao['expressao_oral'] = $carta_candidato->expressao_oral;
+      $consolida_recomendacao['relacionamento'] = $carta_candidato->relacionamento;
+      $consolida_recomendacao['antecedentes_academicos'] = $carta_candidato->antecedentes_academicos;
+      $consolida_recomendacao['possivel_aproveitamento'] = $carta_candidato->possivel_aproveitamento;
+      $consolida_recomendacao['informacoes_relevantes'] = $carta_candidato->informacoes_relevantes;
+      $consolida_recomendacao['como_aluno'] = $carta_candidato->como_aluno;
+      $consolida_recomendacao['como_orientando'] = $carta_candidato->como_orientando;
+    }else{
+      $consolida_recomendacao['tempo_conhece_candidato'] = '';
+      $consolida_recomendacao['circunstancia_1'] = '';
+      $consolida_recomendacao['circunstancia_2'] = '';
+      $consolida_recomendacao['circunstancia_3'] = '';
+      $consolida_recomendacao['circunstancia_4'] = '';
+      $consolida_recomendacao['circunstancia_outra'] = '';
+      $consolida_recomendacao['desempenho_academico'] = '';
+      $consolida_recomendacao['capacidade_aprender'] = '';
+      $consolida_recomendacao['capacidade_trabalhar'] = '';
+      $consolida_recomendacao['criatividade'] = '';
+      $consolida_recomendacao['curiosidade'] = '';
+      $consolida_recomendacao['esforco'] = '';
+      $consolida_recomendacao['expressao_escrita'] = '';
+      $consolida_recomendacao['expressao_oral'] = '';
+      $consolida_recomendacao['relacionamento'] = '';
+      $consolida_recomendacao['antecedentes_academicos'] = '';
+      $consolida_recomendacao['possivel_aproveitamento'] = '';
+      $consolida_recomendacao['informacoes_relevantes'] = '';
+      $consolida_recomendacao['como_aluno'] = '';
+      $consolida_recomendacao['como_orientando'] = '';
+    }
     $consolida_recomendacao['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->instituicao_recomendante;
     $consolida_recomendacao['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->titulacao_recomendante;
     $consolida_recomendacao['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->area_recomendante;
