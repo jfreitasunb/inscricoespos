@@ -1,21 +1,21 @@
 <?php
 
 /*
-*Tradução dos textos para Inglês
+*Tradução dos textos para Português
  */
 
 return [
-    'tela_dados_pessoais' => 'Personal Data',
-    'nome' => 'Full Name',
+    'tela_dados_pessoais' => 'Dados Pessoais',
+    'nome' => 'Nome',
     'rg' => 'RG',
-    'data_nascimento' => 'Birthday',
-    'endereco' => 'Address',
-    'cidade' => 'City',
-    'estado' => 'Estate',
-    'cep' => 'ZIP Code',
-    'pais' => 'Country',
-    'celular' => 'Celphone',
-    'menu_enviar' => 'Send',
+    'data_nascimento' => 'Data de Nascimento',
+    'endereco' => 'Endereço',
+    'cidade' => 'Cidade',
+    'estado' => 'Estado',
+    'cep' => 'CEP',
+    'pais' => 'País',
+    'celular' => 'Celular',
+    'menu_enviar' => 'Enviar',
     'menu_registro_sucesso_parte_inicial' => 'Account succesfully created. It was send an e-mail to: ',
     'menu_registro_sucesso_parte_final' => 'with a link to activate your account.',
 

@@ -1,21 +1,20 @@
 <?php
 
 /*
-*Tradução dos textos para Inglês
+*Tradução dos textos para Português
  */
 
 
 return [
-	'tela_escolhas' => 'Choose',
-	'programa_disponivel' => 'Choose the Programa',
-    'menu_registro' => 'Registrar',
-    'menu_nome' => 'Nome Completo',
-    'menu_email' => 'E-mail',
-    'menu_confirma_email' => 'Confirmar E-mail',
-    'menu_senha' => 'Senha',
-    'menu_confira_senha' => 'Confirmar Senha',
+	'tela_escolhas' => 'Escolha',
+	'programa_disponivel' => 'Programa Pretendido',
+    'interesse_bolsa' => 'Tem interesse em bolsa?',
+    'vinculo_empregaticio' => 'Possui vínculo empregatício?',
+    'recomendante' => 'Nome completo e e-mail de três professores que, por sua solicitação, enviarão cartas de recomendação. ',
+    'nome' => 'Nome: ',
+    'confirmar_email' => 'Confirmar e-mail:',
+    'motivacao' => 'Escreva no espaço abaixo a sua motivação e expectativa em relação ao programa pretendido:',
+    'menu_enviar' => 'Enviar',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
-
-
 ];

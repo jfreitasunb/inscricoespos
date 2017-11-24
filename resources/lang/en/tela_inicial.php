@@ -1,12 +1,13 @@
 <?php
 
 /*
-*Tradução dos textos para Inglês
+*Tradução dos textos para Português
  */
+
 
 return [
 
     'menu_login' => 'Login',
-    'menu_registrar' => 'Register',
+    'menu_registrar' => 'Registrar',
 
 ];
