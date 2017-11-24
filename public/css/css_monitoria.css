@@ -1,6 +1,6 @@
 h1{
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     font-size: 50px;
 }
 h2{
@@ -12,6 +12,22 @@ h3{
     color: #ffffff;
     text-align: center;
     font-size: 30px;
+}
+@media screen and (max-width: 768px) {
+    h1{
+        font-size:30px;
+        text-align: center;
+    }
+    h2{
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
+h3{
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
 }
 .header-main-content {
         padding: 15px 0 0;
@@ -279,5 +295,8 @@ legend.scheduler-border {
 }
 .tdcenter {
     text-align: center;
+}
+.idiomas{
+    margin-top:20px;
 }
 /* Required field END */

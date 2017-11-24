@@ -3,7 +3,7 @@
 @section('inicio')
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="panel-login btn-toolbar">
+      <div class="idiomas btn-toolbar">
         <div class="btn-group btn-group-justified">
           <a href="{{ route('lang.portuguese') }}" class="btn btn-primary">Português</a>
           <a href="{{ route('lang.english') }}" class="btn btn-primary">English</a>
