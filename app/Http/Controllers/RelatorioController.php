@@ -356,10 +356,12 @@ class RelatorioController extends BaseController
     $nome_uploads = [];
 
     $documento = new Documento();
+    
+    $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato)->nome_arquivo;
 
-    $nome_documento_banco = $local_documentos.$documento->retorna_documento($id_candidato,$id_inscricao_pos)->nome_arquivo;
 
-    $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato,$id_inscricao_pos)->nome_arquivo;
+
+    $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato)->nome_arquivo;
 
     if (File::extension($nome_documento_banco) != 'pdf')
       {
