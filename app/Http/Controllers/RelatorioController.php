@@ -548,13 +548,17 @@ class RelatorioController extends BaseController
   $nome_programa_pos = new ProgramaPos();
 
     foreach ($programas_disponiveis as $programa) {
+     
      $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+     
+     $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
     }
 
-  $programa = implode('/', $programa_para_inscricao);
+  $nome_programas = implode('/', $programa_para_inscricao);
+
   $monitoria = $id_inscricao_pos;
 
-  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','programa','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv'));
+  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv'));
   }
 
 
