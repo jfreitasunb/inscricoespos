@@ -136,7 +136,11 @@ class RelatorioController extends BaseController
     }
 
     if (!is_null($dados_pessoais_candidato->estado)) {
-      $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+      if (is_null($estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado))) {
+        $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
+      }else{
+        $consolida_dados['nome_estado'] = null;
+      }
     }else{
       $consolida_dados['nome_estado'] = null;
     }
@@ -500,7 +504,7 @@ class RelatorioController extends BaseController
 
     }
 
-    $programa = implode('/', $programa_para_inscricao);
+    $nome_programas = implode('/', $programa_para_inscricao);
 
     $arquivos_zipados_para_view = "";
 
@@ -510,7 +514,7 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'programa', 'programa_para_inscricao', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'nome_programas', 'programa_para_inscricao', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()

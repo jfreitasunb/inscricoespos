@@ -1,6 +1,7 @@
 @extends('templates.default')
 
 @section('relatorio_pos_edital_vigente')
+
   <form action="" method="POST">
     <legend>Relatório de inscritos</legend>
 
@@ -20,7 +21,7 @@
 		  	<tbody>
 			    	<tr>
 			      	<th scope="row"><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio_disponivel['id_inscricao_pos']]) !!}">{{$relatorio_disponivel['edital']}}</a></th>
-			      	<td><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio_disponivel['id_inscricao_pos']]) !!}">{{ $programa }}</a></td>
+			      	<td><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio_disponivel['id_inscricao_pos']]) !!}">{{ $nome_programas }}</a></td>
 			      	<td><a href="{!! route('gera.relatorio', ['id_inscricao_pos' => $relatorio_disponivel['id_inscricao_pos']]) !!}">{{\Carbon\Carbon::parse($relatorio_disponivel['inicio_inscricao'])->format('d/m/Y')." à ".\Carbon\Carbon::parse($relatorio_disponivel['fim_inscricao'])->format('d/m/Y')}}</a></td>
 			      	<td>@if($monitoria == $relatorio_disponivel['id_inscricao_pos']) 
 			      		@foreach ($arquivos_zipados_para_view as $zip_relatorio)
