@@ -259,9 +259,26 @@ class RelatorioController extends BaseController
 
     $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
 
+    if (!is_null($dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante))) {
+      $consolida_recomendacao['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->nome_recomendante;
+      $consolida_recomendacao['email'] = $usuario_recomendante->email;
+      $consolida_recomendacao['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->instituicao_recomendante;
+      $consolida_recomendacao['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->titulacao_recomendante;
+      $consolida_recomendacao['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->area_recomendante;
+      $consolida_recomendacao['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->ano_titulacao;
+      $consolida_recomendacao['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->inst_obtencao_titulo;
+      $consolida_recomendacao['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->endereco_recomendante;
+    }else{
+      $consolida_recomendacao['nome'] = '';
+      $consolida_recomendacao['email'] = '';
+      $consolida_recomendacao['instituicao_recomendante'] = '';
+      $consolida_recomendacao['titulacao_recomendante'] = '';
+      $consolida_recomendacao['area_recomendante'] = '';
+      $consolida_recomendacao['ano_titulacao'] = '';
+      $consolida_recomendacao['inst_obtencao_titulo'] = '';
+      $consolida_recomendacao['endereco_recomendante'] = '';
+    }
     
-    $consolida_recomendacao['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->nome_recomendante;
-    $consolida_recomendacao['email'] = $usuario_recomendante->email;
     
     if (!is_null($carta_candidato)) {
       $consolida_recomendacao['tempo_conhece_candidato'] = $carta_candidato->tempo_conhece_candidato;
@@ -306,12 +323,6 @@ class RelatorioController extends BaseController
       $consolida_recomendacao['como_aluno'] = '';
       $consolida_recomendacao['como_orientando'] = '';
     }
-    $consolida_recomendacao['instituicao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->instituicao_recomendante;
-    $consolida_recomendacao['titulacao_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->titulacao_recomendante;
-    $consolida_recomendacao['area_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->area_recomendante;
-    $consolida_recomendacao['ano_titulacao'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->ano_titulacao;
-    $consolida_recomendacao['inst_obtencao_titulo'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->inst_obtencao_titulo;
-    $consolida_recomendacao['endereco_recomendante'] = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante)->endereco_recomendante;
 
     return $consolida_recomendacao;
   }
