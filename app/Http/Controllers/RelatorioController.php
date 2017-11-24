@@ -486,11 +486,13 @@ class RelatorioController extends BaseController
   public function geraRelatorio($id_inscricao_pos)
   {
 
-    $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
-    $relatorios_disponivel = $relatorio->retorna_edital_vigente();
+    // $relatorios_disponivel = $relatorio->retorna_edital_vigente();
+    // 
+    
 
-    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->edital);
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     
@@ -509,7 +511,7 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio = [];
 
-      $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
+      $dados_candidato_para_relatorio['edital'] = $relatorio->edital;
 
       $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_user;
 
