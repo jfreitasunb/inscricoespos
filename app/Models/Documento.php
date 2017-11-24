@@ -23,13 +23,13 @@ class Documento extends Model
     	return $this->select('nome_arquivo')->where('id_user',$id_user)->orderBy('created_at','desc')->first();
     }
 
-    public function retorna_historico($id_user,$id_inscricao_pos)
+    public function retorna_historico($id_user)
     {
-        return $this->select('nome_arquivo')->where('id_user',$id_user)->where('tipo_arquivo','Histórico')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
+        return $this->select('nome_arquivo')->where('id_user',$id_user)->where('tipo_arquivo','Histórico')->orderBy('created_at','desc')->first();
     }
 
-    public function retorna_documento($id_user,$id_inscricao_pos)
+    public function retorna_documento($id_user)
     {
-        return $this->select('nome_arquivo')->where('id_user',$id_user)->where('tipo_arquivo','Documentos')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
+        return $this->select('nome_arquivo')->where('id_user',$id_user)->where('tipo_arquivo','Documentos')->orderBy('created_at','desc')->first();
     }
 }
