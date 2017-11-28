@@ -25,6 +25,8 @@ use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Models\Documento;
+use Posmat\Models\Paises;
+use Posmat\Models\Cidade;
 use Posmat\Notifications\NotificaRecomendante;
 use Posmat\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
@@ -85,6 +87,12 @@ class CandidatoController extends BaseController
 
 		$data_nascimento = $nascimento->format('d/m/Y');
 
+		$nome_pais = new Paises;
+
+		$nome_estado = new Estado;
+
+		$nome_cidade = new Cidade;
+
 		$dados = [
 			'nome' => $dados_pessoais->nome,
 			'data_nascimento' => $dados_pessoais->data_nascimento,
@@ -93,9 +101,9 @@ class CandidatoController extends BaseController
 			'cpf' => $dados_pessoais->cpf,
 			'data_nascimento' => $data_nascimento,
 			'endereco' => $dados_pessoais->endereco,
-			'pais' => $dados_pessoais->pais,
-			'estado' => $dados_pessoais->estado,
-			'cidade' => $dados_pessoais->cidade,
+			'pais' => $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais),
+			'estado' => $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado),
+			'cidade' => $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado),
 			'cep' => $dados_pessoais->cep,
 			'celular' => $dados_pessoais->celular,
 		];
