@@ -301,13 +301,13 @@ Route::get('/coordenador', [
 Route::get('/coordenador/gera/ficha/individual', [
 	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato',
 	'as' => 'gera.ficha.individual',
-	'middleware' => ['user.role:coordenador'],
+	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 Route::get('/coordenador/ver/ficha/individual', [
 	'uses' => '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual',
 	'as' => 'ver.ficha.individual',
-	'middleware' => ['user.role:coordenador'],
+	'middleware' => ['user.role:coordenador,admin'],
 ]);
 
 /**
