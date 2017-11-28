@@ -21,7 +21,7 @@
   <div class="row">
     {!! Form::label('tipo_curso_graduacao', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso_graduacao', $graduacao, $dados['tipo_curso_graduacao'] ?: '', ['class' => 'col-md-6']) !!}
+        {!! Form::select('tipo_curso_graduacao', $graduacao, $dados['tipo_curso_graduacao'] ?: '', ['class' => 'form-control formhorizontal']) !!}
     </div>
   </div>
 
@@ -52,7 +52,7 @@
   <div class="row">
     {!! Form::label('tipo_curso_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
-        {!! Form::select('tipo_curso_pos', $pos, $dados['tipo_curso_pos'] ?: '', ['class' => 'col-md-6l']) !!}
+        {!! Form::select('tipo_curso_pos', $pos, $dados['tipo_curso_pos'] ?: '', ['class' => ' form-control formhorizontal']) !!}
     </div>
   </div>
 
