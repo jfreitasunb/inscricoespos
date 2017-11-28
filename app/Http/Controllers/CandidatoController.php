@@ -75,6 +75,8 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$nome = $user->nome;
 		$id_user = $user->id_user;
+
+		$editar_dados = false;
 		
 		$candidato = new DadoPessoal();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
@@ -94,7 +96,42 @@ class CandidatoController extends BaseController
 			'celular' => $dados_pessoais->celular,
 		];
 
-		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados'));
+		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
+		
+	}
+
+	public function getDadosPessoaisEditar()
+	{
+
+		$getcountries = new APIController();
+
+		$countries = $getcountries->index();
+
+		$user = Auth::user();
+		$nome = $user->nome;
+		$id_user = $user->id_user;
+
+		$editar_dados = true;
+		
+		$candidato = new DadoPessoal();
+		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
+
+		$dados = [
+			'nome' => $dados_pessoais->nome,
+			'data_nascimento' => $dados_pessoais->data_nascimento,
+			'numerorg' => $dados_pessoais->numerorg,
+			'emissorrg' => $dados_pessoais->emissorrg,
+			'cpf' => $dados_pessoais->cpf,
+			'data_nascimento' => $dados_pessoais->data_nascimento,
+			'endereco' => $dados_pessoais->endereco,
+			'pais' => $dados_pessoais->pais,
+			'estado' => $dados_pessoais->estado,
+			'cidade' => $dados_pessoais->cidade,
+			'cep' => $dados_pessoais->cep,
+			'celular' => $dados_pessoais->celular,
+		];
+
+		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
 		
 	}
 
