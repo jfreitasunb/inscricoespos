@@ -19909,6 +19909,11 @@ class EscolhasCandidatoTableSeeder extends Seeder
             ),
         ));
         
-        
+        $tableToCheck = 'escolhas_candidato';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
     }
 }

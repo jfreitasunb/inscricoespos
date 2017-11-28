@@ -17801,6 +17801,12 @@ Os motivos que me regem são de foro pessoal e principalmente acadêmicos. Esper
             ),
         ));
         
+        $tableToCheck = 'carta_motivacoes';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
         
     }
 }

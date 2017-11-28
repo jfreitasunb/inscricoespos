@@ -24749,6 +24749,11 @@ class EstadosTableSeeder extends Seeder
             ),
         ));
         
-        
+        $tableToCheck = 'estados';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_state)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_state_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_state_seq\', '.$highestId->max.')');
     }
 }

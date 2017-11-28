@@ -42541,6 +42541,12 @@ class UsersTableSeeder extends Seeder
             ),
         ));
         
+        $tableToCheck = 'users';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_user)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_user_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_user_seq\', '.$highestId->max.')');
         
     }
 }

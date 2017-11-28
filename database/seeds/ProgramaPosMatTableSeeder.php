@@ -40,6 +40,12 @@ class ProgramaPosMatTableSeeder extends Seeder
             ),
         ));
         
+        $tableToCheck = 'programa_pos_mat';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
         
     }
 }
