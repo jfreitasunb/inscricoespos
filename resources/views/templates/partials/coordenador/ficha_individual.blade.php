@@ -9,9 +9,7 @@
 @section('ficha_individual')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_cartas_pendentes.tela_pendentes')}}</legend>
-
-  <p>{{ trans('tela_cartas_pendentes.mensagem_carta_anteriores') }}</p>
+  <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
 
   <table class="table">
   <thead>
