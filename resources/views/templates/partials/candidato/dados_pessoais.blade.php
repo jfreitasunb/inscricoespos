@@ -8,81 +8,183 @@
 
 @section('dados_pessoais')
 <div class="row">
-  {!! Form::open(array('route' => 'dados.pessoais', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+  @if ($editar_dados)
+    {!! Form::open(array('route' => 'dados.pessoais.salvar', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+  @else
+    {!! Form::open(array('route' => 'dados.pessoais.editar', 'class' => 'form-horizontal')) !!}
+  @endif
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Dados Pessoais</legend>
         
-        <div class="row">
-          {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
-          <div class="col-md-4">
-            {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+        @if ($editar_dados)
+          <div class="row">
+            {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            </div>
           </div>
-        </div>
-
-        <div class="row">
-          {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
-          <div class="col-md-4">
-            {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+        @else
+          <div class="row">
+            {!! Form::label('nome', trans('tela_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
+            </div>
           </div>
-        </div>
+        @endif
+        
+        @if ($editar_dados)
+          <div class="row">
+            {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            </div>
+          </div>
+        @else
+          <div class="row">
+            {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
+            <div class="col-md-4">
+              {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+            </div>
+          </div>
+        @endif
+        
 
-        <div class="row">
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+          </div>
+        </div>
+        @endif
         
-        <div class="row">
+
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+          </div>
+        </div>
+        @endif
+        
 
-        <div class="row">
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('cep', trans('tela_dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('cep', trans('tela_dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
+          </div>
+        </div>
+        @endif
+        
 
-        <div class="row">
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
+          </div>
+        </div>
+        @endif
+        
 
-        <div class="row">
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('estado', trans('tela_dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
           <div class="col-md-4">
             <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('estado', trans('tela_dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
+          <div class="col-md-4">
+            <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
+          </div>
+        </div>
+        @endif
+        
 
-        <div class="row">
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('cidade', trans('tela_dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
           <div class="col-md-4">
             <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
           </div>
         </div>
+        @else
+          <div class="row">
+          {!! Form::label('cidade', trans('tela_dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
+          <div class="col-md-4">
+            <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
+          </div>
+        </div>
+        @endif
         
-        <div class="row">
+        
+        @if ($editar_dados)
+          <div class="row">
           {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######', 'required' => '']) !!}
           </div>
         </div>
-        
-        <div class="form-group">
+        @else
           <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-              {!! Form::submit(trans('tela_dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
-            </div>
+          {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
+          <div class="col-md-4">
+            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######', 'required' => '']) !!}
           </div>
         </div>
-
+        @endif
+        
+        
+        @if ($editar_dados)
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center">
+                {!! Form::submit(trans('tela_dados_pessoais.menu_enviar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+              </div>
+            </div>
+          </div>
+        @else
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center">
+                {!! Form::submit(trans('tela_dados_pessoais.menu_editar'), ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+              </div>
+            </div>
+          </div>
+        @endif
       {!! Form::close() !!}
     </fieldset>
 </div>
