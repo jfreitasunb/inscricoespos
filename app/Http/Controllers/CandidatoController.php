@@ -81,13 +81,17 @@ class CandidatoController extends BaseController
 		$candidato = new DadoPessoal();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
+		$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
+
+		$data_nascimento = $nascimento->format('d/m/Y');
+
 		$dados = [
 			'nome' => $dados_pessoais->nome,
 			'data_nascimento' => $dados_pessoais->data_nascimento,
 			'numerorg' => $dados_pessoais->numerorg,
 			'emissorrg' => $dados_pessoais->emissorrg,
 			'cpf' => $dados_pessoais->cpf,
-			'data_nascimento' => $dados_pessoais->data_nascimento,
+			'data_nascimento' => $data_nascimento,
 			'endereco' => $dados_pessoais->endereco,
 			'pais' => $dados_pessoais->pais,
 			'estado' => $dados_pessoais->estado,
