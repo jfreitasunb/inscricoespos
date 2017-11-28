@@ -120,9 +120,15 @@ Route::get('/recomendante/dados/pessoais', [
 	'middleware' => ['user.role:recomendante'],
 ]);
 
+Route::get('/recomendante/dados/pessoais/editar', [
+	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendanteEditar',
+	'as'   => 'dados.recomendante.editar',
+	'middleware' => ['user.role:recomendante'],
+]);
+
 Route::post('/recomendante/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postDadosPessoaisRecomendante',
-	'as'   => 'dados.recomendante',
+	'as'   => 'dados.recomendante.salvar',
 	'middleware' => ['user.role:recomendante'],
 ]);
 
