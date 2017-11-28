@@ -17,7 +17,7 @@
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_finalizar_inscricao.ficha_inscricao')}}</legend>
       <div class="row">
-        {{ link_to($ficha_inscricao,$nome_candidato ) }}
+        {{ link_to($ficha_inscricao,$nome_candidato, array('target' => '_blank' ) ) }}
       </div>
   </fieldset>
   {!! Form::hidden('ficha_inscricao', $ficha_inscricao, []) !!}
