@@ -83,15 +83,42 @@ class CandidatoController extends BaseController
 		$candidato = new DadoPessoal();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
-		$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
+		if (!is_null($dados_pessoais->data_nascimento)) {
+			
+			$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
 
-		$data_nascimento = $nascimento->format('d/m/Y');
+			$data_nascimento = $nascimento->format('d/m/Y');
+		}else{
+			$data_nascimento = '';
+		}
+		
 
 		$nome_pais = new Paises;
 
 		$nome_estado = new Estado;
 
 		$nome_cidade = new Cidade;
+
+		if (!is_null($dados_pessoais->pais)) {
+			$pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
+		}else{
+
+			$pais = '';
+		}
+
+		if (!is_null($dados_pessoais->estado)) {
+			$estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
+		}else{
+
+			$estado = '';
+		}
+
+		if (!is_null($dados_pessoais->cidade)) {
+			$cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
+		}else{
+
+			$cidade = '';
+		}
 
 		$dados = [
 			'nome' => $dados_pessoais->nome,
@@ -101,9 +128,9 @@ class CandidatoController extends BaseController
 			'cpf' => $dados_pessoais->cpf,
 			'data_nascimento' => $data_nascimento,
 			'endereco' => $dados_pessoais->endereco,
-			'pais' => $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais),
-			'estado' => $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado),
-			'cidade' => $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado),
+			'pais' => $pais,
+			'estado' => $estado,
+			'cidade' => $cidade,
 			'cep' => $dados_pessoais->cep,
 			'celular' => $dados_pessoais->celular,
 		];
