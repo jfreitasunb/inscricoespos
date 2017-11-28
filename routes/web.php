@@ -21,23 +21,22 @@ Route::get('api/get-city-list','APIController@getCityList');
 *Área do candidato
 */
 
-Route::get('/candidato', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMenu',
-	'as'   => 'menu.candidato',
-	'middleware' => ['user.role:candidato','define.locale'],
-]);
 
-Route::get('/candidato/dados/academicos', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos',
-	'as'   => 'dados.academicos',
-	'middleware' => ['user.role:candidato'],
-]);
+Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->group(function () {
+	Route::get('/', '\Posmat\Http\Controllers\CandidatoController@getMenu')->name('menu.candidato');
 
-Route::post('/candidato/dados/academicos', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos',
-	'as'   => 'dados.academicos',
-	'middleware' => ['user.role:candidato'],
-]);
+	Route::get('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais')->name('dados.pessoais');
+
+	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
+
+	Route::post('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais')->name('dados.pessoais.salvar');
+
+	Route::get('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos')->name('dados.academicos');
+
+	Route::post('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos');
+});
+
+
 
 Route::get('/candidato/motivacao/documentos', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMotivacaoDocumentos',
@@ -63,23 +62,7 @@ Route::post('/candidato/finalizar/inscricao', [
 	'middleware' => ['user.role:candidato'],
 ]);
 
-Route::get('/candidato/dados/pessoais', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais',
-	'as'   => 'dados.pessoais',
-	'middleware' => ['user.role:candidato'],
-]);
 
-Route::get('/candidato/dados/pessoais/editar', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosPessoaisEditar',
-	'as'   => 'dados.pessoais.editar',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::post('/candidato/dados/pessoais', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais',
-	'as'   => 'dados.pessoais.salvar',
-	'middleware' => ['user.role:candidato'],
-]);
 
 Route::get('/candidato/dados/escolhas', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato',
