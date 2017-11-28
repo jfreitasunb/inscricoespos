@@ -41,9 +41,9 @@
           </div>
         @else
           <div class="row">
-            {!! Form::label('data_nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
+            {!! Form::label('nascimento', trans('tela_dados_pessoais.data_nascimento'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
-              {!! Form::text('data_nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+              {!! Form::text('nascimento', $dados['data_nascimento'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
             </div>
           </div>
         @endif
@@ -60,7 +60,7 @@
           <div class="row">
           {!! Form::label('numerorg', trans('tela_dados_pessoais.rg'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            {!! Form::text('numerorg', $dados['numerorg'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -77,7 +77,7 @@
           <div class="row">
           {!! Form::label('endereco', trans('tela_dados_pessoais.endereco'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            {!! Form::text('endereco', $dados['endereco'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -94,7 +94,7 @@
           <div class="row">
           {!! Form::label('cep', trans('tela_dados_pessoais.cep'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal']) !!}
+            {!! Form::text('cep', $dados['cep'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -111,7 +111,7 @@
           <div class="row">
           {!! Form::label('pais', trans('tela_dados_pessoais.pais'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::select('pais', ['' => 'Select'] +$countries,'',array('class'=>'form-control input-md formhorizontal','id'=>'pais'));!!}
+            {!! Form::text('pais', $dados['pais'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -128,7 +128,7 @@
           <div class="row">
           {!! Form::label('estado', trans('tela_dados_pessoais.estado'), ['class' => 'col-md-4 control-label']) !!}
           <div class="col-md-4">
-            <select name="estado" id="estado" class="form-control  input-md formhorizontal" ></select>
+            {!! Form::text('pais', $dados['estado'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -145,7 +145,7 @@
           <div class="row">
           {!! Form::label('cidade', trans('tela_dados_pessoais.cidade'), ['class' => 'col-md-4 control-label', 'required' => '']) !!}
           <div class="col-md-4">
-            <select name="cidade" id="cidade" class="form-control input-md formhorizontal"></select>
+            {!! Form::text('pais', $dados['cidade'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
@@ -162,7 +162,7 @@
           <div class="row">
           {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######']) !!}
+            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
           </div>
         </div>
         @endif
