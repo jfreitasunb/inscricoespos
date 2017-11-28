@@ -55,6 +55,7 @@
           @yield('relatorio_pos_edital_vigente')
           @yield('relatorio_pos_editais_anteriores')
           @yield('datatable_users')
+          @yield('ficha_individual')
         @endadmin
       @else
         @yield('inicio')
