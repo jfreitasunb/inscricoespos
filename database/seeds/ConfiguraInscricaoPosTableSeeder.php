@@ -211,6 +211,12 @@ class ConfiguraInscricaoPosTableSeeder extends Seeder
             ),
         ));
         
+        $tableToCheck = 'configura_inscricao_pos';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_inscricao_pos)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_inscricao_pos_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_inscricao_pos_seq\', '.$highestId->max.')');    
         
     }
 }
