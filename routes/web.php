@@ -69,9 +69,15 @@ Route::get('/candidato/dados/pessoais', [
 	'middleware' => ['user.role:candidato'],
 ]);
 
+Route::get('/candidato/dados/pessoais/editar', [
+	'uses' => '\Posmat\Http\Controllers\CandidatoController@getDadosPessoaisEditar',
+	'as'   => 'dados.pessoais.editar',
+	'middleware' => ['user.role:candidato'],
+]);
+
 Route::post('/candidato/dados/pessoais', [
 	'uses' => '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais',
-	'as'   => 'dados.pessoais',
+	'as'   => 'dados.pessoais.salvar',
 	'middleware' => ['user.role:candidato'],
 ]);
 
