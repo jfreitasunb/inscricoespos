@@ -11,7 +11,7 @@
   @if ($editar_dados)
     {!! Form::open(array('route' => 'dados.pessoais.salvar', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
   @else
-    {!! Form::open(array('route' => 'dados.pessoais.editar', 'class' => 'form-horizontal')) !!}
+    {!! Form::open(array('route' => 'dados.pessoais.editar', 'class' => 'form-horizontal', 'method' => 'GET')) !!}
   @endif
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Dados Pessoais</legend>
