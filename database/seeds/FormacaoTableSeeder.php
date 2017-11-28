@@ -65,6 +65,30 @@ class FormacaoTableSeeder extends Seeder
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
+            // 6 => 
+            // array (
+            //     'id' => 7,
+            //     'tipo' => 'Especialista',
+            //     'nivel' => 'Pós-Graduação',
+            //     'created_at' => '2017-11-21 15:27:00',
+            //     'updated_at' => '2017-11-21 15:27:00',
+            // ),
+            // 7 => 
+            // array (
+            //     'id' => 8,
+            //     'tipo' => 'Mestrado',
+            //     'nivel' => 'Pós-Graduação',
+            //     'created_at' => '2017-11-21 15:27:00',
+            //     'updated_at' => '2017-11-21 15:27:00',
+            // ),
+            // 8 => 
+            // array (
+            //     'id' => 9,
+            //     'tipo' => 'Doutorado',
+            //     'nivel' => 'Pós-Graduação',
+            //     'created_at' => '2017-11-21 15:27:00',
+            //     'updated_at' => '2017-11-21 15:27:00',
+            // ),
         ));
         
         $tableToCheck = 'formacao';

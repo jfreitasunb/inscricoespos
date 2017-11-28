@@ -23,12 +23,20 @@ class Formacao extends Model
 
     protected $fillable = [];
 
-    public function pega_tipo_formacao($id,$nivel){
-
+    public function pega_tipo_formacao($id,$nivel)
+    {
         return $this->select('tipo')
             ->where('id', $id)
             ->where('nivel', $nivel)
             ->value('tipo');
+    }
+
+     public function retorna_id_formacao($tipo,$nivel)
+     {
+        return $this->select('id')
+            ->where('tipo', $tipo)
+            ->where('nivel', $nivel)
+            ->value('id');
     }
 
     // public function pega_disciplinas_monitoria()

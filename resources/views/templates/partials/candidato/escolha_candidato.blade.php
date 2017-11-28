@@ -18,7 +18,7 @@
         @endforeach
         @if(isset($areas_pos))
           <div class="col-md-3">
-            <label class="radio">{!! Form::select('area_pos', $areas_pos, $dados['area_pos'] ?: '',  ['class' => 'col-md-6']) !!}</label>
+            <label class="radio">{!! Form::select('area_pos', $areas_pos, $dados['area_pos'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
           </div>    
         @endif
       </div>
@@ -28,10 +28,10 @@
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.interesse_bolsa')}}</legend>
       <div class="row">
         <div class="col-md-4">
-          <label class="radio-inline">{!! Form::radio('interesse_bolsa', 0, !$dados['interesse_bolsa'] ?true : false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
+          <label class="radio-inline">{!! Form::radio('interesse_bolsa', 0, !$dados['interesse_bolsa'] ? true : false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
         </div>
         <div class="col-md-4">
-          <label class="radio-inline">{!! Form::radio('interesse_bolsa', 1, $dados['interesse_bolsa'] ?true : false, ['class' => 'col-md-4 control-label']) !!}Sim</label>
+          <label class="radio-inline">{!! Form::radio('interesse_bolsa', 1, $dados['interesse_bolsa'] ? true : false, ['class' => 'col-md-4 control-label']) !!}Sim</label>
         </div>
       </div>
   </fieldset>
@@ -40,10 +40,10 @@
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.vinculo_empregaticio')}}</legend>
       <div class="row">
         <div class="col-md-4">
-          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 0, !$dados['vinculo_empregaticio'] ?true : false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
+          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 0, !$dados['vinculo_empregaticio'] ? true : false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
         </div>
         <div class="col-md-4">
-          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 1, $dados['vinculo_empregaticio'] ?true : false, ['class' => 'col-md-4 control-label']) !!}Sim</label>
+          <label class="radio-inline">{!! Form::radio('vinculo_empregaticio', 1, $dados['vinculo_empregaticio'] ? true : false, ['class' => 'col-md-4 control-label']) !!}Sim</label>
         </div>
       </div>
   </fieldset>

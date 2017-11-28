@@ -241,6 +241,10 @@ class CandidatoController extends BaseController
 
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
 
+		$nivel_candidato[0] = 'Especialista';
+		$nivel_candidato[1] = 'Mestrado';
+		$nivel_candidato[2] = 'Doutorado';
+
 
 		if (is_null($dados_academicos_candidato)) {
 			$dados = [];
@@ -250,21 +254,23 @@ class CandidatoController extends BaseController
 			$dados['ano_conclusao_graduacao'] = '';
 			$dados['curso_pos'] = '';
 			$dados['tipo_curso_pos'] = '';
+			// $dados['nivel_pos'] = '';
 			$dados['instituicao_pos'] = '';
 			$dados['ano_conclusao_pos'] = '';
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos'));
 		}else{
 			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
 			$dados['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
 			$dados['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
 			$dados['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
 			$dados['curso_pos'] = $dados_academicos_candidato->curso_pos;
+			// $dados['nivel_pos'] = $dados_academicos_candidato->nivel_pos;
 			$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
 			$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
 			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
 
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos'));
 		}
 
 		
@@ -283,6 +289,12 @@ class CandidatoController extends BaseController
 		$user = Auth::user();
 		$id_user = $user->id_user;
 		
+		$formacao = new Formacao;
+
+		$nivel_candidato[0] = 'Especialista';
+		$nivel_candidato[1] = 'Mestrado';
+		$nivel_candidato[2] = 'Doutorado';
+
 		$dados_academicos = DadoAcademico::find($id_user);
 
 		$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
@@ -290,6 +302,7 @@ class CandidatoController extends BaseController
 		$cria_dados_academicos['instituicao_graduacao'] = Purifier::clean(trim($request->input('instituicao_graduacao')));
 		$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
 		$cria_dados_academicos['curso_pos'] = Purifier::clean(trim($request->input('curso_pos')));
+		// $cria_dados_academicos['nivel_pos'] = $formacao->retorna_id_formacao($nivel_candidato[(int)$request->nivel_pos],'Pós-Graduação');
 		$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 		$cria_dados_academicos['instituicao_pos'] = Purifier::clean(trim($request->input('instituicao_pos')));
 		$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
@@ -302,10 +315,13 @@ class CandidatoController extends BaseController
 			$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
 			$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
 			$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
+			// $cria_dados_academicos->nivel_pos = $formacao->retorna_id_formacao($nivel_candidato[(int)$request->nivel_pos],'Pós-Graduação');
 			$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 			$cria_dados_academicos->instituicao_pos = Purifier::clean(trim($request->input('instituicao_pos')));
 			$cria_dados_academicos->ano_conclusao_pos = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
+
 			$cria_dados_academicos->save();
+
 		}else{
 			
 
@@ -361,9 +377,9 @@ class CandidatoController extends BaseController
 					
 					$dados = [];
 					$dados['programa_pretendido'] = '';
-					$dados['area_pos'] = '';
-					$dados['interesse_bolsa'] = '';
-					$dados['vinculo_empregaticio'] = '';
+					$dados['area_pos'] = null;
+					$dados['interesse_bolsa'] = null;
+					$dados['vinculo_empregaticio'] = null;
 					
 					$dados['nome_recomendante_1'] = '';
 					$dados['nome_recomendante_2'] = '';

@@ -49,6 +49,15 @@
     </div>
   </div>
 
+  {{-- <div class="row">
+    {!! Form::label('nivel_pos', trans('tela_dados_academicos.nivel'), ['class' => 'col-md-4 control-label'])!!}
+      <div class="col-md-4">
+        @foreach ($nivel_candidato as $nivel => $key)
+          <label class="radio-inline">{{ Form::radio('nivel_pos', $nivel, $dados['nivel_pos'] ? true : false, ['id'=>'nivel_pos']) }} {!! $key !!}</label>
+        @endforeach
+    </div>
+  </div> --}}
+
   <div class="row">
     {!! Form::label('tipo_curso_pos', trans('tela_dados_academicos.tipo_curso'), ['class' => 'col-md-4 control-label'])!!}
       <div class="col-md-4">
