@@ -26,41 +26,41 @@
 </div> --}}
 
 <div class="row">
-        <div class="col-sm-3 col-md-3">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseUm"><span class="glyphicon glyphicon-user">
-                            </span>Contas</a>
-                        </h4>
+    <div class="col-sm-3 col-md-3">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUm"><span class="glyphicon glyphicon-user">
+                        </span>Contas</a>
+                    </h4>
+                </div>
+                <div id="collapseUm" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <a href="{{ route('lista.usuarios') }}">Lista usuários</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ route('ativa.conta') }}">Ativar conta</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ route('pesquisar.papel') }}">Atribuir Papel</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    </span><a href="{{ route('criar.coordenador') }}" class="text-danger">
+                                        Cria Coordenador</a>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div id="collapseUm" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('lista.usuarios') }}">Lista usuários</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('ativa.conta') }}">Ativar conta</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="{{ route('pesquisar.papel') }}">Atribuir Papel</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        </span><a href="{{ route('criar.coordenador') }}" class="text-danger">
-                                            Cria Coordenador</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -140,11 +140,16 @@
                 </div>
             </div>
         </div>
-         <div class="col-sm-9 col-md-9">
+        <div class="col-sm-9 col-md-9">
             <div class="well">
-                <h1>
-                    Accordion Menu With Icon</h1>
-                Admin Dashboard Accordion Menu
+                @yield('ativa_conta')
+                @yield('cadastra_disciplina')
+                @yield('configura_inscricao')
+                @yield('relatorio_pos_edital_vigente')
+                @yield('relatorio_pos_editais_anteriores')
+                @yield('datatable_users')
+                @yield('ficha_individual')
             </div>
         </div>
     </div>
+</div>
