@@ -223,12 +223,16 @@ class AdminController extends CoordenadorController
 	{
 
 		$this->validate($request, [
-			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao',
-			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao',
-			'prazo_carta' => 'required|date_format:"d/m/Y"|after:inicio_inscricao',
+			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
+			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
+			'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
 			'edital' => 'required',
 			'programa' => 'required',
 		]);
+
+		
+
+
 	}
 
 }
