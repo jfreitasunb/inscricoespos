@@ -207,8 +207,11 @@ class AdminController extends CoordenadorController
         notify()->flash('A conta de coordenador para o e-mail: '.$novo_usuario->email.' foi criada com sucesso!','success');
 
         return redirect()->route('criar.coordenador');
-		
+	}
 
+	public function getEditarInscricao()
+	{
+		
 	}
 
 }
