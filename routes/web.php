@@ -34,59 +34,25 @@ Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->g
 	Route::get('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos')->name('dados.academicos');
 
 	Route::post('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos');
+
+	Route::get('dados/escolhas', '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato')->name('dados.escolhas');
+
+	Route::post('dados/escolhas', '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato');
+
+	Route::get('motivacao/documentos', '\Posmat\Http\Controllers\CandidatoController@getMotivacaoDocumentos')->name('motivacao.documentos');
+
+	Route::post('motivacao/documentos', '\Posmat\Http\Controllers\CandidatoController@postMotivacaoDocumentos');
+
+	Route::get('finalizar/inscricao', '\Posmat\Http\Controllers\CandidatoController@getFinalizarInscricao')->name('finalizar.inscricao');
+
+	Route::post('finalizar/inscricao', '\Posmat\Http\Controllers\CandidatoController@postFinalizarInscricao');
+
+	Route::get('status/cartas', '\Posmat\Http\Controllers\CandidatoController@getStatusCartas')->name('status.cartas');
+
+	Route::post('status/cartas', '\Posmat\Http\Controllers\CandidatoController@postStatusCartas');
 });
 
 
-
-Route::get('/candidato/motivacao/documentos', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getMotivacaoDocumentos',
-	'as'   => 'motivacao.documentos',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::post('/candidato/motivacao/documentos', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postMotivacaoDocumentos',
-	'as'   => 'motivacao.documentos',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::get('/candidato/finalizar/inscricao', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getFinalizarInscricao',
-	'as'   => 'finalizar.inscricao',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::post('/candidato/finalizar/inscricao', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postFinalizarInscricao',
-	'as'   => 'finalizar.inscricao',
-	'middleware' => ['user.role:candidato'],
-]);
-
-
-
-Route::get('/candidato/dados/escolhas', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato',
-	'as'   => 'dados.escolhas',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::post('/candidato/dados/escolhas', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato',
-	'as'   => 'dados.escolhas',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::get('/candidato/status/cartas', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@getStatusCartas',
-	'as'   => 'status.cartas',
-	'middleware' => ['user.role:candidato'],
-]);
-
-Route::post('/candidato/status/cartas', [
-	'uses' => '\Posmat\Http\Controllers\CandidatoController@postStatusCartas',
-	'as'   => 'status.cartas',
-	'middleware' => ['user.role:candidato'],
-]);
 
 /*
 *Área do Recomendante
