@@ -55,8 +55,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    </span><a href="{{ route('criar.coordenador') }}" class="text-danger">
-                                        Cria Coordenador</a>
+                                    <span><a href="{{ route('criar.coordenador') }}" class="text-danger">
+                                        Cria Coordenador</a></span>
                                 </td>
                             </tr>
                         </table>
@@ -145,6 +145,7 @@
                 @yield('ativa_conta')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
+                @yield('editar_inscricao')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')
                 @yield('datatable_users')
