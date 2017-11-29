@@ -109,6 +109,8 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::post('contas/cria/coordenador', '\Posmat\Http\Controllers\AdminController@postCriaCoordenador');
 
+	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
