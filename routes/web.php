@@ -111,6 +111,8 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
 
+	Route::post('inscricao/editar', '\Posmat\Http\Controllers\AdminController@postEditarInscricao');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
