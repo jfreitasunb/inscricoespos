@@ -93,21 +93,21 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('/', '\Posmat\Http\Controllers\AdminController@getMenu')->name('menu.admin');
 
-	Route::get('users', 'Admin\UserController@index')->name('lista.usuarios');
+	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 
-	Route::get('ativa/conta', '\Posmat\Http\Controllers\AdminController@getAtivaConta')->name('ativa.conta');
+	Route::get('contas/ativa/conta', '\Posmat\Http\Controllers\AdminController@getAtivaConta')->name('ativa.conta');
 
-	Route::post('ativa/conta', '\Posmat\Http\Controllers\AdminController@postAtivaConta');
+	Route::post('contas/ativa/conta', '\Posmat\Http\Controllers\AdminController@postAtivaConta');
 
-	Route::get('pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
+	Route::get('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
 
-	Route::post('pesquisar/papel', '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual');
+	Route::post('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual');
 
-	Route::post('atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
+	Route::post('contas/atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
 
-	Route::get('cria/coordenador', '\Posmat\Http\Controllers\AdminController@getCriaCoordenador')->name('criar.coordenador');
+	Route::get('contas/cria/coordenador', '\Posmat\Http\Controllers\AdminController@getCriaCoordenador')->name('criar.coordenador');
 
-	Route::post('cria/coordenador', '\Posmat\Http\Controllers\AdminController@postCriaCoordenador');
+	Route::post('contas/cria/coordenador', '\Posmat\Http\Controllers\AdminController@postCriaCoordenador');
 
 });
 
