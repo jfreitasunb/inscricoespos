@@ -216,10 +216,19 @@ class AdminController extends CoordenadorController
 
       	$edital_vigente = $edital->retorna_edital_vigente();
 
-      	// dd($edital_vigente);
-
       	return view('templates.partials.admin.editar_inscricao')->with(compact('edital_vigente'));
+	}
 
+	public function postEditarInscricao(Request $request)
+	{
+
+		$this->validate($request, [
+			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao',
+			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao',
+			'prazo_carta' => 'required|date_format:"d/m/Y"|after:inicio_inscricao',
+			'edital' => 'required',
+			'programa' => 'required',
+		]);
 	}
 
 }
