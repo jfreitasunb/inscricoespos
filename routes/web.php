@@ -85,73 +85,35 @@ Route::prefix('recomendante')->middleware('user.role:recomendante','define.local
 	Route::get('visualiza/anteriores', '\Posmat\Http\Controllers\RecomendanteController@GeraCartasAnteriores')->name('ver.anterior');
 });
 
-
-
-
-
-
-
-
-
 /*
 *Área do Admin
  */
 
+Route::prefix('admin')->middleware('user.role:admin')->group(function () {
+
+	Route::get('/', '\Posmat\Http\Controllers\AdminController@getMenu')->name('menu.admin');
+
+	Route::get('users', 'Admin\UserController@index')->name('lista.usuarios');
+
+	Route::get('ativa/conta', '\Posmat\Http\Controllers\AdminController@getAtivaConta')->name('ativa.conta');
+
+	Route::post('ativa/conta', '\Posmat\Http\Controllers\AdminController@postAtivaConta');
+
+	Route::get('pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
+
+	Route::post('pesquisar/papel', '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual');
+
+	Route::post('atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
+
+	Route::get('cria/coordenador', '\Posmat\Http\Controllers\AdminController@getCriaCoordenador')->name('criar.coordenador');
+
+	Route::post('cria/coordenador', '\Posmat\Http\Controllers\AdminController@postCriaCoordenador');
+
+});
+
 Route::resource('admin/datatable/users', 'DataTable\UserController');
 
-Route::get('/admin', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@getMenu',
-	'as'   => 'menu.admin',
-	'middleware' => ['user.role:admin','define.locale'],
-]);
 
-Route::get('admin/users', [
-	'uses' => 'Admin\UserController@index',
-	'as' => 'lista.usuarios',
-	'middleware' => ['user.role:admin','define.locale'],
-]);
-
-Route::get('/admin/ativa/conta', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@getAtivaConta',
-	'as'   => 'ativa.conta',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::post('/admin/ativa/conta', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@postAtivaConta',
-	'as'   => 'ativa.conta',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::get('/admin/pesquisar/papel', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual',
-	'as'   => 'pesquisar.papel',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::post('/admin/pesquisar/papel', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual',
-	'as'   => 'pesquisar.papel',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::post('/admin/atribuir/papel', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@postAtribuirPapel',
-	'as'   => 'atribuir.papel',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::get('/admin/cria/coordenador', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@getCriaCoordenador',
-	'as'   => 'criar.coordenador',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::post('/admin/cria/coordenador', [
-	'uses' => '\Posmat\Http\Controllers\AdminController@postCriaCoordenador',
-	'as'   => 'criar.coordenador',
-	'middleware' => ['user.role:admin'],
-]);
 
 /*
 *Área do coordenador
