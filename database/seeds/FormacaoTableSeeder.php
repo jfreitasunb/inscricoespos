@@ -52,7 +52,7 @@ class FormacaoTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'tipo' => 'Acadêmico',
+                'tipo' => 'Mestrado Acadêmico',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -60,27 +60,27 @@ class FormacaoTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'tipo' => 'Profissional',
+                'tipo' => 'Mestrado Profissional',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
-            // 6 => 
-            // array (
-            //     'id' => 7,
-            //     'tipo' => 'Especialista',
-            //     'nivel' => 'Pós-Graduação',
-            //     'created_at' => '2017-11-21 15:27:00',
-            //     'updated_at' => '2017-11-21 15:27:00',
-            // ),
-            // 7 => 
-            // array (
-            //     'id' => 8,
-            //     'tipo' => 'Mestrado',
-            //     'nivel' => 'Pós-Graduação',
-            //     'created_at' => '2017-11-21 15:27:00',
-            //     'updated_at' => '2017-11-21 15:27:00',
-            // ),
+            6 => 
+            array (
+                'id' => 7,
+                'tipo' => 'Doutorado',
+                'nivel' => 'Pós-Graduação',
+                'created_at' => '2017-11-21 15:27:00',
+                'updated_at' => '2017-11-21 15:27:00',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'tipo' => 'Especialização',
+                'nivel' => 'Pós-Graduação',
+                'created_at' => '2017-11-21 15:27:00',
+                'updated_at' => '2017-11-21 15:27:00',
+            ),
             // 8 => 
             // array (
             //     'id' => 9,
