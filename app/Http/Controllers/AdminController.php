@@ -230,7 +230,15 @@ class AdminController extends CoordenadorController
 			'programa' => 'required',
 		]);
 
-		
+		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
+
+		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
+		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
+		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
+		$novos_dados_edital['programa'] = $request->programa;
+		$novos_dados_edital['edital'] = $request->edital;
+
+		$edital_vigente->update($novos_dados_edital)
 
 
 	}
