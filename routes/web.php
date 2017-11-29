@@ -119,70 +119,33 @@ Route::resource('admin/datatable/users', 'DataTable\UserController');
 *Área do coordenador
  */
 
-Route::get('/coordenador/cadastrar/disciplina',[
-    'uses' => '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina',
-    'as'   => 'cadastra.disciplina',
-    'middleware' => ['user.role:coordenador,admin'],
-]);
+Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(function () {
 
-Route::post('/coordenador/cadastrar/disciplina',[
-    'uses' => '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina',
-    'as'   => 'cadastra.disciplina',
-    'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('/','\Posmat\Http\Controllers\CoordenadorController@getMenu')->name('menu.coordenador');
 
-Route::get('/coordenador/relatorio/{id_monitoria}',[
-    'uses' => '\Posmat\Http\Controllers\RelatorioController@geraRelatorio',
-    'as'   => 'gera.relatorio',
-    'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina')->name('cadastra.disciplina');
 
-Route::get('/coordenador/relatorio', [
-	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios',
-	'as' => 'relatorio.atual',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::post('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina');
 
-Route::get('/coordenador/relatorios/anteriores/{id_monitoria}',[
-    'uses' => '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores',
-    'as'   => 'gera.anteriores',
-    'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('relatorio/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatorio')->name('gera.relatorio');
 
-Route::get('/coordenador/relatorios/anteriores', [
-	'uses' => '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores',
-	'as' => 'relatorio.anteriores',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('relatorio', '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
 
-Route::get('/coordenador/configura/inscricao', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos',
-	'as' => 'configura.inscricao',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('relatorios/anteriores/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
 
-Route::post('/coordenador/configura/inscricao', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('relatorios/anteriores', '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 
-Route::get('/coordenador', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getMenu',
-	'as'   => 'menu.coordenador',
-	'middleware' => ['user.role:coordenador'],
-]);
+	Route::get('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos')->name('configura.inscricao');
 
-Route::get('/coordenador/gera/ficha/individual', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato',
-	'as' => 'gera.ficha.individual',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::post('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos');
 
-Route::get('/coordenador/ver/ficha/individual', [
-	'uses' => '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual',
-	'as' => 'ver.ficha.individual',
-	'middleware' => ['user.role:coordenador,admin'],
-]);
+	Route::get('gera/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
+
+	Route::get('ver/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
+
+});
+
+
 
 /**
 * Logout
