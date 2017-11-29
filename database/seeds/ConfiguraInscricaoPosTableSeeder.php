@@ -209,6 +209,18 @@ class ConfiguraInscricaoPosTableSeeder extends Seeder
                 'created_at' => '2017-08-20 14:00:00',
                 'updated_at' => '2017-08-20 14:00:00',
             ),
+            16 => 
+            array (
+                'id_inscricao_pos' => 17,
+                'inicio_inscricao' => '2017-11-11',
+                'fim_inscricao' => '2017-12-31',
+                'prazo_carta' => '2018-01-06',
+                'programa' => '1_2',
+                'edital' => '2017-4',
+                'id_coordenador' => 2,
+                'created_at' => '2017-08-20 14:00:00',
+                'updated_at' => '2017-08-20 14:00:00',
+            ),
         ));
         
         $tableToCheck = 'configura_inscricao_pos';
