@@ -85,7 +85,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Reativar Inscrição Candidato</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -146,6 +146,7 @@
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
+                @yield('reativar_inscricao_candidato')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')
                 @yield('datatable_users')
