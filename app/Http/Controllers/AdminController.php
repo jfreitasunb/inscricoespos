@@ -238,9 +238,11 @@ class AdminController extends CoordenadorController
 		$novos_dados_edital['programa'] = $request->programa;
 		$novos_dados_edital['edital'] = $request->edital;
 
-		$edital_vigente->update($novos_dados_edital)
+		$edital_vigente->update($novos_dados_edital);
 
+		notify()->flash('Inscrição alterada com sucesso!','success', ['timer' => 3000,]);
 
+		return redirect()->route('editar.inscricao');
 	}
 
 }
