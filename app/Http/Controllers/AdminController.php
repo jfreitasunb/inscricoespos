@@ -211,7 +211,15 @@ class AdminController extends CoordenadorController
 
 	public function getEditarInscricao()
 	{
-		
+
+		$edital = new ConfiguraInscricaoPos();
+
+      	$edital_vigente = $edital->retorna_edital_vigente();
+
+      	// dd($edital_vigente);
+
+      	return view('templates.partials.admin.editar_inscricao')->with(compact('edital_vigente'));
+
 	}
 
 }
