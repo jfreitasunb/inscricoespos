@@ -28,7 +28,7 @@
 <div class="row">
     <div class="col-sm-3 col-md-3">
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
+            <div class="menuadmin panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseUm"><span class="glyphicon glyphicon-user">
@@ -80,7 +80,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Editar Inscrição</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -141,7 +141,7 @@
             </div>
         </div>
         <div class="col-sm-9 col-md-9">
-            <div class="well">
+            <div class="menuadmin well">
                 @yield('ativa_conta')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
