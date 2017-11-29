@@ -23,6 +23,7 @@ Route::get('api/get-city-list','APIController@getCityList');
 
 
 Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->group(function () {
+	
 	Route::get('/', '\Posmat\Http\Controllers\CandidatoController@getMenu')->name('menu.candidato');
 
 	Route::get('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais')->name('dados.pessoais');
@@ -57,78 +58,40 @@ Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->g
 /*
 *Área do Recomendante
 */
-Route::get('/recomendante', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getMenu',
-	'as'   => 'menu.recomendante',
-	'middleware' => ['user.role:recomendante','define.locale'],
-]);
+Route::prefix('recomendante')->middleware('user.role:recomendante','define.locale')->group(function () {
 
-Route::get('/recomendante/dados/pessoais', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante',
-	'as'   => 'dados.recomendante',
-	'middleware' => ['user.role:recomendante'],
-]);
+	Route::get('/', '\Posmat\Http\Controllers\RecomendanteController@getMenu')->name('menu.recomendante');
 
-Route::get('/recomendante/dados/pessoais/editar', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendanteEditar',
-	'as'   => 'dados.recomendante.editar',
-	'middleware' => ['user.role:recomendante'],
-]);
+	Route::get('dados/pessoais', '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante')->name('dados.recomendante');
 
-Route::post('/recomendante/dados/pessoais', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postDadosPessoaisRecomendante',
-	'as'   => 'dados.recomendante.salvar',
-	'middleware' => ['user.role:recomendante'],
-]);
+	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendanteEditar')->name('dados.recomendante.editar');
+
+	Route::post('dados/pessoais', '\Posmat\Http\Controllers\RecomendanteController@postDadosPessoaisRecomendante')->name('dados.recomendante.salvar');
+
+	Route::get('cartas/pendentes', '\Posmat\Http\Controllers\RecomendanteController@getCartasPendentes')->name('cartas.pendentes');
+
+	Route::post('cartas/pendentes', '\Posmat\Http\Controllers\RecomendanteController@postCartasPendentes');
+
+	Route::post('carta/inicial', '\Posmat\Http\Controllers\RecomendanteController@postCartaInicial')->name('carta.inicial');
+
+	Route::post('salva/carta/inicial', '\Posmat\Http\Controllers\RecomendanteController@postPreencherCarta')->name('salva.carta.inicial');
+
+	Route::get('preencher/carta/final', '\Posmat\Http\Controllers\RecomendanteController@getFinalizarCarta')->name('finalizar.carta');
+
+	Route::post('preencher/carta/final', '\Posmat\Http\Controllers\RecomendanteController@postFinalizarCarta')->name('finalizar.carta');
+
+	Route::get('cartas/anteriores', '\Posmat\Http\Controllers\RecomendanteController@getCartasAnteriores')->name('cartas.anteriores');
+
+	Route::get('visualiza/anteriores', '\Posmat\Http\Controllers\RecomendanteController@GeraCartasAnteriores')->name('ver.anterior');
+});
 
 
-Route::get('/recomendante/cartas/pendentes', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getCartasPendentes',
-	'as'   => 'cartas.pendentes',
-	'middleware' => ['user.role:recomendante'],
-]);
 
-Route::post('/recomendante/cartas/pendentes', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@postCartasPendentes',
-	'as'   => 'cartas.pendentes',
-	'middleware' => ['user.role:recomendante'],
-]);
 
-Route::get('/recomendante/cartas/anteriores', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@getCartasAnteriores',
-	'as'   => 'cartas.anteriores',
-	'middleware' => ['user.role:recomendante'],
-]);
 
-Route::get('/recomendante/visualiza/anteriores', [
-	'uses' => '\Posmat\Http\Controllers\RecomendanteController@GeraCartasAnteriores',
-	'as'   => 'ver.anterior',
-	'middleware' => ['user.role:recomendante'],
-]);
 
-Route::post('/recomendante/carta/inicial', [
-		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postCartaInicial',
-		'as' => 'carta.inicial',
-		'middleware' => ['user.role:recomendante'],
-]);
 
-Route::post('/recomendante/salva/carta/inicial', [
-		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postPreencherCarta',
-		'as' => 'salva.carta.inicial',
-		'middleware' => ['user.role:recomendante'],
-]);
 
-Route::get('/recomendante/preencher/carta/final', [
-		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@getFinalizarCarta',
-		'as' => 'finalizar.carta',
-		'middleware' => ['user.role:recomendante'],
-]);
-
-Route::post('/recomendante/preencher/carta/final', [
-		'uses'	=> '\Posmat\Http\Controllers\RecomendanteController@postFinalizarCarta',
-		'as' => 'finalizar.carta',
-		'middleware' => ['user.role:recomendante'],
-]);
 
 /*
 *Área do Admin
