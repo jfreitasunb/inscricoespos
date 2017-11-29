@@ -37,4 +37,14 @@ class FinalizaInscricao extends Model
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->get();
     }
+
+    public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_user)
+    {
+        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_user', $id_user)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->join('configura_inscricao_pos','configura_inscricao_pos.id_inscricao_pos', 'finaliza_inscricao.id_inscricao_pos')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'dados_pessoais.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id', 'finaliza_inscricao.id_user', 'finaliza_inscricao.id_inscricao_pos', 'finaliza_inscricao.finalizada', 'configura_inscricao_pos.edital', 'dados_pessoais.nome','programa_pos_mat.tipo_programa_pos')->get()->first();
+    }
+
+    public function retorna_dados_inscricao_finalizada($id_inscricao_pos, $id_user)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_user', $id_user)->get()->first();
+    }
 }
