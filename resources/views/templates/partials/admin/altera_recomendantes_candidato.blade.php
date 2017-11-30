@@ -10,7 +10,7 @@
 @if ($modo_pesquisa)
 	{!! Form::open(array('route' => 'pesquisa.recomendantes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 @else
-	{!! Form::open(array('route' => 'salvar.alteracao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
+	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
 @endif
 
 <div class="form-group">
@@ -25,13 +25,13 @@
 
 	<div class="form-group">
 		<div class="col-sm-6">
-			{!! Form::text('nome_candidato', $candidato['nome'], ['class' => 'form-control']) !!}	
+			{!! Form::text('nome_candidato', $candidato['nome'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
 		</div>
 		<div class="col-sm-4">
-			{!! Form::text('programa', $candidato['programa'], ['class' => 'form-control']) !!}	
+			{!! Form::text('programa', $candidato['programa'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
 		</div>
 		<div class="col-sm-2">
-			{!! Form::text('edital', $candidato['edital'], ['class' => 'form-control']) !!}	
+			{!! Form::text('edital', $candidato['edital'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
 		</div>
 	</div>
 
