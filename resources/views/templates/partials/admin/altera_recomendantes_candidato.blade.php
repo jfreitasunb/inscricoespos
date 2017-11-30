@@ -25,13 +25,13 @@
 
 	<div class="form-group">
 		<div class="col-sm-6">
-			{!! Form::text('nome_candidato', $candidato['nome'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
+			{!! Form::text('nome_candidato', $candidato['nome'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
 		</div>
 		<div class="col-sm-4">
-			{!! Form::text('programa', $candidato['programa'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
+			{!! Form::text('programa', $candidato['programa'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
 		</div>
 		<div class="col-sm-2">
-			{!! Form::text('edital', $candidato['edital'], ['class' => 'form-control', 'disabled' => 'disabled']) !!}	
+			{!! Form::text('edital', $candidato['edital'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
 		</div>
 	</div>
 
