@@ -7,7 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPosMat, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -342,12 +342,19 @@ class AdminController extends CoordenadorController
 
 		$id_aluno = $this->getPesquisaCandidato($email_candidato);
 
+		$dados_pessoais = DadoPessoal::find($id_aluno);
 
 		$edital = new ConfiguraInscricaoPos;
 
 		$edital_vigente = $edital->retorna_edital_vigente();
 
 		$id_inscricao_pos = $edital_vigente->id_inscricao_pos;
+
+		$escolha = new EscolhaCandidato;
+
+		$escolha_candidato = $escolha->retorna_escolha_candidato($id_aluno, $id_inscricao_pos);
+
+		$nome_programa_pos = new ProgramaPos();
 
 		$recomendantes = new ContatoRecomendante;
 
@@ -361,9 +368,9 @@ class AdminController extends CoordenadorController
 
 		$candidato['id_aluno'] = $id_aluno;
 
-		$candidato['nome'] = 'Temp';
+		$candidato['nome'] = $dados_pessoais->nome;
 
-		$candidato['programa'] = 'Teste';
+		$candidato['programa'] = $nome_programa_pos->pega_programa_pos_mat($escolha_candidato->programa_pretendido);
 
 		$candidato['edital'] = $edital_vigente->edital;
 
