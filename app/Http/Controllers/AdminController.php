@@ -7,7 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPosMat, RelatorioController, FinalizaInscricao, ContatoRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPosMat, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
