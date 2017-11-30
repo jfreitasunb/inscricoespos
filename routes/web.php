@@ -125,6 +125,8 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes');
 
+	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\AdminController@postAlteraRecomendante')->name('altera.recomendante');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
