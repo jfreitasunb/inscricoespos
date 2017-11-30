@@ -394,6 +394,14 @@ class AdminController extends CoordenadorController
 	public function postAlteraRecomendante(Request $request)
 	{
 
+		
+		if ($request->cancelar === 'Cancelar'){
+
+			notify()->flash('Alteração dos recomendantes cancelada!','info');
+
+			return redirect()->route('pesquisa.recomendantes');
+		}
+
 		dd($request);
 	}
 
