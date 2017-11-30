@@ -7,7 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPosMat, RelatorioController, FinalizaInscricao};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPosMat, RelatorioController, FinalizaInscricao, ContatoRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -331,7 +331,29 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('modo_pesquisa'));
 	}
 
-	
+	public function postPesquisarRecomendantes(Request $request)
+	{
+
+		$this->validate($request, [
+			'email_candidato' => 'required|email',
+		]);
+
+		$email_candidato = strtolower(trim($request->email_candidato));
+
+		$id_aluno = $this->getPesquisaCandidato($email_candidato);
+
+
+		$edital = new ConfiguraInscricaoPos;
+
+		$edital_vigente = $edital->retorna_edital_vigente();
+
+		$recomendantes = new ContatoRecomendante;
+
+		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_aluno, 16);
+
+
+
+	}
 
 
 }
