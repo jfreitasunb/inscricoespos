@@ -351,7 +351,17 @@ class AdminController extends CoordenadorController
 
 		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_aluno, 16);
 
+		$array_recomendantes = [];
 
+		foreach ($indicacoes_candidato as $indicacao) {
+			
+			$dados_pessoais_recomendante = new DadoRecomendante;
+
+
+			$array_recomendantes[$indicacao->id_recomendante]['nome_recomendante'] = $dados_pessoais_recomendante->retorna_dados_pessoais_recomendante($indicacao->id_recomendante)->nome_recomendante;
+
+			$array_recomendantes[$indicacao->id_recomendante]['email_recomendante'] = User::find($indicacao->id_recomendante)->email;
+		}
 
 	}
 
