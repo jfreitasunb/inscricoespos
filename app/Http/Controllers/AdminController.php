@@ -391,5 +391,11 @@ class AdminController extends CoordenadorController
 
 	}
 
+	public function postAlteraRecomendante(Request $request)
+	{
+
+		dd($request);
+	}
+
 
 }
