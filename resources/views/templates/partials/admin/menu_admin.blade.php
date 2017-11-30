@@ -147,6 +147,7 @@
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
                 @yield('reativar_inscricao_candidato')
+                @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')
                 @yield('datatable_users')
