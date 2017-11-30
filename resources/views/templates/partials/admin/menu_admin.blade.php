@@ -95,7 +95,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Mudar Recomendante</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
                             </table>
