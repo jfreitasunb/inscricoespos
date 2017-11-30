@@ -347,21 +347,40 @@ class AdminController extends CoordenadorController
 
 		$edital_vigente = $edital->retorna_edital_vigente();
 
+		$id_inscricao_pos = $edital_vigente->id_inscricao_pos;
+
 		$recomendantes = new ContatoRecomendante;
 
-		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_aluno, 16);
+		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_aluno, $id_inscricao_pos);
 
 		$array_recomendantes = [];
+
+		$candidato = [];
+
+		$candidato['id_inscricao_pos'] = $id_inscricao_pos;
+
+		$candidato['id_aluno'] = $id_aluno;
+
+		$candidato['nome'] = 'Temp';
+
+		$candidato['programa'] = 'Teste';
+
+		$candidato['edital'] = $edital_vigente->edital;
 
 		foreach ($indicacoes_candidato as $indicacao) {
 			
 			$dados_pessoais_recomendante = new DadoRecomendante;
 
+			$array_recomendantes[$indicacao->id_recomendante]['id'] = $indicacao->id;
 
 			$array_recomendantes[$indicacao->id_recomendante]['nome_recomendante'] = $dados_pessoais_recomendante->retorna_dados_pessoais_recomendante($indicacao->id_recomendante)->nome_recomendante;
 
 			$array_recomendantes[$indicacao->id_recomendante]['email_recomendante'] = User::find($indicacao->id_recomendante)->email;
 		}
+
+		$modo_pesquisa = false;
+
+		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('array_recomendantes', 'candidato', 'modo_pesquisa'));
 
 	}
 
