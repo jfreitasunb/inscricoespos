@@ -8,7 +8,7 @@
 
 @section('reativar_inscricao_candidato')
 @if ($modo_pesquisa)
-	{!! Form::open(array('route' => 'pesquisa.candidato', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+	{!! Form::open(array('route' => 'pesquisa.recomendantes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 @else
 	{!! Form::open(array('route' => 'salvar.alteracao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
 @endif

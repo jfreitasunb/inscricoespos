@@ -123,6 +123,8 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
+	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
