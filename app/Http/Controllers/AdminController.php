@@ -265,7 +265,7 @@ class AdminController extends CoordenadorController
 			'email_candidato' => 'required|email',
 		]);
 
-		$email_candidato = trim($request->email_candidato);
+		$email_candidato = strtolower(trim($request->email_candidato));
 
 		$id_user = $this->getPesquisaCandidato($email_candidato);
 
@@ -330,6 +330,8 @@ class AdminController extends CoordenadorController
 		
 		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('modo_pesquisa'));
 	}
+
+	
 
 
 }
