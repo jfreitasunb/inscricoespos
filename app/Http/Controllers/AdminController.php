@@ -324,5 +324,12 @@ class AdminController extends CoordenadorController
 		}
 	}
 
+	public function getPesquisarRecomendantes(){
+
+		$modo_pesquisa = true;
+		
+		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('modo_pesquisa'));
+	}
+
 
 }
