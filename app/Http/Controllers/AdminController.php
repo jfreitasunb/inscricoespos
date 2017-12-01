@@ -403,26 +403,53 @@ class AdminController extends CoordenadorController
 		}
 
 		$this->validate($request, [
-
-			'email_candidato' => 'required!email',
 			'id' => 'required',
 			'id_aluno' => 'required',
 			'id_inscricao_pos' => 'required',
 			'id_recomendante' => 'required',
 			'id_recomendante' => 'required',
 			'nome_recomendante' => 'required',
-			'email' => 'required|email',
+			'email_recomendante' => 'required|email',
 		]);
+
 
 		$id = (int)$request->id;
 		$id_aluno = (int)$request->id_aluno;
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		$id_recomendante = (int)$request->id_recomendante;
-		$email_recomendante = strtolower(trim($request->email));
+		$email_recomendante = strtolower(trim($request->email_recomendante));
 		$nome_recomendante = trim($request->nome_recomendante);
 		$email_candidato = strtolower(trim($request->email_candidato));
 
-		dd($request);
+		$user_recomendante = new User;
+
+		$acha_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante);
+
+		if (is_null($acha_recomendante)) {
+			$novo_usuario = new User();
+            $novo_usuario->email = $email_recomendante;
+            $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
+            $novo_usuario->user_type =  "recomendante";
+            $novo_usuario->ativo = true;
+            $novo_usuario->save();
+
+            $id_novo_recomendante = $novo_usuario->id_user;
+            
+            $dados_iniciais_recomendante = new DadoRecomendante();
+
+            $grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_novo_recomendante, $nome_recomendante);
+
+		}else{
+
+			if ($acha_recomendante->user_type === 'recomendante') {
+				$id_novo_recomendante = $acha_recomendante->id_user;
+			}else{
+
+				notify()->flash('O e-mail: '.$email_recomendante.' pertence a um candidato!','error');
+				return redirect()->back();
+			}
+			
+		}
 	}
 
 
