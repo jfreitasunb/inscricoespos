@@ -32,7 +32,7 @@
 	</div>
 
 	@foreach ($array_recomendantes as $key => $recomendante)
-	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
+	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 	{!! Form::hidden('id_inscricao_pos', $candidato['id_inscricao_pos'], []) !!}
 	{!! Form::hidden('id_aluno', $candidato['id_aluno'], []) !!}
@@ -49,7 +49,7 @@
 				{!! Form::label('email', 'Email', ['class' => 'control-label']) !!}
 			</div>
       		<div class="col-sm-4">
-      			{!! Form::text('email', $recomendante['email_recomendante'], ['class' => 'form-control']) !!}
+      			{!! Form::text('email_recomendante', $recomendante['email_recomendante'], ['class' => 'form-control']) !!}
       		</div>
       		<div class="col-sm-2">
       			{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}
@@ -69,6 +69,7 @@
 	</div>
 	{!! Form::close() !!}
 @else
+	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
 	<div class="form-group">
 	  <div class="row">
 	    <div class="col-md-6 col-md-offset-3 text-center">
