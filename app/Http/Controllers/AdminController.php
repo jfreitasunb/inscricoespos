@@ -452,10 +452,17 @@ class AdminController extends CoordenadorController
 			}	
 		}
 
+		$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_recomendante)->where('completada', false)->update(['id_prof' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+
+		if (!$mudou_recomendante) {
+			
+			notify()->flash('O recomendante original já enviou a carta. Não é possível trocar!','error');
+			return redirect()->back();
+			
+		}
+
 		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
-
-		DB::table('cartas_recomendacoes')->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_recomendante)->where('completada', false)->update(['id_prof' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
 
 
