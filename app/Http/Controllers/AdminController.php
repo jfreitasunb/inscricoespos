@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Mail;
 use Session;
+use Notification;
 use Carbon\Carbon;
 use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao};
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\AuthController;
 use Posmat\Http\Controllers\CoordenadorController;
 use Posmat\Http\Controllers\DataTable\UserController;
+use Posmat\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 
@@ -463,8 +465,23 @@ class AdminController extends CoordenadorController
 
 		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
+		//Falta enviar o e-mail para o novo recomendante.
+
+		// $dado_pessoal_recomendante = new DadoRecomendante();
+
+
+		// 			$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
+
+		// 			$dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+  //       			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
+		// 	        $dados_email['programa'] = $nome_programa_pos_candidato;
+  //       			$dados_email['email_recomendante'] = User::find($recomendante->id_recomendante)->email;
+  //       			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
+
+		// 			Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
 
 		notify()->flash('Alteração efetuado com sucesso','success');
+
 		return redirect()->back();
 
 
