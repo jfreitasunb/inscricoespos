@@ -464,6 +464,8 @@ class AdminController extends CoordenadorController
 		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
 
+		notify()->flash('Alteração efetuado com sucesso','success');
+		return redirect()->back();
 
 
 	}
