@@ -7,7 +7,7 @@ use DB;
 use Mail;
 use Session;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -412,6 +412,8 @@ class AdminController extends CoordenadorController
 			'email_recomendante' => 'required|email',
 		]);
 
+		// dd($request);
+
 
 		$id = (int)$request->id;
 		$id_aluno = (int)$request->id_aluno;
@@ -447,9 +449,16 @@ class AdminController extends CoordenadorController
 
 				notify()->flash('O e-mail: '.$email_recomendante.' pertence a um candidato!','error');
 				return redirect()->back();
-			}
-			
+			}	
 		}
+
+		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+
+
+		DB::table('cartas_recomendacoes')->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_recomendante)->update(['id_prof' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+
+
+
 	}
 
 
