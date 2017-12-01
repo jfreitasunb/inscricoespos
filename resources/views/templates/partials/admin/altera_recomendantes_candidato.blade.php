@@ -71,7 +71,7 @@
 	<div class="form-group">
 	  <div class="row">
 	    <div class="col-md-6 col-md-offset-3 text-center">
-	      {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'cancelar', 'value' => '0']) !!}
+	      {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'Cancelar']) !!}
 	    </div>
 	  </div>
 	</div>

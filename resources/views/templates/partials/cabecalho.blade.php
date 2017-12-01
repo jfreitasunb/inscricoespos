@@ -7,13 +7,12 @@
                 <a href="{{URL::to('/')}}"> <img src="{{ asset('imagens/logo/logo_unb.png') }}" class="img-responsive" style="height:120px" /></a>
               </div>
               <div class="col-sm-8 col-md-7 col-xs-12">  
-              <h1>Departamento de Matemática</h1>
-              <h2>Inscrições para a Pós-Graduação</h2>
-              <h3>{{$periodo_inscricao}}</h3>
+                <h1>Departamento de Matemática</h1>
+                <h2>Inscrições para a Pós-Graduação</h2>
+                <h3>{{$periodo_inscricao}}</h3>
               </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
-
 </header>
