@@ -9,8 +9,6 @@
 @section('altera_recomendantes')
 @if ($modo_pesquisa)
 	{!! Form::open(array('route' => 'pesquisa.recomendantes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-@else
-	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
 @endif
 
 <div class="form-group">
@@ -19,24 +17,25 @@
 		{!! Form::text('email_candidato', '' , ['class' => 'form-control input-md']) !!}
 	</div>
 </div>
-@if (!$modo_pesquisa)
-	{!! Form::hidden('id_inscricao_pos', $candidato['id_inscricao_pos'], []) !!}
-	{!! Form::hidden('id_aluno', $candidato['id_aluno'], []) !!}
 
+@if (!$modo_pesquisa)
 	<div class="form-group">
 		<div class="col-sm-6">
-			{!! Form::text('nome_candidato', $candidato['nome'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
+			<input class="form-control" type="text" name="" value="{{ $candidato['nome'] }}" readonly="readonly">
 		</div>
 		<div class="col-sm-4">
-			{!! Form::text('programa', $candidato['programa'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
+			<input class="form-control" type="text" name="" value="{{ $candidato['programa'] }}" readonly="readonly">
 		</div>
 		<div class="col-sm-2">
-			{!! Form::text('edital', $candidato['edital'], ['class' => 'form-control', 'readonly' => 'readonly']) !!}	
+			<input class="form-control" type="text" name="" value="{{ $candidato['edital'] }}" readonly="readonly">
 		</div>
 	</div>
 
-	
 	@foreach ($array_recomendantes as $key => $recomendante)
+	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
+
+	{!! Form::hidden('id_inscricao_pos', $candidato['id_inscricao_pos'], []) !!}
+	{!! Form::hidden('id_aluno', $candidato['id_aluno'], []) !!}
 		{!! Form::hidden('id', $recomendante['id'], []) !!}
 		{!! Form::hidden('id_recomendante', $key, []) !!}
 		<div class="form-group">
@@ -56,6 +55,7 @@
       			{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}
       		</div>
     	</div>
+    	{!! Form::close() !!}
 	@endforeach
 @endif
 
@@ -67,17 +67,19 @@
 	    </div>
 	  </div>
 	</div>
+	{!! Form::close() !!}
 @else
 	<div class="form-group">
 	  <div class="row">
 	    <div class="col-md-6 col-md-offset-3 text-center">
-	      {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'Cancelar']) !!}
+	      {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'cancelar', 'value' => '0']) !!}
 	    </div>
 	  </div>
 	</div>
+	{!! Form::close() !!}
 @endif
 
-{!! Form::close() !!}
+
 @endsection
 
 @section('scripts')
