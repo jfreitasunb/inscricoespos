@@ -402,6 +402,26 @@ class AdminController extends CoordenadorController
 			return redirect()->route('pesquisa.recomendantes');
 		}
 
+		$this->validate($request, [
+
+			'email_candidato' => 'required!email',
+			'id' => 'required',
+			'id_aluno' => 'required',
+			'id_inscricao_pos' => 'required',
+			'id_recomendante' => 'required',
+			'id_recomendante' => 'required',
+			'nome_recomendante' => 'required',
+			'email' => 'required|email',
+		]);
+
+		$id = (int)$request->id;
+		$id_aluno = (int)$request->id_aluno;
+		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+		$id_recomendante = (int)$request->id_recomendante;
+		$email_recomendante = strtolower(trim($request->email));
+		$nome_recomendante = trim($request->nome_recomendante);
+		$email_candidato = strtolower(trim($request->email_candidato));
+
 		dd($request);
 	}
 
