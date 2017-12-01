@@ -165,6 +165,8 @@ class RecomendanteController extends BaseController
 
 					$dados_para_template[$indicado->id_user]['status_carta'] = $carta_aluno->completada;
 
+					$sem_carta = false;
+
 				}
 			}else{
 				$sem_carta = true;
