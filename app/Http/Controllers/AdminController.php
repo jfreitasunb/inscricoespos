@@ -467,18 +467,17 @@ class AdminController extends CoordenadorController
 
 		//Falta enviar o e-mail para o novo recomendante.
 
-		// $dado_pessoal_recomendante = new DadoRecomendante();
+		$edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
+		$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
 
-		// 			$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
+		$dados_email['nome_professor'] = $nome_recomendante;
+        $dados_email['nome_candidato'] = $request->nome_candidato;
+		$dados_email['programa'] = $request->programa;
+        $dados_email['email_recomendante'] = $email_recomendante;
+        $dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
-		// 			$dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
-  //       			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
-		// 	        $dados_email['programa'] = $nome_programa_pos_candidato;
-  //       			$dados_email['email_recomendante'] = User::find($recomendante->id_recomendante)->email;
-  //       			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
-
-		// 			Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
+		Notification::send(User::find($id_novo_recomendante), new NotificaRecomendante($dados_email));
 
 		notify()->flash('Alteração efetuado com sucesso','success');
 
