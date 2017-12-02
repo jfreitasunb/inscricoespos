@@ -90,7 +90,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Reativar Carta</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('reativar.carta') }}">Reativar Carta</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,6 +147,7 @@
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
                 @yield('reativar_inscricao_candidato')
+                @yield('reativar_carta_enviada')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')

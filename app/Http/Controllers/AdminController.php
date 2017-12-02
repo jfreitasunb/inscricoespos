@@ -465,8 +465,6 @@ class AdminController extends CoordenadorController
 
 		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
-		//Falta enviar o e-mail para o novo recomendante.
-
 		$edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
 		$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
@@ -483,7 +481,14 @@ class AdminController extends CoordenadorController
 
 		return redirect()->back();
 
+	}
 
+	public function getPesquisarCartaEnviada()
+	{
+
+		$modo_pesquisa = true;
+
+		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa'));
 	}
 
 

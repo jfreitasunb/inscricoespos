@@ -127,6 +127,7 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\AdminController@postAlteraRecomendante')->name('altera.recomendante');
 
+	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@getPesquisarCartaEnviada')->name('reativar.carta');
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
