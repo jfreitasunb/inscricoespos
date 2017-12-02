@@ -38,6 +38,10 @@
 	{!! Form::hidden('id_aluno', $candidato['id_aluno'], []) !!}
 		{!! Form::hidden('id', $recomendante['id'], []) !!}
 		{!! Form::hidden('id_recomendante', $key, []) !!}
+		{!! Form::hidden('nome_candidato', $candidato['nome'], []) !!}
+		{!! Form::hidden('programa', $candidato['programa'], []) !!}
+
+
 		<div class="form-group">
 			<div class="col-sm-1">
 				{!! Form::label('nome_recomendante', 'Nome', ['class' => 'control-label']) !!}
