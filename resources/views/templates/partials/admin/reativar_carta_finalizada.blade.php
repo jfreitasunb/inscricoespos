@@ -8,22 +8,22 @@
 
 @section('reativar_carta_enviada')
 @if ($modo_pesquisa)
-	{!! Form::open(array('route' => 'pesquisa.candidato', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+	{!! Form::open(array('route' => 'pesquisa.carta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 @else
 	{!! Form::open(array('route' => 'salvar.alteracao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}	
 @endif
 
 <div class="form-group">
-	{!! Form::label('email_candidato', 'Pesquisar Cartas', ['class' => 'col-md-4 control-label']) !!}
+	{!! Form::label('email_recomendante', 'Pesquisar Cartas', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
-		{!! Form::text('email_candidato', '' , ['class' => 'form-control input-md']) !!}
+		{!! Form::text('email_recomendante', '' , ['class' => 'form-control input-md']) !!}
 	</div>
 </div>
 @if (!$modo_pesquisa)
 	{!! Form::hidden('id', $finalizou->id, []) !!}
 	{!! Form::hidden('id_inscricao_pos', $finalizou->id_inscricao_pos, []) !!}
 	{!! Form::hidden('id_user', $finalizou->id_user, []) !!}
-	{!! Form::hidden('email_candidato', $email_candidato, []) !!}
+	{!! Form::hidden('email_recomendante', $email_recomendante, []) !!}
 	 <div class="form-group">
 	{!! Form::label('edital', 'Edital', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">

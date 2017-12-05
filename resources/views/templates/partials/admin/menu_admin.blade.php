@@ -90,7 +90,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('reativar.carta') }}">Reativar Carta</a>
+                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
                                     </td>
                                 </tr>
                                 <tr>
