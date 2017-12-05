@@ -11,12 +11,15 @@
 	{!! Form::open(array('route' => 'pesquisa.carta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 @endif
 
-<div class="form-group">
-	{!! Form::label('email_recomendante', 'Pesquisar Carta', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('email_recomendante', '' , ['class' => 'form-control input-md']) !!}
+<div class="row">
+	<div class="form-group">
+		{!! Form::label('email_recomendante', 'Pesquisar Carta', ['class' => 'col-md-4 control-label']) !!}
+		<div class="col-md-4">
+			{!! Form::text('email_recomendante', '' , ['class' => 'form-control input-md']) !!}
+		</div>
 	</div>
 </div>
+<hr>
 
 @if (!$modo_pesquisa)
 	@foreach ($cartas_completadas as $carta)
@@ -26,30 +29,33 @@
 	{!! Form::hidden('id_aluno', $carta->id_aluno, []) !!}
 	{!! Form::hidden('id_recomendante', $carta->id_prof, []) !!}
 	
-
+	<div class="row">
 		<div class="form-group">
-			<div class="col-sm-2">
+			<div class="col-md-1">
 				{!! Form::label('nome_candidato', 'Nome', ['class' => 'control-label']) !!}
 			</div>
-      		<div class="col-sm-4">
+      		<div class="col-md-3">
       			{!! Form::text('nome_candidato', $carta->nome, ['class' => 'form-control']) !!}
       		</div>
-      		<div class="col-sm-1">
+      		<div class="col-md-1">
 				{!! Form::label('programa', 'Programa', ['class' => 'control-label']) !!}
 			</div>
-      		<div class="col-sm-4">
+      		<div class="col-md-2">
       			{!! Form::text('programa', $carta->tipo_programa_pos, ['class' => 'form-control']) !!}
       		</div>
-      		<div class="col-sm-2">
+      		<div class="col-md-2">
 				{!! Form::label('completada', 'Completada', ['class' => 'control-label']) !!}
 			</div>
-      		<div class="col-sm-2">
+      		<div class="col-md-1">
       			{!! Form::text('completada', $carta->completada, ['class' => 'form-control']) !!}
       		</div>
-      		<div class="col-sm-2">
+      		<div class="col-md-2">
       			{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}
       		</div>
     	</div>
+	</div>
+	<hr>
+		
     	{!! Form::close() !!}
 	@endforeach
 @endif
