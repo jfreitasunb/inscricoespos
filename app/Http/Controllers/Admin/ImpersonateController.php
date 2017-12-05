@@ -7,5 +7,9 @@ use Posmat\Http\Controllers\Controller;
 
 class ImpersonateController extends Controller
 {
-    //
+    public function index()
+    {
+
+    	return view('templates.partials.admin.impersonate');
+    }
 }
