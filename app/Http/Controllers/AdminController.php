@@ -500,9 +500,7 @@ class AdminController extends CoordenadorController
 
 		$email_recomendante = strtolower(trim($request->email_recomendante));
 
-		// $id_recomendante = $this->getPesquisaCandidato($email_recomendante);
-		
-		$id_recomendante = 3199;
+		$id_recomendante = $this->getPesquisaCandidato($email_recomendante);
 
 		$dados_pessoais = DadoPessoal::find($id_recomendante);
 
@@ -518,12 +516,20 @@ class AdminController extends CoordenadorController
 		$modo_pesquisa = false;
 
 		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos);
+
 		
 		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa', 'cartas_completadas'));
 	}
 
 	public function postReativarCartaEnviada(Request $request)
 	{
+		if ($request->cancelar === 'Cancelar'){
+
+			notify()->flash('Alteração das cartas cancelada!','info');
+
+			return redirect()->route('pesquisa.carta');
+		}
+
 		$this->validate($request, [
 			'id_inscricao_pos' => 'required',
 			'id_aluno' => 'required',
