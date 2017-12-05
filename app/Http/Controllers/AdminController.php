@@ -491,5 +491,15 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa'));
 	}
 
+	public function postPesquisarCartaEnviada(Request $request)
+	{
+
+		$this->validate($request, [
+			'email_recomendante' => 'required|email',
+		]);
+
+		dd($request);
+	}
+
 
 }
