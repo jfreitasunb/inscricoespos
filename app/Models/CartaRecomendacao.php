@@ -34,6 +34,12 @@ class CartaRecomendacao extends Model
         'como_orientando',
     ];
 
+    public function reativa_carta_finalizada($id_inscricao_pos, $id_aluno, $id_prof, $completada)
+    {
+
+        $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_prof)->where('id_aluno', $id_aluno)->update(['completada' => $completada, 'updated_at' => date('Y-m-d H:i:s') ]);
+    }
+
     public function retorna_cartas_por_recomendante($id_prof)
     {
         return $this->where('id_prof', $id_prof)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos')->orderBy('cartas_recomendacoes.created_at', 'desc');
