@@ -11,5 +11,14 @@ class ImpersonateController extends Controller
     {
 
     	return view('templates.partials.admin.impersonate');
+
+    }
+
+    public function store(Request $request)
+    {
+
+    	$this->validate($request, [
+    		'email' => 'required|email|exists:users',
+    	]);
     }
 }
