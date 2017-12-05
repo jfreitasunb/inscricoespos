@@ -47,7 +47,7 @@ class CartaRecomendacao extends Model
 
     public function retorna_cartas_para_reativar($id_prof, $id_inscricao_pos)
     {
-        return $this->where('id_prof', $id_prof)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos', 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
+        return $this->where('id_prof', $id_prof)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos', 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
     }
 
     public function retorna_carta_recomendacao($id_prof,$id_aluno,$id_inscricao_pos)
