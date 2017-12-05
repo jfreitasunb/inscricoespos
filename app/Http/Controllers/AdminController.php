@@ -32,49 +32,34 @@ class AdminController extends CoordenadorController
 	}
 
 
-	public function getAtivaConta()
+	public function getPesquisaConta()
 	{	
-		
-		return view('templates.partials.admin.ativa_conta');
+		$modo_pesquisa = true;
+
+		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa'));
 	}
 
-	public function postAtivaConta(Request $request)
+	public function postPesquisaConta(Request $request)
 	{
 		
 		$this->validate($request, [
 			'email' => 'email|max:256',
-			'ativar' => 'required',
 		]);
 
-		$email = $request->email;
-		$ativar_conta = $request->ativar;
+		$email = strtolower(trim($request->email));
+		
 
 		$usuario = new User();
 		$user = $usuario->retorna_user_por_email($email);
 
 		if (!is_null($user)) {
 			
-			$status_usuario = $user->ativo;
+			$modo_pesquisa = false;
 
-			if ($status_usuario) {
-				notify()->flash('A conta registrada com o e-mail: '.$email.' já foi ativada!','info');
-
-				return redirect()->route('ativa.conta');
-			}else{
-
-				if ($ativar_conta) {
-					$user->ativo = TRUE;
-					$user->save();
-
-					notify()->flash('A conta registrada com o e-mail: '.$email.' foi ativada com sucesso!','success');
-
-					return redirect()->route('ativa.conta')->with('success','A conta registrada com o e-mail: '.$email.' foi ativada com sucesso!');
-				}
-
-			}
+			return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'user'));
 		}else{
 			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
-			return redirect()->route('ativa.conta');
+			return redirect()->route('pesquisa.usuario');
 		}
 	}
 
@@ -82,6 +67,55 @@ class AdminController extends CoordenadorController
 	{
 		$dados = null;
 		return view('templates.partials.admin.atribuir_papel')->with('dados_usuario', $dados);
+	}
+
+	public function postAlteraAtivaConta(Request $request)
+	{
+		if ($request->cancelar === 'Cancelar'){
+
+			notify()->flash('Alteração da conta cancelada!','info');
+
+			return redirect()->route('pesquisa.usuario');
+		}
+
+		$this->validate($request, [
+			'email' => 'required|email',
+			'id_user' => 'required',
+			'locale' => 'required',
+			'user_type' => 'required',
+			'ativo' => 'required',
+		]);
+
+		$id_user = (int)$request->id_user;
+
+		$novos_dados_usuario['email'] = strtolower(trim($request->email));
+		$novos_dados_usuario['locale'] = strtolower(trim($request->locale));
+		$novos_dados_usuario['user_type'] = strtolower(trim($request->user_type));
+		$novos_dados_usuario['ativo'] = (int)$request->ativo;
+		
+		$atualiza_usuario = User::find($id_user);
+
+		$pesquisa_usuario = new User;
+
+		$pesquisa_email = $pesquisa_usuario->retorna_user_por_email($novos_dados_usuario['email']);
+
+		if (!is_null($pesquisa_email)) {
+			if ($atualiza_usuario->email === $pesquisa_email->email) {
+				$atualiza_usuario->update($novos_dados_usuario);
+			}else{
+
+				notify()->flash('Já existe uma conta registrada com o e-mail: '.$novos_dados_usuario['email'].'!','error');
+				return redirect()->back();
+			}
+		}else{
+			$atualiza_usuario->update($novos_dados_usuario);
+		}
+		
+		notify()->flash('Dados atualizados com sucesso!','success');
+		
+		return redirect()->back();
+
+		
 	}
 
 	public function postPesquisarPapelAtual(Request $request)
