@@ -13,17 +13,17 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="{{ route('lista.usuarios') }}">Lista usuários</a>
+                                    <span class="glyphicon glyphicon-th-list"></span><a href="{{ route('lista.usuarios') }}">Lista usuários</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
+                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span><a href="{{ route('criar.coordenador') }}" class="text-danger">
+                                    <span class="glyphicon glyphicon-exclamation-sign"></span><span><a href="{{ route('criar.coordenador') }}" class="text-danger">
                                         Cria Coordenador</a></span>
                                 </td>
                             </tr>
@@ -43,27 +43,27 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-usd"></span><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a>
+                                        <span class="glyphicon glyphicon-wrench"></span><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
+                                        <span class="glyphicon glyphicon-pencil"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
+                                        <span class="glyphicon glyphicon-refresh"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
+                                        <span class="glyphicon glyphicon-envelope"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
+                                        <span class="glyphicon glyphicon-random"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
                             </table>
@@ -82,17 +82,17 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-usd"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
+                                        <span class="glyphicon glyphicon-duplicate"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-user"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
+                                        <span class="glyphicon glyphicon-backward"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-tasks"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
+                                        <span class="glyphicon glyphicon-file"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
                                     </td>
                                 </tr>
                             </table>
@@ -124,3 +124,12 @@
             </div>
         </div>
     </div>
+
+<script>
+    $('.panel-heading a').on('click',function(e){
+    if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+</script>
