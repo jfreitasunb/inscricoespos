@@ -498,7 +498,24 @@ class AdminController extends CoordenadorController
 			'email_recomendante' => 'required|email',
 		]);
 
-		dd($request);
+		$email_recomendante = strtolower(trim($request->email_recomendante));
+
+		// $id_recomendante = $this->getPesquisaCandidato($email_recomendante);
+		
+		$id_recomendante = 3199;
+
+		$dados_pessoais = DadoPessoal::find($id_recomendante);
+
+		$edital = new ConfiguraInscricaoPos;
+
+		$edital_vigente = $edital->retorna_edital_vigente();
+
+		$id_inscricao_pos = $edital_vigente->id_inscricao_pos;
+
+		$cartas_recomendacoes = new CartaRecomendacao;
+
+
+		dd($cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos));
 	}
 
 
