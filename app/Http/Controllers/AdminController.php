@@ -515,7 +515,34 @@ class AdminController extends CoordenadorController
 		$cartas_recomendacoes = new CartaRecomendacao;
 
 
-		dd($cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos));
+		$modo_pesquisa = false;
+
+		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos);
+		
+		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa', 'cartas_completadas'));
+	}
+
+	public function postReativarCartaEnviada(Request $request)
+	{
+		$this->validate($request, [
+			'id_inscricao_pos' => 'required',
+			'id_aluno' => 'required',
+			'id_recomendante' => 'required',
+			'completada' => 'required',
+		]);
+
+		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+		$id_aluno = (int)$request->id_aluno;
+		$id_recomendante = (int)$request->id_recomendante;
+		$completada = (int)$request->completada;
+
+		$carta_recomendacao = new CartaRecomendacao;
+
+		$carta_recomendacao->reativa_carta_finalizada($id_inscricao_pos, $id_aluno, $id_recomendante, $completada);
+
+		notify()->flash('Alteração efetuado com sucesso','success');
+
+		return redirect()->back();
 	}
 
 
