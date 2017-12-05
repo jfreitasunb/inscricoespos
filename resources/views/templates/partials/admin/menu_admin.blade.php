@@ -26,7 +26,7 @@
 </div> --}}
 
 <div class="row">
-    <div class="col-sm-3 col-md-3">
+    <div class="col-sm-3 col-md-2">
         <div class="panel-group" id="accordion">
             <div class="menuadmin panel panel-default">
                 <div class="panel-heading">
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-9 col-md-9">
+        <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
                 @yield('ativa_conta')
                 @yield('cadastra_disciplina')
