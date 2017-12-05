@@ -1,50 +1,79 @@
 @extends('templates.default')
 
 @section('stylesheets')
-  <link href="{{ asset('css/parsley.css') }}" rel="stylesheet">
+  {!! Html::style( asset('css/parsley.css') ) !!}
+  {!! Html::style( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ) !!}
+  {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
 @section('ativa_conta')
-  <div class="row">
-    <form action="{{ route('ativa.conta') }}" method="POST" data-parsley-validate class="form-horizontal">
-      <fieldset class="scheduler-border">
-        <legend class="scheduler-border">Ativar conta manualmente</legend>
-        
-        <div class="form-group" {{ $errors->has('codigo') ? ' has-error' : '' }}>
-          <div class="row">
-            <label class="col-md-2 control-label" for="codigo">E-mail</label>  
-            <div class="col-md-2">
-              <input id="email" name="email" type="text" class="form-control input-md" required="" data-parsley-type="email" value="{{Request::old('email') ?: '' }}">
-            </div>
-          </div>
-          @if ($errors->has('email'))
-            <span class="help-block">{{ $errors->first('email') }}</span>
-          @endif
-        </div>
+@if ($modo_pesquisa)
+  {!! Form::open(array('route' => 'pesquisa.usuario', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+@else
+  {!! Form::open(array('route' => 'altera.ativa.conta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!} 
+@endif
 
-        
-        <div class="form-group form-inline{{ $errors->has('ativar') ? ' has-error' : '' }}">
-          <label class="col-md-2 control-label" for="ativar">Ativar?</label>  
-          <input type="radio" name="ativar" id="ativar" class="radio" value="1" @if(Request::old('ativar')==1) checked @endif> Sim
-          <input type="radio" name="ativar" id="ativar" class="radio" value="0" @if(Request::old('ativar')==2) checked @endif> Não
-        </div>
-      
-
-        <div class="col-xs-12" style="height:35px;"></div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-              <input type="submit" name="registrar" id="register-submit" class="btn btn-primary btn-lg" tabindex="4" value="Enviar">
-            </div>
-          </div>
-        </div>
-      </fieldset>
-      <input type="hidden" name="_token" value="{{ Session::token() }}">
-    </form>
+<div class="form-group">
+  {!! Form::label('email', 'Pesquisar Usuário', ['class' => 'col-md-4 control-label']) !!}
+  <div class="col-md-4">
+    {!! Form::text('email', '' , ['class' => 'form-control input-md']) !!}
   </div>
+</div>
+@if (!$modo_pesquisa)
+  {!! Form::hidden('id_user', $user->id_user, []) !!}
+   <div class="form-group">
+    {!! Form::label('edital', 'E-mail', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+      {!! Form::text('email', $user->email, ['class' => 'form-control input-md']) !!}
+    </div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('locale', 'Locale', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+      {!! Form::text('locale', $user->locale, ['class' => 'form-control input-md']) !!}
+    </div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('user_type', 'User Type:', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+      {!! Form::text('user_type', $user->user_type, ['class' => 'form-control input-md']) !!}
+    </div>
+  </div>
+  <div class="form-group">
+    {!! Form::label('ativo', 'Ativo?', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+      {!! Form::text('ativo', $user->ativo, ['class' => 'form-control input-md']) !!}
+    </div>
+  </div>
+@endif
+
+@if ($modo_pesquisa)
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        {!! Form::submit('Pesquisar', ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+      </div>
+    </div>
+  </div> 
+@else
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        {!! Form::submit('Alterar', ['class' => 'btn btn-warning btn-lg register-submit']) !!}
+        {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'cancelar',]) !!}
+      </div>
+    </div>
+  </div>
+@endif
+
+{!! Form::close() !!}
 @endsection
 
 @section('scripts')
-  <script src="{{ asset('js/parsley.min.js') }}"></script>
-  <script src="{{ asset('i18n/pt-br.js') }}"></script>
+  {!! Html::script( asset('bower_components/moment/min/moment.min.js') ) !!}
+  {!! Html::script( asset('bower_components/moment/locale/pt-br.js') ) !!}
+  {!! Html::script( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ) !!}
+  {!! Html::script( asset('bower_components/moment/locale/fr.js') ) !!}
+  {{-- {!! Html::script( asset('js/datepicker.js') ) !!} --}}
+  {!! Html::script( asset('js/parsley.min.js') ) !!}
 @endsection

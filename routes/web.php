@@ -95,9 +95,11 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 
-	Route::get('contas/ativa/conta', '\Posmat\Http\Controllers\AdminController@getAtivaConta')->name('ativa.conta');
+	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@getPesquisaConta')->name('pesquisa.usuario');
 
-	Route::post('contas/ativa/conta', '\Posmat\Http\Controllers\AdminController@postAtivaConta');
+	Route::post('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@postPesquisaConta');
+
+	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\AdminController@postAlteraAtivaConta')->name('altera.ativa.conta');
 
 	Route::get('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
 
