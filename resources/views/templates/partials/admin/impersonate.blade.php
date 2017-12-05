@@ -7,7 +7,7 @@
 @endsection
 
 @section('admin_impersonate')
-{!! Form::open(array('route' => 'pesquisa.recomendantes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+{!! Form::open(array('route' => 'admin.impersonate', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 <div class="form-group">
 	{!! Form::label('email', 'Entre como o e-mail', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
