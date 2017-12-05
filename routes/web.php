@@ -130,6 +130,9 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
 	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@postPesquisarCartaEnviada');
+
+	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\AdminController@postReativarCartaEnviada')->name('reativar.carta');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
