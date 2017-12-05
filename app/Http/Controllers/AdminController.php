@@ -448,8 +448,6 @@ class AdminController extends CoordenadorController
 			'email_recomendante' => 'required|email',
 		]);
 
-		// dd($request);
-
 
 		$id = (int)$request->id;
 		$id_aluno = (int)$request->id_aluno;
