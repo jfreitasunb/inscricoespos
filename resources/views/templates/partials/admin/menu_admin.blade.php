@@ -11,11 +11,11 @@
                 <div id="collapseUm" class="panel-collapse collapse">
                     <div class="panel-body">
                         <table class="table">
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-th-list"></span><a href="{{ route('lista.usuarios') }}">Lista usuários</a>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
@@ -124,12 +124,3 @@
             </div>
         </div>
     </div>
-
-<script>
-    $('.panel-heading a').on('click',function(e){
-    if($(this).parents('.panel').children('.panel-collapse').hasClass('in')){
-        e.preventDefault();
-        e.stopPropagation();
-    }
-});
-</script>
