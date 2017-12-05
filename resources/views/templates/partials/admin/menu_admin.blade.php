@@ -13,11 +13,6 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <a href="{{ route('admin.impersonate') }}">Logar como</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
                                     <a href="{{ route('lista.usuarios') }}">Lista usuários</a>
                                 </td>
                             </tr>
@@ -115,7 +110,6 @@
         </div>
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
-                @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')

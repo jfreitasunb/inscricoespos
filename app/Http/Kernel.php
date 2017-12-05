@@ -60,6 +60,5 @@ class Kernel extends HttpKernel
         'user.role' => \Posmat\Http\Middleware\UserRoles::class,
         'autoriza.inscricao' => \Posmat\Http\Middleware\AutorizaLogin::class,
         'define.locale' => \Posmat\Http\Middleware\LocaleMiddleware::class,
-        'impersonate.user' => \Posmat\Http\Middleware\Admin\Impersonate::class,
     ];
 }

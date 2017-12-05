@@ -89,13 +89,9 @@ Route::prefix('recomendante')->middleware('user.role:recomendante','define.local
 *Área do Admin
  */
 
-Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group(function () {
+Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('/', '\Posmat\Http\Controllers\AdminController@getMenu')->name('menu.admin');
-
-	Route::get('contas/users/impersonate', '\Posmat\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
-
-	Route::post('contas/users/impersonate', '\Posmat\Http\Controllers\Admin\ImpersonateController@store');
 
 	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 

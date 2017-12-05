@@ -24,9 +24,13 @@ class HomeController extends BaseController
 	public function setaLocale($locale)
     {
     	if(Auth::check()){
-	       $user = User::find(Auth::user()->id);
+
+	       $user = User::find(Auth::user()->id_user);
+
 	       $user->update(['locale'=>$locale]);
+
 	  	}else{
+            
 	    	Session::put('locale',$locale);
 	  	}
     }
