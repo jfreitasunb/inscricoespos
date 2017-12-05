@@ -93,6 +93,8 @@ Route::prefix('admin')->middleware('user.role:admin')->group(function () {
 
 	Route::get('/', '\Posmat\Http\Controllers\AdminController@getMenu')->name('menu.admin');
 
+	Route::get('contas/users/impersonate', '\Posmat\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
+	
 	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 
 	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@getPesquisaConta')->name('pesquisa.usuario');
