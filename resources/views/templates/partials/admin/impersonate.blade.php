@@ -6,19 +6,19 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('altera_recomendantes')
+@section('admin_impersonate')
 {!! Form::open(array('route' => 'pesquisa.recomendantes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 <div class="form-group">
-	{!! Form::label('email_candidato', 'Pesquisar Candidato', ['class' => 'col-md-4 control-label']) !!}
+	{!! Form::label('email', 'Entre como o e-mail', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
-		{!! Form::text('email_candidato', '' , ['class' => 'form-control input-md']) !!}
+		{!! Form::text('email', '' , ['class' => 'form-control input-md']) !!}
 	</div>
 </div>
 
 <div class="form-group">
 	<div class="row">
 	    <div class="col-md-6 col-md-offset-3 text-center">
-	      {!! Form::submit('Pesquisar', ['class' => 'btn btn-primary btn-lg register-submit']) !!}
+	      {!! Form::submit('Logar como', ['class' => 'btn btn-primary btn-lg register-submit']) !!}
 	    </div>
 	  </div>
 	</div>
