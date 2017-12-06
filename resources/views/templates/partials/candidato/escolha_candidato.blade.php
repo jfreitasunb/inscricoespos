@@ -25,7 +25,7 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_escolha_candidato.interesse_bolsa')}}</legend>
+    <legend class="scheduler-border">{{ trans('tela_escolha_candidato.interesse_bolsa') }}</legend>
       <div class="row">
         <div class="col-md-4">
           <label class="radio-inline">{!! Form::radio('interesse_bolsa', 0, !$dados['interesse_bolsa'] ? true : false, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Não</label>
