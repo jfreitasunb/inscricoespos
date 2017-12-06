@@ -19,7 +19,6 @@ class LocaleMiddleware {
         	app()->setLocale('pt-br');
         }
 
-
         return $next($request);
     }
 
