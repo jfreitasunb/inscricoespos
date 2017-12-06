@@ -6,8 +6,6 @@
 
 
 return [
-
     'menu_login' => 'Login',
-    'menu_registrar' => 'Registrar',
-
+    'menu_registrar' => 'Register',
 ];
