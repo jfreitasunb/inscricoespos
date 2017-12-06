@@ -6,8 +6,8 @@
 
 
 return [
-    'tela_dados_pessoais' => 'Dados Pessoais',
-    'nome_recomendante' => 'Nome',
+    'tela_dados_pessoais' => 'Datos Personales',
+    'nome_recomendante' => 'Nombre',
 	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
     'instituicao_recomendante' => 'Instituição',
 	'titulacao_recomendante' => 'Grau acadêmico mais alto obtido',
