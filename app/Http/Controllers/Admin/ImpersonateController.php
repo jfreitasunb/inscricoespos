@@ -2,14 +2,25 @@
 
 namespace Posmat\Http\Controllers\Admin;
 
+use Auth;
 use Illuminate\Http\Request;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Models\User;
 
 class ImpersonateController extends Controller
-{
+{   
+
+    public function PermiteImpersontate()
+    {
+        if (Auth::user()->user_type !== 'admin'){
+            return redirect()->back();
+        }
+    }
+
     public function index()
     {
+
+        $this->PermiteImpersontate();
 
     	return view('templates.partials.admin.impersonate');
 
@@ -17,6 +28,8 @@ class ImpersonateController extends Controller
 
     public function store(Request $request)
     {
+
+        $this->PermiteImpersontate();
 
     	$this->validate($request, [
     		'email' => 'required|email|exists:users',
@@ -28,10 +41,7 @@ class ImpersonateController extends Controller
 
     	session()->put('impersonate', $user->id_user);
 
-        if ($user->user_type === 'coordenador') {
-            
-            return redirect()->intended('coordenador');
-        }
+        session()->put('impersonate_user_type', $user->user_type);
 
         if ($user->user_type === 'recomendante') {
             
@@ -40,7 +50,7 @@ class ImpersonateController extends Controller
 
         if ($user->user_type === 'candidato') {
             
-            return redirect()->intended('candidato');
+            return redirect()->route('dados.pessoais');
         }
 
     }
@@ -48,7 +58,11 @@ class ImpersonateController extends Controller
     public function destroy()
     {
 
+        $this->PermiteImpersontate();
+        
         session()->forget('impersonate');
+
+        session()->forget('impersonate_user_type');
 
         return redirect('/');
     }
