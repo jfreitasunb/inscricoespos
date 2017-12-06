@@ -45,7 +45,7 @@ class ImpersonateController extends Controller
 
         if ($user->user_type === 'recomendante') {
             
-            return redirect()->route('dados.recomendante');
+            return redirect()->route('menu.recomendante');
         }
 
         if ($user->user_type === 'candidato') {
