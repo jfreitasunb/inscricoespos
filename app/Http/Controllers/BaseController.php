@@ -2,7 +2,9 @@
 
 namespace Posmat\Http\Controllers;
 
-use Posmat\Models\ConfiguraInscricaoPos;
+use Posmat\Models\{ConfiguraInscricaoPos, User};
+use Auth;
+use Session;
 
 use View;
 
@@ -24,5 +26,15 @@ class BaseController extends Controller
 	   $periodo_inscricao = $inscricao_pos->retorna_periodo_inscricao();
 
        View::share ( 'periodo_inscricao', $periodo_inscricao );
+    }
+
+    public function SetUser()
+    {
+        if (session()->has('impersonate')) {
+            
+            return User::find(session()->get('impersonate'));
+        }else{
+            return Auth::user();
+        }
     }
 }

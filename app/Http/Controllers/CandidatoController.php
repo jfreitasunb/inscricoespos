@@ -74,8 +74,8 @@ class CandidatoController extends BaseController
 
 		$countries = $getcountries->index();
 
-		$user = Auth::user();
-		$nome = $user->nome;
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$editar_dados = false;
@@ -146,7 +146,8 @@ class CandidatoController extends BaseController
 
 		$countries = $getcountries->index();
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$nome = $user->nome;
 		$id_user = $user->id_user;
 
@@ -188,7 +189,8 @@ class CandidatoController extends BaseController
 				'celular' => 'required|max:21',
 			]);
 
-			$user = Auth::user();
+			$user = $this->SetUser();
+			
 			$id_user = $user->id_user;
 
     		$nascimento = Carbon::createFromFormat('d/m/Y', Purifier::clean(trim($request->data_nascimento)));
@@ -255,7 +257,8 @@ class CandidatoController extends BaseController
  */
 	public function getDadosAcademicos()
 	{
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 		
 		$dados_academicos = new DadoAcademico();
@@ -313,7 +316,8 @@ class CandidatoController extends BaseController
 			'ano_conclusao_pos' => 'required_without_all:ano_conclusao_graduacao',
 		]);
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 		
 		$formacao = new Formacao;
@@ -363,7 +367,8 @@ class CandidatoController extends BaseController
  */
 	public function getEscolhaCandidato()
 	{
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 		
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -481,7 +486,8 @@ class CandidatoController extends BaseController
 	public function postEscolhaCandidato(Request $request)
 	{
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_aluno = $user->id_user;
 		
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -581,7 +587,8 @@ class CandidatoController extends BaseController
 
 	public function getMotivacaoDocumentos()
 	{
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -636,7 +643,8 @@ class CandidatoController extends BaseController
 			'concorda_termos' => 'required',
 		]);
 
-			$user = Auth::user();
+			$user = $this->SetUser();
+			
 			$id_user = $user->id_user;
 
 			$edital_ativo = new ConfiguraInscricaoPos();
@@ -683,7 +691,8 @@ class CandidatoController extends BaseController
 
 	public function getFinalizarInscricao(){
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -730,7 +739,8 @@ class CandidatoController extends BaseController
 
 	public function postFinalizarInscricao(Request $request){
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -874,7 +884,8 @@ class CandidatoController extends BaseController
 
 	public function getStatusCartas(){
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();

@@ -54,6 +54,6 @@ class HomeController extends BaseController
     	$this->setaLocale('es');
 
     	return redirect()->back();
-    }
+    }    
 
 }

@@ -55,7 +55,8 @@ class RecomendanteController extends BaseController
 	public function getDadosPessoaisRecomendante()
 	{
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 		
 		$recomendante = new DadoRecomendante();
@@ -72,7 +73,8 @@ class RecomendanteController extends BaseController
 	public function getDadosPessoaisRecomendanteEditar()
 	{
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 		
 		$recomendante = new DadoRecomendante();
@@ -98,7 +100,8 @@ class RecomendanteController extends BaseController
 			'endereco_recomendante' => 'required',
 		]);
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 		
 		$recomendante = new DadoRecomendante();
@@ -124,7 +127,8 @@ class RecomendanteController extends BaseController
 	public function getCartasPendentes()
 	{
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 		
 		$recomendante = new DadoRecomendante();
@@ -187,7 +191,8 @@ class RecomendanteController extends BaseController
 	{
 		$id_candidato= (int)$_POST['id_candidato'];
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 		
 		$recomendante = new DadoRecomendante();
@@ -245,7 +250,8 @@ class RecomendanteController extends BaseController
 
 		$id_candidato = (int)$request->input('id_candidato');
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -296,7 +302,8 @@ class RecomendanteController extends BaseController
 	{
 		$id_candidato = (int)$_GET['id_candidato'];
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -336,7 +343,8 @@ class RecomendanteController extends BaseController
 
 		$id_candidato = (int)$request->input('id_candidato');
 
-		$user = Auth::user();
+		$user = $this->SetUser();
+		
 		$id_user = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -389,7 +397,7 @@ class RecomendanteController extends BaseController
 
 	public function getCartasAnteriores()
 	{
-		$user = Auth::user();
+		$user = $this->SetUser();
 		
 		$id_prof = $user->id_user;
 
@@ -403,7 +411,7 @@ class RecomendanteController extends BaseController
 	public function GeraCartasAnteriores()
 	{
 		
-		$user = Auth::user();
+		$user = $this->SetUser();
 		
 		$id_prof = $user->id_user;
 
