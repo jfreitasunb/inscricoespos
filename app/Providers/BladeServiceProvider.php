@@ -16,9 +16,31 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('impersonating', function () {
+        Blade::if('impersonating_recomendante', function () {
 
-            return session()->has('impersonate');
+            if (session()->has('impersonate') || session()->has('impersonate_user_type')) {
+                if (session()->get('impersonate_user_type') === 'recomendante') {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+            
+        });
+
+        Blade::if('impersonating_candidato', function () {
+
+            if (session()->has('impersonate') || session()->has('impersonate_user_type')) {
+                if (session()->get('impersonate_user_type') === 'candidato') {
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
             
         });
 
