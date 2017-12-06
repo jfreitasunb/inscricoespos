@@ -22,7 +22,7 @@ Route::get('api/get-city-list','APIController@getCityList');
 */
 
 
-Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->group(function () {
+Route::prefix('candidato')->middleware('user.role:candidato, admin','define.locale')->group(function () {
 	
 	Route::get('/', '\Posmat\Http\Controllers\CandidatoController@getMenu')->name('menu.candidato');
 
@@ -58,7 +58,7 @@ Route::prefix('candidato')->middleware('user.role:candidato','define.locale')->g
 /*
 *Área do Recomendante
 */
-Route::prefix('recomendante')->middleware('user.role:recomendante','define.locale')->group(function () {
+Route::prefix('recomendante')->middleware('user.role:recomendante, admin','define.locale')->group(function () {
 
 	Route::get('/', '\Posmat\Http\Controllers\RecomendanteController@getMenu')->name('menu.recomendante');
 
