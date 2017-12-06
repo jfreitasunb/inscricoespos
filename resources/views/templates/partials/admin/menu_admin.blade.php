@@ -18,6 +18,11 @@
                             </tr> --}}
                             <tr>
                                 <td>
+                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
@@ -110,6 +115,7 @@
         </div>
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
+                @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
