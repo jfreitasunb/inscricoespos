@@ -7,7 +7,7 @@
         <div class="btn-group btn-group-justified">
           <a href="{{ route('lang.portuguese') }}" class="btn btn-primary">Português</a>
           <a href="{{ route('lang.english') }}" class="btn btn-primary">English</a>
-          <a href="{{ route('lang.spanish') }}" class="btn btn-primary">Spañol</a>
+          <a href="{{ route('lang.spanish') }}" class="btn btn-primary">Español</a>
         </div>  
       </div>
     </div>
