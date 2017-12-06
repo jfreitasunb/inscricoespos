@@ -14,7 +14,7 @@
     {!! Form::open(array('route' => 'dados.pessoais.editar', 'class' => 'form-horizontal', 'method' => 'GET')) !!}
   @endif
     <fieldset class="scheduler-border">
-      <legend class="scheduler-border">Dados Pessoais</legend>
+      <legend class="scheduler-border">{{ trans('tela_dados_pessoais.tela_dados_pessoais') }}</legend>
         
         @if ($editar_dados)
           <div class="row">
