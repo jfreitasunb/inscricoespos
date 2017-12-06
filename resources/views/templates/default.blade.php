@@ -49,6 +49,20 @@
         @endrecomendante
         @admin(Auth()->user())
           @include('templates.partials.admin.menu_admin')
+          @impersonating_recomendante
+            @yield('dados_pessoais_recomendante')
+            @yield('cartas_pendentes')
+            @yield('carta_parte_inicial')
+            @yield('carta_parte_final')
+          @endimpersonating_recomendante
+          @impersonating_candidato
+            @yield('dados_pessoais')
+            @yield('dados_academicos')
+            @yield('escolha_monitoria')
+            @yield('motivacao_documentos')
+            @yield('finaliza_inscricao')
+            @yield('status_cartas')
+          @endimpersonating_candidato
         @endadmin
       @else
         @yield('inicio')
