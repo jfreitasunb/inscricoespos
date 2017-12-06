@@ -15,9 +15,9 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-lg-12">
-                {!! Form::open(array('route' => 'auth.login','data-parsley-validate' => '' )) !!}
+                {!! Form::open(array('route' => 'auth.login','data-parsley-validate' => '' , 'id' => 'login-form', 'role' => 'form')) !!}
                 <div class="form-group">
-                  {!! Form::text('email', null, ['class' => 'form-control', 'tabindex' => '1', 'placeholder' => trans('tela_login.menu_email')]) !!}
+                  {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'login', 'tabindex' => '1', 'placeholder' => trans('tela_login.menu_email')]) !!}
                 </div>
                 <div class="form-group">
                   {!! Form::password('password', ['class' => 'form-control', 'tabindex' => '2', 'placeholder' => trans('tela_login.menu_senha')]) !!}

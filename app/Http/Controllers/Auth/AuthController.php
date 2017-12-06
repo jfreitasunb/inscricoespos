@@ -71,7 +71,6 @@ class AuthController extends BaseController
 
 		Notification::send(User::find($id_user), new AtivaConta($novo_usuario->validation_code));
 
-
 		notify()->flash(trans('tela_registro.menu_registro_sucesso_parte_inicial').' '.$novo_usuario->email.' '.trans('tela_registro.menu_registro_sucesso_parte_final'),'info');
 
 		return redirect()->route('home');
@@ -140,6 +139,7 @@ class AuthController extends BaseController
 		notify()->flash('Você não se identificou ainda.','warning',[
 				'timer' => 1500,
 			]);
+
 		return redirect()->route('home');
 	}
 

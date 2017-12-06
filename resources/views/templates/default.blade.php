@@ -16,7 +16,6 @@
   @yield('stylesheets')
 </head>
 <body>
-  <div id="app">
     @include('templates.partials.alertas_erros')
     @include('templates.partials.cabecalho')
     <div class="container">
@@ -70,7 +69,6 @@
       @endif
     </div>
     @include('templates.partials.rodape')
-  </div>
 </body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="{{ asset('jquery/jquery-3.1.1.min.js') }}"></script>
