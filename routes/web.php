@@ -22,7 +22,7 @@ Route::get('api/get-city-list','APIController@getCityList');
 */
 
 
-Route::prefix('candidato')->middleware('user.role:candidato, admin','define.locale')->group(function () {
+Route::prefix('candidato')->middleware('user.role:candidato,admin','define.locale')->group(function () {
 	
 	Route::get('/', '\Posmat\Http\Controllers\CandidatoController@getMenu')->name('menu.candidato');
 
@@ -58,7 +58,7 @@ Route::prefix('candidato')->middleware('user.role:candidato, admin','define.loca
 /*
 *Área do Recomendante
 */
-Route::prefix('recomendante')->middleware('user.role:recomendante, admin','define.locale')->group(function () {
+Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define.locale')->group(function () {
 
 	Route::get('/', '\Posmat\Http\Controllers\RecomendanteController@getMenu')->name('menu.recomendante');
 
@@ -96,6 +96,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('contas/users/impersonate','\Posmat\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
 
 	Route::post('contas/users/impersonate','\Posmat\Http\Controllers\Admin\ImpersonateController@store');
+
+	Route::delete('contas/users/impersonate','\Posmat\Http\Controllers\Admin\ImpersonateController@destroy');
 
 	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 

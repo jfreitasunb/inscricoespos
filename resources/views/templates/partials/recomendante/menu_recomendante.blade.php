@@ -16,6 +16,16 @@
         <li class="{{ Route::currentRouteNamed('cartas.anteriores') ? 'active' : '' }}"><a href="{{ route('cartas.anteriores') }}">{{ trans('tela_cartas_anteriores.tela_cartas_anteriores') }}</a></li>
         @endliberacarta
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
+        @impersonating_recomendante
+          <li>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('impersonating').submit();">Voltar ao Admin</a>
+          </li>
+
+          {!! Form::open(array('route' => 'admin.impersonate', 'id' => 'impersonating', 'class' => 'hidden')) !!}
+            {{ method_field('DELETE') }}
+          {!! Form::close() !!}
+
+        @endimpersonating_recomendante
       </ul>
     </div>
   </nav>

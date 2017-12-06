@@ -20,6 +20,16 @@
           <li class="{{ Route::currentRouteNamed('status.cartas') ? 'active' : '' }}"><a href="{{ route('status.cartas') }}">{{ trans('tela_status_cartas.status_cartas') }}</a></li>
         @endstatuscarta
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
+        @impersonating_candidato
+          <li>
+            <a href="#" onclick="event.preventDefault(); document.getElementById('impersonating').submit();">Voltar ao Admin</a>
+          </li>
+
+          {!! Form::open(array('route' => 'admin.impersonate', 'id' => 'impersonating', 'class' => 'hidden')) !!}
+            {{ method_field('DELETE') }}
+          {!! Form::close() !!}
+
+        @endimpersonating_candidato
       </ul>
     </div>
   </nav>
