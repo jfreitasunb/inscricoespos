@@ -16,4 +16,5 @@ return [
     'inst_obtencao_titulo' => 'Instituição de obtenção deste grau',
     'endereco_recomendante' => 'Endereço institucional',
     'menu_enviar' => 'Enviar',
+    'menu_editar' => 'Editar',
 ];

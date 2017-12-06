@@ -15,6 +15,7 @@ return [
     'nome_candidato' => 'Nome do candidato',
     'tipo_programa' => 'Programa pretendido',
     'mensagem_status_cartas' => 'Selecione a carta que deseja preencher',
+    'sem_cartas' => 'Não há cartas pendentes',
     'mensagem_carta_anteriores' => 'Clique na carta que deseja visualizar',
     'menu_enviar' => 'Preencher carta',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',

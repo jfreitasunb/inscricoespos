@@ -16,6 +16,7 @@ return [
     'pais' => 'País',
     'celular' => 'Celular',
     'menu_enviar' => 'Enviar',
+    'menu_editar' => 'Editar',
     'menu_registro_sucesso_parte_inicial' => 'Account succesfully created. It was send an e-mail to: ',
     'menu_registro_sucesso_parte_final' => 'with a link to activate your account.',
 
