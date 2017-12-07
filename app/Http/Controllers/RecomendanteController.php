@@ -222,8 +222,25 @@ class RecomendanteController extends BaseController
 			$dados_candidato['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido);
 
 
-			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
-			
+			$dados_antigos = $carta_recomendacao->retorna_carta_recomendacao_antiga($id_user,$id_candidato,$id_inscricao_pos);
+
+			$dados_atuais = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+
+			if (is_null($dados_antigos)) {
+				$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			}
+
+			if (!is_null($dados_atuais->tempo_conhece_candidato)) {
+				
+				$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			}else{
+				
+				$dados = $carta_recomendacao->retorna_carta_recomendacao_antiga($id_user,$id_candidato,$id_inscricao_pos);
+
+				notify()->flash(trans('tela_cartas_pendentes.mensagem_carta_antiga'),'info');
+
+			}
+
 			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados_candidato','dados','id_candidato'));
 		}else{
 
@@ -315,14 +332,32 @@ class RecomendanteController extends BaseController
 
 			$carta_recomendacao = new CartaRecomendacao();
 
-			$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			$dados_antigos = $carta_recomendacao->retorna_carta_recomendacao_antiga($id_user,$id_candidato,$id_inscricao_pos);
 
-			if ($dados->completada) {
+			$dados_atuais = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+
+			if ($dados_atuais->completada) {
 				notify()->flash(trans('tela_cartas_parte_inicial.carta_enviada'),'info');
 				return redirect()->back();
-			}else{
-				return view('templates.partials.recomendante.carta_parte_final', compact('dados','id_candidato'));
 			}
+
+			if (is_null($dados_antigos)) {
+				$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			}
+
+			if (!is_null($dados_atuais->antecedentes_academicos)) {
+				
+				$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			}else{
+				
+				$dados = $carta_recomendacao->retorna_carta_recomendacao_antiga($id_user,$id_candidato,$id_inscricao_pos);
+
+				notify()->flash(trans('tela_cartas_pendentes.mensagem_carta_antiga'),'info');
+
+			}
+
+			return view('templates.partials.recomendante.carta_parte_final', compact('dados','id_candidato'));
+			
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
