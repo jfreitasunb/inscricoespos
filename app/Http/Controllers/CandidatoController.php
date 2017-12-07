@@ -396,46 +396,36 @@ class CandidatoController extends BaseController
 				return redirect()->back();
 			}
 
-			if (in_array(2, $programas_disponiveis)) {
-
-				$areas_pos = AreaPosMat::pluck('nome','id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
-
-				$escolha_candidato = new EscolhaCandidato();
-
-				$candidato_ja_escolheu = $escolha_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos);
-
-
-				if (is_null($candidato_ja_escolheu)) {
+			$dados = [];
+			$dados['programa_pretendido'] = null;
+			$dados['area_pos'] = null;
+			$dados['interesse_bolsa'] = null;
+			$dados['vinculo_empregaticio'] = null;
 					
-					$dados = [];
-					$dados['programa_pretendido'] = '';
-					$dados['area_pos'] = null;
-					$dados['interesse_bolsa'] = null;
-					$dados['vinculo_empregaticio'] = null;
-					
-					$dados['nome_recomendante_1'] = '';
-					$dados['nome_recomendante_2'] = '';
-					$dados['nome_recomendante_3'] = '';
-					$dados['email_recomendante_1'] = '';
-					$dados['email_recomendante_2'] = '';
-					$dados['email_recomendante_3'] = '';
-						
+			$dados['nome_recomendante_1'] = null;
+			$dados['nome_recomendante_2'] = null;
+			$dados['nome_recomendante_3'] = null;
+			$dados['email_recomendante_1'] = null;
+			$dados['email_recomendante_2'] = null;
+			$dados['email_recomendante_3'] = null;
+			$dados['nome_recomendante_1'] = null;
+			$dados['nome_recomendante_2'] = null;
+			$dados['nome_recomendante_3'] = null;
+			$dados['email_recomendante_1'] = null;
+			$dados['email_recomendante_2'] = null;
+			$dados['email_recomendante_3'] = null;
 
-					return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
-				}else{
+			$escolha_candidato = new EscolhaCandidato();
+
+			$candidato_ja_escolheu = $escolha_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos);
+
+			if (!is_null($candidato_ja_escolheu)) {
 
 					$canditato_recomendante = new ContatoRecomendante();
 
 					$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
 
-					if (count($contatos_recomendantes) == 0) {
-						$dados['nome_recomendante_1'] = '';
-						$dados['nome_recomendante_2'] = '';
-						$dados['nome_recomendante_3'] = '';
-						$dados['email_recomendante_1'] = '';
-						$dados['email_recomendante_2'] = '';
-						$dados['email_recomendante_3'] = '';
-					}else{
+					if (count($contatos_recomendantes) > 0) {
 						$i = 1;
 						foreach ($contatos_recomendantes as $recomendante) {
 					
@@ -457,15 +447,14 @@ class CandidatoController extends BaseController
 					$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
 					$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
 					$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
-
-					return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
 				}
-				
-			
-				
-			}else{
-				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao'));
+
+			if (in_array(2, $programas_disponiveis)) {
+
+				$areas_pos = AreaPosMat::pluck('nome','id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
 			}
+
+			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
 
 			if (in_array(3, $programas_disponiveis)) {
 			
