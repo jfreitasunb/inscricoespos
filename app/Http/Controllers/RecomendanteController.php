@@ -303,6 +303,7 @@ class RecomendanteController extends BaseController
 				$atualiza_carta['expressao_escrita'] = (int) Purifier::clean(trim($request->input('expressao_escrita')));
 				$atualiza_carta['expressao_oral'] = (int) Purifier::clean(trim($request->input('expressao_oral')));
 				$atualiza_carta['relacionamento'] = (int) Purifier::clean(trim($request->input('relacionamento')));
+				$atualiza_carta['updated_at'] = date('Y-m-d H:i:s');
 
 				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
@@ -357,7 +358,7 @@ class RecomendanteController extends BaseController
 			}
 
 			return view('templates.partials.recomendante.carta_parte_final', compact('dados','id_candidato'));
-			
+
 		}else{
 
 			notify()->flash(trans('tela_cartas_pendentes.prazo_carta'),'info');
@@ -405,6 +406,7 @@ class RecomendanteController extends BaseController
 				$atualiza_carta['como_aluno'] = (int) Purifier::clean(trim($request->input('como_aluno')));
 				$atualiza_carta['como_orientando'] = (int) Purifier::clean(trim($request->input('como_orientando')));
 				$atualiza_carta['completada'] = true;
+				$atualiza_carta['updated_at'] = date('Y-m-d H:i:s');
 
 				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
