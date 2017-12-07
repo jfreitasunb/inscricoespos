@@ -57,6 +57,13 @@ class CartaRecomendacao extends Model
 
     }
 
+    public function retorna_carta_recomendacao_antiga($id_prof,$id_aluno,$id_inscricao_pos)
+    {
+
+        return $this->where("id_prof", $id_prof)->where('id_aluno',$id_aluno)->where('id_inscricao_pos', '!=', $id_inscricao_pos)->get()->first();
+
+    }
+
     public function inicia_carta_candidato($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes)
     {
         
