@@ -34,10 +34,13 @@ class DadoRecomendante extends Model
     {
         $dados_recomendantes = new DadoRecomendante();
 
-        $dados_recomendantes->id_prof = $id_prof;
+        if (is_null($this->retorna_dados_pessoais_recomendante($id_prof))) {
+            
+            $dados_recomendantes->id_prof = $id_prof;
 
-        $dados_recomendantes->nome_recomendante = $nome_recomendante;
+            $dados_recomendantes->nome_recomendante = $nome_recomendante;
 
-        $dados_recomendantes->save();
+            $dados_recomendantes->save();
+        }
     }
 }
