@@ -16,10 +16,12 @@
             <div class="row">
               <div class="col-lg-12">
                 {!! Form::open(array('route' => 'auth.login','data-parsley-validate' => '' , 'id' => 'login-form', 'role' => 'form')) !!}
-                <div class="form-group">
+                <div class="input-group form-group">
+                  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
                   {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'login', 'tabindex' => '1', 'placeholder' => trans('tela_login.menu_email')]) !!}
                 </div>
-                <div class="form-group">
+                <div class="input-group form-group">
+                  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                   {!! Form::password('password', ['class' => 'form-control', 'tabindex' => '2', 'placeholder' => trans('tela_login.menu_senha')]) !!}
                 </div>
                 <div class="form-group">
