@@ -302,4 +302,10 @@ legend.scheduler-border {
 .menuadmin{
     margin-top:30px;
 }
+.table tbody tr.carta_completa {
+  background-color: #2ecc71;
+}
+.table tbody tr.carta_incompleta {
+  background-color: #e74c3c;
+}
 /* Required field END */
