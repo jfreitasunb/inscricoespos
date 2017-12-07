@@ -558,7 +558,9 @@ class RelatorioController extends BaseController
 
   $monitoria = $id_inscricao_pos;
 
-  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv'));
+  $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
+
+  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
   }
 
 
@@ -642,7 +644,7 @@ class RelatorioController extends BaseController
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio->programa);
     
 
-    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
 
   public function geraFichaIndividual($id_aluno)
@@ -773,7 +775,7 @@ class RelatorioController extends BaseController
 
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->programa);
 
-    return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$locais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_viewddlocais_arquivos['arquivo_relatorio_csv']);
   }
 
 
