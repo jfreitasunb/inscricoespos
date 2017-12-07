@@ -8,12 +8,10 @@
 {!! Form::open(array('route' => 'dados.escolhas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.programa_disponivel')}}</legend>
-      
-      
       <div class="row">
         @foreach($programa_para_inscricao as $programa => $key)
           <div class="col-md-4">
-            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, $dados['programa_pretendido'] ?: '', ['required' => '']) !!} {!! $key !!}</label>
+            <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, $dados['programa_pretendido'] == $programa ?: '', ['required' => '']) !!} {!! $key !!}</label>
           </div>
         @endforeach
         @if(isset($areas_pos))
