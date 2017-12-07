@@ -115,7 +115,8 @@ class RecomendanteController extends BaseController
 		$atualiza_dados_recomendantes['ano_titulacao'] = Purifier::clean(trim($request->input('ano_titulacao')));
 		$atualiza_dados_recomendantes['inst_obtencao_titulo'] = Purifier::clean(trim($request->input('inst_obtencao_titulo')));
 		$atualiza_dados_recomendantes['endereco_recomendante'] = Purifier::clean(trim($request->input('endereco_recomendante')));
-		$atualiza_dados_recomendantes['atualizado'] = true;
+		$atualiza_dados_recomendantes['atualizado'] = 1;
+		$atualiza_dados_recomendantes['updated_at'] = date('Y-m-d H:i:s');
 
 		DB::table('dados_recomendantes')->where('id', $id_recomendante[0])->where('id_prof', $id_user)->update($atualiza_dados_recomendantes);
 
@@ -423,9 +424,15 @@ class RecomendanteController extends BaseController
 					return redirect()->route('cartas.pendentes');
 				}else{
 
-					notify()->flash(trans('tela_recomendante_dados_pessoais.atualizar_dados'));
+					$recomendante = new DadoRecomendante();
+					$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
-					return redirect()->route('dados.recomendante');
+					if (!$status_dados_pessoais->atualizado) {
+						
+						notify()->flash(trans('tela_recomendante_dados_pessoais.atualizar_dados'));
+
+						return redirect()->route('dados.recomendante');
+					}
 				}
 			}
 		}else{
