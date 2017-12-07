@@ -14,6 +14,7 @@ return [
 	'status_nao_enviada' => 'Carta não enviada',
     'nome_candidato' => 'Nome do candidato',
     'tipo_programa' => 'Programa pretendido',
+    'mensagem_carta_antiga' => 'Prezado(a) recomendante, uma carta antiga para este(a) candidato(a) foi encontrada. Os dados foram carregados automaticamente nos formulários a seguir',
     'mensagem_status_cartas' => 'Selecione a carta que deseja preencher',
     'sem_cartas' => 'Não há cartas pendentes',
     'mensagem_carta_anteriores' => 'Clique na carta que deseja visualizar',
