@@ -16,36 +16,40 @@
     <p>{{ trans('tela_cartas_pendentes.sem_cartas') }}</p>
   @else
     <p>{{ trans('tela_cartas_pendentes.sem_cartas') }}</p>
-    
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">{{ trans('tela_cartas_pendentes.selecionar') }}</th>
-          <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-          <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-          <th scope="col">{{ trans('tela_cartas_pendentes.situacao_carta') }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach( $dados_para_template as $status)
-          @if ($status['status_carta'])
-            <tr class="carta_completa">
-          @else
-            <tr class="carta_incompleta">
-          @endif
-          <td> {!! Form::radio('id_candidato', $status['id_candidato'], false,  $status['status_carta'] ? ['disabled'=> 'disabled'] : []) !!} </td>
-          <td>{{ $status['nome_candidato'] }}</td>
-          <td>{{ $status['programa_pretendido'] }}</td>
-          <td>@if ($status['status_carta'])
-              {{ trans('tela_cartas_pendentes.status_enviada') }}
-            @else
-              {{ trans('tela_cartas_pendentes.status_nao_enviada') }}
-            @endif
-          </td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">{{ trans('tela_cartas_pendentes.selecionar') }}</th>
+            <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
+            <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
+            <th scope="col">{{ trans('tela_cartas_pendentes.situacao_carta') }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach( $dados_para_template as $status)
+            <tr>
+              @if ($status['status_carta'])
+                <tr class="carta_completa">
+              @else
+                <tr class="carta_incompleta">
+              @endif
+              <td> {!! Form::radio('id_candidato', $status['id_candidato'], false,  $status['status_carta'] ? ['disabled'=> 'disabled'] : []) !!} </td>
+              <td>{{ $status['nome_candidato'] }}</td>
+              <td>{{ $status['programa_pretendido'] }}</td>
+              <td>
+                @if ($status['status_carta'])
+                  {{ trans('tela_cartas_pendentes.status_enviada') }}
+                @else
+                  {{ trans('tela_cartas_pendentes.status_nao_enviada') }}
+                @endif
+              </td>
+              </tr>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>
   @endif
 
 </fieldset>

@@ -13,21 +13,24 @@
 
   <p>{{ trans('tela_cartas_pendentes.mensagem_carta_anteriores') }}</p>
 
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-      <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach( $indicacoes_anteriores as $indicacoes)
-      <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['nome'] }}</a></td>
-      <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['tipo_programa_pos'] }}</a></td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
+          <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach( $indicacoes_anteriores as $indicacoes)
+          <tr>
+            <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['nome'] }}</a></td>
+            <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['tipo_programa_pos'] }}</a></td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+  </div>
 <div class="text-center">
   {{ $indicacoes_anteriores->render() }}
 </div>
