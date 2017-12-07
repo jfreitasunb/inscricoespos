@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/css_monitoria.css') }}" rel="stylesheet">
+  <script src="https://use.fontawesome.com/96ea273a00.js"></script>
   <link href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
   <script>
     window.Laravel = {!! json_encode([
