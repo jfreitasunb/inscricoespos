@@ -40,4 +40,4 @@
   <p class="bottom-three">
    
   </p>
-@stop
+@endsection
