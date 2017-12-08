@@ -13,10 +13,30 @@
     		table.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
             table.tftable td.valor_celula {text-align:center;font-weight: bold;font-size:14px;border-width: 1px;padding: 8px;border-style: solid;}
             table.tftable td.cabecalho {text-align:center;font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
-        </style>
+            .footer {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+        font-size: 8pt;
+        bottom: 0px;
+    }
+    .pagenum:before {
+        content: counter(page);
+    }
+}
+
+
     </head>
 
     <body>
+        <script type="text/php">
+            if (isset($pdf)) {
+                $font = $fontMetrics->getFont("Arial", "bold");
+                $pdf->page_text(50, 740, "{{  $dados_candidato_para_relatorio['nome'] }}", $font, 7, array(0, 0, 0) );
+                $pdf->page_text(555, 740, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
+            }
+        </script>
+        
         <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
