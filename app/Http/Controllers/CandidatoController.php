@@ -669,7 +669,9 @@ class CandidatoController extends BaseController
 				$nova_motivacao->save();
 			}else{
 				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
-				$motivacao->update($dados_motivacao);
+				$dados_motivacao['updated_at'] = date('Y-m-d H:i:s');
+				
+				DB::table('carta_motivacoes')->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
 			}
 
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
