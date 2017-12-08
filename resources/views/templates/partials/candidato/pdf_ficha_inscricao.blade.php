@@ -4,6 +4,9 @@
     <head>
         <meta charset="utf-8">
         <style>
+            #logo {
+                max-width:150px;
+            }
             h2 {text-align:center;}
             label {font-weight: bold;}
             label.motivacao {font-weight: normal;text-align:justify;}
@@ -36,6 +39,7 @@
                 $pdf->page_text(555, 740, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
+        <img src="{!! public_path("/imagens/logo/logo_unb.png") !!}" id="logo">   
         
         <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
         <div>
