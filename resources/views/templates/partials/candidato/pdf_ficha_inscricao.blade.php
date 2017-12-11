@@ -27,6 +27,7 @@
             .pagenum:before {
                 content: counter(page);
             }
+            p:last-child { page-break-after: never; }
         </style>
     </head>
 
@@ -34,8 +35,8 @@
         <script type="text/php">
             if (isset($pdf)) {
                 $font = $fontMetrics->getFont("Arial", "bold");
-                $pdf->page_text(50, 740, "{{  $dados_candidato_para_relatorio['nome'] }}", $font, 7, array(0, 0, 0) );
-                $pdf->page_text(555, 740, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
+                $pdf->page_text(35, 750, "{{  $dados_candidato_para_relatorio['nome'] }}", $font, 7, array(0, 0, 0) );
+                $pdf->page_text(540, 750, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
 
@@ -109,8 +110,8 @@
 
         <hr>
         <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
-        <div>
-            <label class="motivacao">{{ $dados_candidato_para_relatorio['motivacao'] }}</label>
-        </div>
+        <p class="motivacao">
+            {{ $dados_candidato_para_relatorio['motivacao'] }}
+        </p>
     </body>
 </html>
