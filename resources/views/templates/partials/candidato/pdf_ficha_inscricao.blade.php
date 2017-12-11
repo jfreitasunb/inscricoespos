@@ -11,6 +11,7 @@
             h4 {text-align:left;}
             label {font-weight: bold;}
             label.motivacao {font-weight: normal;text-align:justify;}
+            p.motivacao {font-weight: normal;text-align:justify;}
             .page_break { page-break-before: always;}
             table.tftable {font-size:12px;width:100%;border-width: 1px;border-collapse: collapse;}
     		table.tftable th {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;text-align:center;}
