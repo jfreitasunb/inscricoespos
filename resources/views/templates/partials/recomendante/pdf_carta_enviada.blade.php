@@ -4,29 +4,68 @@
     <head>
         <meta charset="utf-8">
         <style>
-            h2 {text-align:center;}
+            #logo {
+                max-width:77px;
+            }
+            h3 {text-align:center;}
+            h4 {text-align:left;}
             label {font-weight: bold;}
             label.motivacao {font-weight: normal;text-align:justify;}
+            p.motivacao {font-weight: normal;text-align:justify;}
             .page_break { page-break-before: always;}
             table.tftable {font-size:12px;width:100%;border-width: 1px;border-collapse: collapse;}
     		table.tftable th {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;text-align:center;}
     		table.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
             table.tftable td.valor_celula {text-align:center;font-weight: bold;font-size:14px;border-width: 1px;padding: 8px;border-style: solid;}
             table.tftable td.cabecalho {text-align:center;font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
+            .footer {
+                width: 100%;
+                text-align: center;
+                position: fixed;
+                font-size: 8pt;
+                bottom: 0px;
+            }
+            .pagenum:before {
+                content: counter(page);
+            }
+            p:last-child { page-break-after: never; }
         </style>
     </head>
 
     <body>
-        <h2>Carta de Recomendação enviada ao MAT/UnB para o(a) candidato(a) ao Programa de {{ $dados_para_carta_enviada['programa_pretendido'] }}: {{ $dados_para_carta_enviada['nome_candidato'] }} </h2>
-        <div>
+        <script type="text/php">
+            if (isset($pdf)) {
+                $font = $fontMetrics->getFont("Arial", "bold");
+                $pdf->page_text(540, 750, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
+            }
+        </script>
+
+        <p style="width: 500px;">
+            <img src="{!! public_path("/imagens/logo/logo_unb.png") !!}" id="logo" style="float: left;" />
+            <h4>
+                Departamento de Matemática<br>
+                Programa de Pós-Graduação do MAT/UnB
+            </h4>
+        </p>
+
+        <h3>
+            <i>
+                Carta de Recomendação enviada ao MAT/UnB para o(a) candidato(a) ao Programa de {{ $dados_para_carta_enviada['programa_pretendido'] }}: {{ $dados_para_carta_enviada['nome_candidato'] }}
+            </i>
+        </h3>
+
+        <p>
             <label>Conhece o candidato há quanto tempo? </label> {{ $carta_enviada['tempo_conhece_candidato'] }}
-        </div>
-        <div>
+        </p>
+
+        <p>
             <label>Conhece o candidato sob as seguintes circunstâncias: </label> {{ $carta_enviada['circunstancia_1'] }} {{ $carta_enviada['circunstancia_2'] }} {{ $carta_enviada['circunstancia_3'] }} {{ $carta_enviada['circunstancia_4'] }}
-        </div>
-        <div>
+        </p>
+
+        <p>
             <label>Conhece o candidato sob outras circunstâncias: </label> {{ $carta_enviada['circunstancia_outra'] }}
-        </div>
+        </p>
+        
         <hr size="0">
         <label>Avaliações</label>
 
@@ -117,22 +156,22 @@
 
 
         <hr size="0">
-        <div>
+        <p class="motivacao">
             <label>Opinião sobre os antecedentes acadêmicos, profissionais e/ou técnicos do candidato:</label>
-            <label class="motivacao"> {{ $carta_enviada['antecedentes_academicos'] }} </label>
-        </div>
+            {{ $carta_enviada['antecedentes_academicos'] }}
+        </p>
 
         <hr size="0">
-        <div>
+        <p class="motivacao">
             <label>Opinião sobre seu possível aproveitamento, se aceito no Programa:</label>
-            <label class="motivacao"> {{ $carta_enviada['possivel_aproveitamento'] }} </label>
-        </div>
+            {{ $carta_enviada['possivel_aproveitamento'] }}
+        </p>
 
         <hr size="0">
-        <div>
+        <p class="motivacao">
             <label>Outras informaçõoes relevantes:</label>
-            <label class="motivacao"> {{ $carta_enviada['informacoes_relevantes'] }} </label>
-        </div>
+            {{ $carta_enviada['informacoes_relevantes'] }}
+        </p>
 
         <hr size="0">
         <div>
