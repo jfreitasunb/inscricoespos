@@ -5,9 +5,10 @@
         <meta charset="utf-8">
         <style>
             #logo {
-                max-width:150px;
+                max-width:77px;
             }
             h2 {text-align:center;}
+            h4 {text-align:left;}
             label {font-weight: bold;}
             label.motivacao {font-weight: normal;text-align:justify;}
             .page_break { page-break-before: always;}
@@ -17,18 +18,16 @@
             table.tftable td.valor_celula {text-align:center;font-weight: bold;font-size:14px;border-width: 1px;padding: 8px;border-style: solid;}
             table.tftable td.cabecalho {text-align:center;font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
             .footer {
-        width: 100%;
-        text-align: center;
-        position: fixed;
-        font-size: 8pt;
-        bottom: 0px;
-    }
-    .pagenum:before {
-        content: counter(page);
-    }
-}
-
-
+                width: 100%;
+                text-align: center;
+                position: fixed;
+                font-size: 8pt;
+                bottom: 0px;
+            }
+            .pagenum:before {
+                content: counter(page);
+            }
+        </style>
     </head>
 
     <body>
@@ -39,9 +38,18 @@
                 $pdf->page_text(555, 740, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
-        <img src="{!! public_path("/imagens/logo/logo_unb.png") !!}" id="logo">   
-        
-        <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
+
+        <p style="width: 500px;">
+            <img src="{!! public_path("/imagens/logo/logo_unb.png") !!}" id="logo" style="float: left;" />
+            <h4>
+                Departamento de Matemática<br>
+                Programa de Pós-Graduação do MAT/UnB
+            </h4>
+        </p>
+       
+        <h2>
+                Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
+
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
