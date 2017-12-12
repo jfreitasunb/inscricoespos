@@ -61,7 +61,9 @@
   <fieldset class="scheduler-border">
       <div class="row">
         <p> {{ trans('tela_motivacao_documentos.concordancia_1') }} {{ link_to($arquivos_editais.'Edital_MAT_'.$edital.'.pdf',trans('tela_motivacao_documentos.texto_link_edital'), array('target' => '_blank' )) }} {{ trans('tela_motivacao_documentos.concordancia_2') }}</p>
-        {!! Form::checkbox('concorda_termos', '1', null, ['class' => 'control-label', 'required' => '']) !!} {{ trans('tela_motivacao_documentos.concordancia_3') }}
+        <label>
+          {!! Form::checkbox('concorda_termos', '1', null, ['class' => 'control-label', 'required' => '']) !!} {{ trans('tela_motivacao_documentos.concordancia_3') }}
+        </label>
       </div>
   </fieldset>
 

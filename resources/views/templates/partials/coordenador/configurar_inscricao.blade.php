@@ -49,7 +49,9 @@
           @foreach($programas_pos_mat as $programa)
             <div class="col-xs-6">
               <div class="form-group form-inline">
-                {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos }}  
+                <label>
+                  {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos }} 
+                </label> 
               </div>
             </div>
           @endforeach
