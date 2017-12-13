@@ -64,6 +64,13 @@ class CartaRecomendacao extends Model
 
     }
 
+    public function retorna_carta_recomendacao_nao_enviadas($id_inscricao_pos)
+    {
+
+        return $this->select('id_prof')->where("id_inscricao_pos", $id_inscricao_pos)->where('completada', false)->distinct('id_prof')->get()->pluck('id_prof');
+
+    }
+
     public function inicia_carta_candidato($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes)
     {
         
