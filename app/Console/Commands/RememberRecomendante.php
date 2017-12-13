@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
 use Posmat\Models\{User, ConfiguraInscricaoPos, DadoRecomendante, CartaRecomendacao};
+use Posmat\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
 
@@ -46,14 +47,29 @@ class RememberRecomendante extends Command
 
         $edital_vigente = $edital->retorna_inscricao_ativa();
 
-        $prazo_carta = $edital_vigente->prazo_carta;
-
-        $this->info($prazo_carta);
+        $prazo_carta = Carbon::createFromFormat('Y-m-d', $edital_vigente->prazo_carta);
 
         $cartas = new CartaRecomendacao;
 
         $cartas_nao_enviadas = $cartas->retorna_carta_recomendacao_nao_enviadas($edital_vigente->id_inscricao_pos);
 
-        dd($cartas_nao_enviadas);
+        $data_hoje = Carbon::now();
+
+        $dados_email['prazo_carta'] = $prazo_carta->format('d/m/Y');
+
+        if ($data_hoje->diffInDays($prazo_carta) == 2) {
+           
+           foreach ($cartas_nao_enviadas as $id_user) {
+               
+               $dado_pessoal_recomendante = new DadoRecomendante();
+
+               $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome_recomendante;
+
+
+
+               Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
+           }
+        }
+
     }
 }
