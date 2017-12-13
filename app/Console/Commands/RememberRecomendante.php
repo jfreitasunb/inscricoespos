@@ -18,7 +18,7 @@ class RememberRecomendante extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Lembra os recomendantes do prazo final de envio das cartas.';
 
     /**
      * Create a new command instance.
