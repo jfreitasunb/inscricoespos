@@ -25,7 +25,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('reme:reco')
-                 ->everyMinute();
+                 // ->everyMinute();
+                 ->dailyAt('01:00');
     }
 
     /**
