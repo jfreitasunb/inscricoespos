@@ -33,6 +33,7 @@ class NotificaNovaInscricao extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+            ->from('posgrad@mat.unb.br', 'Coordenação de Pós-Graduação do MAT/UnB')
             ->subject('Nova inscrição configurada')
             ->line('Fique atento, uma nova inscrição da Pós começará em breve. Veja os dados abaixo: ')
             ->line('Início da inscrição: '.$this->dados_email['inicio_inscricao'])

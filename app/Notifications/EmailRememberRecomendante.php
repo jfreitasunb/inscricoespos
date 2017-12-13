@@ -45,6 +45,7 @@ class EmailRememberRecomendante extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->from('posgrad@mat.unb.br', 'Coordenação de Pós-Graduação do MAT/UnB')
                     ->subject('Prazo de envio das cartas de Recomendação ao MAT/UnB')
                     ->line('Prezado(a) recomendante '.$this->dados_email['nome_professor'].',')
                     ->line('O prazo de envio das cartas de recomendação termina no dia '.$this->dados_email['prazo_carta'].'.')
