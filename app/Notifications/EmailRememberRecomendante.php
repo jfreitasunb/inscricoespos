@@ -48,9 +48,9 @@ class EmailRememberRecomendante extends Notification
                     ->from('posgrad@mat.unb.br', 'Coordenação de Pós-Graduação do MAT/UnB')
                     ->subject('Prazo de envio das cartas de Recomendação ao MAT/UnB')
                     ->line('Prezado(a) recomendante '.$this->dados_email['nome_professor'].',')
-                    ->action('O prazo de envio das cartas de recomendação termina no dia '.$this->dados_email['prazo_carta'].'.')
-                    ->line('Para enviar as cartas clique aqui '.url('/'))
-                    ->line('Caso preciso mudar a senha clique no link', url('esqueci/senha'))
+                    ->line('O prazo de envio das cartas de recomendação termina no dia '.$this->dados_email['prazo_carta'].'.')
+                    ->action('Para enviar as cartas clique aqui', url('/'))
+                    ->line('Caso preciso mudar a senha clique no link'.url('esqueci/senha'))
                     ->line('Atenciosamente,')
                     ->line('Coordenação de Pós-Graduação do MAT/UnB.');
     }
