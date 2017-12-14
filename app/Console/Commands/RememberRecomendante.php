@@ -63,13 +63,15 @@ class RememberRecomendante extends Command
                
                $dado_pessoal_recomendante = new DadoRecomendante();
 
-               $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome_recomendante;
+               $dados_recomendantes = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user);
+               
+               if (!is_null($dados_recomendantes)) {
+                   
+                   $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome_recomendante;
 
-
-
-               Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
+                    Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
+               }   
            }
         }
-
     }
 }
