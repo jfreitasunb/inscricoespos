@@ -584,9 +584,7 @@ class CandidatoController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-		$arquivos_editais = storage_path("app/editais/");
-
-		$url = Storage::disk('local')->url('app/editais/Edital_MAT_'.$edital.'.pdf');
+		$arquivos_editais = public_path("editais/");
 		
 		if ($autoriza_inscricao) {
 		
@@ -608,12 +606,12 @@ class CandidatoController extends BaseController
 				if (is_null($fez_carta_motivacao)) {
 					$dados['motivacao'] = '';
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('url','edital', 'dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital', 'dados'));
 				}else{
 
 					$dados['motivacao'] = $fez_carta_motivacao->motivacao;
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('url','edital','dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital','dados'));
 				}
 				
 			}
