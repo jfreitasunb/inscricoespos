@@ -7,7 +7,7 @@
 return [
     'tela_dados_pessoais' => 'Dados Pessoais',
     'nome' => 'Nome',
-    'rg' => 'RG',
+    'rg' => 'No. Documento de Identificação',
     'data_nascimento' => 'Data de Nascimento',
     'endereco' => 'Endereço',
     'cidade' => 'Cidade',
