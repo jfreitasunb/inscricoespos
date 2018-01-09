@@ -38,6 +38,7 @@ use Posmat\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Posmat\Http\Requests;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 /**
 * Classe para manipulação do candidato.
@@ -584,6 +585,8 @@ class CandidatoController extends BaseController
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 		$arquivos_editais = storage_path("app/editais/");
+
+		$url = Storage::disk('local')->url('app/editais/Edital_MAT_'.$edital.'.pdf');
 		
 		if ($autoriza_inscricao) {
 		
@@ -605,12 +608,12 @@ class CandidatoController extends BaseController
 				if (is_null($fez_carta_motivacao)) {
 					$dados['motivacao'] = '';
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital', 'dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('url','edital', 'dados'));
 				}else{
 
 					$dados['motivacao'] = $fez_carta_motivacao->motivacao;
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital','dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('url','edital','dados'));
 				}
 				
 			}
