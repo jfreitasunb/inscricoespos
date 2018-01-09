@@ -184,8 +184,6 @@ class CandidatoController extends BaseController
 				'endereco' => 'required|max:256',
 				'cep' => 'required|max:20',
 				'pais' => 'required',
-				'estado' => 'required|max:5',
-				'cidade' => 'required',
 				'celular' => 'required|max:21',
 			]);
 
