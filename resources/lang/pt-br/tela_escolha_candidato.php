@@ -7,6 +7,7 @@
 
 return [
 	'tela_escolhas' => 'Escolha',
+    'texto_programa' => 'No quadro abaixo você deve assinalar o programa pretendido. Para o doutorado, deve marcar ainda a subárea de interesse. A relação de orientadores em cada subárea pode ser encontrada no site do PPG/MAT.',
 	'programa_disponivel' => 'Programa Pretendido',
     'interesse_bolsa' => 'Tem interesse em bolsa?',
     'vinculo_empregaticio' => 'Possui vínculo empregatício?',

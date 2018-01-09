@@ -5,6 +5,13 @@
 @endsection
 
 @section('escolha_monitoria')
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border"></legend>
+    <div class="row">
+      {{trans('tela_escolha_candidato.texto_programa')}}
+    </div>
+</fieldset>
+
 {!! Form::open(array('route' => 'dados.escolhas', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.programa_disponivel')}}</legend>
