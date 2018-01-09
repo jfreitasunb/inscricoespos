@@ -75,11 +75,11 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = [];
     
-    $locais_arquivos['arquivos_temporarios'] = storage_path("app/temporario/");
+    $locais_arquivos['arquivos_temporarios'] = storage_path("app/relatorios/temporario/");
 
-    $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
+    $locais_arquivos['ficha_inscricao'] = storage_path("app/relatorios/ficha_inscricao/");
 
-    $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/edital_".$edital."/");
+    $locais_arquivos['local_relatorios'] = storage_path("app/relatorios/edital_".$edital."/");
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
@@ -788,6 +788,8 @@ class RelatorioController extends BaseController
   public function geraFichaInscricao($id_aluno, $id_inscricao_pos)
   {
 
+    $endereco_mudar = '/var/www/postmat/storage/app/public';
+    
     $relatorio = new ConfiguraInscricaoPos();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
@@ -829,7 +831,8 @@ class RelatorioController extends BaseController
 
     $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-    return $nome_arquivos['arquivo_relatorio_candidato_final'];
+    return str_replace($endereco_mudar,'storage', $nome_arquivos['arquivo_rel
+atorio_candidato_final']);
   }
 
 }
