@@ -311,7 +311,7 @@ class AdminController extends CoordenadorController
 
 		$finaliza_inscricao = new FinalizaInscricao;
 
-		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($id_user, $id_user);
+		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user);
 
 		if (!is_null($finalizou)) {
 			
