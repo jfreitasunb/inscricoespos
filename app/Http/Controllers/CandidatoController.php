@@ -184,7 +184,7 @@ class CandidatoController extends BaseController
 				'endereco' => 'required|max:256',
 				'cep' => 'required|max:20',
 				'pais' => 'required',
-				'celular' => 'required|max:21',
+				'celular' => 'max:21',
 			]);
 
 			$user = $this->SetUser();

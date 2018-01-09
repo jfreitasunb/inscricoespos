@@ -155,7 +155,7 @@
           <div class="row">
           {!! Form::label('celular', trans('tela_dados_pessoais.celular'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
-            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######', 'required' => '']) !!}
+            {!! Form::text('celular', $dados['celular'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'placeholder' => '(DD)#######']) !!}
           </div>
         </div>
         @else
