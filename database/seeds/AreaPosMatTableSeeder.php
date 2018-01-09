@@ -41,14 +41,14 @@ class AreaPosMatTableSeeder extends Seeder
             3 => 
             array (
                 'id_area_pos' => 4,
-                'nome' => 'Geometria',
+                'nome' => 'Dinâmica de Fluidos',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             4 => 
             array (
                 'id_area_pos' => 5,
-                'nome' => 'Matemática Aplicada',
+                'nome' => 'Geometria',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
