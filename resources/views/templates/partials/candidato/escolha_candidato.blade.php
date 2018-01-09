@@ -61,6 +61,13 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
+  <legend class="scheduler-border"></legend>
+    <div class="row">
+      {{trans('tela_escolha_candidato.texto_recomendantes')}}
+    </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_escolha_candidato.recomendante')}}</legend>
       <div class="row">
         <div class="col-md-4">
