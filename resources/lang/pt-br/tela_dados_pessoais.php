@@ -14,7 +14,7 @@ return [
     'estado' => 'Estado',
     'cep' => 'CEP',
     'pais' => 'País',
-    'celular' => 'Celular',
+    'celular' => 'Telefone de Contato',
     'menu_enviar' => 'Enviar',
     'menu_editar' => 'Editar',
     'menu_registro_sucesso_parte_inicial' => 'Account succesfully created. It was send an e-mail to: ',
