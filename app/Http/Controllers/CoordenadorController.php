@@ -95,7 +95,7 @@ class CoordenadorController extends BaseController
 		$user = Auth::user();
 
 		$local_documentos = storage_path('app/');
-        $arquivos_editais = storage_path("app/editais/");
+        $arquivos_editais = storage_path("app/public/editais/");
 
         File::isDirectory($arquivos_editais) or File::makeDirectory($arquivos_editais,077,true,true);
     
