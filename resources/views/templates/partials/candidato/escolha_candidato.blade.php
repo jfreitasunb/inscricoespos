@@ -30,6 +30,13 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
+  <legend class="scheduler-border"></legend>
+    <div class="row">
+      {{trans('tela_escolha_candidato.texto_bolsas')}}
+    </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{ trans('tela_escolha_candidato.interesse_bolsa') }}</legend>
       <div class="row">
         <div class="col-md-4">
