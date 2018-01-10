@@ -560,6 +560,12 @@ class RelatorioController extends BaseController
 
   $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
+  $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
+
+  $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
+
+  $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
+
   return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
   }
 
@@ -703,6 +709,8 @@ class RelatorioController extends BaseController
 
     $monitoria = $id_inscricao_pos;
 
+
+
     return redirect()->back()->with(compact('monitoria','relatorios_anteriores','arquivos_zipados_para_view','relatorio_csv'));
   }
 
@@ -775,7 +783,7 @@ class RelatorioController extends BaseController
 
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->programa);
 
-    return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_viewddlocais_arquivos['arquivo_relatorio_csv']);
+    return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
 
 
