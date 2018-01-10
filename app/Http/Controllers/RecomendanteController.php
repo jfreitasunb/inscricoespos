@@ -229,6 +229,8 @@ class RecomendanteController extends BaseController
 
 			if (is_null($dados_antigos)) {
 				$dados = $carta_recomendacao->retorna_carta_recomendacao($id_user,$id_candidato,$id_inscricao_pos);
+			}else{
+				$dados = $dados_antigos;
 			}
 
 			if (!is_null($dados_atuais->tempo_conhece_candidato)) {
@@ -239,7 +241,6 @@ class RecomendanteController extends BaseController
 			if (!is_null($dados_antigos) && is_null($dados_atuais->tempo_conhece_candidato)) {
 				
 				notify()->flash(trans('tela_cartas_pendentes.mensagem_carta_antiga'),'info');
-
 			}
 
 			return view('templates.partials.recomendante.carta_parte_inicial', compact('dados_candidato','dados','id_candidato'));
