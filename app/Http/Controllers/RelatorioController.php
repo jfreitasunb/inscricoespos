@@ -75,11 +75,11 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = [];
     
-    $locais_arquivos['arquivos_temporarios'] = storage_path("app/relatorios/temporario/");
+    $locais_arquivos['arquivos_temporarios'] = storage_path("app/public/relatorios/temporario/");
 
-    $locais_arquivos['ficha_inscricao'] = storage_path("app/relatorios/ficha_inscricao/");
+    $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
 
-    $locais_arquivos['local_relatorios'] = storage_path("app/relatorios/edital_".$edital."/");
+    $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/edital_".$edital."/");
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
@@ -560,7 +560,7 @@ class RelatorioController extends BaseController
 
   $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-  $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
+  $endereco_zip_mudar = '/var/www/posmat/storage/app/public/';
 
   $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
 
@@ -697,7 +697,9 @@ class RelatorioController extends BaseController
 
       $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-      return $nome_arquivos['arquivo_relatorio_candidato_final'];
+      $endereco_mudar = '/var/www/posmat/storage/app/public/';
+      
+      return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
 
   public function getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$relatorio_csv)
@@ -708,8 +710,6 @@ class RelatorioController extends BaseController
     $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
 
     $monitoria = $id_inscricao_pos;
-
-
 
     return redirect()->back()->with(compact('monitoria','relatorios_anteriores','arquivos_zipados_para_view','relatorio_csv'));
   }
@@ -749,7 +749,7 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
 
-      foreach ($thiss->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -796,7 +796,7 @@ class RelatorioController extends BaseController
   public function geraFichaInscricao($id_aluno, $id_inscricao_pos)
   {
 
-    $endereco_mudar = '/var/www/postmat/storage/app/public';
+    $endereco_mudar = '/var/www/posmat/storage/app/public/';
     
     $relatorio = new ConfiguraInscricaoPos();
 
@@ -839,8 +839,7 @@ class RelatorioController extends BaseController
 
     $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-    return str_replace($endereco_mudar,'storage', $nome_arquivos['arquivo_rel
-atorio_candidato_final']);
+    return str_replace($endereco_mudar,'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
 
 }
