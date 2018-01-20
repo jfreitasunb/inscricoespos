@@ -6,7 +6,7 @@
 
 
 return [
-	'tela_escolhas' => 'Escolha',
+	'tela_escolhas' => 'Elegir',
 	'programa_disponivel' => 'Programa al que aspira',
     'interesse_bolsa' => '¿Tiene interés en solicitar beca?',
     'vinculo_empregaticio' => '¿Es usted empleado?',

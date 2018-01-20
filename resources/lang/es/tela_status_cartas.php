@@ -6,10 +6,10 @@
 
 
 return [
-	'status_cartas' => 'Status das Cartas de Recomendação',
-    'mensagem_status_cartas' => 'Abaixo você pode conferir se suas cartas já foram enviadas',
-    'nome_recomendante' => 'Nome do recomendante',
-    'situacao_carta' => 'Situação da Carta',
-    'status_enviada' => 'Enviada',
-    'status_nao_enviada' => 'Não enviada',
+	'status_cartas' => 'Status de las Cartas de Recomendación',
+    'mensagem_status_cartas' => 'Abajo usted puede confirmar si sus cartas ya fueron enviada',
+    'nome_recomendante' => 'Nombre del recomendante',
+    'situacao_carta' => 'Situación de la Carta',
+    'status_enviada' => 'Enviado',
+    'status_nao_enviada' => 'No enviado',
 ];
