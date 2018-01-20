@@ -9,7 +9,7 @@ return [
     'tela_pendentes' => 'Preencher Carta',
     'opiniao_antecedentes_academicos' => 'Dê-nos sua opinião sobre os antecedentes acadêmicos, profissionais e/ou técnicos do candidato ',
     'opiniao_desempenho_candidato' => 'Dê-nos sua opinião sobre o possível desempenho do candidato, se aceito no programa',
-    'outras_informacoes_relevantes' => 'Outras informações relevante',
+    'outras_informacoes_relevantes' => 'Outras informações relevantes',
     'classifica_candidato' => 'Entre os estudantes que já conheceu, de que maneira você classificaria o candidato?',
     'top_5' => '5% melhores',
     'top_10' => '10% melhores',
