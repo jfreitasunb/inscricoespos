@@ -7,6 +7,7 @@
 
 return [
     'tela_pendentes' => 'Preencher Carta',
+    'sem_carta_seleciona' => 'Por favor selecione a carta que deseja enviar.',
     'programa_pretendido_candidato' => 'Programa pretendido pelo candidato',
     'nome_candidato' => 'Nome do candidato',
     'tempo_conhece_candidato' => 'Conhece-o há quanto tempo (meses, anos)',
