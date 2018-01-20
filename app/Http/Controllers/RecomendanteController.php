@@ -189,7 +189,16 @@ class RecomendanteController extends BaseController
 	}
 
 	public function postCartaInicial()
-	{
+	{	
+
+		if (!isset($_POST['id_candidato'])) {
+			
+			notify()->flash(trans('tela_carta_parte_inicial.sem_carta_seleciona'), 'error');
+
+			return redirect()->back();
+
+		}
+		
 		$id_candidato= (int)$_POST['id_candidato'];
 
 		$user = $this->SetUser();
