@@ -6,21 +6,18 @@
 
 
 return [
-	'tela_finaliza' => 'Finalizar Inscrição',
-    'texto_finaliza' => 'No link abaixo você encontrará um arquivo PDF com os dados da sua inscrição. Confira todos os dados e caso encontre algum erro retorne à tela correspondente e efetue a correção. Após o envio definitivo da inscrição não será possível efetuar nenhuma mudanção.',
-    'ficha_inscricao' => 'Ficha de Inscrição',
-    'falta_dados_academicos' => 'Você deve informar seus dados acadêmicos antes de finalizar a inscrição.',
-    'falta_documentos' => 'Você não enviou seus documentos ainda.',
-    'falta_recomendante' => 'Você não informou seus recomendantes ainda.',
-    'falta_motivacao' => 'Você não informou sua motivação.',
-    'confirma_envio' => 'Envio definitivo?',
-    'texto_confirma_envio' => 'Tem certeza que deseja fazer o envio definitivo?',
-    'sim_envia' => 'Sim',
-    'nao_envia' => 'Não',
-    'envio_cancelado' => 'Envio da inscrição cancelado!',
-    'menu_envio_definitivo' => 'Envio Definitivo',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
-    'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
-
-
+	'tela_finaliza' => 'Finalizar Inscripción',
+    'texto_finaliza' => 'En el link de abajo usted encontrará un archivo PDF con los datos de su inscripción. Compruebe que todos los datos estén correctos y en el caso de encontrar algún error regrese a la página correspondiente y haga la corrección. Después del envío definitivo de la inscripción no será posible realizar ningún cambio.',
+    'ficha_inscricao' => 'Formulario de Inscripción',
+    'falta_dados_academicos' => 'Usted debe completar sus datos académicos antes de finalizar la inscripción.',
+    'falta_documentos' => 'Aún no ha enviado sus documentos.',
+    'falta_recomendante' => 'Aún no ha señalado las personas que lo recomiendan.',
+    'falta_motivacao' => 'Usted no ha indicado su motivación.',
+    'confirma_envio' => '¿Envío definitivo?',
+    'texto_confirma_envio' => '¿Esta seguro que desea hacer el envío definitivo?',
+    'sim_envia' => 'Sí',
+    'nao_envia' => 'No',
+    'envio_cancelado' => 'Envío de la inscripción cancelado!',
+    'menu_envio_definitivo' => 'Envío definitivo',
+    
 ];
