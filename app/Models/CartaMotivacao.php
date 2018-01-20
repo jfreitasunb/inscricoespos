@@ -16,9 +16,8 @@ class CartaMotivacao extends Model
 
     public function retorna_carta_motivacao($id_user,$id_inscricao_pos)
     {
-        $carta_motivacao = $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
-
-        return $carta_motivacao;
+     
+        return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
 
     }
 }

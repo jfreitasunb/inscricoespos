@@ -26,9 +26,8 @@ class DadoAcademico extends Model
 
 public function retorna_dados_academicos($id_user)
     {
-        $dados_academicos = $this->find($id_user);
 
-        return $dados_academicos;
+        return $this->find($id_user);
 
     }
 }
