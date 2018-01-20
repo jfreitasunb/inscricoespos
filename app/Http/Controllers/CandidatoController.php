@@ -61,6 +61,8 @@ class CandidatoController extends BaseController
     }
 	public function getMenu()
 	{	
+		Session::get('locale');
+		
 		return view('home');
 	}
 
