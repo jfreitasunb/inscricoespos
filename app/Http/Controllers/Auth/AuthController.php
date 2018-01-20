@@ -43,8 +43,8 @@ class AuthController extends BaseController
 			'nome' => 'required|max:255',
 			'email'  => 'required|unique:users|email|max:255',
 			'confirmar-email'  => 'required|email|same:email|max:255',
-			'password'  => 'required|min:1',
-			'confirmar-password'  => 'required|same:password|min:1',
+			'password'  => 'required|min:6',
+			'confirmar-password'  => 'required|same:password|min:6',
 
 		]);
 

@@ -43,14 +43,14 @@
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                   <label for="password" class="control-label">{{trans('tela_registro.menu_senha')}}</label>
-                  <input type="password" name="password" id="password" tabindex="2" class="form-control" required="" data-parsley-minlength="1" placeholder="{{trans('tela_registro.menu_senha')}}">
+                  <input type="password" name="password" id="password" tabindex="2" class="form-control" required="" data-parsley-minlength="6" placeholder="{{trans('tela_registro.menu_senha')}}">
                   @if ($errors->has('password'))
                       <span class="help-block">{{ $errors->first('password') }}</span>
                   @endif
                 </div>
                 <div class="form-group{{ $errors->has('confirmar-password') ? ' has-error' : '' }}">
                   <label for="confirmar-password" class="control-label">{{trans('tela_registro.menu_confira_senha')}}</label>
-                  <input type="password" name="confirmar-password" id="confirmar-password" tabindex="2" class="form-control" required="" data-parsley-minlength="1" data-parsley-equalto="#password" placeholder="{{trans('tela_registro.menu_confira_senha')}}">
+                  <input type="password" name="confirmar-password" id="confirmar-password" tabindex="2" class="form-control" required="" data-parsley-minlength="6" data-parsley-equalto="#password" placeholder="{{trans('tela_registro.menu_confira_senha')}}">
                   @if ($errors->has('confirmar-password'))
                       <span class="help-block">{{ $errors->first('confirmar-password') }}</span>
                   @endif
