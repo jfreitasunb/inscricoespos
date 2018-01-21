@@ -15,7 +15,7 @@
           <li class="{{ Route::currentRouteNamed('cartas.pendentes') ? 'active' : '' }}"><a href="{{ route('cartas.pendentes') }}">{{ trans('tela_cartas_pendentes.tela_pendentes') }}</a></li>
         @endliberacarta
         <li class="{{ Route::currentRouteNamed('cartas.anteriores') ? 'active' : '' }}"><a href="{{ route('cartas.anteriores') }}">{{ trans('tela_cartas_anteriores.tela_cartas_anteriores') }}</a></li>
-        <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
+        <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">{{ trans('tela_sair.sair') }}</a></li>
         @impersonating_recomendante
           <li>
             <a href="#" onclick="event.preventDefault(); document.getElementById('impersonating').submit();">Voltar ao Admin</a>
