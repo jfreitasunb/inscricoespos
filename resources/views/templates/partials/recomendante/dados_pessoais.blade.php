@@ -14,7 +14,7 @@
     {!! Form::open(array('route' => 'dados.recomendante.editar', 'class' => 'form-horizontal', 'method' => 'GET' )) !!}
   @endif
     <fieldset class="scheduler-border">
-      <legend class="scheduler-border">Dados Pessoais</legend>
+      <legend class="scheduler-border">{{ trans('tela_recomendante_dados_pessoais.tela_dados_pessoais') }}s</legend>
         @if ($editar_dados)
           <div class="row">
           {!! Form::label('nome_recomendante', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
