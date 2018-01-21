@@ -7,14 +7,12 @@
 
 return [
     'tela_cartas_anteriores' => 'Cartas Anteriores',
-	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
-    'curso_graduacao' => 'Graduação',
+	'atualizar_dados' => 'Respetado(a) recomendante, antes de enviar su recomendación, por favor actualice sus datos.',
+    'curso_graduacao' => 'Graduación',
 	'curso' => 'Curso',
-    'tipo_curso' => 'Tipo',
-    'instituicao' => 'Instituição',
-    'ano_conclusao' => 'Ano de conclusão (ou previsão)',
-    'curso_pos' => 'Pós-Graduação',
+    'tipo_curso' => 'Especie',
+    'instituicao' => 'Institución',
+    'ano_conclusao' => 'Año de conclusión (o previsión)',
+    'curso_pos' => 'Posgraduación',
     'menu_enviar' => 'Enviar',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
-    'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
 ];

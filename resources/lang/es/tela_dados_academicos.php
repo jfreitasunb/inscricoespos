@@ -7,14 +7,12 @@
 
 return [
 	'tela_dados_academicos' => 'Datos Académicos',
-    'curso_graduacao' => 'Graduação',
+    'curso_graduacao' => 'Graduación',
 	'curso' => 'Curso',
-    'tipo_curso' => 'Tipo',
-    'instituicao' => 'Instituição',
-    'ano_conclusao' => 'Ano de conclusão (ou previsão)',
-    'curso_pos' => 'Pós-Graduação',
+    'tipo_curso' => 'Especie',
+    'instituicao' => 'Institución',
+    'ano_conclusao' => 'Año de conclusión (o previsión)',
+    'curso_pos' => 'Posgraduación',
     'nivel' => 'Nivel',
     'menu_enviar' => 'Enviar',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
-    'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
 ];
