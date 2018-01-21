@@ -7,6 +7,7 @@
 
 return [
 	'tela_motivacao_documentos' => 'Motivación y Documentos',
+	'texto_motivacao' => 'Utilice el cuadro siguiente para expresar su motivación con el programa deseado. También relata sus actividades extra-curriculares que considera relevantes para el análisis (iniciación científica, curso de verano, medallas en competiciones de Matemáticas, etc)',
     'motivacao' => 'Escriba en el espacio de abajo su motivación y expectativa con respecto al programa al que aspira:',
     'documentos_pessoais' => 'RG y foto en el mismo archivo',
     'historico' => 'Histórico escolar de su grado académico más alto',
