@@ -562,6 +562,9 @@ class RelatorioController extends BaseController
 
   $endereco_zip_mudar = '/var/www/posmat/storage/app/public/';
 
+  //Para ser usado no MAT
+  // $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
+
   $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
 
   $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
@@ -698,6 +701,9 @@ class RelatorioController extends BaseController
       $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
       $endereco_mudar = '/var/www/posmat/storage/app/public/';
+
+      //Para ser usado no MAT
+      // $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
       
       return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
@@ -797,6 +803,9 @@ class RelatorioController extends BaseController
   {
 
     $endereco_mudar = '/var/www/posmat/storage/app/public/';
+
+    //Para ser usado no MAT
+    // $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
     
     $relatorio = new ConfiguraInscricaoPos();
 
