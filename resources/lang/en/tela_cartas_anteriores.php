@@ -6,8 +6,8 @@
 
 
 return [
-    'tela_cartas_anteriores' => 'Cartas Anteriores',
-	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
+    'tela_cartas_anteriores' => 'Previous Letters',
+	'atualizar_dados' => 'Dear professor, before sending your recommendation, please update your data.',
     'curso_graduacao' => 'Graduação',
 	'curso' => 'Curso',
     'tipo_curso' => 'Tipo',
