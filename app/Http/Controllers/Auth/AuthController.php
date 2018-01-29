@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\BaseController;
+use Posmat\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Notification;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -51,7 +52,7 @@ class AuthController extends BaseController
 		$novo_usuario = new User();
 
 		if (Session::has('locale')) {
-			$novo_usuario->locale = Session::get('locale');	
+			$novo_usuario->locale = Session::get('locale');
 		}else{
 			$novo_usuario->locale = "pt-br";
 		}
@@ -106,6 +107,11 @@ class AuthController extends BaseController
 
 		$user_type = DB::table('users')->where('email', $request->input('email'))->value('user_type');
 
+		$home = new HomeController();
+		if (Session::has('locale')) {
+			$home->setaLocale(Session::get('locale'));
+		}
+		
 		Session::put('user_type', $user_type);
 
 		if ($user_type === 'coordenador') {
