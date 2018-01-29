@@ -6,21 +6,18 @@
 
 
 return [
-	'tela_finaliza' => 'Finalizar Inscrição',
-    'texto_finaliza' => 'No link abaixo você encontrará um arquivo PDF com os dados da sua inscrição. Confira todos os dados e caso encontre algum erro retorne à tela correspondente e efetue a correção. Após o envio definitivo da inscrição não será possível efetuar nenhuma mudanção.',
-    'ficha_inscricao' => 'Ficha de Inscrição',
-    'falta_dados_academicos' => 'Você deve informar seus dados acadêmicos antes de finalizar a inscrição.',
-    'falta_documentos' => 'Você não enviou seus documentos ainda.',
-    'falta_recomendante' => 'Você não informou seus recomendantes ainda.',
-    'falta_motivacao' => 'Você não informou sua motivação.',
-    'confirma_envio' => 'Envio definitivo?',
-    'texto_confirma_envio' => 'Tem certeza que deseja fazer o envio definitivo?',
-    'sim_envia' => 'Sim',
-    'nao_envia' => 'Não',
-    'envio_cancelado' => 'Envio da inscrição cancelado!',
-    'menu_envio_definitivo' => 'Envio Definitivo',
-    'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
-    'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
-
+	'tela_finaliza' => 'Finish Registration',
+    'texto_finaliza' => 'On the link bellow you will find a PDF file with your registration data. Check all the data and if you find any error, return to the corresponding page and make the correction. After the definitive sending of the registration it will not be possible to make any changes.',
+    'ficha_inscricao' => 'Application Form',
+    'falta_dados_academicos' => 'You must enter your academic data before completing the application.',
+    'falta_documentos' => 'You have not submitted your documents yet.',
+    'falta_recomendante' => 'You have not informed your references yet.',
+    'falta_motivacao' => 'You have not informed your motivation.',
+    'confirma_envio' => 'Definitive sending',
+    'texto_confirma_envio' => 'Are you sure you want to send it definitely?',
+    'sim_envia' => 'Yes',
+    'nao_envia' => 'No',
+    'envio_cancelado' => 'Submission of application canceled!',
+    'menu_envio_definitivo' => 'Definitive Sending',
 
 ];
