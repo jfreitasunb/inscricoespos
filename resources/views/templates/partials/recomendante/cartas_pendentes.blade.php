@@ -15,7 +15,7 @@
   @if ($sem_carta)
     <p>{{ trans('tela_cartas_pendentes.sem_cartas') }}</p>
   @else
-    <p>{{ trans('tela_cartas_pendentes.sem_cartas') }}</p>
+    <p>{{ trans('tela_cartas_pendentes.mensagem_status_cartas') }}</p>
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
         <thead>
