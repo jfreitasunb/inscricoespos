@@ -20,7 +20,7 @@ class CreateDadosPessoaisTable extends Migration
             $table->date('data_nascimento')->nullable();
             $table->string('numerorg',30)->nullable();
             $table->string('endereco',255)->nullable();
-            $table->string('cep',11)->nullable();
+            $table->string('cep',30)->nullable();
             $table->integer('pais')->nullable();
             $table->integer('estado')->nullable();
             $table->integer('cidade')->nullable();
