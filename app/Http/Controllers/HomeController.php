@@ -4,6 +4,7 @@ namespace Posmat\Http\Controllers;
 
 use Auth;
 use Session;
+use Posmat\Models\User;
 
 
 /**
