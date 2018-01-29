@@ -6,15 +6,15 @@
 
 
 return [
-    'tela_dados_pessoais' => 'Dados Pessoais',
-    'nome_recomendante' => 'Nome',
-	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
-    'instituicao_recomendante' => 'Instituição',
-	'titulacao_recomendante' => 'Grau acadêmico mais alto obtido',
+    'tela_dados_pessoais' => 'Personal Data',
+    'nome_recomendante' => 'Name',
+	'atualizar_dados' => 'Dear professor, before sending your recommendation, please update your data.',
+    'instituicao_recomendante' => 'Institution',
+	'titulacao_recomendante' => 'Highest academic degree achieved',
     'area_recomendante' => 'Área',
-    'ano_titulacao' => 'Ano de obtenção deste grau',
-    'inst_obtencao_titulo' => 'Instituição de obtenção deste grau',
-    'endereco_recomendante' => 'Endereço institucional',
-    'menu_enviar' => 'Enviar',
-    'menu_editar' => 'Editar',
+    'ano_titulacao' => 'Year of the aforementioned achievement',
+    'inst_obtencao_titulo' => 'Institution where the aforementioned academic degree was achieved',
+    'endereco_recomendante' => 'Institutional address',
+    'menu_enviar' => 'Submit',
+    'menu_editar' => 'Edit',
 ];
