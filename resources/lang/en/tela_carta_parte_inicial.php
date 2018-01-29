@@ -31,7 +31,7 @@ return [
     'expressao_oral' => 'Oral expression',
     'relacionamento' => 'Relationship with colleagues',
 	'prazo_carta' => 'Dear professor, the deadline for sending letters is closed.',
-    'situacao_carta' => 'Status of the letter',
+    'situacao_carta' => 'Recommendation letter status',
     'status_enviada' => 'Letter sent',
 	'status_nao_enviada' => 'Letter not sent',
     'nome_candidato' => 'Candidate\'s name',
