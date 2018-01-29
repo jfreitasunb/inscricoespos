@@ -9,9 +9,9 @@
 @section('cartas_anteriores')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_cartas_pendentes.tela_pendentes')}}</legend>
+  <legend class="scheduler-border">{{trans('tela_cartas_anteriores.cartas_antigas')}}</legend>
 
-  <p>{{ trans('tela_cartas_pendentes.mensagem_carta_anteriores') }}</p>
+  <p>{{ trans('tela_cartas_anteriores.mensagem_carta_anteriores') }}</p>
 
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
