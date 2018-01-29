@@ -7,7 +7,7 @@
 return [
     'tela_dados_pessoais' => 'Personal Data',
     'nome' => 'Name',
-    'rg' => 'Passport number',
+    'rg' => 'Identification card number',
     'data_nascimento' => 'Date of birth',
     'endereco' => 'Address',
     'cidade' => 'City',
