@@ -233,25 +233,25 @@ Route::post('/registrar', [
 Route::get('esqueci/senha', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm',
 		'as'	=> 'password.request',
-		'middleware' => ['guest'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::post('esqueci/senha/link', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail',
 		'as' => 'password.email',
-		'middleware' => ['guest'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::get('/esqueci/senha/{token}', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\ResetPasswordController@showResetForm',
 		'as' => 'password.reset',
-		'middleware' => ['guest'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::post('/esqueci/senha/{token}', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\ResetPasswordController@reset',
 		'as' => 'password.reset',
-		'middleware' => ['guest'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 Route::get('/mudousenha', [
