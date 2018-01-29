@@ -4,7 +4,7 @@
 
   <form action="" method="POST">
     <legend>Relatório de inscritos</legend>
-    	
+    	<strong>Total de Inscritos: </strong> {{ $total_inscritos }} <br>
     	@foreach ($programa_para_inscricao as $programa)
     		<strong>Total de inscritos para o {{ $programa }}:</strong> {{ $contagem[$programa] }}<br>
     	@endforeach

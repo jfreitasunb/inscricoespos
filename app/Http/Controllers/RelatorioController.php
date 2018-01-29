@@ -504,6 +504,8 @@ class RelatorioController extends BaseController
 
     }
 
+    $total_inscritos = array_sum($contagem);
+
     $nome_programas = implode('/', $programa_para_inscricao);
 
     $arquivos_zipados_para_view = "";
@@ -514,7 +516,7 @@ class RelatorioController extends BaseController
 
     $monitoria = "";
 
-    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'nome_programas', 'programa_para_inscricao', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
+    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','relatorio_disponivel', 'nome_programas', 'programa_para_inscricao', 'total_inscritos', 'contagem', 'arquivos_zipados_para_view','relatorio_csv'));
   }
 
    public function getListaRelatoriosAnteriores()
