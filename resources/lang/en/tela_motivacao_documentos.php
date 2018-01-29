@@ -6,16 +6,16 @@
 
 
 return [
-	'tela_motivacao_documentos' => 'Motivação e Documentos',
-    'motivacao' => 'Escreva no espaço abaixo a sua motivação e expectativa em relação ao programa pretendido:',
-    'documentos_pessoais' => 'RG e foto em um mesmo arquivo',
-    'historico' => 'Histórico da maior titulação',
-    'concordancia_1' => 'O solicitante declara formalmente que está de acordo com as ',
-    'concordancia_2' => ' e que está ciente que as decisões da Comissão de Seleção da Matemática serão irrecorríveis, admitindo-se pedido de reconsideração 
-para a própria Comissão nas hipóteses de erros procedimentais ou materiais. (declaração feita em observância aos artigos 297-299 do Código Penal Brasileiro)',
-	'texto_link_edital' => 'normas estabelecidas no Edital do Programa de Matemática da UnB',
-	'concordancia_3' => 'Li e estou de acordo com a declaração acima.',
-    'menu_enviar' => 'Enviar',
+	'tela_motivacao_documentos' => 'Motivation and Documents',
+    'motivacao' => 'Write on the space bellow your motivation and expectations regarding the intended program:',
+    'documentos_pessoais' => 'The identification card and photo must be in the same file',
+    'historico' => 'School history with disciplines and grades of the highest academic degree achieved',
+    'concordancia_1' => 'The applicant formally declares that he / she is in compliance with the ',
+    'concordancia_2' => ' and that he / she is aware that the decisions of the Commission of Mathematics Selection will be unappealable, admitting a request for reconsideration
+to the Commission itself in the event of procedural or material errors. (statement made in compliance with articles 297-299 of the Brazilian Penal Code)',
+	'texto_link_edital' => 'norms established in the Announcement of the Mathematics Program of the UnB',
+	'concordancia_3' => 'I have read and agree to the above statement.',
+    'menu_enviar' => 'Submit',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
 
