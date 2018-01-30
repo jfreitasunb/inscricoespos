@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Posmat\Models\User;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
+use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\ProgramaPos;
 use Posmat\Models\FinalizaInscricao;
 use Posmat\Notifications\NotificaNovaInscricao;
@@ -211,7 +212,14 @@ class CoordenadorController extends BaseController
 		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(2);
 
 
-		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'nome_pdf', 'id_aluno_pdf'));
+		foreach ($inscricoes_finalizadas as $candidato ) {
+
+			$cartas = new CartaRecomendacao();
+
+			$total_cartas[$candidato->id_user]=  $cartas->conta_cartas_enviadas_por_candidato($candidato->id_inscricao_pos, $candidato->id_user);
+		}
+
+		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'total_cartas', 'nome_pdf', 'id_aluno_pdf'));
 		
 	}
 
