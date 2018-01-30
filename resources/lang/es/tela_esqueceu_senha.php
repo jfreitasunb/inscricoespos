@@ -8,5 +8,5 @@
 return [
     'menu_esqueceu_senha' => 'Recuperar contraseña',
     'email' => 'E-mail',
-    'menu_enviar' => 'Enviar',
+    'menu_enviar' => 'Obtener nueva contraseña',
 ];

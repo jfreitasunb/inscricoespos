@@ -6,8 +6,8 @@
 
 
 return [
-    'menu_email' => 'E-mail',
+    'menu_email' => 'Correo electrónico',
     'menu_senha' => 'Contraseña',
-    'menu_entrar' => 'Entrar',
+    'menu_entrar' => 'Acceder',
     'menu_esqueceu_senha' => '¿Recuperar contraseña?',
 ];
