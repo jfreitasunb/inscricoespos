@@ -186,6 +186,7 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 Route::get('/logout', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getLogout',
 		'as'	=> 'auth.logout',
+		'middleware' => ['define.locale'],
 ]);
 
 Route::post('/login', [
