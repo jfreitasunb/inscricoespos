@@ -257,6 +257,7 @@ Route::post('/esqueci/senha/{token}', [
 Route::get('/mudousenha', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getMudouSenha',
 		'as'	=> 'mudou.senha',
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 /**
