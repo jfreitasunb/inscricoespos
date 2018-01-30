@@ -18,4 +18,6 @@ return [
     'confirmar_email' => 'Confirmar e-mail:',
     'motivacao' => 'Escriba en el espacio de  abajo su motivación y expectativa con respecto al programa que aspira:',
     'menu_enviar' => 'Enviar',
+    'sim' => 'Sí',
+    'nao' => 'No',
 ];

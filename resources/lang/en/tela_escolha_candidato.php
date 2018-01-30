@@ -14,4 +14,6 @@ return [
     'nome' => 'Name: ',
     'confirmar_email' => 'Confirm Email:',
     'menu_enviar' => 'Submit',
+    'sim' => 'Yes',
+    'nao' => 'No',
 ];
