@@ -18,6 +18,7 @@
           <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
           <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
           <th>Ficha de Inscrição</th>
+          <th>Cartas Recebidas</th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
             <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['nome'] }}</a></td>
             <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['tipo_programa_pos'] }}</a></td>
             <td>@if($id_aluno_pdf == $finalizada['id_user']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
+            <td>{{ $total_cartas[$finalizada['id_user']] }}</td>
           </tr>
         @endforeach
       </tbody>
