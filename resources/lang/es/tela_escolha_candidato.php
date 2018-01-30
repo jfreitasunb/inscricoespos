@@ -7,7 +7,7 @@
 
 return [
 	'tela_escolhas' => 'Elegir',
-	'texto_programa' => 'En el cuadro siguiente usted debe señalar el programa deseado. Para el doctorado, debe marcar la subárea de interés. La relación de orientadores en cada subárea puede ser encontrada en el sitio del PPG / MAT.',
+	'texto_programa' => 'En el cuadro siguiente usted debe señalar el programa deseado. Para el doctorado, debe marcar la subárea de interés. La relación de orientadores en cada subárea puede ser encontrada en el sitio del PPG/MAT.',
 	'programa_disponivel' => 'Programa al que aspira',
 	'texto_bolsas' => 'El programa cuenta con algunas becas que pueden ser utilizadas por alumnos que no tienen vínculo laboral.',
     'interesse_bolsa' => '¿Tiene interés en solicitar beca?',

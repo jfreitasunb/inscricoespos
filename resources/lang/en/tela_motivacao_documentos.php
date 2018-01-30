@@ -7,6 +7,7 @@
 
 return [
 	'tela_motivacao_documentos' => 'Motivation and Documents',
+    'texto_motivacao' => 'Use the following space to express your motivation with the desired program. Also your  extra-curricular activities that you considers relevant for the analysis (scientific initiation, summer course, medals in Mathematics competitions, etc.)',
     'motivacao' => 'Write on the space bellow your motivation and expectations regarding the intended program:',
     'documentos_pessoais' => 'The identification card and photo must be in the same file',
     'historico' => 'School history with disciplines and grades of the highest academic degree achieved',
