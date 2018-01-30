@@ -556,6 +556,8 @@ class RelatorioController extends BaseController
      $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
     }
 
+  $total_inscritos = array_sum($contagem);
+  
   $nome_programas = implode('/', $programa_para_inscricao);
 
   $monitoria = $id_inscricao_pos;
@@ -571,7 +573,7 @@ class RelatorioController extends BaseController
 
   $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem','relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem', 'total_inscritos', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
   }
 
 
