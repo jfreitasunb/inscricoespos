@@ -12,7 +12,7 @@
   <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
 
   <div class="table-responsive">
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
           <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
@@ -23,7 +23,7 @@
       </thead>
       <tbody>
         @foreach( $inscricoes_finalizadas as $finalizada)
-          <tr>
+          <tr class="{{ $classes_linhas[$total_cartas[$finalizada['id_user']]] }}">
             <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['nome'] }}</a></td>
             <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['tipo_programa_pos'] }}</a></td>
             <td>@if($id_aluno_pdf == $finalizada['id_user']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
