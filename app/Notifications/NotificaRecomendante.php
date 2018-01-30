@@ -33,7 +33,7 @@ class NotificaRecomendante extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->from('posgrad@mat.unb.br', 'Coordenação de Pós-Graduação do MAT/UnB')
+            ->from('posgrad@mat.unb.br', 'Postgraduate Comitee of MAT/UnB')
             ->subject(trans('mensagens_gerais.carta_recomendacao'))
             ->line(trans('mensagens_gerais.motivo_mensagem_1').$this->dados_email['nome_professor'].',')
             ->line(trans('mensagens_gerais.motivo_mensagem_2').$this->dados_email['programa'].trans('mensagens_gerais.motivo_mensagem_3').$this->dados_email['nome_candidato'].'.')

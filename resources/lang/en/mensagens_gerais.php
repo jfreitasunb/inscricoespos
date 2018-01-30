@@ -1,7 +1,7 @@
 <?php
 
 /*
-*Tradução dos textos para Português
+*Tradução dos textos para Inglês
  */
 
 

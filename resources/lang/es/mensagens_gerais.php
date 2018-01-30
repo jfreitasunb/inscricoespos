@@ -1,7 +1,7 @@
 <?php
 
 /*
-*Tradução dos textos para Português
+*Tradução dos textos para Espanhol
  */
 
 
@@ -13,17 +13,17 @@ return [
     'selecionar' => 'Selecione',
     'mensagem_sucesso' => 'Datos guardados con éxito.',
     'envio_final' => 'Su inscripción fue enviada correctamente a nuestro sistema.',
-    'carta_recomendacao' => 'Carta de Recomendação ao MAT/UnB',
-    'motivo_mensagem_1' => 'Prezado(a) professor(a) ',
-    'motivo_mensagem_2' => 'O(A) senhor(a) foi indicado(a) como recomendante pelo candidato(a) ao programa de  ',
-    'motivo_mensagem_3' => ' no MAT/UnB, ',
-    'motivo_mensagem_4' => 'A carta deve ser enviada pelo site: ',
-    'motivo_mensagem_5' => 'Para entrar no sistema use como login: ',
-    'inscricao_mat' => 'Inscrição no Programa de Pós-Graduação do MAT/UnB',
-    'inscricao_mat_1' => 'Prezado(a) candidato(a) ',
-    'inscricao_mat_2' => 'Sua inscrição para o Programa de ',
-    'inscricao_mat_3' => ' no MAT/UnB foi recebida corretamente em nosso sistema. Em anexo você encontrará uma cópia da sua ficha de inscrição.',
-    'prazo_envio' => 'A carta deve ser enviada até o dia: ',
-    'recupera_senha' => 'Clique aqui para criar a sua senha',
-    'saudacoes_finais' => 'Atenciosamente, Coordenação de Pós-Graduação do MAT/UnB.',
+    'carta_recomendacao' => 'Recommendation letter to MAT/UnB',
+    'motivo_mensagem_1' => 'Dear professor, ',
+    'motivo_mensagem_2' => 'you have been appointed for reference to the candidate to the postgradute program at MAT/UnB ',
+    'motivo_mensagem_3' => ' at MAT/UnB, ',
+    'motivo_mensagem_4' => 'The recommendation letter must be sent by the website: ',
+    'motivo_mensagem_5' => 'To access the system use as login: ',
+    'inscricao_mat' => 'Subscription for the postgraduate program at MAT/UnB',
+    'inscricao_mat_1' => 'Dear applicant, ',
+    'inscricao_mat_2' => 'Your subscription to the program ',
+    'inscricao_mat_3' => ' at MAT/UnB has been successfully received in our system. Attached you will find a copy of your registration form.',
+    'prazo_envio' => 'The deadline for submission of the recommendation letter is: ',
+    'recupera_senha' => 'Click here to create your password',
+    'saudacoes_finais' => 'Sincerely, postgraduate comitee of MAT/UnB.',
 ];
