@@ -177,7 +177,7 @@ class CoordenadorController extends BaseController
 
 		$finalizacoes = new FinalizaInscricao;
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(2);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(10);
 
 
 		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'nome_pdf', 'id_aluno_pdf'));
@@ -209,7 +209,7 @@ class CoordenadorController extends BaseController
 		}
 		
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(2);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(10);
 
 
 		foreach ($inscricoes_finalizadas as $candidato ) {
@@ -219,7 +219,14 @@ class CoordenadorController extends BaseController
 			$total_cartas[$candidato->id_user]=  $cartas->conta_cartas_enviadas_por_candidato($candidato->id_inscricao_pos, $candidato->id_user);
 		}
 
-		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'total_cartas', 'nome_pdf', 'id_aluno_pdf'));
+		$classes_linhas[0] = 'danger';
+		$classes_linhas[1] = 'warning';
+		$classes_linhas[2] = 'info';
+		$classes_linhas[3] = 'success';
+
+
+
+		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'total_cartas', 'classes_linhas', 'nome_pdf', 'id_aluno_pdf'));
 		
 	}
 
