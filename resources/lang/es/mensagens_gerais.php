@@ -26,4 +26,8 @@ return [
     'prazo_envio' => 'The deadline for submission of the recommendation letter is: ',
     'recupera_senha' => 'Click here to create your password',
     'saudacoes_finais' => 'Sincerely, postgraduate comitee of MAT/UnB.',
+    'erro_login' => 'Estas credenciales no coinciden con nuestros registros.',
+    'conta_nao_ativa' => 'Debes confirmar tu cuenta. Le hemos enviado un código de activación, verifique su correo electrónico.',
+    'bem_vindo' => '¡Bienvenido!',
+    'logout' => '¡Has sido desconectado!',
 ];

@@ -92,18 +92,20 @@ class AuthController extends BaseController
 
 		
 		$user = DB::table('users')->where('email', strtolower(trim($request->input('email'))))->value('ativo');
+		
 
-		if (!$user) {
-			notify()->flash('Você não ativou sua conta ainda. Você deve clicar no link de ativação que foi enviado para seu e-mail.','info');
+		if (!$user and !is_null($user)) {
+			notify()->flash(trans('mensagens_gerais.conta_nao_ativa'),'info');
 			return redirect()->back();
-		}else{
+		}
+
 			if (!Auth::attempt($request->only(['email', 'password']))) {
-				notify()->flash('Usuário ou senha não conferem!', 'error',[
+				notify()->flash(trans('mensagens_gerais.erro_login'), 'error',[
 					'timer' => 3000,
 				]);
 				return redirect()->back();
 			}
-		}
+		
 
 		$user_type = DB::table('users')->where('email', $request->input('email'))->value('user_type');
 
@@ -115,28 +117,28 @@ class AuthController extends BaseController
 		Session::put('user_type', $user_type);
 
 		if ($user_type === 'coordenador') {
-			notify()->flash('Bem vindo!','success',[
+			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
 			return redirect()->intended('coordenador');
 		}
 		
 		if ($user_type === 'admin') {
-			notify()->flash('Bem vindo!','success',[
+			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
 			return redirect()->intended('admin');
 		}
 
 		if ($user_type === 'candidato') {
-			notify()->flash('Bem vindo!','success',[
+			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
 			return redirect()->intended('candidato');
 		}
 
 		if ($user_type === 'recomendante') {
-			notify()->flash('Bem vindo!','success',[
+			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
 				'timer' => 1500,
 			]);
 			return redirect()->intended('recomendante');
@@ -153,7 +155,7 @@ class AuthController extends BaseController
 	{
 		Auth::logout();
 
-		notify()->flash('Você saiu da sua conta.','info',[
+		notify()->flash(trans('mensagens_gerais.logout'),'info',[
 				'timer' => 1500,
 			]);
 
@@ -164,7 +166,7 @@ class AuthController extends BaseController
 	{
 		Auth::logout();
 
-		notify()->flash('Senha alterada com sucesso!','success',[
+		notify()->flash(trans('mensagens_gerais.senha_alterada'),'success',[
 				'timer' => 1500,
 			]);
 
@@ -177,7 +179,7 @@ class AuthController extends BaseController
 	    // for better readability
 	    User::where('validation_code',$token)->firstOrFail()->verified();
 
-	    notify()->flash('Conta ativada com sucesso!','success',[
+	    notify()->flash(trans('mensagens_gerais.conta_ativada'),'success',[
 				'timer' => 1500,
 			]);
 
