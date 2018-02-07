@@ -5,6 +5,8 @@ namespace Posmat\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Posmat\Notifications\ResetPassword as ResetPasswordNotification;
+use Notification;
+use Posmat\Notifications\LinkSenha;
 
 class User extends Authenticatable
 {
@@ -46,7 +48,9 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         // Your your own implementation.
+        Notification::send(User::find('1'), new LinkSenha($token));
         $this->notify(new ResetPasswordNotification($token));
+        
     }
 
     public function retorna_user_por_email($email)
