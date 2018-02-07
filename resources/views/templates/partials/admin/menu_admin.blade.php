@@ -11,11 +11,6 @@
                 <div id="collapseUm" class="panel-collapse collapse">
                     <div class="panel-body">
                         <table class="table">
-                            {{-- <tr>
-                                <td>
-                                    <span class="glyphicon glyphicon-th-list"></span><a href="{{ route('lista.usuarios') }}">Lista usuários</a>
-                                </td>
-                            </tr> --}}
                             <tr>
                                 <td>
                                     <span class="glyphicon glyphicon-cog"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
