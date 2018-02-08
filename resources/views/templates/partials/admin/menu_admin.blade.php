@@ -13,6 +13,11 @@
                         <table class="table">
                             <tr>
                                 <td>
+                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.email.muda.senha') }}">Link mudança de senha</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <span class="glyphicon glyphicon-cog"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
                                 </td>
                             </tr>
@@ -112,6 +117,7 @@
             <div class="menuadmin well">
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
+                @yield('link_muda_senha')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
