@@ -103,7 +103,6 @@ class User extends Authenticatable
 
     public function registra_recomendante($email_contatos_recomendantes)
     {
-                    
         if (is_null($this->retorna_user_por_email($email_contatos_recomendantes))){
                 
             $novo_usuario = new User();
@@ -112,6 +111,8 @@ class User extends Authenticatable
             $novo_usuario->user_type =  "recomendante";
             $novo_usuario->ativo = true;
             $novo_usuario->save();
+        }elseif ($this->retorna_user_por_email($email_contatos_recomendantes)->user_type <> "recomendante"){
+                return true;
         }
     }
 }
