@@ -51,6 +51,13 @@ class AdminController extends CoordenadorController
 	public function postPesquisaLinkMudarSenha(Request $request)
 	{
 
+		if ($request->cancelar === 'Limpar'){
+
+			$modo_pesquisa = true;
+
+			return redirect()->route('pesquisa.email.muda.senha');
+		}
+
 		$this->validate($request, [
 			'email' => 'email|max:256',
 		]);
@@ -65,9 +72,19 @@ class AdminController extends CoordenadorController
 			
 			$modo_pesquisa = false;
 
-			// dd($user);
+			$token_link = str_random(64);
 
-			return view('templates.partials.admin.link_muda_senha')->with(compact('modo_pesquisa', 'user'));
+			$url_mudar_senha = url('esqueci/senha').'/'.$token_link;
+			$token = (bcrypt($token_link));
+			
+
+			DB::table('password_resets')->insert([
+				'email' => $user->email,
+				'token' => $token,
+				'created_at' => Carbon::now(),
+			]);
+
+			return view('templates.partials.admin.link_muda_senha')->with(compact('modo_pesquisa', 'user', 'url_mudar_senha'));
 		}else{
 			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
 			return redirect()->route('pesquisa.usuario');
