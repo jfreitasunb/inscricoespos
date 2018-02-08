@@ -32,4 +32,6 @@ return [
     'logout' => 'Você saiu da sua conta.',
     'senha_alterada' => 'Senha alterada com sucesso!',
     'conta_ativada' => 'Conta ativada com sucesso!',
+    'inicio_erro_email_recomendantes' => 'Os e-mails: ',
+    'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',
 ];

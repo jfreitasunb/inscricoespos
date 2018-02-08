@@ -30,4 +30,6 @@ return [
     'conta_nao_ativa' => 'You need to confirm your account. We have sent you an activation code, please check your email.',
     'bem_vindo' => 'Welcome',
     'logout' => 'You have been logged out!',
+    'inicio_erro_email_recomendantes' => 'Os e-mails: ',
+    'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',
 ];

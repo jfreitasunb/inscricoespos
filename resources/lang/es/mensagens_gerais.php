@@ -30,4 +30,6 @@ return [
     'conta_nao_ativa' => 'Debes confirmar tu cuenta. Le hemos enviado un código de activación, verifique su correo electrónico.',
     'bem_vindo' => '¡Bienvenido!',
     'logout' => '¡Has sido desconectado!',
+    'inicio_erro_email_recomendantes' => 'Os e-mails: ',
+    'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',
 ];
