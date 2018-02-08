@@ -86,12 +86,15 @@ class AuthController extends BaseController
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
-			'email' => 'required',
+			'email' => 'required|email',
 			'password' => 'required',
 		]);
 
+		$email = strtolower(trim($request->input('email')));
+
+		$password = trim($request->password);
 		
-		$user = DB::table('users')->where('email', strtolower(trim($request->input('email'))))->value('ativo');
+		$user = DB::table('users')->where('email', $email)->value('ativo');
 		
 
 		if (!$user and !is_null($user)) {
@@ -99,15 +102,15 @@ class AuthController extends BaseController
 			return redirect()->back();
 		}
 
-			if (!Auth::attempt($request->only(['email', 'password']))) {
-				notify()->flash(trans('mensagens_gerais.erro_login'), 'error',[
-					'timer' => 3000,
-				]);
-				return redirect()->back();
-			}
+		if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+			notify()->flash(trans('mensagens_gerais.erro_login'), 'error',[
+				'timer' => 3000,
+			]);
+			return redirect()->back();
+		}
 		
 
-		$user_type = DB::table('users')->where('email', $request->input('email'))->value('user_type');
+		$user_type = DB::table('users')->where('email', $email)->value('user_type');
 
 		$home = new HomeController();
 		if (Session::has('locale')) {
