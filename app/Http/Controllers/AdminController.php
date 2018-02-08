@@ -39,6 +39,41 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa'));
 	}
 
+	public function getPesquisaLinkMudarSenha()
+	{
+
+		$modo_pesquisa = true;
+
+		return view('templates.partials.admin.link_muda_senha')->with(compact('modo_pesquisa'));
+	}
+
+
+	public function postPesquisaLinkMudarSenha(Request $request)
+	{
+
+		$this->validate($request, [
+			'email' => 'email|max:256',
+		]);
+
+		$email = strtolower(trim($request->email));
+		
+
+		$usuario = new User();
+		$user = $usuario->retorna_user_por_email($email);
+
+		if (!is_null($user)) {
+			
+			$modo_pesquisa = false;
+
+			// dd($user);
+
+			return view('templates.partials.admin.link_muda_senha')->with(compact('modo_pesquisa', 'user'));
+		}else{
+			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
+			return redirect()->route('pesquisa.usuario');
+		}
+	}
+
 	public function postPesquisaConta(Request $request)
 	{
 		
