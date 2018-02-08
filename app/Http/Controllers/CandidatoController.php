@@ -535,9 +535,19 @@ class CandidatoController extends BaseController
 
 
 				$novo_usuario = new User();
+				$array_erro = [];
 
 				for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes[$i]);	
+					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes[$i]);
+
+					if ($novo_usuario_recomendante) {
+						$array_erro[$i] = $email_contatos_recomendantes[$i];
+					}
+				}
+
+				if (!empty($array_erro)) {
+					notify()->flash(trans('mensagens_gerais.inicio_erro_email_recomendantes').implode(", ", $array_erro).trans('mensagens_gerais.final_erro_email_recomendantes'),'warning');
+					return redirect()->back();
 				}
 				
 				$dados_iniciais_recomendante = new DadoRecomendante();
