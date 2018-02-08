@@ -48,7 +48,7 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         // Your your own implementation.
-        Notification::send(User::find('1'), new LinkSenha($token));
+        // Notification::send(User::find('1'), new LinkSenha($token));
         $this->notify(new ResetPasswordNotification($token));
         
     }
