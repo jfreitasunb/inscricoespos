@@ -22,6 +22,8 @@ return [
     'erro_login' => 'These credentials do not match our records.',
     'conta_nao_ativa' => 'You need to confirm your account. We have sent you an activation code, please check your email.',
     'bem_vindo' => 'Welcome',
+    'conta_ativada' => 'Conta ativada com sucesso!',
+    'conta_ja_ativada' => 'Sua conta já foi ativada!',
     'logout' => 'You have been logged out!',
     'inicio_erro_email_recomendantes' => 'Os e-mails: ',
     'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',

@@ -22,6 +22,8 @@ return [
     'saudacoes_finais' => 'Sincerely, postgraduate comitee of MAT/UnB.',
     'erro_login' => 'Estas credenciales no coinciden con nuestros registros.',
     'conta_nao_ativa' => 'Debes confirmar tu cuenta. Le hemos enviado un código de activación, verifique su correo electrónico.',
+    'conta_ativada' => 'Conta ativada com sucesso!',
+    'conta_ja_ativada' => 'Sua conta já foi ativada!',
     'bem_vindo' => '¡Bienvenido!',
     'logout' => '¡Has sido desconectado!',
     'inicio_erro_email_recomendantes' => 'Os e-mails: ',
