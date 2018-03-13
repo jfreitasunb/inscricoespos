@@ -33,6 +33,6 @@ class AtivaConta extends Notification
         return (new MailMessage)
             ->subject(trans('tela_ativar_conta.assunto_email'))
             ->line(trans('tela_ativar_conta.texto_ativar'))
-            ->action(trans('tela_ativar_conta.clique_aqui', url('register/verify', $this->token), '.');
+            ->action(trans('tela_ativar_conta.clique_aqui'), url('register/verify', $this->token), '.');
     }
 }
