@@ -34,13 +34,13 @@ class NotificaRecomendante extends Notification
     {
         return (new MailMessage)
             ->from('posgrad@mat.unb.br', 'Postgraduate Comitee of MAT/UnB')
-            ->subject(trans('mensagens_gerais.carta_recomendacao'))
-            ->line(trans('mensagens_gerais.motivo_mensagem_1').$this->dados_email['nome_professor'].',')
-            ->line(trans('mensagens_gerais.motivo_mensagem_2').$this->dados_email['programa'].trans('mensagens_gerais.motivo_mensagem_3').$this->dados_email['nome_candidato'].'.')
-            ->line(trans('mensagens_gerais.motivo_mensagem_4').url('/'))
-            ->line(trans('mensagens_gerais.motivo_mensagem_5').$this->dados_email['email_recomendante'])
-            ->line(trans('mensagens_gerais.prazo_envio').$this->dados_email['prazo_envio'].'.')
-            ->action(trans('mensagens_gerais.recupera_senha'),url('esqueci/senha'))
-            ->line(trans('mensagens_gerais.saudacoes_finais'));
+            ->subject('Recommendation letter to MAT/UnB')
+            ->line('Dear professor, '.$this->dados_email['nome_professor'].',')
+            ->line('you have been appointed for reference to the candidate to the postgradute program at MAT/UnB '.$this->dados_email['programa'].$this->dados_email['nome_candidato'].'.')
+            ->line('The recommendation letter must be sent by the website: '.url('/'))
+            ->line('To access the system use as login: ',.$this->dados_email['email_recomendante'])
+            ->line('The deadline for submission of the recommendation letter is: ',.$this->dados_email['prazo_envio'].'.')
+            ->action('Click here to create your password',,url('esqueci/senha'))
+            ->line('Sincerely, postgraduate comitee of MAT/UnB.');
     }
 }
