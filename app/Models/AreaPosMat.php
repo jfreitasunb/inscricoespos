@@ -25,7 +25,7 @@ class AreaPosMat extends Model
         'nome',
     ];
 
-     public function pega_area_pos_mat($area_pos){
+    public function pega_area_pos_mat($area_pos){
 
         if ($area_pos == 0) {
             return null;
@@ -35,20 +35,4 @@ class AreaPosMat extends Model
             ->value('nome');
         }   
     }
-
-    // public function pega_disciplinas_monitoria()
-    // {
-    
-    //     $disciplinas_para_monitoria = $this->select('codigo', 'nome')->orderBy('nome')->get();
-
-    //     return $disciplinas_para_monitoria;
-    // }
-
-    // public function retorna_nome_pelo_codigo($codigo)
-    // {
-    //     $nome_disciplina = $this->select('nome')->where('codigo',$codigo)->get();
-
-    //     return $nome_disciplina;
-
-    // }
 }
