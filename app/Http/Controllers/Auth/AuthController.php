@@ -94,10 +94,10 @@ class AuthController extends BaseController
 
 		$password = trim($request->password);
 		
-		$user = DB::table('users')->where('email', $email)->value('ativo');
+		$user_ativo = DB::table('users')->where('email', $email)->value('ativo');
 		
 
-		if (!$user and !is_null($user)) {
+		if (!$user_ativo and !is_null($user_type)) {
 			notify()->flash(trans('mensagens_gerais.conta_nao_ativa'),'info');
 			return redirect()->back();
 		}
@@ -180,11 +180,20 @@ class AuthController extends BaseController
 	{
 	    // The verified method has been added to the user model and chained here
 	    // for better readability
-	    User::where('validation_code',$token)->firstOrFail()->verified();
-
-	    notify()->flash(trans('mensagens_gerais.conta_ativada'),'success',[
+	    
+	    if (is_null(User::where('validation_code',$token)->first())) {
+	    	notify()->flash(trans('mensagens_gerais.conta_ja_ativada'),'success',[
 				'timer' => 1500,
 			]);
+	    }else{
+	    	User::where('validation_code',$token)->firstOrFail()->verified();
+
+	    	notify()->flash(trans('mensagens_gerais.conta_ativada'),'success',[
+				'timer' => 1500,
+			]);
+	    }
+	    
+	    
 
 	    return redirect()->route('home');
 	}
