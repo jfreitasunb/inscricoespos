@@ -97,7 +97,7 @@ class AuthController extends BaseController
 		$user_ativo = DB::table('users')->where('email', $email)->value('ativo');
 		
 
-		if (!$user_ativo and !is_null($user_type)) {
+		if (!$user_ativo and !is_null($user_ativo)) {
 			notify()->flash(trans('mensagens_gerais.conta_nao_ativa'),'info');
 			return redirect()->back();
 		}
