@@ -145,6 +145,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\AdminController@postReativarCartaEnviada')->name('reativar.carta');
 
+	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@getAchaIndicacoes')->name('pesquisa.indicacoes');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
