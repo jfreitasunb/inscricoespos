@@ -656,9 +656,18 @@ class AdminController extends CoordenadorController
 
 		$recomendante = $user->retorna_user_por_email($email_recomendante);
 
+		if (is_null($recomendante)) {
+			
+			notify()->flash('O e-mail: '.$email_recomendante.' não pertence a um recomendante registrado no sistema.','error');
+
+			return redirect()->route('pesquisa.indicacoes');
+		}
+
 		$contato_recomendante = new ContatoRecomendante;
 
-		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
+		// $indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
+
+		dd(is_null($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user)));
 
 		
 		$modo_pesquisa = false;
