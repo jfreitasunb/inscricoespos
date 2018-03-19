@@ -24,7 +24,7 @@
 @if (!$modo_pesquisa)
 	
 	<fieldset class="scheduler-border">
-  <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
+  <legend class="scheduler-border">Alunos que indicaram o recomendante pesquisado</legend>
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -45,9 +45,6 @@
         @endforeach
       </tbody>
     </table>
-  </div>
-  <div class="text-center">
-    {{ $indicacoes->render() }}
   </div>
 </fieldset>
 @endif
