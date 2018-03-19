@@ -635,5 +635,12 @@ class AdminController extends CoordenadorController
 		return redirect()->back();
 	}
 
+	public function getAchaIndicacoes()
+	{
+
+		$modo_pesquisa = true;
+
+		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa'));
+	}
 
 }
