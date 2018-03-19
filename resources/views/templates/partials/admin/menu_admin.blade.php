@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-random"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
+                                        <span class="glyphicon glyphicon-list"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
                                     </td>
                                 </tr>
                             </table>
