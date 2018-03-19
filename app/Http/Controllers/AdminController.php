@@ -643,4 +643,16 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa'));
 	}
 
+	public function postAchaIndicacoes(Request $request)
+	{
+
+		$this->validate($request, [
+			'email_recomendante' => 'required|email',
+		]);
+		dd($request);
+		$modo_pesquisa = true;
+
+		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa'));
+	}
+
 }
