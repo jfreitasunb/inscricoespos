@@ -4,7 +4,7 @@
             <div class="menuadmin panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUm"><span class="glyphicon glyphicon-user">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseUm"><span class="glyphicon glyphicon-user fa-fw">
                         </span>Contas</a>
                     </h4>
                 </div>
@@ -13,22 +13,22 @@
                         <table class="table">
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.email.muda.senha') }}">Link mudança de senha</a>
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.email.muda.senha') }}">Link mudança de senha</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-cog"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <span class="glyphicon glyphicon-exclamation-sign"></span><span><a href="{{ route('criar.coordenador') }}" class="text-danger">
+                                    <span class="glyphicon glyphicon-exclamation-sign fa-fw"></span><span><a href="{{ route('criar.coordenador') }}" class="text-danger">
                                         Cria Coordenador</a></span>
                                 </td>
                             </tr>
@@ -39,7 +39,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseDois"><span class="glyphicon glyphicon-file">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseDois"><span class="glyphicon glyphicon-file fa-fw">
                             </span>Inscrições</a>
                         </h4>
                     </div>
@@ -48,32 +48,32 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-wrench"></span><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a>
+                                        <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
+                                        <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-refresh"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
+                                        <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-envelope"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
+                                        <span class="glyphicon glyphicon-envelope fa-fw"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-random"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
+                                        <span class="glyphicon glyphicon-random fa-fw"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-list"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
                                     </td>
                                 </tr>
                             </table>
@@ -83,7 +83,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTres"><span class="glyphicon glyphicon-file">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTres"><span class="glyphicon glyphicon-file fa-fw">
                             </span>Relatórios</a>
                         </h4>
                     </div>
@@ -92,17 +92,17 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-duplicate"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-backward"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
+                                        <span class="glyphicon glyphicon-backward fa-fw"></span><a href="{{ route('relatorio.anteriores') }}">Edital Anterior</a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-file"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
+                                        <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
                                     </td>
                                 </tr>
                             </table>
@@ -112,7 +112,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <span class="glyphicon glyphicon-log-out"></span><a href="{{ route('auth.logout') }}">Sair</a>
+                            <span class="glyphicon glyphicon-log-out fa-fw"></span><a href="{{ route('auth.logout') }}">Sair</a>
                         </h4>
                     </div>
                 </div>
