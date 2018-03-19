@@ -649,7 +649,20 @@ class AdminController extends CoordenadorController
 		$this->validate($request, [
 			'email_recomendante' => 'required|email',
 		]);
-		dd($request);
+		
+		$user = new User;
+		
+		$email_recomendante = trim(strtolower($request->email_recomendante));
+
+		$recomendante = $user->retorna_user_por_email($email_recomendante);
+
+		$contato_recomendante = new ContatoRecomendante;
+
+		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
+		
+
+		dd($indicacoes);
+		
 		$modo_pesquisa = true;
 
 		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa'));
