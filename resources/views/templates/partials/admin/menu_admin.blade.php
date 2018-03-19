@@ -71,6 +71,11 @@
                                         <span class="glyphicon glyphicon-random"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-random"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -123,6 +128,7 @@
                 @yield('editar_inscricao')
                 @yield('reativar_inscricao_candidato')
                 @yield('reativar_carta_enviada')
+                @yield('acha_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')
