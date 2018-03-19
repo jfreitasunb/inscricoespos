@@ -659,13 +659,11 @@ class AdminController extends CoordenadorController
 		$contato_recomendante = new ContatoRecomendante;
 
 		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
-		
 
-		dd($indicacoes);
 		
-		$modo_pesquisa = true;
+		$modo_pesquisa = false;
 
-		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa'));
+		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa', 'indicacoes'));
 	}
 
 }
