@@ -665,11 +665,16 @@ class AdminController extends CoordenadorController
 
 		$contato_recomendante = new ContatoRecomendante;
 
-		// $indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
-
-		dd(is_null($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user)));
-
 		
+		if (sizeof($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user)) == 0) {
+			
+			notify()->flash('O e-mail: '.$email_recomendante.' não foi indicado por nenhum candidato no edital atual.','error');
+
+			return redirect()->route('pesquisa.indicacoes');
+		}
+
+		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
+
 		$modo_pesquisa = false;
 
 		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa', 'indicacoes'));
