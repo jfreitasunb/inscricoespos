@@ -11,12 +11,15 @@
 	{!! Form::open(array('route' => 'pesquisa.indicacoes', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 @endif
 
-<div class="form-group">
-	{!! Form::label('email_recomendante', 'Pesquisar Recomendante', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('email_recomendante', '' , ['class' => 'form-control input-md']) !!}
-	</div>
+<div class="row">
+	<div class="form-group">
+		{!! Form::label('email_recomendante', 'Pesquisar Recomendante', ['class' => 'col-md-4 control-label']) !!}
+		<div class="col-md-4">
+			{!! Form::text('email_recomendante', '' , ['class' => 'form-control input-md']) !!}
+		</div>
+	</div>	
 </div>
+
 
 @if (!$modo_pesquisa)
 	
