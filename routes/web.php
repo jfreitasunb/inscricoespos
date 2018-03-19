@@ -147,6 +147,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@getAchaIndicacoes')->name('pesquisa.indicacoes');
 
+	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@postAchaIndicacoes');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
