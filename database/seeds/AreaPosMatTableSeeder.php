@@ -94,7 +94,7 @@ class AreaPosMatTableSeeder extends Seeder
                 'id_area_pos' => 9,
                 'nome_ptbr' => 'Teoria dos Números',
                 'nome_en' => 'Number Theory',
-                'nome_es' => 'Teoría de Números',
+                'nome_es' => 'Teoría de los Números',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
