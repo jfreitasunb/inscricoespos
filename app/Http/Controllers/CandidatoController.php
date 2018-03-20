@@ -382,8 +382,10 @@ class CandidatoController extends BaseController
 
 			$nome_programa_pos = new ProgramaPos();
 
+			$locale_candidato = Session::get('locale');
+
 			foreach ($programas_disponiveis as $programa) {
-				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_candidato);
 			}
 
 			$finaliza_inscricao = new FinalizaInscricao();
