@@ -186,11 +186,16 @@ class CoordenadorController extends BaseController
 
 		$area_pos = AreaPosMat::find($id_area_pos);
 
-		$area_pos->update($dados_area_pos);
+		$status_atualizacao = $area_pos->update($dados_area_pos);
 
+		if ($status_atualizacao) {
+			notify()->flash('Dados salvos com sucesso.','success');
 		
+		}else{
+			notify()->flash('Ocorreu um erro. Tente novamente mais tarde.','error');
+		}
 
-		dd($id_area_pos);
+		return redirect()->route('editar.area.pos');
 
 	}
 
