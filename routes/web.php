@@ -163,6 +163,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('/','\Posmat\Http\Controllers\CoordenadorController@getMenu')->name('menu.coordenador');
 
+	Route::get('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos')->name('configura.inscricao');
+
+	Route::post('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos');
+
 	// Route::get('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina')->name('cadastra.disciplina');
 
 	// Route::post('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina');
@@ -171,18 +175,13 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio', '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
 
-	Route::get('relatorios/anteriores/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
-
-	Route::get('relatorios/anteriores', '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
-
-	Route::get('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos')->name('configura.inscricao');
-
-	Route::post('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos');
-
 	Route::get('gera/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
 
 	Route::get('ver/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
 
+	Route::get('relatorios/anteriores/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
+
+	Route::get('relatorios/anteriores', '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 });
 
 
