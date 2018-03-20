@@ -31,13 +31,13 @@ class ProgramaPosMatTableSeeder extends Seeder
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
-            2 => 
-            array (
-                'id_programa_pos' => 3,
-                'tipo_programa_pos' => 'Verão',
-                'created_at' => '2017-11-21 15:27:00',
-                'updated_at' => '2017-11-21 15:27:00',
-            ),
+            // 2 => 
+            // array (
+            //     'id_programa_pos' => 3,
+            //     'tipo_programa_pos' => 'Verão',
+            //     'created_at' => '2017-11-21 15:27:00',
+            //     'updated_at' => '2017-11-21 15:27:00',
+            // ),
         ));
         
         $tableToCheck = 'programa_pos_mat';
