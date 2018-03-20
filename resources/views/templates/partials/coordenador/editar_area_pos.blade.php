@@ -32,8 +32,8 @@
             <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
             {!! Form::close() !!}
           </tr>
+        @endforeach
       </tbody>
-      @endforeach
     </table>
   </div>
   
