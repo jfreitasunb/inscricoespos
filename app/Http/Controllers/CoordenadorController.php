@@ -179,6 +179,19 @@ class CoordenadorController extends BaseController
 		$nova_area_pos->nome_en = trim($request->nome_en);
 		$nova_area_pos->nome_es = trim($request->nome_es);
 		$status_gravacao = $nova_area_pos->save();
+
+		if ($status_gravacao) {
+			notify()->flash('Dados salvos com sucesso.','success', [
+				'timer' => 2000,
+			]);
+		
+		}else{
+			notify()->flash('Ocorreu um erro. Tente novamente mais tarde.','error', [
+				'timer' => 2000,
+			]);
+		}
+
+		return redirect()->route('cadastra.area.pos');
 	}
 
 
