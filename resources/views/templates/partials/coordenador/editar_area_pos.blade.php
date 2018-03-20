@@ -11,7 +11,7 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Áreas da Pós-Graduação</legend>
 
-  @foreach ($areas_pos_mat as $area)
+  
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
       <thead>
@@ -22,20 +22,22 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {!! Form::open(array('route' => 'editar.area.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-          {!! Form::hidden('id_area_pos', $area->id_area_pos, []) !!}
-          <td>{!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}</td>
-          <td>{!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}</td>
-          <td>{!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}</td>
-          <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
-          {!! Form::close() !!}
-        </tr>
+        @foreach ($areas_pos_mat as $area)
+          <tr>
+            {!! Form::open(array('route' => 'editar.area.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+            {!! Form::hidden('id_area_pos', $area->id_area_pos, []) !!}
+            <td>{!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
+            {!! Form::close() !!}
+          </tr>
       </tbody>
+      @endforeach
     </table>
   </div>
   
-  @endforeach
+  
   
 </fieldset>
 
