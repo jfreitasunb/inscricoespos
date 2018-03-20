@@ -162,7 +162,11 @@ class CoordenadorController extends BaseController
 
 	public function getEditarAreaPos()
 	{
-		# code...
+		$areas_pos_mat = AreaPosMat::get()->all();
+
+		// dd($areas_pos_mat);
+
+		return view('templates.partials.coordenador.editar_area_pos');
 	}
 
 	public function postEditarAreaPos(Request $request)
