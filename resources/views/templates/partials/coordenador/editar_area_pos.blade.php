@@ -12,34 +12,29 @@
   <legend class="scheduler-border">Áreas da Pós-Graduação</legend>
 
   @foreach ($areas_pos_mat as $area)
-  {!! Form::open(array('route' => 'editar.area.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-
-  {!! Form::hidden('id_area_pos', $area->id_area_pos, []) !!}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Nome Português</th>
+          <th>Nome Inglês</th>
+          <th>Nome Espanhol</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {!! Form::open(array('route' => 'editar.area.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+          {!! Form::hidden('id_area_pos', $area->id_area_pos, []) !!}
+          <td>{!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}</td>
+          <td>{!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}</td>
+          <td>{!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}</td>
+          <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
+          {!! Form::close() !!}
+        </tr>
+      </tbody>
+    </table>
+  </div>
   
-    <div class="form-group">
-      <div class="col-sm-1">
-        {!! Form::label('nome_ptbr', 'Nome', ['class' => 'control-label']) !!}
-      </div>
-          <div class="col-sm-4">
-            {!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}
-          </div>
-          <div class="col-sm-1">
-        {!! Form::label('nome_en', 'Nome Inglês', ['class' => 'control-label']) !!}
-      </div>
-          <div class="col-sm-4">
-            {!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}
-          </div>
-          <div class="col-sm-1">
-        {!! Form::label('nome_es', 'Nome Espanhol', ['class' => 'control-label']) !!}
-      </div>
-          <div class="col-sm-4">
-            {!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}
-          </div>
-          <div class="col-sm-2">
-            {!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}
-          </div>
-      </div>
-      {!! Form::close() !!}
   @endforeach
   
 </fieldset>
