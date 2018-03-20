@@ -161,7 +161,7 @@ class CoordenadorController extends BaseController
 
 	public function getCadastraAreaPos()
 	{
-		# code...
+		return view('templates.partials.coordenador.cadastra_area_pos');
 	}
 
 
