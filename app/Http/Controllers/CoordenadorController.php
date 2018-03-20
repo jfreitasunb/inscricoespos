@@ -162,7 +162,7 @@ class CoordenadorController extends BaseController
 
 	public function getEditarAreaPos()
 	{
-		$areas_pos_mat = AreaPosMat::get()->all();
+		$areas_pos_mat = AreaPosMat::orderBy('id_area_pos')->get()->all();
 
 		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
