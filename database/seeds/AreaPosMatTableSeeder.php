@@ -21,7 +21,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 1,
                 'nome_ptbr' => 'Álgebra',
-                'nome_en' => '',
+                'nome_en' => 'Algebra',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -30,7 +30,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 2,
                 'nome_ptbr' => 'Análise',
-                'nome_en' => '',
+                'nome_en' => 'Analysis',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -39,7 +39,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 3,
                 'nome_ptbr' => 'Análise Numérica',
-                'nome_en' => '',
+                'nome_en' => 'Numerical Analysis',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -48,7 +48,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 4,
                 'nome_ptbr' => 'Dinâmica de Fluidos',
-                'nome_en' => '',
+                'nome_en' => 'Fluid Dynamics',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -57,7 +57,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 5,
                 'nome_ptbr' => 'Geometria',
-                'nome_en' => '',
+                'nome_en' => 'Geometry',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -66,7 +66,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 6,
                 'nome_ptbr' => 'Probabilidade',
-                'nome_en' => '',
+                'nome_en' => 'Probability',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -75,7 +75,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 7,
                 'nome_ptbr' => 'Sistemas Dinâmicos',
-                'nome_en' => '',
+                'nome_en' => 'Dynamical Systems',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -84,7 +84,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 8,
                 'nome_ptbr' => 'Teoria da Computação',
-                'nome_en' => '',
+                'nome_en' => 'Theory of Computation',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -93,7 +93,7 @@ class AreaPosMatTableSeeder extends Seeder
             array (
                 'id_area_pos' => 9,
                 'nome_ptbr' => 'Teoria dos Números',
-                'nome_en' => '',
+                'nome_en' => 'Number Theory',
                 'nome_es' => '',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
