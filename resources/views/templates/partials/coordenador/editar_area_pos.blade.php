@@ -9,33 +9,9 @@
 @section('edita_area_pos')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
+  <legend class="scheduler-border">Áreas da Pós-Graduação</legend>
 
-  <div class="table-responsive">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-          <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-          <th>Ficha de Inscrição</th>
-          <th>Cartas Recebidas</th>
-        </tr>
-      </thead>
-      <tbody>
-        @foreach( $inscricoes_finalizadas as $finalizada)
-          <tr class="{{ $classes_linhas[$total_cartas[$finalizada['id_user']]] }}">
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['nome'] }}</a></td>
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['tipo_programa_pos'] }}</a></td>
-            <td>@if($id_aluno_pdf == $finalizada['id_user']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
-            <td>{{ $total_cartas[$finalizada['id_user']] }}</td>
-          </tr>
-        @endforeach
-      </tbody>
-    </table>
-  </div>
-  <div class="text-center">
-    {{ $inscricoes_finalizadas->render() }}
-  </div>
+  
 </fieldset>
 
 @endsection
