@@ -184,6 +184,10 @@ class CoordenadorController extends BaseController
 			'nome_es' => trim($request->nome_es),
 		];
 
+		$area_pos = AreaPosMat::find($id_area_pos);
+
+		$area_pos->update($dados_area_pos);
+
 		
 
 		dd($id_area_pos);
