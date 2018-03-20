@@ -20,63 +20,81 @@ class AreaPosMatTableSeeder extends Seeder
             0 => 
             array (
                 'id_area_pos' => 1,
-                'nome' => 'Álgebra',
+                'nome_ptbr' => 'Álgebra',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             1 => 
             array (
                 'id_area_pos' => 2,
-                'nome' => 'Análise',
+                'nome_ptbr' => 'Análise',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             2 => 
             array (
                 'id_area_pos' => 3,
-                'nome' => 'Análise Numérica',
+                'nome_ptbr' => 'Análise Numérica',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             3 => 
             array (
                 'id_area_pos' => 4,
-                'nome' => 'Dinâmica de Fluidos',
+                'nome_ptbr' => 'Dinâmica de Fluidos',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             4 => 
             array (
                 'id_area_pos' => 5,
-                'nome' => 'Geometria',
+                'nome_ptbr' => 'Geometria',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             5 => 
             array (
                 'id_area_pos' => 6,
-                'nome' => 'Probabilidade',
+                'nome_ptbr' => 'Probabilidade',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             6 => 
             array (
                 'id_area_pos' => 7,
-                'nome' => 'Sistemas Dinâmicos',
+                'nome_ptbr' => 'Sistemas Dinâmicos',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             7 => 
             array (
                 'id_area_pos' => 8,
-                'nome' => 'Teoria da Computação',
+                'nome_ptbr' => 'Teoria da Computação',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
             8 => 
             array (
                 'id_area_pos' => 9,
-                'nome' => 'Teoria dos Números',
+                'nome_ptbr' => 'Teoria dos Números',
+                'nome_en' => 'as',
+                'nome_es' => 'adsd',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),

@@ -22,7 +22,9 @@ class AreaPosMat extends Model
     protected $table = 'area_pos_mat';
 
     protected $fillable = [
-        'nome',
+        'nome_ptbr',
+        'nome_en',
+        'nome_es',
     ];
 
     public function pega_area_pos_mat($area_pos){
