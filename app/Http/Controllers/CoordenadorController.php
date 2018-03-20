@@ -159,6 +159,17 @@ class CoordenadorController extends BaseController
     	}
 	}
 
+
+	public function getEditarAreaPos()
+	{
+		# code...
+	}
+
+	public function postEditarAreaPos(Request $request)
+	{
+		# code...
+	}
+
 	public function getRelatorioPos()
 	{
 
