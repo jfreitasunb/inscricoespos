@@ -176,6 +176,18 @@ class CoordenadorController extends BaseController
 			'nome_es' => 'required',
 		]);
 
+		$id_area_pos = (int)$request->id_area_pos;
+
+		$dados_area_pos = [
+			'nome_ptbr' => trim($request->nome_ptbr),
+			'nome_en' => trim($request->nome_en),
+			'nome_es' => trim($request->nome_es),
+		];
+
+		
+
+		dd($id_area_pos);
+
 	}
 
 	public function getRelatorioPos()
