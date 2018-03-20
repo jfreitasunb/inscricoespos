@@ -166,7 +166,7 @@ class CoordenadorController extends BaseController
 
 		// dd($areas_pos_mat);
 
-		return view('templates.partials.coordenador.editar_area_pos');
+		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
 
 	public function postEditarAreaPos(Request $request)
