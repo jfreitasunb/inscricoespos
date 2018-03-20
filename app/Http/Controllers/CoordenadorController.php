@@ -164,14 +164,18 @@ class CoordenadorController extends BaseController
 	{
 		$areas_pos_mat = AreaPosMat::get()->all();
 
-		// dd($areas_pos_mat);
-
 		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
 
 	public function postEditarAreaPos(Request $request)
 	{
-		# code...
+		$this->validate($request, [
+			'id_area_pos' => 'required',
+			'nome_ptbr' => 'required',
+			'nome_en' => 'required',
+			'nome_es' => 'required',
+		]);
+
 	}
 
 	public function getRelatorioPos()
