@@ -165,9 +165,20 @@ class CoordenadorController extends BaseController
 	}
 
 
-	public function postCadastraAreaPos()
+	public function postCadastraAreaPos(Request $request)
 	{
-		# code...
+		$this->validate($request, [
+			'nome_ptbr' => 'required',
+			'nome_en' => 'required',
+			'nome_es' => 'required',
+		]);
+
+		$nova_area_pos = new AreaPosMat;
+
+		$nova_area_pos->nome_ptbr = trim($request->nome_ptbr);
+		$nova_area_pos->nome_en = trim($request->nome_en);
+		$nova_area_pos->nome_es = trim($request->nome_es);
+		$status_gravacao = $nova_area_pos->save();
 	}
 
 
