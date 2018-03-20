@@ -12,6 +12,7 @@
     <div class="collapse navbar-collapse" id="bar1">
       <ul class="nav navbar-nav">
         <li class="{{ Route::currentRouteNamed('configura.inscricao') ? 'active' : '' }}"><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a></li>
+        <li class="{{ Route::currentRouteNamed('editar.area.pos') ? 'active' : '' }}"><a href="{{ route('editar.area.pos') }}">Editar áreas Pós</a></li>
         <li class="{{ Route::currentRouteNamed('relatorio.atual') ? 'active' : '' }}"><a href="{{ route('relatorio.atual') }}">Relatórios Edital Vigente</a></li>
         <li class="{{ Route::currentRouteNamed('gera.ficha.individual') ? 'active' : '' }}"><a href="{{ route('gera.ficha.individual') }}">Ficha Individual</a></li>
         <li class="{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active' : '' }}"><a href="{{ route('relatorio.anteriores') }}">Relatórios Editais Anteriores</a></li>
