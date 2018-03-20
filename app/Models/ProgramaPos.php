@@ -22,7 +22,9 @@ class ProgramaPos extends Model
     protected $table = 'programa_pos_mat';
 
     protected $fillable = [
-        'tipo_programa_pos', 
+        'tipo_programa_pos_ptbr', 
+        'tipo_programa_pos_en', 
+        'tipo_programa_pos_es', 
     ];
 
     public function pega_programa_pos_mat($programa){
