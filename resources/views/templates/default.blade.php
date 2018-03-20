@@ -35,6 +35,7 @@
           @include('templates.partials.coordenador.menu_coordenador')
           {{-- @yield('cadastra_disciplina') --}}
           @yield('configura_inscricao')
+          @yield('cadastra_area_pos')
           @yield('edita_area_pos')
           @yield('relatorio_pos_edital_vigente')
           @yield('relatorio_pos_editais_anteriores')

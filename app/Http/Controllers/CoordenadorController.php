@@ -159,6 +159,17 @@ class CoordenadorController extends BaseController
     	}
 	}
 
+	public function getCadastraAreaPos()
+	{
+		# code...
+	}
+
+
+	public function postCadastraAreaPos()
+	{
+		# code...
+	}
+
 
 	public function getEditarAreaPos()
 	{

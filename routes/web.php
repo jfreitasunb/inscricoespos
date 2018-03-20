@@ -167,6 +167,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos');
 
+	Route::get('cadastra/area/pos', '\Posmat\Http\Controllers\CoordenadorController@getCadastraAreaPos')->name('cadastra.area.pos');
+
+	Route::post('cadastra/area/pos', '\Posmat\Http\Controllers\CoordenadorController@postCadastraAreaPos');
+
 	Route::get('editar/area/pos', '\Posmat\Http\Controllers\CoordenadorController@getEditarAreaPos')->name('editar.area.pos');
 
 	Route::post('editar/area/pos', '\Posmat\Http\Controllers\CoordenadorController@postEditarAreaPos');
