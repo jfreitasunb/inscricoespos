@@ -189,10 +189,14 @@ class CoordenadorController extends BaseController
 		$status_atualizacao = $area_pos->update($dados_area_pos);
 
 		if ($status_atualizacao) {
-			notify()->flash('Dados salvos com sucesso.','success');
+			notify()->flash('Dados salvos com sucesso.','success', [
+				'timer' => 2000,
+			]);
 		
 		}else{
-			notify()->flash('Ocorreu um erro. Tente novamente mais tarde.','error');
+			notify()->flash('Ocorreu um erro. Tente novamente mais tarde.','error', [
+				'timer' => 2000,
+			]);
 		}
 
 		return redirect()->route('editar.area.pos');
