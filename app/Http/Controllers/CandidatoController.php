@@ -452,7 +452,23 @@ class CandidatoController extends BaseController
 
 			if (in_array(2, $programas_disponiveis)) {
 
-				$areas_pos = AreaPosMat::pluck('nome','id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
+				$locale_candidato = Session::get('locale');
+
+				switch ($locale_candidato) {
+				 	case 'en':
+				 		$nome_coluna = 'nome_en';
+				 		break;
+
+				 	case 'es':
+				 		$nome_coluna = 'nome_es';
+				 		break;
+				 	
+				 	default:
+				 		$nome_coluna = 'nome_ptbr';
+				 		break;
+				 }
+
+				$areas_pos = AreaPosMat::pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
 			}
 
 			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
