@@ -262,13 +262,29 @@ class CandidatoController extends BaseController
 		
 		$id_user = $user->id_user;
 		
+		$locale_candidato = Session::get('locale');
+
+		switch ($locale_candidato) {
+		 	case 'en':
+		 		$nome_coluna = 'tipo_en';
+		 		break;
+
+		 	case 'es':
+		 		$nome_coluna = 'tipo_es';
+		 		break;
+		 	
+		 	default:
+		 		$nome_coluna = 'tipo_ptbr';
+		 		break;
+		 }
+
 		$dados_academicos = new DadoAcademico();
 
 		$tipo_formacao = new Formacao();
 
-		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');
+		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');
 
-		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck('tipo','id')->prepend(trans('mensagens_gerais.selecionar'),'');;
+		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
 
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
 
@@ -725,6 +741,7 @@ class CandidatoController extends BaseController
 		$arquivos_editais = storage_path("/app/editais/");
 
 		if ($autoriza_inscricao) {
+
 
 			$finaliza_inscricao = new FinalizaInscricao();
 
