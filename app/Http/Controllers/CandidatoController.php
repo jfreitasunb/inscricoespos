@@ -455,8 +455,6 @@ class CandidatoController extends BaseController
 
 			if (in_array(2, $programas_disponiveis)) {
 
-				$locale_candidato = Session::get('locale');
-
 				switch ($locale_candidato) {
 				 	case 'en':
 				 		$nome_coluna = 'nome_en';
