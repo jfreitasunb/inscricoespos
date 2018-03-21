@@ -121,8 +121,16 @@ class RelatorioController extends BaseController
 
     $consolida_dados['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
 
-    $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
+    $array_data_hoje = explode('-', $data_hoje);
 
+    $array_data_nascimento = explode('-', $dados_pessoais_candidato->data_nascimento);
+
+    if ($array_data_hoje[1] < $array_data_nascimento[1]) {
+      $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento - 1;
+    }else{
+      $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
+    }
+    
     $consolida_dados['numerorg'] = $dados_pessoais_candidato->numerorg;
 
     $consolida_dados['endereco'] = $dados_pessoais_candidato->endereco;
