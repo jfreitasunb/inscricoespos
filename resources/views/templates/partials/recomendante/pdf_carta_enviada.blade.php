@@ -50,7 +50,7 @@
 
         <h3>
             <i>
-                Carta de Recomendação enviada ao MAT/UnB para o(a) candidato(a) ao Programa de {{ $dados_para_carta_enviada['programa_pretendido'] }}: {{ $dados_para_carta_enviada['nome_candidato'] }}
+                {{ trans('mensagens_gerais.titulo_pdf_recomendacao') }} {{ $dados_para_carta_enviada['programa_pretendido'] }}: {{ $dados_para_carta_enviada['nome_candidato'] }}
             </i>
         </h3>
 
