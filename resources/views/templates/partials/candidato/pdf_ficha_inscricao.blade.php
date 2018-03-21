@@ -50,67 +50,67 @@
         </p>
        
         <h2>
-                Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
+                {{ trans('tela_finalizar_inscricao.ficha_inscricao') }} - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
 
         <div>
-            <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
+            <label class="control-label">{{ trans('tela_dados_pessoais.nome') }}: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
         <div>
-            <label class="control-label">Data de nascimento: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <label class="control-label">{{ trans('tela_dados_pessoais.data_nascimento') }}: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <label class="control-label">Idade: </label>{{ $dados_candidato_para_relatorio['idade'].' anos' }}
         </div>
         <hr>
-        <h3>Endereço Pessoal</h3>
+        <h3>{{ trans('tela_dados_pessoais.endereco_pessoal') }}</h3>
         <div>
-            <label>Endereço: </label>{{ $dados_candidato_para_relatorio['endereco'] }}
+            <label>{{ trans('tela_dados_pessoais.endereco') }}: </label>{{ $dados_candidato_para_relatorio['endereco'] }}
         </div>
         <div>
-            <label>Celular: </label>{{ $dados_candidato_para_relatorio['celular'] }}
+            <label>{{ trans('tela_dados_pessoais.celular') }}: </label>{{ $dados_candidato_para_relatorio['celular'] }}
         </div>
         <div>
-            <label>País: </label> {{ $dados_candidato_para_relatorio['nome_pais'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label> Estado: </label>{{ $dados_candidato_para_relatorio['nome_estado'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Cidade: </label> {{ $dados_candidato_para_relatorio['nome_cidade'] }}
+            <label>{{ trans('tela_dados_pessoais.pais') }}: </label> {{ $dados_candidato_para_relatorio['nome_pais'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label> {{ trans('tela_dados_pessoais.estado') }}: </label>{{ $dados_candidato_para_relatorio['nome_estado'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_pessoais.cidade') }}: </label> {{ $dados_candidato_para_relatorio['nome_cidade'] }}
         </div>
 
         <hr>
-        <h3>Dados Acadêmicos</h3>
+        <h3>{{ trans('tela_dados_academicos.tela_dados_academicos') }}</h3>
         <div>
-            <label>Graduação: </label> {{ $dados_candidato_para_relatorio['curso_graduacao'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Tipo: </label> {{ $dados_candidato_para_relatorio['tipo_curso_graduacao'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>Instituição: </label> {{ $dados_candidato_para_relatorio['instituicao_graduacao'] }}
+            <label>{{ trans('tela_dados_academicos.curso_graduacao') }}: </label> {{ $dados_candidato_para_relatorio['curso_graduacao'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_academicos.tipo_curso') }}: </label> {{ $dados_candidato_para_relatorio['tipo_curso_graduacao'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>{{ trans('tela_dados_academicos.instituicao') }}: </label> {{ $dados_candidato_para_relatorio['instituicao_graduacao'] }}
         </div>
         <div>
-            <label>Ano de Conclusão (ou previsão): </label> {{ $dados_candidato_para_relatorio['ano_conclusao_graduacao'] }}
+            <label>{{ trans('tela_dados_academicos.ano_conclusao') }}: </label> {{ $dados_candidato_para_relatorio['ano_conclusao_graduacao'] }}
         </div>
         @if ($dados_candidato_para_relatorio['curso_pos'])
         <hr size="0">
         <div>
-            <label>Pós-Graduação: </label> {{ $dados_candidato_para_relatorio['curso_pos'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Tipo: </label> {{ $dados_candidato_para_relatorio['tipo_curso_pos'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>Instituição: </label> {{ $dados_candidato_para_relatorio['instituicao_pos'] }}
+            <label>{{ trans('tela_dados_academicos.curso_pos') }}: </label> {{ $dados_candidato_para_relatorio['curso_pos'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>{{ trans('tela_dados_academicos.tipo_curso') }}: </label> {{ $dados_candidato_para_relatorio['tipo_curso_pos'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label>{{ trans('tela_dados_academicos.instituicao') }}: </label> {{ $dados_candidato_para_relatorio['instituicao_pos'] }}
         </div>
         <div>
-            <label>Ano de Conclusão (ou previsão): </label> {{ $dados_candidato_para_relatorio['ano_conclusao_pos'] }}
+            <label>{{ trans('tela_dados_academicos.ano_conclusao') }}: </label> {{ $dados_candidato_para_relatorio['ano_conclusao_pos'] }}
         </div>
         @endif
 
         <hr>
-        <h3>Programa pretendido</h3>
+        <h3>{{ trans('tela_escolha_candidato.tela_escolhas') }}</h3>
         <div>
-            <label>Programa pretendido: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área: </label>'.$dados_candidato_para_relatorio['area_pos']: '' !!}
+            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área: </label>'.$dados_candidato_para_relatorio['area_pos']: '' !!}
         </div>
         <div>
-            <label>Interesse em bolsa: </label> {{ $dados_candidato_para_relatorio['interesse_bolsa'] ? 'Sim' : 'Não' }}
+            <label>{{ trans('tela_escolha_candidato.interesse_bolsa') }}: </label> {{ $dados_candidato_para_relatorio['interesse_bolsa'] ?  trans('tela_escolha_candidato.sim')  :  trans('tela_escolha_candidato.nao') }}
         </div>
         <div>
-            <label>Possui vínculo empregatício: </label> {{ $dados_candidato_para_relatorio['vinculo_empregaticio'] ? 'Sim' : 'Não' }}
+            <label>{{ trans('tela_escolha_candidato.vinculo_empregaticio') }}: </label> {{ $dados_candidato_para_relatorio['vinculo_empregaticio'] ? trans('tela_escolha_candidato.sim')  :  trans('tela_escolha_candidato.nao') }}
         </div>
 
         <hr>
-        <h3>Dados dos Recomendantes</h3>
+        <h3>{{ trans('tela_escolha_candidato.recomendante') }}</h3>
         @foreach ($recomendantes_candidato as $recomendante)
         <div>
-            <label> Nome: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
+            <label> {{ trans('tela_escolha_candidato.nome') }}: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
         </div>
         @endforeach
 
         <hr>
-        <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
+        <h3>{{ trans('tela_motivacao_documentos.tela_motivacao_documentos') }}</h3>
         <p class="motivacao">
             {{ $dados_candidato_para_relatorio['motivacao'] }}
         </p>
