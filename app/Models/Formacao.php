@@ -21,7 +21,11 @@ class Formacao extends Model
 
     protected $table = 'formacao';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'tipo_ptbr',
+        'tipo_en',
+        'tipo_es',
+    ];
 
     public function pega_tipo_formacao($id,$nivel)
     {
