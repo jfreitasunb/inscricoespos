@@ -179,7 +179,7 @@ class RelatorioController extends BaseController
     return $consolida_academico;
   }
 
-  public function ConsolidaEscolhaCandidato($id_candidato,$id_inscricao_pos)
+  public function ConsolidaEscolhaCandidato($id_candidato,$id_inscricao_pos, $locale_relatorio)
   {
     $consolida_escolha = [];
 
@@ -191,7 +191,7 @@ class RelatorioController extends BaseController
 
     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
-    $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido);
+    $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido, $locale_relatorio);
     $consolida_escolha['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
     $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
     $consolida_escolha['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
@@ -725,7 +725,7 @@ class RelatorioController extends BaseController
   }
 
 
-  public function geraRelatoriosAnteriores($id_inscricao_pos)
+  public function geraRelatoriosAnteriores($id_inscricao_pos, $locale_relatorio)
   {
 
     $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_pos);
@@ -763,7 +763,7 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -803,7 +803,7 @@ class RelatorioController extends BaseController
     return view('templates.partials.coordenador.relatorio_pos_edital_vigente');
   }
 
-  public function geraFichaInscricao($id_aluno, $id_inscricao_pos)
+  public function geraFichaInscricao($id_aluno, $id_inscricao_pos, $locale_relatorio)
   {
 
     $endereco_mudar = '/var/www/posmat/storage/app/public/';
@@ -831,7 +831,7 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
     }
 
-    foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos) as $key => $value) {
+    foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
       $dados_candidato_para_relatorio[$key] = $value;
     }
 

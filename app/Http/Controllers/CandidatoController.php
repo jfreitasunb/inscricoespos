@@ -715,6 +715,8 @@ class CandidatoController extends BaseController
 		
 		$id_user = $user->id_user;
 
+		$locale_candidato = Session::get('locale');
+
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
@@ -737,7 +739,7 @@ class CandidatoController extends BaseController
 
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos);
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos, $locale_candidato);
 
 			$dados_pessoais = new DadoPessoal();
 
