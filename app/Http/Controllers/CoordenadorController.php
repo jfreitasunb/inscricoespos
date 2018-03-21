@@ -232,6 +232,7 @@ class CoordenadorController extends BaseController
 
 	public function getFichaInscricaoPorCandidato()
 	{
+		$locale_relatorio = 'pt-br';
 
 		$user = Auth::user();
 		
@@ -255,7 +256,7 @@ class CoordenadorController extends BaseController
 		}
 		
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos)->paginate(10);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $locale_relatorio)->paginate(10);
 
 
 		foreach ($inscricoes_finalizadas as $candidato ) {
@@ -278,6 +279,7 @@ class CoordenadorController extends BaseController
 
 	public function GeraPdfFichaIndividual()
 	{
+		$locale_relatorio = 'pt-br';
 		
 		$user = Auth::user();
 		
@@ -288,7 +290,7 @@ class CoordenadorController extends BaseController
 
 		$ficha = new RelatorioController;
 	
-		$nome_pdf = $ficha->geraFichaIndividual($id_aluno_pdf);
+		$nome_pdf = $ficha->geraFichaIndividual($id_aluno_pdf, $locale_relatorio);
       	
       	
       	return redirect()->back()->with(compact('nome_pdf','id_aluno_pdf'));
