@@ -667,7 +667,7 @@ class RelatorioController extends BaseController
     return $this->getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
   }
 
-  public function geraFichaIndividual($id_aluno)
+  public function geraFichaIndividual($id_aluno, $locale_relatorio)
   {
 
       $relatorio = new ConfiguraInscricaoPos();
@@ -690,7 +690,7 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
