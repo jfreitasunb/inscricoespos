@@ -37,6 +37,7 @@
           @yield('configura_inscricao')
           @yield('cadastra_area_pos')
           @yield('edita_area_pos')
+          @yield('edita_formacao')
           @yield('relatorio_pos_edital_vigente')
           @yield('relatorio_pos_editais_anteriores')
           @yield('ficha_individual')
