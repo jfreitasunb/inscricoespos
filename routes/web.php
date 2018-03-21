@@ -175,6 +175,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('editar/area/pos', '\Posmat\Http\Controllers\CoordenadorController@postEditarAreaPos');
 
+	Route::get('editar/formacao', '\Posmat\Http\Controllers\CoordenadorController@getEditarFormacao')->name('editar.formacao');
+
+	Route::post('editar/formacao', '\Posmat\Http\Controllers\CoordenadorController@postEditarFormacao');
+
 	// Route::get('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina')->name('cadastra.disciplina');
 
 	// Route::post('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina');
