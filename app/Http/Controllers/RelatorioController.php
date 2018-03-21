@@ -452,13 +452,14 @@ class RelatorioController extends BaseController
 
   public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)
   {
-    
+    $locale_relatorio = 'pt-br';
+
     $programas_disponiveis = explode("_", $programas);
 
     $nome_programa_pos = new ProgramaPos();
 
     foreach ($programas_disponiveis as $programa) {
-       $programa_para_relatorio[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+       $programa_para_relatorio[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
     }
 
     foreach ($programa_para_relatorio as $nome_programa) {
@@ -487,6 +488,8 @@ class RelatorioController extends BaseController
   public function getListaRelatorios()
   {
 
+    $locale_relatorio = 'pt-br';
+
     $relatorio = new ConfiguraInscricaoPos();
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
@@ -498,7 +501,7 @@ class RelatorioController extends BaseController
 
     foreach ($programas_disponiveis as $programa) {
 
-      $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+      $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
       
       $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
 
@@ -541,6 +544,8 @@ class RelatorioController extends BaseController
   public function getArquivosRelatorios($id_inscricao_pos,$arquivos_zipados_para_view,$relatorio_csv)
   {
 
+    $locale_relatorio = 'pt-br';
+
   $relatorio = new ConfiguraInscricaoPos();
 
   $relatorio_disponivel = $relatorio->retorna_edital_vigente();
@@ -551,7 +556,7 @@ class RelatorioController extends BaseController
 
     foreach ($programas_disponiveis as $programa) {
      
-     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa);
+     $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_relatorio);
      
      $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
     }
@@ -579,6 +584,8 @@ class RelatorioController extends BaseController
 
   public function geraRelatorio($id_inscricao_pos)
   {
+
+    $locale_relatorio = 'pt-br';
 
     $relatorio = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
@@ -619,7 +626,7 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos) as $key => $value) {
+      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
