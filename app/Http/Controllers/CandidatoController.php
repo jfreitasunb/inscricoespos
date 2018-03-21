@@ -754,15 +754,23 @@ class CandidatoController extends BaseController
 				return redirect()->back();
 			}
 
-			$novo_relatorio = new RelatorioController;
-
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos, $locale_candidato);
-
 			$dados_pessoais = new DadoPessoal();
 
 			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_user);
 
 			$nome_candidato = $dados_pessoais_candidato->nome;
+
+			if (is_null($dados_pessoais_candidato->data_nascimento)) {
+				
+				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_pessoais'),'warning');
+
+				return redirect()->route('dados.pessoais');
+			}
+			
+			$novo_relatorio = new RelatorioController;
+
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos, $locale_candidato);
+
 
 			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
 
@@ -803,6 +811,7 @@ class CandidatoController extends BaseController
 			}
 
 			$informou_dados_academicos = DadoAcademico::find($id_user);
+
 
 			if (is_null($informou_dados_academicos)) {
 				
