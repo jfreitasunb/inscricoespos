@@ -505,7 +505,7 @@ class RecomendanteController extends BaseController
 
 		$dados_para_carta_enviada['nome_candidato'] = $carta->ConsolidaDadosPessoais($id_aluno)['nome'];
 
-		$dados_para_carta_enviada['programa_pretendido'] = $carta->ConsolidaEscolhaCandidato($id_aluno,$id_inscricao_pos)['programa_pretendido'];
+		$dados_para_carta_enviada['programa_pretendido'] = $carta->ConsolidaEscolhaCandidato($id_aluno,$id_inscricao_pos, $locale_recomendante)['programa_pretendido'];
 
 		$carta_enviada = $carta->ConsolidaCartaPorRecomendante($id_prof,$id_aluno,$id_inscricao_pos);
 
