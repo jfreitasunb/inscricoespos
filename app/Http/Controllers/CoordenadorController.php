@@ -35,45 +35,12 @@ class CoordenadorController extends BaseController
 		return view('home');
 	}
 
-	// public function getCadastraDisciplina()
-	// {
-
-	// 	return view('templates.partials.coordenador.cadastra_disciplina');
-	// }
-
-	// public function postCadastraDisciplina(Request $request)
-	// {
-
-	// 	$this->validate($request, [
-	// 		'codigo' => 'required|unique:disciplinas_mat|numeric',
-	// 		'nome_disciplina' => 'required|max:256',
-	// 		'creditos_disciplina' => 'required|numeric',
-	// 	]);
-    
- //    	$nova_disciplina = new AreaPosMat();
-
-	// 	$nova_disciplina->codigo = $request->codigo;
-	// 	$nova_disciplina->nome = $request->nome_disciplina;
-	// 	$nova_disciplina->creditos = $request->creditos_disciplina;
-		
-	// 	$nova_disciplina->save();
-
-	// 	notify()->flash('Disciplina cadastrada com sucesso!','success',[
-	// 		'timer' => 2000,
-	// 	]);
-
-	// 	return redirect()->route('cadastra.disciplina');	
-
-	// }
-
 	public function getConfiguraInscricaoPos()
 	{
 
 		$inscricao_pos = new ConfiguraInscricaoPos();
 
 		$programas_pos_mat = ProgramaPos::get()->all();
-
-		// $areas_pos_mat = AreaPosMat::get()->all();
 
 		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat'));
 	}
