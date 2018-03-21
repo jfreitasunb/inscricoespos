@@ -28,4 +28,5 @@ return [
     'conta_ja_ativada' => 'Sua conta já foi ativada!',
     'inicio_erro_email_recomendantes' => 'Os e-mails: ',
     'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',
+    'titulo_pdf_recomendacao' => 'Carta de Recomendação enviada ao MAT/UnB para o(a) candidato(a) ao Programa de',
 ];
