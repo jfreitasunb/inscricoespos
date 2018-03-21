@@ -200,7 +200,7 @@ class RelatorioController extends BaseController
     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
     $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido, $locale_relatorio);
-    $consolida_escolha['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos);
+    $consolida_escolha['area_pos'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos, $locale_relatorio);
     $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
     $consolida_escolha['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
 
