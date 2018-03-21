@@ -25,7 +25,7 @@
         @foreach( $indicacoes_anteriores as $indicacoes)
           <tr>
             <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['nome'] }}</a></td>
-            <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes['tipo_programa_pos'] }}</a></td>
+            <td><a target="_blank" href=" {{ route('ver.anterior', ['id_inscricao_pos' => $indicacoes['id_inscricao_pos'],'id_aluno' => $indicacoes['id_aluno']]) }}">{{ $indicacoes[$nome_coluna] }}</a></td>
           </tr>
         @endforeach
       </tbody>
