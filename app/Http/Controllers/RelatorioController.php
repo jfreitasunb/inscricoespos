@@ -156,7 +156,7 @@ class RelatorioController extends BaseController
     return $consolida_dados;
   }
 
-  public function ConsolidaDadosAcademicos($id_candidato)
+  public function ConsolidaDadosAcademicos($id_candidato, $locale_relatorio)
   {
 
     $consolida_academico = [];
@@ -168,11 +168,11 @@ class RelatorioController extends BaseController
     $dados_academicos_candidato = $dado_academico->retorna_dados_academicos($id_candidato);
 
     $consolida_academico['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
-    $consolida_academico['tipo_curso_graduacao'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_graduacao,'Graduação');
+    $consolida_academico['tipo_curso_graduacao'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_graduacao,'Graduação', $locale_relatorio);
     $consolida_academico['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
     $consolida_academico['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
     $consolida_academico['curso_pos'] = $dados_academicos_candidato->curso_pos;
-    $consolida_academico['tipo_curso_pos'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_pos,'Pós-Graduação');
+    $consolida_academico['tipo_curso_pos'] = $formacao->pega_tipo_formacao($dados_academicos_candidato->tipo_curso_pos,'Pós-Graduação', $locale_relatorio);
     $consolida_academico['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
     $consolida_academico['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
@@ -834,7 +834,7 @@ class RelatorioController extends BaseController
        $dados_candidato_para_relatorio[$key] = $value;
     }
 
-    foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+    foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
     }
 
