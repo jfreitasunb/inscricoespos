@@ -27,14 +27,28 @@ class AreaPosMat extends Model
         'nome_es',
     ];
 
-    public function pega_area_pos_mat($area_pos){
+    public function pega_area_pos_mat($area_pos, $locale)
+    {
+        switch ($locale) {
+            case 'en':
+                $nome_coluna = 'nome_en';
+                break;
+
+            case 'es':
+                $nome_coluna = 'nome_es';
+                break;
+            
+            default:
+                $nome_coluna = 'nome_ptbr';
+                break;
+        }
 
         if ($area_pos == 0) {
             return null;
         }else{
-            return $this->select('nome')
+            return $this->select($nome_coluna)
             ->where('id_area_pos', $area_pos)
-            ->value('nome');
+            ->value($nome_coluna);
         }   
     }
 }
