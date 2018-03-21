@@ -56,8 +56,7 @@
             <label class="control-label">{{ trans('tela_dados_pessoais.nome') }}: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
         <div>
-            <label class="control-label">{{ trans('tela_dados_pessoais.data_nascimento') }}: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <label class="control-label">Idade: </label>{{ $dados_candidato_para_relatorio['idade'].' anos' }}
+            <label class="control-label">{{ trans('tela_dados_pessoais.data_nascimento') }}: </label>{{ $dados_candidato_para_relatorio['data_nascimento'] }}
         </div>
         <hr>
         <h3>{{ trans('tela_dados_pessoais.endereco_pessoal') }}</h3>
