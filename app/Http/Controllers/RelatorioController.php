@@ -144,7 +144,7 @@ class RelatorioController extends BaseController
     }
 
     if (!is_null($dados_pessoais_candidato->estado)) {
-      if (is_null($estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado))) {
+      if (!is_null($estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado))) {
         $consolida_dados['nome_estado'] = $estado->retorna_nome_estados_por_id($dados_pessoais_candidato->pais, $dados_pessoais_candidato->estado);
       }else{
         $consolida_dados['nome_estado'] = null;
