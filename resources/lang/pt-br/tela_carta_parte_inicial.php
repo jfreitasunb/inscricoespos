@@ -16,6 +16,7 @@ return [
     'circunstancia_2' => 'Orientação',
     'circunstancia_3' => 'Seminários',
     'circunstancia_4' => 'Outra (Informe no campo abaixo)',
+    'outra_circunstancia' => 'Conhece o candidato sob outras circunstâncias:',
     'tabela_avaliacao' => 'Procure avaliá-lo sob os itens abaixo',
     'excelente' => 'Excelente',
     'bom' => 'Bom',

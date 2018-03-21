@@ -15,6 +15,7 @@ return [
     'circunstancia_2' => 'Advisor',
     'circunstancia_3' => 'Seminars',
     'circunstancia_4' => 'Other',
+    'outra_circunstancia' => 'Conhece o candidato sob outras circunstâncias:',
     'tabela_avaliacao' => 'Evaluate it on the items below',
     'excelente' => 'Excellent',
     'bom' => 'Good',

@@ -15,6 +15,7 @@ return [
     'circunstancia_2' => 'Dirección',
     'circunstancia_3' => 'Seminarios',
     'circunstancia_4' => 'Otra (En el campo siguiente)',
+    'outra_circunstancia' => 'Conhece o candidato sob outras circunstâncias:',
     'tabela_avaliacao' => 'Evalúelo teniendo en cuenta los ítems mencionados a continuación',
     'excelente' => 'Excelente',
     'bom' => 'Bom',
