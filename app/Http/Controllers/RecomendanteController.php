@@ -132,6 +132,8 @@ class RecomendanteController extends BaseController
 
 		$id_user = $user->id_user;
 		
+		$locale_recomendante = Session::get('locale');
+
 		$recomendante = new DadoRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
@@ -162,7 +164,7 @@ class RecomendanteController extends BaseController
 					$dados_para_template[$indicado->id_user]['id_candidato'] = $indicado->id_user;
 
 					$dados_para_template[$indicado->id_user]['nome_candidato'] = $dados_indicador->nome;
-					$dados_para_template[$indicado->id_user]['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido);
+					$dados_para_template[$indicado->id_user]['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido, $locale_recomendante);
 
 					$dados_cartas = new CartaRecomendacao();
 
@@ -190,6 +192,7 @@ class RecomendanteController extends BaseController
 
 	public function postCartaInicial()
 	{	
+		$locale_recomendante = Session::get('locale');
 
 		if (!isset($_POST['id_candidato'])) {
 			
@@ -229,7 +232,7 @@ class RecomendanteController extends BaseController
 
 			$dados_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
 
-			$dados_candidato['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido);
+			$dados_candidato['programa_pretendido'] = $nome_programa_pos->pega_programa_pos_mat($programa_pretendido_candidato->programa_pretendido, $locale_recomendante);
 
 
 			$dados_antigos = $carta_recomendacao->retorna_carta_recomendacao_antiga($id_user,$id_candidato,$id_inscricao_pos);
@@ -458,11 +461,27 @@ class RecomendanteController extends BaseController
 		
 		$id_prof = $user->id_user;
 
+		$locale_recomendante = Session::get('locale');
+
+		switch ($locale_recomendante) {
+            case 'en':
+                $nome_coluna = 'tipo_programa_pos_en';
+                break;
+
+            case 'es':
+                $nome_coluna = 'tipo_programa_pos_es';
+                break;
+            
+            default:
+                $nome_coluna = 'tipo_programa_pos_ptbr';
+                break;
+        }
+
 		$indicacoes = new CartaRecomendacao;
 
-		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof)->paginate(10);
+		$indicacoes_anteriores = $indicacoes->retorna_cartas_por_recomendante($id_prof, $locale_recomendante)->paginate(10);
 
-		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores'));
+		return view('templates.partials.recomendante.cartas_anteriores', compact('indicacoes_anteriores', 'nome_coluna'));
 	}
 
 	public function GeraCartasAnteriores()
@@ -471,6 +490,8 @@ class RecomendanteController extends BaseController
 		$user = $this->SetUser();
 		
 		$id_prof = $user->id_user;
+
+		$locale_recomendante = Session::get('locale');
 
 		// $locais_arquivos_carta_enviadas = public_path("/relatorios/cartas_enviadas/");
 		
