@@ -27,18 +27,46 @@ class Formacao extends Model
         'tipo_es',
     ];
 
-    public function pega_tipo_formacao($id,$nivel)
+    public function pega_tipo_formacao($id,$nivel, $locale)
     {
-        return $this->select('tipo')
+        switch ($locale) {
+            case 'en':
+                $nome_coluna = 'tipo_en';
+                break;
+
+            case 'es':
+                $nome_coluna = 'tipo_es';
+                break;
+            
+            default:
+                $nome_coluna = 'tipo_ptbr';
+                break;
+        }
+
+        return $this->select($nome_coluna)
             ->where('id', $id)
             ->where('nivel', $nivel)
-            ->value('tipo');
+            ->value($nome_coluna);
     }
 
-     public function retorna_id_formacao($tipo,$nivel)
+     public function retorna_id_formacao($tipo,$nivel, $locale_candidato)
      {
+        switch ($locale) {
+            case 'en':
+                $nome_coluna = 'tipo_en';
+                break;
+
+            case 'es':
+                $nome_coluna = 'tipo_es';
+                break;
+            
+            default:
+                $nome_coluna = 'tipo_ptbr';
+                break;
+        }
+
         return $this->select('id')
-            ->where('tipo', $tipo)
+            ->where($nome_coluna, $tipo)
             ->where('nivel', $nivel)
             ->value('id');
     }
