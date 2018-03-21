@@ -10,6 +10,7 @@ return [
     'rg' => 'No. Documento de Identificação',
     'data_nascimento' => 'Data de Nascimento',
     'endereco' => 'Endereço',
+    'endereco_pessoal' => 'Endereço Pessoal',
     'cidade' => 'Cidade',
     'estado' => 'Estado',
     'cep' => 'CEP',

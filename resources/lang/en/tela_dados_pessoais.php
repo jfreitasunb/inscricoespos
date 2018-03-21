@@ -10,6 +10,7 @@ return [
     'rg' => 'Identification card number',
     'data_nascimento' => 'Date of birth',
     'endereco' => 'Address',
+    'endereco_pessoal' => 'Personal Address',
     'cidade' => 'City',
     'estado' => 'State',
     'cep' => 'ZIP code',

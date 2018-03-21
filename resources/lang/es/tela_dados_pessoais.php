@@ -10,6 +10,7 @@ return [
     'rg' => 'RG',
     'data_nascimento' => 'Fecha de Nacimiento',
     'endereco' => 'Dirección',
+    'endereco_pessoal' => 'Dirección Personal',
     'cidade' => 'Ciudad',
     'estado' => 'Estado',
     'cep' => 'CEP',
