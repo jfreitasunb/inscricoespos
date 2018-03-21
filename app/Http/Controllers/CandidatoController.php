@@ -765,6 +765,8 @@ class CandidatoController extends BaseController
 		
 		$id_user = $user->id_user;
 
+		$locale_fixo = 'en';
+
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
@@ -848,7 +850,7 @@ class CandidatoController extends BaseController
 			$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos)->programa_pretendido;
 			$programa_pos = new ProgramaPos();
 
-			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido);
+			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido, $locale_fixo);
 
 			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
 			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
