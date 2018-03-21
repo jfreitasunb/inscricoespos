@@ -6,7 +6,7 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('edita_area_pos')
+@section('edita_formacao')
 
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Áreas da Pós-Graduação</legend>
@@ -22,13 +22,13 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($areas_pos_mat as $area)
+        @foreach ($tipo_formacao as $formacao)
           <tr>
-            {!! Form::open(array('route' => 'editar.area.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-            {!! Form::hidden('id_area_pos', $area->id_area_pos, []) !!}
-            <td>{!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}</td>
+            {!! Form::open(array('route' => 'editar.formacao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+            {!! Form::hidden('id', $formacao->id, []) !!}
+            <td>{!! Form::text('tipo_ptbr', $formacao->tipo_ptbr, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('tipo_en', $formacao->tipo_en, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('tipo_es', $formacao->tipo_es, ['class' => 'form-control']) !!}</td>
             <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
             {!! Form::close() !!}
           </tr>
