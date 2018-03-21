@@ -50,7 +50,7 @@
             <div class="col-xs-6">
               <div class="form-group form-inline">
                 <label>
-                  {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos }} 
+                  {!! Form::checkbox('escolhas_coordenador[]', $programa->id_programa_pos, null) !!} {{ $programa->tipo_programa_pos_ptbr }} 
                 </label> 
               </div>
             </div>
