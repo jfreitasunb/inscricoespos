@@ -15,7 +15,9 @@ class CreateFormacaoTable extends Migration
     {
         Schema::create('formacao', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo',50);
+            $table->string('tipo_ptbr',50);
+            $table->string('tipo_en',50);
+            $table->string('tipo_es',50);
             $table->string('nivel',50);
             $table->timestamps();
         });

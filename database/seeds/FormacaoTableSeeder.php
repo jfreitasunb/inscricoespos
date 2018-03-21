@@ -20,7 +20,9 @@ class FormacaoTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'tipo' => 'Bacharelado',
+                'tipo_ptbr' => 'Bacharelado',
+                'tipo_en' => 'Bach',
+                'tipo_es' => 'Bach',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -28,7 +30,9 @@ class FormacaoTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'tipo' => 'Licenciatura',
+                'tipo_ptbr' => 'Licenciatura',
+                'tipo_en' => 'Bach1',
+                'tipo_es' => 'Bach12',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -36,7 +40,9 @@ class FormacaoTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'tipo' => 'Ambos',
+                'tipo_ptbr' => 'Ambos',
+                'tipo_en' => 'Bach2323',
+                'tipo_es' => 'Bach123',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -44,7 +50,9 @@ class FormacaoTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'tipo' => 'Não se Aplica',
+                'tipo_ptbr' => 'Não se Aplica',
+                'tipo_en' => 'Bach34243',
+                'tipo_es' => 'Bach324234234',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -52,7 +60,9 @@ class FormacaoTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'tipo' => 'Mestrado Acadêmico',
+                'tipo_ptbr' => 'Mestrado Acadêmico',
+                'tipo_en' => 'Bach4523453',
+                'tipo_es' => 'Bach232435',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -60,7 +70,9 @@ class FormacaoTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'tipo' => 'Mestrado Profissional',
+                'tipo_ptbr' => 'Mestrado Profissional',
+                'tipo_en' => 'Bach447657546',
+                'tipo_es' => 'Bach87876757',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -68,7 +80,9 @@ class FormacaoTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'tipo' => 'Doutorado',
+                'tipo_ptbr' => 'Doutorado',
+                'tipo_en' => 'Bach09786587',
+                'tipo_es' => 'Bach3567687',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -76,7 +90,9 @@ class FormacaoTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 8,
-                'tipo' => 'Especialização',
+                'tipo_ptbr' => 'Especialização',
+                'tipo_en' => 'Bach7685798989',
+                'tipo_es' => 'Bach675898987',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
