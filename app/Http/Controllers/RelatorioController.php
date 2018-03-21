@@ -622,7 +622,7 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
 
-      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -686,7 +686,7 @@ class RelatorioController extends BaseController
          $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
@@ -732,8 +732,10 @@ class RelatorioController extends BaseController
   }
 
 
-  public function geraRelatoriosAnteriores($id_inscricao_pos, $locale_relatorio)
+  public function geraRelatoriosAnteriores($id_inscricao_pos)
   {
+
+    $locale_relatorio = 'pt-br';
 
     $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
@@ -766,7 +768,7 @@ class RelatorioController extends BaseController
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
 
-      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
