@@ -100,12 +100,12 @@ class CoordenadorController extends BaseController
 				$dados_email['fim_inscricao'] = $request->fim_inscricao;
 				$dados_email['prazo_carta'] = $request->prazo_carta;
 
-				
+				$locale_coordenador = 'pt-br';
 				foreach ($request->escolhas_coordenador as $key) {
 					
 					$nome_programa_pos = new ProgramaPos();
 
-					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key);
+					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $locale_coordenador);
 				}
 
 				$dados_email['programa'] = implode('/', $temp);
