@@ -39,7 +39,7 @@
 	<div class="form-group">
 		{!! Form::label('tipo_programa_pos', 'Inscreveu para:', ['class' => 'col-md-4 control-label']) !!}
 		<div class="col-md-4">
-			{!! Form::text('tipo_programa_pos', $finalizou->tipo_programa_pos, ['class' => 'form-control input-md']) !!}
+			{!! Form::text('tipo_programa_pos', $finalizou->tipo_programa_pos_ptbr, ['class' => 'form-control input-md']) !!}
 		</div>
 	</div>
 	<div class="form-group">
