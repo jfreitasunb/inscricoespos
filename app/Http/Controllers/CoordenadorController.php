@@ -31,6 +31,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class CoordenadorController extends BaseController
 {
 
+	private $locale_default = 'pt-br';
+
 	public function getMenu()
 	{	
 		return view('home');
@@ -101,12 +103,11 @@ class CoordenadorController extends BaseController
 				$dados_email['fim_inscricao'] = $request->fim_inscricao;
 				$dados_email['prazo_carta'] = $request->prazo_carta;
 
-				$locale_coordenador = 'pt-br';
 				foreach ($request->escolhas_coordenador as $key) {
 					
 					$nome_programa_pos = new ProgramaPos();
 
-					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $locale_coordenador);
+					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $this->locale_default);
 				}
 
 				$dados_email['programa'] = implode('/', $temp);
@@ -279,7 +280,6 @@ class CoordenadorController extends BaseController
 
 	public function getFichaInscricaoPorCandidato()
 	{
-		$locale_relatorio = 'pt-br';
 
 		$user = Auth::user();
 		
@@ -303,7 +303,7 @@ class CoordenadorController extends BaseController
 		}
 		
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $locale_relatorio)->paginate(10);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
 
 		foreach ($inscricoes_finalizadas as $candidato ) {
@@ -326,7 +326,6 @@ class CoordenadorController extends BaseController
 
 	public function GeraPdfFichaIndividual()
 	{
-		$locale_relatorio = 'pt-br';
 
 		$user = Auth::user();
 		
@@ -337,7 +336,7 @@ class CoordenadorController extends BaseController
 
 		$ficha = new RelatorioController;
 	
-		$nome_pdf = $ficha->geraFichaIndividual($id_aluno_pdf, $locale_relatorio);
+		$nome_pdf = $ficha->geraFichaIndividual($id_aluno_pdf, $this->locale_default);
       	
       	
       	return redirect()->back()->with(compact('nome_pdf','id_aluno_pdf'));
