@@ -137,6 +137,13 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes');
 
+
+
+
+	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@getListaIndicacoes')->name('lista.recomendacoes');
+
+	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@postListaIndicacoes');
+
 	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\AdminController@postAlteraRecomendante')->name('altera.recomendante');
 
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@getPesquisarCartaEnviada')->name('pesquisa.carta');
