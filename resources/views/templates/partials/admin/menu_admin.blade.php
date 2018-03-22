@@ -73,7 +73,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicações</a>
                                     </td>
                                 </tr>
                                 <tr>
