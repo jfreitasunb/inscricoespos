@@ -23,14 +23,32 @@
         </tr>
       </thead>
       <tbody>
+        @foreach ($dados_para_template as $dados)
           <tr class="">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ $dados['nome_candidato'] }}</td>
+            <td>{{ $dados['tipo_programa_pos'] }}</td>
+            @if ($dados['status_carta_1'])
+              <td class="carta_completa">
+            @else
+              <td class="carta_incompleta">
+            @endif {{ $dados['nome_recomendante_1'] }} </br> {{ $dados['email_recomendante_1'] }}</td>
+            @if ($dados['status_carta_2'])
+              <td class="carta_completa">
+            @else
+              <td class="carta_incompleta">
+            @endif {{ $dados['nome_recomendante_2'] }} </br> {{ $dados['email_recomendante_2'] }}</td>
+            @if ($dados['status_carta_3'])
+              <td class="carta_completa">
+            @else
+              <td class="carta_incompleta">
+            @endif {{ $dados['nome_recomendante_3'] }} </br> {{ $dados['email_recomendante_3'] }}</td>
           </tr>
+        @endforeach
       </tbody>
     </table>
+  </div>
+  <div class="text-center">
+    {{ $inscricoes_finalizadas->render() }}
   </div>
 </fieldset>
 
