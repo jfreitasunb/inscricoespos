@@ -17,21 +17,26 @@ class ContatoRecomendante extends Model
         'id_inscricao_pos',
     ];
 
-    public function retorna_candidatos_por_recomendante($id_prof, $locale_candidato)
-    {   
-        switch ($locale_candidato) {
+    public function define_nome_coluna_por_locale($locale)
+    {
+        switch ($locale) {
             case 'en':
-                $nome_coluna = 'tipo_programa_pos_en';
+                return 'tipo_programa_pos_en';
                 break;
 
             case 'es':
-                $nome_coluna = 'tipo_programa_pos_es';
+                return 'tipo_programa_pos_es';
                 break;
             
             default:
-                $nome_coluna = 'tipo_programa_pos_ptbr';
+                return 'tipo_programa_pos_ptbr';
                 break;
         }
+    }
+
+    public function retorna_candidatos_por_recomendante($id_prof, $locale)
+    {   
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_user','dados_pessoais.id_user')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('dados_pessoais.nome', 'asc')->get();
     }

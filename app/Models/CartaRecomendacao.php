@@ -34,6 +34,23 @@ class CartaRecomendacao extends Model
         'como_orientando',
     ];
 
+    public function define_nome_coluna_por_locale($locale)
+    {
+        switch ($locale) {
+            case 'en':
+                return 'tipo_programa_pos_en';
+                break;
+
+            case 'es':
+                return 'tipo_programa_pos_es';
+                break;
+            
+            default:
+                return 'tipo_programa_pos_ptbr';
+                break;
+        }
+    }
+
     public function reativa_carta_finalizada($id_inscricao_pos, $id_aluno, $id_prof, $completada)
     {
 
@@ -47,38 +64,14 @@ class CartaRecomendacao extends Model
 
     public function retorna_cartas_por_recomendante($id_prof, $locale)
     {
-        switch ($locale) {
-            case 'en':
-                $nome_coluna = 'tipo_programa_pos_en';
-                break;
-
-            case 'es':
-                $nome_coluna = 'tipo_programa_pos_es';
-                break;
-            
-            default:
-                $nome_coluna = 'tipo_programa_pos_ptbr';
-                break;
-        }
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         return $this->where('id_prof', $id_prof)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna)->orderBy('cartas_recomendacoes.created_at', 'desc');
     }
 
     public function retorna_cartas_para_reativar($id_prof, $id_inscricao_pos, $locale)
     {
-        switch ($locale) {
-            case 'en':
-                $nome_coluna = 'tipo_programa_pos_en';
-                break;
-
-            case 'es':
-                $nome_coluna = 'tipo_programa_pos_es';
-                break;
-            
-            default:
-                $nome_coluna = 'tipo_programa_pos_ptbr';
-                break;
-        }
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         return $this->where('id_prof', $id_prof)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna, 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
     }

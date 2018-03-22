@@ -27,21 +27,26 @@ class ProgramaPos extends Model
         'tipo_programa_pos_es', 
     ];
 
-    public function pega_programa_pos_mat($programa, $locale){
-
+    public function define_nome_coluna_por_locale($locale)
+    {
         switch ($locale) {
             case 'en':
-                $nome_coluna = 'tipo_programa_pos_en';
+                return 'tipo_programa_pos_en';
                 break;
 
             case 'es':
-                $nome_coluna = 'tipo_programa_pos_es';
+                return 'tipo_programa_pos_es';
                 break;
             
             default:
-                $nome_coluna = 'tipo_programa_pos_ptbr';
+                return 'tipo_programa_pos_ptbr';
                 break;
         }
+    }
+
+    public function pega_programa_pos_mat($programa, $locale){
+
+        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         return $this->select($nome_coluna)
             ->where('id_programa_pos', $programa)

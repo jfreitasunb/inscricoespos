@@ -27,22 +27,28 @@ class Formacao extends Model
         'tipo_es',
     ];
 
-    public function pega_tipo_formacao($id,$nivel, $locale)
+    public function define_coluna_formacao_por_locale($locale)
     {
         switch ($locale) {
             case 'en':
-                $nome_coluna = 'tipo_en';
+                return 'tipo_en';
                 break;
 
             case 'es':
-                $nome_coluna = 'tipo_es';
+                return 'tipo_es';
                 break;
             
             default:
-                $nome_coluna = 'tipo_ptbr';
+                return 'tipo_ptbr';
                 break;
         }
 
+    }
+
+    public function pega_tipo_formacao($id,$nivel, $locale)
+    {
+        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
+        
         return $this->select($nome_coluna)
             ->where('id', $id)
             ->where('nivel', $nivel)
@@ -51,19 +57,7 @@ class Formacao extends Model
 
      public function retorna_id_formacao($tipo,$nivel, $locale_candidato)
      {
-        switch ($locale) {
-            case 'en':
-                $nome_coluna = 'tipo_en';
-                break;
-
-            case 'es':
-                $nome_coluna = 'tipo_es';
-                break;
-            
-            default:
-                $nome_coluna = 'tipo_ptbr';
-                break;
-        }
+        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
 
         return $this->select('id')
             ->where($nome_coluna, $tipo)
