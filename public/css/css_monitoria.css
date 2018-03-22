@@ -308,4 +308,7 @@ legend.scheduler-border {
 .table tbody tr.carta_incompleta {
   background-color: #e74c3c;
 }
+.table td {
+   text-align: center;   
+}
 /* Required field END */
