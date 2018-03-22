@@ -134,6 +134,7 @@
                 @yield('reativar_inscricao_candidato')
                 @yield('reativar_carta_enviada')
                 @yield('acha_indicacoes')
+                @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
                 @yield('relatorio_pos_editais_anteriores')
