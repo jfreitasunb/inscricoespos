@@ -138,8 +138,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes');
 
 
-
-
 	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@getListaIndicacoes')->name('lista.recomendacoes');
 
 	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@postListaIndicacoes');
