@@ -684,4 +684,13 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.acha_indicacoes')->with(compact('modo_pesquisa', 'indicacoes'));
 	}
 
+	public function getListaIndicacoes()
+	{
+
+	}
+
+	public function postListaIndicacoes(Request $request)
+	{
+		
+	}
 }
