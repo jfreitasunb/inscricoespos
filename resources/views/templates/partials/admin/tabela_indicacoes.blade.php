@@ -6,7 +6,7 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('ficha_individual')
+@section('tabela_indicacoes')
 
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
