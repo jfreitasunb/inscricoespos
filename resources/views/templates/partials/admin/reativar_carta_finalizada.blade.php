@@ -47,7 +47,7 @@
 				{!! Form::label('completada', 'Completada', ['class' => 'control-label']) !!}
 			</div>
       		<div class="col-md-1">
-      			{!! Form::text('completada', $carta->completada, ['class' => 'form-control']) !!}
+      			{!! Form::text('completada', $carta->completada ? 'Sim' : 'Não', ['class' => 'form-control']) !!}
       		</div>
       		<div class="col-md-2">
       			{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}
