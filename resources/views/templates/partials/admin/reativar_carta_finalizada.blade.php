@@ -44,7 +44,7 @@
       			{!! Form::text('programa', $carta->tipo_programa_pos, ['class' => 'form-control']) !!}
       		</div>
       		<div class="col-md-2">
-				{!! Form::label('completada', 'Completada', ['class' => 'control-label']) !!}
+				{!! Form::label('completada', 'Carta enviada?', ['class' => 'control-label']) !!}
 			</div>
       		<div class="col-md-1">
       			{!! Form::text('completada', $carta->completada ? 'Sim' : 'Não', ['class' => 'form-control']) !!}
