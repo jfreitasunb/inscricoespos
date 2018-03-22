@@ -397,7 +397,7 @@ class AdminController extends CoordenadorController
 		$email_candidato = $request->email_candidato;
 
 
-		$finalizada = (int)$request->finalizada;
+		$finalizada = (strtolower(trim($request->finalizada)) == 'sim' ? 1 : 0);
 
 		if (!$finalizada) {
 			$inscricao_finalizada = new FinalizaInscricao;
