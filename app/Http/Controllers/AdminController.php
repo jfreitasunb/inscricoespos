@@ -350,6 +350,8 @@ class AdminController extends CoordenadorController
 
 	public function getInscricaoParaReativar(Request $request)
 	{
+		$locale_admin = 'pt-br';
+
 		$this->validate($request, [
 			'email_candidato' => 'required|email',
 		]);
@@ -364,7 +366,7 @@ class AdminController extends CoordenadorController
 
 		$finaliza_inscricao = new FinalizaInscricao;
 
-		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user);
+		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user, $locale_admin);
 
 		if (!is_null($finalizou)) {
 			
