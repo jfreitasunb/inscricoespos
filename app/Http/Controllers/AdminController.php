@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 class AdminController extends CoordenadorController
 {
 
+	private $locale_admin = 'pt-br';
+
 	public function getMenu()
 	{	
 		Session::get('locale');
@@ -350,7 +352,6 @@ class AdminController extends CoordenadorController
 
 	public function getInscricaoParaReativar(Request $request)
 	{
-		$locale_admin = 'pt-br';
 
 		$this->validate($request, [
 			'email_candidato' => 'required|email',
@@ -366,7 +367,7 @@ class AdminController extends CoordenadorController
 
 		$finaliza_inscricao = new FinalizaInscricao;
 
-		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user, $locale_admin);
+		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user, $this->locale_admin);
 
 		if (!is_null($finalizou)) {
 			
@@ -581,8 +582,6 @@ class AdminController extends CoordenadorController
 	public function postPesquisarCartaEnviada(Request $request)
 	{
 
-		$locale_admin = 'pt-br';
-
 		$this->validate($request, [
 			'email_recomendante' => 'required|email',
 		]);
@@ -604,7 +603,7 @@ class AdminController extends CoordenadorController
 
 		$modo_pesquisa = false;
 
-		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos, $locale_admin);
+		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos, $this->locale_admin);
 
 		
 		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa', 'cartas_completadas'));
