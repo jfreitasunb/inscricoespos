@@ -142,6 +142,7 @@ class AdminController extends CoordenadorController
 
 		$novos_dados_usuario['email'] = strtolower(trim($request->email));
 		$novos_dados_usuario['locale'] = strtolower(trim($request->locale));
+		$novos_dados_usuario['validation_code'] = NULL;
 		$novos_dados_usuario['user_type'] = strtolower(trim($request->user_type));
 		$novos_dados_usuario['ativo'] = (strtolower(trim($request->ativo)) == 'sim' ? 1 : 0);
 		
