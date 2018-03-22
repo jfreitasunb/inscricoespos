@@ -25,22 +25,22 @@
       <tbody>
         @foreach ($dados_para_template as $dados)
           <tr class="">
-            <td>{{ $dados['nome_candidato'] }}</td>
-            <td>{{ $dados['tipo_programa_pos'] }}</td>
+            <td class="lista_carta">{{ $dados['nome_candidato'] }}</td>
+            <td class="lista_carta">{{ $dados['tipo_programa_pos'] }}</td>
             @if ($dados['status_carta_1'])
-              <td class="carta_completa">
+              <td class="lista_carta carta_completa">
             @else
-              <td class="carta_incompleta">
+              <td class="lista_carta carta_incompleta">
             @endif {{ $dados['nome_recomendante_1'] }} </br> {{ $dados['email_recomendante_1'] }}</td>
             @if ($dados['status_carta_2'])
-              <td class="carta_completa">
+              <td class="lista_carta carta_completa">
             @else
-              <td class="carta_incompleta">
+              <td class="lista_carta carta_incompleta">
             @endif {{ $dados['nome_recomendante_2'] }} </br> {{ $dados['email_recomendante_2'] }}</td>
             @if ($dados['status_carta_3'])
-              <td class="carta_completa">
+              <td class="lista_carta carta_completa">
             @else
-              <td class="carta_incompleta">
+              <td class="lista_carta carta_incompleta">
             @endif {{ $dados['nome_recomendante_3'] }} </br> {{ $dados['email_recomendante_3'] }}</td>
           </tr>
         @endforeach

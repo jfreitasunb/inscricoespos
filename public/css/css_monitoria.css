@@ -314,7 +314,7 @@ legend.scheduler-border {
 .table tbody td.carta_incompleta {
   background-color: #e74c3c;
 }
-.table td {
+.table td.lista_carta {
    text-align: center;   
 }
 /* Required field END */
