@@ -308,6 +308,12 @@ legend.scheduler-border {
 .table tbody tr.carta_incompleta {
   background-color: #e74c3c;
 }
+.table tbody td.carta_completa {
+  background-color: #2ecc71;
+}
+.table tbody td.carta_incompleta {
+  background-color: #e74c3c;
+}
 .table td {
    text-align: center;   
 }
