@@ -42,7 +42,7 @@
   <div class="form-group">
     {!! Form::label('ativo', 'Ativo?', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-      {!! Form::text('ativo', $user->ativo, ['class' => 'form-control input-md']) !!}
+      {!! Form::text('ativo', $user->ativo ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}
     </div>
   </div>
 @endif
