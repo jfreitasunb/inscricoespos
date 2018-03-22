@@ -579,6 +579,8 @@ class AdminController extends CoordenadorController
 	public function postPesquisarCartaEnviada(Request $request)
 	{
 
+		$locale_admin = 'pt-br';
+
 		$this->validate($request, [
 			'email_recomendante' => 'required|email',
 		]);
@@ -600,7 +602,7 @@ class AdminController extends CoordenadorController
 
 		$modo_pesquisa = false;
 
-		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos);
+		$cartas_completadas = $cartas_recomendacoes->retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos, $locale_admin);
 
 		
 		return view('templates.partials.admin.reativar_carta_finalizada')->with(compact('modo_pesquisa', 'cartas_completadas'));
@@ -625,7 +627,7 @@ class AdminController extends CoordenadorController
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		$id_aluno = (int)$request->id_aluno;
 		$id_recomendante = (int)$request->id_recomendante;
-		$completada = (int)$request->completada;
+		$completada = (strtolower(trim($request->completada)) == 'sim' ? 1 : 0);
 
 		$carta_recomendacao = new CartaRecomendacao;
 
