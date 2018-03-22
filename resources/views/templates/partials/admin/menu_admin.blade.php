@@ -76,6 +76,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicacoes</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista todas as indicações</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
