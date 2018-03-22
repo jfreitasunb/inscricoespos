@@ -686,7 +686,7 @@ class AdminController extends CoordenadorController
 
 	public function getListaIndicacoes()
 	{
-
+		return view('templates.partials.admin.tabela_indicacoes');
 	}
 
 	public function postListaIndicacoes(Request $request)
