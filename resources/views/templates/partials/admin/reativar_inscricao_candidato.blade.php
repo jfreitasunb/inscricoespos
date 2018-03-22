@@ -51,7 +51,7 @@
 	<div class="form-group">
 		{!! Form::label('finalizada', 'Finalizou Inscrição:', ['class' => 'col-md-4 control-label']) !!}
 		<div class="col-md-4">
-			{!! Form::text('finalizada', $finalizou->finalizada, ['class' => 'form-control input-md']) !!}
+			{!! Form::text('finalizada', $finalizou->finalizada ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}
 		</div>
 	</div>
 @endif
