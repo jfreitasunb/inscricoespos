@@ -328,3 +328,9 @@ Route::get('/migracao', [
 	'as'   => 'migra.dados',
 	'middleware' => ['user.role:admin'],
 ]);
+
+Route::get('/chart', [
+	'uses' => '\Posmat\Http\Controllers\GraficosController@index',
+	'as'   => 'ver.charts',
+	'middleware' => ['user.role:admin'],
+]);
