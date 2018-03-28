@@ -14,9 +14,15 @@
     <center>
         {!! $chart->html() !!}
     </center>
+
+    <hr>
+    <center>
+        {!! $chart2->html() !!}
+    </center>
 </div>
 <!-- End Of Main Application -->
 {!! Charts::scripts() !!}
 {!! $chart->script() !!}
+{!! $chart2->script() !!}
 
 @endsection
