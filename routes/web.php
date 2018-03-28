@@ -154,6 +154,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@postAchaIndicacoes');
 
+	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
@@ -326,11 +328,5 @@ Route::get('/es', [
 Route::get('/migracao', [
 	'uses' => '\Posmat\Http\Controllers\MigracaoController@getMigracao',
 	'as'   => 'migra.dados',
-	'middleware' => ['user.role:admin'],
-]);
-
-Route::get('/chart', [
-	'uses' => '\Posmat\Http\Controllers\GraficosController@index',
-	'as'   => 'ver.charts',
 	'middleware' => ['user.role:admin'],
 ]);
