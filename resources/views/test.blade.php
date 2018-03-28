@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('templates.default')
 
-        <title>My Charts</title>
+@section('stylesheets')
+  {!! Html::style( asset('css/parsley.css') ) !!}
+  {!! Html::style( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ) !!}
+  {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
+@endsection
 
-        {!! Charts::styles() !!}
+@section('graficos')
 
-    </head>
-    <body>
-        <!-- Main Application (Can be VueJS or other JS framework) -->
-        <div class="app">
-            <center>
-                {!! $chart->html() !!}
-            </center>
-        </div>
-        <!-- End Of Main Application -->
-        {!! Charts::scripts() !!}
-        {!! $chart->script() !!}
-    </body>
-</html>
+{!! Charts::styles() !!}
+
+<div class="app">
+    <center>
+        {!! $chart->html() !!}
+    </center>
+</div>
+<!-- End Of Main Application -->
+{!! Charts::scripts() !!}
+{!! $chart->script() !!}
+
+@endsection
