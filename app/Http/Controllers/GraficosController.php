@@ -60,6 +60,14 @@ class GraficosController extends BaseController
             // Setup what the values mean
             ->labels(['One', 'Two', 'Three']);
 
-        return view('templates.partials.graficos.test', ['chart' => $chart]);
+
+            $chart2 = Charts::create('pie', 'highcharts')
+                ->title('My nice chart')
+                ->labels(['First', 'Second', 'Third'])
+                ->values([5,10,20])
+                ->dimensions(1000,500)
+                ->responsive(true);
+
+        return view('templates.partials.graficos.test', ['chart' => $chart, 'chart2' => $chart2]);
     }
 }
