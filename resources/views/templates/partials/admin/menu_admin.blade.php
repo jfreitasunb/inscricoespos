@@ -110,6 +110,11 @@
                                         <span class="glyphicon glyphicon-file fa-fw"></span><a href="{{ route('gera.ficha.individual') }}">Por Candidato</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Gráficos</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -140,6 +145,7 @@
                 @yield('relatorio_pos_editais_anteriores')
                 @yield('datatable_users')
                 @yield('ficha_individual')
+                @yield('graficos')
             </div>
         </div>
     </div>
