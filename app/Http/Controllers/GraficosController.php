@@ -60,6 +60,6 @@ class GraficosController extends BaseController
             // Setup what the values mean
             ->labels(['One', 'Two', 'Three']);
 
-        return view('test', ['chart' => $chart]);
+        return view('templates.partials.graficos.test', ['chart' => $chart]);
     }
 }
