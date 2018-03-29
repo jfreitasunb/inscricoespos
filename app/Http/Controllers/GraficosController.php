@@ -89,8 +89,24 @@ class GraficosController extends BaseController
             $total_por_area = [];
 
             foreach ($areas_inscricoes as $id_area) {
+                $id_por_area = [];
+
+                $total = 0;
+                
                 $nome_area_pos[] = $area_pos->pega_area_pos_mat($id_area, $this->locale_default);
-                $total_por_area[] = $escolhas_candidato->conta_inscritos_por_area_pos($id_area, $relatorio_disponivel->id_inscricao_pos);
+                
+                $id_por_area = $escolhas_candidato->retorna_inscritos_por_area_pos($id_area, $relatorio_disponivel->id_inscricao_pos);
+                // dd($id_por_area);
+                foreach ($id_por_area as $id_user) {
+
+                    $status_candidato = new FinalizaInscricao;
+                    
+                    if ($status_candidato->retorna_se_finalizou($id_user, $relatorio_disponivel->id_inscricao_pos)) {
+                        ++$total;
+                    }
+                }
+
+                $total_por_area[] = $total;
             }
 
             $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
