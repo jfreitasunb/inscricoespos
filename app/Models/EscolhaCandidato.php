@@ -65,4 +65,8 @@ class EscolhaCandidato extends Model
         return $this->select('area_pos')->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', '2')->distinct()->orderBy('area_pos')->pluck('area_pos');
     }
 
+    public function conta_inscritos_por_area_pos($area_pos, $id_inscricao_pos)
+    {
+        return $this->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->count();
+    }
 }
