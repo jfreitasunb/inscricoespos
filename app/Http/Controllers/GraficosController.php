@@ -109,11 +109,15 @@ class GraficosController extends BaseController
                 $total_por_area[] = $total;
             }
 
-            $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
+            $candidatos_por_area_doutorado = Charts::create('bar', 'highcharts')
                 ->title("Inscritos no Doutorado por área/Edital ".$relatorio_disponivel->edital)
-                ->dimensions(0, 400) // Width x Height
+                ->responsive(false)
+                ->height(400)
+                ->width(900)
+                ->colors($cores_utilizadas)
                 ->template("material")
-                ->dataset('', array_values($total_por_area))
+                ->elementLabel("Total por Área")
+                ->values(array_values($total_por_area))
                 ->labels(array_values($nome_area_pos));
 
             $inscricao_doutorado = TRUE;
