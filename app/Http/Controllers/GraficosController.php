@@ -75,5 +75,21 @@ class GraficosController extends BaseController
                 ->values(array_values($contagem))
                 ->dimensions(1000,500)
                 ->responsive(true);
+
+
+        if (array_key_exists("Doutorado", $programas_disponiveis)) {
+            $chart = Charts::multi('bar', 'material')
+                ->title("Inscrições para o Edital ".$relatorio_disponivel->edital)
+                ->dimensions(0, 400) // Width x Height
+                ->template("material")
+                ->dataset('', array_values($contagem))
+                ->labels(array_keys($contagem));
+
+            return view('templates.partials.graficos.graficos_pos', ['inscritos_por_programa' => $inscritos_por_programa, 'chart2' => $chart2]);
+        }else{
+
+            return view('templates.partials.graficos.graficos_pos', ['inscritos_por_programa' => $inscritos_por_programa, 'chart2' => $chart2]);
+
+        }
     }
 }
