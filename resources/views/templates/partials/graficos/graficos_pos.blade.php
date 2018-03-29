@@ -14,15 +14,19 @@
     <center>
         {!! $inscritos_por_programa->html() !!}
     </center>
-
-    <hr>
-    <center>
-        {!! $candidatos_por_area_doutorado->html() !!}
-    </center>
+    @if ($inscricao_doutorado)
+        <hr>
+        <center>
+            {!! $candidatos_por_area_doutorado->html() !!}
+        </center>
+    @endif
+    
 </div>
 <!-- End Of Main Application -->
 {!! Charts::scripts() !!}
 {!! $inscritos_por_programa->script() !!}
-{!! $candidatos_por_area_doutorado->script() !!}
+@if ($inscricao_doutorado)
+    {!! $candidatos_por_area_doutorado->script() !!}
+@endif
 
 @endsection
