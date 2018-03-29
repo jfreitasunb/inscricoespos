@@ -47,6 +47,26 @@ class GraficosController extends BaseController
 	public function index()
     {
 
+        $user = Auth::user();
         
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $relatorio_para_grafico = new RelatorioController;
+
+        $programas_disponiveis = explode("_", $relatorio_disponivel->retorna_inscricao_ativa()->programa);
+
+        $nome_programa_pos = new ProgramaPos();
+
+        foreach ($programas_disponiveis as $programa) {
+
+        $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $this->locale_default);
+      
+        $contagem[$programa_para_inscricao[$programa]] = $relatorio_para_grafico->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
+
+        }
+
+        $total_inscritos = array_sum($contagem);
     }
 }
