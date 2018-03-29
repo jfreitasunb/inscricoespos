@@ -109,6 +109,12 @@ class GraficosController extends BaseController
                 $total_por_area[] = $total;
             }
 
+            $array_cores = ['red','yellow', 'gray', '#34aadc', 'pink', 'orange', '#0088cc', 'green','#2ecc71'];
+
+            $numero_de_areas = count($nome_area_pos);
+            
+            $cores_utilizadas = array_slice($array_cores, 0, $numero_de_areas);
+            
             $candidatos_por_area_doutorado = Charts::create('bar', 'highcharts')
                 ->title("Inscritos no Doutorado por área/Edital ".$relatorio_disponivel->edital)
                 ->responsive(false)
