@@ -79,7 +79,7 @@ class GraficosController extends BaseController
 
         if (array_key_exists("Doutorado", $contagem)) {
             $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
-                ->title("Inscrições para o Edital ".$relatorio_disponivel->edital)
+                ->title("Inscritos no Doutorado por área/Edital ".$relatorio_disponivel->edital)
                 ->dimensions(0, 400) // Width x Height
                 ->template("material")
                 ->dataset('', array_values($contagem))
