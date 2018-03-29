@@ -78,6 +78,13 @@ class GraficosController extends BaseController
 
 
         if (array_key_exists("Doutorado", $contagem)) {
+
+            $escolhas_candidato = new EscolhaCandidato;
+
+            $areas_inscricoes = $escolhas_candidato->retorna_area_distintas($relatorio_disponivel->id_inscricao_pos);
+
+            dd($areas_inscricoes);
+            
             $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
                 ->title("Inscritos no Doutorado por área/Edital ".$relatorio_disponivel->edital)
                 ->dimensions(0, 400) // Width x Height
