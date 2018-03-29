@@ -83,14 +83,22 @@ class GraficosController extends BaseController
 
             $areas_inscricoes = $escolhas_candidato->retorna_area_distintas($relatorio_disponivel->id_inscricao_pos);
 
-            dd($areas_inscricoes);
-            
+            $area_pos = new AreaPosMat;
+
+            $nome_area_pos = [];
+            $total_por_area = [];
+
+            foreach ($areas_inscricoes as $id_area) {
+                $nome_area_pos[] = $area_pos->pega_area_pos_mat($id_area, $this->locale_default);
+                $total_por_area[] = $escolhas_candidato->conta_inscritos_por_area_pos($id_area, $relatorio_disponivel->id_inscricao_pos);
+            }
+
             $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
                 ->title("Inscritos no Doutorado por área/Edital ".$relatorio_disponivel->edital)
                 ->dimensions(0, 400) // Width x Height
                 ->template("material")
-                ->dataset('', array_values($contagem))
-                ->labels(array_keys($contagem));
+                ->dataset('', array_values($total_por_area))
+                ->labels(array_values($nome_area_pos));
 
             $inscricao_doutorado = TRUE;
 
