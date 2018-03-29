@@ -12,17 +12,17 @@
 
 <div class="app">
     <center>
-        {!! $chart->html() !!}
+        {!! $inscritos_por_programa->html() !!}
     </center>
 
     <hr>
     <center>
-        {!! $chart2->html() !!}
+        {!! $candidatos_por_area_doutorado->html() !!}
     </center>
 </div>
 <!-- End Of Main Application -->
 {!! Charts::scripts() !!}
-{!! $chart->script() !!}
-{!! $chart2->script() !!}
+{!! $inscritos_por_programa->script() !!}
+{!! $candidatos_por_area_doutorado->script() !!}
 
 @endsection
