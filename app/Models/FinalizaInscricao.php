@@ -68,4 +68,9 @@ class FinalizaInscricao extends Model
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_user', $id_user)->get()->first();
     }
+
+    public function retorna_se_finalizou($id_user, $id_inscricao_pos)
+    {
+        return $this->select('finalizada')->where('id_user',$id_user)->where('id_inscricao_pos',$id_inscricao_pos)->value('finalizada');
+    }
 }
