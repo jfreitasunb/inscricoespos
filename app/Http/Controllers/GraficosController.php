@@ -77,7 +77,7 @@ class GraficosController extends BaseController
                 ->responsive(true);
 
 
-        if (array_key_exists("Doutorado", $programas_disponiveis)) {
+        if (array_key_exists("Doutorado", $contagem)) {
             $candidatos_por_area_doutorado = Charts::multi('bar', 'material')
                 ->title("Inscrições para o Edital ".$relatorio_disponivel->edital)
                 ->dimensions(0, 400) // Width x Height
