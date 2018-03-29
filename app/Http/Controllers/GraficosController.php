@@ -85,10 +85,13 @@ class GraficosController extends BaseController
                 ->dataset('', array_values($contagem))
                 ->labels(array_keys($contagem));
 
-            return view('templates.partials.graficos.graficos_pos', ['inscritos_por_programa' => $inscritos_por_programa, 'candidatos_por_area_doutorado' => $candidatos_por_area_doutorado]);
+            $inscricao_doutorado = TRUE;
+
+            return view('templates.partials.graficos.graficos_pos', compact('inscricao_doutorado','inscritos_por_programa','candidatos_por_area_doutorado'));
         }else{
 
-            return view('templates.partials.graficos.graficos_pos', ['inscritos_por_programa' => $inscritos_por_programa]);
+            $inscricao_doutorado = FALSE;
+            return view('templates.partials.graficos.graficos_pos', compact('inscricao_doutorado', 'inscritos_por_programa'));
 
         }
     }
