@@ -68,5 +68,12 @@ class GraficosController extends BaseController
         }
 
         $total_inscritos = array_sum($contagem);
+
+        $inscritos_por_programa = Charts::create('pie', 'highcharts')
+                ->title("Inscrições para o Edital ".$relatorio_disponivel->edital)
+                ->labels(array_keys($contagem))
+                ->values(array_values($contagem))
+                ->dimensions(1000,500)
+                ->responsive(true);
     }
 }
