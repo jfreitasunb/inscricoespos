@@ -311,10 +311,13 @@ legend.scheduler-border {
 .table tbody td.carta_completa {
   background-color: #2ecc71;
 }
-.table tbody td.carta_incompleta {
+.table td.carta_incompleta {
   background-color: #e74c3c;
 }
 .table td.lista_carta {
    text-align: center;   
+}
+.table td.active_link{
+    background-color: #4bcffa;
 }
 /* Required field END */
