@@ -124,7 +124,8 @@ class GraficosController extends BaseController
                 ->template("material")
                 ->elementLabel("Total por Área")
                 ->values(array_values($total_por_area))
-                ->labels(array_values($nome_area_pos));
+                ->labels(array_values($nome_area_pos))
+                ->responsive(true);
 
             $inscricao_doutorado = TRUE;
 
