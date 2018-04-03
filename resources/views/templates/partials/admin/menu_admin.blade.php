@@ -8,26 +8,26 @@
                         </span>Contas</a>
                     </h4>
                 </div>
-                <div id="collapseUm" class="panel-collapse collapse">
+                <div id="collapseUm" class="panel-collapse collapse {{ Route::currentRouteNamed('pesquisa.email.muda.senha') || Route::currentRouteNamed('admin.impersonate') || Route::currentRouteNamed('pesquisa.usuario') || Route::currentRouteNamed('criar.coordenador')? 'in' : '' }}">
                     <div class="panel-body">
                         <table class="table">
                             <tr>
-                                <td>
+                                <td class= "{{ Route::currentRouteNamed('pesquisa.email.muda.senha') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.email.muda.senha') }}">Link mudança de senha</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class= "{{ Route::currentRouteNamed('admin.impersonate') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('admin.impersonate') }}">Logar como</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class= "{{ Route::currentRouteNamed('pesquisa.usuario') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td class= "{{ Route::currentRouteNamed('criar.coordenador') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-exclamation-sign fa-fw"></span><span><a href="{{ route('criar.coordenador') }}" class="text-danger">
                                         Cria Coordenador</a></span>
                                 </td>
