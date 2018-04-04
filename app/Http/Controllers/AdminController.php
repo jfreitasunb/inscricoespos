@@ -27,6 +27,8 @@ class AdminController extends CoordenadorController
 
 	private $locale_default = 'pt-br';
 
+	private $accordion_contas = ['pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador'];
+	
 	public function getMenu()
 	{	
 		Session::get('locale');
