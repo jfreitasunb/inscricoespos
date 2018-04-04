@@ -8,7 +8,7 @@
                         </span>Contas</a>
                     </h4>
                 </div>
-                <div id="collapseUm" class="panel-collapse collapse {{ Route::currentRouteNamed('pesquisa.email.muda.senha') || Route::currentRouteNamed('admin.impersonate') || Route::currentRouteNamed('pesquisa.usuario') || Route::currentRouteNamed('criar.coordenador')? 'in' : '' }}">
+                <div id="collapseUm" class="panel-collapse collapse {{ $keep_open_accordion_contas }}">
                     <div class="panel-body">
                         <table class="table">
                             <tr>
