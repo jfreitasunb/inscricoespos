@@ -433,7 +433,7 @@ class AdminController extends CoordenadorController
 
 		$candidato['nome'] = $dados_pessoais->nome;
 
-		$candidato['programa'] = $nome_programa_pos->pega_programa_pos_mat($escolha_candidato->programa_pretendido);
+		$candidato['programa'] = $nome_programa_pos->pega_programa_pos_mat($escolha_candidato->programa_pretendido, $this->locale_default);
 
 		$candidato['edital'] = $edital_vigente->edital;
 
@@ -653,14 +653,14 @@ class AdminController extends CoordenadorController
 		$contato_recomendante = new ContatoRecomendante;
 
 		
-		if (sizeof($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user)) == 0) {
+		if (sizeof($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user, $this->locale_default)) == 0) {
 			
 			notify()->flash('O e-mail: '.$email_recomendante.' não foi indicado por nenhum candidato no edital atual.','error');
 
 			return redirect()->route('pesquisa.indicacoes');
 		}
 
-		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user);
+		$indicacoes = $contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user, $this->locale_default);
 
 		$modo_pesquisa = false;
 
