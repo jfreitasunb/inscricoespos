@@ -26,12 +26,6 @@
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class= "{{ Route::currentRouteNamed('criar.coordenador') ? 'active_link' : '' }}">
-                                    <span class="glyphicon glyphicon-exclamation-sign fa-fw"></span><span><a href="{{ route('criar.coordenador') }}" class="text-danger">
-                                        Cria Coordenador</a></span>
-                                </td>
-                            </tr>
                         </table>
                     </div>
                     </div>
@@ -57,7 +51,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('reativar.candidato') ? 'active_link' : '' }}">
+                                    <td class= "{{ Route::currentRouteNamed('reativar.candidato') || Route::currentRouteNamed('pesquisa.candidato') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
