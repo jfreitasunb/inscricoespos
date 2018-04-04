@@ -559,6 +559,18 @@ class AdminController extends CoordenadorController
 
 		$email_recomendante = strtolower(trim($request->email_recomendante));
 
+		$user = new User;
+
+		$usuario_pesquisado = $user->retorna_user_por_email($email_recomendante);
+
+		if ($usuario_pesquisado->user_type <> "recomendante") {
+			
+			notify()->flash('O e-mail informado '.$email_recomendante.' não pertence a um recomendante.','info');
+
+			return redirect()->route('pesquisa.carta');
+
+		}
+
 		$id_recomendante = $this->getPesquisaCandidato($email_recomendante);
 
 		$dados_pessoais = DadoPessoal::find($id_recomendante);
