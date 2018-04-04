@@ -107,7 +107,7 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@getPesquisaConta')->name('pesquisa.usuario');
 
-	Route::post('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@postPesquisaConta');
+	Route::post('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@postPesquisaConta')->name('pesquisa.usuario');
 
 	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\AdminController@postAlteraAtivaConta')->name('altera.ativa.conta');
 
@@ -117,25 +117,21 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
 
-	Route::get('contas/cria/coordenador', '\Posmat\Http\Controllers\AdminController@getCriaCoordenador')->name('criar.coordenador');
-
-	Route::post('contas/cria/coordenador', '\Posmat\Http\Controllers\AdminController@postCriaCoordenador');
-
 	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
 
 	Route::post('inscricao/editar', '\Posmat\Http\Controllers\AdminController@postEditarInscricao');
 
 	Route::get('inscricao/reativar/candidato', '\Posmat\Http\Controllers\AdminController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
-	Route::post('inscricao/pesquisa/candidato', '\Posmat\Http\Controllers\AdminController@getInscricaoParaReativar')->name('pesquisa.candidato');
+	Route::post('inscricao/pesquisa/candidato', '\Posmat\Http\Controllers\AdminController@postInscricaoParaReativar')->name('pesquisa.candidato');
 
 	Route::get('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\AdminController@getSalvaReativacao')->name('salvar.alteracao');
 
-	Route::post('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\AdminController@postReativarInscricaoCandidato');
+	Route::post('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\AdminController@postReativarInscricaoCandidato')->name('salvar.alteracao');
 
 	Route::get('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
-	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes');
+	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
 
 	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@getListaIndicacoes')->name('lista.recomendacoes');
@@ -146,13 +142,13 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
-	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@postPesquisarCartaEnviada');
+	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@postPesquisarCartaEnviada')->name('pesquisa.carta');
 
 	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\AdminController@postReativarCartaEnviada')->name('reativar.carta');
 
 	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@getAchaIndicacoes')->name('pesquisa.indicacoes');
 
-	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@postAchaIndicacoes');
+	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@postAchaIndicacoes')->name('pesquisa.indicacoes');
 
 	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
 
