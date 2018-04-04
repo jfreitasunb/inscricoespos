@@ -57,7 +57,7 @@ class FinalizaInscricao extends Model
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->get();
     }
 
-    public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_user, $locale_candidato)
+    public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_user, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
