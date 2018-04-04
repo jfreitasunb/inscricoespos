@@ -92,7 +92,7 @@
                             </span>Relatórios</a>
                         </h4>
                     </div>
-                    <div id="collapseTres" class="panel-collapse collapse">
+                    <div id="collapseTres" class="panel-collapse collapse {{ $keep_open_accordion_relatorios }}">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
