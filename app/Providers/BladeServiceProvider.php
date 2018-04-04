@@ -6,6 +6,8 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\FinalizaInscricao;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Route;
 
 class BladeServiceProvider extends ServiceProvider
 {
@@ -14,6 +16,18 @@ class BladeServiceProvider extends ServiceProvider
      *
      * @return void
      */
+    
+    private $accordion_contas = ['pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador'];
+
+    public function ativa_accordion_contas()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_contas)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
+
     public function boot()
     {
         Blade::if('impersonating_recomendante', function () {
@@ -53,6 +67,8 @@ class BladeServiceProvider extends ServiceProvider
             if (!$user) {
                 return false;
             }
+
+            View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
 
             return $user->isAdmin();
         });
