@@ -19,9 +19,20 @@ class BladeServiceProvider extends ServiceProvider
     
     private $accordion_contas = ['pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador'];
 
+    private $accordion_inscricoes = ['configura.inscricao', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'pesquisa.recomendantes', 'pesquisa.indicacoes', 'lista.recomendacoes'];
+
     public function ativa_accordion_contas()
     {
         if (in_array(Route::currentRouteName(), $this->accordion_contas)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
+
+    public function ativa_accordion_inscricoes()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_inscricoes)) {
             return 'in';
         }else{
             return '';
@@ -69,6 +80,7 @@ class BladeServiceProvider extends ServiceProvider
             }
 
             View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
+            View::share('keep_open_accordion_inscricoes', $this->ativa_accordion_inscricoes());
 
             return $user->isAdmin();
         });

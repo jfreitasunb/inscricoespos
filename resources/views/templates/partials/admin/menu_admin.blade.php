@@ -43,7 +43,7 @@
                             </span>Inscrições</a>
                         </h4>
                     </div>
-                    <div id="collapseDois" class="panel-collapse collapse">
+                    <div id="collapseDois" class="panel-collapse collapse {{ $keep_open_accordion_inscricoes }}">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
