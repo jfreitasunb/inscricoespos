@@ -47,37 +47,37 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('configura.inscricao') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('configura.inscricao') }}">Configurar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('editar.inscricao') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('reativar.candidato') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-refresh fa-fw"></span><a href="{{ route('reativar.candidato') }}">Reativar Inscrição Candidato</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('pesquisa.carta') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-envelope fa-fw"></span><a href="{{ route('pesquisa.carta') }}">Reativar Carta</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('pesquisa.recomendantes') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-random fa-fw"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('pesquisa.indicacoes') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pesquisa.indicacoes') }}">Lista indicações</a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td class= "{{ Route::currentRouteNamed('lista.recomendacoes') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('lista.recomendacoes') }}">Lista as indicações por candidato</a>
                                     </td>
                                 </tr>
