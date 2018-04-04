@@ -321,7 +321,7 @@ class AdminController extends CoordenadorController
 		return $user->retorna_user_por_email($email_candidato)->id_user;
 	}
 
-	public function getInscricaoParaReativar(Request $request)
+	public function postInscricaoParaReativar(Request $request)
 	{
 
 		$this->validate($request, [
