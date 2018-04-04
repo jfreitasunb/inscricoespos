@@ -40,7 +40,7 @@
           <tr class="">
             <td>{{ $indicado->nome }}</td>
             <td>{{ $indicado->email }}</td>
-            <td>{{ $indicado->tipo_programa_pos }}</td>
+            <td>{{ $indicado->tipo_programa_pos_ptbr }}</td>
           </tr>
         @endforeach
       </tbody>
