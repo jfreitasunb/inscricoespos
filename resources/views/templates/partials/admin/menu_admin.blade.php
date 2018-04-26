@@ -28,7 +28,7 @@
                             </tr>
                             <tr>
                                 <td class= "{{ Route::currentRouteNamed('lista.inativos') ? 'active_link' : '' }}">
-                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('lista.inativos') }}">Usuários Inativos/a>
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('lista.inativos') }}">Usuários Inativos</a>
                                 </td>
                             </tr>
                         </table>
