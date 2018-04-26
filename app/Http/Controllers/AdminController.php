@@ -269,7 +269,9 @@ class AdminController extends CoordenadorController
 
 	public function getListaInativos()
 	{
-		
+
+		return view('templates.partials.admin.lista_inativos');
+
 	}
 
 	public function getEditarInscricao()
