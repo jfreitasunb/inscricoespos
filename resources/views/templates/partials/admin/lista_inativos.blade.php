@@ -19,7 +19,7 @@
           <th scope="col">E-mail</th>
           <th>Tipo de conta</th>
           <th>Data de criação</th>
-          <th>Ação</th>1
+          <th>Ação</th>
         </tr>
       </thead>
       <tbody>
