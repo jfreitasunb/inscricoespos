@@ -287,6 +287,11 @@ class AdminController extends CoordenadorController
 			'$validation_code' => NULL,
 		];
 
+		$user = User::find($id_user);
+
+		$status = $user->update($ativa_usuario);
+
+			
 		
 	}
 
