@@ -280,6 +280,13 @@ class AdminController extends CoordenadorController
 
 	public function postListaInativos(Request $request)
 	{
+		$id_user = (int) $request->id_user;
+
+		$ativa_usuario = [
+			'ativo' => TRUE,
+			'$validation_code' => NULL,
+		];
+
 		
 	}
 
