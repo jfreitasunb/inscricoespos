@@ -64,6 +64,12 @@ class User extends Authenticatable
         return $this->groupBy('user_type')->orderBy('user_type')->pluck('user_type');
     }
 
+
+     public function retorna_contas_nao_ativas()
+    {
+        return $this->where('ativo',FALSE)->join('dados_pessoais', 'dados_pessoais.id_user','users.id_user')->select('users.id_user', 'dados_pessoais.nome', 'users.email', 'users.user_type', 'users.ativo');
+    }
+
     public function isAdmin()
     {
         if (auth()->user()->user_type === 'admin') {
