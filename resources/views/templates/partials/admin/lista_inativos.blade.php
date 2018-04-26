@@ -15,26 +15,26 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-          <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-          <th>Ficha de Inscrição</th>
-          <th>Cartas Recebidas</th>
+          <th scope="col">Nome do candidato</th>
+          <th scope="col">E-mail</th>
+          <th>Tipo de conta</th>
+          <th>Ação</th>
         </tr>
       </thead>
       <tbody>
-        @foreach( $inscricoes_finalizadas as $finalizada)
-          <tr class="{{ $classes_linhas[$total_cartas[$finalizada['id_user']]] }}">
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['nome'] }}</a></td>
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['tipo_programa_pos_ptbr'] }}</a></td>
-            <td>@if($id_aluno_pdf == $finalizada['id_user']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
-            <td>{{ $total_cartas[$finalizada['id_user']] }}</td>
+        @foreach( $usuarios_inativos as $inativo)
+          <tr>
+            <td>{{ $inativo['nome'] }}</td>
+            <td>{{ $inativo['email'] }}</td>
+            <td>{{ $inativo['user_type'] }}</td>
+            <td>Ativar</td>
           </tr>
         @endforeach
       </tbody>
     </table>
   </div>
   <div class="text-center">
-    {{ $inscricoes_finalizadas->render() }}
+    {{ $usuarios_inativos->render() }}
   </div>
 </fieldset>
 
