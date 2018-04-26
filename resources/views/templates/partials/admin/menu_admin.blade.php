@@ -26,6 +26,11 @@
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.usuario') }}">Ativar/Alterar conta</a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class= "{{ Route::currentRouteNamed('lista.inativos') ? 'active_link' : '' }}">
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('lista.inativos') }}">Usuários Inativos/a>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     </div>
@@ -127,6 +132,7 @@
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
+                @yield('contas_intivas')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
