@@ -270,6 +270,12 @@ class AdminController extends CoordenadorController
 	public function getListaInativos()
 	{
 
+		$user = new User;
+
+		$usuarios_inativos = $user->retorna_contas_nao_ativas()->paginate(10);
+
+		dd($usuarios_inativos);
+		
 		return view('templates.partials.admin.lista_inativos');
 
 	}
