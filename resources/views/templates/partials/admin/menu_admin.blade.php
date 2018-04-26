@@ -132,7 +132,7 @@
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
-                @yield('contas_intivas')
+                @yield('contas_inativas')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')
