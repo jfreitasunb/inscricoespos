@@ -291,7 +291,13 @@ class AdminController extends CoordenadorController
 
 		$status = $user->update($ativa_usuario);
 
-			
+		if ($status) {
+			notify()->flash('Conta ativada com sucesso!','success', ['timer' => 1500,]);
+			return redirect()->route('lista.inativos');
+		}else{
+			notify()->flash('Erro ao ativar a conta.','error', ['timer' => 1500,]);
+			return redirect()->route('lista.inativos');
+		}
 		
 	}
 
