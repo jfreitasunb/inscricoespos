@@ -24,7 +24,7 @@
       <tbody>
         @foreach( $usuarios_inativos as $inativo)
         {!! Form::open(array('route' => 'lista.inativos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-        {!! Form::hidden('id', $inativo['id_user'], []) !!}
+        {!! Form::hidden('id_user', $inativo['id_user'], []) !!}
           <tr>
             <td>{{ $inativo['nome'] }}</td>
             <td>{{ $inativo['email'] }}</td>
