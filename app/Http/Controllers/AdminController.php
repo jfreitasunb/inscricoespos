@@ -278,6 +278,11 @@ class AdminController extends CoordenadorController
 
 	}
 
+	public function postListaInativos(Request $request)
+	{
+		
+	}
+
 	public function getEditarInscricao()
 	{
 
