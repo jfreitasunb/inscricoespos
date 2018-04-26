@@ -26,6 +26,7 @@ class AdminController extends CoordenadorController
 {
 
 	private $locale_default = 'pt-br';
+	
 
 	public function getMenu()
 	{	
@@ -266,6 +267,10 @@ class AdminController extends CoordenadorController
 
 	}
 
+	public function getListaInativos()
+	{
+		
+	}
 
 	public function getEditarInscricao()
 	{
