@@ -274,9 +274,7 @@ class AdminController extends CoordenadorController
 
 		$usuarios_inativos = $user->retorna_contas_nao_ativas()->paginate(10);
 
-		dd($usuarios_inativos);
-		
-		return view('templates.partials.admin.lista_inativos');
+		return view('templates.partials.admin.lista_inativos')->with(compact('usuarios_inativos'));
 
 	}
 
