@@ -117,6 +117,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
 
+	Route::get('/contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@getListaInativos')->name('lista.inativos');
+
 	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
 
 	Route::post('inscricao/editar', '\Posmat\Http\Controllers\AdminController@postEditarInscricao');
