@@ -18,7 +18,8 @@
           <th scope="col">Nome do candidato</th>
           <th scope="col">E-mail</th>
           <th>Tipo de conta</th>
-          <th>Ação</th>
+          <th>Data de criação</th>
+          <th>Ação</th>1
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@
             <td>{{ $inativo['nome'] }}</td>
             <td>{{ $inativo['email'] }}</td>
             <td>{{ $inativo['user_type'] }}</td>
+            <td>{{ $inativo['created_at'] }}</td>
             <td>{!! Form::submit('Ativar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
           </tr>
         {!! Form::close() !!}
