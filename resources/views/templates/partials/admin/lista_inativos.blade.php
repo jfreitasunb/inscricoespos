@@ -23,12 +23,15 @@
       </thead>
       <tbody>
         @foreach( $usuarios_inativos as $inativo)
+        {!! Form::open(array('route' => 'lista.inativos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+        {!! Form::hidden('id', $inativo['id_user'], []) !!}
           <tr>
             <td>{{ $inativo['nome'] }}</td>
             <td>{{ $inativo['email'] }}</td>
             <td>{{ $inativo['user_type'] }}</td>
-            <td>Ativar</td>
+            <td>{!! Form::submit('Ativar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
           </tr>
+        {!! Form::close() !!}
         @endforeach
       </tbody>
     </table>
