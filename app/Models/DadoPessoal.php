@@ -34,7 +34,7 @@ class DadoPessoal extends Model
 
     public function retorna_user_por_nome($nome_pesquisado)
     {
-        return $this->where('nome', 'ILIKE', $nome_pesquisado.'%')->get();
+        return $this->where('nome', 'ILIKE', $nome_pesquisado.'%')->join('users', 'users.id_user', 'dados_pessoais.id_user')->select('users.id_user', 'dados_pessoais.nome', 'users.email', 'users.locale', 'users.user_type', 'users.ativo')->get();
     }
 
 }
