@@ -25,7 +25,7 @@ class DadoPessoal extends Model
         'celular',
     ];
 
-public function retorna_dados_pessoais($id_user)
+    public function retorna_dados_pessoais($id_user)
     {
         
         return $this->find($id_user);
