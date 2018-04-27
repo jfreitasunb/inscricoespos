@@ -14,9 +14,19 @@
 @endif
 
 <div class="form-group">
-  {!! Form::label('email', 'Pesquisar Usuário', ['class' => 'col-md-4 control-label']) !!}
+  {!! Form::label('campo_pesquisa', 'Pesquisar Usuário', ['class' => 'col-md-4 control-label']) !!}
   <div class="col-md-4">
-    {!! Form::text('email', '' , ['class' => 'form-control input-md']) !!}
+    {!! Form::text('campo_pesquisa', '' , ['class' => 'form-control input-md']) !!}
+  </div>
+</div>
+<div class="form-group">
+  {!! Form::label('tipo_pesquisa', 'Pesquisar por:', ['class' => 'col-md-4 control-label']) !!}
+  <div class="col-md-4">
+    @foreach($tipo_pesquisa as $tipo => $key)
+        <div class="col-md-4">
+          <label class="radio-inline">{!! Form::radio('tipo_pesquisa', $tipo, ['required' => '']) !!} {!! $key !!}</label>
+        </div>
+    @endforeach
   </div>
 </div>
 @if (!$modo_pesquisa)
