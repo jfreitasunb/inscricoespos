@@ -33,11 +33,10 @@ class AdminController extends CoordenadorController
 
 	private $locale_default = 'pt-br';
 
-	protected $tipo_pesquisa = [
+	private $pesquisa = [
 			'nome' => 'Nome',
 			'email' => 'E-mail',
 		];
-	
 
 	public function getMenu()
 	{	
@@ -49,6 +48,8 @@ class AdminController extends CoordenadorController
 	public function getPesquisaConta()
 	{	
 		$modo_pesquisa = true;
+
+		$tipo_pesquisa = $this->pesquisa;
 
 		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'tipo_pesquisa'));
 	}
@@ -108,6 +109,8 @@ class AdminController extends CoordenadorController
 
 	public function postPesquisaConta(Request $request)
 	{
+		
+		$tipo_pesquisa = $this->pesquisa;
 		
 		$this->validate($request, [
 			'campo_pesquisa' => 'required',
