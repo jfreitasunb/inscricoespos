@@ -122,7 +122,9 @@ class AdminController extends CoordenadorController
 
 		switch ($pesquisar_pos) {
 			case 'nome':
-				# code...
+				$nome_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
+
+				dd($nome_pesquisado);
 				break;
 			
 			default:
