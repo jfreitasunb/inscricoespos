@@ -276,9 +276,6 @@ class AdminController extends CoordenadorController
 	public function getListaInativos()
 	{
 
-		$str = 'Maça';
-
-		dd(strtr( $str, $this->unwanted_array ));
 		$user = new User;
 
 		$usuarios_inativos = $user->retorna_contas_nao_ativas()->paginate(10);
