@@ -45,7 +45,12 @@ class AdminController extends CoordenadorController
 	{	
 		$modo_pesquisa = true;
 
-		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa'));
+		$tipo_pesquisa = [
+			'nome' => 'Nome',
+			'email' => 'E-mail',
+		];
+
+		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'tipo_pesquisa'));
 	}
 
 	public function getPesquisaLinkMudarSenha()
@@ -105,7 +110,7 @@ class AdminController extends CoordenadorController
 	{
 		
 		$this->validate($request, [
-			'email' => 'email|max:256',
+			'campo_pesquisa' => 'required',
 		]);
 
 		$email = strtolower(trim($request->email));
@@ -128,7 +133,8 @@ class AdminController extends CoordenadorController
 	public function getPesquisarPapelAtual()
 	{
 		$dados = null;
-		return view('templates.partials.admin.atribuir_papel')->with('dados_usuario', $dados);
+
+		return view('templates.partials.admin.atribuir_papel')->with(compact('dados_usuario'));
 	}
 
 	public function postAlteraAtivaConta(Request $request)
