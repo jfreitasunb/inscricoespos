@@ -116,36 +116,34 @@ class AdminController extends CoordenadorController
 			'campo_pesquisa' => 'required',
 		]);
 
-		$pesquisar_pos = $request->tipo_pesquisa;
+		$pesquisar_por = $request->tipo_pesquisa;
 
 		$usuario = new User();
 
-		switch ($pesquisar_pos) {
+		switch ($pesquisar_por) {
 			case 'nome':
-				$nome_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
+				$termo_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
 
 				$dado_pessoal = new DadoPessoal;
 
-				$acha_pesquisado = $dado_pessoal->retorna_user_por_nome($nome_pesquisado);
-
-				dd($acha_pesquisado);
-
-				$user = $usuario->retorna_user_por_nome($nome_pesquisado);
+				$users = $dado_pessoal->retorna_user_por_nome($termo_pesquisado);
+				
 				break;
 			
 			default:
-				$email = strtolower(trim($request->campo_pesquisa));
-				$user = $usuario->retorna_user_por_email($email);
+				$termo_pesquisado = strtolower(trim($request->campo_pesquisa));
+				
+				$users = $usuario->retorna_user_por_email($termo_pesquisado);
 				break;
 		}
 
-		if (!is_null($user)) {
+		if (!is_null($users)) {
 			
 			$modo_pesquisa = false;
 
-			return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'user', 'tipo_pesquisa'));
+			return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'users', 'tipo_pesquisa', 'pesquisar_por', 'termo_pesquisado'));
 		}else{
-			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
+			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$termo_pesquisado.'!','error');
 			return redirect()->route('pesquisa.usuario');
 		}
 	}
@@ -781,8 +779,14 @@ class AdminController extends CoordenadorController
 		return view('templates.partials.admin.tabela_indicacoes')->with(compact('dados_para_template', 'inscricoes_finalizadas'));
 	}
 
-	public function postListaIndicacoes(Request $request)
+	public function getInscricoesNaoFinalizadas()
 	{
-		
+		$relatorio = new ConfiguraInscricaoPos();
+
+      	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+		$escolha_candidato = new EscolhaCandidato;
+
+		dd($escolha_candidato->usuarios_nao_finalizados($relatorio_disponivel->id_inscricao_pos));
 	}
 }
