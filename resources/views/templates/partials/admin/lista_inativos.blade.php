@@ -9,7 +9,7 @@
 @section('contas_inativas')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Fichas de Inscrição Individuais</legend>
+  <legend class="scheduler-border">Contas não ativadas ainda</legend>
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
