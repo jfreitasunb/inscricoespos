@@ -113,11 +113,23 @@ class AdminController extends CoordenadorController
 			'campo_pesquisa' => 'required',
 		]);
 
-		$email = strtolower(trim($request->email));
-		
+		$tipo_pesquisa = $request->tipo_pesquisa;
 
 		$usuario = new User();
-		$user = $usuario->retorna_user_por_email($email);
+
+		switch ($tipo_pesquisa) {
+			case 'nome':
+				# code...
+				break;
+			
+			default:
+				$email = strtolower(trim($request->tipo_pesquisa));
+				$user = $usuario->retorna_user_por_email($email);
+				break;
+		}
+		
+
+		
 
 		if (!is_null($user)) {
 			
