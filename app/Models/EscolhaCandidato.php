@@ -26,6 +26,12 @@ class EscolhaCandidato extends Model
         return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
     }
 
+    public function usuarios_nao_finalizados($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->whereNotIn('id_user', function($query) use ($id_inscricao_pos) {
+            $query->select('id_user')->from('finaliza_inscricao')->where('id_inscricao_pos', $id_inscricao_pos);
+        } )->get();
+    }
 
     public function grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request)
     {
