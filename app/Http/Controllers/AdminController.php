@@ -32,6 +32,11 @@ class AdminController extends CoordenadorController
         'ö'=>'_', 'ø'=>'_', 'ù'=>'_', 'ú'=>'_', 'û'=>'_', 'ý'=>'_', 'þ'=>'_', 'ÿ'=>'_', 'Ğ'=>'_', 'İ'=>'_', 'Ş'=>'_', 'ğ'=>'_', 'ı'=>'_', 'ş'=>'_', 'ü'=>'_', 'ă'=>'_', 'Ă'=>'_', 'ș'=>'_', 'Ș'=>'_', 'ț'=>'_', 'Ț'=>'_');
 
 	private $locale_default = 'pt-br';
+
+	protected $tipo_pesquisa = [
+			'nome' => 'Nome',
+			'email' => 'E-mail',
+		];
 	
 
 	public function getMenu()
@@ -44,11 +49,6 @@ class AdminController extends CoordenadorController
 	public function getPesquisaConta()
 	{	
 		$modo_pesquisa = true;
-
-		$tipo_pesquisa = [
-			'nome' => 'Nome',
-			'email' => 'E-mail',
-		];
 
 		return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'tipo_pesquisa'));
 	}
@@ -123,7 +123,7 @@ class AdminController extends CoordenadorController
 				break;
 			
 			default:
-				$email = strtolower(trim($request->tipo_pesquisa));
+				$email = strtolower(trim($request->campo_pesquisa));
 				$user = $usuario->retorna_user_por_email($email);
 				break;
 		}
