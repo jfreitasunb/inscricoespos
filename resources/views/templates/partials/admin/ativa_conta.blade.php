@@ -30,30 +30,35 @@
   </div>
 </div>
 @if (!$modo_pesquisa)
-  {!! Form::hidden('id_user', $user->id_user, []) !!}
-   <div class="form-group">
-    {!! Form::label('edital', 'E-mail', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-4">
-      {!! Form::text('email', $user->email, ['class' => 'form-control input-md']) !!}
-    </div>
-  </div>
-  <div class="form-group">
-    {!! Form::label('locale', 'Locale', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-4">
-      {!! Form::text('locale', $user->locale, ['class' => 'form-control input-md']) !!}
-    </div>
-  </div>
-  <div class="form-group">
-    {!! Form::label('user_type', 'User Type:', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-4">
-      {!! Form::text('user_type', $user->user_type, ['class' => 'form-control input-md']) !!}
-    </div>
-  </div>
-  <div class="form-group">
-    {!! Form::label('ativo', 'Ativo?', ['class' => 'col-md-4 control-label']) !!}
-    <div class="col-md-4">
-      {!! Form::text('ativo', $user->ativo ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}
-    </div>
+<hr>
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="col-md-3" scope="col">Nome</th>
+          <th class="col-md-3" scope="col">E-mail</th>
+          <th class="col-sm-1" scope="col">Locale</th>
+          <th class="col-sm-1" scope="col">Tipo</th>
+          <th class="col-sm-1" scope="col">Ativo?</th>
+          <th class="col-sm-1" scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($users as $user)
+          {!! Form::open(array('route' => 'altera.ativa.conta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+          {!! Form::hidden('id_user', $user->id_user, []) !!}
+          <tr>
+            <td>{!! Form::text('nome', $user->nome, ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('email', $user->email, ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('locale', $user->locale, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('user_type', $user->user_type, ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('ativo', $user->ativo ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::submit('Alterar', ['class' => 'btn btn-warning']) !!}</td>
+          </tr>
+          {!! Form::close() !!}
+        @endforeach
+      </tbody>
+    </table>
   </div>
 @endif
 
@@ -69,7 +74,6 @@
   <div class="form-group">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 text-center">
-        {!! Form::submit('Alterar', ['class' => 'btn btn-warning btn-lg register-submit']) !!}
         {!! Form::submit('Cancelar', ['class' => 'btn btn-primary btn-lg register-submit', 'name' =>'cancelar',]) !!}
       </div>
     </div>
