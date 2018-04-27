@@ -124,7 +124,13 @@ class AdminController extends CoordenadorController
 			case 'nome':
 				$nome_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
 
-				dd($nome_pesquisado);
+				$dado_pessoal = new DadoPessoal;
+
+				$acha_pesquisado = $dado_pessoal->retorna_user_por_nome($nome_pesquisado);
+
+				dd($acha_pesquisado);
+
+				$user = $usuario->retorna_user_por_nome($nome_pesquisado);
 				break;
 			
 			default:
