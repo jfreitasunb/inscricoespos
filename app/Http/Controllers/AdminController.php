@@ -111,16 +111,16 @@ class AdminController extends CoordenadorController
 	{
 		
 		$tipo_pesquisa = $this->pesquisa;
-		
+
 		$this->validate($request, [
 			'campo_pesquisa' => 'required',
 		]);
 
-		$tipo_pesquisa = $request->tipo_pesquisa;
+		$pesquisar_pos = $request->tipo_pesquisa;
 
 		$usuario = new User();
 
-		switch ($tipo_pesquisa) {
+		switch ($pesquisar_pos) {
 			case 'nome':
 				# code...
 				break;
@@ -130,15 +130,12 @@ class AdminController extends CoordenadorController
 				$user = $usuario->retorna_user_por_email($email);
 				break;
 		}
-		
-
-		
 
 		if (!is_null($user)) {
 			
 			$modo_pesquisa = false;
 
-			return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'user'));
+			return view('templates.partials.admin.ativa_conta')->with(compact('modo_pesquisa', 'user', 'tipo_pesquisa'));
 		}else{
 			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
 			return redirect()->route('pesquisa.usuario');
