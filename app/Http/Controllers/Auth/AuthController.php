@@ -167,13 +167,16 @@ class AuthController extends BaseController
 
 	public function getMudouSenha()
 	{
-		Auth::logout();
+		if (Auth::check()) {
+ 		   Auth::logout();
 
-		notify()->flash(trans('mensagens_gerais.senha_alterada'),'success',[
+			notify()->flash(trans('mensagens_gerais.senha_alterada'),'success',[
 				'timer' => 1500,
 			]);
-
-		return redirect()->route('home');
+			return redirect()->route('home');
+		}else{
+			return redirect()->route('home');
+		}
 	}
 
 	public function verify($token)
