@@ -20,7 +20,7 @@ return [
     'recupera_senha' => 'Click here to create your password',
     'saudacoes_finais' => 'Sincerely, postgraduate comitee of MAT/UnB.',
     'erro_login' => 'These credentials do not match our records.',
-    'conta_nao_ativa' => 'You need to confirm your account. We have sent you an activation code, please check your email.',
+    'conta_nao_ativa' => 'You need to confirm your account. We have sent you an activation code, please check your email. Problems contact informatica@mat.unb.br',
     'bem_vindo' => 'Welcome',
     'conta_ativada' => 'Conta ativada com sucesso!',
     'conta_ja_ativada' => 'Sua conta já foi ativada!',
