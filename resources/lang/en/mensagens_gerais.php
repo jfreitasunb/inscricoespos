@@ -9,7 +9,7 @@ return [
 
     'inscricao_inativa' => 'Application period is already closed or has not been opened.',
     'inscricao_finalizada' => 'You have already completed your application. You can not change this data. Only personal data can now be changed.',
-    'informe_area' => 'ou must inform the research area.',
+    'informe_area' => 'You must inform the research area.',
     'selecionar' => 'Select',
     'mensagem_sucesso' => 'Data sucessfully saved.',
     'envio_final' => 'Your application has been successfully submitted.',
