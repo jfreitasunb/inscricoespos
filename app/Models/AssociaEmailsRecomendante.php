@@ -35,6 +35,18 @@ class AssociaEmailsRecomendante extends Model
 
     public function retorna_associacoes()
     {
-        return $this->all()->groupBy('email_preferido');
+        $associacoes_existentes = DB::select("SELECT email_preferido, ARRAY_AGG(email_fornecido) AS email_fornecido FROM associa_emails_recomendante GROUP BY
+     email_preferido");
+
+        $array_associacoes = [];
+        foreach ($associacoes_existentes as $key => $associacao) {
+            $temp =  explode(',', str_replace('}', '', str_replace('{', '', $associacao->email_fornecido)));
+
+            for ($i=0; $i < sizeof($temp); $i++) { 
+                $array_associacoes[$associacao->email_preferido][$i] = $temp[$i];
+            }
+        }
+
+        return $array_associacoes;
     }
 }

@@ -15,40 +15,26 @@
     <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Nome do Candidato</th>
-          <th>Programa</th>
-          <th>Recomendante 1</th>
-          <th>Recomendante 2</th>
-          <th>Recomendante 3</th>
+          <th>E-mail preferido</th>
+          <th>E-mail informado</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($dados_para_template as $dados)
-          <tr class="">
-            <td class="lista_carta">{{ $dados['nome_candidato'] }}</td>
-            <td class="lista_carta">{{ $dados['tipo_programa_pos'] }}</td>
-            @if ($dados['status_carta_1'])
-              <td class="lista_carta carta_completa">
-            @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_1'] }} </br> {{ $dados['email_recomendante_1'] }}</td>
-            @if ($dados['status_carta_2'])
-              <td class="lista_carta carta_completa">
-            @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_2'] }} </br> {{ $dados['email_recomendante_2'] }}</td>
-            @if ($dados['status_carta_3'])
-              <td class="lista_carta carta_completa">
-            @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_3'] }} </br> {{ $dados['email_recomendante_3'] }}</td>
+        @foreach ($paginatedItems as $key => $associacao)
+          <tr>
+            <td>{{ $key }}</td>
+            <td>  
+              @foreach ($associacao as $email)
+                {{ $email }}</br><hr>
+              @endforeach
+            </td>
           </tr>
         @endforeach
       </tbody>
     </table>
   </div>
   <div class="text-center">
-    {{ $inscricoes_finalizadas->render() }}
+    {{ $paginatedItems->render() }}
   </div>
 </fieldset>
 
