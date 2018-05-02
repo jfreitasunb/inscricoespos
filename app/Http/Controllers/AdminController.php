@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -799,6 +799,27 @@ class AdminController extends CoordenadorController
 
 	public function postAssociaEmail(Request $request)
 	{
-		dd($request);
+		$this->validate($request, [
+			'email_informado' => 'required|email',
+			'email_preferido' => 'required|email',
+		]);
+
+		$email_informado = strtolower(trim($request->email_informado));
+
+		$email_preferido = strtolower(trim($request->email_preferido));
+
+		$associa_email = new AssociaEmailsRecomendante;
+
+		$associa_email->email_fornecido = $email_informado;
+
+		$associa_email->email_preferido = $email_preferido;
+
+		$status_associacao = $associa_email->save();
+
+		if ($status_associacao) {
+			notify()->flash('Associação criada com sucesso', 'success', ['timer' => 1500,]);
+
+			return redirect()->route('associa.recomendantes');
+		}
 	}
 }
