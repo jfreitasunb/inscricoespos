@@ -810,6 +810,15 @@ class AdminController extends CoordenadorController
 
 		$associa_email = new AssociaEmailsRecomendante;
 
+		$associacao_previa = $associa_email->retorna_associacao($email_informado);
+
+		if (!is_null($associacao_previa)) {
+			
+			notify()->flash('O e-mail: '.$email_informado.' já está associado com o endereço: '.$associacao_previa, 'error');
+
+			return redirect()->route('associa.recomendantes');
+		}
+
 		$associa_email->email_fornecido = $email_informado;
 
 		$associa_email->email_preferido = $email_preferido;
