@@ -158,6 +158,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('inscricoes/nao/finalizadas', '\Posmat\Http\Controllers\AdminController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
+	Route::get('inscricoes/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@getAssociaEmail')->name('associa.recomendantes');
+
+	Route::post('inscricoes/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@postAssociaEmail')->name('associa.recomendantes');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
