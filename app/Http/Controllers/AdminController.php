@@ -791,4 +791,14 @@ class AdminController extends CoordenadorController
 
 		return view('templates.partials.admin.nao_finalizadas')->with(compact('inscricoes_nao_finalizadas'));
 	}
+
+	public function getAssociaEmail()
+	{
+		return view('templates.partials.admin.associa_email_recomendante');
+	}
+
+	public function postAssociaEmail(Request $request)
+	{
+		dd($request);
+	}
 }
