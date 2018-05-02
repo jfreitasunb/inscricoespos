@@ -36,6 +36,11 @@
                                     <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('associa.recomendantes') }}">Associa email de recomendante</a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class= "{{ Route::currentRouteNamed('visualiza.associacoes') ? 'active_link' : '' }}">
+                                    <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('visualiza.associacoes') }}">Associações existentes</a>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     </div>
@@ -143,6 +148,7 @@
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
                 @yield('contas_inativas')
+                @yield('visualiza_associacoes')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
                 @yield('editar_inscricao')

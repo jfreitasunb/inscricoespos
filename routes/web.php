@@ -117,9 +117,15 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
 
-	Route::get('/contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@getListaInativos')->name('lista.inativos');
+	Route::get('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@getListaInativos')->name('lista.inativos');
 
-	Route::post('/contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@postListaInativos')->name('lista.inativos');
+	Route::post('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@postListaInativos')->name('lista.inativos');
+
+	Route::get('contas/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@getAssociaEmail')->name('associa.recomendantes');
+
+	Route::post('contas/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@postAssociaEmail')->name('associa.recomendantes');
+
+	Route::get('contas/visualiza/associacoes', '\Posmat\Http\Controllers\AdminController@getAssociacoes')->name('visualiza.associacoes');
 
 	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
 
@@ -157,10 +163,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
 
 	Route::get('inscricoes/nao/finalizadas', '\Posmat\Http\Controllers\AdminController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
-
-	Route::get('inscricoes/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@getAssociaEmail')->name('associa.recomendantes');
-
-	Route::post('inscricoes/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@postAssociaEmail')->name('associa.recomendantes');
 
 });
 

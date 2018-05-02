@@ -831,4 +831,9 @@ class AdminController extends CoordenadorController
 			return redirect()->route('associa.recomendantes');
 		}
 	}
+
+	public function getAssociacoes()
+	{
+		
+	}
 }
