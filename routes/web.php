@@ -156,6 +156,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
 
+	Route::get('inscricoes/nao/finalizadas', '\Posmat\Http\Controllers\AdminController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+
 });
 
 Route::resource('admin/datatable/users', 'DataTable\UserController');
@@ -284,7 +286,7 @@ Route::post('/esqueci/senha/{token}', [
 Route::get('/mudousenha', [
 		'uses'	=> '\Posmat\Http\Controllers\Auth\AuthController@getMudouSenha',
 		'as'	=> 'mudou.senha',
-		'middleware' => ['define.locale'],
+		'middleware' => ['guest', 'define.locale'],
 ]);
 
 /**
