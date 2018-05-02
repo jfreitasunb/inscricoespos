@@ -85,6 +85,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('associa.recomendantes') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('associa.recomendantes') }}">Associa email de recomendante</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -144,6 +149,7 @@
                 @yield('reativar_inscricao_candidato')
                 @yield('reativar_carta_enviada')
                 @yield('acha_indicacoes')
+                @yield('associa_recomendate')
                 @yield('nao_finalizadas')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
