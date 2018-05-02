@@ -25,4 +25,11 @@ class AssociaEmailsRecomendante extends Model
         'email_fornecido',
         'email_preferido',
     ];
+
+    public function retorna_associacao($email_fornecido)
+    {
+        return $this->select('email_preferido')
+            ->where('email_fornecido', $email_fornecido)
+            ->value('email_preferido');
+    }
 }
