@@ -15,8 +15,8 @@ class AssociaEmailsRecomendante extends Migration
     {
         Schema::create('associa_emails_recomendante', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('e_mail_fornecido');
-            $table->string('e_mail_preferido');
+            $table->string('email_fornecido');
+            $table->string('email_preferido');
             $table->timestamps();
         });
     }

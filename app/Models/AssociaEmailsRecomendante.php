@@ -22,7 +22,7 @@ class AssociaEmailsRecomendante extends Model
     protected $table = 'associa_emails_recomendante';
 
     protected $fillable = [
-        'e_mail_fornecido',
-        'e_mail_preferido',
+        'email_fornecido',
+        'email_preferido',
     ];
 }
