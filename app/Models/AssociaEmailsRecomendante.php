@@ -32,4 +32,9 @@ class AssociaEmailsRecomendante extends Model
             ->where('email_fornecido', $email_fornecido)
             ->value('email_preferido');
     }
+
+    public function retorna_associacoes()
+    {
+        return $this->all()->groupBy('email_preferido');
+    }
 }
