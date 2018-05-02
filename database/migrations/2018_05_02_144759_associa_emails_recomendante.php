@@ -13,7 +13,7 @@ class AssociaEmailsRecomendante extends Migration
      */
     public function up()
     {
-        Schema::create('cartas_recomendacoes', function (Blueprint $table) {
+        Schema::create('associa_emails_recomendante', function (Blueprint $table) {
             $table->increments('id');
             $table->string('e_mail_fornecido');
             $table->string('e_mail_preferido');
