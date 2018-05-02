@@ -17,7 +17,7 @@
 		</div>
 	</div>
   <div class="form-group">
-    {!! Form::label('email_preferido', 'E-mail preferido pelo Candidato', ['class' => 'col-md-4 control-label']) !!}
+    {!! Form::label('email_preferido', 'E-mail preferido pelo Recomendante', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
       {!! Form::text('email_preferido', '' , ['class' => 'form-control input-md']) !!}
     </div>
