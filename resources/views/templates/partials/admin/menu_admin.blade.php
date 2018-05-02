@@ -80,6 +80,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('lista.recomendacoes') }}">Lista as indicações por candidato</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('inscricoes.nao.finalizadas') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -139,6 +144,7 @@
                 @yield('reativar_inscricao_candidato')
                 @yield('reativar_carta_enviada')
                 @yield('acha_indicacoes')
+                @yield('nao_finalizadas')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
