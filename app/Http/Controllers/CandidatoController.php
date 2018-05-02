@@ -11,6 +11,7 @@ use Purifier;
 use Notification;
 use Carbon\Carbon;
 use Posmat\Models\User;
+use Posmat\Models\AssociaEmailsRecomendante;
 use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
@@ -564,6 +565,14 @@ class CandidatoController extends BaseController
 				for ($i=0; $i < count($request->email_recomendante); $i++) { 
 					
 					$email_contatos_recomendantes[$i] = Purifier::clean(strtolower(trim($request->email_recomendante[$i])));
+
+					$associa_email = new AssociaEmailsRecomendante;
+
+					$existe_associacao = $associa_email->retorna_associacao($email_contatos_recomendantes[$i]);
+
+					if (!is_null($existe_associacao)) {
+						$email_contatos_recomendantes[$i] = $existe_associacao;
+					}
 				}
 
 
