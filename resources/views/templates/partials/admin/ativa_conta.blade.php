@@ -46,13 +46,13 @@
       <tbody>
         @foreach ($users as $user)
           {!! Form::open(array('route' => 'altera.ativa.conta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-          {!! Form::hidden('id_user', $user->id_user, []) !!}
+          {!! Form::hidden('id_user', $user['id_user'], []) !!}
           <tr>
-            <td>{!! Form::text('nome', $user->nome, ['class' => 'form-control input-md']) !!}</td>
-            <td>{!! Form::text('email', $user->email, ['class' => 'form-control input-md']) !!}</td>
-            <td>{!! Form::text('locale', $user->locale, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::text('user_type', $user->user_type, ['class' => 'form-control input-md']) !!}</td>
-            <td>{!! Form::text('ativo', $user->ativo ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('nome', $user['nome'], ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('email', $user['email'], ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('locale', $user['locale'], ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('user_type', $user['user_type'], ['class' => 'form-control input-md']) !!}</td>
+            <td>{!! Form::text('ativo', $user['ativo'] ? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}</td>
             <td>{!! Form::submit('Alterar', ['class' => 'btn btn-warning']) !!}</td>
           </tr>
           {!! Form::close() !!}
