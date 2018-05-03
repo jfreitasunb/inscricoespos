@@ -283,9 +283,9 @@ class CandidatoController extends BaseController
 
 		$tipo_formacao = new Formacao();
 
-		$graduacao = $tipo_formacao->where('nivel','Graduação')->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');
+		$graduacao = $tipo_formacao->where('nivel','Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');
 
-		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
+		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
 
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
 
