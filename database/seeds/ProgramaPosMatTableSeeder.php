@@ -30,7 +30,7 @@ class ProgramaPosMatTableSeeder extends Seeder
             array (
                 'id_programa_pos' => 2,
                 'tipo_programa_pos_ptbr' => 'Doutorado',
-                'tipo_programa_pos_en' => 'Doctor\'s degree',
+                'tipo_programa_pos_en' => 'PhD degree',
                 'tipo_programa_pos_es' => 'Doctorado',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
