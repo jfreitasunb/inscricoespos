@@ -111,7 +111,7 @@
         <hr>
         <h3>{{ trans('tela_motivacao_documentos.tela_motivacao_documentos') }}</h3>
         <p class="motivacao">
-            {{ $dados_candidato_para_relatorio['motivacao'] }}
+            {!! $dados_candidato_para_relatorio['motivacao'] !!}
         </p>
     </body>
 </html>

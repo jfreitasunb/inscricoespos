@@ -98,7 +98,7 @@
         <hr>
         <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
         <p class="motivacao">
-            {{ $dados_candidato_para_relatorio['motivacao'] }}
+            {!! $dados_candidato_para_relatorio['motivacao'] !!}
         </p>
 
         @foreach ($recomendantes_candidato as $recomendante)
