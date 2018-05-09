@@ -320,4 +320,35 @@ legend.scheduler-border {
 .table td.active_link{
     background-color: #4bcffa;
 }
+.button {
+  padding: 4px 10px;
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #00B1FF;
+  color: white;
+  border: 5px solid white;
+  transition: border 0.2s ease;
+}
+.button:hover {
+  border: 5px solid #81D9FF;
+  cursor: pointer;
+}
+.btn-change{
+    height: 50px;
+    width: 100px;
+    background: lightseagreen;
+    margin: 20px;
+    float: left;
+    box-shadow: 0 0 1px #ccc;
+    -webkit-transition: all 0.5s ease-in-out;
+    border: 0px;
+    color: #fff;
+}
+.btn-change:hover{
+    -webkit-transform: scale(1.1);
+    background: #31708f;
+}
+#panel-heading .loginhover:hover {
+    border: 5px solid #81D9FF;
+}
 /* Required field END */
