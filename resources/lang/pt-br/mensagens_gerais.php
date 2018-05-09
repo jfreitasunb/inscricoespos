@@ -29,5 +29,8 @@ return [
     'inicio_erro_email_recomendantes' => 'Os e-mails: ',
     'final_erro_email_recomendantes' => ' não podem ser utilizados como contatos de recomendantes.',
     'titulo_pdf_recomendacao' => 'Carta de Recomendação enviada ao MAT/UnB para o(a) candidato(a) ao Programa de',
-    'problemas' => 'Problemas? Clique aqui.',
+    'problemas' => 'Problemas técnicos? Clique aqui',
+    'duvidas_pos' => 'Dúvidas sobre a Pós? Clique aqui',
+    'departamento' => 'Departamento de Matemática',
+    'inscricao_pos' => 'Inscrições para a Pós-Graduação',
 ];
