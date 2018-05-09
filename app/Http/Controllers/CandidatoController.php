@@ -542,7 +542,7 @@ class CandidatoController extends BaseController
 					'interesse_bolsa' => 'required',
 					'vinculo_empregaticio' => 'required',
 					'nome_recomendante' => 'required',
-					'email_recomendante' => 'required',
+					'email_recomendante' => 'required|tres_recomendantes',
 					'confirmar_email_recomendante' => 'required|same:email_recomendante',
 				]);
 
@@ -558,7 +558,6 @@ class CandidatoController extends BaseController
 				$escolhas_candidato = new EscolhaCandidato();
 
 				$registra_escolhas_candidato = $escolhas_candidato->grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request);
-
 
 				$email_contatos_recomendantes = [];
 
