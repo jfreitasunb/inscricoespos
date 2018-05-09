@@ -12,7 +12,7 @@ return [
     | as the size rules. Feel free to tweak each of these messages here.
     |
     */
-    'is_voluntario' => "Como foi já é monitor em um projeto, você só pode solicitar monitoria voluntária!",
+    'tres_recomendantes' => "Você não informou 3 recomendantes distintos.",
     'accepted'             => ':attribute deve ser aceito.',
     'active_url'           => ':attribute não é uma URL válida.',
     'after'                => ':attribute deve ser uma data depois de :date.',
