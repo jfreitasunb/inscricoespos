@@ -18,6 +18,14 @@ class AppServiceProvider extends ServiceProvider
             }
                 return true;
         });
+
+        Validator::extend('tres_recomendantes', function($attribute, $value, $parameters, $validator) {
+            if(sizeof(array_unique($value)) <> 3){
+                return false;
+            }
+                return true;
+        });
+
     }
 
     public function register()
