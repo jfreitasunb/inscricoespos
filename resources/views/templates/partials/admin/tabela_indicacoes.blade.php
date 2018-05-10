@@ -25,7 +25,7 @@
       <tbody>
         @foreach ($dados_para_template as $dados)
           <tr class="">
-            <td class="lista_carta">{{ $dados['nome_candidato'] }}</td>
+            <td class="lista_carta">{{ $dados['nome_candidato'] }} <br> {{ $dados['email'] }}</td>
             <td class="lista_carta">{{ $dados['tipo_programa_pos'] }}</td>
             @if ($dados['status_carta_1'])
               <td class="lista_carta carta_completa">
