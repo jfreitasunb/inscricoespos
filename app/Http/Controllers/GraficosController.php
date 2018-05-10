@@ -109,7 +109,7 @@ class GraficosController extends BaseController
                 $total_por_area[] = $total;
             }
 
-            $array_cores = ['red','yellow', 'gray', '#34aadc', 'pink', 'orange', '#0088cc', 'green','#2ecc71'];
+            $array_cores = ['red','yellow', '#34aadc', 'orange', '#0088cc', 'green', '#2ecc71', 'gray', 'pink'];
 
             $numero_de_areas = count($nome_area_pos);
             
