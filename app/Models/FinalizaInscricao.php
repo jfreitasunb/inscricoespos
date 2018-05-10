@@ -49,7 +49,7 @@ class FinalizaInscricao extends Model
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'dados_pessoais.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id_user', 'finaliza_inscricao.id_inscricao_pos','dados_pessoais.nome','programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_candidato.programa_pretendido' , 'desc')->orderBy('dados_pessoais.nome','asc');
+        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->join('users', 'users.id_user', 'finaliza_inscricao.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'dados_pessoais.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id_user', 'finaliza_inscricao.id_inscricao_pos','dados_pessoais.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_candidato.programa_pretendido' , 'desc')->orderBy('dados_pessoais.nome','asc');
     }
 
     public function retorna_usuarios_relatorios($id_inscricao_pos)
