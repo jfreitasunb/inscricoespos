@@ -134,13 +134,11 @@ class AdminController extends CoordenadorController
 			default:
 				$termo_pesquisado = strtolower(trim($request->campo_pesquisa));
 				
-				$temporario = $usuario->retorna_user_por_email($termo_pesquisado);
-
-				// dd($temporario);
+				$temporario = $usuario->retorna_usuario_por_email($termo_pesquisado);
 
 				$users[$temporario->id_user]['id_user'] = $temporario->id_user;
 
-				$users[$temporario->id_user]['nome'] = null;
+				$users[$temporario->id_user]['nome'] = $temporario->nome;;
 
 				$users[$temporario->id_user]['email'] = $temporario->email;
 
