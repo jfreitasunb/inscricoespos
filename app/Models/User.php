@@ -53,10 +53,15 @@ class User extends Authenticatable
         
     }
 
+    public function retorna_usuario_por_email($email)
+    {
+        return $this->where('email',$email)->join('dados_pessoais', 'dados_pessoais.id_user','users.id_user')->get()->first();
+
+    }
+
     public function retorna_user_por_email($email)
     {
         return $this->get()->where('email',$email)->first();
-
     }
 
     public function retorna_papeis()
