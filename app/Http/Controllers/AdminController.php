@@ -172,8 +172,6 @@ class AdminController extends CoordenadorController
 	{
 		if ($request->cancelar === 'Cancelar'){
 
-			notify()->flash('Alteração da conta cancelada!','info');
-
 			return redirect()->route('pesquisa.usuario');
 		}
 
