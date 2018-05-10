@@ -73,6 +73,6 @@ class EscolhaCandidato extends Model
 
     public function retorna_inscritos_por_area_pos($area_pos, $id_inscricao_pos)
     {
-        return $this->select('id_user')->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_user');
+        return $this->select('id_user')->where('programa_pretendido', '2')->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_user');
     }
 }
