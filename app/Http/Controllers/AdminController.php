@@ -763,6 +763,7 @@ class AdminController extends CoordenadorController
 			$recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($inscricao->id_user,$inscricao->id_inscricao_pos);
 
 			$dados_para_template[$inscricao->id_user]['nome_candidato'] = $inscricao->nome;
+			$dados_para_template[$inscricao->id_user]['email'] = $inscricao->email;
 			$dados_para_template[$inscricao->id_user]['tipo_programa_pos'] = $inscricao->tipo_programa_pos_ptbr;
 			$i = 1;
 			foreach ($recomendantes_candidato as $recomendante) {
