@@ -546,7 +546,7 @@ class CandidatoController extends BaseController
 					'confirmar_email_recomendante' => 'required|same:email_recomendante',
 				]);
 
-				if (!is_null($request->areas_pos) and $request->programa_pretendido === '2') {
+				if (is_null($request->areas_pos) and $request->programa_pretendido === '2') {
 					
 					notify()->flash(trans('mensagens_gerais.informe_area'),'warning');
 
