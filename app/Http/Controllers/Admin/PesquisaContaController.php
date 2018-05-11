@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace Posmat\Http\Controllers\Admin;
 
 use Auth;
 use DB;
@@ -88,5 +88,53 @@ class PesquisaContaController extends AdminController
 			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$termo_pesquisado.'!','error');
 			return redirect()->route('pesquisa.usuario');
 		}
+	}
+
+	public function postAlteraAtivaConta(Request $request)
+	{
+		if ($request->cancelar === 'Cancelar'){
+
+			return redirect()->route('pesquisa.usuario');
+		}
+
+		$this->validate($request, [
+			'email' => 'required|email',
+			'id_user' => 'required',
+			'locale' => 'required',
+			'user_type' => 'required',
+			'ativo' => 'required',
+		]);
+
+		$id_user = (int)$request->id_user;
+
+		$novos_dados_usuario['email'] = strtolower(trim($request->email));
+		$novos_dados_usuario['locale'] = strtolower(trim($request->locale));
+		$novos_dados_usuario['validation_code'] = NULL;
+		$novos_dados_usuario['user_type'] = strtolower(trim($request->user_type));
+		$novos_dados_usuario['ativo'] = (strtolower(trim($request->ativo)) == 'sim' ? 1 : 0);
+		
+		$atualiza_usuario = User::find($id_user);
+
+		$pesquisa_usuario = new User;
+
+		$pesquisa_email = $pesquisa_usuario->retorna_user_por_email($novos_dados_usuario['email']);
+
+		if (!is_null($pesquisa_email)) {
+			if ($atualiza_usuario->email === $pesquisa_email->email) {
+				$atualiza_usuario->update($novos_dados_usuario);
+			}else{
+
+				notify()->flash('Já existe uma conta registrada com o e-mail: '.$novos_dados_usuario['email'].'!','error');
+				return redirect()->back();
+			}
+		}else{
+			$atualiza_usuario->update($novos_dados_usuario);
+		}
+		
+		notify()->flash('Dados atualizados com sucesso!','success');
+		
+		return redirect()->back();
+
+		
 	}
 }
