@@ -113,9 +113,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/lista/inativos', '\Posmat\Http\Controllers\Admin\ListaInativosController@postListaInativos')->name('lista.inativos');
 
-	Route::get('contas/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@getAssociaEmail')->name('associa.recomendantes');
+	Route::get('contas/associa/email/recomendante', '\Posmat\Http\Controllers\Admin\AssociaEmailController@getAssociaEmail')->name('associa.recomendantes');
 
-	Route::post('contas/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@postAssociaEmail')->name('associa.recomendantes');
+	Route::post('contas/associa/email/recomendante', '\Posmat\Http\Controllers\Admin\AssociaEmailController@postAssociaEmail')->name('associa.recomendantes');
 
 	Route::get('contas/visualiza/associacoes', '\Posmat\Http\Controllers\AdminController@getAssociacoes')->name('visualiza.associacoes');
 
