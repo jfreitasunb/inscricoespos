@@ -109,12 +109,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@postAlteraAtivaConta')->name('altera.ativa.conta');
 
-	Route::get('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
-
-	Route::post('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@postPesquisarPapelAtual');
-
-	Route::post('contas/atribuir/papel', '\Posmat\Http\Controllers\AdminController@postAtribuirPapel');
-
 	Route::get('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@getListaInativos')->name('lista.inativos');
 
 	Route::post('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@postListaInativos')->name('lista.inativos');
