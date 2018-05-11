@@ -99,8 +99,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::delete('contas/users/impersonate','\Posmat\Http\Controllers\Admin\ImpersonateController@destroy');
 
-	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
-
 	Route::get('contas/users/link/senha', '\Posmat\Http\Controllers\Admin\LinkSenhaController@getPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
 
 	Route::post('contas/users/link/senha', '\Posmat\Http\Controllers\Admin\LinkSenhaController@postPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
