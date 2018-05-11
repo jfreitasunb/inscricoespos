@@ -123,13 +123,13 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/editar', '\Posmat\Http\Controllers\Admin\EditarInscricaoController@postEditarInscricao');
 
-	Route::get('inscricao/reativar/candidato', '\Posmat\Http\Controllers\AdminController@getReativarInscricaoCandidato')->name('reativar.candidato');
+	Route::get('inscricao/reativar/candidato', '\Posmat\Http\Controllers\Admin\ReativarInscricaoCandidatoController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
-	Route::post('inscricao/pesquisa/candidato', '\Posmat\Http\Controllers\AdminController@postInscricaoParaReativar')->name('pesquisa.candidato');
+	Route::post('inscricao/pesquisa/candidato', '\Posmat\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postInscricaoParaReativar')->name('pesquisa.candidato');
 
-	Route::get('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\AdminController@getSalvaReativacao')->name('salvar.alteracao');
+	Route::get('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\Admin\ReativarInscricaoCandidatoController@getSalvaReativacao')->name('salvar.alteracao');
 
-	Route::post('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\AdminController@postReativarInscricaoCandidato')->name('salvar.alteracao');
+	Route::post('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postReativarInscricaoCandidato')->name('salvar.alteracao');
 
 	Route::get('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
