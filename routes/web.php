@@ -131,16 +131,16 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/salvar/alteracao', '\Posmat\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postReativarInscricaoCandidato')->name('salvar.alteracao');
 
-	Route::get('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
+	Route::get('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\Admin\MudaRecomendanteController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
-	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\AdminController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
+	Route::post('inscricao/pesquisa/recomendantes', '\Posmat\Http\Controllers\Admin\MudaRecomendanteController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
+
+	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
 
 
 	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@getListaIndicacoes')->name('lista.recomendacoes');
 
 	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@postListaIndicacoes');
-
-	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\AdminController@postAlteraRecomendante')->name('altera.recomendante');
 
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
@@ -148,9 +148,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@postReativarCartaEnviada')->name('reativar.carta');
 
-	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@getAchaIndicacoes')->name('pesquisa.indicacoes');
+	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\Admin\ListaQuemIndicouController@getAchaIndicacoes')->name('pesquisa.indicacoes');
 
-	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@postAchaIndicacoes')->name('pesquisa.indicacoes');
+	Route::post('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\Admin\ListaQuemIndicouController@postAchaIndicacoes')->name('pesquisa.indicacoes');
 
 	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
 
