@@ -142,11 +142,11 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\AdminController@postAlteraRecomendante')->name('altera.recomendante');
 
-	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@getPesquisarCartaEnviada')->name('pesquisa.carta');
+	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
-	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\AdminController@postPesquisarCartaEnviada')->name('pesquisa.carta');
+	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@postPesquisarCartaEnviada')->name('pesquisa.carta');
 
-	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\AdminController@postReativarCartaEnviada')->name('reativar.carta');
+	Route::post('inscricao/reativar/carta/enviada', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@postReativarCartaEnviada')->name('reativar.carta');
 
 	Route::get('inscricao/acha/indicacoes', '\Posmat\Http\Controllers\AdminController@getAchaIndicacoes')->name('pesquisa.indicacoes');
 
