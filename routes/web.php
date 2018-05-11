@@ -91,7 +91,7 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 
 Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group(function () {
 
-	Route::get('/', '\Posmat\Http\Controllers\AdminController@getMenu')->name('menu.admin');
+	Route::get('/', '\Posmat\Http\Controllers\Admin\AdminController@getMenu')->name('menu.admin');
 
 	Route::get('contas/users/impersonate','\Posmat\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
 
@@ -105,11 +105,11 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/users/link/senha', '\Posmat\Http\Controllers\AdminController@postPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
 
-	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@getPesquisaConta')->name('pesquisa.usuario');
+	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@getPesquisaConta')->name('pesquisa.usuario');
 
-	Route::post('contas/pesquisa/conta', '\Posmat\Http\Controllers\AdminController@postPesquisaConta')->name('pesquisa.usuario');
+	Route::post('contas/pesquisa/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@postPesquisaConta')->name('pesquisa.usuario');
 
-	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\AdminController@postAlteraAtivaConta')->name('altera.ativa.conta');
+	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@postAlteraAtivaConta')->name('altera.ativa.conta');
 
 	Route::get('contas/pesquisar/papel', '\Posmat\Http\Controllers\AdminController@getPesquisarPapelAtual')->name('pesquisar.papel');
 
