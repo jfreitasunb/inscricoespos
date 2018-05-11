@@ -23,7 +23,7 @@
         @foreach( $inscricoes_nao_finalizadas as $nao_finalizada)
           <tr>
             <td>{{ $nao_finalizada['nome'] }}</td>
-            <td>{{ $nao_finalizada['tipo_programa_pos'] }}</td>
+            <td>{{ $nao_finalizada['tipo_programa_pos_ptbr'] }}</td>
           </tr>
         @endforeach
       </tbody>
