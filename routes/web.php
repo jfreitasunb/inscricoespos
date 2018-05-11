@@ -109,9 +109,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/altera/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@postAlteraAtivaConta')->name('altera.ativa.conta');
 
-	Route::get('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@getListaInativos')->name('lista.inativos');
+	Route::get('contas/lista/inativos', '\Posmat\Http\Controllers\Admin\ListaInativosController@getListaInativos')->name('lista.inativos');
 
-	Route::post('contas/lista/inativos', '\Posmat\Http\Controllers\AdminController@postListaInativos')->name('lista.inativos');
+	Route::post('contas/lista/inativos', '\Posmat\Http\Controllers\Admin\ListaInativosController@postListaInativos')->name('lista.inativos');
 
 	Route::get('contas/associa/email/recomendante', '\Posmat\Http\Controllers\AdminController@getAssociaEmail')->name('associa.recomendantes');
 
