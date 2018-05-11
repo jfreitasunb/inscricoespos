@@ -138,9 +138,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
 
 
-	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@getListaIndicacoes')->name('lista.recomendacoes');
+	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 
-	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\AdminController@postListaIndicacoes');
+	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
 
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
@@ -154,7 +154,7 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('chart', '\Posmat\Http\Controllers\GraficosController@index')->name('ver.charts');
 
-	Route::get('inscricoes/nao/finalizadas', '\Posmat\Http\Controllers\AdminController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+	Route::get('inscricoes/nao/finalizadas', '\Posmat\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
 });
 
