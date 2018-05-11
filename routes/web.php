@@ -119,9 +119,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('contas/visualiza/associacoes', '\Posmat\Http\Controllers\Admin\VisualizaAssociacoesController@getAssociacoes')->name('visualiza.associacoes');
 
-	Route::get('inscricao/editar', '\Posmat\Http\Controllers\AdminController@getEditarInscricao')->name('editar.inscricao');
+	Route::get('inscricao/editar', '\Posmat\Http\Controllers\Admin\EditarInscricaoController@getEditarInscricao')->name('editar.inscricao');
 
-	Route::post('inscricao/editar', '\Posmat\Http\Controllers\AdminController@postEditarInscricao');
+	Route::post('inscricao/editar', '\Posmat\Http\Controllers\Admin\EditarInscricaoController@postEditarInscricao');
 
 	Route::get('inscricao/reativar/candidato', '\Posmat\Http\Controllers\AdminController@getReativarInscricaoCandidato')->name('reativar.candidato');
 
