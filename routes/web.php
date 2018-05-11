@@ -101,9 +101,9 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('contas/users', 'Admin\UserController@index')->name('lista.usuarios');
 
-	Route::get('contas/users/link/senha', '\Posmat\Http\Controllers\AdminController@getPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
+	Route::get('contas/users/link/senha', '\Posmat\Http\Controllers\Admin\LinkSenhaController@getPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
 
-	Route::post('contas/users/link/senha', '\Posmat\Http\Controllers\AdminController@postPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
+	Route::post('contas/users/link/senha', '\Posmat\Http\Controllers\Admin\LinkSenhaController@postPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');
 
 	Route::get('contas/pesquisa/conta', '\Posmat\Http\Controllers\Admin\PesquisaContaController@getPesquisaConta')->name('pesquisa.usuario');
 
