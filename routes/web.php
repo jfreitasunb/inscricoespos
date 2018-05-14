@@ -170,9 +170,9 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('/','\Posmat\Http\Controllers\Coordenador\CoordenadorController@getMenu')->name('menu.coordenador');
 
-	Route::get('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos')->name('configura.inscricao');
+	Route::get('configura/inscricao', '\Posmat\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@getConfiguraInscricaoPos')->name('configura.inscricao');
 
-	Route::post('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@postConfiguraInscricaoPos');
+	Route::post('configura/inscricao', '\Posmat\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@postConfiguraInscricaoPos');
 
 	Route::get('cadastra/area/pos', '\Posmat\Http\Controllers\CoordenadorController@getCadastraAreaPos')->name('cadastra.area.pos');
 
