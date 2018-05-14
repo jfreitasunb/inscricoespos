@@ -14,11 +14,12 @@ class CreateArquivosEnviadosTable extends Migration
     public function up()
     {
         Schema::create('arquivos_enviados', function (Blueprint $table){
-            $table->increments('id');
-            $table->integer('id_user');
+            $table->unsignedInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('nome_arquivo',255);
             $table->string('tipo_arquivo',10);
-            $table->integer('id_inscricao_pos');
+            $table->unsignedInteger('id_inscricao_pos');
+            $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->timestamps();
         });
     }
