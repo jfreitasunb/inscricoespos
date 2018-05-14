@@ -24,7 +24,7 @@ Route::get('api/get-city-list','APIController@getCityList');
 
 Route::prefix('candidato')->middleware('user.role:candidato,admin','define.locale')->group(function () {
 	
-	Route::get('/', '\Posmat\Http\Controllers\CandidatoController@getMenu')->name('menu.candidato');
+	Route::get('/', '\Posmat\Http\Controllers\Candidato\CandidatoController@getMenu')->name('menu.candidato');
 
 	Route::get('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais')->name('dados.pessoais');
 
