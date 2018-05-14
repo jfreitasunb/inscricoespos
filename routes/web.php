@@ -80,9 +80,9 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 
 	Route::post('preencher/carta/final', '\Posmat\Http\Controllers\Recomendante\PreencherCartaController@postFinalizarCarta')->name('finalizar.carta');
 
-	Route::get('cartas/anteriores', '\Posmat\Http\Controllers\RecomendanteController@getCartasAnteriores')->name('cartas.anteriores');
+	Route::get('cartas/anteriores', '\Posmat\Http\Controllers\Recomendante\CartasAnterioresController@getCartasAnteriores')->name('cartas.anteriores');
 
-	Route::get('visualiza/anteriores', '\Posmat\Http\Controllers\RecomendanteController@GeraCartasAnteriores')->name('ver.anterior');
+	Route::get('visualiza/anteriores', '\Posmat\Http\Controllers\Recomendante\CartasAnterioresController@GeraCartasAnteriores')->name('ver.anterior');
 });
 
 /*
