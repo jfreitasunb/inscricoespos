@@ -29,7 +29,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 /**
 * Classe para visualização da página inicial.
 */
-class ConfiguraInscricaoPosController extends BaseController
+class ConfiguraInscricaoPosController extends CoordenadorController
 {
 
 	public function getConfiguraInscricaoPos()
