@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
 use Posmat\Http\Controllers\AuthController;
-use Posmat\Http\Controllers\CoordenadorController;
+use Posmat\Http\Controllers\Coordenador\CoordenadorController;
 use Posmat\Http\Controllers\DataTable\UserController;
 use Posmat\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
