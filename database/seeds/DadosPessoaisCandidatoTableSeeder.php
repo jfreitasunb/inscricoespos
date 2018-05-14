@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DadosPessoaisTableSeeder extends Seeder
+class DadosPessoaisCandidatoTableSeeder extends Seeder
 {
 
     /**
@@ -14,9 +14,9 @@ class DadosPessoaisTableSeeder extends Seeder
     {
         
 
-        \DB::table('dados_pessoais')->delete();
+        \DB::table('dados_pessoais_candidato')->delete();
         
-        \DB::table('dados_pessoais')->insert(array (
+        \DB::table('dados_pessoais_candidato')->insert(array (
             0 => 
             array (
                 'id' => 1,
@@ -8018,7 +8018,7 @@ class DadosPessoaisTableSeeder extends Seeder
                 'updated_at' => '2017-11-21 15:32:28',
             ),
         ));
-        \DB::table('dados_pessoais')->insert(array (
+        \DB::table('dados_pessoais_candidato')->insert(array (
             0 => 
             array (
                 'id' => 501,
@@ -16020,7 +16020,7 @@ class DadosPessoaisTableSeeder extends Seeder
                 'updated_at' => '2017-11-21 15:33:53',
             ),
         ));
-        \DB::table('dados_pessoais')->insert(array (
+        \DB::table('dados_pessoais_candidato')->insert(array (
             0 => 
             array (
                 'id' => 1001,
@@ -23592,7 +23592,7 @@ class DadosPessoaisTableSeeder extends Seeder
         ));
 
 
-        $tableToCheck = 'dados_pessoais';
+        $tableToCheck = 'dados_pessoais_candidato';
 
         $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
         $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
