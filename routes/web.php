@@ -168,7 +168,7 @@ Route::resource('admin/datatable/users', 'DataTable\UserController');
 
 Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(function () {
 
-	Route::get('/','\Posmat\Http\Controllers\CoordenadorController@getMenu')->name('menu.coordenador');
+	Route::get('/','\Posmat\Http\Controllers\Coordenador\CoordenadorController@getMenu')->name('menu.coordenador');
 
 	Route::get('configura/inscricao', '\Posmat\Http\Controllers\CoordenadorController@getConfiguraInscricaoPos')->name('configura.inscricao');
 
