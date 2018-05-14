@@ -194,9 +194,9 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio', '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
 
-	Route::get('gera/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
+	Route::get('gera/ficha/individual', '\Posmat\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
 
-	Route::get('ver/ficha/individual', '\Posmat\Http\Controllers\CoordenadorController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
+	Route::get('ver/ficha/individual', '\Posmat\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');
 
 	Route::get('relatorios/anteriores/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
 
