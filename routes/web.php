@@ -32,9 +32,9 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 
 	Route::post('dados/pessoais', '\Posmat\Http\Controllers\Candidato\DadosPessoaisController@postDadosPessoais')->name('dados.pessoais.salvar');
 
-	Route::get('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos')->name('dados.academicos');
+	Route::get('dados/academicos', '\Posmat\Http\Controllers\Candidato\DadosAcademicosController@getDadosAcademicos')->name('dados.academicos');
 
-	Route::post('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@postDadosAcademicos');
+	Route::post('dados/academicos', '\Posmat\Http\Controllers\Candidato\DadosAcademicosController@postDadosAcademicos');
 
 	Route::get('dados/escolhas', '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato')->name('dados.escolhas');
 
