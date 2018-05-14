@@ -60,7 +60,7 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 */
 Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define.locale')->group(function () {
 
-	Route::get('/', '\Posmat\Http\Controllers\RecomendanteController@getMenu')->name('menu.recomendante');
+	Route::get('/', '\Posmat\Http\Controllers\Recomendante\RecomendanteController@getMenu')->name('menu.recomendante');
 
 	Route::get('dados/pessoais', '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante')->name('dados.recomendante');
 
