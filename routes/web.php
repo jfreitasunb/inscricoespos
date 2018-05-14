@@ -36,21 +36,21 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 
 	Route::post('dados/academicos', '\Posmat\Http\Controllers\Candidato\DadosAcademicosController@postDadosAcademicos');
 
-	Route::get('dados/escolhas', '\Posmat\Http\Controllers\CandidatoController@getEscolhaCandidato')->name('dados.escolhas');
+	Route::get('dados/escolhas', '\Posmat\Http\Controllers\Candidato\EscolhaCandidatoController@getEscolhaCandidato')->name('dados.escolhas');
 
-	Route::post('dados/escolhas', '\Posmat\Http\Controllers\CandidatoController@postEscolhaCandidato');
+	Route::post('dados/escolhas', '\Posmat\Http\Controllers\Candidato\EscolhaCandidatoController@postEscolhaCandidato');
 
-	Route::get('motivacao/documentos', '\Posmat\Http\Controllers\CandidatoController@getMotivacaoDocumentos')->name('motivacao.documentos');
+	Route::get('motivacao/documentos', '\Posmat\Http\Controllers\Candidato\MotivacaoDocumentosController@getMotivacaoDocumentos')->name('motivacao.documentos');
 
-	Route::post('motivacao/documentos', '\Posmat\Http\Controllers\CandidatoController@postMotivacaoDocumentos');
+	Route::post('motivacao/documentos', '\Posmat\Http\Controllers\Candidato\MotivacaoDocumentosController@postMotivacaoDocumentos');
 
-	Route::get('finalizar/inscricao', '\Posmat\Http\Controllers\CandidatoController@getFinalizarInscricao')->name('finalizar.inscricao');
+	Route::get('finalizar/inscricao', '\Posmat\Http\Controllers\Candidato\FinalizarInscricaoController@getFinalizarInscricao')->name('finalizar.inscricao');
 
-	Route::post('finalizar/inscricao', '\Posmat\Http\Controllers\CandidatoController@postFinalizarInscricao');
+	Route::post('finalizar/inscricao', '\Posmat\Http\Controllers\Candidato\FinalizarInscricaoController@postFinalizarInscricao');
 
-	Route::get('status/cartas', '\Posmat\Http\Controllers\CandidatoController@getStatusCartas')->name('status.cartas');
+	Route::get('status/cartas', '\Posmat\Http\Controllers\Candidato\StatusCartasController@getStatusCartas')->name('status.cartas');
 
-	Route::post('status/cartas', '\Posmat\Http\Controllers\CandidatoController@postStatusCartas');
+	Route::post('status/cartas', '\Posmat\Http\Controllers\Candidato\StatusCartasController@postStatusCartas');
 });
 
 
