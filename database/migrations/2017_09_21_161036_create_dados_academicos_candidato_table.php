@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosAcademicosTable extends Migration
+class CreateDadosAcademicosCandidatoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateDadosAcademicosTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados_academicos', function (Blueprint $table){
+        Schema::create('dados_academicos_candidato', function (Blueprint $table){
             $table->increments('id');
-            $table->integer('id_user');
+            $table->unsignedInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('curso_graduacao',255)->nullable();
-            $table->integer('tipo_curso_graduacao')->nullable();
+            $table->unsignedInteger('tipo_curso_graduacao')->nullable();
+            $table->foreign('tipo_curso_graduacao')->references('id')->on('formacao')->onDelete('cascade');
             $table->string('instituicao_graduacao',255)->nullable();
             $table->integer('ano_conclusao_graduacao')->nullable();
             $table->string('curso_pos',255)->nullable();
-            $table->integer('tipo_curso_pos')->nullable();
-            // $table->integer('nivel_pos')->nullable();
+            $table->unsignedInteger('tipo_curso_pos')->nullable();
+            $table->foreign('tipo_curso_pos')->references('id')->on('formacao')->onDelete('cascade');
             $table->string('instituicao_pos',255)->nullable();
             $table->integer('ano_conclusao_pos')->nullable();
             $table->timestamps();
@@ -36,6 +38,6 @@ class CreateDadosAcademicosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dados_academicos');
+        Schema::drop('dados_academicos_candidato');
     }
 }

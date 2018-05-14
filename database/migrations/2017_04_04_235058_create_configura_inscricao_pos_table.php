@@ -20,7 +20,8 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->date('prazo_carta');
             $table->string('programa',7);
             $table->string('edital',7);
-            $table->integer('id_coordenador');
+            $table->unsignedInteger('id_coordenador');
+            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
