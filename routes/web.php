@@ -62,11 +62,11 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 
 	Route::get('/', '\Posmat\Http\Controllers\Recomendante\RecomendanteController@getMenu')->name('menu.recomendante');
 
-	Route::get('dados/pessoais', '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendante')->name('dados.recomendante');
+	Route::get('dados/pessoais', '\Posmat\Http\Controllers\Recomendante\DadosPessoaisRecomendanteController@getDadosPessoaisRecomendante')->name('dados.recomendante');
 
-	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\RecomendanteController@getDadosPessoaisRecomendanteEditar')->name('dados.recomendante.editar');
+	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\Recomendante\DadosPessoaisRecomendanteController@getDadosPessoaisRecomendanteEditar')->name('dados.recomendante.editar');
 
-	Route::post('dados/pessoais', '\Posmat\Http\Controllers\RecomendanteController@postDadosPessoaisRecomendante')->name('dados.recomendante.salvar');
+	Route::post('dados/pessoais', '\Posmat\Http\Controllers\Recomendante\DadosPessoaisRecomendanteController@postDadosPessoaisRecomendante')->name('dados.recomendante.salvar');
 
 	Route::get('cartas/pendentes', '\Posmat\Http\Controllers\RecomendanteController@getCartasPendentes')->name('cartas.pendentes');
 
