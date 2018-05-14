@@ -178,13 +178,13 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('cadastra/area/pos', '\Posmat\Http\Controllers\Coordenador\CadastraAreaPosController@postCadastraAreaPos');
 
-	Route::get('editar/area/pos', '\Posmat\Http\Controllers\CoordenadorController@getEditarAreaPos')->name('editar.area.pos');
+	Route::get('editar/area/pos', '\Posmat\Http\Controllers\Coordenador\EditarAreaPosController@getEditarAreaPos')->name('editar.area.pos');
 
-	Route::post('editar/area/pos', '\Posmat\Http\Controllers\CoordenadorController@postEditarAreaPos');
+	Route::post('editar/area/pos', '\Posmat\Http\Controllers\Coordenador\EditarAreaPosController@postEditarAreaPos');
 
-	Route::get('editar/formacao', '\Posmat\Http\Controllers\CoordenadorController@getEditarFormacao')->name('editar.formacao');
+	Route::get('editar/formacao', '\Posmat\Http\Controllers\Coordenador\EditarFormacaoController@getEditarFormacao')->name('editar.formacao');
 
-	Route::post('editar/formacao', '\Posmat\Http\Controllers\CoordenadorController@postEditarFormacao');
+	Route::post('editar/formacao', '\Posmat\Http\Controllers\Coordenador\EditarFormacaoController@postEditarFormacao');
 
 	// Route::get('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina')->name('cadastra.disciplina');
 
