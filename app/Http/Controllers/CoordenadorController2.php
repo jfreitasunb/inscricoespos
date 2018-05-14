@@ -20,7 +20,8 @@ use Posmat\Models\FinalizaInscricao;
 use Posmat\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
+use Posmat\Http\Controllers\CidadeController;
+
 use Posmat\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
