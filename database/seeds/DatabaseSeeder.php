@@ -30,15 +30,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(FinalizaInscricaoTableSeeder::class);
         
 
-        $user = ['email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $user = ['nome' => 'Jota', 'email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
 
-        $user = ['email' => 'posgrad@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        $user = ['nome' => 'Coordenação de Pós-Graduação', 'email' => 'posgrad@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
 
         $dados_jota = [
             'id_user' => '1',
-            'nome' => 'Jota',
             'data_nascimento' => '1979-05-28',
             'numerorg' => '1',
             'endereco' => '1',
@@ -49,11 +48,10 @@ class DatabaseSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ];
-        $db_dados_pessoais = DB::table('dados_pessoais')->insert($dados_jota);
+        $db_dados_pessoais = DB::table('dados_pessoais_candidato')->insert($dados_jota);
 
         $dados_coord = [
             'id_user' => '2',
-            'nome' => 'Coordenação de Pós-Graduação',
             'data_nascimento' => '1963-04-01',
             'numerorg' => '2', 
             'endereco' => '2',
@@ -64,7 +62,7 @@ class DatabaseSeeder extends Seeder
             'created_at' => date("Y-m-d H:i:s"),
             'updated_at' => date("Y-m-d H:i:s"),
         ];
-        $db_dados_coord = DB::table('dados_pessoais')->insert($dados_coord);
+        $db_dados_coord = DB::table('dados_pessoais_candidato')->insert($dados_coord);
 
         // $configura_inscricao_pos_1 = ['inicio_inscricao' => '2012-10-15', 'fim_inscricao' => '2012-11-01', 'prazo_carta' => '2012-11-05','edital' => '2012-2', 'programa' => '1_2', 'id_coordenador' => '2','created_at' => '2012-10-10 14:00:00', 'updated_at' => '2012-10-10 14:00:00'];
 
