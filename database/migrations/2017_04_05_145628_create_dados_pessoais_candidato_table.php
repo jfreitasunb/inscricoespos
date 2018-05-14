@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosPessoaisTable extends Migration
+class CreateDadosPessoaisCandidatoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateDadosPessoaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados_pessoais', function (Blueprint $table){
-            $table->increments('id');
-            $table->integer('id_user');
-            $table->string('nome');
+        Schema::create('dados_pessoais_candidato', function (Blueprint $table){
+            $table->unsignedInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->date('data_nascimento')->nullable();
             $table->string('numerorg',30)->nullable();
             $table->string('endereco',255)->nullable();
@@ -36,6 +35,6 @@ class CreateDadosPessoaisTable extends Migration
      */
     public function down()
     {
-        Schema::drop('dados_pessoais');
+        Schema::drop('dados_pessoais_candidato');
     }
 }
