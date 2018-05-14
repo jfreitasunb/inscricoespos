@@ -186,10 +186,6 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('editar/formacao', '\Posmat\Http\Controllers\Coordenador\EditarFormacaoController@postEditarFormacao');
 
-	// Route::get('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@getCadastraDisciplina')->name('cadastra.disciplina');
-
-	// Route::post('cadastrar/disciplina', '\Posmat\Http\Controllers\CoordenadorController@PostCadastraDisciplina');
-
 	Route::get('relatorio/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatorio')->name('gera.relatorio');
 
 	Route::get('relatorio', '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
