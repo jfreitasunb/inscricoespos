@@ -68,17 +68,17 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 
 	Route::post('dados/pessoais', '\Posmat\Http\Controllers\Recomendante\DadosPessoaisRecomendanteController@postDadosPessoaisRecomendante')->name('dados.recomendante.salvar');
 
-	Route::get('cartas/pendentes', '\Posmat\Http\Controllers\RecomendanteController@getCartasPendentes')->name('cartas.pendentes');
+	Route::get('cartas/pendentes', '\Posmat\Http\Controllers\Recomendante\CartasPendentesController@getCartasPendentes')->name('cartas.pendentes');
 
-	Route::post('cartas/pendentes', '\Posmat\Http\Controllers\RecomendanteController@postCartasPendentes');
+	Route::post('cartas/pendentes', '\Posmat\Http\Controllers\Recomendante\CartasPendentes\PreencherCartaController@postCartasPendentes');
 
-	Route::post('carta/inicial', '\Posmat\Http\Controllers\RecomendanteController@postCartaInicial')->name('carta.inicial');
+	Route::post('carta/inicial', '\Posmat\Http\Controllers\Recomendante\PreencherCartaController@postCartaInicial')->name('carta.inicial');
 
-	Route::post('salva/carta/inicial', '\Posmat\Http\Controllers\RecomendanteController@postPreencherCarta')->name('salva.carta.inicial');
+	Route::post('salva/carta/inicial', '\Posmat\Http\Controllers\Recomendante\PreencherCartaController@postPreencherCarta')->name('salva.carta.inicial');
 
-	Route::get('preencher/carta/final', '\Posmat\Http\Controllers\RecomendanteController@getFinalizarCarta')->name('finalizar.carta');
+	Route::get('preencher/carta/final', '\Posmat\Http\Controllers\Recomendante\PreencherCartaController@getFinalizarCarta')->name('finalizar.carta');
 
-	Route::post('preencher/carta/final', '\Posmat\Http\Controllers\RecomendanteController@postFinalizarCarta')->name('finalizar.carta');
+	Route::post('preencher/carta/final', '\Posmat\Http\Controllers\Recomendante\PreencherCartaController@postFinalizarCarta')->name('finalizar.carta');
 
 	Route::get('cartas/anteriores', '\Posmat\Http\Controllers\RecomendanteController@getCartasAnteriores')->name('cartas.anteriores');
 
