@@ -18,7 +18,7 @@
 	</div>
 </div>
 <div class="form-group">
-	{!! Form::label('fim_inscricao', 'Início da Inscrição', ['class' => 'col-md-4 control-label']) !!}
+	{!! Form::label('fim_inscricao', 'Fim da Inscrição', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
 		{!! Form::text('fim_inscricao', $edital_vigente->fim_inscricao, ['class' => 'form-control input-md']) !!}
 	</div>
