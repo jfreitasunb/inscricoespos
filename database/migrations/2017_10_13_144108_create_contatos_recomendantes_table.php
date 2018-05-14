@@ -15,9 +15,12 @@ class CreateContatosRecomendantesTable extends Migration
     {
         Schema::create('contatos_recomendantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_user');
-            $table->integer('id_recomendante');
-            $table->integer('id_inscricao_pos');
+            $table->unsignedInteger('id_user');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_recomendante');
+            $table->foreign('id_recomendante')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_inscricao_pos');
+            $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->boolean('email_enviado')->default(false);
             $table->timestamps();
         });

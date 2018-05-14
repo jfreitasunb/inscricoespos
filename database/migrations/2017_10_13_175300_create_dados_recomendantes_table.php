@@ -15,7 +15,8 @@ class CreateDadosRecomendantesTable extends Migration
     {
         Schema::create('dados_recomendantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_prof');
+            $table->unsignedInteger('id_prof');
+            $table->foreign('id_prof')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('nome_recomendante',200)->nullable();
             $table->string('instituicao_recomendante',500)->nullable();
             $table->string('titulacao_recomendante',200)->nullable();

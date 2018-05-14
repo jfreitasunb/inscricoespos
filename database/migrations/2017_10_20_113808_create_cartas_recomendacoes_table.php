@@ -15,10 +15,13 @@ class CreateCartasRecomendacoesTable extends Migration
     {
         Schema::create('cartas_recomendacoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_prof');
-            $table->integer('id_aluno');
+            $table->unsignedInteger('id_prof');
+            $table->foreign('id_prof')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_aluno');
+            $table->foreign('id_aluno')->references('id_user')->on('users')->onDelete('cascade');
             $table->integer('programa_pretendido');
-            $table->integer('id_inscricao_pos');
+            $table->unsignedInteger('id_inscricao_pos');
+            $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->string('tempo_conhece_candidato',50)->nullable();
             $table->string('circunstancia_1', 10)->nullable();
             $table->string('circunstancia_2', 10)->nullable();

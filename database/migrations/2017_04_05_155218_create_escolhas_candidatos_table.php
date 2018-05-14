@@ -18,7 +18,6 @@ class CreateEscolhasCandidatosTable extends Migration
             $table->unsignedInteger('id_user');
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->integer('programa_pretendido');
-            $table->foreign('programa_pretendido')->references('programa')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->integer('area_pos')->default(0);
             $table->foreign('area_pos')->references('id_area_pos')->on('area_pos_mat')->onDelete('cascade');
             $table->boolean('interesse_bolsa');
