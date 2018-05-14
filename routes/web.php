@@ -26,11 +26,11 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 	
 	Route::get('/', '\Posmat\Http\Controllers\Candidato\CandidatoController@getMenu')->name('menu.candidato');
 
-	Route::get('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoais')->name('dados.pessoais');
+	Route::get('dados/pessoais', '\Posmat\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoais')->name('dados.pessoais');
 
-	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\CandidatoController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
+	Route::get('dados/pessoais/editar', '\Posmat\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
 
-	Route::post('dados/pessoais', '\Posmat\Http\Controllers\CandidatoController@postDadosPessoais')->name('dados.pessoais.salvar');
+	Route::post('dados/pessoais', '\Posmat\Http\Controllers\Candidato\DadosPessoaisController@postDadosPessoais')->name('dados.pessoais.salvar');
 
 	Route::get('dados/academicos', '\Posmat\Http\Controllers\CandidatoController@getDadosAcademicos')->name('dados.academicos');
 
