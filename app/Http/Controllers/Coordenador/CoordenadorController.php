@@ -32,7 +32,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class CoordenadorController extends BaseController
 {
 
-	private $locale_default = 'pt-br';
+	public $locale_default = 'pt-br';
 
 	public function getMenu()
 	{	
