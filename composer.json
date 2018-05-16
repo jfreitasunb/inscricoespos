@@ -10,7 +10,7 @@
         "codecourse/notify": "^1.1",
         "consoletvs/charts": "5.*",
         "jailtonsc/validador-cpf-laravel": "^4.0",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.*.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "league/csv": "^8.2",
