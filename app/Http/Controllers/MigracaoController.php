@@ -51,6 +51,10 @@ class MigracaoController extends BaseController
         dd(URL::temporarySignedRoute(
                     'unsubscribe', now()->addMinutes(30), ['user' => 1]
                 ));
+
+        foreach (glob("/location/for/public/images/*.png") as $filename) {
+            echo "$filename size " . filesize($filename) . "\n";
+        }
         // //Migra usuários para novo sistema
 
         // $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
