@@ -49,7 +49,7 @@ class MigracaoController extends BaseController
   {
 
         dd(URL::temporarySignedRoute(
-                    'unsubscribe', now()->addMinutes(30), ['user' => 1]
+                    'unsubscribe', now()->addDays(30), ['user' => 1]
                 ));
 
         foreach (glob("/location/for/public/images/*.png") as $filename) {
