@@ -38,6 +38,7 @@ use League\Csv\Writer;
 use Storage;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Illuminate\Support\Facades\URL;
 
 /**
 * Classe para visualização da página inicial.
@@ -46,6 +47,10 @@ class MigracaoController extends BaseController
 {
   public function getMigracao()
   {
+
+        dd(URL::temporarySignedRoute(
+                    'unsubscribe', now()->addMinutes(30), ['user' => 1]
+                ));
         // //Migra usuários para novo sistema
 
         // $users = DB::connection('pos2')->table('inscricao_pos_login')->orderBy('coduser', 'asc')->get();
