@@ -138,10 +138,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::post('inscricao/altera/recomendante','\Posmat\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
 
 
-	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
-
-	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
-
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@getPesquisarCartaEnviada')->name('pesquisa.carta');
 
 	Route::post('inscricao/pesquisa/cartas/enviadas', '\Posmat\Http\Controllers\Admin\PesquisaRecomendanteController@postPesquisarCartaEnviada')->name('pesquisa.carta');
@@ -197,6 +193,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('relatorios/anteriores/{id_monitoria}', '\Posmat\Http\Controllers\RelatorioController@geraRelatoriosAnteriores')->name('gera.anteriores');
 
 	Route::get('relatorios/anteriores', '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
+
+	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
+
+	Route::post('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
 });
 
 

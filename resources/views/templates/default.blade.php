@@ -41,6 +41,7 @@
           @yield('relatorio_pos_edital_vigente')
           @yield('relatorio_pos_editais_anteriores')
           @yield('ficha_individual')
+          @yield('tabela_indicacoes')
         @endcoordenador
         @recomendante(Auth()->user())
           @include('templates.partials.recomendante.menu_recomendante')
