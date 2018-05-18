@@ -19,6 +19,7 @@ class Kernel extends HttpKernel
         \Posmat\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Posmat\Http\Middleware\LocaleMiddleware::class,
+        \Posmat\Http\Middleware\ValidaSignature::class,
     ];
 
     /**
@@ -61,5 +62,6 @@ class Kernel extends HttpKernel
         'autoriza.inscricao' => \Posmat\Http\Middleware\AutorizaLogin::class,
         'define.locale' => \Posmat\Http\Middleware\LocaleMiddleware::class,
         'impersonate.user' => \Posmat\Http\Middleware\Admin\Impersonate::class,
+        'validaassinatura' => \Posmat\Http\Middleware\ValidaSignature::class,
     ];
 }

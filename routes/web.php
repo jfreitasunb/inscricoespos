@@ -331,4 +331,4 @@ Route::get('/migracao', [
 	'middleware' => ['user.role:admin'],
 ]);
 
-Route::get('/acesso/arquivos', '\Posmat\Http\Controllers\Coordenador\AcessoArquivosController@getVerArquivos')->name('ver.arquivos')->middleware('signedurl');
+Route::get('/acesso/arquivos', '\Posmat\Http\Controllers\Coordenador\AcessoArquivosController@getVerArquivos')->name('ver.arquivos')->middleware('validaassinatura');
