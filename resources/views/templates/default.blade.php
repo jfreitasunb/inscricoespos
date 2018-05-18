@@ -72,6 +72,7 @@
       @else
         @yield('inicio')
         @yield('content')
+        @yield('ver_ficha')
       @endif
     </div>
     @include('templates.partials.rodape')

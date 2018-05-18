@@ -64,16 +64,8 @@ class LinkAcessoController extends CoordenadorController
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
       	$modo_pesquisa = false;
-
-      	$arquivos = new RelatorioController;
-
-      	$endereco_zip_mudar = '/var/www/posmat/storage/app/public/';
-
-		$local_arquivos = $arquivos->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 		
-		$endereco_temporatio = str_replace($endereco_zip_mudar, '/storage/', $local_arquivos['local_relatorios']);
-		
-		$url_temporatia = URL::to('/').rtrim($endereco_temporatio, "/");
+		$url_temporatia = URL::to('/')."/acesso/arquivos";
 
 		$link_de_acesso = UrlSigner::sign($url_temporatia, Carbon::now()->addDays($validade_link));
 

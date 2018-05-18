@@ -48,7 +48,7 @@ class MigracaoController extends BaseController
   public function getMigracao()
   {
 
-        dd(UrlSigner::sign('https://myapp.com/protected-route', Carbon::now()->addHours(2) ));
+        // dd(UrlSigner::sign('https://myapp.com/protected-route', Carbon::now()->addHours(2) ));
 
         foreach (glob("/location/for/public/images/*.png") as $filename) {
             echo "$filename size " . filesize($filename) . "\n";
