@@ -186,6 +186,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorio', '\Posmat\Http\Controllers\RelatorioController@getListaRelatorios')->name('relatorio.atual');
 
+	Route::get('relatorio/link/acesso', '\Posmat\Http\Controllers\Coordenador\LinkAcessoController@getLinkAcesso')->name('link.acesso');
+
+	Route::post('relatorio/link/acesso', '\Posmat\Http\Controllers\Coordenador\LinkAcessoController@postLinkAcesso')->name('link.acesso');
+
 	Route::get('gera/ficha/individual', '\Posmat\Http\Controllers\Coordenador\RelatorioPosController@getFichaInscricaoPorCandidato')->name('gera.ficha.individual');
 
 	Route::get('ver/ficha/individual', '\Posmat\Http\Controllers\Coordenador\RelatorioPosController@GeraPdfFichaIndividual')->name('ver.ficha.individual');

@@ -38,7 +38,7 @@ use League\Csv\Writer;
 use Storage;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use Illuminate\Support\Facades\URL;
+use UrlSigner;
 
 /**
 * Classe para visualização da página inicial.
@@ -48,9 +48,7 @@ class MigracaoController extends BaseController
   public function getMigracao()
   {
 
-        dd(URL::temporarySignedRoute(
-                    'unsubscribe', now()->addDays(30), ['user' => 1]
-                ));
+        dd(UrlSigner::sign('https://myapp.com/protected-route', Carbon::now()->addHours(2) ));
 
         foreach (glob("/location/for/public/images/*.png") as $filename) {
             echo "$filename size " . filesize($filename) . "\n";
