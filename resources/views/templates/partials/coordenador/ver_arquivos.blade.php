@@ -9,7 +9,7 @@
 @section('ver_ficha') --}}
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Fichas de Inscrição para o Edital: {{ $relatorio_disponivel->edital }}</legend>
+  <legend class="scheduler-border"><h1>Fichas de Inscrição para o Edital: {{ $relatorio_disponivel->edital }}</h1></legend>
     @foreach( $fichas as $key => $ficha)
     <h2>Inscrições para o {{ $key }}</h2>
       @foreach ($ficha as $element)
