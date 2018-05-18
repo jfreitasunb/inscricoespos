@@ -55,9 +55,12 @@ class LinkAcessoController extends CoordenadorController
 
 		$this->validate($request, [
 			'validade_link' => 'required',
+			'tempo_validade' => 'required',
 		]);
 
 		$validade_link = (int)$request->validade_link;
+
+		$tempo_validade = $request->tempo_validade;
 		
 		$relatorio = new ConfiguraInscricaoPos();
 
@@ -67,7 +70,21 @@ class LinkAcessoController extends CoordenadorController
 		
 		$url_temporatia = URL::to('/')."/acesso/arquivos";
 
-		$link_de_acesso = UrlSigner::sign($url_temporatia, Carbon::now()->addDays($validade_link));
+		switch ($tempo_validade) {
+			case 'horas':
+				$valido_por = Carbon::now()->addHours($validade_link);
+				break;
+
+			case 'minutos':
+				$valido_por = Carbon::now()->addMinutes($validade_link);
+				break;
+
+			default:
+				$valido_por = Carbon::now()->addDays($validade_link);
+				break;
+		}
+
+		$link_de_acesso = UrlSigner::sign($url_temporatia, $valido_por);
 
       	return view('templates.partials.coordenador.link_acesso', compact('relatorio_disponivel', 'modo_pesquisa','link_de_acesso'));
 	}
