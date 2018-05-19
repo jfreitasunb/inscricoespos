@@ -49,7 +49,7 @@ class AcessoArquivosController extends CoordenadorController
 
 		$local_arquivos = $arquivos->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-		$local_arquivos_pdf = str_replace($endereco_zip_mudar, '/public/', $local_arquivos['local_relatorios']);
+		$local_arquivos_pdf = str_replace($endereco_zip_mudar, '/storage/', $local_arquivos['local_relatorios']);
 
 		$programas_disponiveis = explode("_", $relatorio_disponivel->retorna_inscricao_ativa()->programa);
 
@@ -65,6 +65,6 @@ class AcessoArquivosController extends CoordenadorController
         	}
 		}
 
-      	return view('templates.partials.coordenador.ver_arquivos', compact('relatorio_disponivel', 'fichas'));
+      	return view('templates.partials.coordenador.ver_arquivos', compact('relatorio_disponivel', 'fichas', 'local_arquivos_pdf'));
 	}
 }

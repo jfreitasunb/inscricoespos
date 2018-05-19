@@ -14,7 +14,7 @@
     <h2>Inscrições para o {{ $key }}</h2>
       @foreach ($ficha as $element)
         <div class="row">
-        <a target="_blank" href="{{asset($element)}}" > {{ $element }} </a>
+        <a target="_blank" href="{{asset($local_arquivos_pdf.$element)}}" > {{ $element }} </a>
       </div>
       @endforeach
     @endforeach
