@@ -48,8 +48,8 @@ class AcessoArquivosController extends CoordenadorController
       	$endereco_zip_mudar = '/var/www/posmat/storage/app/public/';
 
 		$local_arquivos = $arquivos->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
-		
-		$endereco_temporatio = str_replace($endereco_zip_mudar, '/coordenador/storage/', $local_arquivos['local_relatorios']);
+
+		$local_arquivos_pdf = str_replace($endereco_zip_mudar, '/public/', $local_arquivos['local_relatorios']);
 		
 		$url_temporatia = URL::to('/').rtrim($endereco_temporatio, "/");
 		
@@ -64,7 +64,7 @@ class AcessoArquivosController extends CoordenadorController
 		}
 
 		foreach ($programa_para_inscricao as $programa) {
-			foreach (glob($teste."Inscricao_".$programa."*.pdf") as $filename) {
+			foreach (glob($local_arquivos['local_relatorios']."Inscricao_".$programa."*.pdf") as $filename) {
             	$fichas[$programa][] = basename($filename);
         	}
 		}
