@@ -19,7 +19,6 @@ class Kernel extends HttpKernel
         \Posmat\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Posmat\Http\Middleware\LocaleMiddleware::class,
-        \Posmat\Http\Middleware\ValidaSignature::class,
     ];
 
     /**
