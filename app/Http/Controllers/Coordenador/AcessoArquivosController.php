@@ -53,7 +53,7 @@ class AcessoArquivosController extends CoordenadorController
 		
 		$url_temporatia = URL::to('/').rtrim($endereco_temporatio, "/");
 		
-		$teste = '/var/www/posmat/storage/app/relatorios/edital_2018-2/';
+		$teste = '/var/www/posmat/storage/app/public/relatorios/edital_2018-2/';
 
 		$programas_disponiveis = explode("_", $relatorio_disponivel->retorna_inscricao_ativa()->programa);
 
