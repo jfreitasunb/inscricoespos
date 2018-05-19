@@ -50,10 +50,6 @@ class AcessoArquivosController extends CoordenadorController
 		$local_arquivos = $arquivos->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
 		$local_arquivos_pdf = str_replace($endereco_zip_mudar, '/public/', $local_arquivos['local_relatorios']);
-		
-		$url_temporatia = URL::to('/').rtrim($endereco_temporatio, "/");
-		
-		$teste = '/var/www/posmat/storage/app/public/relatorios/edital_2018-2/';
 
 		$programas_disponiveis = explode("_", $relatorio_disponivel->retorna_inscricao_ativa()->programa);
 
