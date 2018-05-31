@@ -10,7 +10,7 @@
         "codecourse/notify": "^1.1",
         "consoletvs/charts": "5.*",
         "jailtonsc/validador-cpf-laravel": "^4.0",
-        "laravel/framework": "5.5.*",
+        "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4",
         "league/csv": "^8.2",
@@ -21,7 +21,7 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~7.0",
         "filp/whoops": "~2.0"
     },
     "autoload": {
@@ -45,12 +45,10 @@
             "php artisan key:generate"
         ],
         "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
         ],
         "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate"
         ]
     },
     "config": {
