@@ -186,7 +186,6 @@ return [
         Posmat\Providers\BladeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
-        Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
 
     ],
 
@@ -241,7 +240,6 @@ return [
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-        'UrlSigner' => Spatie\UrlSigner\Laravel\UrlSignerFacade::class,
 
     ],
 
