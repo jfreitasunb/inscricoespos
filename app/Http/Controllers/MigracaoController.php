@@ -132,74 +132,46 @@ class MigracaoController extends BaseController
 
         // //Migra as inscrições já configuradas para o novo sistema
 
-        $inscricoes_configuradas = DB::connection('pos2')->table('configura_inscricao_pos')->orderBy('id_inscricao_pos','asc')->get();
+        // $inscricoes_configuradas = DB::connection('pos2')->table('configura_inscricao_pos')->orderBy('id_inscricao_pos','asc')->get();
 
-        foreach ($inscricoes_configuradas as $inscricao) {
+        // foreach ($inscricoes_configuradas as $inscricao) {
             
-            $nova_inscricao_configurada = new ConfiguraInscricaoPos();
+        //     $nova_inscricao_configurada = new ConfiguraInscricaoPos();
 
-            $nova_inscricao_configurada->id_inscricao_pos = $inscricao->id_inscricao_pos;
-            $nova_inscricao_configurada->inicio_inscricao = $inscricao->inicio_inscricao;
-            $nova_inscricao_configurada->fim_inscricao = $inscricao->fim_inscricao;
-            $nova_inscricao_configurada->prazo_carta = $inscricao->prazo_carta;
-            $nova_inscricao_configurada->programa = $inscricao->programa;
-            $nova_inscricao_configurada->edital = $inscricao->edital;
-            $nova_inscricao_configurada->id_coordenador = $inscricao->id_coordenador;
-            $nova_inscricao_configurada->created_at = $inscricao->created_at;
-            $nova_inscricao_configurada->updated_at = $inscricao->updated_at;
-            $nova_inscricao_configurada->save();
-        }
+        //     $nova_inscricao_configurada->id_inscricao_pos = $inscricao->id_inscricao_pos;
+        //     $nova_inscricao_configurada->inicio_inscricao = $inscricao->inicio_inscricao;
+        //     $nova_inscricao_configurada->fim_inscricao = $inscricao->fim_inscricao;
+        //     $nova_inscricao_configurada->prazo_carta = $inscricao->prazo_carta;
+        //     $nova_inscricao_configurada->programa = $inscricao->programa;
+        //     $nova_inscricao_configurada->edital = $inscricao->edital;
+        //     $nova_inscricao_configurada->id_coordenador = $inscricao->id_coordenador;
+        //     $nova_inscricao_configurada->created_at = $inscricao->created_at;
+        //     $nova_inscricao_configurada->updated_at = $inscricao->updated_at;
+        //     $nova_inscricao_configurada->save();
+        // }
         
 
-        // //Fim da migração das inscrições já configuradas para o novo sistema.
+        // // //Fim da migração das inscrições já configuradas para o novo sistema.
 
-        // // // //Migra as cartas de motivação dos candidatos
+        // // //Migra os arquivos enviados pelo candidatos
 
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
+        $arquivos_enviados = DB::connection('pos2')->table('arquivos_enviados')->orderBy('id','asc')->get();
 
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
+        foreach ($arquivos_enviados as $arquivo) {
 
-        // foreach ($users_candidato as $candidato) {
-            
-        //     $motivacao_candidato = DB::connection('pos2')->table('inscricao_pos_carta_motivacao')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
+            $novo_arquivos_enviados = new Documento();
 
-        //     $novo_usuario = new User();
+            $novo_arquivos_enviados->id = $arquivo->id;
+            $novo_arquivos_enviados->id_user = $arquivo->id_user;
+            $novo_arquivos_enviados->nome_arquivo = $arquivo->nome_arquivo;
+            $novo_arquivos_enviados->tipo_arquivo = $arquivo->tipo_arquivo;
+            $novo_arquivos_enviados->id_inscricao_pos = $arquivo->id_inscricao_pos;
+            $novo_arquivos_enviados->created_at = $arquivo->created_at;
+            $novo_arquivos_enviados->updated_at = $arquivo->updated_at;
+            $novo_arquivos_enviados->save();
+        }
 
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //     foreach ($motivacao_candidato as $carta) {
-
-        //         $carta_motivao = new CartaMotivacao();
-
-        //         $carta_motivao->id_user = $novo_id_usuario;
-                
-        //         $array_edital = explode('-', $carta->edital);
-
-        //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
-
-        //         foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //             if ($inscricao->edital === $edital) {
-                        
-        //                 $carta_motivao->id_inscricao_pos = $inscricao->id_inscricao_pos;
-
-        //             }
-        //         }
-
-        //         if (is_null($carta_motivao->id_inscricao_pos)) {
-                    
-        //             $carta_motivao->id_inscricao_pos = 0;
-        //         }
-
-        //         $carta_motivao->motivacao = Purifier::clean(trim($carta->motivacaoprogramapretendido));
-        //         $carta_motivao->concorda_termos = true;
-
-        //         $carta_motivao->save();
-        //     }
-
-        // }
-
-        // // //Fim da migração das cartas de motivação dos candidatos
+        // //Fim da migração dos arquivos enviados pelo candidatos
 
         // // //Migra as escolhas dos candidatos
 
