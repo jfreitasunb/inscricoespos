@@ -162,7 +162,7 @@ class MigracaoController extends BaseController
         //     $novo_arquivos_enviados = new Documento();
 
         //     $novo_arquivos_enviados->id = $arquivo->id;
-        //     $novo_arquivos_enviados->id_user = $arquivo->id_user;
+        //     $novo_arquivos_enviados->id_candidato = $arquivo->id_user;
         //     $novo_arquivos_enviados->nome_arquivo = $arquivo->nome_arquivo;
         //     $novo_arquivos_enviados->tipo_arquivo = $arquivo->tipo_arquivo;
         //     $novo_arquivos_enviados->id_inscricao_pos = $arquivo->id_inscricao_pos;
@@ -184,7 +184,7 @@ class MigracaoController extends BaseController
         //     $nova_carta_motivacao = new CartaMotivacao();
 
         //     $nova_carta_motivacao->id = $motivacao->id;
-        //     $nova_carta_motivacao->id_user = $motivacao->id_user;
+        //     $nova_carta_motivacao->id_candidato = $motivacao->id_user;
         //     $nova_carta_motivacao->motivacao = $motivacao->motivacao;
         //     $nova_carta_motivacao->concorda_termos = $motivacao->concorda_termos;
         //     $nova_carta_motivacao->id_inscricao_pos = $motivacao->id_inscricao_pos;
@@ -196,198 +196,56 @@ class MigracaoController extends BaseController
 
         // // //Fim da migração das cartas de motivação dos candidatos
 
-        //Migra os contatos dos recomendantes
+        // //Migra os contatos dos recomendantes
 
-        $recomendantes_indicados = DB::connection('pos2')->table('contatos_recomendantes')->orderBy('id','asc')->get();
+        // $recomendantes_indicados = DB::connection('pos2')->table('contatos_recomendantes')->orderBy('id','asc')->get();
 
-        foreach ($recomendantes_indicados as $recomendante) {
+        // foreach ($recomendantes_indicados as $recomendante) {
             
-            $novo_contatos_recomendante = new ContatoRecomendante();
+        //     $novo_contatos_recomendante = new ContatoRecomendante();
 
-            $novo_contatos_recomendante->id = $recomendante->id;
-            $novo_contatos_recomendante->id_candidato = $recomendante->id_user;
-            $novo_contatos_recomendante->id_recomendante = $recomendante->id_recomendante;
-            $novo_contatos_recomendante->id_inscricao_pos = $recomendante->id_inscricao_pos;
-            $novo_contatos_recomendante->email_enviado = $recomendante->email_enviado;
-            $novo_contatos_recomendante->created_at = $recomendante->created_at;
-            $novo_contatos_recomendante->updated_at = $recomendante->updated_at;
-            $novo_contatos_recomendante->save();
+        //     $novo_contatos_recomendante->id = $recomendante->id;
+        //     $novo_contatos_recomendante->id_candidato = $recomendante->id_user;
+        //     $novo_contatos_recomendante->id_recomendante = $recomendante->id_recomendante;
+        //     $novo_contatos_recomendante->id_inscricao_pos = $recomendante->id_inscricao_pos;
+        //     $novo_contatos_recomendante->email_enviado = $recomendante->email_enviado;
+        //     $novo_contatos_recomendante->created_at = $recomendante->created_at;
+        //     $novo_contatos_recomendante->updated_at = $recomendante->updated_at;
+        //     $novo_contatos_recomendante->save();
             
-        }
-        //Fim da migração dos contatos dos recomendantes
-        
-        // // //Início da migração das cartas de recomendação
-        
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
-
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
-
-        // foreach ($users_candidato as $candidato) {
-
-        //     $cartas_recomendacoes_antigas = DB::connection('pos2')->table('inscricao_pos_recomendacoes')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
-            
-        //     $novo_usuario = new User();
-
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //     foreach ($cartas_recomendacoes_antigas as $carta_recomendacao) {
-                
-                
-        //         $array_edital = explode('-', $carta_recomendacao->edital);
-
-        //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
-
-        //         $id_inscricao_pos = null;
-
-        //         foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //             if ($inscricao->edital === $edital) {
-                        
-        //                 $id_inscricao_pos = $inscricao->id_inscricao_pos;
-
-        //             }
-        //         }
-
-        //         if (is_null($id_inscricao_pos)) {
-        //             $id_inscricao_pos = 0;
-        //         }
-                    
-        //         $novo_usuario_candidato = new User();
-
-        //         $id_novo_usuario_candidato = $novo_usuario_candidato->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //         $email_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->where('coduser', $carta_recomendacao->id_prof)->get()->first();
-
-        //         $novo_usuario_recomendante = new User();
-
-        //         $id_novo_usuario_recomendante = $novo_usuario_recomendante->retorna_user_por_email(strtolower(trim($email_recomendante->login)));
-
-        //         $nova_carta = new CartaRecomendacao();
-
-        //         $nova_carta->id_prof = $id_novo_usuario_recomendante->id_user;
-                
-        //         $nova_carta->id_aluno = $novo_id_usuario;
-
-        //         $nova_carta->programa_pretendido = 0;
-
-        //         if (is_null($carta_recomendacao->nivel)) {
-        //             $nova_carta->programa_pretendido = 0;
-        //         }
-
-        //         if (strtolower(trim($carta_recomendacao->nivel)) === 'doutorado') {
-        //             $nova_carta->programa_pretendido = 2;
-        //         }
-
-        //         if (strtolower(trim($carta_recomendacao->nivel)) === 'mestrado') {
-        //             $nova_carta->programa_pretendido = 1;
-        //         }
-
-        //         if (strtolower(trim($carta_recomendacao->nivel)) === 'verão') {
-        //             $nova_carta->programa_pretendido = 3;
-        //         }
-                
-
-        //         $nova_carta->id_inscricao_pos = $id_inscricao_pos;
-
-        //         $nova_carta->tempo_conhece_candidato = $carta_recomendacao->tempoconhececandidato;
-
-        //         $nova_carta->circunstancia_1 = $carta_recomendacao->circunstancia1;
-
-        //         $nova_carta->circunstancia_2 = $carta_recomendacao->circunstancia2;
-
-        //         $nova_carta->circunstancia_3 = $carta_recomendacao->circunstancia3;
-
-        //         $nova_carta->circunstancia_4 = $carta_recomendacao->circunstancia4;
-
-        //         $nova_carta->circunstancia_outra = $carta_recomendacao->circunstanciaoutra;
-
-        //         $nova_carta->desempenho_academico = (int) $carta_recomendacao->desempenhoacademico;
-
-        //         if ($carta_recomendacao->desempenhoacademico === 'naoinfo') {
-        //             $nova_carta->desempenho_academico = 5;
-        //         }
-                
-        //         $nova_carta->capacidade_aprender = (int) $carta_recomendacao->capacidadeaprender;
-
-        //         if ($carta_recomendacao->capacidadeaprender === 'naoinfo') {
-        //             $nova_carta->capacidade_aprender = 5;
-        //         }
-
-        //         $nova_carta->capacidade_trabalhar = (int) $carta_recomendacao->capacidadetrabalhar;
-
-        //         if ($carta_recomendacao->capacidadetrabalhar === 'naoinfo') {
-        //             $nova_carta->capacidade_trabalhar = 5;
-        //         }
-
-        //         $nova_carta->criatividade = (int) $carta_recomendacao->criatividade;
-
-        //         if ($carta_recomendacao->criatividade === 'naoinfo') {
-        //             $nova_carta->criatividade = 5;
-        //         }
-
-        //         $nova_carta->curiosidade = (int) $carta_recomendacao->curiosidade;
-
-        //         if ($carta_recomendacao->curiosidade === 'naoinfo') {
-        //             $nova_carta->curiosidade = 5;
-        //         }
-
-        //         $nova_carta->esforco = (int) $carta_recomendacao->esforco;
-
-        //         if ($carta_recomendacao->esforco === 'naoinfo') {
-        //             $nova_carta->esforco = 5;
-        //         }
-
-        //         $nova_carta->expressao_escrita = (int) $carta_recomendacao->expressaoescrita;
-
-        //         if ($carta_recomendacao->expressaoescrita === 'naoinfo') {
-        //             $nova_carta->expressao_escrita = 5;
-        //         }
-
-        //         $nova_carta->expressao_oral = (int) $carta_recomendacao->expressaooral;
-
-        //         if ($carta_recomendacao->expressaooral === 'naoinfo') {
-        //             $nova_carta->expressao_oral = 5;
-        //         }
-
-        //         $nova_carta->relacionamento = (int) $carta_recomendacao->relacionamento;
-
-        //         if ($carta_recomendacao->relacionamento === 'naoinfo') {
-        //             $nova_carta->relacionamento = 5;
-        //         }
-
-        //         $nova_carta->antecedentes_academicos = $carta_recomendacao->antecedentesacademicos;
-
-        //         $nova_carta->possivel_aproveitamento = $carta_recomendacao->possivelaproveitamento;
-
-        //         $nova_carta->informacoes_relevantes = $carta_recomendacao->informacoesrelevantes;
-
-        //         $nova_carta->como_aluno = (int) $carta_recomendacao->comoaluno;
-
-        //         if ($carta_recomendacao->comoaluno === 'naoinfo') {
-        //             $nova_carta->como_aluno = 5;
-        //         }
-
-        //         if (is_null($carta_recomendacao->comoaluno)) {
-        //             $nova_carta->como_aluno = 5;
-        //         }
-
-        //         $nova_carta->como_orientando = (int) $carta_recomendacao->comoorientando;
-
-        //         if ($carta_recomendacao->comoorientando === 'naoinfo') {
-        //             $nova_carta->como_orientando = 5;
-        //         }
-
-        //         if (is_null($carta_recomendacao->comoorientando)) {
-        //             $nova_carta->como_orientando = 5;
-        //         }
-
-        //         $nova_carta->completada = true;
-
-        //         $nova_carta->save();
-        //     }
         // }
+        // //Fim da migração dos contatos dos recomendantes
+        
+        // //Início dos dados acadêmicos do candidato
+        
+        $dados_academicos_candidato = DB::connection('pos2')->table('dados_academicos')->orderBy('id','asc')->get();
 
-        // // //Fim da migração das cartas de recomendação
+
+        foreach ($dados_academicos_candidato as $academico_candidato) {
+
+            $novo_dados_academicos_candidato = new DadoAcademico();
+
+            $novo_dados_academicos_candidato->id = $academico_candidato->id;
+            $novo_dados_academicos_candidato->id_candidato = $academico_candidato->id_user;
+            $novo_dados_academicos_candidato->curso_graduacao = $academico_candidato->curso_graduacao;
+            $novo_dados_academicos_candidato->tipo_curso_graduacao = $academico_candidato->tipo_curso_graduacao;
+            $novo_dados_academicos_candidato->instituicao_graduacao = $academico_candidato->instituicao_graduacao;
+            $novo_dados_academicos_candidato->ano_conclusao_graduacao = $academico_candidato->ano_conclusao_graduacao;
+            $novo_dados_academicos_candidato->curso_pos = $academico_candidato->curso_pos;
+            if ($academico_candidato->tipo_curso_pos == 0) {
+                $novo_dados_academicos_candidato->tipo_curso_pos = 9;
+            }else{
+                $novo_dados_academicos_candidato->tipo_curso_pos = $academico_candidato->tipo_curso_pos;
+            }
+            $novo_dados_academicos_candidato->instituicao_pos = $academico_candidato->instituicao_pos;
+            $novo_dados_academicos_candidato->ano_conclusao_pos = $academico_candidato->ano_conclusao_pos;
+            $novo_dados_academicos_candidato->created_at = $academico_candidato->created_at;
+            $novo_dados_academicos_candidato->updated_at = $academico_candidato->updated_at;
+            $novo_dados_academicos_candidato->save();
+
+        }
+
+        // //Fim dos dados acadêmicos do candidato
 
 
         // // //Migra finalização das inscrições
