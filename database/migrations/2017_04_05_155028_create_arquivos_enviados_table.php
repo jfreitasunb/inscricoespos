@@ -15,8 +15,8 @@ class CreateArquivosEnviadosTable extends Migration
     {
         Schema::create('arquivos_enviados', function (Blueprint $table){
             $table->Increments('id');
-            $table->unsignedInteger('id_user');
-            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_candidato');
+            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('nome_arquivo',255);
             $table->string('tipo_arquivo',10);
             $table->unsignedInteger('id_inscricao_pos');

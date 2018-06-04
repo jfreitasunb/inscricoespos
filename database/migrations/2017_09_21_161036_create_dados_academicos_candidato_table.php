@@ -15,8 +15,8 @@ class CreateDadosAcademicosCandidatoTable extends Migration
     {
         Schema::create('dados_academicos_candidato', function (Blueprint $table){
             $table->increments('id');
-            $table->unsignedInteger('id_user');
-            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_candidato');
+            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('curso_graduacao',255)->nullable();
             $table->unsignedInteger('tipo_curso_graduacao')->nullable();
             $table->foreign('tipo_curso_graduacao')->references('id')->on('formacao')->onDelete('cascade');

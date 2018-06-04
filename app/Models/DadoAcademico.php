@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class DadoAcademico extends Model
 {
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id_candidato';
 
-    protected $table = 'dados_academicos';
+    protected $table = 'dados_academicos_candidato';
 
     protected $fillable = [
         'curso_graduacao',

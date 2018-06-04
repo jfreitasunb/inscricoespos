@@ -15,8 +15,8 @@ class CreateDadosPessoaisCandidatoTable extends Migration
     {
         Schema::create('dados_pessoais_candidato', function (Blueprint $table){
             $table->Increments('id');
-            $table->unsignedInteger('id_user');
-            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_candidato');
+            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
             $table->date('data_nascimento')->nullable();
             $table->string('numerorg',30)->nullable();
             $table->string('endereco',255)->nullable();

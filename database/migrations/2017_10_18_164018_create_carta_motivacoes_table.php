@@ -15,8 +15,8 @@ class CreateCartaMotivacoesTable extends Migration
     {
         Schema::create('carta_motivacoes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_user');
-            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('id_candidato');
+            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
             $table->text('motivacao');
             $table->boolean('concorda_termos');
             $table->unsignedInteger('id_inscricao_pos');
