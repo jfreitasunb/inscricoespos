@@ -47,7 +47,7 @@ class MigracaoController extends BaseController
 {
   public function getMigracao()
   {
-        //Migra usuários para novo sistema
+        // // Migra usuários para novo sistema
 
         // $users = DB::connection('pos2')->table('users')->orderBy('id_user', 'asc')->get();
 
@@ -72,92 +72,43 @@ class MigracaoController extends BaseController
         //     $novo_usuario->save(); 
         // }
         
-        //Fim da migração dos usuário para o novo sistema
+        // //Fim da migração dos usuário para o novo sistema
 
-        //Migra área da Pós para o novo sistema
+        // //Migra área da Pós para o novo sistema
 
-        $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
+        // $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
 
-        foreach ($areas_pos as $area) {
-            $nova_area = new AreaPosMat();
+        // foreach ($areas_pos as $area) {
+        //     $nova_area = new AreaPosMat();
 
-            $nova_area->id_area_pos = $area->id_area_pos;
-            $nova_area->nome_ptbr = $area->nome;
-            $nova_area->nome_en = $area->nome_en;
-            $nova_area->nome_es = $area->nome_es;
-            $nova_area->created_at = $area->created_at;
-            $nova_area->updated_at = $area->updated_at;
-            $nova_area->save();
-        }
-        
-
-        //Fim da Migração das áreas da Pós  para o novo sistema
-        
-        // // //Migra os dados pessoais dos recomendantes para o novo sistema
-
-        // $users_recomendante = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'recomendante')->orderBy('coduser','asc')->get();
-
-        // foreach ($users_recomendante as $recomendante) {
-
-        //   if ($recomendante->coduser == 348 or $recomendante->coduser == 567 or $recomendante->coduser == 565 or $recomendante->coduser == 566 or $recomendante->coduser == 563 or $recomendante->coduser == 557 or $recomendante->coduser == 685 or $recomendante->coduser == 632 or $recomendante->coduser == 530 or $recomendante->coduser == 989 or $recomendante->coduser == 1339 or $recomendante->coduser == 415 or $recomendante->coduser == 470 or $recomendante->coduser == 472 or $recomendante->coduser == 2124 or $recomendante->coduser == 2125 or $recomendante->coduser == 667 or $recomendante->coduser == 225 or $recomendante->coduser == 350 or $recomendante->coduser == 593 or $recomendante->coduser == 1881) {
-        //        $recomendante->email = Purifier::clean(strtolower(trim($recomendante->login)).'.duplicado');
-        //      }else{
-        //        $recomendante->email = Purifier::clean(strtolower(trim($recomendante->login)));
-        //      }
-
-        //     $dados_antigos_usuario = DB::connection('pos2')->table('inscricao_pos_dados_pessoais_recomendante')->where('id_prof', $recomendante->coduser)->first();
-
-             
-        //     if (!is_null($dados_antigos_usuario)) {
-        //         $novo_usuario = new User();
-
-        //         $novo_id_usuario = $novo_usuario->retorna_user_por_email($recomendante->email)->id_user;
-
-        //         $novos_dados_pessoais = new DadoRecomendante();
-
-        //         $existe_dados_pessoais = $novos_dados_pessoais->retorna_dados_pessoais_recomendante($novo_id_usuario);
-
-        //         if (is_null($existe_dados_pessoais)) {
-
-        //             $novos_dados_pessoais->id_prof = $novo_id_usuario;
-
-        //             $novos_dados_pessoais->nome_recomendante = trim($dados_antigos_usuario->nomerecomendante);
-
-        //             $novos_dados_pessoais->instituicao_recomendante = trim($dados_antigos_usuario->instituicaorecomendante);
-
-        //             $novos_dados_pessoais->titulacao_recomendante = trim($dados_antigos_usuario->titulacaorecomendante);
-
-        //             $novos_dados_pessoais->area_recomendante = trim($dados_antigos_usuario->arearecomendante);
-
-        //             $novos_dados_pessoais->ano_titulacao = trim($dados_antigos_usuario->anoobtencaorecomendante);
-
-        //             $novos_dados_pessoais->inst_obtencao_titulo = trim($dados_antigos_usuario->instobtencaorecomendante);
-
-        //             $novos_dados_pessoais->endereco_recomendante = trim($dados_antigos_usuario->enderecorecomendante);
-
-        //             $novos_dados_pessoais->save();   
-        //         }else{
-
-        //             $atualiza_dados_pessoais['nome_recomendante'] = trim($dados_antigos_usuario->nomerecomendante);
-
-        //             $atualiza_dados_pessoais['instituicao_recomendante'] = trim($dados_antigos_usuario->instituicaorecomendante);;
-
-        //             $atualiza_dados_pessoais['titulacao_recomendante'] = trim($dados_antigos_usuario->titulacaorecomendante);
-
-        //             $atualiza_dados_pessoais['area_recomendante'] = trim($dados_antigos_usuario->arearecomendante);
-
-        //             $atualiza_dados_pessoais['ano_titulacao'] = trim($dados_antigos_usuario->anoobtencaorecomendante);
-
-        //             $atualiza_dados_pessoais['inst_obtencao_titulo'] = trim($dados_antigos_usuario->instobtencaorecomendante);
-
-        //             $atualiza_dados_pessoais['endereco_recomendante'] = trim($dados_antigos_usuario->enderecorecomendante);
-
-        //             $existe_dados_pessoais->update($atualiza_dados_pessoais);
-        //         }            
-        //     }
+        //     $nova_area->id_area_pos = $area->id_area_pos;
+        //     $nova_area->nome_ptbr = $area->nome;
+        //     $nova_area->nome_en = $area->nome_en;
+        //     $nova_area->nome_es = $area->nome_es;
+        //     $nova_area->created_at = $area->created_at;
+        //     $nova_area->updated_at = $area->updated_at;
+        //     $nova_area->save();
         // }
+        
 
-        // // // //Fim da migração dos dados pessoais do recomendante para o novo sistema
+        // //Fim da Migração das áreas da Pós  para o novo sistema
+        
+        // //Migra as formaçoes para o novo sistema
+
+        $formacoes = DB::connection('pos2')->table('formacao')->orderBy('id','asc')->get();
+
+        foreach ($formacoes as $formacao) {
+            $nova_formacao = new Formacao();
+            $nova_formacao->tipo_ptbr = $formacao->tipo;
+            $nova_formacao->tipo_en = $formacao->tipo_en;
+            $nova_formacao->tipo_es = $formacao->tipo_es;
+            $nova_formacao->nivel = $formacao->nivel;
+            $nova_formacao->created_at = $formacao->created_at;
+            $nova_formacao->updated_at = $formacao->updated_at;
+            $nova_formacao->save();
+        }
+
+        // // //Fim da migração das formacoes para o novo sistema
 
         // // // //Migra dados acadêmicos dos candidatos para o novo sistema.
 
