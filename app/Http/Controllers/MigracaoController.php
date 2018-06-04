@@ -93,134 +93,65 @@ class MigracaoController extends BaseController
 
         // //Fim da Migração das áreas da Pós  para o novo sistema
         
-        // //Migra as formaçoes para o novo sistema
+        // // //Migra as formaçoes para o novo sistema
 
-        $formacoes = DB::connection('pos2')->table('formacao')->orderBy('id','asc')->get();
+        // $formacoes = DB::connection('pos2')->table('formacao')->orderBy('id','asc')->get();
 
-        foreach ($formacoes as $formacao) {
-            $nova_formacao = new Formacao();
-            $nova_formacao->tipo_ptbr = $formacao->tipo;
-            $nova_formacao->tipo_en = $formacao->tipo_en;
-            $nova_formacao->tipo_es = $formacao->tipo_es;
-            $nova_formacao->nivel = $formacao->nivel;
-            $nova_formacao->created_at = $formacao->created_at;
-            $nova_formacao->updated_at = $formacao->updated_at;
-            $nova_formacao->save();
-        }
+        // foreach ($formacoes as $formacao) {
+        //     $nova_formacao = new Formacao();
+        //     $nova_formacao->tipo_ptbr = $formacao->tipo;
+        //     $nova_formacao->tipo_en = $formacao->tipo_en;
+        //     $nova_formacao->tipo_es = $formacao->tipo_es;
+        //     $nova_formacao->nivel = $formacao->nivel;
+        //     $nova_formacao->created_at = $formacao->created_at;
+        //     $nova_formacao->updated_at = $formacao->updated_at;
+        //     $nova_formacao->save();
+        // }
 
-        // // //Fim da migração das formacoes para o novo sistema
+        // // // //Fim da migração das formacoes para o novo sistema
 
-        // // //Migra programas da Pós para o novo sistema.
+        // // // //Migra programas da Pós para o novo sistema.
 
-        $programas_pos = DB::connection('pos2')->table('programa_pos_mat')->orderBy('id_programa_pos','asc')->get();
+        // $programas_pos = DB::connection('pos2')->table('programa_pos_mat')->orderBy('id_programa_pos','asc')->get();
 
-        foreach ($programas_pos as $programa_pos) {
+        // foreach ($programas_pos as $programa_pos) {
             
-            $novo_programa_pos = new ProgramaPos();
+        //     $novo_programa_pos = new ProgramaPos();
 
-            $novo_programa_pos->id_programa_pos = $programa_pos->id_programa_pos;
-            $novo_programa_pos->tipo_programa_pos_ptbr = $programa_pos->tipo_programa_pos;
-            $novo_programa_pos->tipo_programa_pos_en = $programa_pos->tipo_programa_pos_en;
-            $novo_programa_pos->tipo_programa_pos_es = $programa_pos->tipo_programa_pos_es;
-            $novo_programa_pos->created_at = $programa_pos->created_at;
-            $novo_programa_pos->updated_at = $programa_pos->updated_at;
-            $novo_programa_pos->save();
+        //     $novo_programa_pos->id_programa_pos = $programa_pos->id_programa_pos;
+        //     $novo_programa_pos->tipo_programa_pos_ptbr = $programa_pos->tipo_programa_pos;
+        //     $novo_programa_pos->tipo_programa_pos_en = $programa_pos->tipo_programa_pos_en;
+        //     $novo_programa_pos->tipo_programa_pos_es = $programa_pos->tipo_programa_pos_es;
+        //     $novo_programa_pos->created_at = $programa_pos->created_at;
+        //     $novo_programa_pos->updated_at = $programa_pos->updated_at;
+        //     $novo_programa_pos->save();
+        // }
+        
+
+        // // //Fim da migração dos programas da Pós para o novo sistema.
+
+        // //Migra as inscrições já configuradas para o novo sistema
+
+        $inscricoes_configuradas = DB::connection('pos2')->table('configura_inscricao_pos')->orderBy('id_inscricao_pos','asc')->get();
+
+        foreach ($inscricoes_configuradas as $inscricao) {
+            
+            $nova_inscricao_configurada = new ConfiguraInscricaoPos();
+
+            $nova_inscricao_configurada->id_inscricao_pos = $inscricao->id_inscricao_pos;
+            $nova_inscricao_configurada->inicio_inscricao = $inscricao->inicio_inscricao;
+            $nova_inscricao_configurada->fim_inscricao = $inscricao->fim_inscricao;
+            $nova_inscricao_configurada->prazo_carta = $inscricao->prazo_carta;
+            $nova_inscricao_configurada->programa = $inscricao->programa;
+            $nova_inscricao_configurada->edital = $inscricao->edital;
+            $nova_inscricao_configurada->id_coordenador = $inscricao->id_coordenador;
+            $nova_inscricao_configurada->created_at = $inscricao->created_at;
+            $nova_inscricao_configurada->updated_at = $inscricao->updated_at;
+            $nova_inscricao_configurada->save();
         }
         
 
-        // //Fim da migração dos programas da Pós para o novo sistema.
-
-        // // //Migra documentos para o novo sistema
-
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
-
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
-
-
-        // foreach ($users_candidato as $candidato) {
-
-        //     $documentos_candidato = DB::connection('pos2')->table('inscricao_pos_anexos')->where('coduser', $candidato->coduser)->where('tipo', 'documentos')->get();
-
-
-        //     $historicos_candidato = DB::connection('pos2')->table('inscricao_pos_anexos')->where('coduser', $candidato->coduser)->where('tipo', 'historico')->get();
-
-        //     $novo_usuario = new User();
-
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //     foreach ($documentos_candidato as $documento_enviado) {
-
-        //         if (File::exists(public_path('uploads_temporario/').$documento_enviado->nome_arquivo)) {
-                    
-        //             $documento = new Documento();
-
-        //             $documento->id_user = $novo_id_usuario;
-
-        //             foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //                 if ($documento_enviado->data >= $inscricao->inicio_inscricao and $documento_enviado->data <= $inscricao->fim_inscricao ) {
-                            
-        //                     $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
-        //                 }
-        //             }
-
-        //             if (is_null($documento->id_inscricao_pos)) {
-        //                 $documento->id_inscricao_pos = 0;
-        //             }
-
-        //             $nome_crypt_arquivo = md5_file(public_path('uploads_temporario/').$documento_enviado->nome_arquivo);
-
-        //             $doc_pessoais = File::copy(public_path('uploads_temporario/').$documento_enviado->nome_arquivo,storage_path('app/').'uploads/'.$nome_crypt_arquivo.'.'.File::extension($documento_enviado->nome_arquivo));
-
-        //             $documento->nome_arquivo = 'uploads/'.$nome_crypt_arquivo.'.'.File::extension($documento_enviado->nome_arquivo);
-
-        //             $documento->tipo_arquivo = 'Documentos';
-
-        //             $documento->created_at = $documento_enviado->data.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
-
-        //             $documento->save();
-        //         }
-
-                
-        //     }
-
-        //     foreach ($historicos_candidato as $historico_enviado) {
-
-        //         if (File::exists(public_path('uploads_temporario/').$historico_enviado->nome_arquivo)) {
-                    
-        //             $nome_crypt_historico = md5_file(public_path('uploads_temporario/').$historico_enviado->nome_arquivo);
-                    
-        //             $documento = new Documento();
-
-        //             $documento->id_user = $novo_id_usuario;
-
-        //             foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //                 if ($historico_enviado->data >= $inscricao->inicio_inscricao and $historico_enviado->data <= $inscricao->fim_inscricao ) {
-                            
-        //                     $documento->id_inscricao_pos = $inscricao->id_inscricao_pos;
-        //                 }
-        //             }
-
-        //             if (is_null($documento->id_inscricao_pos)) {
-        //                 $documento->id_inscricao_pos = 0;
-        //             }
-
-        //             $historico_pessoais = File::copy(public_path('uploads_temporario/').$historico_enviado->nome_arquivo,storage_path('app/').'uploads/'.$nome_crypt_historico.'.'.File::extension($historico_enviado->nome_arquivo));
-
-        //             $documento->nome_arquivo = 'uploads/'.$nome_crypt_historico.'.'.File::extension($historico_enviado->nome_arquivo);
-
-        //             $documento->tipo_arquivo = 'Histórico';
-
-        //             $documento->created_at = $historico_enviado->data.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
-
-        //             $documento->save();
-        //         }
-        //     }
-            
-        // }
-
-        // // // //Fim da migração dos documentos para o novo sistema.
+        // //Fim da migração das inscrições já configuradas para o novo sistema.
 
         // // // //Migra as cartas de motivação dos candidatos
 
