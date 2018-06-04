@@ -153,133 +153,48 @@ class MigracaoController extends BaseController
 
         // // //Fim da migração das inscrições já configuradas para o novo sistema.
 
-        // // //Migra os arquivos enviados pelo candidatos
+        // // // //Migra os arquivos enviados pelo candidatos
 
-        $arquivos_enviados = DB::connection('pos2')->table('arquivos_enviados')->orderBy('id','asc')->get();
+        // $arquivos_enviados = DB::connection('pos2')->table('arquivos_enviados')->orderBy('id','asc')->get();
 
-        foreach ($arquivos_enviados as $arquivo) {
+        // foreach ($arquivos_enviados as $arquivo) {
 
-            $novo_arquivos_enviados = new Documento();
+        //     $novo_arquivos_enviados = new Documento();
 
-            $novo_arquivos_enviados->id = $arquivo->id;
-            $novo_arquivos_enviados->id_user = $arquivo->id_user;
-            $novo_arquivos_enviados->nome_arquivo = $arquivo->nome_arquivo;
-            $novo_arquivos_enviados->tipo_arquivo = $arquivo->tipo_arquivo;
-            $novo_arquivos_enviados->id_inscricao_pos = $arquivo->id_inscricao_pos;
-            $novo_arquivos_enviados->created_at = $arquivo->created_at;
-            $novo_arquivos_enviados->updated_at = $arquivo->updated_at;
-            $novo_arquivos_enviados->save();
-        }
-
-        // //Fim da migração dos arquivos enviados pelo candidatos
-
-        // // //Migra as escolhas dos candidatos
-
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
-
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
-
-        // foreach ($users_candidato as $candidato) {
-            
-
-        //     $escolhas_candidato_antigo = DB::connection('pos2')->table('inscricao_pos_dados_profissionais_candidato')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
-
-        //     $novo_usuario = new User();
-
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //     foreach ($escolhas_candidato_antigo as $escolha_antiga) {
-                
-        //         $nova_escolha = new EscolhaCandidato();
-
-        //         $nova_escolha->id_user = $novo_id_usuario;
-
-        //         $array_edital = explode('-', $escolha_antiga->edital);
-
-        //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
-
-        //         foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //             if ($inscricao->edital === $edital) {
-                        
-        //                 $nova_escolha->id_inscricao_pos = $inscricao->id_inscricao_pos;
-
-        //             }
-        //         }
-
-        //         if (is_null($nova_escolha->id_inscricao_pos)) {
-                    
-        //             $nova_escolha->id_inscricao_pos = 0;
-        //         }
-
-        //         if (!is_null($escolha_antiga->areadoutorado)) {
-                    
-        //             $nova_escolha->programa_pretendido = 2;
-
-        //         }
-
-        //         if (strtolower(trim($escolha_antiga->cursopos)) === '0') {
-        //             $nova_escolha->programa_pretendido = 3;
-        //         }
-
-        //         if (strtolower(trim($escolha_antiga->cursopos)) === 'doutorado') {
-        //             $nova_escolha->programa_pretendido = 2;
-        //         }
-
-        //         if (strtolower(trim($escolha_antiga->cursopos)) === 'mestrado') {
-        //             $nova_escolha->programa_pretendido = 1;
-        //         }
-
-        //         if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadosnumeros') {
-        //                 $nova_escolha->area_pos = 9;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'teoriadacomputacao') {
-        //                 $nova_escolha->area_pos = 8;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'sistemasdinamicos') {
-        //                 $nova_escolha->area_pos = 7;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'probabilidade') {
-        //                 $nova_escolha->area_pos = 6;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'algebra') {
-        //                 $nova_escolha->area_pos = 1;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analisenumerica') {
-        //                 $nova_escolha->area_pos = 3;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'matematicaaplicada') {
-        //                 $nova_escolha->area_pos = 5;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'analise') {
-        //                 $nova_escolha->area_pos = 2;
-        //             }
-
-        //             if (strtolower(trim($escolha_antiga->areadoutorado)) === 'geometriadiferencial') {
-        //                 $nova_escolha->area_pos = 4;
-        //             }
-
-        //         if ($escolha_antiga->interessebolsa === 'Sim') {
-        //             $nova_escolha->interesse_bolsa = true;
-        //         }else{
-        //             $nova_escolha->interesse_bolsa = false;
-        //         }
-
-        //         $nova_escolha->vinculo_empregaticio = false;
-        //         $nova_escolha->save();
-                
-        //     }
-
+        //     $novo_arquivos_enviados->id = $arquivo->id;
+        //     $novo_arquivos_enviados->id_user = $arquivo->id_user;
+        //     $novo_arquivos_enviados->nome_arquivo = $arquivo->nome_arquivo;
+        //     $novo_arquivos_enviados->tipo_arquivo = $arquivo->tipo_arquivo;
+        //     $novo_arquivos_enviados->id_inscricao_pos = $arquivo->id_inscricao_pos;
+        //     $novo_arquivos_enviados->created_at = $arquivo->created_at;
+        //     $novo_arquivos_enviados->updated_at = $arquivo->updated_at;
+        //     $novo_arquivos_enviados->save();
         // }
 
-        // // //Fim da migração das escolhas dos candidatos
+        // // //Fim da migração dos arquivos enviados pelo candidatos
+
+        // //Migra as cartas de motivação dos candidatos
+
+        $carta_motivacao = DB::connection('pos2')->table('carta_motivacoes')->orderBy('id','asc')->get();
+
+
+        foreach ($carta_motivacao as $motivacao) {
+            
+
+            $nova_carta_motivacao = new CartaMotivacao();
+
+            $nova_carta_motivacao->id = $motivacao->id;
+            $nova_carta_motivacao->id_user = $motivacao->id_user;
+            $nova_carta_motivacao->motivacao = $motivacao->motivacao;
+            $nova_carta_motivacao->concorda_termos = $motivacao->concorda_termos;
+            $nova_carta_motivacao->id_inscricao_pos = $motivacao->id_inscricao_pos;
+            $nova_carta_motivacao->created_at = $motivacao->created_at;
+            $nova_carta_motivacao->updated_at = $motivacao->updated_at;
+            $nova_carta_motivacao->save();
+
+        }
+
+        // //Fim da migração das cartas de motivação dos candidatos
 
         // //Migra os contatos dos recomendantes
 
