@@ -173,121 +173,48 @@ class MigracaoController extends BaseController
 
         // // //Fim da migração dos arquivos enviados pelo candidatos
 
-        // //Migra as cartas de motivação dos candidatos
+        // // //Migra as cartas de motivação dos candidatos
 
-        $carta_motivacao = DB::connection('pos2')->table('carta_motivacoes')->orderBy('id','asc')->get();
+        // $carta_motivacao = DB::connection('pos2')->table('carta_motivacoes')->orderBy('id','asc')->get();
 
 
-        foreach ($carta_motivacao as $motivacao) {
+        // foreach ($carta_motivacao as $motivacao) {
             
 
-            $nova_carta_motivacao = new CartaMotivacao();
+        //     $nova_carta_motivacao = new CartaMotivacao();
 
-            $nova_carta_motivacao->id = $motivacao->id;
-            $nova_carta_motivacao->id_user = $motivacao->id_user;
-            $nova_carta_motivacao->motivacao = $motivacao->motivacao;
-            $nova_carta_motivacao->concorda_termos = $motivacao->concorda_termos;
-            $nova_carta_motivacao->id_inscricao_pos = $motivacao->id_inscricao_pos;
-            $nova_carta_motivacao->created_at = $motivacao->created_at;
-            $nova_carta_motivacao->updated_at = $motivacao->updated_at;
-            $nova_carta_motivacao->save();
+        //     $nova_carta_motivacao->id = $motivacao->id;
+        //     $nova_carta_motivacao->id_user = $motivacao->id_user;
+        //     $nova_carta_motivacao->motivacao = $motivacao->motivacao;
+        //     $nova_carta_motivacao->concorda_termos = $motivacao->concorda_termos;
+        //     $nova_carta_motivacao->id_inscricao_pos = $motivacao->id_inscricao_pos;
+        //     $nova_carta_motivacao->created_at = $motivacao->created_at;
+        //     $nova_carta_motivacao->updated_at = $motivacao->updated_at;
+        //     $nova_carta_motivacao->save();
 
-        }
-
-        // //Fim da migração das cartas de motivação dos candidatos
-
-        // //Migra os contatos dos recomendantes
-
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
-
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
-
-        // foreach ($users_candidato as $candidato) {
-            
-        //     $contatos_recomendantes_antigo = DB::connection('pos2')->table('inscricao_pos_contatos_recomendante')->where('id_aluno', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
-
-        //     $novo_usuario = new User();
-
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-        //     foreach ($contatos_recomendantes_antigo as $antigo_recomendante) {
-
-        //         $array_edital = explode('-', $antigo_recomendante->edital);
-
-        //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
-
-        //         $id_inscricao_pos = null;
-
-        //         foreach ($inscricoes_configuradas as $inscricao) {
-                    
-        //             if ($inscricao->edital === $edital) {
-                        
-        //                 $id_inscricao_pos = $inscricao->id_inscricao_pos;
-
-        //             }
-        //         }
-
-        //         if (is_null($id_inscricao_pos)) {
-        //             $id_inscricao_pos = 0;
-        //         }
-
-
-        //         $novo_usuario_recomendante1 = new User();
-
-        //         if (!is_null($novo_usuario_recomendante1->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante1))))) {
-        //             $novo_id_recomendante1 = $novo_usuario_recomendante1->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante1)))->id_user;
-
-        //             $contatos_novos = new ContatoRecomendante();
-
-        //             $contatos_novos->id_user = $novo_id_usuario;
-
-        //             $contatos_novos->id_recomendante = $novo_id_recomendante1;
-
-        //             $contatos_novos->id_inscricao_pos = $id_inscricao_pos;
-
-        //             $contatos_novos->email_enviado = true;
-
-        //             $contatos_novos->save();
-        //         }
-
-        //         $novo_usuario_recomendante2 = new User();
-
-        //         if (!is_null($novo_usuario_recomendante2->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante2))))) {
-        //             $novo_id_recomendante2 = $novo_usuario_recomendante2->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante2)))->id_user;
-
-        //             $contatos_novos2 = new ContatoRecomendante();
-
-        //             $contatos_novos2->id_user = $novo_id_usuario;
-
-        //             $contatos_novos2->id_recomendante = $novo_id_recomendante2;
-
-        //             $contatos_novos2->id_inscricao_pos = $id_inscricao_pos;
-
-        //             $contatos_novos2->email_enviado = true;
-
-        //             $contatos_novos2->save();
-        //         }
-
-        //         $novo_usuario_recomendante3 = new User();
-
-        //         if (!is_null($novo_usuario_recomendante3->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante3))))) {
-        //             $novo_id_recomendante3 = $novo_usuario_recomendante3->retorna_user_por_email(strtolower(trim($antigo_recomendante->emailprofrecomendante3)))->id_user;
-
-        //             $contatos_novos3 = new ContatoRecomendante();
-
-        //             $contatos_novos3->id_user = $novo_id_usuario;
-
-        //             $contatos_novos3->id_recomendante = $novo_id_recomendante3;
-
-        //             $contatos_novos3->id_inscricao_pos = $id_inscricao_pos;
-
-        //             $contatos_novos3->email_enviado = true;
-
-        //             $contatos_novos3->save();
-        //         }
-        //     }
         // }
-        // //Fim da migração dos contatos dos recomendantes
+
+        // // //Fim da migração das cartas de motivação dos candidatos
+
+        //Migra os contatos dos recomendantes
+
+        $recomendantes_indicados = DB::connection('pos2')->table('contatos_recomendantes')->orderBy('id','asc')->get();
+
+        foreach ($recomendantes_indicados as $recomendante) {
+            
+            $novo_contatos_recomendante = new ContatoRecomendante();
+
+            $novo_contatos_recomendante->id = $recomendante->id;
+            $novo_contatos_recomendante->id_candidato = $recomendante->id_user;
+            $novo_contatos_recomendante->id_recomendante = $recomendante->id_recomendante;
+            $novo_contatos_recomendante->id_inscricao_pos = $recomendante->id_inscricao_pos;
+            $novo_contatos_recomendante->email_enviado = $recomendante->email_enviado;
+            $novo_contatos_recomendante->created_at = $recomendante->created_at;
+            $novo_contatos_recomendante->updated_at = $recomendante->updated_at;
+            $novo_contatos_recomendante->save();
+            
+        }
+        //Fim da migração dos contatos dos recomendantes
         
         // // //Início da migração das cartas de recomendação
         
