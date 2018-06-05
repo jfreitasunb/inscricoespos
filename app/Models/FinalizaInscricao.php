@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FinalizaInscricao extends Model
 {
-    protected $primaryKey = 'id_user';
+    protected $primaryKey = 'id_candidato';
 
     protected $table = 'finaliza_inscricao';
 
