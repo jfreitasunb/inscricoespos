@@ -59,7 +59,7 @@ class RelatorioController extends BaseController
   public function ContaInscricoes($id_inscricao_pos, $programa)
   {
      
-    return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_user', 'escolhas_candidato.id_user')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
+    return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_candidato', 'escolhas_candidato.id_candidato')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
 
   }
 
@@ -103,7 +103,7 @@ class RelatorioController extends BaseController
   {
     $consolida_dados = [];
 
-    $dado_pessoal = new DadoPessoal();
+    $dado_pessoal = new DadoPessoalCandidato();
 
     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
 
@@ -167,7 +167,7 @@ class RelatorioController extends BaseController
 
     $consolida_academico = [];
 
-    $dado_academico = new DadoAcademico();
+    $dado_academico = new DadoAcademicoCandidato();
 
     $formacao = new Formacao();
 
@@ -211,7 +211,7 @@ class RelatorioController extends BaseController
 
     foreach ($contatos_indicados as $recomendante) {
       
-      $dado_recomendante = new DadoRecomendante();
+      $dado_recomendante = new DadoPessoalRecomendante();
 
       $usuario_recomendante = User::find($recomendante->id_recomendante);
 
@@ -227,7 +227,7 @@ class RelatorioController extends BaseController
     $consolida_recomendacao = [];
 
     foreach ($contatos_indicados as $recomendante) {
-      $dado_recomendante = new DadoRecomendante();
+      $dado_recomendante = new DadoPessoalRecomendante();
       $carta_recomendacao = new CartaRecomendacao();
 
       $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_candidato,$id_inscricao_pos);
@@ -273,7 +273,7 @@ class RelatorioController extends BaseController
 
     $usuario_recomendante = User::find($id_recomendante);
 
-    $dado_recomendante = new DadoRecomendante();
+    $dado_recomendante = new DadoPessoalRecomendante();
     $carta_recomendacao = new CartaRecomendacao();
 
     $carta_candidato = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
