@@ -336,23 +336,48 @@ class MigracaoController extends BaseController
         // }
         // // //Fim da migração das cartas de recomendação
         
-        // //Início da migração das finalizações das inscrições
+        // // //Início da migração das finalizações das inscrições
         
-        $finaliza_insc = DB::connection('pos2')->table('finaliza_inscricao')->orderBy('id', 'asc')->get();
+        // $finaliza_insc = DB::connection('pos2')->table('finaliza_inscricao')->orderBy('id', 'asc')->get();
 
-        foreach ($finaliza_insc as $final) {
+        // foreach ($finaliza_insc as $final) {
             
-            $novo_finaliza_inscricao = new FinalizaInscricao();
+        //     $novo_finaliza_inscricao = new FinalizaInscricao();
 
-            $novo_finaliza_inscricao->id_candidato = $final->id_user;
-            $novo_finaliza_inscricao->id_inscricao_pos = $final->id_inscricao_pos;
-            $novo_finaliza_inscricao->finalizada = $final->finalizada;
-            $novo_finaliza_inscricao->created_at = $final->created_at;
-            $novo_finaliza_inscricao->updated_at = $final->updated_at;
-            $novo_finaliza_inscricao->save();
-        }
+        //     $novo_finaliza_inscricao->id_candidato = $final->id_user;
+        //     $novo_finaliza_inscricao->id_inscricao_pos = $final->id_inscricao_pos;
+        //     $novo_finaliza_inscricao->finalizada = $final->finalizada;
+        //     $novo_finaliza_inscricao->created_at = $final->created_at;
+        //     $novo_finaliza_inscricao->updated_at = $final->updated_at;
+        //     $novo_finaliza_inscricao->save();
+        // }
         
-        // //Fim da migração das finalizações das inscrições
+        // // //Fim da migração das finalizações das inscrições
+        
+        // //Início da migração das escolhas do candidato
+        
+        $escolhas_candidato = DB::connection('pos2')->table('escolhas_candidato')->orderBy('id', 'asc')->get();
+
+        foreach ($escolhas_candidato as $escolha) {
+            
+            $nova_escolha_candidatos = new EscolhaCandidato();
+
+            $nova_escolha_candidatos->id_candidato = $escolha->id_user;
+            $nova_escolha_candidatos->programa_pretendido = $escolha->programa_pretendido;
+            if ($escolha->area_pos == 0) {
+                $nova_escolha_candidatos->area_pos = 10;
+            }else{
+                $nova_escolha_candidatos->area_pos = $escolha->area_pos;    
+            }
+            $nova_escolha_candidatos->interesse_bolsa = $escolha->interesse_bolsa;
+            $nova_escolha_candidatos->vinculo_empregaticio = $escolha->vinculo_empregaticio;
+            $nova_escolha_candidatos->id_inscricao_pos = $escolha->id_inscricao_pos;
+            $nova_escolha_candidatos->created_at = $escolha->created_at;
+            $nova_escolha_candidatos->updated_at = $escolha->updated_at;
+            $nova_escolha_candidatos->save();
+
+        }
+        // //Fim da migração das escolhas do candidato
         
   }
 }
