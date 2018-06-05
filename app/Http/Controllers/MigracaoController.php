@@ -249,28 +249,51 @@ class MigracaoController extends BaseController
 
 
         // //Início da migração dos dados pessoais do candidato
-            $users = DB::connection('pos2')->table('dados_pessoais')->where('id_user','>',2)->orderBy('id_user', 'asc')->get();
+            // $users = DB::connection('pos2')->table('dados_pessoais')->where('id_user','>',2)->orderBy('id_user', 'asc')->get();
 
-            foreach ($users as $user) {
+            // foreach ($users as $user) {
                 
-                $novo_dado_pessoal_candidato = new DadoPessoal();
+            //     $novo_dado_pessoal_candidato = new DadoPessoal();
 
-                $novo_dado_pessoal_candidato->id_candidato = $user->id_user;
-                $novo_dado_pessoal_candidato->data_nascimento = $user->data_nascimento;
-                $novo_dado_pessoal_candidato->numerorg = $user->numerorg;
-                $novo_dado_pessoal_candidato->endereco = $user->endereco;
-                $novo_dado_pessoal_candidato->cep = $user->cep;
-                $novo_dado_pessoal_candidato->pais = $user->pais;
-                $novo_dado_pessoal_candidato->estado = $user->estado;
-                $novo_dado_pessoal_candidato->cidade = $user->cidade;
-                $novo_dado_pessoal_candidato->celular = $user->celular;
-                $novo_dado_pessoal_candidato->created_at = $user->created_at;
-                $novo_dado_pessoal_candidato->updated_at = $user->updated_at;
-                $novo_dado_pessoal_candidato->save();
+            //     $novo_dado_pessoal_candidato->id_candidato = $user->id_user;
+            //     $novo_dado_pessoal_candidato->data_nascimento = $user->data_nascimento;
+            //     $novo_dado_pessoal_candidato->numerorg = $user->numerorg;
+            //     $novo_dado_pessoal_candidato->endereco = $user->endereco;
+            //     $novo_dado_pessoal_candidato->cep = $user->cep;
+            //     $novo_dado_pessoal_candidato->pais = $user->pais;
+            //     $novo_dado_pessoal_candidato->estado = $user->estado;
+            //     $novo_dado_pessoal_candidato->cidade = $user->cidade;
+            //     $novo_dado_pessoal_candidato->celular = $user->celular;
+            //     $novo_dado_pessoal_candidato->created_at = $user->created_at;
+            //     $novo_dado_pessoal_candidato->updated_at = $user->updated_at;
+            //     $novo_dado_pessoal_candidato->save();
 
-            }
-
+            // }
 
         // //Fim da migração dos dados pessoais do candidato
+        
+        // //Início da migração dos dados pessoais do recomendante
+        
+        $users_rec = DB::connection('pos2')->table('dados_recomendantes')->orderBy('id', 'asc')->get();
+
+        foreach ($users_rec as $reco) {
+
+            $novo_dado_recomendante = new DadoRecomendante();
+
+            $novo_dado_recomendante->id_recomendante = $reco->id_prof;
+            $novo_dado_recomendante->instituicao_recomendante = $reco->instituicao_recomendante;
+            $novo_dado_recomendante->titulacao_recomendante = $reco->titulacao_recomendante;
+            $novo_dado_recomendante->area_recomendante = $reco->area_recomendante;
+            $novo_dado_recomendante->ano_titulacao = $reco->ano_titulacao;
+            $novo_dado_recomendante->inst_obtencao_titulo = $reco->inst_obtencao_titulo;
+            $novo_dado_recomendante->endereco_recomendante = $reco->endereco_recomendante;
+            $novo_dado_recomendante->atualizado = $reco->atualizado;
+            $novo_dado_recomendante->created_at = $reco->created_at;
+            $novo_dado_recomendante->updated_at = $reco->updated_at;
+            $novo_dado_recomendante->save();
+
+        }
+
+        // //Fim da migração dos dados pessoais do recomendante
   }
 }
