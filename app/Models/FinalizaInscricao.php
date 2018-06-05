@@ -57,20 +57,20 @@ class FinalizaInscricao extends Model
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->get();
     }
 
-    public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_user, $locale)
+    public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_candidato, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_user', $id_user)->join('dados_pessoais', 'dados_pessoais.id_user','finaliza_inscricao.id_user')->join('configura_inscricao_pos','configura_inscricao_pos.id_inscricao_pos', 'finaliza_inscricao.id_inscricao_pos')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'dados_pessoais.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id', 'finaliza_inscricao.id_user', 'finaliza_inscricao.id_inscricao_pos', 'finaliza_inscricao.finalizada', 'configura_inscricao_pos.edital', 'dados_pessoais.nome','programa_pos_mat.'.$nome_coluna)->get()->first();
+        return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_candidato', $id_candidato)->join('dados_pessoais', 'dados_pessoais.id_candidato','finaliza_inscricao.id_candidato')->join('configura_inscricao_pos','configura_inscricao_pos.id_inscricao_pos', 'finaliza_inscricao.id_inscricao_pos')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'dados_pessoais.id_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id', 'finaliza_inscricao.id_candidato', 'finaliza_inscricao.id_inscricao_pos', 'finaliza_inscricao.finalizada', 'configura_inscricao_pos.edital', 'dados_pessoais.nome','programa_pos_mat.'.$nome_coluna)->get()->first();
     }
 
-    public function retorna_dados_inscricao_finalizada($id_inscricao_pos, $id_user)
+    public function retorna_dados_inscricao_finalizada($id_inscricao_pos, $id_candidato)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_user', $id_user)->get()->first();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->get()->first();
     }
 
-    public function retorna_se_finalizou($id_user, $id_inscricao_pos)
+    public function retorna_se_finalizou($id_candidato, $id_inscricao_pos)
     {
-        return $this->select('finalizada')->where('id_user',$id_user)->where('id_inscricao_pos',$id_inscricao_pos)->value('finalizada');
+        return $this->select('finalizada')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->value('finalizada');
     }
 }
