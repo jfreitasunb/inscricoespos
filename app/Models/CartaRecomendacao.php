@@ -51,42 +51,42 @@ class CartaRecomendacao extends Model
         }
     }
 
-    public function reativa_carta_finalizada($id_inscricao_pos, $id_aluno, $id_prof, $completada)
+    public function reativa_carta_finalizada($id_inscricao_pos, $id_candidato, $id_prof, $completada)
     {
 
-        $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_prof)->where('id_aluno', $id_aluno)->update(['completada' => $completada, 'updated_at' => date('Y-m-d H:i:s') ]);
+        $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_prof)->where('id_candidato', $id_candidato)->update(['completada' => $completada, 'updated_at' => date('Y-m-d H:i:s') ]);
     }
 
-    public function conta_cartas_enviadas_por_candidato($id_inscricao_pos, $id_aluno)
+    public function conta_cartas_enviadas_por_candidato($id_inscricao_pos, $id_candidato)
     {
-        return $this->where('id_inscricao_pos',$id_inscricao_pos)->where('id_aluno',$id_aluno)->where('completada',TRUE)->count();
+        return $this->where('id_inscricao_pos',$id_inscricao_pos)->where('id_candidato',$id_candidato)->where('completada',TRUE)->count();
     }
 
     public function retorna_cartas_por_recomendante($id_prof, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_prof', $id_prof)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna)->orderBy('cartas_recomendacoes.created_at', 'desc');
+        return $this->where('id_prof', $id_prof)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna)->orderBy('cartas_recomendacoes.created_at', 'desc');
     }
 
     public function retorna_cartas_para_reativar($id_prof, $id_inscricao_pos, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_prof', $id_prof)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_aluno')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_aluno', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna, 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
+        return $this->where('id_prof', $id_prof)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_prof', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna, 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
     }
 
-    public function retorna_carta_recomendacao($id_prof,$id_aluno,$id_inscricao_pos)
+    public function retorna_carta_recomendacao($id_prof,$id_candidato,$id_inscricao_pos)
     {
 
-        return $this->where("id_prof", $id_prof)->where('id_aluno',$id_aluno)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
+        return $this->where("id_prof", $id_prof)->where('id_candidato',$id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
 
     }
 
-    public function retorna_carta_recomendacao_antiga($id_prof,$id_aluno,$id_inscricao_pos)
+    public function retorna_carta_recomendacao_antiga($id_prof,$id_candidato,$id_inscricao_pos)
     {
 
-        return $this->where("id_prof", $id_prof)->where('id_aluno',$id_aluno)->where('id_inscricao_pos', '!=', $id_inscricao_pos)->get()->first();
+        return $this->where("id_prof", $id_prof)->where('id_candidato',$id_candidato)->where('id_inscricao_pos', '!=', $id_inscricao_pos)->get()->first();
 
     }
 
@@ -97,10 +97,10 @@ class CartaRecomendacao extends Model
 
     }
 
-    public function inicia_carta_candidato($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes)
+    public function inicia_carta_candidato($id_candidato, $id_inscricao_pos, $email_contatos_recomendantes)
     {
         
-        $cartas_inicializadas = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+        $cartas_inicializadas = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
         if (count($cartas_inicializadas) == 0) {
 
@@ -114,9 +114,9 @@ class CartaRecomendacao extends Model
 
                 $nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                $nova_carta_recomendacao->id_aluno = $id_aluno;
+                $nova_carta_recomendacao->id_candidato = $id_candidato;
 
-                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
+                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_candidato, $id_inscricao_pos)->programa_pretendido;
 
                 $nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
 
@@ -126,7 +126,7 @@ class CartaRecomendacao extends Model
 
         if (count($cartas_inicializadas) == 1 or count($cartas_inicializadas) == 2 ) {
            
-           $id_carta_recomendacoes = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
+           $id_carta_recomendacoes = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
 
            for ($i=0; $i < count($id_carta_recomendacoes); $i++) { 
                
@@ -134,7 +134,7 @@ class CartaRecomendacao extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
                 
-                DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
+                DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
             }
 
             
@@ -146,9 +146,9 @@ class CartaRecomendacao extends Model
 
                 $nova_carta_recomendacao->id_prof = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[($j+count($cartas_inicializadas))])->id_user;
 
-                $nova_carta_recomendacao->id_aluno = $id_aluno;
+                $nova_carta_recomendacao->id_candidato = $id_candidato;
 
-                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_aluno, $id_inscricao_pos)->programa_pretendido;
+                $nova_carta_recomendacao->programa_pretendido = $escolhas_candidato->retorna_escolha_candidato($id_candidato, $id_inscricao_pos)->programa_pretendido;
 
                 $nova_carta_recomendacao->id_inscricao_pos = $id_inscricao_pos;
 
@@ -158,7 +158,7 @@ class CartaRecomendacao extends Model
 
         if (count($cartas_inicializadas) == 3) {
 
-           $id_carta_recomendacoes = $this->select('id')->where('id_aluno', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
+           $id_carta_recomendacoes = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->where('completada',false)->pluck('id');
 
 
            for ($i=0; $i < count($email_contatos_recomendantes); $i++) {        
@@ -166,7 +166,7 @@ class CartaRecomendacao extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-               DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
+               DB::table('cartas_recomendacoes')->where('id', $id_carta_recomendacoes[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_prof' => $novo_id_recomendante]);
             }
         }
     }

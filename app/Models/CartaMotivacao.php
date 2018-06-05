@@ -14,10 +14,10 @@ class CartaMotivacao extends Model
         'motivacao',
     ];
 
-    public function retorna_carta_motivacao($id_user,$id_inscricao_pos)
+    public function retorna_carta_motivacao($id_candidato,$id_inscricao_pos)
     {
      
-        return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
+        return $this->where("id_candidato", $id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
 
     }
 }
