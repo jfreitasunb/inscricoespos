@@ -216,90 +216,61 @@ class MigracaoController extends BaseController
         // }
         // //Fim da migração dos contatos dos recomendantes
         
-        // //Início dos dados acadêmicos do candidato
+        // // //Início da migração dos dados acadêmicos do candidato
         
-        $dados_academicos_candidato = DB::connection('pos2')->table('dados_academicos')->orderBy('id','asc')->get();
+        // $dados_academicos_candidato = DB::connection('pos2')->table('dados_academicos')->orderBy('id','asc')->get();
 
 
-        foreach ($dados_academicos_candidato as $academico_candidato) {
+        // foreach ($dados_academicos_candidato as $academico_candidato) {
 
-            $novo_dados_academicos_candidato = new DadoAcademico();
+        //     $novo_dados_academicos_candidato = new DadoAcademico();
 
-            $novo_dados_academicos_candidato->id = $academico_candidato->id;
-            $novo_dados_academicos_candidato->id_candidato = $academico_candidato->id_user;
-            $novo_dados_academicos_candidato->curso_graduacao = $academico_candidato->curso_graduacao;
-            $novo_dados_academicos_candidato->tipo_curso_graduacao = $academico_candidato->tipo_curso_graduacao;
-            $novo_dados_academicos_candidato->instituicao_graduacao = $academico_candidato->instituicao_graduacao;
-            $novo_dados_academicos_candidato->ano_conclusao_graduacao = $academico_candidato->ano_conclusao_graduacao;
-            $novo_dados_academicos_candidato->curso_pos = $academico_candidato->curso_pos;
-            if ($academico_candidato->tipo_curso_pos == 0) {
-                $novo_dados_academicos_candidato->tipo_curso_pos = 9;
-            }else{
-                $novo_dados_academicos_candidato->tipo_curso_pos = $academico_candidato->tipo_curso_pos;
-            }
-            $novo_dados_academicos_candidato->instituicao_pos = $academico_candidato->instituicao_pos;
-            $novo_dados_academicos_candidato->ano_conclusao_pos = $academico_candidato->ano_conclusao_pos;
-            $novo_dados_academicos_candidato->created_at = $academico_candidato->created_at;
-            $novo_dados_academicos_candidato->updated_at = $academico_candidato->updated_at;
-            $novo_dados_academicos_candidato->save();
-
-        }
-
-        // //Fim dos dados acadêmicos do candidato
-
-
-        // // //Migra finalização das inscrições
-        
-        // $users_candidato = DB::connection('pos2')->table('inscricao_pos_login')->where('status', 'candidato')->orderBy('coduser','asc')->get();
-
-        // $inscricoes_configuradas = ConfiguraInscricaoPos::all();
-
-        // foreach ($users_candidato as $candidato) {
-
-        //     $finalizada_antigas = DB::connection('pos2')->table('inscricao_pos_finaliza')->where('coduser', $candidato->coduser)->orderBy('edital', 'asc')->get()->all();
-            
-        //     $novo_usuario = new User();
-
-        //     $novo_id_usuario = $novo_usuario->retorna_user_por_email(strtolower(trim($candidato->login)))->id_user;
-
-            
-
-        //     foreach ($finalizada_antigas as $antigas) {
-
-        //         $array_edital = explode('-', $antigas->edital);
-
-        //         $edital = (string)$array_edital[1].'-'.$array_edital[0];
-
-        //         $id_inscricao_pos = null;
-
-        //         foreach ($inscricoes_configuradas as $inscricao) {
-                
-        //             if ($inscricao->edital === $edital) {
-                    
-        //                 $id_inscricao_pos = $inscricao->id_inscricao_pos;
-        //             }
-        //         }
-
-        //         if (is_null($id_inscricao_pos)) {
-        //             $id_inscricao_pos = 0;
-        //         }
-                
-        //         $nova_finalizada = new FinalizaInscricao();
-
-        //         $nova_finalizada->id_user = $novo_id_usuario;
-
-        //         $nova_finalizada->id_inscricao_pos = $id_inscricao_pos;
-
-        //         $nova_finalizada->finalizada = true;
-
-        //         $nova_finalizada->created_at = $antigas->data.' '.mt_rand(1, 24).':'.mt_rand(10, 60).':'.mt_rand(10, 60);
-
-        //         $nova_finalizada->save();
+        //     $novo_dados_academicos_candidato->id = $academico_candidato->id;
+        //     $novo_dados_academicos_candidato->id_candidato = $academico_candidato->id_user;
+        //     $novo_dados_academicos_candidato->curso_graduacao = $academico_candidato->curso_graduacao;
+        //     $novo_dados_academicos_candidato->tipo_curso_graduacao = $academico_candidato->tipo_curso_graduacao;
+        //     $novo_dados_academicos_candidato->instituicao_graduacao = $academico_candidato->instituicao_graduacao;
+        //     $novo_dados_academicos_candidato->ano_conclusao_graduacao = $academico_candidato->ano_conclusao_graduacao;
+        //     $novo_dados_academicos_candidato->curso_pos = $academico_candidato->curso_pos;
+        //     if ($academico_candidato->tipo_curso_pos == 0) {
+        //         $novo_dados_academicos_candidato->tipo_curso_pos = 9;
+        //     }else{
+        //         $novo_dados_academicos_candidato->tipo_curso_pos = $academico_candidato->tipo_curso_pos;
         //     }
-            
+        //     $novo_dados_academicos_candidato->instituicao_pos = $academico_candidato->instituicao_pos;
+        //     $novo_dados_academicos_candidato->ano_conclusao_pos = $academico_candidato->ano_conclusao_pos;
+        //     $novo_dados_academicos_candidato->created_at = $academico_candidato->created_at;
+        //     $novo_dados_academicos_candidato->updated_at = $academico_candidato->updated_at;
+        //     $novo_dados_academicos_candidato->save();
 
         // }
-        
-        // // Fim da migração da finalização das inscrições
+
+        // // //Fim da migração dos dados acadêmicos do candidato
+
+
+        // //Início da migração dos dados pessoais do candidato
+            $users = DB::connection('pos2')->table('dados_pessoais')->where('id_user','>',2)->orderBy('id_user', 'asc')->get();
+
+            foreach ($users as $user) {
+                
+                $novo_dado_pessoal_candidato = new DadoPessoal();
+
+                $novo_dado_pessoal_candidato->id_candidato = $user->id_user;
+                $novo_dado_pessoal_candidato->data_nascimento = $user->data_nascimento;
+                $novo_dado_pessoal_candidato->numerorg = $user->numerorg;
+                $novo_dado_pessoal_candidato->endereco = $user->endereco;
+                $novo_dado_pessoal_candidato->cep = $user->cep;
+                $novo_dado_pessoal_candidato->pais = $user->pais;
+                $novo_dado_pessoal_candidato->estado = $user->estado;
+                $novo_dado_pessoal_candidato->cidade = $user->cidade;
+                $novo_dado_pessoal_candidato->celular = $user->celular;
+                $novo_dado_pessoal_candidato->created_at = $user->created_at;
+                $novo_dado_pessoal_candidato->updated_at = $user->updated_at;
+                $novo_dado_pessoal_candidato->save();
+
+            }
+
+
+        // //Fim da migração dos dados pessoais do candidato
   }
 }
