@@ -34,11 +34,11 @@ class ContatoRecomendante extends Model
         }
     }
 
-    public function retorna_candidatos_por_recomendante($id_prof, $locale)
+    public function retorna_candidatos_por_recomendante($id_recomendante, $locale)
     {   
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_recomendante', $id_prof)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_user','dados_pessoais.id_user')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('dados_pessoais.nome', 'asc')->get();
+        return $this->where('id_recomendante', $id_recomendante)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_user','dados_pessoais.id_user')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('dados_pessoais.nome', 'asc')->get();
     }
 
     public function retorna_recomendante_candidato($id_user,$id_inscricao_pos)
