@@ -11,7 +11,7 @@ class DadoPessoal extends Model
 {
     protected $primaryKey = 'id_candidato';
 
-    protected $table = 'dados_pessoais';
+    protected $table = 'dados_pessoais_candidato';
 
     protected $fillable = [
         'nome',
