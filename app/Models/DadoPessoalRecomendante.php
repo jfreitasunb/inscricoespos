@@ -4,7 +4,7 @@ namespace Posmat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DadoRecomendante extends Model
+class DadoPessoalRecomendante extends Model
 {
     protected $primaryKey = 'id';
 
@@ -32,7 +32,7 @@ class DadoRecomendante extends Model
 
     public function grava_dados_iniciais_recomendante($id_prof, $nome_recomendante)
     {
-        $dados_recomendantes = new DadoRecomendante();
+        $dados_recomendantes = new DadoPessoalRecomendante();
 
         if (is_null($this->retorna_dados_pessoais_recomendante($id_prof))) {
             

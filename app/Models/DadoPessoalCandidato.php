@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class DadoPessoal extends Model
+class DadoPessoalCandidato extends Model
 {
     protected $primaryKey = 'id_candidato';
 
