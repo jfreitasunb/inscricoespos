@@ -8,7 +8,7 @@ class DadoRecomendante extends Model
 {
     protected $primaryKey = 'id';
 
-    protected $table = 'dados_recomendantes';
+    protected $table = 'dados_pessoais_recomendantes';
 
     protected $fillable = [
         'nome_recomendante',

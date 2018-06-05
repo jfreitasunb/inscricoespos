@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDadosRecomendantesTable extends Migration
+class CreateDadosPessoaisRecomendantesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDadosRecomendantesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dados_recomendantes', function (Blueprint $table) {
+        Schema::create('dados_pessoais_recomendantes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_prof');
-            $table->foreign('id_prof')->references('id_user')->on('users')->onDelete('cascade');
-            $table->string('nome_recomendante',200)->nullable();
+            $table->unsignedInteger('id_recomendante');
+            $table->foreign('id_recomendante')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('instituicao_recomendante',500)->nullable();
             $table->string('titulacao_recomendante',200)->nullable();
             $table->string('area_recomendante',200)->nullable();
