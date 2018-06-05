@@ -297,44 +297,62 @@ class MigracaoController extends BaseController
         // // //Fim da migração dos dados pessoais do recomendante
         
 
-        // //Início da migração das cartas de recomendação
+        // // //Início da migração das cartas de recomendação
         
-        $cartas_recomendacao = DB::connection('pos2')->table('cartas_recomendacoes')->orderBy('id', 'asc')->get();
+        // $cartas_recomendacao = DB::connection('pos2')->table('cartas_recomendacoes')->orderBy('id', 'asc')->get();
 
-        foreach ($cartas_recomendacao as $carta) {
+        // foreach ($cartas_recomendacao as $carta) {
             
-            $nova_carta_recomendacao = new CartaRecomendacao();
+        //     $nova_carta_recomendacao = new CartaRecomendacao();
 
-            $nova_carta_recomendacao->id_recomendante = $carta->id_prof;
-            $nova_carta_recomendacao->id_candidato = $carta->id_aluno;
-            $nova_carta_recomendacao->programa_pretendido = $carta->programa_pretendido;
-            $nova_carta_recomendacao->id_inscricao_pos = $carta->id_inscricao_pos;
-            $nova_carta_recomendacao->tempo_conhece_candidato = $carta->tempo_conhece_candidato;
-            $nova_carta_recomendacao->circunstancia_1 = $carta->circunstancia_1;
-            $nova_carta_recomendacao->circunstancia_2 = $carta->circunstancia_2;
-            $nova_carta_recomendacao->circunstancia_3 = $carta->circunstancia_3;
-            $nova_carta_recomendacao->circunstancia_4 = $carta->circunstancia_4;
-            $nova_carta_recomendacao->circunstancia_outra = $carta->circunstancia_outra;
-            $nova_carta_recomendacao->desempenho_academico = $carta->desempenho_academico;
-            $nova_carta_recomendacao->capacidade_aprender = $carta->capacidade_aprender;
-            $nova_carta_recomendacao->capacidade_trabalhar = $carta->capacidade_trabalhar;
-            $nova_carta_recomendacao->criatividade = $carta->criatividade;
-            $nova_carta_recomendacao->curiosidade = $carta->curiosidade;
-            $nova_carta_recomendacao->esforco = $carta->esforco;
-            $nova_carta_recomendacao->expressao_escrita = $carta->expressao_escrita;
-            $nova_carta_recomendacao->expressao_oral = $carta->expressao_oral;
-            $nova_carta_recomendacao->relacionamento = $carta->relacionamento;
-            $nova_carta_recomendacao->antecedentes_academicos = $carta->antecedentes_academicos;
-            $nova_carta_recomendacao->possivel_aproveitamento = $carta->possivel_aproveitamento;
-            $nova_carta_recomendacao->informacoes_relevantes = $carta->informacoes_relevantes;
-            $nova_carta_recomendacao->como_aluno = $carta->como_aluno;
-            $nova_carta_recomendacao->como_orientando = $carta->como_orientando;
-            $nova_carta_recomendacao->completada = $carta->completada;
-            $nova_carta_recomendacao->created_at = $carta->created_at;
-            $nova_carta_recomendacao->updated_at = $carta->updated_at;
-            $nova_carta_recomendacao->save();
+        //     $nova_carta_recomendacao->id_recomendante = $carta->id_prof;
+        //     $nova_carta_recomendacao->id_candidato = $carta->id_aluno;
+        //     $nova_carta_recomendacao->programa_pretendido = $carta->programa_pretendido;
+        //     $nova_carta_recomendacao->id_inscricao_pos = $carta->id_inscricao_pos;
+        //     $nova_carta_recomendacao->tempo_conhece_candidato = $carta->tempo_conhece_candidato;
+        //     $nova_carta_recomendacao->circunstancia_1 = $carta->circunstancia_1;
+        //     $nova_carta_recomendacao->circunstancia_2 = $carta->circunstancia_2;
+        //     $nova_carta_recomendacao->circunstancia_3 = $carta->circunstancia_3;
+        //     $nova_carta_recomendacao->circunstancia_4 = $carta->circunstancia_4;
+        //     $nova_carta_recomendacao->circunstancia_outra = $carta->circunstancia_outra;
+        //     $nova_carta_recomendacao->desempenho_academico = $carta->desempenho_academico;
+        //     $nova_carta_recomendacao->capacidade_aprender = $carta->capacidade_aprender;
+        //     $nova_carta_recomendacao->capacidade_trabalhar = $carta->capacidade_trabalhar;
+        //     $nova_carta_recomendacao->criatividade = $carta->criatividade;
+        //     $nova_carta_recomendacao->curiosidade = $carta->curiosidade;
+        //     $nova_carta_recomendacao->esforco = $carta->esforco;
+        //     $nova_carta_recomendacao->expressao_escrita = $carta->expressao_escrita;
+        //     $nova_carta_recomendacao->expressao_oral = $carta->expressao_oral;
+        //     $nova_carta_recomendacao->relacionamento = $carta->relacionamento;
+        //     $nova_carta_recomendacao->antecedentes_academicos = $carta->antecedentes_academicos;
+        //     $nova_carta_recomendacao->possivel_aproveitamento = $carta->possivel_aproveitamento;
+        //     $nova_carta_recomendacao->informacoes_relevantes = $carta->informacoes_relevantes;
+        //     $nova_carta_recomendacao->como_aluno = $carta->como_aluno;
+        //     $nova_carta_recomendacao->como_orientando = $carta->como_orientando;
+        //     $nova_carta_recomendacao->completada = $carta->completada;
+        //     $nova_carta_recomendacao->created_at = $carta->created_at;
+        //     $nova_carta_recomendacao->updated_at = $carta->updated_at;
+        //     $nova_carta_recomendacao->save();
+        // }
+        // // //Fim da migração das cartas de recomendação
+        
+        // //Início da migração das finalizações das inscrições
+        
+        $finaliza_insc = DB::connection('pos2')->table('finaliza_inscricao')->orderBy('id', 'asc')->get();
+
+        foreach ($finaliza_insc as $final) {
+            
+            $novo_finaliza_inscricao = new FinalizaInscricao();
+
+            $novo_finaliza_inscricao->id_candidato = $final->id_user;
+            $novo_finaliza_inscricao->id_inscricao_pos = $final->id_inscricao_pos;
+            $novo_finaliza_inscricao->finalizada = $final->finalizada;
+            $novo_finaliza_inscricao->created_at = $final->created_at;
+            $novo_finaliza_inscricao->updated_at = $final->updated_at;
+            $novo_finaliza_inscricao->save();
         }
-        // //Fim da migração das cartas de recomendação
+        
+        // //Fim da migração das finalizações das inscrições
         
   }
 }
