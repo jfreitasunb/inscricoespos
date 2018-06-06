@@ -16,7 +16,7 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoPessoalCandidato;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
@@ -65,60 +65,77 @@ class DadosPessoaisController extends BaseController
 
 		$editar_dados = false;
 		
-		$candidato = new DadoPessoal();
+		$candidato = new DadoPessoalCandidato();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
-		if (!is_null($dados_pessoais->data_nascimento)) {
+		if (is_null($dados_pessoais)) {
+				$dados = [
+					'nome' => $user->nome,
+					'data_nascimento' => '',
+					'numerorg' => '',
+					'emissorrg' => '',
+					'cpf' => '',
+					'data_nascimento' => '',
+					'endereco' => '',
+					'pais' => '',
+					'estado' => '',
+					'cidade' => '',
+					'cep' => '',
+					'celular' => '',
+				];
+		}else{
+			if (!is_null($dados_pessoais->data_nascimento)) {
 			
-			$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
+				$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
 
-			$data_nascimento = $nascimento->format('d/m/Y');
-		}else{
-			$data_nascimento = '';
+				$data_nascimento = $nascimento->format('d/m/Y');
+			}else{
+				$data_nascimento = '';
+			}
+			
+
+			$nome_pais = new Paises;
+
+			$nome_estado = new Estado;
+
+			$nome_cidade = new Cidade;
+
+			if (!is_null($dados_pessoais->pais)) {
+				$pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
+			}else{
+
+				$pais = '';
+			}
+
+			if (!is_null($dados_pessoais->estado)) {
+				$estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
+			}else{
+
+				$estado = '';
+			}
+
+			if (!is_null($dados_pessoais->cidade)) {
+				$cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
+			}else{
+
+				$cidade = '';
+			}
+
+			$dados = [
+				'nome' => $dados_pessoais->nome,
+				'data_nascimento' => $dados_pessoais->data_nascimento,
+				'numerorg' => $dados_pessoais->numerorg,
+				'emissorrg' => $dados_pessoais->emissorrg,
+				'cpf' => $dados_pessoais->cpf,
+				'data_nascimento' => $data_nascimento,
+				'endereco' => $dados_pessoais->endereco,
+				'pais' => $pais,
+				'estado' => $estado,
+				'cidade' => $cidade,
+				'cep' => $dados_pessoais->cep,
+				'celular' => $dados_pessoais->celular,
+			];
 		}
-		
-
-		$nome_pais = new Paises;
-
-		$nome_estado = new Estado;
-
-		$nome_cidade = new Cidade;
-
-		if (!is_null($dados_pessoais->pais)) {
-			$pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
-		}else{
-
-			$pais = '';
-		}
-
-		if (!is_null($dados_pessoais->estado)) {
-			$estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
-		}else{
-
-			$estado = '';
-		}
-
-		if (!is_null($dados_pessoais->cidade)) {
-			$cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
-		}else{
-
-			$cidade = '';
-		}
-
-		$dados = [
-			'nome' => $dados_pessoais->nome,
-			'data_nascimento' => $dados_pessoais->data_nascimento,
-			'numerorg' => $dados_pessoais->numerorg,
-			'emissorrg' => $dados_pessoais->emissorrg,
-			'cpf' => $dados_pessoais->cpf,
-			'data_nascimento' => $data_nascimento,
-			'endereco' => $dados_pessoais->endereco,
-			'pais' => $pais,
-			'estado' => $estado,
-			'cidade' => $cidade,
-			'cep' => $dados_pessoais->cep,
-			'celular' => $dados_pessoais->celular,
-		];
 
 		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
 		
@@ -138,7 +155,7 @@ class DadosPessoaisController extends BaseController
 
 		$editar_dados = true;
 		
-		$candidato = new DadoPessoal();
+		$candidato = new DadoPessoalCandidato();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		$dados = [
@@ -193,10 +210,10 @@ class DadosPessoaisController extends BaseController
 			'celular' => Purifier::clean(trim($request->input('celular'))),
 		];
 
-		$candidato =  DadoPessoal::find($id_user);
+		$candidato =  DadoPessoalCandidato::find($id_user);
 
 		if (is_null($candidato)) {
-			$cria_candidato = new DadoPessoal();
+			$cria_candidato = new DadoPessoalCandidato();
 			$cria_candidato->id_user = $id_user;
 			$cria_candidato->nome = Purifier::clean(trim($request->input('nome')));
 			$cria_candidato->data_nascimento = $data_nascimento;
