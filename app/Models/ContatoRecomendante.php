@@ -38,7 +38,7 @@ class ContatoRecomendante extends Model
     {   
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_recomendante', $id_recomendante)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_candidato','contatos_recomendantes.id_candidato')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'contatos_recomendantes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_candidato','dados_pessoais_candidato.id_candidato')->select('contatos_recomendantes.id_candidato', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'users.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('users.nome', 'asc')->get();
+        return $this->where('id_recomendante', $id_recomendante)->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'contatos_recomendantes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_user','contatos_recomendantes.id_candidato')->select('contatos_recomendantes.id_candidato', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'users.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('users.nome', 'asc')->get();
     }
 
     public function retorna_recomendante_candidato($id_candidato,$id_inscricao_pos)
