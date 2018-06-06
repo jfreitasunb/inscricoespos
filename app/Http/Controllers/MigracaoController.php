@@ -71,6 +71,13 @@ class MigracaoController extends BaseController
             $novo_usuario->updated_at = $user->updated_at;
             $novo_usuario->save(); 
         }
+
+        $tableToCheck = 'users';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_user)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_user_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_user_seq\', '.$highestId->max.')');
         
         //Fim da migração dos usuário para o novo sistema
 
@@ -90,6 +97,12 @@ class MigracaoController extends BaseController
             $nova_area->save();
         }
         
+        $tableToCheck = 'area_pos_mat';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_area_pos)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_area_pos_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_area_pos_seq\', '.$highestId->max.')');
 
         //Fim da Migração das áreas da Pós  para o novo sistema
         
@@ -107,6 +120,13 @@ class MigracaoController extends BaseController
             $nova_formacao->updated_at = $formacao->updated_at;
             $nova_formacao->save();
         }
+
+        $tableToCheck = 'formacao';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
 
         // // //Fim da migração das formacoes para o novo sistema
 
@@ -127,6 +147,12 @@ class MigracaoController extends BaseController
             $novo_programa_pos->save();
         }
         
+        $tableToCheck = 'programa_pos_mat';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
 
         // //Fim da migração dos programas da Pós para o novo sistema.
 
@@ -150,6 +176,12 @@ class MigracaoController extends BaseController
             $nova_inscricao_configurada->save();
         }
         
+        $tableToCheck = 'configura_inscricao_pos';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_inscricao_pos)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_inscricao_pos_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_inscricao_pos_seq\', '.$highestId->max.')');
 
         // //Fim da migração das inscrições já configuradas para o novo sistema.
 
@@ -170,6 +202,13 @@ class MigracaoController extends BaseController
             $novo_arquivos_enviados->updated_at = $arquivo->updated_at;
             $novo_arquivos_enviados->save();
         }
+
+        $tableToCheck = 'arquivos_enviados';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
 
         // //Fim da migração dos arquivos enviados pelo candidatos
 
@@ -194,6 +233,13 @@ class MigracaoController extends BaseController
 
         }
 
+        $tableToCheck = 'carta_motivacoes';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
+
         // //Fim da migração das cartas de motivação dos candidatos
 
         //Migra os contatos dos recomendantes
@@ -214,6 +260,13 @@ class MigracaoController extends BaseController
             $novo_contatos_recomendante->save();
             
         }
+
+        $tableToCheck = 'contatos_recomendantes';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
         //Fim da migração dos contatos dos recomendantes
         
         // //Início da migração dos dados acadêmicos do candidato
@@ -245,6 +298,13 @@ class MigracaoController extends BaseController
 
         }
 
+        $tableToCheck = 'dados_academicos_candidato';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
+
         // //Fim da migração dos dados acadêmicos do candidato
 
 
@@ -270,6 +330,12 @@ class MigracaoController extends BaseController
 
             }
 
+            $tableToCheck = 'dados_pessoais_candidato';
+
+            $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+            $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+            DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
         //Fim da migração dos dados pessoais do candidato
         
         // //Início da migração dos dados pessoais do recomendante
@@ -293,6 +359,13 @@ class MigracaoController extends BaseController
             $novo_dado_recomendante->save();
 
         }
+
+        $tableToCheck = 'dados_pessoais_recomendantes';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
 
         // //Fim da migração dos dados pessoais do recomendante
         
@@ -334,6 +407,14 @@ class MigracaoController extends BaseController
             $nova_carta_recomendacao->updated_at = $carta->updated_at;
             $nova_carta_recomendacao->save();
         }
+
+        $tableToCheck = 'cartas_recomendacoes';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
+
         // //Fim da migração das cartas de recomendação
         
         // //Início da migração das finalizações das inscrições
@@ -351,6 +432,13 @@ class MigracaoController extends BaseController
             $novo_finaliza_inscricao->updated_at = $final->updated_at;
             $novo_finaliza_inscricao->save();
         }
+
+        $tableToCheck = 'finaliza_inscricao';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
         
         // //Fim da migração das finalizações das inscrições
         
@@ -377,6 +465,13 @@ class MigracaoController extends BaseController
             $nova_escolha_candidatos->save();
 
         }
+
+        $tableToCheck = 'escolhas_candidato';
+
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
         // //Fim da migração das escolhas do candidato
         
   }
