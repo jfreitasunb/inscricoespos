@@ -358,6 +358,12 @@ class MigracaoController extends BaseController
             $novo_dado_recomendante->updated_at = $reco->updated_at;
             $novo_dado_recomendante->save();
 
+            $atualiza_usuario = User::find($reco->id_prof);
+
+            $nome_recomendante['nome'] = $reco->nome_recomendante;
+
+            $atualiza_usuario->update($nome_recomendante);
+
         }
 
         $tableToCheck = 'dados_pessoais_recomendantes';
