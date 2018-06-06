@@ -63,7 +63,7 @@ class PesquisaContaController extends AdminController
 			default:
 				$termo_pesquisado = strtolower(trim($request->campo_pesquisa));
 				
-				$temporario = $usuario->retorna_usuario_por_email($termo_pesquisado);
+				$temporario = $usuario->retorna_user_por_email($termo_pesquisado);
 
 				$users[$temporario->id_user]['id_user'] = $temporario->id_user;
 
