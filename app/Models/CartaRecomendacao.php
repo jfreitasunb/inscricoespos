@@ -66,14 +66,14 @@ class CartaRecomendacao extends Model
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_recomendante', $id_recomendante)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_recomendante', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna)->orderBy('cartas_recomendacoes.created_at', 'desc');
+        return $this->where('id_recomendante', $id_recomendante)->where('completada', true)->join('users', 'users.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_recomendante', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'users.nome', 'programa_pos_mat.'.$nome_coluna)->orderBy('cartas_recomendacoes.created_at', 'desc');
     }
 
     public function retorna_cartas_para_reativar($id_recomendante, $id_inscricao_pos, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_recomendante', $id_recomendante)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('dados_pessoais', 'dados_pessoais.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_recomendante', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'dados_pessoais.nome', 'programa_pos_mat.'.$nome_coluna, 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
+        return $this->where('id_recomendante', $id_recomendante)->where('id_inscricao_pos', $id_inscricao_pos)->where('completada', true)->join('users', 'users.id_user','cartas_recomendacoes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'cartas_recomendacoes.programa_pretendido')->select('cartas_recomendacoes.id_recomendante', 'cartas_recomendacoes.id_candidato', 'cartas_recomendacoes.id_inscricao_pos', 'users.nome', 'programa_pos_mat.'.$nome_coluna, 'cartas_recomendacoes.completada')->orderBy('cartas_recomendacoes.created_at', 'desc')->get();
     }
 
     public function retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos)

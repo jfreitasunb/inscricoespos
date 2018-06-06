@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoPessoalRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -57,7 +57,7 @@ class PesquisaRecomendanteController extends ReativarInscricaoCandidatoControlle
 
 		$id_recomendante = $this->getPesquisaCandidato($email_recomendante);
 
-		$dados_pessoais = DadoPessoal::find($id_recomendante);
+		$dados_pessoais = DadoPessoalCandidato::find($id_recomendante);
 
 		$edital = new ConfiguraInscricaoPos;
 
