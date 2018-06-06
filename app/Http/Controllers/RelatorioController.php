@@ -107,8 +107,6 @@ class RelatorioController extends BaseController
 
     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
 
-    // dd($dados_pessoais_candidato);
-
     $paises = new Paises();
 
     $estado = new Estado();
@@ -126,14 +124,6 @@ class RelatorioController extends BaseController
     $idade = Carbon::parse($dados_pessoais_candidato->data_nascimento)->diff(Carbon::now())->format('%y');
 
     $consolida_dados['idade'] = $idade;
-    
-    // $array_data_nascimento = explode('-', $dados_pessoais_candidato->data_nascimento);
-
-    // if ($array_data_hoje[1] < $array_data_nascimento[1]) {
-    //   $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento - 1;
-    // }else{
-    //   $consolida_dados['idade'] = dd($data_hoje - $dados_pessoais_candidato->data_nascimento);
-    // }
     
     $consolida_dados['numerorg'] = $dados_pessoais_candidato->numerorg;
 
@@ -374,8 +364,6 @@ class RelatorioController extends BaseController
   {
     $nome_arquivos = [];
 
-    // dd($local_arquivos_temporarios);
-
     if (is_null($dados_candidato_para_relatorio['area_pos'])) {
       $nome_arquivos['arquivo_relatorio_candidato_temporario'] = $local_arquivos_temporarios.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['programa_pretendido'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       $nome_arquivos['arquivo_relatorio_candidato_final'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['programa_pretendido'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
@@ -409,16 +397,6 @@ class RelatorioController extends BaseController
         $img = new Imagick($nome_documento_banco);
         $img->setImageFormat('pdf');
         $success = $img->writeImage($nome_documento_pdf);
-
-        // $converte_jpg = new Process('convert '.$nome_documento_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_documento_pdf);
-
-        // $converte_jpg->run();
-        
-        // if (!$converte_jpg->isSuccessful()) {
-        //   throw new ProcessFailedException($converte_jpg);
-        // }
-
-        // echo $converte_jpg->getOutput();
       }
 
       if (File::extension($nome_historico_banco) != 'pdf')
@@ -431,14 +409,6 @@ class RelatorioController extends BaseController
         $img = new Imagick($nome_historico_banco);
         $img->setImageFormat('pdf');
         $success = $img->writeImage($nome_historico_pdf);
-
-        // $converte_jpg = new Process('convert '.$nome_historico_banco.' -resize 575x823^\> -gravity center -background white -extent 595x842 '.$nome_historico_pdf);
-        // $converte_jpg->run();
-        // if (!$converte_jpg->isSuccessful()) {
-        //   throw new ProcessFailedException($converte_jpg);
-        // }
-
-        // echo $converte_jpg->getOutput();
       }
 
     $nome_uploads['documento_pdf'] = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
@@ -459,7 +429,6 @@ class RelatorioController extends BaseController
       throw new ProcessFailedException($process);
     }
 
-    // echo $process->getOutput();
   }
 
   public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)
@@ -480,17 +449,13 @@ class RelatorioController extends BaseController
 
       $zip = new ZipArchive;
 
-      if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true )
-      {
-             // Copy all the files from the folder and place them in the archive.
-        
-             foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName )
-             {
-                    $file = basename( $fileName );
-                    $zip->addFile( $fileName, $file );
-             }
+      if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
 
-             $zip->close();
+       foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName ){
+          $file = basename( $fileName );
+          $zip->addFile( $fileName, $file );
+       }
+       $zip->close();
       }
     }
 
@@ -600,10 +565,6 @@ class RelatorioController extends BaseController
     $locale_relatorio = 'pt-br';
 
     $relatorio = ConfiguraInscricaoPos::find($id_inscricao_pos);
-
-    // $relatorios_disponivel = $relatorio->retorna_edital_vigente();
-    // 
-    
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->edital);
 
