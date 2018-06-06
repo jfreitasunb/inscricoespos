@@ -20,11 +20,6 @@ class DadoPessoalRecomendante extends Model
         'endereco_recomendante',
     ];
 
-    public function retorna_dados_pessoais_recomendante($id_recomendante)
-    {
-        return $this->where("id_recomendante", $id_recomendante)->get()->first();
-    }
-
     public function dados_atualizados_recomendante($id_recomendante)
     {
         return $this->select('atualizado')->where("id_recomendante", $id_recomendante)->get()->first();
