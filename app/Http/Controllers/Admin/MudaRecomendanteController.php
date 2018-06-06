@@ -33,6 +33,14 @@ class MudaRecomendanteController extends AdminController
 		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('modo_pesquisa'));
 	}
 
+	public function getPesquisaCandidato($email_candidato)
+	{
+	
+		$user = new User;
+
+		return $user->retorna_user_por_email($email_candidato)->id_user;
+	}
+
 	public function postPesquisarRecomendantes(Request $request)
 	{
 
