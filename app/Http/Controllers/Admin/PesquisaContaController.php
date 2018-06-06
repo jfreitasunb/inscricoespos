@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -54,7 +54,7 @@ class PesquisaContaController extends AdminController
 			case 'nome':
 				$termo_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
 
-				$dado_pessoal = new DadoPessoal;
+				$dado_pessoal = new DadoPessoalCandidato;
 
 				$users = $dado_pessoal->retorna_user_por_nome($termo_pesquisado);
 				
