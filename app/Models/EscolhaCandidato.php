@@ -28,7 +28,7 @@ class EscolhaCandidato extends Model
 
     public function usuarios_nao_finalizados($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->join('users', 'users.id_candidato', 'escolhas_candidato.id_candidato')->join('programa_pos_mat', 'programa_pos_mat.id_programa_pos', 'escolhas_candidato.programa_pretendido')->whereNotIn('escolhas_candidato.id_candidato', function($query) use ($id_inscricao_pos) {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->join('users', 'users.id_user', 'escolhas_candidato.id_candidato')->join('programa_pos_mat', 'programa_pos_mat.id_programa_pos', 'escolhas_candidato.programa_pretendido')->whereNotIn('escolhas_candidato.id_candidato', function($query) use ($id_inscricao_pos) {
             $query->select('id_candidato')->from('finaliza_inscricao')->where('id_inscricao_pos', $id_inscricao_pos);
         } )->select('users.nome', 'programa_pos_mat.tipo_programa_pos_ptbr')->orderBy('programa_pos_mat.tipo_programa_pos_ptbr');
     }
