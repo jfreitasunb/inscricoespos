@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoPessoalRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -44,28 +44,25 @@ class ListaTodasIndicacoesController extends AdminController
 
 			$recomendante_candidato = new ContatoRecomendante();
 
-			$recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($inscricao->id_user,$inscricao->id_inscricao_pos);
+			$recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($inscricao->id_candidato,$inscricao->id_inscricao_pos);
 
-			$dados_para_template[$inscricao->id_user]['nome_candidato'] = $inscricao->nome;
-			$dados_para_template[$inscricao->id_user]['email'] = $inscricao->email;
-			$dados_para_template[$inscricao->id_user]['tipo_programa_pos'] = $inscricao->tipo_programa_pos_ptbr;
+			$dados_para_template[$inscricao->id_candidato]['nome_candidato'] = $inscricao->nome;
+			$dados_para_template[$inscricao->id_candidato]['email'] = $inscricao->email;
+			$dados_para_template[$inscricao->id_candidato]['tipo_programa_pos'] = $inscricao->tipo_programa_pos_ptbr;
 			$i = 1;
 			foreach ($recomendantes_candidato as $recomendante) {
 
-
-				$dado_pessoal_recomendante = new DadoRecomendante();
-
 				$usuario_recomendante = User::find($recomendante->id_recomendante);
 
-				$dados_para_template[$inscricao->id_user]['email_recomendante_'.$i] = $usuario_recomendante->email;
+				$dados_para_template[$inscricao->id_candidato]['email_recomendante_'.$i] = $usuario_recomendante->email;
 
-				$dados_para_template[$inscricao->id_user]['nome_recomendante_'.$i] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+				$dados_para_template[$inscricao->id_candidato]['nome_recomendante_'.$i] = $usuario_recomendante->nome;
 
 				$carta_recomendacao = new CartaRecomendacao();
 				
-				$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$inscricao->id_user,$inscricao->id_inscricao_pos);
+				$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$inscricao->id_candidato,$inscricao->id_inscricao_pos);
 
-				$dados_para_template[$inscricao->id_user]['status_carta_'.$i] = $carta_aluno->completada;
+				$dados_para_template[$inscricao->id_candidato]['status_carta_'.$i] = $carta_aluno->completada;
 
 				$i++;
 			}
