@@ -731,7 +731,7 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
 
-      $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_user;
+      $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_candidato;
 
       foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
          $dados_candidato_para_relatorio[$key] = $value;
