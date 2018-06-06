@@ -31,10 +31,4 @@ class DadoPessoalCandidato extends Model
         return $this->where('id_candidato', $id_candidato)->join('users', 'users.id_user', 'dados_pessoais_candidato.id_candidato')->select('users.nome', 'users.email', 'dados_pessoais_candidato.*')->get()->first();
 
     }
-
-    public function retorna_user_por_nome($nome_pesquisado)
-    {
-        return $this->where('nome', 'ILIKE', $nome_pesquisado.'%')->get();
-    }
-
 }
