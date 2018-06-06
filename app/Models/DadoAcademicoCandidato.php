@@ -24,10 +24,10 @@ class DadoAcademicoCandidato extends Model
         'ano_conclusao_pos',
     ];
 
-public function retorna_dados_academicos($id_user)
+public function retorna_dados_academicos($id_candidato)
     {
 
-        return $this->find($id_user);
+        return $this->find($id_candidato);
 
     }
 }
