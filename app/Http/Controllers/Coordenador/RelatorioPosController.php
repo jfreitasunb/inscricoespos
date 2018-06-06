@@ -23,6 +23,7 @@ use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\BaseController;
 use Posmat\Http\Controllers\CidadeController;
 use Posmat\Http\Controllers\AuthController;
+use Posmat\Http\Controllers\RelatorioController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 
@@ -89,7 +90,7 @@ class RelatorioPosController extends CoordenadorController
 
 			$cartas = new CartaRecomendacao();
 
-			$total_cartas[$candidato->id_user]=  $cartas->conta_cartas_enviadas_por_candidato($candidato->id_inscricao_pos, $candidato->id_user);
+			$total_cartas[$candidato->id_candidato]=  $cartas->conta_cartas_enviadas_por_candidato($candidato->id_inscricao_pos, $candidato->id_candidato);
 		}
 
 		$classes_linhas[0] = 'danger';
