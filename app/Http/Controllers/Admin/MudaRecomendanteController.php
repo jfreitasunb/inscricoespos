@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoPessoalRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
 use Posmat\Mail\EmailVerification;
 use Posmat\Http\Controllers\Controller;
@@ -41,6 +41,7 @@ class MudaRecomendanteController extends AdminController
 		return $user->retorna_user_por_email($email_candidato)->id_user;
 	}
 
+
 	public function postPesquisarRecomendantes(Request $request)
 	{
 
@@ -52,7 +53,7 @@ class MudaRecomendanteController extends AdminController
 
 		$id_aluno = $this->getPesquisaCandidato($email_candidato);
 
-		$dados_pessoais = DadoPessoal::find($id_aluno);
+		$dados_pessoais = User::find($id_aluno);
 
 		$edital = new ConfiguraInscricaoPos;
 
@@ -86,15 +87,15 @@ class MudaRecomendanteController extends AdminController
 
 		foreach ($indicacoes_candidato as $indicacao) {
 			
-			$dados_pessoais_recomendante = new DadoRecomendante;
+			$dados_pessoais_recomendante = User::find($indicacao->id_recomendante);
 
 			$array_recomendantes[$indicacao->id_recomendante]['id'] = $indicacao->id;
 
-			$array_recomendantes[$indicacao->id_recomendante]['nome_recomendante'] = $dados_pessoais_recomendante->retorna_dados_pessoais_recomendante($indicacao->id_recomendante)->nome_recomendante;
+			$array_recomendantes[$indicacao->id_recomendante]['nome_recomendante'] = $dados_pessoais_recomendante->nome;
 
-			$array_recomendantes[$indicacao->id_recomendante]['email_recomendante'] = User::find($indicacao->id_recomendante)->email;
+			$array_recomendantes[$indicacao->id_recomendante]['email_recomendante'] = $dados_pessoais_recomendante->email;
 		}
-
+		
 		$modo_pesquisa = false;
 
 		return view('templates.partials.admin.altera_recomendantes_candidato')->with(compact('array_recomendantes', 'candidato', 'modo_pesquisa'));
@@ -145,7 +146,7 @@ class MudaRecomendanteController extends AdminController
 
             $id_novo_recomendante = $novo_usuario->id_user;
             
-            $dados_iniciais_recomendante = new DadoRecomendante();
+            $dados_iniciais_recomendante = new DadoPessoalRecomendante();
 
             $grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_novo_recomendante, $nome_recomendante);
 
