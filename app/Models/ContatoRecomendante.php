@@ -38,27 +38,27 @@ class ContatoRecomendante extends Model
     {   
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
-        return $this->where('id_recomendante', $id_recomendante)->join('dados_pessoais', 'dados_pessoais.id_user','contatos_recomendantes.id_user')->join('escolhas_candidato', 'escolhas_candidato.id_user', 'contatos_recomendantes.id_user')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_user','dados_pessoais.id_user')->select('contatos_recomendantes.id_user', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'dados_pessoais.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('dados_pessoais.nome', 'asc')->get();
+        return $this->where('id_recomendante', $id_recomendante)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_candidato','contatos_recomendantes.id_candidato')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'contatos_recomendantes.id_candidato')->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->join('users','users.id_candidato','dados_pessoais_candidato.id_candidato')->select('contatos_recomendantes.id_candidato', 'contatos_recomendantes.id_recomendante', 'contatos_recomendantes.id_inscricao_pos', 'contatos_recomendantes.created_at', 'users.nome', 'users.email', 'programa_pos_mat.'.$nome_coluna)->orderBy('users.nome', 'asc')->get();
     }
 
-    public function retorna_recomendante_candidato($id_user,$id_inscricao_pos)
+    public function retorna_recomendante_candidato($id_candidato,$id_inscricao_pos)
     {
 
-        return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
-
-    }
-
-    public function retorna_indicacoes($id_user,$id_inscricao_pos)
-    {
-
-        return $this->where("id_recomendante", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get();
+        return $this->where("id_candidato", $id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get();
 
     }
 
-    public function processa_indicacoes($id_aluno, $id_inscricao_pos, $email_contatos_recomendantes)
+    public function retorna_indicacoes($id_recomendante,$id_inscricao_pos)
     {
 
-        $candidato_recomendantes = $this->retorna_recomendante_candidato($id_aluno, $id_inscricao_pos);
+        return $this->where("id_recomendante", $id_recomendante)->where("id_inscricao_pos", $id_inscricao_pos)->get();
+
+    }
+
+    public function processa_indicacoes($id_candidato, $id_inscricao_pos, $email_contatos_recomendantes)
+    {
+
+        $candidato_recomendantes = $this->retorna_recomendante_candidato($id_candidato, $id_inscricao_pos);
 
         if (count($candidato_recomendantes) == 0) {
 
@@ -67,7 +67,7 @@ class ContatoRecomendante extends Model
                 $novo_recomendante = new ContatoRecomendante();
                 $acha_recomendante = new User();
 
-                $novo_recomendante->id_user = $id_aluno;
+                $novo_recomendante->id_recomendante = $id_candidato;
 
                 $novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
                         
@@ -79,7 +79,7 @@ class ContatoRecomendante extends Model
 
         if (count($candidato_recomendantes) == 1 or count($candidato_recomendantes) == 2 ) {
            
-           $id_atualizacao = $this->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+           $id_atualizacao = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
            for ($i=0; $i < count($id_atualizacao); $i++) { 
                
@@ -87,7 +87,7 @@ class ContatoRecomendante extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
             }
 
             
@@ -95,7 +95,7 @@ class ContatoRecomendante extends Model
                 $novo_recomendante = new ContatoRecomendante();
                 $acha_recomendante = new User();
 
-                $novo_recomendante->id_user = $id_aluno;
+                $novo_recomendante->id_candidato = $id_candidato;
 
                 $novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[($j+count($candidato_recomendantes))])->id_user;
                         
@@ -107,7 +107,7 @@ class ContatoRecomendante extends Model
 
         if (count($candidato_recomendantes) == 3) {
 
-           $id_atualizacao = $this->select('id')->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+           $id_atualizacao = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
 
            for ($i=0; $i < count($email_contatos_recomendantes); $i++) {        
@@ -115,7 +115,7 @@ class ContatoRecomendante extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
             }
         }
     }
