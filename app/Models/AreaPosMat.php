@@ -52,7 +52,7 @@ class AreaPosMat extends Model
             return null;
         }else{
             return $this->select($nome_coluna)
-            ->where('id_area_pos', $area_pos)
+            ->where('id_area_pos', $area_pos)->where('id_area_pos', '!=', 10)
             ->value($nome_coluna);
         }   
     }
