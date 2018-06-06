@@ -20,23 +20,23 @@ class DadoPessoalRecomendante extends Model
         'endereco_recomendante',
     ];
 
-    public function retorna_dados_pessoais_recomendante($id_user)
+    public function retorna_dados_pessoais_recomendante($id_recomendante)
     {
-        return $this->where("id_prof", $id_user)->get()->first();
+        return $this->where("id_recomendante", $id_recomendante)->get()->first();
     }
 
-    public function dados_atualizados_recomendante($id_user)
+    public function dados_atualizados_recomendante($id_recomendante)
     {
-        return $this->select('atualizado')->where("id_prof", $id_user)->get()->first();
+        return $this->select('atualizado')->where("id_recomendante", $id_recomendante)->get()->first();
     }
 
-    public function grava_dados_iniciais_recomendante($id_prof, $nome_recomendante)
+    public function grava_dados_iniciais_recomendante($id_recomendante, $nome_recomendante)
     {
         $dados_recomendantes = new DadoPessoalRecomendante();
 
-        if (is_null($this->retorna_dados_pessoais_recomendante($id_prof))) {
+        if (is_null($this->retorna_dados_pessoais_recomendante($id_recomendante))) {
             
-            $dados_recomendantes->id_prof = $id_prof;
+            $dados_recomendantes->id_recomendante = $id_recomendante;
 
             $dados_recomendantes->nome_recomendante = $nome_recomendante;
 
