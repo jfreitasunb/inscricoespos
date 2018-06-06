@@ -107,6 +107,8 @@ class RelatorioController extends BaseController
 
     $dados_pessoais_candidato = $dado_pessoal->retorna_dados_pessoais($id_candidato);
 
+    // dd($dados_pessoais_candidato);
+
     $paises = new Paises();
 
     $estado = new Estado();
@@ -120,14 +122,18 @@ class RelatorioController extends BaseController
     $consolida_dados['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
 
     $array_data_hoje = explode('-', $data_hoje);
+    
+    $idade = Carbon::parse($dados_pessoais_candidato->data_nascimento)->diff(Carbon::now())->format('%y');
 
-    $array_data_nascimento = explode('-', $dados_pessoais_candidato->data_nascimento);
+    $consolida_dados['idade'] = $idade;
+    
+    // $array_data_nascimento = explode('-', $dados_pessoais_candidato->data_nascimento);
 
-    if ($array_data_hoje[1] < $array_data_nascimento[1]) {
-      $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento - 1;
-    }else{
-      $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento;
-    }
+    // if ($array_data_hoje[1] < $array_data_nascimento[1]) {
+    //   $consolida_dados['idade'] = $data_hoje - $dados_pessoais_candidato->data_nascimento - 1;
+    // }else{
+    //   $consolida_dados['idade'] = dd($data_hoje - $dados_pessoais_candidato->data_nascimento);
+    // }
     
     $consolida_dados['numerorg'] = $dados_pessoais_candidato->numerorg;
 
@@ -618,7 +624,7 @@ class RelatorioController extends BaseController
 
       $dados_candidato_para_relatorio['edital'] = $relatorio->edital;
 
-      $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_user;
+      $dados_candidato_para_relatorio['id_aluno'] = $candidato->id_candidato;
 
       foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
          $dados_candidato_para_relatorio[$key] = $value;
