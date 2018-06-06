@@ -21,25 +21,25 @@ class EscolhaCandidato extends Model
         'id_inscricao_pos',
     ];
 
-    public function retorna_escolha_candidato($id_user,$id_inscricao_pos)
+    public function retorna_escolha_candidato($id_candidato,$id_inscricao_pos)
     {
-        return $this->where("id_user", $id_user)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
+        return $this->where("id_candidato", $id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get()->first();
     }
 
     public function usuarios_nao_finalizados($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->join('dados_pessoais', 'dados_pessoais.id_user', 'escolhas_candidato.id_user')->join('programa_pos_mat', 'programa_pos_mat.id_programa_pos', 'escolhas_candidato.programa_pretendido')->whereNotIn('escolhas_candidato.id_user', function($query) use ($id_inscricao_pos) {
-            $query->select('id_user')->from('finaliza_inscricao')->where('id_inscricao_pos', $id_inscricao_pos);
-        } )->select('dados_pessoais.nome', 'programa_pos_mat.tipo_programa_pos_ptbr')->orderBy('programa_pos_mat.tipo_programa_pos_ptbr');
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->join('users', 'users.id_candidato', 'escolhas_candidato.id_candidato')->join('programa_pos_mat', 'programa_pos_mat.id_programa_pos', 'escolhas_candidato.programa_pretendido')->whereNotIn('escolhas_candidato.id_candidato', function($query) use ($id_inscricao_pos) {
+            $query->select('id_candidato')->from('finaliza_inscricao')->where('id_inscricao_pos', $id_inscricao_pos);
+        } )->select('users.nome', 'programa_pos_mat.tipo_programa_pos_ptbr')->orderBy('programa_pos_mat.tipo_programa_pos_ptbr');
     }
 
-    public function grava_escolhas_candidato($id_aluno,$id_inscricao_pos,$request)
+    public function grava_escolhas_candidato($id_candidato,$id_inscricao_pos,$request)
     {
 
-        $candidato_fez_escolhas = $this->retorna_escolha_candidato($id_aluno,$id_inscricao_pos);
+        $candidato_fez_escolhas = $this->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
         if (count($candidato_fez_escolhas) > 0) {
-            $atualiza_escolhas = $this->where('id_user', $id_aluno)->where('id_inscricao_pos',$id_inscricao_pos);
+            $atualiza_escolhas = $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos);
             $dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
             if ($request->programa_pretendido == 1) {
                 $dados_escolhas['area_pos'] = 0;
@@ -51,7 +51,7 @@ class EscolhaCandidato extends Model
             $atualiza_escolhas->update($dados_escolhas);
         }else{
             $escolhas_candidato = new EscolhaCandidato();
-            $escolhas_candidato->id_user = $id_aluno;
+            $escolhas_candidato->id_candidato = $id_candidato;
             $escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
 
             if ($request->programa_pretendido == 1) {
@@ -73,6 +73,6 @@ class EscolhaCandidato extends Model
 
     public function retorna_inscritos_por_area_pos($area_pos, $id_inscricao_pos)
     {
-        return $this->select('id_user')->where('programa_pretendido', '2')->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_user');
+        return $this->select('id_candidato')->where('programa_pretendido', '2')->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_candidato');
     }
 }
