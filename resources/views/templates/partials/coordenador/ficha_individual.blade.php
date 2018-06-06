@@ -23,11 +23,11 @@
       </thead>
       <tbody>
         @foreach( $inscricoes_finalizadas as $finalizada)
-          <tr class="{{ $classes_linhas[$total_cartas[$finalizada['id_user']]] }}">
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['nome'] }}</a></td>
-            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_user']]) }}">{{ $finalizada['tipo_programa_pos_ptbr'] }}</a></td>
-            <td>@if($id_aluno_pdf == $finalizada['id_user']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
-            <td>{{ $total_cartas[$finalizada['id_user']] }}</td>
+          <tr class="{{ $classes_linhas[$total_cartas[$finalizada['id_candidato']]] }}">
+            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_candidato']]) }}">{{ $finalizada['nome'] }}</a></td>
+            <td><a href=" {{ route('ver.ficha.individual', ['id_inscricao_pos' => $finalizada['id_inscricao_pos'],'id_aluno' => $finalizada['id_candidato']]) }}">{{ $finalizada['tipo_programa_pos_ptbr'] }}</a></td>
+            <td>@if($id_aluno_pdf == $finalizada['id_candidato']) <a target="_blank" href="{{asset($nome_pdf)}}" > Ficha de Inscrição </a> @endif</td>
+            <td>{{ $total_cartas[$finalizada['id_candidato']] }}</td>
           </tr>
         @endforeach
       </tbody>
