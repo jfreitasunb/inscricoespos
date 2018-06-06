@@ -54,28 +54,15 @@ class PesquisaContaController extends AdminController
 			case 'nome':
 				$termo_pesquisado = strtr($request->campo_pesquisa, $this->unwanted_array);
 
-				$dado_pessoal = new DadoPessoalCandidato;
-
-				$users = $dado_pessoal->retorna_user_por_nome($termo_pesquisado);
+				$users = $usuario->retorna_user_por_nome($termo_pesquisado);
 				
 				break;
 			
 			default:
 				$termo_pesquisado = strtolower(trim($request->campo_pesquisa));
 				
-				$temporario = $usuario->retorna_user_por_email($termo_pesquisado);
+				$users = $usuario->retorna_user_por_email($termo_pesquisado);
 
-				$users[$temporario->id_user]['id_user'] = $temporario->id_user;
-
-				$users[$temporario->id_user]['nome'] = $temporario->nome;;
-
-				$users[$temporario->id_user]['email'] = $temporario->email;
-
-				$users[$temporario->id_user]['locale'] = $temporario->locale;
-
-				$users[$temporario->id_user]['user_type'] = $temporario->user_type;
-
-				$users[$temporario->id_user]['ativo'] = $temporario->ativo;
 				break;
 		}
 
