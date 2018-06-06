@@ -26,8 +26,8 @@
 	{!! Form::open(array('route' => 'reativar.carta', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 	{!! Form::hidden('id_inscricao_pos', $carta->id_inscricao_pos, []) !!}
-	{!! Form::hidden('id_aluno', $carta->id_aluno, []) !!}
-	{!! Form::hidden('id_recomendante', $carta->id_prof, []) !!}
+	{!! Form::hidden('id_aluno', $carta->id_candidato, []) !!}
+	{!! Form::hidden('id_recomendante', $carta->id_recomendante, []) !!}
 	
 	<div class="row">
 		<div class="form-group">
