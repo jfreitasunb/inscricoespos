@@ -16,12 +16,12 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoPessoalCandidato;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
-use Posmat\Models\DadoAcademico;
+use Posmat\Models\DadoAcademicoCandidato;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -78,7 +78,7 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->back();
 			}
 
-			$dados_pessoais = new DadoPessoal();
+			$dados_pessoais = new DadoPessoalCandidato();
 
 			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_user);
 
@@ -131,7 +131,7 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->back();
 			}
 
-			$informou_dados_academicos = DadoAcademico::find($id_user);
+			$informou_dados_academicos = DadoAcademicoCandidato::find($id_user);
 
 
 			if (is_null($informou_dados_academicos)) {
@@ -188,7 +188,7 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->route('motivacao.documentos');
 			}
 
-			$dado_pessoal_candidato = new DadoPessoal();
+			$dado_pessoal_candidato = new DadoPessoalCandidato();
 
 			$dados_pessoais_candidato = $dado_pessoal_candidato->retorna_dados_pessoais($id_user);
 
@@ -206,7 +206,7 @@ class FinalizarInscricaoController extends BaseController
 				
 				if (!$recomendante->email_enviado) {
 
-					$dado_pessoal_recomendante = new DadoRecomendante();
+					$dado_pessoal_recomendante = new DadoPessoalRecomendante();
 
 
 					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
