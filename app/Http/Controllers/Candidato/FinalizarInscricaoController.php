@@ -53,7 +53,7 @@ class FinalizarInscricaoController extends BaseController
 
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 
 		$locale_candidato = Session::get('locale');
 
@@ -69,7 +69,7 @@ class FinalizarInscricaoController extends BaseController
 
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
 
@@ -80,9 +80,9 @@ class FinalizarInscricaoController extends BaseController
 
 			$dados_pessoais = new DadoPessoalCandidato();
 
-			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_user);
+			$dados_pessoais_candidato = $dados_pessoais->retorna_dados_pessoais($id_candidato);
 
-			$nome_candidato = $dados_pessoais_candidato->nome;
+			$nome_candidato = User::find($id_candidato)->nome;
 
 			if (is_null($dados_pessoais_candidato->data_nascimento)) {
 				
@@ -93,7 +93,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_user, $id_inscricao_pos, $locale_candidato);
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_candidato, $id_inscricao_pos, $locale_candidato);
 
 
 			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
@@ -109,7 +109,7 @@ class FinalizarInscricaoController extends BaseController
 
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 
 		$locale_fixo = 'en';
 
@@ -123,7 +123,7 @@ class FinalizarInscricaoController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
 				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
@@ -131,7 +131,7 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->back();
 			}
 
-			$informou_dados_academicos = DadoAcademicoCandidato::find($id_user);
+			$informou_dados_academicos = DadoAcademicoCandidato::find($id_candidato);
 
 
 			if (is_null($informou_dados_academicos)) {
@@ -143,9 +143,11 @@ class FinalizarInscricaoController extends BaseController
 
 			$informou_escolha = new EscolhaCandidato();
 
-			$escolheu = $informou_escolha->retorna_escolha_candidato($id_user,$id_inscricao_pos);
+			$escolheu = $informou_escolha->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
+			
 
-			if (count($informou_escolha) == 0) {
+
+			if (is_null($escolheu)) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_escolha'),'warning');
 
@@ -154,7 +156,7 @@ class FinalizarInscricaoController extends BaseController
 
 			$recomendantes_candidato = new ContatoRecomendante();
 
-			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
 
 
 			if (count($informou_recomendantes) < 3) {
@@ -166,9 +168,9 @@ class FinalizarInscricaoController extends BaseController
 
 			$informou_motivacao = new CartaMotivacao();
 
-			$fez_carta_motivacao = $informou_motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
+			$fez_carta_motivacao = $informou_motivacao->retorna_carta_motivacao($id_candidato, $id_inscricao_pos);
 
-			if (count($fez_carta_motivacao) == 0) {
+			if (is_null($fez_carta_motivacao)) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_motivacao'),'warning');
 
@@ -177,24 +179,22 @@ class FinalizarInscricaoController extends BaseController
 
 			$documentos = new Documento();
 
-			$enviou_historico = $documentos->retorna_historico($id_user, $id_inscricao_pos);
+			$enviou_historico = $documentos->retorna_historico($id_candidato, $id_inscricao_pos);
 
-			$enviou_documentos = $documentos->retorna_documento($id_user, $id_inscricao_pos);
+			$enviou_documentos = $documentos->retorna_documento($id_candidato, $id_inscricao_pos);
 
-			if (count($enviou_historico) == 0 or count($enviou_documentos) == 0) {
+			if (is_null($enviou_historico) or is_null($enviou_documentos)) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_documentos'),'warning');
 
 				return redirect()->route('motivacao.documentos');
 			}
 
-			$dado_pessoal_candidato = new DadoPessoalCandidato();
-
-			$dados_pessoais_candidato = $dado_pessoal_candidato->retorna_dados_pessoais($id_user);
+			$dados_pessoais_candidato = User::find($id_candidato);
 
 			$escolha_candidato = new EscolhaCandidato();
 
-			$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_user,$id_inscricao_pos)->programa_pretendido;
+			$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos)->programa_pretendido;
 			$programa_pos = new ProgramaPos();
 
 			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido, $locale_fixo);
@@ -206,20 +206,20 @@ class FinalizarInscricaoController extends BaseController
 				
 				if (!$recomendante->email_enviado) {
 
-					$dado_pessoal_recomendante = new DadoPessoalRecomendante();
+					$dado_pessoal_recomendante = User::find($recomendante->id_recomendante);
 
 
 					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
 
-					$dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+					$dados_email['nome_professor'] = $dado_pessoal_recomendante->nome;
         			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
 			        $dados_email['programa'] = $nome_programa_pos_candidato;
-        			$dados_email['email_recomendante'] = User::find($recomendante->id_recomendante)->email;
+        			$dados_email['email_recomendante'] = $dado_pessoal_recomendante->email;
         			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
 					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
 
-					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_user', $recomendante->id_user)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => 'true']);
+					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_candidato', $recomendante->id_candidato)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => 'true']);
 
 				}
 			}
@@ -227,18 +227,18 @@ class FinalizarInscricaoController extends BaseController
 
 			$dados_email_candidato['ficha_inscricao'] = $request->ficha_inscricao;
 			
-			Notification::send(User::find($id_user), new NotificaCandidato($dados_email_candidato));
+			Notification::send(User::find($id_candidato), new NotificaCandidato($dados_email_candidato));
 
 			$finalizar_inscricao = new FinalizaInscricao();
 
-			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_user',$id_user)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
 			if (count($id_finalizada_anteriormente)>0){
 
-				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True]);
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True]);
 			}else{
 				
-				$finalizar_inscricao->id_user = $id_user;
+				$finalizar_inscricao->id_candidato = $id_candidato;
 				$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
 				$finalizar_inscricao->finalizada = true;
 				$finalizar_inscricao->save();
