@@ -42,7 +42,7 @@ class EscolhaCandidato extends Model
             $atualiza_escolhas = $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos);
             $dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
             if ($request->programa_pretendido == 1) {
-                $dados_escolhas['area_pos'] = 0;
+                $dados_escolhas['area_pos'] = 10;
             }else{
                 $dados_escolhas['area_pos'] = (int)$request->area_pos;
             }
@@ -55,7 +55,7 @@ class EscolhaCandidato extends Model
             $escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
 
             if ($request->programa_pretendido == 1) {
-                $escolhas_candidato->area_pos = 0;
+                $escolhas_candidato->area_pos = 10;
             }else{
                 $escolhas_candidato->area_pos = (int)$request->areas_pos;
             }
