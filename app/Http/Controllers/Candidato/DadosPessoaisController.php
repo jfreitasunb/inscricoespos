@@ -209,14 +209,14 @@ class DadosPessoaisController extends BaseController
 
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 
 		$nascimento = Carbon::createFromFormat('d/m/Y', Purifier::clean(trim($request->data_nascimento)));
 
 		$data_nascimento = $nascimento->format('Y-m-d');
 	
 		$dados_pessoais = [
-			'id_user' => $id_user,
+			'id_candidato' => $id_candidato,
 			'nome' => Purifier::clean(trim($request->input('nome'))),
 			'data_nascimento' => $data_nascimento,
 			'numerorg' => Purifier::clean(trim($request->input('numerorg'))),
@@ -228,12 +228,15 @@ class DadosPessoaisController extends BaseController
 			'celular' => Purifier::clean(trim($request->input('celular'))),
 		];
 
-		$candidato =  DadoPessoalCandidato::find($id_user);
+		$candidato =  DadoPessoalCandidato::find($id_candidato);
+		
+		$usuario = User::find($id_candidato);
+
+		$update_nome['candidato'] = Purifier::clean(trim($request->input('nome')));;
 
 		if (is_null($candidato)) {
 			$cria_candidato = new DadoPessoalCandidato();
-			$cria_candidato->id_user = $id_user;
-			$cria_candidato->nome = Purifier::clean(trim($request->input('nome')));
+			$cria_candidato->id_candidato = $id_candidato;
 			$cria_candidato->data_nascimento = $data_nascimento;
 			$cria_candidato->numerorg = Purifier::clean(trim($request->input('numerorg')));
 			$cria_candidato->endereco = Purifier::clean(trim($request->input('endereco')));
@@ -243,9 +246,14 @@ class DadosPessoaisController extends BaseController
 			$cria_candidato->pais = $request->input('pais');
 			$cria_candidato->celular = Purifier::clean(trim($request->input('celular')));
 			$cria_candidato->save($dados_pessoais);
+
+			$usuario->update($update_nome);
+
 		}else{
 			
 			$candidato->update($dados_pessoais);
+
+			$usuario->update($update_nome);
 		}
 
 
@@ -259,7 +267,7 @@ class DadosPessoaisController extends BaseController
 
 		$finaliza_inscricao = new FinalizaInscricao();
 
-		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 		if ($autoriza_inscricao and !$status_inscricao) {
 			return redirect()->route('dados.academicos');
