@@ -129,7 +129,7 @@ class User extends Authenticatable
             $novo_usuario->user_type =  "recomendante";
             $novo_usuario->ativo = true;
             $novo_usuario->save();
-        }elseif ($this->retorna_user_por_email($email_contatos_recomendantes)->user_type <> "recomendante"){
+        }elseif ($this->retorna_user_por_email($novo_recomendante['email'])->user_type <> "recomendante"){
                 return true;
         }
     }
