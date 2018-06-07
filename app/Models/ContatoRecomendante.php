@@ -67,7 +67,7 @@ class ContatoRecomendante extends Model
                 $novo_recomendante = new ContatoRecomendante();
                 $acha_recomendante = new User();
 
-                $novo_recomendante->id_recomendante = $id_candidato;
+                $novo_recomendante->id_candidato = $id_candidato;
 
                 $novo_recomendante->id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
                         
