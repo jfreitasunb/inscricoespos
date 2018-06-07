@@ -156,7 +156,7 @@ class EscolhaCandidatoController extends BaseController
 				 		break;
 				 }
 
-				$areas_pos = AreaPosMat::pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
+				$areas_pos = AreaPosMat::where('id_area_pos', '!=', 10)->pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
 			}
 			
 			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));
