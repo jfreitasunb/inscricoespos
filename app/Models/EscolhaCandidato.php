@@ -38,7 +38,7 @@ class EscolhaCandidato extends Model
 
         $candidato_fez_escolhas = $this->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
-        if (count($candidato_fez_escolhas) > 0) {
+        if (!is_null($candidato_fez_escolhas)) {
             $atualiza_escolhas = $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos);
             $dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
             if ($request->programa_pretendido == 1) {
