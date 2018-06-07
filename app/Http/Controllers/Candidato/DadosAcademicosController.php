@@ -16,10 +16,10 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoPessoalCandidato;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
-use Posmat\Models\DadoAcademico;
+use Posmat\Models\DadoAcademicoCandidato;
 use Posmat\Models\EscolhaCandidato;
 use Posmat\Models\DadoRecomendante;
 use Posmat\Models\ContatoRecomendante;
@@ -73,7 +73,7 @@ class DadosAcademicosController extends BaseController
 		 		break;
 		 }
 
-		$dados_academicos = new DadoAcademico();
+		$dados_academicos = new DadoAcademicoCandidato();
 
 		$tipo_formacao = new Formacao();
 
@@ -135,7 +135,7 @@ class DadosAcademicosController extends BaseController
 		$nivel_candidato[1] = 'Mestrado';
 		$nivel_candidato[2] = 'Doutorado';
 
-		$dados_academicos = DadoAcademico::find($id_user);
+		$dados_academicos = DadoAcademicoCandidato::find($id_user);
 
 		$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
 		$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
@@ -148,7 +148,7 @@ class DadosAcademicosController extends BaseController
 		$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
 
 		if (is_null($dados_academicos)) {
-			$cria_dados_academicos = new DadoAcademico();
+			$cria_dados_academicos = new DadoAcademicoCandidato();
 			$cria_dados_academicos->id_user = $id_user;
 			$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
 			$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
