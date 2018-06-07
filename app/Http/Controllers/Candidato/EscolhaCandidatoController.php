@@ -16,12 +16,12 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoPessoalCandidato;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -122,7 +122,7 @@ class EscolhaCandidatoController extends BaseController
 					
 							$usuario_recomendante = User::find($recomendante->id_recomendante);
 						
-							$dado_recomendante = new DadoRecomendante();
+							$dado_recomendante = new DadoPessoalRecomendante();
 
 							$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
 						
@@ -261,7 +261,7 @@ class EscolhaCandidatoController extends BaseController
 					return redirect()->back();
 				}
 				
-				$dados_iniciais_recomendante = new DadoRecomendante();
+				$dados_iniciais_recomendante = new DadoPessoalRecomendante();
 
 				for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
 
