@@ -55,7 +55,7 @@ class DadosAcademicosController extends BaseController
 	{
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 		
 		$locale_candidato = Session::get('locale');
 
@@ -81,7 +81,7 @@ class DadosAcademicosController extends BaseController
 
 		$pos = $tipo_formacao->where('nivel','Pós-Graduação')->whereNotNull($nome_coluna)->pluck($nome_coluna,'id')->prepend(trans('mensagens_gerais.selecionar'),'');;
 
-		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_user);
+		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_candidato);
 
 		$nivel_candidato[0] = 'Especialista';
 		$nivel_candidato[1] = 'Mestrado';
@@ -127,7 +127,7 @@ class DadosAcademicosController extends BaseController
 
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 		
 		$formacao = new Formacao;
 
@@ -135,7 +135,7 @@ class DadosAcademicosController extends BaseController
 		$nivel_candidato[1] = 'Mestrado';
 		$nivel_candidato[2] = 'Doutorado';
 
-		$dados_academicos = DadoAcademicoCandidato::find($id_user);
+		$dados_academicos = DadoAcademicoCandidato::find($id_candidato);
 
 		$cria_dados_academicos['curso_graduacao'] = Purifier::clean(trim($request->input('curso_graduacao')));
 		$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
@@ -149,7 +149,7 @@ class DadosAcademicosController extends BaseController
 
 		if (is_null($dados_academicos)) {
 			$cria_dados_academicos = new DadoAcademicoCandidato();
-			$cria_dados_academicos->id_user = $id_user;
+			$cria_dados_academicos->id_candidato = $id_candidato;
 			$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
 			$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
 			$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
