@@ -248,8 +248,13 @@ class EscolhaCandidatoController extends BaseController
 				$novo_usuario = new User();
 				$array_erro = [];
 
-				for ($i=0; $i < count($email_contatos_recomendantes); $i++) { 
-					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($email_contatos_recomendantes[$i]);
+				for ($i=0; $i < count($email_contatos_recomendantes); $i++) {
+
+					$novo_recomendante['nome'] = Purifier::clean($request->nome_recomendante[$i]);
+					
+					$novo_recomendante['email'] = $email_contatos_recomendantes[$i];
+
+					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($novo_recomendante);
 
 					if ($novo_usuario_recomendante) {
 						$array_erro[$i] = $email_contatos_recomendantes[$i];
@@ -261,14 +266,14 @@ class EscolhaCandidatoController extends BaseController
 					return redirect()->back();
 				}
 				
-				$dados_iniciais_recomendante = new DadoPessoalRecomendante();
+				// $dados_iniciais_recomendante = new DadoPessoalRecomendante();
 
-				for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
+				// for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
 
-					$id_recomendante = $novo_usuario->retorna_user_por_email($email_contatos_recomendantes[$j]);
+				// 	$id_recomendante = $novo_usuario->retorna_user_por_email($email_contatos_recomendantes[$j]);
 					
-					$grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_recomendante->id_user, Purifier::clean($request->nome_recomendante[$j]));
-				}
+				// 	$grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_recomendante->id_user, Purifier::clean($request->nome_recomendante[$j]));
+				// }
 
 
 				$contatos_recomendantes = new ContatoRecomendante();

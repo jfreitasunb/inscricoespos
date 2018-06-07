@@ -25,17 +25,17 @@ class DadoPessoalRecomendante extends Model
         return $this->select('atualizado')->where("id_recomendante", $id_recomendante)->get()->first();
     }
 
-    public function grava_dados_iniciais_recomendante($id_recomendante, $nome_recomendante)
-    {
-        $dados_recomendantes = new DadoPessoalRecomendante();
+    // public function grava_dados_iniciais_recomendante($id_recomendante, $nome_recomendante)
+    // {
+    //     $dados_recomendantes = new DadoPessoalRecomendante();
 
-        if (is_null($this->retorna_dados_pessoais_recomendante($id_recomendante))) {
+    //     if (is_null($this->retorna_dados_pessoais_recomendante($id_recomendante))) {
             
-            $dados_recomendantes->id_recomendante = $id_recomendante;
+    //         $dados_recomendantes->id_recomendante = $id_recomendante;
 
-            $dados_recomendantes->nome_recomendante = $nome_recomendante;
+    //         $dados_recomendantes->nome_recomendante = $nome_recomendante;
 
-            $dados_recomendantes->save();
-        }
-    }
+    //         $dados_recomendantes->save();
+    //     }
+    // }
 }
