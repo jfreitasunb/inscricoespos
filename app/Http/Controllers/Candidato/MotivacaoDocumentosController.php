@@ -52,7 +52,7 @@ class MotivacaoDocumentosController extends BaseController
 	{
 		$user = $this->SetUser();
 		
-		$id_user = $user->id_user;
+		$id_candidato = $user->id_user;
 
 		$edital_ativo = new ConfiguraInscricaoPos();
 
@@ -66,7 +66,7 @@ class MotivacaoDocumentosController extends BaseController
 		
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
 
@@ -77,7 +77,7 @@ class MotivacaoDocumentosController extends BaseController
 
 				$motivacao = new CartaMotivacao();
 
-				$fez_carta_motivacao = $motivacao->retorna_carta_motivacao($id_user,$id_inscricao_pos);
+				$fez_carta_motivacao = $motivacao->retorna_carta_motivacao($id_candidato,$id_inscricao_pos);
 
 				if (is_null($fez_carta_motivacao)) {
 					$dados['motivacao'] = '';
@@ -109,7 +109,7 @@ class MotivacaoDocumentosController extends BaseController
 
 			$user = $this->SetUser();
 			
-			$id_user = $user->id_user;
+			$id_candidato = $user->id_user;
 
 			$edital_ativo = new ConfiguraInscricaoPos();
 
@@ -117,7 +117,7 @@ class MotivacaoDocumentosController extends BaseController
 			
 			$doc_pessoais = $request->documentos_pessoais->store('uploads');
 			$arquivo = new Documento();
-			$arquivo->id_user = $id_user;
+			$arquivo->id_candidato = $id_candidato;
 			$arquivo->nome_arquivo = $doc_pessoais;
 			$arquivo->tipo_arquivo = "Documentos";
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
@@ -125,7 +125,7 @@ class MotivacaoDocumentosController extends BaseController
 
 			$hist = $request->historico->store('uploads');
 			$arquivo = new Documento();
-			$arquivo->id_user = $id_user;
+			$arquivo->id_candidato = $id_candidato;
 			$arquivo->nome_arquivo = $hist;
 			$arquivo->tipo_arquivo = "Histórico";
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
@@ -133,11 +133,12 @@ class MotivacaoDocumentosController extends BaseController
 
 			$motivacao = new CartaMotivacao();
 
-			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_user, $id_inscricao_pos);
+			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_candidato, $id_inscricao_pos);
 
-			if (count($carta_motivacao)==0) {
+
+			if (is_null($carta_motivacao)) {
 				$nova_motivacao = new CartaMotivacao();
-				$nova_motivacao->id_user = $id_user;
+				$nova_motivacao->id_candidato = $id_candidato;
 				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
 				$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
 				$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
@@ -146,7 +147,7 @@ class MotivacaoDocumentosController extends BaseController
 				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
 				$dados_motivacao['updated_at'] = date('Y-m-d H:i:s');
 				
-				DB::table('carta_motivacoes')->where('id_user', $id_user)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
+				DB::table('carta_motivacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
 			}
 
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
