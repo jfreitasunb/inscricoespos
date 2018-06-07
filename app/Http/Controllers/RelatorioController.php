@@ -207,11 +207,9 @@ class RelatorioController extends BaseController
 
     foreach ($contatos_indicados as $recomendante) {
       
-      $dado_recomendante = new DadoPessoalRecomendante();
-
       $usuario_recomendante = User::find($recomendante->id_recomendante);
 
-      $nomes_recomendantes[$recomendante->id_recomendante]['nome'] = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+      $nomes_recomendantes[$recomendante->id_recomendante]['nome'] = $usuario_recomendante->nome;
       $nomes_recomendantes[$recomendante->id_recomendante]['email'] = $usuario_recomendante->email;
     }
 
