@@ -158,20 +158,38 @@ class DadosPessoaisController extends BaseController
 		$candidato = new DadoPessoalCandidato();
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
-		$dados = [
-			'nome' => $dados_pessoais->nome,
-			'data_nascimento' => $dados_pessoais->data_nascimento,
-			'numerorg' => $dados_pessoais->numerorg,
-			'emissorrg' => $dados_pessoais->emissorrg,
-			'cpf' => $dados_pessoais->cpf,
-			'data_nascimento' => $dados_pessoais->data_nascimento,
-			'endereco' => $dados_pessoais->endereco,
-			'pais' => $dados_pessoais->pais,
-			'estado' => $dados_pessoais->estado,
-			'cidade' => $dados_pessoais->cidade,
-			'cep' => $dados_pessoais->cep,
-			'celular' => $dados_pessoais->celular,
-		];
+		if (is_null($dados_pessoais)) {
+			$dados = [
+					'nome' => $user->nome,
+					'data_nascimento' => '',
+					'numerorg' => '',
+					'emissorrg' => '',
+					'cpf' => '',
+					'data_nascimento' => '',
+					'endereco' => '',
+					'pais' => '',
+					'estado' => '',
+					'cidade' => '',
+					'cep' => '',
+					'celular' => '',
+				];
+		}else{
+			$dados = [
+				'nome' => $dados_pessoais->nome,
+				'data_nascimento' => $dados_pessoais->data_nascimento,
+				'numerorg' => $dados_pessoais->numerorg,
+				'emissorrg' => $dados_pessoais->emissorrg,
+				'cpf' => $dados_pessoais->cpf,
+				'data_nascimento' => $dados_pessoais->data_nascimento,
+				'endereco' => $dados_pessoais->endereco,
+				'pais' => $dados_pessoais->pais,
+				'estado' => $dados_pessoais->estado,
+				'cidade' => $dados_pessoais->cidade,
+				'cep' => $dados_pessoais->cep,
+				'celular' => $dados_pessoais->celular,
+			];
+		}
+
 
 		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
 		
