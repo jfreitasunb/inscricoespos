@@ -118,13 +118,14 @@ class User extends Authenticatable
         }
     }
 
-    public function registra_recomendante($email_contatos_recomendantes)
+    public function registra_recomendante($novo_recomendante)
     {
-        if (is_null($this->retorna_user_por_email($email_contatos_recomendantes))){
+        if (is_null($this->retorna_user_por_email($novo_recomendante['email']))){
                 
             $novo_usuario = new User();
-            $novo_usuario->email = $email_contatos_recomendantes;
-            $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
+            $novo_usuario->nome = $novo_recomendante['nome'];
+            $novo_usuario->email = $novo_recomendante['email'];
+            $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u").str_random(10));
             $novo_usuario->user_type =  "recomendante";
             $novo_usuario->ativo = true;
             $novo_usuario->save();
