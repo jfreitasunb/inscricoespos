@@ -9,7 +9,7 @@ return [
 	'tela_motivacao_documentos' => 'Motivação e Documentos',
     'texto_motivacao' => 'Use o quadro abaixo para expressar sua motivação com o programa pretendido. Relate ainda suas atividades extra-curriculares que considera relevantes para a análise (iniciação científica, curso de verão, medalhas em competições de Matemática, etc)',
     'motivacao' => 'Motivação, expectativa e outras informações relevantes',
-    'documentos_pessoais' => 'Documento de Indetificação e foto (em um mesmo PDF)',
+    'documentos_pessoais' => 'Documento de Identificação e foto (em um mesmo PDF)',
     'historico' => 'Histórico de graduação e mestrado, quando disponível (em um mesmo PDF)',
     'concordancia_1' => 'O solicitante declara formalmente que está de acordo com as ',
     'concordancia_2' => ' e que está ciente que as decisões da Comissão de Seleção da Matemática serão irrecorríveis, admitindo-se pedido de reconsideração 
