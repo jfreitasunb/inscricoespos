@@ -84,51 +84,11 @@ class FinalizarInscricaoController extends BaseController
 
 			$nome_candidato = User::find($id_candidato)->nome;
 
-			if (is_null($dados_pessoais_candidato->data_nascimento)) {
+			if (is_null($dados_pessoais_candidato)) {
 				
 				notify()->flash(trans('tela_finalizar_inscricao.falta_dados_pessoais'),'warning');
 
 				return redirect()->route('dados.pessoais');
-			}
-			
-			$novo_relatorio = new RelatorioController;
-
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_candidato, $id_inscricao_pos, $locale_candidato);
-
-
-			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
-
-		}else{
-			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
-			
-			return redirect()->route('home');
-		}	
-	}
-
-	public function postFinalizarInscricao(Request $request){
-
-		$user = $this->SetUser();
-		
-		$id_candidato = $user->id_user;
-
-		$locale_fixo = 'en';
-
-		$edital_ativo = new ConfiguraInscricaoPos();
-
-		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-
-		if ($autoriza_inscricao) {
-			
-			$finaliza_inscricao = new FinalizaInscricao();
-
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
-
-			if ($status_inscricao) {
-				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
-
-				return redirect()->back();
 			}
 
 			$informou_dados_academicos = DadoAcademicoCandidato::find($id_candidato);
@@ -188,6 +148,46 @@ class FinalizarInscricaoController extends BaseController
 				notify()->flash(trans('tela_finalizar_inscricao.falta_documentos'),'warning');
 
 				return redirect()->route('motivacao.documentos');
+			}
+			
+			$novo_relatorio = new RelatorioController;
+
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_candidato, $id_inscricao_pos, $locale_candidato);
+
+
+			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
+
+		}else{
+			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
+			
+			return redirect()->route('home');
+		}	
+	}
+
+	public function postFinalizarInscricao(Request $request){
+
+		$user = $this->SetUser();
+		
+		$id_candidato = $user->id_user;
+
+		$locale_fixo = 'en';
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+		if ($autoriza_inscricao) {
+			
+			$finaliza_inscricao = new FinalizaInscricao();
+
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
+
+			if ($status_inscricao) {
+				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
+
+				return redirect()->back();
 			}
 
 			$dados_pessoais_candidato = User::find($id_candidato);
