@@ -21,7 +21,7 @@ use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -80,9 +80,9 @@ class StatusCartasController extends BaseController
 
 			foreach ($recomendantes_candidato as $recomendante) {
 
-				$dado_pessoal_recomendante = new DadoRecomendante();
+				$dado_pessoal_recomendante = new DadoPessoalRecomendante();
 
-				$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome_recomendante;
+				$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome;
 
 				$carta_recomendacao = new CartaRecomendacao();
 				
