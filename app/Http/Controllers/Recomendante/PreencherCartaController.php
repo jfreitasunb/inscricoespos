@@ -17,12 +17,12 @@ use Posmat\Models\ConfiguraInscricaoPos;
 use Posmat\Models\AreaPosMat;
 use Posmat\Models\CartaMotivacao;
 use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoal;
+use Posmat\Models\DadoPessoalCandidato;
 use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -63,7 +63,7 @@ class PreencherCartaController extends RecomendanteController
 
 		$id_user = $user->id_user;
 		
-		$recomendante = new DadoRecomendante();
+		$recomendante = new DadoPessoalRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 		$edital_ativo = new ConfiguraInscricaoPos();
@@ -75,7 +75,7 @@ class PreencherCartaController extends RecomendanteController
 
 			$carta_recomendacao = new CartaRecomendacao();
 
-			$candidato = new DadoPessoal();
+			$candidato = new DadoPessoalCandidato();
 
 			$programa = new EscolhaCandidato();
 
@@ -282,7 +282,7 @@ class PreencherCartaController extends RecomendanteController
 
 				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
-				$recomendante = new DadoRecomendante();
+				$recomendante = new DadoPessoalRecomendante();
 				$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 				if ($status_dados_pessoais->atualizado) {
@@ -292,7 +292,7 @@ class PreencherCartaController extends RecomendanteController
 					return redirect()->route('cartas.pendentes');
 				}else{
 
-					$recomendante = new DadoRecomendante();
+					$recomendante = new DadoPessoalRecomendante();
 					$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 					if (!$status_dados_pessoais->atualizado) {
