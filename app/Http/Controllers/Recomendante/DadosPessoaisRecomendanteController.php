@@ -22,7 +22,7 @@ use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -56,7 +56,7 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 
 		$id_user = $user->id_user;
 		
-		$recomendante = new DadoRecomendante();
+		$recomendante = new DadoPessoalRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 		$dados = $recomendante->retorna_dados_pessoais_recomendante($id_user);
@@ -74,7 +74,7 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 
 		$id_user = $user->id_user;
 		
-		$recomendante = new DadoRecomendante();
+		$recomendante = new DadoPessoalRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 		$dados = $recomendante->retorna_dados_pessoais_recomendante($id_user);
@@ -101,7 +101,7 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 
 		$id_user = $user->id_user;
 		
-		$recomendante = new DadoRecomendante();
+		$recomendante = new DadoPessoalRecomendante();
 
 		$id_recomendante = $recomendante->select('id')->where('id_prof', $id_user)->pluck('id');
 
