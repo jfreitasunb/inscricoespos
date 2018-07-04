@@ -88,7 +88,7 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 	public function postDadosPessoaisRecomendante(Request $request)
 	{
 		$this->validate($request, [
-			'nome_recomendante' => 'required',
+			'nome' => 'required',
 			'instituicao_recomendante' => 'required',
 			'titulacao_recomendante' => 'required',
 			'area_recomendante' => 'required',
@@ -100,12 +100,17 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 		$user = $this->SetUser();
 
 		$id_user = $user->id_user;
+
+		$user_recomendante = User::find($id_user);
+
+		$atualiza_nome['nome'] = Purifier::clean(trim($request->input('nome')));
+
+		$user_recomendante->update($atualiza_nome);
 		
 		$recomendante = new DadoPessoalRecomendante();
 
-		$id_recomendante = $recomendante->select('id')->where('id_prof', $id_user)->pluck('id');
+		$id_recomendante = $recomendante->select('id')->where('id_recomendante', $id_user)->pluck('id');
 
-		$atualiza_dados_recomendantes['nome_recomendante'] = Purifier::clean(trim($request->input('nome_recomendante')));
 		$atualiza_dados_recomendantes['instituicao_recomendante'] = Purifier::clean(trim($request->input('instituicao_recomendante')));
 		$atualiza_dados_recomendantes['titulacao_recomendante'] = Purifier::clean(trim($request->input('titulacao_recomendante')));
 		$atualiza_dados_recomendantes['area_recomendante'] = Purifier::clean(trim($request->input('area_recomendante')));
@@ -115,7 +120,7 @@ class DadosPessoaisRecomendanteController extends RecomendanteController
 		$atualiza_dados_recomendantes['atualizado'] = 1;
 		$atualiza_dados_recomendantes['updated_at'] = date('Y-m-d H:i:s');
 
-		DB::table('dados_recomendantes')->where('id', $id_recomendante[0])->where('id_prof', $id_user)->update($atualiza_dados_recomendantes);
+		DB::table('dados_pessoais_recomendantes')->where('id', $id_recomendante[0])->where('id_recomendante', $id_user)->update($atualiza_dados_recomendantes);
 
 
 
