@@ -22,7 +22,7 @@ use Posmat\Models\Formacao;
 use Posmat\Models\Estado;
 use Posmat\Models\DadoAcademico;
 use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoRecomendante;
+use Posmat\Models\DadoPessoalRecomendante;
 use Posmat\Models\ContatoRecomendante;
 use Posmat\Models\CartaRecomendacao;
 use Posmat\Models\FinalizaInscricao;
@@ -54,7 +54,7 @@ class CartasPendentesController extends RecomendanteController
 		
 		$locale_recomendante = Session::get('locale');
 
-		$recomendante = new DadoRecomendante();
+		$recomendante = new DadoPessoalRecomendante();
 		$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
 
 		$edital_ativo = new ConfiguraInscricaoPos();
