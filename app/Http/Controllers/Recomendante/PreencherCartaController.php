@@ -174,7 +174,7 @@ class PreencherCartaController extends RecomendanteController
 				$atualiza_carta['relacionamento'] = (int) Purifier::clean(trim($request->input('relacionamento')));
 				$atualiza_carta['updated_at'] = date('Y-m-d H:i:s');
 
-				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
+				DB::table('cartas_recomendacoes')->where('id_recomendante', $carta_atual->id_recomendante)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
 				return redirect()->route('finalizar.carta', ['id_candidato' => $id_candidato]);
 			}
@@ -280,7 +280,7 @@ class PreencherCartaController extends RecomendanteController
 				$atualiza_carta['completada'] = true;
 				$atualiza_carta['updated_at'] = date('Y-m-d H:i:s');
 
-				DB::table('cartas_recomendacoes')->where('id_prof', $carta_atual->id_prof)->where('id_aluno', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
+				DB::table('cartas_recomendacoes')->where('id_recomendante', $carta_atual->id_recomendante)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($atualiza_carta);
 
 				$recomendante = new DadoPessoalRecomendante();
 				$status_dados_pessoais = $recomendante->dados_atualizados_recomendante($id_user);
