@@ -17,14 +17,14 @@
       <legend class="scheduler-border">{{ trans('tela_recomendante_dados_pessoais.tela_dados_pessoais') }}s</legend>
         @if ($editar_dados)
           <div class="row">
-          {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+          {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
           <div class="col-md-4">
             {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'required' => '']) !!}
           </div>
         </div>
         @else
           <div class="row">
-            {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome'), ['class' => 'col-md-4 control-label'])!!}
+            {!! Form::label('nome', trans('tela_recomendante_dados_pessoais.nome_recomendante'), ['class' => 'col-md-4 control-label'])!!}
             <div class="col-md-4">
               {!! Form::text('nome', $dados['nome'] ?: '' , ['class' => 'form-control input-md formhorizontal', 'disabled' => 'disabled']) !!}
             </div>
