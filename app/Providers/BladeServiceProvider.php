@@ -187,13 +187,13 @@ class BladeServiceProvider extends ServiceProvider
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
             $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-            $autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+            $autoriza_status_carta = $edital_ativo->visualiza_status_carta();
 
             $finaliza_inscricao = new FinalizaInscricao();
 
             $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
-            if ($autoriza_inscricao and $status_inscricao) {
+            if ($autoriza_status_carta and $status_inscricao) {
                 return true;
             }else{
                 return false;
