@@ -5,7 +5,7 @@ namespace Posmat\Console\Commands;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use Posmat\Models\{User, ConfiguraInscricaoPos, DadoRecomendante, CartaRecomendacao};
+use Posmat\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao};
 use Posmat\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
@@ -61,13 +61,13 @@ class RememberRecomendante extends Command
            
            foreach ($cartas_nao_enviadas as $id_user) {
                
-               $dado_pessoal_recomendante = new DadoRecomendante();
+               $dado_pessoal_recomendante = new DadoPessoalRecomendante();
 
                $dados_recomendantes = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user);
                
                if (!is_null($dados_recomendantes)) {
                    
-                   $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome_recomendante;
+                   $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome;
 
                     Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
                }   
