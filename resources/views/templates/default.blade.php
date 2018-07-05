@@ -42,6 +42,7 @@
           @yield('relatorio_pos_editais_anteriores')
           @yield('ficha_individual')
           @yield('tabela_indicacoes')
+          @yield('homologa_inscricoes')
           @yield('link_acesso')
         @endcoordenador
         @recomendante(Auth()->user())
