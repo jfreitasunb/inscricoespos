@@ -274,7 +274,7 @@ class RelatorioController extends BaseController
 
     $dados_pessoais_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($id_recomendante);
     if (!is_null($dados_pessoais_recomendante)) {
-      $consolida_recomendacao['nome'] = $dados_pessoais_recomendante->nome_recomendante;
+      $consolida_recomendacao['nome'] = $dados_pessoais_recomendante->nome;
       $consolida_recomendacao['email'] = $usuario_recomendante->email;
       $consolida_recomendacao['instituicao_recomendante'] = $dados_pessoais_recomendante->instituicao_recomendante;
       $consolida_recomendacao['titulacao_recomendante'] = $dados_pessoais_recomendante->titulacao_recomendante;
