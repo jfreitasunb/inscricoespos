@@ -145,7 +145,7 @@ class DadosAcademicosController extends BaseController
 		// $cria_dados_academicos['nivel_pos'] = $formacao->retorna_id_formacao($nivel_candidato[(int)$request->nivel_pos],'Pós-Graduação');
 		
 		if (is_null(($request->input('tipo_curso_pos')))) {
-			$cria_dados_academicos['tipo_curso_pos'] = 1;
+			$cria_dados_academicos['tipo_curso_pos'] = 9;
 		}else{
 			$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 		}
@@ -162,7 +162,7 @@ class DadosAcademicosController extends BaseController
 			$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
 			$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
 			if (is_null(($request->input('tipo_curso_pos')))) {
-				$cria_dados_academicos->tipo_curso_pos = 1;	
+				$cria_dados_academicos->tipo_curso_pos = 9;	
 			}else{
 				$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 			}
