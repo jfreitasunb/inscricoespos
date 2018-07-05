@@ -129,6 +129,15 @@ class User extends Authenticatable
             $novo_usuario->user_type =  "recomendante";
             $novo_usuario->ativo = true;
             $novo_usuario->save();
+
+            $id_recomendante = $novo_usuario->id_user;
+
+            $inicia_dado = new DadoPessoalRecomendante();
+
+            $inicia_dado->id_recomendante = $id_recomendante;
+
+            $inicia_dado->save();
+            
         }elseif ($this->retorna_user_por_email($novo_recomendante['email'])->user_type <> "recomendante"){
                 return true;
         }
