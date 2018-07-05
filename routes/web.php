@@ -198,7 +198,9 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorios/anteriores', '\Posmat\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 
-	Route::get('homologa/inscricoes', '\Posmat\Http\Controllers\Coordenador\HomologaInscricoesController@getInscritosHomologar')->name('homologa.inscricoes');
+	Route::get('homologa/inscricoes', '\Posmat\Http\Controllers\Coordenador\HomologaInscricoesController@getHomologarInscritos')->name('homologa.inscricoes');
+
+	Route::post('homologa/inscricoes', '\Posmat\Http\Controllers\Coordenador\HomologaInscricoesController@postHomologarInscritos')->name('homologa.inscricoes');
 
 	Route::get('inscricao/lista/recomendacoes', '\Posmat\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 

@@ -35,7 +35,7 @@ use URL;
 class HomologaInscricoesController extends CoordenadorController
 {
 
-	public function getInscritosHomologar()
+	public function getHomologarInscritos()
 	{
 		
 		$relatorio = new ConfiguraInscricaoPos();
@@ -44,8 +44,13 @@ class HomologaInscricoesController extends CoordenadorController
 
         $finalizacoes = new FinalizaInscricao;
 
-        $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
+        $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
 
       	return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));
 	}
+
+    public function postHomologarInscritos(Request $request)
+    {
+        dd($request);
+    }
 }
