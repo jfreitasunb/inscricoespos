@@ -128,7 +128,7 @@ class EscolhaCandidatoController extends BaseController
 						
 							$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
 						
-							$dados['nome_recomendante_'.$i] = $dados_recomendante->nome_recomendante;
+							$dados['nome_recomendante_'.$i] = $dados_recomendante->nome;
 
 							$i++;
 						}
