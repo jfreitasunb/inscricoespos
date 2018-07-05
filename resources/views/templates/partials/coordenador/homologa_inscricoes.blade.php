@@ -27,7 +27,7 @@
               {!! Form::hidden('id_programa_pos', $finalizada['id_programa_pos'], []) !!}
               <td>{{ $finalizada['nome'] }}</td>
               <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::checkbox('homologar[]',1,1) !!} Sim {!! Form::checkbox('homologar[]',0,0) !!} Não</td>
+              <td>{!! Form::checkbox('homologar[]',$finalizada['id_candidato'].'_'.$finalizada['id_programa_pos'],1) !!} Sim {!! Form::checkbox('homologar[]',0,0) !!} Não</td>
             </tr>
           @endforeach
         </tbody>
