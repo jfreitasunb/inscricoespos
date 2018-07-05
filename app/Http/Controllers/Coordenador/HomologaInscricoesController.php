@@ -51,6 +51,10 @@ class HomologaInscricoesController extends CoordenadorController
 
     public function postHomologarInscritos(Request $request)
     {
-        dd($request);
+        $user = Auth::user();
+
+        $this->validate($request, [
+            'homologar' => 'required',
+        ]);
     }
 }
