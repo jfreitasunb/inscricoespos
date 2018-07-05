@@ -57,7 +57,7 @@ class EscolhaCandidato extends Model
             if ($request->programa_pretendido == 1) {
                 $escolhas_candidato->area_pos = 10;
             }else{
-                $escolhas_candidato->area_pos = (int)$request->areas_pos;
+                $escolhas_candidato->area_pos = (int)$request->area_pos;
             }
             $escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
             $escolhas_candidato->vinculo_empregaticio = (bool)$request->vinculo_empregaticio;
