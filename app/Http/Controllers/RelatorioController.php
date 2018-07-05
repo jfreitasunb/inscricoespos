@@ -117,6 +117,8 @@ class RelatorioController extends BaseController
 
     $consolida_dados['nome'] = $dados_pessoais_candidato->nome;
 
+    $consolida_dados['email'] = $dados_pessoais_candidato->email;
+
     $consolida_dados['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $dados_pessoais_candidato->data_nascimento)->format('d/m/Y');
 
     $array_data_hoje = explode('-', $data_hoje);
