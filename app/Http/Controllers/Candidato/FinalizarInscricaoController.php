@@ -202,6 +202,10 @@ class FinalizarInscricaoController extends BaseController
 			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
 			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
 
+			$recomendantes_candidato = new ContatoRecomendante();
+
+			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
+
 			foreach ($informou_recomendantes as $recomendante) {
 				
 				if (!$recomendante->email_enviado) {
