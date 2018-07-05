@@ -97,6 +97,24 @@ class ConfiguraInscricaoPos extends Model
         }
     }
 
+
+    public function visualiza_status_carta()
+    {
+        $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
+        $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao)->addDays(20);
+
+        $data_inicio = $inicio->format('Y-m-d');
+        $data_fim = $fim->format('Y-m-d');
+
+        $data_hoje = (new Carbon())->format('Y-m-d');
+
+        if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function autoriza_carta()
     {
         $prazo = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->prazo_carta);
