@@ -56,5 +56,18 @@ class HomologaInscricoesController extends CoordenadorController
         $this->validate($request, [
             'homologar' => 'required',
         ]);
+
+        foreach ($request->homologar as $homologando) {
+            
+            $homologa = new HomologaInscricoes();
+
+            $homologa->id_candidato = explode("_", $homologando)[0];
+
+            $homologa->id_inscricao_pos = (int)$request->id_inscricao_pos;
+
+            $homologa->programa_pretendido = explode("_", $homologando)[1];
+        }
+
+
     }
 }
