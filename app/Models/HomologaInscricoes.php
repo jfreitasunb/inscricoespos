@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat;
+namespace Posmat\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
