@@ -28,7 +28,7 @@
             "database"
         ],
         "psr-4": {
-            "Posmat\\": "app/"
+            "InscricoesPos\\": "app/"
         }
     },
     "autoload-dev": {

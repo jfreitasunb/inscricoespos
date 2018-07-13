@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers\Coordenador;
+namespace InscricoesPos\Http\Controllers\Coordenador;
 
 use Auth;
 use DB;
@@ -10,19 +10,19 @@ use File;
 use PDF;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\Formacao;
-use Posmat\Models\ProgramaPos;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Notifications\NotificaNovaInscricao;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\BaseController;
-use Posmat\Http\Controllers\CidadeController;
-use Posmat\Http\Controllers\AuthController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\BaseController;
+use InscricoesPos\Http\Controllers\CidadeController;
+use InscricoesPos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 

@@ -1,24 +1,24 @@
 <?php
 
-namespace Posmat\Http\Controllers\Auth;
+namespace InscricoesPos\Http\Controllers\Auth;
 
 use Auth;
 use DB;
 use Mail;
 use Session;
 use Purifier;
-use Posmat\Models\User;
-use Posmat\Models\Monitoria;
-use Posmat\Models\DadoPessoal;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\Monitoria;
+use InscricoesPos\Models\DadoPessoal;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\BaseController;
-use Posmat\Http\Controllers\HomeController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\BaseController;
+use InscricoesPos\Http\Controllers\HomeController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Notification;
 use Illuminate\Notifications\Messages\MailMessage;
-use Posmat\Notifications\AtivaConta;
+use InscricoesPos\Notifications\AtivaConta;
 
 
 

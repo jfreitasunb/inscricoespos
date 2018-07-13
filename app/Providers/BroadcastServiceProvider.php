@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Providers;
+namespace InscricoesPos\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

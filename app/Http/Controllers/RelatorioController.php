@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
 use Auth;
 use DB;
@@ -10,29 +10,29 @@ use File;
 use ZipArchive;
 use PDF;
 use Imagick;
-use Posmat\Http\Controllers\FPDFController;
+use InscricoesPos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Models\DadoPessoalCandidato;
-use Posmat\Models\Paises;
-use Posmat\Models\Formacao;
-use Posmat\Models\Estado;
-use Posmat\Models\Cidade;
-use Posmat\Models\DadoPessoalRecomendante;
-use Posmat\Models\DadoAcademicoCandidato;
-use Posmat\Models\Documento;
-use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\ContatoRecomendante;
-use Posmat\Models\CartaMotivacao;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPos;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\DadoPessoalCandidato;
+use InscricoesPos\Models\Paises;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\Estado;
+use InscricoesPos\Models\Cidade;
+use InscricoesPos\Models\DadoPessoalRecomendante;
+use InscricoesPos\Models\DadoAcademicoCandidato;
+use InscricoesPos\Models\Documento;
+use InscricoesPos\Models\EscolhaCandidato;
+use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\CartaMotivacao;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\AuthController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
@@ -191,7 +191,7 @@ class RelatorioController extends BaseController
 
     $programa_pos = new ProgramaPos();
 
-    $area_pos_mat = new AreaPosMat();
+    $area_pos_mat = new AreaInscricoesPos();
 
     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
@@ -547,10 +547,10 @@ class RelatorioController extends BaseController
 
   $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-  $endereco_zip_mudar = '/var/www/posmat/storage/app/public/';
+  $endereco_zip_mudar = '/var/www/InscricoesPos/storage/app/public/';
 
   //Para ser usado no MAT
-  // $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
+  // $endereco_zip_mudar = '/var/www/InscricoesPos/storage/app/public/';
 
   $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
 
@@ -685,10 +685,10 @@ class RelatorioController extends BaseController
 
       $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-      $endereco_mudar = '/var/www/posmat/storage/app/public/';
+      $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
 
       //Para ser usado no MAT
-      // $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
+      // $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
       
       return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
@@ -789,10 +789,10 @@ class RelatorioController extends BaseController
   public function geraFichaInscricao($id_aluno, $id_inscricao_pos, $locale_relatorio)
   {
 
-    $endereco_mudar = '/var/www/posmat/storage/app/public/';
+    $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
 
     //Para ser usado no MAT
-    // $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
+    // $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
     
     $relatorio = new ConfiguraInscricaoPos();
 

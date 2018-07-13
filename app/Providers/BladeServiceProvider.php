@@ -1,9 +1,9 @@
 <?php
 
-namespace Posmat\Providers;
+namespace InscricoesPos\Providers;
 
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\FinalizaInscricao;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\FinalizaInscricao;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;

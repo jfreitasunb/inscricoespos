@@ -1,5 +1,5 @@
 <?php
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;

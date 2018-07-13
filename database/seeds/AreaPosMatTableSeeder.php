@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class AreaPosMatTableSeeder extends Seeder
+class AreaInscricoesPosTableSeeder extends Seeder
 {
 
     /**

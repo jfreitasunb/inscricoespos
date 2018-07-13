@@ -1,8 +1,8 @@
 <?php
 
-namespace Posmat\Http\Controllers\Auth;
+namespace InscricoesPos\Http\Controllers\Auth;
 
-use Posmat\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

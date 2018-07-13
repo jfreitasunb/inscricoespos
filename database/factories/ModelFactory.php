@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Posmat\User::class, function (Faker\Generator $faker) {
+$factory->define(InscricoesPos\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

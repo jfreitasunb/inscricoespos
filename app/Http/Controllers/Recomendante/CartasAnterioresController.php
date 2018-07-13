@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers\Recomendante;
+namespace InscricoesPos\Http\Controllers\Recomendante;
 
 use Auth;
 use DB;
@@ -12,32 +12,32 @@ use Validator;
 use Purifier;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\CartaMotivacao;
-use Posmat\Models\ProgramaPos;
-use Posmat\Models\DadoPessoalCandidato;
-use Posmat\Models\Formacao;
-use Posmat\Models\Estado;
-use Posmat\Models\DadoAcademico;
-use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\DadoPessoalRecomendante;
-use Posmat\Models\ContatoRecomendante;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Models\Documento;
-use Posmat\Notifications\NotificaRecomendante;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\CartaMotivacao;
+use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\DadoPessoalCandidato;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\Estado;
+use InscricoesPos\Models\DadoAcademico;
+use InscricoesPos\Models\EscolhaCandidato;
+use InscricoesPos\Models\DadoPessoalRecomendante;
+use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\Documento;
+use InscricoesPos\Notifications\NotificaRecomendante;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\BaseController;
-use Posmat\Http\Controllers\AuthController;
-use Posmat\Http\Controllers\CidadeController;
-use Posmat\Http\Controllers\RelatorioController;
-use Posmat\Http\Controllers\APIController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\BaseController;
+use InscricoesPos\Http\Controllers\AuthController;
+use InscricoesPos\Http\Controllers\CidadeController;
+use InscricoesPos\Http\Controllers\RelatorioController;
+use InscricoesPos\Http\Controllers\APIController;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Posmat\Http\Requests;
+use InscricoesPos\Http\Requests;
 use Illuminate\Support\Facades\Response;
 
 /**

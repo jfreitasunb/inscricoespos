@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Middleware;
+namespace InscricoesPos\Http\Middleware;
 
 use Closure;
 

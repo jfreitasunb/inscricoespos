@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http;
+namespace InscricoesPos\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -16,9 +16,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Posmat\Http\Middleware\TrimStrings::class,
+        \InscricoesPos\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Posmat\Http\Middleware\LocaleMiddleware::class,
+        \InscricoesPos\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -28,12 +28,12 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Posmat\Http\Middleware\EncryptCookies::class,
+            \InscricoesPos\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Posmat\Http\Middleware\VerifyCsrfToken::class,
+            \InscricoesPos\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -55,12 +55,12 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Posmat\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \InscricoesPos\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'user.role' => \Posmat\Http\Middleware\UserRoles::class,
-        'autoriza.inscricao' => \Posmat\Http\Middleware\AutorizaLogin::class,
-        'define.locale' => \Posmat\Http\Middleware\LocaleMiddleware::class,
-        'impersonate.user' => \Posmat\Http\Middleware\Admin\Impersonate::class,
-        'validaassinatura' => \Posmat\Http\Middleware\ValidaSignature::class,
+        'user.role' => \InscricoesPos\Http\Middleware\UserRoles::class,
+        'autoriza.inscricao' => \InscricoesPos\Http\Middleware\AutorizaLogin::class,
+        'define.locale' => \InscricoesPos\Http\Middleware\LocaleMiddleware::class,
+        'impersonate.user' => \InscricoesPos\Http\Middleware\Admin\Impersonate::class,
+        'validaassinatura' => \InscricoesPos\Http\Middleware\ValidaSignature::class,
     ];
 }

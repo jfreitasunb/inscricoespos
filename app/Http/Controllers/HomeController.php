@@ -1,10 +1,10 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
 use Auth;
 use Session;
-use Posmat\Models\User;
+use InscricoesPos\Models\User;
 
 
 /**

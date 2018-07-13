@@ -175,15 +175,15 @@ return [
         /*
          * Application Service Providers...
          */
-        Posmat\Providers\AppServiceProvider::class,
-        Posmat\Providers\AuthServiceProvider::class,
-        // Posmat\Providers\BroadcastServiceProvider::class,
-        Posmat\Providers\EventServiceProvider::class,
-        Posmat\Providers\RouteServiceProvider::class,
+        InscricoesPos\Providers\AppServiceProvider::class,
+        InscricoesPos\Providers\AuthServiceProvider::class,
+        // InscricoesPos\Providers\BroadcastServiceProvider::class,
+        InscricoesPos\Providers\EventServiceProvider::class,
+        InscricoesPos\Providers\RouteServiceProvider::class,
         ValidadorCpf\CpfServiceProvider54::class,
-        Posmat\Providers\ViewComposerServiceProvider::class,
+        InscricoesPos\Providers\ViewComposerServiceProvider::class,
         Codecourse\Notify\NotifyServiceProvider::class,
-        Posmat\Providers\BladeServiceProvider::class,
+        InscricoesPos\Providers\BladeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
 

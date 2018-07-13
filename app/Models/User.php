@@ -1,12 +1,12 @@
 <?php
 
-namespace Posmat\Models;
+namespace InscricoesPos\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Posmat\Notifications\ResetPassword as ResetPasswordNotification;
+use InscricoesPos\Notifications\ResetPassword as ResetPasswordNotification;
 use Notification;
-use Posmat\Notifications\LinkSenha;
+use InscricoesPos\Notifications\LinkSenha;
 
 class User extends Authenticatable
 {

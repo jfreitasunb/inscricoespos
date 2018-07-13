@@ -1,9 +1,9 @@
 <?php
 
-namespace Posmat\Providers;
+namespace InscricoesPos\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Posmat\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 use Validator;
 use Illuminate\Http\Request;
 

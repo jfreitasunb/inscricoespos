@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Middleware\Admin;
+namespace InscricoesPos\Http\Middleware\Admin;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

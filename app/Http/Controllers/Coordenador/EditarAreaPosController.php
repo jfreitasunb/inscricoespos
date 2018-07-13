@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers\Coordenador;
+namespace InscricoesPos\Http\Controllers\Coordenador;
 
 use Auth;
 use DB;
@@ -10,19 +10,19 @@ use File;
 use PDF;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\Formacao;
-use Posmat\Models\ProgramaPos;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Notifications\NotificaNovaInscricao;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\BaseController;
-use Posmat\Http\Controllers\CidadeController;
-use Posmat\Http\Controllers\AuthController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\BaseController;
+use InscricoesPos\Http\Controllers\CidadeController;
+use InscricoesPos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 
@@ -34,7 +34,7 @@ class EditarAreaPosController extends CoordenadorController
 
 	public function getEditarAreaPos()
 	{
-		$areas_pos_mat = AreaPosMat::orderBy('id_area_pos')->get()->all();
+		$areas_pos_mat = AreaInscricoesPos::orderBy('id_area_pos')->get()->all();
 
 		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
@@ -56,7 +56,7 @@ class EditarAreaPosController extends CoordenadorController
 			'nome_es' => trim($request->nome_es),
 		];
 
-		$area_pos = AreaPosMat::find($id_area_pos);
+		$area_pos = AreaInscricoesPos::find($id_area_pos);
 
 		$status_atualizacao = $area_pos->update($dados_area_pos);
 

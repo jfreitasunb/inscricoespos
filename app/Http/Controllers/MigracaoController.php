@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
 use Auth;
 use DB;
@@ -10,29 +10,29 @@ use File;
 use ZipArchive;
 use Purifier;
 use PDF;
-use Posmat\Http\Controllers\FPDFController;
+use InscricoesPos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Models\DadoPessoalCandidato;
-use Posmat\Models\Paises;
-use Posmat\Models\Formacao;
-use Posmat\Models\Estado;
-use Posmat\Models\Cidade;
-use Posmat\Models\DadoPessoalRecomendante;
-use Posmat\Models\DadoAcademicoCandidato;
-use Posmat\Models\Documento;
-use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\ContatoRecomendante;
-use Posmat\Models\CartaMotivacao;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPos;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\DadoPessoalCandidato;
+use InscricoesPos\Models\Paises;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\Estado;
+use InscricoesPos\Models\Cidade;
+use InscricoesPos\Models\DadoPessoalRecomendante;
+use InscricoesPos\Models\DadoAcademicoCandidato;
+use InscricoesPos\Models\Documento;
+use InscricoesPos\Models\EscolhaCandidato;
+use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\CartaMotivacao;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\AuthController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
@@ -86,7 +86,7 @@ class MigracaoController extends BaseController
         $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
 
         foreach ($areas_pos as $area) {
-            $nova_area = new AreaPosMat();
+            $nova_area = new AreaInscricoesPos();
 
             $nova_area->id_area_pos = $area->id_area_pos;
             $nova_area->nome_ptbr = $area->nome;

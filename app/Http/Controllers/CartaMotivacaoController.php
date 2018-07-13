@@ -1,8 +1,8 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
-use Posmat\CartaMotivacao;
+use InscricoesPos\CartaMotivacao;
 use Illuminate\Http\Request;
 
 class CartaMotivacaoController extends Controller
@@ -41,7 +41,7 @@ class CartaMotivacaoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Posmat\CartaMotivacao  $cartaMotivacao
+     * @param  \InscricoesPos\CartaMotivacao  $cartaMotivacao
      * @return \Illuminate\Http\Response
      */
     public function show(CartaMotivacao $cartaMotivacao)
@@ -52,7 +52,7 @@ class CartaMotivacaoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Posmat\CartaMotivacao  $cartaMotivacao
+     * @param  \InscricoesPos\CartaMotivacao  $cartaMotivacao
      * @return \Illuminate\Http\Response
      */
     public function edit(CartaMotivacao $cartaMotivacao)
@@ -64,7 +64,7 @@ class CartaMotivacaoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Posmat\CartaMotivacao  $cartaMotivacao
+     * @param  \InscricoesPos\CartaMotivacao  $cartaMotivacao
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CartaMotivacao $cartaMotivacao)
@@ -75,7 +75,7 @@ class CartaMotivacaoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Posmat\CartaMotivacao  $cartaMotivacao
+     * @param  \InscricoesPos\CartaMotivacao  $cartaMotivacao
      * @return \Illuminate\Http\Response
      */
     public function destroy(CartaMotivacao $cartaMotivacao)

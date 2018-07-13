@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ProgramaPosMatTableSeeder extends Seeder
+class ProgramaInscricoesPosTableSeeder extends Seeder
 {
 
     /**

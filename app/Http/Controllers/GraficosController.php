@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
 use Auth;
 use DB;
@@ -11,29 +11,29 @@ use ZipArchive;
 use PDF;
 use Imagick;
 use Charts;
-use Posmat\Http\Controllers\FPDFController;
+use InscricoesPos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
-use Posmat\Models\User;
-use Posmat\Models\ConfiguraInscricaoPos;
-use Posmat\Models\FinalizaInscricao;
-use Posmat\Models\DadoPessoal;
-use Posmat\Models\Paises;
-use Posmat\Models\Formacao;
-use Posmat\Models\Estado;
-use Posmat\Models\Cidade;
-use Posmat\Models\DadoRecomendante;
-use Posmat\Models\DadoAcademico;
-use Posmat\Models\Documento;
-use Posmat\Models\EscolhaCandidato;
-use Posmat\Models\ContatoRecomendante;
-use Posmat\Models\CartaMotivacao;
-use Posmat\Models\CartaRecomendacao;
-use Posmat\Models\AreaPosMat;
-use Posmat\Models\ProgramaPos;
+use InscricoesPos\Models\User;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\DadoPessoal;
+use InscricoesPos\Models\Paises;
+use InscricoesPos\Models\Formacao;
+use InscricoesPos\Models\Estado;
+use InscricoesPos\Models\Cidade;
+use InscricoesPos\Models\DadoRecomendante;
+use InscricoesPos\Models\DadoAcademico;
+use InscricoesPos\Models\Documento;
+use InscricoesPos\Models\EscolhaCandidato;
+use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\CartaMotivacao;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\AuthController;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\AuthController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use League\Csv\Writer;
 use Storage;
@@ -83,7 +83,7 @@ class GraficosController extends BaseController
 
             $areas_inscricoes = $escolhas_candidato->retorna_area_distintas($relatorio_disponivel->id_inscricao_pos);
 
-            $area_pos = new AreaPosMat;
+            $area_pos = new AreaInscricoesPos;
 
             $nome_area_pos = [];
             $total_por_area = [];

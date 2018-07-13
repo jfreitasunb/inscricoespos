@@ -1,11 +1,11 @@
 <?php
 
-namespace Posmat\Http\Controllers\Admin;
+namespace InscricoesPos\Http\Controllers\Admin;
 
 use Auth;
 use Illuminate\Http\Request;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Models\User;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Models\User;
 
 class ImpersonateController extends Controller
 {   

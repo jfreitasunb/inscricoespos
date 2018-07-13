@@ -1,8 +1,8 @@
 <?php
 
-namespace Posmat\Http\Controllers;
+namespace InscricoesPos\Http\Controllers;
 
-use Posmat\Models\{ConfiguraInscricaoPos, User};
+use InscricoesPos\Models\{ConfiguraInscricaoPos, User};
 use Auth;
 use Session;
 

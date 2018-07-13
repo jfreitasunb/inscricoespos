@@ -1,12 +1,12 @@
 <?php
 
-namespace Posmat\Console\Commands;
+namespace InscricoesPos\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use Posmat\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao};
-use Posmat\Notifications\EmailRememberRecomendante;
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao};
+use InscricoesPos\Notifications\EmailRememberRecomendante;
 
 use Illuminate\Console\Command;
 

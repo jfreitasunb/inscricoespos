@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Models;
+namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,7 +15,7 @@ class Cidade extends Model
 
     public function estado()
     {
-        return $this->belongsTo('Posmat\Models\Estado');
+        return $this->belongsTo('InscricoesPos\Models\Estado');
     }
 
     public function retorna_nome_cidade_por_id($id_cidade, $id_estado)

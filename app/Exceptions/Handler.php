@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Exceptions;
+namespace InscricoesPos\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

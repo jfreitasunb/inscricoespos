@@ -1,6 +1,6 @@
 <?php
 
-namespace Posmat\Http\Controllers\Admin;
+namespace InscricoesPos\Http\Controllers\Admin;
 
 use Auth;
 use DB;
@@ -8,14 +8,14 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use Posmat\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaInscricoesPos, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoalCandidato, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
 use Illuminate\Http\Request;
-use Posmat\Mail\EmailVerification;
-use Posmat\Http\Controllers\Controller;
-use Posmat\Http\Controllers\AuthController;
-use Posmat\Http\Controllers\CoordenadorController;
-use Posmat\Http\Controllers\DataTable\UserController;
-use Posmat\Notifications\NotificaRecomendante;
+use InscricoesPos\Mail\EmailVerification;
+use InscricoesPos\Http\Controllers\Controller;
+use InscricoesPos\Http\Controllers\AuthController;
+use InscricoesPos\Http\Controllers\CoordenadorController;
+use InscricoesPos\Http\Controllers\DataTable\UserController;
+use InscricoesPos\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;
