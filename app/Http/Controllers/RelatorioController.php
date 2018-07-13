@@ -429,6 +429,7 @@ class RelatorioController extends BaseController
       throw new ProcessFailedException($process);
     }
 
+    @unlink($nome_arquivos['arquivo_relatorio_candidato_temporario']);
   }
 
   public function ConsolidaArquivosZIP($edital, $arquivo_zip, $local_relatorios, $programas)

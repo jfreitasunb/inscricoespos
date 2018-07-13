@@ -248,7 +248,7 @@ class FinalizarInscricaoController extends BaseController
 				$finalizar_inscricao->save();
 			}
 
-
+			@unlink($request->ficha_inscricao);
 
 			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
