@@ -82,6 +82,10 @@ class HomologaInscricoesController extends CoordenadorController
             $homologa->save();
         }
 
+        notify()->flash('Dados salvos com sucesso.','success', [
+            'timer' => 2000,
+        ]);
 
+        return redirect()->back();
     }
 }
