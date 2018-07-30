@@ -14,6 +14,7 @@ class HomologaInscricoes extends Model
         'id_candidato',
         'id_inscricao_pos',
         'programa_pretendido',
+        'homologar',
         'id_coordenador',
     ];
 
