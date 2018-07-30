@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class HomologaInscricoes extends Model
 {
     use SoftDeletes;
-    
+
     protected $primaryKey = 'id';
 
     protected $table = 'homologa_inscricoes';
@@ -22,4 +22,8 @@ class HomologaInscricoes extends Model
         'deleted_at',
     ];
 
+    public function limpa_homologacoes_anteriores($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
+    }
 }
