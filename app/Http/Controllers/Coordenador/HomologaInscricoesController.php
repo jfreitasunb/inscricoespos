@@ -53,19 +53,33 @@ class HomologaInscricoesController extends CoordenadorController
     {
         $user = Auth::user();
 
+        $id_user = $user->id_user;
+
         $this->validate($request, [
             'homologar' => 'required',
         ]);
+        
+        $id_inscricao_pos = (int)$request->id_inscricao_pos;
 
-        foreach ($request->homologar as $homologando) {
+        $limpa_homologacoes = new HomologaInscricoes();
+
+        $limpa_homologacoes->limpa_homologacoes_anteriores($id_inscricao_pos);
+
+        foreach ($request->homologar as $id => $homologar) {
             
             $homologa = new HomologaInscricoes();
 
-            $homologa->id_candidato = explode("_", $homologando)[0];
+            $homologa->id_candidato = $id;
 
-            $homologa->id_inscricao_pos = (int)$request->id_inscricao_pos;
+            $homologa->id_inscricao_pos = $id_inscricao_pos;
 
-            $homologa->programa_pretendido = explode("_", $homologando)[1];
+            $homologa->programa_pretendido = explode("_", $homologar)[1];
+
+            $homologa->homologar = explode("_", $homologar)[0];
+
+            $homologa->id_coordenador = $id_user;
+
+            $homologa->save();
         }
 
 
