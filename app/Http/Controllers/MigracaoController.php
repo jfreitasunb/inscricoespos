@@ -27,7 +27,7 @@ use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ContatoRecomendante;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\CartaRecomendacao;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
@@ -86,7 +86,7 @@ class MigracaoController extends BaseController
         $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
 
         foreach ($areas_pos as $area) {
-            $nova_area = new AreaInscricoesPos();
+            $nova_area = new AreaPosMat();
 
             $nova_area->id_area_pos = $area->id_area_pos;
             $nova_area->nome_ptbr = $area->nome;

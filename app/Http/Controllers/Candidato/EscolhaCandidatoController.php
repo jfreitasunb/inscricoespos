@@ -13,7 +13,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\AssociaEmailsRecomendante;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\DadoPessoalCandidato;
@@ -156,7 +156,7 @@ class EscolhaCandidatoController extends BaseController
 				 		break;
 				 }
 
-				$areas_pos = AreaInscricoesPos::where('id_area_pos', '!=', 10)->pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
+				$areas_pos = AreaPosMat::where('id_area_pos', '!=', 10)->pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
 			}
 			
 			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados'));

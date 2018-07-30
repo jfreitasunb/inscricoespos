@@ -14,7 +14,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\DadoPessoal;

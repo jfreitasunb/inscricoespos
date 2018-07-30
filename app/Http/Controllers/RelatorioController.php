@@ -27,7 +27,7 @@ use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ContatoRecomendante;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\CartaRecomendacao;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
@@ -191,7 +191,7 @@ class RelatorioController extends BaseController
 
     $programa_pos = new ProgramaPos();
 
-    $area_pos_mat = new AreaInscricoesPos();
+    $area_pos_mat = new AreaPosMat();
 
     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 

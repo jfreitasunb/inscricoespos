@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class AreaInscricoesPos extends Model
+class AreaPosMat extends Model
 {
     
 

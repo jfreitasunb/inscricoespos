@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\ProgramaPos;
@@ -34,7 +34,7 @@ class EditarAreaPosController extends CoordenadorController
 
 	public function getEditarAreaPos()
 	{
-		$areas_pos_mat = AreaInscricoesPos::orderBy('id_area_pos')->get()->all();
+		$areas_pos_mat = AreaPosMat::orderBy('id_area_pos')->get()->all();
 
 		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
@@ -56,7 +56,7 @@ class EditarAreaPosController extends CoordenadorController
 			'nome_es' => trim($request->nome_es),
 		];
 
-		$area_pos = AreaInscricoesPos::find($id_area_pos);
+		$area_pos = AreaPosMat::find($id_area_pos);
 
 		$status_atualizacao = $area_pos->update($dados_area_pos);
 

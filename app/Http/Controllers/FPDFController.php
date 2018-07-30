@@ -21,7 +21,7 @@ use InscricoesPos\Models\DadoAcademico;
 use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ContatoRecomendante;
 use InscricoesPos\Models\CartaMotivacao;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;

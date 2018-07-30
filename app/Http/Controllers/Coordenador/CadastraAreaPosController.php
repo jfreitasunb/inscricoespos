@@ -12,7 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\ProgramaPos;
@@ -46,7 +46,7 @@ class CadastraAreaPosController extends CoordenadorController
 			'nome_es' => 'required',
 		]);
 
-		$nova_area_pos = new AreaInscricoesPos;
+		$nova_area_pos = new AreaPosMat;
 
 		$nova_area_pos->nome_ptbr = trim($request->nome_ptbr);
 		$nova_area_pos->nome_en = trim($request->nome_en);

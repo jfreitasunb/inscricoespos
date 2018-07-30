@@ -28,7 +28,7 @@ use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ContatoRecomendante;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\CartaRecomendacao;
-use InscricoesPos\Models\AreaInscricoesPos;
+use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
@@ -83,7 +83,7 @@ class GraficosController extends BaseController
 
             $areas_inscricoes = $escolhas_candidato->retorna_area_distintas($relatorio_disponivel->id_inscricao_pos);
 
-            $area_pos = new AreaInscricoesPos;
+            $area_pos = new AreaPosMat;
 
             $nome_area_pos = [];
             $total_por_area = [];
