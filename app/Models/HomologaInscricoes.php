@@ -22,6 +22,11 @@ class HomologaInscricoes extends Model
         'deleted_at',
     ];
 
+    public function retorna_inscricoes_homologadas($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('homologar', 'True')->get();
+    }
+
     public function limpa_homologacoes_anteriores($id_inscricao_pos)
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
