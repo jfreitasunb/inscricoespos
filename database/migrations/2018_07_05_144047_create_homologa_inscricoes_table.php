@@ -24,6 +24,7 @@ class CreateHomologaInscricoesTable extends Migration
             $table->boolean('homologar');
             $table->unsignedInteger('id_coordenador');
             $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
