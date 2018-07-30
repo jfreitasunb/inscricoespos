@@ -3,9 +3,12 @@
 namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HomologaInscricoes extends Model
 {
+    use SoftDeletes;
+    
     protected $primaryKey = 'id';
 
     protected $table = 'homologa_inscricoes';
@@ -16,6 +19,7 @@ class HomologaInscricoes extends Model
         'programa_pretendido',
         'homologar',
         'id_coordenador',
+        'deleted_at',
     ];
 
 }
