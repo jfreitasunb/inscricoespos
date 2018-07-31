@@ -4,6 +4,7 @@ namespace InscricoesPos\Providers;
 
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\CandidatosSelecionados;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -194,6 +195,26 @@ class BladeServiceProvider extends ServiceProvider
             $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
             if ($autoriza_status_carta and $status_inscricao) {
+                return true;
+            }else{
+                return false;
+            }         
+        });
+
+        Blade::if('confirmacao_participacao', function ( $user = null ){
+
+            $user = auth()->user();
+            $id_user = $user->id_user;
+
+            $edital_ativo = new ConfiguraInscricaoPos();
+
+            $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+            
+            $selecao_candidatos = new CandidatosSelecionados();
+
+            $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+            if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca) {
                 return true;
             }else{
                 return false;
