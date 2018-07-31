@@ -13,14 +13,17 @@
 
   <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.mensagem_fim')!!}</p>
 {!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-<div class="form-group">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3 text-center">
-            {!! Form::submit(trans('tela_confirma_presenca.confirma'), ['class' => 'btn btn-success btn-lg submit-aceita', 'name' =>'confirma']) !!}
-            {!! Form::button(trans('tela_confirma_presenca.declina'), ['class' => 'btn btn-danger btn-lg submit-declina', 'onclick' => 'return archiveFunction(event)', 'id' => 'declina']) !!}
-          </div>
-        </div>
+  {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
+  {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
+  {!! Form::hidden('programa_pretendido', $dados_para_template['programa_pretendido'], []) !!}
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        {!! Form::submit(trans('tela_confirma_presenca.confirma'), ['class' => 'btn btn-success btn-lg submit-aceita', 'name' =>'confirma']) !!}
+        {!! Form::button(trans('tela_confirma_presenca.declina'), ['class' => 'btn btn-danger btn-lg submit-declina', 'onclick' => 'return archiveFunction(event)', 'id' => 'declina']) !!}
       </div>
+    </div>
+  </div>
 {!! Form::close() !!}
 </fieldset>
 
