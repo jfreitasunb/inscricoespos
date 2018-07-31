@@ -63,7 +63,7 @@ class ConfirmaPresencaController extends BaseController
 		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
-		if ($autoriza_inscricao) {
+		if (!$autoriza_inscricao) {
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
@@ -95,7 +95,7 @@ class ConfirmaPresencaController extends BaseController
 			}
 			
 
-			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
+			return redirect()->back();
 
 		}else{
 			return redirect()->back();
