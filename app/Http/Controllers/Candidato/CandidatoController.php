@@ -78,10 +78,12 @@ class CandidatoController extends BaseController
 
         $status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
-        if ($status_selecao->selecionado AND !$status_selecao->confirmou_presenca) {
+        if (!is_null($status_selecao)) {
+            if ($status_selecao->selecionado AND !$status_selecao->confirmou_presenca) {
             return redirect()->route('confirma.presenca');
+            }
         }
-		
+        
 		return view('home');
 	}
 }

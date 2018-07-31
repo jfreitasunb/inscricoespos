@@ -214,11 +214,14 @@ class BladeServiceProvider extends ServiceProvider
 
             $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
-            if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca) {
-                return true;
-            }else{
-                return false;
-            }         
+            if (!is_null($status_selecao)) {
+                if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+                     
         });
     }
 
