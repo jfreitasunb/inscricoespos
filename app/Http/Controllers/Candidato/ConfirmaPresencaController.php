@@ -57,6 +57,8 @@ class ConfirmaPresencaController extends BaseController
 		
 		$id_user = $user->id_user;
 
+		$locale_candidato = Session::get('locale');
+
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
@@ -97,9 +99,22 @@ class ConfirmaPresencaController extends BaseController
 			
 				return redirect()->route('home');
 			}
-			
 
-			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
+			$nome = User::find($id_user)->nome;
+
+			$programa_pos = new ProgramaPos();
+
+			$nome_programa_pretendido = $programa_pos->pega_programa_pos_mat($status_selecao->programa_pretendido, $locale_candidato);
+
+			$dados_para_template['id_candidato'] = $id_user;
+
+			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
+
+			$dados_para_template['nome'] = $nome;
+			
+			$dados_para_template['programa_pretendido'] = $nome_programa_pretendido;
+
+			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template'));
 
 		}else{
 			return redirect()->back();
