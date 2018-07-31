@@ -28,6 +28,8 @@ use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\Documento;
 use InscricoesPos\Models\Paises;
 use InscricoesPos\Models\Cidade;
+use InscricoesPos\Models\HomologaInscricoes;
+use InscricoesPos\Models\CandidatosSelecionados;
 use InscricoesPos\Notifications\NotificaRecomendante;
 use InscricoesPos\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
@@ -74,28 +76,34 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->back();
 			}
 
-			$recomendante_candidato = new ContatoRecomendante();
+			$homologa = new HomologaInscricoes();
 
-			$recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
-			
-			$dados_para_template = [];
+			$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
 
-			foreach ($recomendantes_candidato as $recomendante) {
-
-				$dado_pessoal_recomendante = new DadoPessoalRecomendante();
-
-				$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome;
-
-				$carta_recomendacao = new CartaRecomendacao();
-				
-				$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
-
-				$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
-
+			if (!$candidato_homologado) {
+				return redirect()->back();
 			}
+
+			// $recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+			
+			// $dados_para_template = [];
+
+			// foreach ($recomendantes_candidato as $recomendante) {
+
+			// 	$dado_pessoal_recomendante = new DadoPessoalRecomendante();
+
+			// 	$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome;
+
+			// 	$carta_recomendacao = new CartaRecomendacao();
+				
+			// 	$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
+
+			// 	$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
+
+			// }
 			
 
-			return redirect()->back();
+			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
 
 		}else{
 			return redirect()->back();
