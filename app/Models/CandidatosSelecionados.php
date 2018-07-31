@@ -40,6 +40,10 @@ class CandidatosSelecionados extends Model
         }
     }
 
+    public function retorna_status_selecionado($id_inscricao_pos, $id_candidato)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->get()->first();
+    }
 
     public function retorna_candidatos_selecionados($id_inscricao_pos)
     {

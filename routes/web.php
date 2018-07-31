@@ -51,6 +51,10 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 	Route::get('status/cartas', '\InscricoesPos\Http\Controllers\Candidato\StatusCartasController@getStatusCartas')->name('status.cartas');
 
 	Route::post('status/cartas', '\InscricoesPos\Http\Controllers\Candidato\StatusCartasController@postStatusCartas');
+
+	Route::get('confirma/presencao', '\InscricoesPos\Http\Controllers\Candidato\ConfirmaPresencaController@getConfirmaPresenca')->name('confirma.presenca');
+
+	Route::post('confirma/presencao', '\InscricoesPos\Http\Controllers\Candidato\ConfirmaPresencaController@postConfirmaPresenca')->name('confirma.presenca');
 });
 
 
