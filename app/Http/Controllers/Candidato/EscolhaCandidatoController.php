@@ -216,9 +216,15 @@ class EscolhaCandidatoController extends BaseController
 					'confirmar_email_recomendante' => 'required|same:email_recomendante',
 				]);
 
-				if (is_null($request->area_pos) and ($request->programa_pretendido === '2')) {
+				if (is_null($request->area_pos_principal) and is_null($request->area_pos_secundaria) and ($request->programa_pretendido === '2')) {
 					
 					notify()->flash(trans('mensagens_gerais.informe_area'),'warning');
+
+					return redirect()->back();
+				}
+
+				if (($request->area_pos_principal != $request->area_pos_secundaria) and ($request->programa_pretendido === '2')) {
+					notify()->flash(trans('mensagens_gerais.areas_diferentes'),'warning');
 
 					return redirect()->back();
 				}
