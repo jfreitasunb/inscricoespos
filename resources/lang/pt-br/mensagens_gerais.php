@@ -34,4 +34,5 @@ return [
     'departamento' => 'Departamento de Matemática',
     'inscricao_pos' => 'Inscrições para a Pós-Graduação',
     'confirmou_presenca' => 'Você já confirmou seu interesse no Programa.',
+    'confirmou_presenca_erro' => 'Houve um erro com a gravação da sua resposta. Por favor tente novamente mais tarde.',
 ];
