@@ -15,7 +15,8 @@ class EscolhaCandidato extends Model
 
     protected $fillable = [
         'programa_pretendido',
-        'area_pos',
+        'area_pos_principal',
+        'area_pos_secundaria',
         'interesse_bolsa',
         'vinculo_empregaticio',
         'id_inscricao_pos',
