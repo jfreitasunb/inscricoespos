@@ -27,6 +27,7 @@ use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\Documento;
 use InscricoesPos\Models\Paises;
+use InscricoesPos\Models\CandidatosSelecionados;
 use InscricoesPos\Models\Cidade;
 use InscricoesPos\Notifications\NotificaRecomendante;
 use InscricoesPos\Notifications\NotificaCandidato;
@@ -64,6 +65,22 @@ class CandidatoController extends BaseController
 	public function getMenu()
 	{	
 		Session::get('locale');
+        
+        $user = $this->SetUser();
+        
+        $id_user = $user->id_user;
+
+        $edital_ativo = new ConfiguraInscricaoPos();
+
+        $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+        $selecionado = new CandidatosSelecionados();
+
+        $status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+        if ($status_selecao->selecionado AND !$status_selecao->confirmou_presenca) {
+            return redirect()->route('confirma.presenca');
+        }
 		
 		return view('home');
 	}
