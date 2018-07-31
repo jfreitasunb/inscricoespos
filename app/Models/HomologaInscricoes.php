@@ -39,6 +39,10 @@ class HomologaInscricoes extends Model
         }
     }
 
+    public function retorna_se_foi_homologado($id_candidato, $id_inscricao_pos)
+    {
+        return $this->select('homologada')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->value('homologada');
+    }
 
     public function retorna_inscricoes_homologadas($id_inscricao_pos)
     {
