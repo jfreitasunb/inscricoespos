@@ -84,23 +84,19 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->back();
 			}
 
-			// $recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+			$selecionado = new CandidatosSelecionados();
+
+			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+			if (!$status_selecao->selecionado) {
+				return redirect()->back();
+			}
+
+			if ($status_selecao->confirmou_presenca) {
+				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
 			
-			// $dados_para_template = [];
-
-			// foreach ($recomendantes_candidato as $recomendante) {
-
-			// 	$dado_pessoal_recomendante = new DadoPessoalRecomendante();
-
-			// 	$dados_para_template[$recomendante->id_recomendante]['nome_recomendante'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante)->nome;
-
-			// 	$carta_recomendacao = new CartaRecomendacao();
-				
-			// 	$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
-
-			// 	$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
-
-			// }
+				return redirect()->route('home');
+			}
 			
 
 			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
