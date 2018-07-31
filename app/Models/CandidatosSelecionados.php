@@ -67,6 +67,8 @@ class CandidatosSelecionados extends Model
     {
         $id = $this->select('id')->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->value('id');
 
-        DB::table('candidatos_selecionados')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['confirmou_presenca' => $confirmou_presenca, 'updated_at' => date('Y-m-d H:i:s')]);
+        $status_gravacao = DB::table('candidatos_selecionados')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['confirmou_presenca' => $confirmou_presenca, 'updated_at' => date('Y-m-d H:i:s')]);
+
+        return $status_gravacao;
     }
 }
