@@ -18,10 +18,10 @@
         @endliberamenu
         @statuscarta
           <li class="{{ Route::currentRouteNamed('status.cartas') ? 'active' : '' }}"><a href="{{ route('status.cartas') }}">{{ trans('tela_status_cartas.status_cartas') }}</a></li>
+          @confirmacao_participacao
+            <li class="{{ Route::currentRouteNamed('confirma.presenca') ? 'active' : '' }}"><a href="{{ route('confirma.presenca') }}">{{ trans('tela_confirma_presenca.confirma_presenca') }}</a></li>
+          @endconfirmacao_participacao
         @endstatuscarta
-        @confirmacao_participacao
-          <li class="{{ Route::currentRouteNamed('confirma.presenca') ? 'active' : '' }}"><a href="{{ route('confirma.presenca') }}">{{ trans('tela_confirma_presenca.confirma_presenca') }}</a></li>
-        @endconfirmacao_participacao
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">{{ trans('tela_sair.sair') }}</a></li>
         @impersonating_candidato
           <li>
