@@ -177,6 +177,8 @@ class ConfirmaPresencaController extends BaseController
 
 			$selecionado = new CandidatosSelecionados();
 
+			$selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
+
 			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
 			if (!$status_selecao->selecionado) {
@@ -189,21 +191,7 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->route('home');
 			}
 
-			$nome = User::find($id_user)->nome;
-
-			$programa_pos = new ProgramaPos();
-
-			$nome_programa_pretendido = $programa_pos->pega_programa_pos_mat($status_selecao->programa_pretendido, $locale_candidato);
-
-			$dados_para_template['id_candidato'] = $id_user;
-
-			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
-
-			$dados_para_template['nome'] = $nome;
 			
-			$dados_para_template['programa_pretendido'] = $nome_programa_pretendido;
-
-			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template'));
 
 		}else{
 			return redirect()->back();
