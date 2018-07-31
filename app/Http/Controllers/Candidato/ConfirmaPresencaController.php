@@ -177,8 +177,6 @@ class ConfirmaPresencaController extends BaseController
 
 			$selecionado = new CandidatosSelecionados();
 
-			$selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
-
 			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
 			if (!$status_selecao->selecionado) {
@@ -191,7 +189,17 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->route('home');
 			}
 
+			$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
+
+			if ($status_resposta) {
+				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
 			
+				return redirect()->route('home');
+			}else{
+				notify()->flash(trans('mensagens_gerais.confirmou_presenca_erro'),'error');
+			
+				return redirect()->route('home');
+			}
 
 		}else{
 			return redirect()->back();
