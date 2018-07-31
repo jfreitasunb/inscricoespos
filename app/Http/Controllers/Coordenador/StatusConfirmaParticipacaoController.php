@@ -45,7 +45,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $selecionados = new CandidatosSelecionados;
 
-        $candidatos_selecionados = $selecionados->retorna_dados_candidatos_selecionados($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
+        $candidatos_selecionados = $selecionados->retorna_dados_candidatos_selecionados($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados'));
 	}
