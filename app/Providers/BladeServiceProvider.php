@@ -161,7 +161,7 @@ class BladeServiceProvider extends ServiceProvider
             }         
         });
 
-         Blade::if('liberacarta', function ( $user = null ){
+        Blade::if('liberacarta', function ( $user = null ){
 
             $user = auth()->user();
             $id_user = $user->id_user;
@@ -178,7 +178,7 @@ class BladeServiceProvider extends ServiceProvider
             }         
         });
 
-         Blade::if('statuscarta', function ( $user = null ){
+        Blade::if('statuscarta', function ( $user = null ){
 
             $user = auth()->user();
             $id_user = $user->id_user;
