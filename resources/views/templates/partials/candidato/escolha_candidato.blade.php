@@ -21,12 +21,27 @@
             <label class="radio-inline">{!! Form::radio('programa_pretendido', $programa, $dados['programa_pretendido'] == $programa ?: '', ['required' => '']) !!} {!! $key !!}</label>
           </div>
         @endforeach
-        @if(isset($areas_pos))
-          <div class="col-md-3">
-            <label class="radio">{!! Form::select('area_pos', $areas_pos, $dados['area_pos'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
-          </div>    
-        @endif
       </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{ trans('tela_escolha_candidato.area_doutorado') }}</legend>
+    <div class="row">
+      @if(isset($areas_pos))
+        <div class="col-md-4">
+          {!! Form::label('area_principal', trans('tela_escolha_candidato.area_principal'), ['class' => 'col-md-4 control-label'])!!}
+        </div>
+        <div class="col-md-2">
+          <label class="radio">{!! Form::select('area_pos_principal', $areas_pos, $dados['area_pos'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
+        </div>
+        <div class="col-md-4">
+          {!! Form::label('area_secundaria', trans('tela_escolha_candidato.area_secundaria'), ['class' => 'col-md-4 control-label'])!!}
+        </div>
+        <div class="col-md-2">
+          <label class="radio">{!! Form::select('area_pos_secundaria', $areas_pos, $dados['area_pos'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
+        </div>  
+      @endif
+    </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
