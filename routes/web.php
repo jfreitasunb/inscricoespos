@@ -206,6 +206,8 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@postSelecinarCandidatos')->name('seleciona.candidatos');
 
+	Route::get('status/selecionados', '\InscricoesPos\Http\Controllers\Coordenador\StatusConfirmaParticipacaoController@getStatusCandidatosSelecionados')->name('status.selecionados');
+
 	Route::get('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 
 	Route::post('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');

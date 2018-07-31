@@ -44,6 +44,7 @@
           @yield('tabela_indicacoes')
           @yield('homologa_inscricoes')
           @yield('seleciona_candidatos')
+          @yield('status_selecionados')
           @yield('link_acesso')
         @endcoordenador
         @recomendante(Auth()->user())

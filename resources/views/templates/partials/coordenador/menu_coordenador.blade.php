@@ -20,6 +20,7 @@
         <li class="{{ Route::currentRouteNamed('relatorio.anteriores') ? 'active' : '' }}"><a href="{{ route('relatorio.anteriores') }}">Relatórios Editais Anteriores</a></li>
         <li class="{{ Route::currentRouteNamed('homologa.inscricoes') ? 'active' : '' }}"><a href="{{ route('homologa.inscricoes') }}">Homologa Inscrições</a></li>
         <li class="{{ Route::currentRouteNamed('seleciona.candidatos') ? 'active' : '' }}"><a href="{{ route('seleciona.candidatos') }}">Candidatos Selecionados</a></li>
+        <li class="{{ Route::currentRouteNamed('status.selecionados') ? 'active' : '' }}"><a href="{{ route('status.selecionados') }}">Status das Confirmações</a></li>
         <li class="{{ Route::currentRouteNamed('lista.recomendacoes') ? 'active' : '' }}"><a href="{{ route('lista.recomendacoes') }}">Cartas recebidas</a></li>
         <li class="{{ Route::currentRouteNamed('link.acesso') ? 'active' : '' }}"><a href="{{ route('link.acesso') }}">Link de Acesso</a></li>
         <li class="{{ Route::currentRouteNamed('auth.logout') ? 'active' : '' }}"><a href="{{ route('auth.logout') }}">Sair</a></li>
