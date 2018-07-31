@@ -33,4 +33,5 @@ return [
     'duvidas_pos' => 'Dúvidas sobre a Pós? Clique aqui',
     'departamento' => 'Departamento de Matemática',
     'inscricao_pos' => 'Inscrições para a Pós-Graduação',
+    'confirmou_presenca' => 'Você já confirmou seu interesse no Programa.',
 ];
