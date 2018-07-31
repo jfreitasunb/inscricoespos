@@ -4,6 +4,7 @@ namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class CandidatosSelecionados extends Model
 {
@@ -60,5 +61,12 @@ class CandidatosSelecionados extends Model
         $nome_coluna = $this->define_nome_coluna_por_locale($locale);
 
         return $this->where('candidatos_selecionados.id_inscricao_pos', $id_inscricao_pos)->where('candidatos_selecionados.selecionado', true)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_candidato','candidatos_selecionados.id_candidato')->join('users', 'users.id_user', 'candidatos_selecionados.id_candidato')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'dados_pessoais_candidato.id_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('candidatos_selecionados.id_candidato', 'candidatos_selecionados.id_inscricao_pos', 'candidatos_selecionados.confirmou_presenca','users.nome', 'users.email', 'programa_pos_mat.id_programa_pos', 'programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_candidato.programa_pretendido' , 'desc')->orderBy('users.nome','asc');
+    }
+
+    public function grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca)
+    {
+        $id = $this->select('id')->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->value('id');
+
+        DB::table('candidatos_selecionados')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['confirmou_presenca' => $confirmou_presenca, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }

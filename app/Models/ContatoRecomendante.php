@@ -87,7 +87,7 @@ class ContatoRecomendante extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante, 'updated_at' => date('Y-m-d H:i:s')]);
             }
 
             
@@ -115,7 +115,7 @@ class ContatoRecomendante extends Model
 
                 $novo_id_recomendante = $acha_recomendante->retorna_user_por_email($email_contatos_recomendantes[$i])->id_user;
 
-                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante]);
+                DB::table('contatos_recomendantes')->where('id', $id_atualizacao[$i])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['id_recomendante' => $novo_id_recomendante, 'updated_at' => date('Y-m-d H:i:s')]);
             }
         }
     }
