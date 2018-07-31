@@ -11,38 +11,46 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
 
-  <p>{{ trans('tela_confirma_presenca.mensagem_confirma_presenca') }}</p>
-
-  <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">{{ trans('tela_confirma_presenca.nome_recomendante') }}</th>
-      <th scope="col">{{ trans('tela_confirma_presenca.situacao_carta') }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach( $dados_para_template as $status)
-      @if ($status['status_carta'])
-        <tr class="success">
-      @else
-        <tr class="danger">
-      @endif
-      <td>{{ $status['nome_recomendante'] }}</td>
-      <td>@if ($status['status_carta'])
-          {{ trans('tela_confirma_presenca.status_enviada') }}
-        @else
-          {{ trans('tela_confirma_presenca.status_nao_enviada') }}
-        @endif
-      </td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
- 
+  <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.mensagem_fim')!!}</p>
+{!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+<div class="form-group">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            {!! Form::submit(trans('tela_confirma_presenca.confirma'), ['class' => 'btn btn-success btn-lg submit-aceita', 'name' =>'confirma']) !!}
+            {!! Form::button(trans('tela_confirma_presenca.declina'), ['class' => 'btn btn-danger btn-lg submit-declina', 'onclick' => 'return archiveFunction(event)', 'id' => 'declina']) !!}
+          </div>
+        </div>
+      </div>
+{!! Form::close() !!}
 </fieldset>
 
 
 @endsection
+
+@section('post-script')
+<script>
+function archiveFunction(event) {
+event.preventDefault(); // prevent form submit
+var form = event.target.form; // storing the form
+        swal({
+  title: '{{ trans('tela_confirma_presenca.confirma_envio') }}',
+  text: '{{ trans('tela_confirma_presenca.texto_confirma_envio') }}',
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: '{{ trans('tela_confirma_presenca.sim_envia') }}',
+  cancelButtonText: '{{ trans('tela_confirma_presenca.nao_envia') }}',
+}).then(function () {
+  form.submit();          // submitting the form when user press yes
+},function(dismiss){
+  if (dismiss === 'cancel') {
+    swal(
+      '{{ trans('tela_confirma_presenca.envio_cancelado') }}'
+    )
+  } 
+});
+}
+</script>
 
 @section('scripts')
   {!! Html::script( asset('bower_components/moment/min/moment.min.js') ) !!}
