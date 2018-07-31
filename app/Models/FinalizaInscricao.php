@@ -64,7 +64,15 @@ class FinalizaInscricao extends Model
 
     public function retorna_usuarios_relatorios($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->get();
+        $homologadas = new HomologaInscricoes;
+
+        $inscricoes_homologadas = $homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
+        if (sizeof($inscricoes_homologadas) == 0) {
+            return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', true)->get();
+        }else{
+            return $inscricoes_homologadas;
+        }
+        
     }
 
     public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_candidato, $locale)
