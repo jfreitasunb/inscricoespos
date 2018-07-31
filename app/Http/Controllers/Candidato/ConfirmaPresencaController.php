@@ -120,4 +120,9 @@ class ConfirmaPresencaController extends BaseController
 			return redirect()->back();
 		}
 	}
+
+	public function postConfirmaPresenca(Request $request)
+	{	
+		dd(isset($request->confirma));
+	}
 }
