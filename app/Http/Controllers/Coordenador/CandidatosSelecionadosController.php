@@ -16,6 +16,7 @@ use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\HomologaInscricoes;
+use InscricoesPos\Models\CandidatosSelecionados;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Notifications\NotificaNovaInscricao;
@@ -56,26 +57,26 @@ class CandidatosSelecionadosController extends CoordenadorController
         $id_user = $user->id_user;
 
         $this->validate($request, [
-            'homologar' => 'required',
+            'selecionar' => 'required',
         ]);
         
         $id_inscricao_pos = (int)$request->id_inscricao_pos;
 
-        $limpa_homologacoes = new HomologaInscricoes();
+        $limpa_homologacoes = new CandidatosSelecionados();
 
-        $limpa_homologacoes->limpa_homologacoes_anteriores($id_inscricao_pos);
+        $limpa_homologacoes->limpa_selecoes_anteriores($id_inscricao_pos);
 
-        foreach ($request->homologar as $id => $homologar) {
+        foreach ($request->selecionar as $id => $selecionar) {
             
-            $homologa = new HomologaInscricoes();
+            $homologa = new CandidatosSelecionados();
 
             $homologa->id_candidato = $id;
 
             $homologa->id_inscricao_pos = $id_inscricao_pos;
 
-            $homologa->programa_pretendido = explode("_", $homologar)[1];
+            $homologa->programa_pretendido = explode("_", $selecionar)[1];
 
-            $homologa->homologar = explode("_", $homologar)[0];
+            $homologa->selecionado = explode("_", $selecionar)[0];
 
             $homologa->id_coordenador = $id_user;
 

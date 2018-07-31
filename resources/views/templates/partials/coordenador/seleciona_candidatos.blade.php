@@ -27,7 +27,7 @@
               {!! Form::hidden('id_programa_pos', $finalizada['id_programa_pos'], []) !!}
               <td>{{ $finalizada['nome'] }}</td>
               <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::radio('homologar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_programa_pos'],true) !!} Sim {!! Form::radio('homologar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_programa_pos'],false) !!} Não</td>
+              <td>{!! Form::radio('selecionar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_programa_pos'],true) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_programa_pos'],false) !!} Não</td>
             </tr>
           @endforeach
         </tbody>
@@ -35,7 +35,7 @@
       </table>
     </div>
     <div class="col-md-10 text-center"> 
-      {!! Form::submit('Homologar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
+      {!! Form::submit('Enviar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
     </div>
   {!! Form::close() !!}
 </fieldset>

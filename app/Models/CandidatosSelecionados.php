@@ -41,12 +41,12 @@ class CandidatosSelecionados extends Model
     }
 
 
-    public function retorna_inscricoes_homologadas($id_inscricao_pos)
+    public function retorna_candidatos_selecionados($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('homologada', 'True')->get();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('selecionado', 'True')->get();
     }
 
-    public function limpa_homologacoes_anteriores($id_inscricao_pos)
+    public function limpa_selecoes_anteriores($id_inscricao_pos)
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
     }
