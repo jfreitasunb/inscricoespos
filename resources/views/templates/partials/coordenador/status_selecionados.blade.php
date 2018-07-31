@@ -17,38 +17,26 @@
         <tr>
           <th>Nome do Candidato</th>
           <th>Programa</th>
-          <th>Recomendante 1</th>
-          <th>Recomendante 2</th>
-          <th>Recomendante 3</th>
+          <th>Confirmou Presença?</th>
         </tr>
       </thead>
       <tbody>
-        @foreach ($dados_para_template as $dados)
+        @foreach ($candidatos_selecionados as $dados)
           <tr class="">
-            <td class="lista_carta">{{ $dados['nome_candidato'] }} <br> {{ $dados['email'] }}</td>
-            <td class="lista_carta">{{ $dados['tipo_programa_pos'] }}</td>
-            @if ($dados['status_carta_1'])
-              <td class="lista_carta carta_completa">
+            <td class="lista_carta">{{ $dados['nome'] }} <br> {{ $dados['email'] }}</td>
+            <td class="lista_carta">{{ $dados['tipo_programa_pos_ptbr'] }}</td>
+            @if ($dados['confirmou_presenca'])
+              <td class="lista_carta carta_completa"> Sim
             @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_1'] }} </br> {{ $dados['email_recomendante_1'] }}</td>
-            @if ($dados['status_carta_2'])
-              <td class="lista_carta carta_completa">
-            @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_2'] }} </br> {{ $dados['email_recomendante_2'] }}</td>
-            @if ($dados['status_carta_3'])
-              <td class="lista_carta carta_completa">
-            @else
-              <td class="lista_carta carta_incompleta">
-            @endif {{ $dados['nome_recomendante_3'] }} </br> {{ $dados['email_recomendante_3'] }}</td>
+              <td class="lista_carta carta_incompleta"> Não
+            @endif </td>
           </tr>
         @endforeach
       </tbody>
     </table>
   </div>
   <div class="text-center">
-    {{ $inscricoes_finalizadas->render() }}
+    {{ $candidatos_selecionados->render() }}
   </div>
 </fieldset>
 
