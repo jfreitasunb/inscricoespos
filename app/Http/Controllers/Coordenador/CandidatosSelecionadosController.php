@@ -46,10 +46,10 @@ class CandidatosSelecionadosController extends CoordenadorController
 
         $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
 
-      	return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));
+      	return view('templates.partials.coordenador.seleciona_candidatos', compact('relatorio_disponivel','inscricoes_finalizadas'));
 	}
 
-    public function postHomologarInscritos(Request $request)
+    public function postSelecinarCandidatos(Request $request)
     {
         $user = Auth::user();
 

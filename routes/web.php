@@ -202,6 +202,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@postHomologarInscritos')->name('homologa.inscricoes');
 
+	Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecinarCandidatos')->name('seleciona.candidatos');
+
+	Route::post('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@postSelecinarCandidatos')->name('seleciona.candidatos');
+
 	Route::get('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 
 	Route::post('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
