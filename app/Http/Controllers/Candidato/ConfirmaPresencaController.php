@@ -192,7 +192,7 @@ class ConfirmaPresencaController extends BaseController
 			$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
 
 			if ($status_resposta) {
-				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
+				notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
 			
 				return redirect()->route('home');
 			}else{
