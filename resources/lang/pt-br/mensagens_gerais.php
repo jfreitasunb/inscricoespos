@@ -10,6 +10,7 @@ return [
     'inscricao_inativa' => 'O período de inscrição já está encerrado ou ainda não começou.',
     'inscricao_finalizada' => 'Você já finalizou sua inscrição. Não é possível alterar esses dados. Somente dados pessoais.',
     'informe_area' => 'Você deve informar a área do Doutorado.',
+    'areas_diferentes' => 'As áreas não podem ser iguais.',
     'selecionar' => 'Selecione',
     'mensagem_sucesso' => 'Dados salvos com sucesso',
     'envio_final' => 'Sua inscrição foi envidada corretamente para nosso sistema.',
