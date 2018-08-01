@@ -63,7 +63,7 @@ class CandidatosSelecionadosController extends CoordenadorController
         if ($relatorio->autoriza_inscricao()) {
             
             notify()->flash('As inscrições não terminaram ainda. Não é informar os candidatos selecionados.','warning', [
-                'timer' => 2000,
+                'timer' => 3000,
             ]);
 
             return redirect()->back();

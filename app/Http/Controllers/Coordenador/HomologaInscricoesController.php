@@ -62,7 +62,7 @@ class HomologaInscricoesController extends CoordenadorController
         if ($relatorio->autoriza_inscricao()) {
             
             notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
-                'timer' => 2000,
+                'timer' => 3000,
             ]);
 
             return redirect()->back();
