@@ -43,9 +43,11 @@ class EscolhaCandidato extends Model
             $atualiza_escolhas = $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos',$id_inscricao_pos);
             $dados_escolhas['programa_pretendido'] = (int)$request->programa_pretendido;
             if ($request->programa_pretendido == 1) {
-                $dados_escolhas['area_pos'] = 10;
+                $dados_escolhas['area_pos_principal'] = 10;
+                $dados_escolhas['area_pos_secundaria'] = 10;
             }else{
-                $dados_escolhas['area_pos'] = (int)$request->area_pos;
+                $dados_escolhas['area_pos_principal'] = (int)$request->area_pos_principal;
+                $dados_escolhas['area_pos_secundaria'] = (int)$request->area_pos_secundaria;
             }
             $dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
             $dados_escolhas['vinculo_empregaticio'] = (bool)$request->vinculo_empregaticio;
@@ -56,9 +58,11 @@ class EscolhaCandidato extends Model
             $escolhas_candidato->programa_pretendido = (int)$request->programa_pretendido;
 
             if ($request->programa_pretendido == 1) {
-                $escolhas_candidato->area_pos = 10;
+                $escolhas_candidato->area_pos_principal = 10;
+                $escolhas_candidato->area_pos_secundaria = 10;
             }else{
-                $escolhas_candidato->area_pos = (int)$request->area_pos;
+                $escolhas_candidato->area_pos_principal = (int)$request->area_pos_principal;
+                $escolhas_candidato->area_pos_secundaria = (int)$request->area_pos_secundaria;
             }
             $escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
             $escolhas_candidato->vinculo_empregaticio = (bool)$request->vinculo_empregaticio;
