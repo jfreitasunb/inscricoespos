@@ -223,14 +223,13 @@ class EscolhaCandidatoController extends BaseController
 					return redirect()->back();
 				}
 
-				if (($request->area_pos_principal != $request->area_pos_secundaria) and ($request->programa_pretendido === '2')) {
+				if (($request->area_pos_principal == $request->area_pos_secundaria) and ($request->programa_pretendido === '2')) {
 					notify()->flash(trans('mensagens_gerais.areas_diferentes'),'warning');
 
 					return redirect()->back();
 				}
 
 
-				
 				$escolhas_candidato = new EscolhaCandidato();
 
 				$registra_escolhas_candidato = $escolhas_candidato->grava_escolhas_candidato($id_candidato,$id_inscricao_pos,$request);
