@@ -37,7 +37,7 @@
             }
         </script>
 
-        <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
+        <h2>Ficha de Inscrição - {{ $dados_candidato_para_relatorio['programa_pretendido'] }}</h2>
         <div>
             <label class="control-label">Nome: </label>{{ $dados_candidato_para_relatorio['nome'] }}
         </div>
@@ -81,7 +81,7 @@
         <hr>
         <h3>Programa pretendido</h3>
         <div>
-            <label>Programa pretendido: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área: </label>'.$dados_candidato_para_relatorio['area_pos']: '' !!}
+            <label>Programa pretendido: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos_principal'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Principal: </label>'.$dados_candidato_para_relatorio['area_pos_principal']: '' !!} {!! $dados_candidato_para_relatorio['area_pos_secundaria'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Secundária: </label>'.$dados_candidato_para_relatorio['area_pos_secundaria']: '' !!}
         </div>
         <div>
             <label>Interesse em bolsa: </label> {{ $dados_candidato_para_relatorio['interesse_bolsa'] ? 'Sim' : 'Não' }}
