@@ -459,9 +459,11 @@ class MigracaoController extends BaseController
             $nova_escolha_candidatos->id_candidato = $escolha->id_user;
             $nova_escolha_candidatos->programa_pretendido = $escolha->programa_pretendido;
             if ($escolha->area_pos == 0) {
-                $nova_escolha_candidatos->area_pos = 10;
+                $nova_escolha_candidatos->area_pos_principal = 10;
+                $nova_escolha_candidatos->area_pos_secundaria = 10;
             }else{
-                $nova_escolha_candidatos->area_pos = $escolha->area_pos;    
+                $nova_escolha_candidatos->area_pos_principal = $escolha->area_pos;
+                $nova_escolha_candidatos->area_pos_secundaria = 10;
             }
             $nova_escolha_candidatos->interesse_bolsa = $escolha->interesse_bolsa;
             $nova_escolha_candidatos->vinculo_empregaticio = $escolha->vinculo_empregaticio;
