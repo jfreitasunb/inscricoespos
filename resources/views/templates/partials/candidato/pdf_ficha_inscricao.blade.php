@@ -50,7 +50,7 @@
         </p>
        
         <h2>
-                {{ trans('tela_finalizar_inscricao.ficha_inscricao') }} - {{ $dados_candidato_para_relatorio['programa_pretendido'] }} {{ $dados_candidato_para_relatorio['area_pos'] ? ' - '.$dados_candidato_para_relatorio['area_pos']: '' }}</h2>
+                {{ trans('tela_finalizar_inscricao.ficha_inscricao') }} - {{ $dados_candidato_para_relatorio['programa_pretendido'] }}</h2>
 
         <div>
             <label class="control-label">{{ trans('tela_dados_pessoais.nome') }}: </label>{{ $dados_candidato_para_relatorio['nome'] }}
@@ -91,7 +91,7 @@
         <hr>
         <h3>{{ trans('tela_escolha_candidato.tela_escolhas') }}</h3>
         <div>
-            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área: </label>'.$dados_candidato_para_relatorio['area_pos']: '' !!}
+            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: </label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos_principal'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Principal: </label>'.$dados_candidato_para_relatorio['area_pos_principal']: '' !!} {!! $dados_candidato_para_relatorio['area_pos_secundaria'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Secundária: </label>'.$dados_candidato_para_relatorio['area_pos_secundaria']: '' !!}
         </div>
         <div>
             <label>{{ trans('tela_escolha_candidato.interesse_bolsa') }}: </label> {{ $dados_candidato_para_relatorio['interesse_bolsa'] ?  trans('tela_escolha_candidato.sim')  :  trans('tela_escolha_candidato.nao') }}
