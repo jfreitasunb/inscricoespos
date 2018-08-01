@@ -23,9 +23,9 @@
   <tbody>
     @foreach( $dados_para_template as $status)
       @if ($status['status_carta'])
-        <tr class="success">
+        <tr class="carta_completa">
       @else
-        <tr class="danger">
+        <tr class="carta_incompleta">
       @endif
       <td>{{ $status['nome_recomendante'] }}</td>
       <td>@if ($status['status_carta'])
