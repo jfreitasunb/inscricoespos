@@ -71,7 +71,7 @@ return [
             'driver' => 'pgsql',
             'host' => '127.0.0.1',
             'port' => '5432',
-            'database' => 'InscricoesPos-BKP',
+            'database' => 'inscricoespos-BKP',
             'username' => 'pos',
             'password' => 'estudos',
             'charset' => 'utf8',
