@@ -55,6 +55,20 @@ class HomologaInscricoesController extends CoordenadorController
 
         $id_user = $user->id_user;
 
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        if ($relatorio->autoriza_inscricao()) {
+            
+            notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
+                'timer' => 2000,
+            ]);
+
+            return redirect()->back();
+        }
+        
+
         $this->validate($request, [
             'homologar' => 'required',
         ]);

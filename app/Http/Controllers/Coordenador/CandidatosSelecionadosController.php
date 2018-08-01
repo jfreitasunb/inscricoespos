@@ -56,6 +56,19 @@ class CandidatosSelecionadosController extends CoordenadorController
 
         $id_user = $user->id_user;
 
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        if ($relatorio->autoriza_inscricao()) {
+            
+            notify()->flash('As inscrições não terminaram ainda. Não é informar os candidatos selecionados.','warning', [
+                'timer' => 2000,
+            ]);
+
+            return redirect()->back();
+        }
+
         $this->validate($request, [
             'selecionar' => 'required',
         ]);
