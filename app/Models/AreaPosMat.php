@@ -29,7 +29,7 @@ class AreaPosMat extends FuncoesModels
 
     public function pega_area_pos_mat($area_pos, $locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_area_pos_mat($locale);
 
         if ($area_pos == 0) {
             return null;
