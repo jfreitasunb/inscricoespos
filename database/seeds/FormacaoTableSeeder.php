@@ -21,8 +21,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'tipo_ptbr' => 'Bacharelado',
-                'tipo_en' => 'Bach',
-                'tipo_es' => 'Bach',
+                'tipo_en' => 'Bachelor’s degree',
+                'tipo_es' => 'Bachillerato',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -31,8 +31,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'tipo_ptbr' => 'Licenciatura',
-                'tipo_en' => 'Bach1',
-                'tipo_es' => 'Bach12',
+                'tipo_en' => 'College degree',
+                'tipo_es' => 'Licenciatura',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -41,8 +41,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'tipo_ptbr' => 'Ambos',
-                'tipo_en' => 'Bach2323',
-                'tipo_es' => 'Bach123',
+                'tipo_en' => 'Both',
+                'tipo_es' => 'Ambos',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -51,8 +51,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'tipo_ptbr' => 'Não se Aplica',
-                'tipo_en' => 'Bach34243',
-                'tipo_es' => 'Bach324234234',
+                'tipo_en' => 'Not applicable',
+                'tipo_es' => 'No se aplica',
                 'nivel' => 'Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -61,8 +61,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 5,
                 'tipo_ptbr' => 'Mestrado Acadêmico',
-                'tipo_en' => 'Bach4523453',
-                'tipo_es' => 'Bach232435',
+                'tipo_en' => 'Master’s degree',
+                'tipo_es' => 'Magíster',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -71,8 +71,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'tipo_ptbr' => 'Mestrado Profissional',
-                'tipo_en' => 'Bach447657546',
-                'tipo_es' => 'Bach87876757',
+                'tipo_en' => null,
+                'tipo_es' => null,
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -81,8 +81,8 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 7,
                 'tipo_ptbr' => 'Doutorado',
-                'tipo_en' => 'Bach09786587',
-                'tipo_es' => 'Bach3567687',
+                'tipo_en' => 'PhD',
+                'tipo_es' => 'Doctorado',
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
@@ -91,20 +91,22 @@ class FormacaoTableSeeder extends Seeder
             array (
                 'id' => 8,
                 'tipo_ptbr' => 'Especialização',
-                'tipo_en' => 'Bach7685798989',
-                'tipo_es' => 'Bach675898987',
+                'tipo_en' => null,
+                'tipo_es' => null,
                 'nivel' => 'Pós-Graduação',
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
-            // 8 => 
-            // array (
-            //     'id' => 9,
-            //     'tipo' => 'Doutorado',
-            //     'nivel' => 'Pós-Graduação',
-            //     'created_at' => '2017-11-21 15:27:00',
-            //     'updated_at' => '2017-11-21 15:27:00',
-            // ),
+            8 => 
+            array (
+                'id' => 9,
+                'tipo_ptbr' => 'Não se Aplica',
+                'tipo_en' => 'Not applicable',
+                'tipo_es' => 'No se aplica',
+                'nivel' => 'Pós-Graduação',
+                'created_at' => '2017-11-21 15:27:00',
+                'updated_at' => '2017-11-21 15:27:00',
+            ),
         ));
         
         $tableToCheck = 'formacao';

@@ -14,8 +14,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         // $this->call(ConfiguraInscricaoPosTableSeeder::class);
         // $this->call(ProgramaInscricoesPosTableSeeder::class);
-        // $this->call(AreaPosMatTableSeeder::class);
-        // $this->call(FormacaoTableSeeder::class);
+        $this->call(ProgramaPosMatTableSeeder::class);
+        $this->call(AreaPosMatTableSeeder::class);
+        $this->call(FormacaoTableSeeder::class);
         $this->call(PaisesTableSeeder::class);
         $this->call(EstadosTableSeeder::class);
         $this->call(CidadesTableSeeder::class);

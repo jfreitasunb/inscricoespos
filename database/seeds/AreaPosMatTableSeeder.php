@@ -98,6 +98,15 @@ class AreaPosMatTableSeeder extends Seeder
                 'created_at' => '2017-11-21 15:27:00',
                 'updated_at' => '2017-11-21 15:27:00',
             ),
+            9 => 
+            array (
+                'id_area_pos' => 10,
+                'nome_ptbr' => 'Não se Aplica',
+                'nome_en' => 'Not applicable',
+                'nome_es' => 'No se aplica',
+                'created_at' => '2017-11-21 15:27:00',
+                'updated_at' => '2017-11-21 15:27:00',
+            ),
         ));
 
         $tableToCheck = 'area_pos_mat';

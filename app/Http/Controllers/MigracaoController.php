@@ -83,76 +83,76 @@ class MigracaoController extends BaseController
 
         //Migra área da Pós para o novo sistema
 
-        $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
+        // $areas_pos = DB::connection('pos2')->table('area_pos_mat')->orderBy('id_area_pos','asc')->get();
 
-        foreach ($areas_pos as $area) {
-            $nova_area = new AreaPosMat();
+        // foreach ($areas_pos as $area) {
+        //     $nova_area = new AreaPosMat();
 
-            $nova_area->id_area_pos = $area->id_area_pos;
-            $nova_area->nome_ptbr = $area->nome;
-            $nova_area->nome_en = $area->nome_en;
-            $nova_area->nome_es = $area->nome_es;
-            $nova_area->created_at = $area->created_at;
-            $nova_area->updated_at = $area->updated_at;
-            $nova_area->save();
-        }
+        //     $nova_area->id_area_pos = $area->id_area_pos;
+        //     $nova_area->nome_ptbr = $area->nome;
+        //     $nova_area->nome_en = $area->nome_en;
+        //     $nova_area->nome_es = $area->nome_es;
+        //     $nova_area->created_at = $area->created_at;
+        //     $nova_area->updated_at = $area->updated_at;
+        //     $nova_area->save();
+        // }
         
-        $tableToCheck = 'area_pos_mat';
+        // $tableToCheck = 'area_pos_mat';
 
-        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_area_pos)'))->first();
-        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_area_pos_seq\')'))->first();
+        // $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_area_pos)'))->first();
+        // $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_area_pos_seq\')'))->first();
 
-        DB::select('SELECT setval(\''.$tableToCheck.'_id_area_pos_seq\', '.$highestId->max.')');
+        // DB::select('SELECT setval(\''.$tableToCheck.'_id_area_pos_seq\', '.$highestId->max.')');
 
         //Fim da Migração das áreas da Pós  para o novo sistema
         
         // //Migra as formaçoes para o novo sistema
 
-        $formacoes = DB::connection('pos2')->table('formacao')->orderBy('id','asc')->get();
+        // $formacoes = DB::connection('pos2')->table('formacao')->orderBy('id','asc')->get();
 
-        foreach ($formacoes as $formacao) {
-            $nova_formacao = new Formacao();
-            $nova_formacao->tipo_ptbr = $formacao->tipo;
-            $nova_formacao->tipo_en = $formacao->tipo_en;
-            $nova_formacao->tipo_es = $formacao->tipo_es;
-            $nova_formacao->nivel = $formacao->nivel;
-            $nova_formacao->created_at = $formacao->created_at;
-            $nova_formacao->updated_at = $formacao->updated_at;
-            $nova_formacao->save();
-        }
+        // foreach ($formacoes as $formacao) {
+        //     $nova_formacao = new Formacao();
+        //     $nova_formacao->tipo_ptbr = $formacao->tipo;
+        //     $nova_formacao->tipo_en = $formacao->tipo_en;
+        //     $nova_formacao->tipo_es = $formacao->tipo_es;
+        //     $nova_formacao->nivel = $formacao->nivel;
+        //     $nova_formacao->created_at = $formacao->created_at;
+        //     $nova_formacao->updated_at = $formacao->updated_at;
+        //     $nova_formacao->save();
+        // }
 
-        $tableToCheck = 'formacao';
+        // $tableToCheck = 'formacao';
 
-        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
-        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
+        // $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        // $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
 
-        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
+        // DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
 
         // // //Fim da migração das formacoes para o novo sistema
 
         // // //Migra programas da Pós para o novo sistema.
 
-        $programas_pos = DB::connection('pos2')->table('programa_pos_mat')->orderBy('id_programa_pos','asc')->get();
+        // $programas_pos = DB::connection('pos2')->table('programa_pos_mat')->orderBy('id_programa_pos','asc')->get();
 
-        foreach ($programas_pos as $programa_pos) {
+        // foreach ($programas_pos as $programa_pos) {
             
-            $novo_programa_pos = new ProgramaPos();
+        //     $novo_programa_pos = new ProgramaPos();
 
-            $novo_programa_pos->id_programa_pos = $programa_pos->id_programa_pos;
-            $novo_programa_pos->tipo_programa_pos_ptbr = $programa_pos->tipo_programa_pos;
-            $novo_programa_pos->tipo_programa_pos_en = $programa_pos->tipo_programa_pos_en;
-            $novo_programa_pos->tipo_programa_pos_es = $programa_pos->tipo_programa_pos_es;
-            $novo_programa_pos->created_at = $programa_pos->created_at;
-            $novo_programa_pos->updated_at = $programa_pos->updated_at;
-            $novo_programa_pos->save();
-        }
+        //     $novo_programa_pos->id_programa_pos = $programa_pos->id_programa_pos;
+        //     $novo_programa_pos->tipo_programa_pos_ptbr = $programa_pos->tipo_programa_pos;
+        //     $novo_programa_pos->tipo_programa_pos_en = $programa_pos->tipo_programa_pos_en;
+        //     $novo_programa_pos->tipo_programa_pos_es = $programa_pos->tipo_programa_pos_es;
+        //     $novo_programa_pos->created_at = $programa_pos->created_at;
+        //     $novo_programa_pos->updated_at = $programa_pos->updated_at;
+        //     $novo_programa_pos->save();
+        // }
         
-        $tableToCheck = 'programa_pos_mat';
+        // $tableToCheck = 'programa_pos_mat';
 
-        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
-        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
+        // $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
+        // $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
 
-        DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
+        // DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
 
         // //Fim da migração dos programas da Pós para o novo sistema.
 

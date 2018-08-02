@@ -342,7 +342,7 @@ Route::get('/es', [
 Route::get('/migracao', [
 	'uses' => '\InscricoesPos\Http\Controllers\MigracaoController@getMigracao',
 	'as'   => 'migra.dados',
-	'middleware' =>['user.role:admin']
+	// 'middleware' =>['user.role:admin']
 ]);
 
 Route::get('/acesso/arquivos', '\InscricoesPos\Http\Controllers\Coordenador\AcessoArquivosController@getVerArquivos')->name('ver.arquivos')->middleware('validaassinatura');
