@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class AreaPosMat extends Model
+class AreaPosMat extends FuncoesModels
 {
     
 
@@ -26,23 +26,6 @@ class AreaPosMat extends Model
         'nome_en',
         'nome_es',
     ];
-
-    public function define_nome_coluna_por_locale($locale)
-    {
-        switch ($locale) {
-            case 'en':
-                return 'nome_en';
-                break;
-
-            case 'es':
-                return 'nome_es';
-                break;
-            
-            default:
-                return 'nome_ptbr';
-                break;
-        }
-    }
 
     public function pega_area_pos_mat($area_pos, $locale)
     {

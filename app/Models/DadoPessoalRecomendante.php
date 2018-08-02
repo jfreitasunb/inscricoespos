@@ -28,18 +28,4 @@ class DadoPessoalRecomendante extends Model
     {
         return $this->where('id_recomendante', $id_user)->join('users', 'users.id_user', 'dados_pessoais_recomendantes.id_recomendante')->select('users.nome', 'users.email', 'dados_pessoais_recomendantes.*')->get()->first();
     }
-
-    // public function grava_dados_iniciais_recomendante($id_recomendante, $nome_recomendante)
-    // {
-    //     $dados_recomendantes = new DadoPessoalRecomendante();
-
-    //     if (is_null($this->retorna_dados_pessoais_recomendante($id_recomendante))) {
-            
-    //         $dados_recomendantes->id_recomendante = $id_recomendante;
-
-    //         $dados_recomendantes->nome_recomendante = $nome_recomendante;
-
-    //         $dados_recomendantes->save();
-    //     }
-    // }
 }

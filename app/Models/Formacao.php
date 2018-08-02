@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class Formacao extends Model
+class Formacao extends FuncoesModels
 {
     
 
@@ -27,27 +27,9 @@ class Formacao extends Model
         'tipo_es',
     ];
 
-    public function define_coluna_formacao_por_locale($locale)
-    {
-        switch ($locale) {
-            case 'en':
-                return 'tipo_en';
-                break;
-
-            case 'es':
-                return 'tipo_es';
-                break;
-            
-            default:
-                return 'tipo_ptbr';
-                break;
-        }
-
-    }
-
     public function pega_tipo_formacao($id,$nivel, $locale)
     {
-        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_tipo_formacao($locale);
         
         return $this->select($nome_coluna)
             ->where('id', $id)
@@ -57,27 +39,11 @@ class Formacao extends Model
 
      public function retorna_id_formacao($tipo,$nivel, $locale_candidato)
      {
-        $nome_coluna = $this->define_coluna_formacao_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_tipo_formacao($locale);
 
         return $this->select('id')
             ->where($nome_coluna, $tipo)
             ->where('nivel', $nivel)
             ->value('id');
     }
-
-    // public function pega_disciplinas_monitoria()
-    // {
-    
-    //     $disciplinas_para_monitoria = $this->select('codigo', 'nome')->orderBy('nome')->get();
-
-    //     return $disciplinas_para_monitoria;
-    // }
-
-    // public function retorna_nome_pelo_codigo($codigo)
-    // {
-    //     $nome_disciplina = $this->select('nome')->where('codigo',$codigo)->get();
-
-    //     return $nome_disciplina;
-
-    // }
 }

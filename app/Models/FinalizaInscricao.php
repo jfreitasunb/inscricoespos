@@ -7,7 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class FinalizaInscricao extends Model
+class FinalizaInscricao extends FuncoesModels
 {
     protected $primaryKey = 'id_candidato';
 
@@ -15,23 +15,6 @@ class FinalizaInscricao extends Model
 
     protected $fillable = [
     ];
-
-    public function define_nome_coluna_por_locale($locale)
-    {
-        switch ($locale) {
-            case 'en':
-                return 'tipo_programa_pos_en';
-                break;
-
-            case 'es':
-                return 'tipo_programa_pos_es';
-                break;
-            
-            default:
-                return 'tipo_programa_pos_ptbr';
-                break;
-        }
-    }
 
     public function retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos)
     {
@@ -47,7 +30,7 @@ class FinalizaInscricao extends Model
 
     public function retorna_usuarios_relatorio_individual($id_inscricao_pos, $locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
 
         $homologadas = new HomologaInscricoes;
 
@@ -77,7 +60,7 @@ class FinalizaInscricao extends Model
 
     public function retorna_usuario_inscricao_finalizada($id_inscricao_pos, $id_candidato, $locale)
     {
-        $nome_coluna = $this->define_nome_coluna_por_locale($locale);
+        $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
 
         return $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_candidato', $id_candidato)->join('users', 'users.id_user','finaliza_inscricao.id_candidato')->join('configura_inscricao_pos','configura_inscricao_pos.id_inscricao_pos', 'finaliza_inscricao.id_inscricao_pos')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'users.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id', 'finaliza_inscricao.id_candidato', 'finaliza_inscricao.id_inscricao_pos', 'finaliza_inscricao.finalizada', 'configura_inscricao_pos.edital', 'users.nome','programa_pos_mat.'.$nome_coluna)->get()->first();
     }
