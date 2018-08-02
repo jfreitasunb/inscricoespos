@@ -642,50 +642,50 @@ class RelatorioController extends BaseController
   public function geraFichaIndividual($id_aluno, $locale_relatorio)
   {
 
-      $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoPos();
 
-      $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+    $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-      $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+    $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-      $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
+    $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-      $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
+    $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
 
-      $dados_candidato_para_relatorio['id_aluno'] = $id_aluno;
+    $dados_candidato_para_relatorio['id_aluno'] = $id_aluno;
 
-      foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
-         $dados_candidato_para_relatorio[$key] = $value;
-      }
+    foreach ($this->ConsolidaDadosPessoais($dados_candidato_para_relatorio['id_aluno']) as $key => $value) {
+       $dados_candidato_para_relatorio[$key] = $value;
+    }
 
-      foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
-        $dados_candidato_para_relatorio[$key] = $value;
-      }
+    foreach ($this->ConsolidaDadosAcademicos($dados_candidato_para_relatorio['id_aluno'], $locale_relatorio) as $key => $value) {
+      $dados_candidato_para_relatorio[$key] = $value;
+    }
 
-      foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
-        $dados_candidato_para_relatorio[$key] = $value;
-      }
+    foreach ($this->ConsolidaEscolhaCandidato($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos, $locale_relatorio) as $key => $value) {
+      $dados_candidato_para_relatorio[$key] = $value;
+    }
 
-      $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+    $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      foreach ($contatos_indicados  as $id ) {
-        $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
-      }
+    foreach ($contatos_indicados  as $id ) {
+      $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+    }
 
-      $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
+    $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
 
-      $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
-      
-      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
-      $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
+    $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
+    
+    $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
+    $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
-      $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos);
+    $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos);
 
-      $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
+    $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-      $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
-      
-      return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
+    $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
+    
+    return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
 
   public function getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view,$relatorio_csv)
