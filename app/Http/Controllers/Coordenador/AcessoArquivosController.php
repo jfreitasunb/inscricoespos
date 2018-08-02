@@ -45,7 +45,7 @@ class AcessoArquivosController extends CoordenadorController
 
       	$arquivos = new RelatorioController;
 
-      	$endereco_zip_mudar = '/var/www/InscricoesPos/storage/app/public/';
+      	$endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
 
 		$local_arquivos = $arquivos->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 

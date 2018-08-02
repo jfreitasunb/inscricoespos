@@ -548,10 +548,7 @@ class RelatorioController extends BaseController
 
   $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-  $endereco_zip_mudar = '/var/www/InscricoesPos/storage/app/public/';
-
-  //Para ser usado no MAT
-  // $endereco_zip_mudar = '/var/www/InscricoesPos/storage/app/public/';
+  $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
 
   $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
 
@@ -686,10 +683,7 @@ class RelatorioController extends BaseController
 
       $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 
-      $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
-
-      //Para ser usado no MAT
-      // $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
+      $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
       
       return str_replace($endereco_mudar, 'storage/', $nome_arquivos['arquivo_relatorio_candidato_final']);
   }
@@ -790,10 +784,7 @@ class RelatorioController extends BaseController
   public function geraFichaInscricao($id_aluno, $id_inscricao_pos, $locale_relatorio)
   {
 
-    $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
-
-    //Para ser usado no MAT
-    // $endereco_mudar = '/var/www/InscricoesPos/storage/app/public/';
+    $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
     
     $relatorio = new ConfiguraInscricaoPos();
 
