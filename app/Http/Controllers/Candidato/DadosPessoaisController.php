@@ -217,7 +217,6 @@ class DadosPessoaisController extends BaseController
 	
 		$dados_pessoais = [
 			'id_candidato' => $id_candidato,
-			'nome' => Purifier::clean(trim($request->input('nome'))),
 			'data_nascimento' => $data_nascimento,
 			'numerorg' => Purifier::clean(trim($request->input('numerorg'))),
 			'endereco' => Purifier::clean(trim($request->input('endereco'))),
@@ -232,7 +231,7 @@ class DadosPessoaisController extends BaseController
 		
 		$usuario = User::find($id_candidato);
 
-		$update_nome['candidato'] = Purifier::clean(trim($request->input('nome')));;
+		$update_nome['nome'] = Purifier::clean(trim($request->input('nome')));;
 
 		if (is_null($candidato)) {
 			$cria_candidato = new DadoPessoalCandidato();
