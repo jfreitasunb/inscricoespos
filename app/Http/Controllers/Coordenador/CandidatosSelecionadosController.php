@@ -43,11 +43,19 @@ class CandidatosSelecionadosController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-        $finalizacoes = new FinalizaInscricao;
+        if ($relatorio->autoriza_homologacao()){
+            $finalizacoes = new FinalizaInscricao;
 
-        $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
+            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
 
-      	return view('templates.partials.coordenador.seleciona_candidatos', compact('relatorio_disponivel','inscricoes_finalizadas'));
+            return view('templates.partials.coordenador.seleciona_candidatos', compact('relatorio_disponivel','inscricoes_finalizadas'));
+        }else{
+            notify()->flash('As inscrições não terminaram ainda. Não é possível fazer a seleção dos candidatos.','warning', [
+                'timer' => 3000,
+            ]);
+
+            return redirect()->back();
+      }
 	}
 
     public function postSelecinarCandidatos(Request $request)
