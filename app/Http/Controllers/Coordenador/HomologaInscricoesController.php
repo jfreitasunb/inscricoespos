@@ -44,9 +44,18 @@ class HomologaInscricoesController extends CoordenadorController
 
         $finalizacoes = new FinalizaInscricao;
 
-        $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
+        if ($relatorio->autoriza_homologacao()){
+            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
 
-      	return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));
+            return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));    
+        }else{
+            notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
+                'timer' => 3000,
+            ]);
+
+            return redirect()->back();
+        }
+        
 	}
 
     public function postHomologarInscritos(Request $request)
