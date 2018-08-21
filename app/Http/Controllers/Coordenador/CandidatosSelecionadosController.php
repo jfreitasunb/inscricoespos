@@ -43,7 +43,22 @@ class CandidatosSelecionadosController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
         if ($relatorio->autoriza_homologacao()){
+
+            $homologadas = new HomologaInscricoes;
+
+            $inscricoes_homologadas = $homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
+            
+            if (sizeof($inscricoes_homologadas) == 0) {
+                notify()->flash('Não há inscrições homologadas. Primeiro é necessário homologar as inscrições.','warning', [
+                    'timer' => 3000,
+                ]);
+
+                return redirect()->back();
+            }
+
             $finalizacoes = new FinalizaInscricao;
 
             $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
