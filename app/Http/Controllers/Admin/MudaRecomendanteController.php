@@ -138,6 +138,7 @@ class MudaRecomendanteController extends AdminController
 
 		if (is_null($acha_recomendante)) {
 			$novo_usuario = new User();
+			$novo_usuario->nome = $nome_recomendante;
             $novo_usuario->email = $email_recomendante;
             $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
             $novo_usuario->user_type =  "recomendante";
@@ -146,9 +147,6 @@ class MudaRecomendanteController extends AdminController
 
             $id_novo_recomendante = $novo_usuario->id_user;
             
-            $dados_iniciais_recomendante = new DadoPessoalRecomendante();
-
-            $grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_novo_recomendante, $nome_recomendante);
 
 		}else{
 
@@ -160,6 +158,8 @@ class MudaRecomendanteController extends AdminController
 				return redirect()->back();
 			}	
 		}
+
+		dd($id_novo_recomendante);
 
 		$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
