@@ -85,6 +85,7 @@ class PesquisaContaController extends AdminController
 		}
 
 		$this->validate($request, [
+			'nome' => 'required',
 			'email' => 'required|email',
 			'id_user' => 'required',
 			'locale' => 'required',
@@ -94,6 +95,7 @@ class PesquisaContaController extends AdminController
 
 		$id_user = (int)$request->id_user;
 
+		$novos_dados_usuario['nome'] = trim($request->nome);
 		$novos_dados_usuario['email'] = strtolower(trim($request->email));
 		$novos_dados_usuario['locale'] = strtolower(trim($request->locale));
 		$novos_dados_usuario['validation_code'] = NULL;
