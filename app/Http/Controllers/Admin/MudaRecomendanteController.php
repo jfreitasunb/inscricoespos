@@ -51,9 +51,9 @@ class MudaRecomendanteController extends AdminController
 
 		$email_candidato = strtolower(trim($request->email_candidato));
 
-		$id_aluno = $this->getPesquisaCandidato($email_candidato);
+		$id_candidato = $this->getPesquisaCandidato($email_candidato);
 
-		$dados_pessoais = User::find($id_aluno);
+		$dados_pessoais = User::find($id_candidato);
 
 		$edital = new ConfiguraInscricaoPos;
 
@@ -63,13 +63,13 @@ class MudaRecomendanteController extends AdminController
 
 		$escolha = new EscolhaCandidato;
 
-		$escolha_candidato = $escolha->retorna_escolha_candidato($id_aluno, $id_inscricao_pos);
+		$escolha_candidato = $escolha->retorna_escolha_candidato($id_candidato, $id_inscricao_pos);
 
 		$nome_programa_pos = new ProgramaPos();
 
 		$recomendantes = new ContatoRecomendante;
 
-		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_aluno, $id_inscricao_pos);
+		$indicacoes_candidato = $recomendantes->retorna_recomendante_candidato($id_candidato, $id_inscricao_pos);
 
 		$array_recomendantes = [];
 
@@ -77,7 +77,7 @@ class MudaRecomendanteController extends AdminController
 
 		$candidato['id_inscricao_pos'] = $id_inscricao_pos;
 
-		$candidato['id_aluno'] = $id_aluno;
+		$candidato['id_candidato'] = $id_candidato;
 
 		$candidato['nome'] = $dados_pessoais->nome;
 
@@ -115,7 +115,7 @@ class MudaRecomendanteController extends AdminController
 
 		$this->validate($request, [
 			'id' => 'required',
-			'id_aluno' => 'required',
+			'id_candidato' => 'required',
 			'id_inscricao_pos' => 'required',
 			'id_recomendante' => 'required',
 			'id_recomendante' => 'required',
@@ -125,7 +125,7 @@ class MudaRecomendanteController extends AdminController
 
 
 		$id = (int)$request->id;
-		$id_aluno = (int)$request->id_aluno;
+		$id_candidato = (int)$request->id_candidato;
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		$id_recomendante = (int)$request->id_recomendante;
 		$email_recomendante = strtolower(trim($request->email_recomendante));
@@ -161,7 +161,7 @@ class MudaRecomendanteController extends AdminController
 			}	
 		}
 
-		$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_aluno', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_prof', $id_recomendante)->where('completada', false)->update(['id_prof' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+		$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
 		if (!$mudou_recomendante) {
 			
@@ -170,7 +170,7 @@ class MudaRecomendanteController extends AdminController
 			
 		}
 
-		DB::table('contatos_recomendantes')->where('id', $id)->where('id_user', $id_aluno)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+		DB::table('contatos_recomendantes')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
 		$edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
 

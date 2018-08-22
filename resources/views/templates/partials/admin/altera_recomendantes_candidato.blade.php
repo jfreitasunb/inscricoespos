@@ -35,7 +35,7 @@
 	{!! Form::open(array('route' => 'altera.recomendante', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 	{!! Form::hidden('id_inscricao_pos', $candidato['id_inscricao_pos'], []) !!}
-	{!! Form::hidden('id_aluno', $candidato['id_aluno'], []) !!}
+	{!! Form::hidden('id_candidato', $candidato['id_candidato'], []) !!}
 		{!! Form::hidden('id', $recomendante['id'], []) !!}
 		{!! Form::hidden('id_recomendante', $key, []) !!}
 		{!! Form::hidden('nome_candidato', $candidato['nome'], []) !!}
