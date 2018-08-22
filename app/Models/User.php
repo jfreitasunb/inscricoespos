@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function retorna_user_por_nome($nome_pesquisado)
     {
-        return $this->where('nome', 'ILIKE', $nome_pesquisado.'%')->get();
+        return $this->where('nome', 'ILIKE', '%'.$nome_pesquisado.'%')->get();
     }
     
     public function retorna_papeis()
