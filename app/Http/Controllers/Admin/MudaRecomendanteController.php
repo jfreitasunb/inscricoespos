@@ -131,7 +131,7 @@ class MudaRecomendanteController extends AdminController
 		$email_recomendante = strtolower(trim($request->email_recomendante));
 		$nome_recomendante = trim($request->nome_recomendante);
 		$email_candidato = strtolower(trim($request->email_candidato));
-
+		
 		$user_recomendante = new User;
 
 		$acha_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante);
