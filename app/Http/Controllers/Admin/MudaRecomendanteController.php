@@ -159,34 +159,36 @@ class MudaRecomendanteController extends AdminController
 			}	
 		}
 
-		dd($id_novo_recomendante);
+		$carta_recomendacao = new CartaRecomendacao();
 
-		$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+		$ja_enviou_carta = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante,$id_candidato,$id_inscricao_pos);
 
-		if (!$mudou_recomendante) {
+		if ($ja_enviou_carta->completada) {
 			
 			notify()->flash('O recomendante original já enviou a carta. Não é possível trocar!','error');
 			return redirect()->back();
 			
+		}else{
+			$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+
+			DB::table('contatos_recomendantes')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
+
+			$edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
+
+			$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
+
+			$dados_email['nome_professor'] = $nome_recomendante;
+	        $dados_email['nome_candidato'] = $request->nome_candidato;
+			$dados_email['programa'] = $request->programa;
+	        $dados_email['email_recomendante'] = $email_recomendante;
+	        $dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
+
+			Notification::send(User::find($id_novo_recomendante), new NotificaRecomendante($dados_email));
+
+			notify()->flash('Alteração efetuado com sucesso','success');
+
+			return redirect()->back();
 		}
-
-		DB::table('contatos_recomendantes')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
-
-		$edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
-
-		$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
-
-		$dados_email['nome_professor'] = $nome_recomendante;
-        $dados_email['nome_candidato'] = $request->nome_candidato;
-		$dados_email['programa'] = $request->programa;
-        $dados_email['email_recomendante'] = $email_recomendante;
-        $dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
-
-		Notification::send(User::find($id_novo_recomendante), new NotificaRecomendante($dados_email));
-
-		notify()->flash('Alteração efetuado com sucesso','success');
-
-		return redirect()->back();
 
 	}
 }
