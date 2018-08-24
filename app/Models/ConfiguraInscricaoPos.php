@@ -51,6 +51,43 @@ class ConfiguraInscricaoPos extends Model
 
     }
 
+    public function define_texto_inscricao()
+    {
+
+        if (!is_null($this->retorna_inscricao_ativa())){
+            $programas = explode('_', $this->retorna_inscricao_ativa()->programa);
+
+            if (Session::get('locale') == 'en') {
+                
+                if (sizeof($programas) > 1) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.dois_programas');
+                }
+
+                if ($programas[0] == 1) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_mestrado');
+                }
+
+                if ($programas[0] == 2) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_doutorado');
+                }
+
+            }else{
+                if (sizeof($programas) > 1) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.dois_programas');
+                }
+
+                if ($programas[0] == 1) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_mestrado');
+                }
+
+                if ($programas[0] == 2) {
+                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_doutorado');
+                }
+                
+            }
+        }
+    }
+
     public function retorna_periodo_inscricao()
     {
         Session::get('locale');
