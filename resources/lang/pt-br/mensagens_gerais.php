@@ -40,4 +40,7 @@ return [
     'inscricao_encerrada' => 'Inscrições encerradas.',
     'inscricao_nao_iniciada' => 'A inscrição não está aberta',
     'to' => ' à ',
+    'dois_programas' => 'Inscrições para o Mestrado e Doutorado',
+    'inscricao_mestrado' => 'Inscrições para o Mestrado',
+    'inscricao_doutorado' => 'Inscrições para o Doutorado',
 ];

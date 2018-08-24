@@ -36,4 +36,7 @@ return [
     'inscricao_encerrada' => 'El período de inscripción ya ha finalizado.',
     'inscricao_nao_iniciada' => 'El período de inscripción no ha comenzado.',
     'to' => ' a ',
+    'dois_programas' => 'Formulario de Inscripción para Maestría y Doctorado',
+    'inscricao_mestrado' => 'Formulario de Inscripción para Maestría',
+    'inscricao_doutorado' => 'Formulario de Inscripción para Doctorado',
 ];

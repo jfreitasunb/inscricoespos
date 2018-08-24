@@ -35,4 +35,7 @@ return [
     'inscricao_encerrada' => 'Application period is closed.',
     'inscricao_nao_iniciada' => 'Application period has not been opened.',
     'to' => ' to ',
+    'dois_programas' => 'Application form for the Postgraduate Program: MSc and P.h.D.',
+    'inscricao_mestrado' => 'Application form for the Postgraduate Program: MSc.',
+    'inscricao_doutorado' => 'Application form for the Postgraduate Program: P.h.D.',
 ];
