@@ -34,4 +34,5 @@ return [
     'inscricao_pos' => 'Application to Postgraduate',
     'inscricao_encerrada' => 'Application period is closed.',
     'inscricao_nao_iniciada' => 'Application period has not been opened.',
+    'to' => ' to ',
 ];

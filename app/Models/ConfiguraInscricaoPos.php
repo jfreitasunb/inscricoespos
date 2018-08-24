@@ -69,7 +69,7 @@ class ConfiguraInscricaoPos extends Model
 
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
-            return $periodo_inscricao = $inicio->format('d/m/Y')." à ".$fim->format('d/m/Y');
+            return $periodo_inscricao = $inicio->format('d/m/Y').trans('mensagens_gerais.to').$fim->format('d/m/Y');
         }
 
         if ($data_hoje < $data_inicio) {

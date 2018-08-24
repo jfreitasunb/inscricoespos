@@ -35,4 +35,5 @@ return [
     'inscricao_pos' => 'Inscripción para el Postgrado',
     'inscricao_encerrada' => 'El período de inscripción ya ha finalizado.',
     'inscricao_nao_iniciada' => 'El período de inscripción no ha comenzado.',
+    'to' => ' a ',
 ];
