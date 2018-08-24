@@ -57,34 +57,21 @@ class ConfiguraInscricaoPos extends Model
         if (!is_null($this->retorna_inscricao_ativa())){
             $programas = explode('_', $this->retorna_inscricao_ativa()->programa);
 
-            if (Session::get('locale') == 'en') {
-                
+            
                 if (sizeof($programas) > 1) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.dois_programas');
+                    return $texto_inscricao_pos = 'dois_programas';
+                }else{
+                    if ($programas[0] == 1) {
+                    return $texto_inscricao_pos = 'inscricao_mestrado';
                 }
 
-                if ($programas[0] == 1) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_mestrado');
+                    if ($programas[0] == 2) {
+                    return $texto_inscricao_pos = 'inscricao_doutorado';
+                    }
                 }
 
-                if ($programas[0] == 2) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_doutorado');
-                }
-
-            }else{
-                if (sizeof($programas) > 1) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.dois_programas');
-                }
-
-                if ($programas[0] == 1) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_mestrado');
-                }
-
-                if ($programas[0] == 2) {
-                    return $texto_inscricao_pos = trans('mensagens_gerais.inscricao_doutorado');
-                }
                 
-            }
+
         }
     }
 
