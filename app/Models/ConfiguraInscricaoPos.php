@@ -69,7 +69,12 @@ class ConfiguraInscricaoPos extends Model
 
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
-            return $periodo_inscricao = $inicio->format('d/m/Y').trans('mensagens_gerais.to').$fim->format('d/m/Y');
+            if (Session::get('locale') == 'en') {
+                return $periodo_inscricao = $inicio->format('m/d/Y').trans('mensagens_gerais.to').$fim->format('m/d/Y');
+            }else{
+                return $periodo_inscricao = $inicio->format('d/m/Y').trans('mensagens_gerais.to').$fim->format('d/m/Y');
+            }
+            
         }
 
         if ($data_hoje < $data_inicio) {
