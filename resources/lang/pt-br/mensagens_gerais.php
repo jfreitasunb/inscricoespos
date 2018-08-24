@@ -37,4 +37,5 @@ return [
     'confirmou_presenca' => 'Você já confirmou seu interesse no Programa.',
     'confirmou_presenca_erro' => 'Houve um erro com a gravação da sua resposta. Por favor tente novamente mais tarde.',
     'confirma_presenca' => 'Resposta gravada com sucesso.',
+    'inscricao_encerrada' => 'Inscrições encerradas.',
 ];

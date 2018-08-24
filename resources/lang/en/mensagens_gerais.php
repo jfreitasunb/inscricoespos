@@ -32,4 +32,5 @@ return [
     'duvidas_pos' => 'Questions about Postgraduate? Click here',
     'departamento' => 'Department of Mathematics',
     'inscricao_pos' => 'Application to Postgraduate',
+    'inscricao_encerrada' => 'Application period is closed.',
 ];
