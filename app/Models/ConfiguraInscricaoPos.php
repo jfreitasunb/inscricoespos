@@ -3,6 +3,7 @@
 namespace InscricoesPos\Models;
 
 use DB;
+use Session;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -52,7 +53,7 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_periodo_inscricao()
     {
-
+        Session::get('locale');
         if (is_null($this->retorna_inscricao_ativa())){
             $data_inicio = '3000-01-01';
         }else{
@@ -76,7 +77,7 @@ class ConfiguraInscricaoPos extends Model
         }
 
         if ($data_hoje > $data_fim) {
-            return $periodo_inscricao = "Inscrições encerradas.";
+            return $periodo_inscricao = trans('mensagens_gerais.inscricao_encerrada');
         }
     }
 
