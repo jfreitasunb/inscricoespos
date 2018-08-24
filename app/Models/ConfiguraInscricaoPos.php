@@ -73,7 +73,7 @@ class ConfiguraInscricaoPos extends Model
         }
 
         if ($data_hoje < $data_inicio) {
-            return $periodo_inscricao = "A inscrição não está aberta";
+            return $periodo_inscricao = trans('mensagens_gerais.inscricao_nao_iniciada');
         }
 
         if ($data_hoje > $data_fim) {
