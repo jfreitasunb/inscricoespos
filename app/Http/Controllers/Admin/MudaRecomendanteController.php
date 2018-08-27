@@ -146,6 +146,12 @@ class MudaRecomendanteController extends AdminController
             $novo_usuario->save();
 
             $id_novo_recomendante = $novo_usuario->id_user;
+
+            $inicia_dado = new DadoPessoalRecomendante();
+
+            $inicia_dado->id_recomendante = $id_novo_recomendante;
+
+            $inicia_dado->save();
             
 
 		}else{
