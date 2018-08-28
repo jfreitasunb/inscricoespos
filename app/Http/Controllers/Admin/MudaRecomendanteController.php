@@ -132,28 +132,18 @@ class MudaRecomendanteController extends AdminController
 		$nome_recomendante = trim($request->nome_recomendante);
 		$email_candidato = strtolower(trim($request->email_candidato));
 		
+		$novo_recomendante['nome'] = $nome_recomendante;
+		$novo_recomendante['email'] = $email_recomendante;
+
 		$user_recomendante = new User;
 
 		$acha_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante);
 
 		if (is_null($acha_recomendante)) {
-			$novo_usuario = new User();
-			$novo_usuario->nome = $nome_recomendante;
-            $novo_usuario->email = $email_recomendante;
-            $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u"));
-            $novo_usuario->user_type =  "recomendante";
-            $novo_usuario->ativo = true;
-            $novo_usuario->save();
-
-            $id_novo_recomendante = $novo_usuario->id_user;
-
-            $inicia_dado = new DadoPessoalRecomendante();
-
-            $inicia_dado->id_recomendante = $id_novo_recomendante;
-
-            $inicia_dado->save();
-            
-
+			
+			$user_recomendante->registra_recomendante($novo_recomendante);
+			
+            $id_novo_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante)->id_user;
 		}else{
 
 			if ($acha_recomendante->user_type === 'recomendante') {
