@@ -34,7 +34,7 @@ class ContatoRecomendante extends FuncoesModels
     public function retorna_indicacoes($id_recomendante,$id_inscricao_pos)
     {
 
-        return $this->where("id_recomendante", $id_recomendante)->where("id_inscricao_pos", $id_inscricao_pos)->get();
+        return $this->where("id_recomendante", $id_recomendante)->where("id_inscricao_pos", $id_inscricao_pos)->where('email_enviado','True')->get();
 
     }
 
