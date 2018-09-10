@@ -60,14 +60,12 @@ class RememberRecomendante extends Command
         if ($data_hoje->diffInDays($prazo_carta) == 2) {
            
            foreach ($cartas_nao_enviadas as $id_user) {
-               
-               $dado_pessoal_recomendante = new DadoPessoalRecomendante();
 
-               $dados_recomendantes = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user);
+               $dados_recomendantes = User::find($id_user)->nome;
                
                if (!is_null($dados_recomendantes)) {
                    
-                   $dados_email['nome_professor'] = $dado_pessoal_recomendante->retorna_dados_pessoais_recomendante($id_user)->nome;
+                   $dados_email['nome_professor'] = $dados_recomendantes;
 
                     Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
                }   
