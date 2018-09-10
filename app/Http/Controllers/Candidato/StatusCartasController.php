@@ -59,9 +59,9 @@ class StatusCartasController extends BaseController
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$status_carta = $edital_ativo->visualiza_status_carta();
 
-		if ($autoriza_inscricao) {
+		if ($status_carta) {
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
