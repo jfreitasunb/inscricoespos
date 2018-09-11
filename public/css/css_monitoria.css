@@ -302,6 +302,10 @@ legend.scheduler-border {
 .menuadmin{
     margin-top:30px;
 }
+
+.welladmin{
+    width: 125%;
+}
 .table tbody tr.carta_completa {
   background-color: #2ecc71;
 }

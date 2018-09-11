@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="col-sm-9 col-md-10">
-            <div class="menuadmin well">
+            <div class="menuadmin well welladmin">
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
