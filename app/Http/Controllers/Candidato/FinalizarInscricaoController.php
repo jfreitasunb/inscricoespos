@@ -228,11 +228,6 @@ class FinalizarInscricaoController extends BaseController
 				}
 			}
 			
-
-			$dados_email_candidato['ficha_inscricao'] = $request->ficha_inscricao;
-			
-			Notification::send(User::find($id_candidato), new NotificaCandidato($dados_email_candidato));
-
 			$finalizar_inscricao = new FinalizaInscricao();
 
 			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
@@ -247,6 +242,11 @@ class FinalizarInscricaoController extends BaseController
 				$finalizar_inscricao->finalizada = true;
 				$finalizar_inscricao->save();
 			}
+
+			$dados_email_candidato['ficha_inscricao'] = $request->ficha_inscricao;
+			
+			Notification::send(User::find($id_candidato), new NotificaCandidato($dados_email_candidato));
+
 
 			@unlink($request->ficha_inscricao);
 
