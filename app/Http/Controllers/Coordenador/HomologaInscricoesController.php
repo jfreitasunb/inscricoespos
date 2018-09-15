@@ -98,7 +98,7 @@ class HomologaInscricoesController extends CoordenadorController
 
             $homologa->programa_pretendido = explode("_", $homologar)[1];
 
-            $homologa->homologar = explode("_", $homologar)[0];
+            $homologa->homologada = explode("_", $homologar)[0];
 
             $homologa->id_coordenador = $id_user;
 
