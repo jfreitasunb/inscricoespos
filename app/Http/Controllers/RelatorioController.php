@@ -80,10 +80,6 @@ class RelatorioController extends BaseController
     $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
 
     $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/edital_".$edital."/");
-
-    foreach (glob( $locais_arquivos['local_relatorios']."Inscri*") as $fileName ){
-      @unlink($fileName);
-    }
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
@@ -572,6 +568,10 @@ class RelatorioController extends BaseController
 
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->edital);
 
+    foreach (glob( $locais_arquivos['local_relatorios']."Inscri*") as $fileName ){
+      @unlink($fileName);
+    }
+
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     
 
@@ -626,7 +626,6 @@ class RelatorioController extends BaseController
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
 
-      
       $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
