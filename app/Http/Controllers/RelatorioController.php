@@ -80,6 +80,10 @@ class RelatorioController extends BaseController
     $locais_arquivos['ficha_inscricao'] = storage_path("app/public/relatorios/ficha_inscricao/");
 
     $locais_arquivos['local_relatorios'] = storage_path("app/public/relatorios/edital_".$edital."/");
+
+    foreach (glob( $locais_arquivos['local_relatorios']."Inscri*") as $fileName ){
+      @unlink($fileName);
+    }
     
     $locais_arquivos['arquivo_relatorio_csv'] = 'Inscricoes_Edital_'.$edital.'.csv';
 
@@ -420,6 +424,7 @@ class RelatorioController extends BaseController
 
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
+    
     $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
     $process->setTimeout(3600);
