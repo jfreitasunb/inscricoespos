@@ -15,7 +15,7 @@
           <div class="form-group form-inline">
             {!! Form::label('mes_inicio_1', 'Mês de início no programa:') !!}
             <div class='input-group' id='mes_inicio_1'>
-              {!! Form::text('mes_inicio[]', null, ['class' => 'form-control', 'required' => '']) !!}
+              {!! Form::text('mes_inicio_1', null, ['class' => 'form-control', 'required' => '']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -26,7 +26,7 @@
           <div class="form-group form-inline">
             {!! Form::label('prazo_confirmacao_mes_1', 'Prazo para confirmação de interesse:') !!}
             <div class='input-group' id='prazo_confirmacao_mes_1'>
-              {!! Form::text('prazo_confirmacao_mes[]', null, ['class' => 'form-control', 'required' => '']) !!}
+              {!! Form::text('prazo_confirmacao_mes_1', null, ['class' => 'form-control', 'required' => '']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -37,7 +37,7 @@
           <div class="form-group form-inline">
             {!! Form::label('mes_inicio_2', 'Mês de início no programa:') !!}
             <div class='input-group' id='mes_inicio_2'>
-              {!! Form::text('mes_inicio[]', null, ['class' => 'form-control', 'required' => '']) !!}
+              {!! Form::text('mes_inicio_2', null, ['class' => 'form-control']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -48,14 +48,15 @@
           <div class="form-group form-inline">
             {!! Form::label('prazo_confirmacao_mes_2', 'Prazo para confirmação de interesse:') !!}
             <div class='input-group' id='prazo_confirmacao_mes_2'>
-              {!! Form::text('prazo_confirmacao_mes[]', null, ['class' => 'form-control']) !!}
+              {!! Form::text('prazo_confirmacao_mes_2', null, ['class' => 'form-control']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
             </div>
           </div>
         </div>
-        <div class="col-md-10 text-center"> 
+        <div class="col-md-10 text-center">
+          {!! Form::hidden('id_inscricao_pos', $edital_vigente->id_inscricao_pos, []) !!}
           {!! Form::submit('Salvar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
         </div>
     </div>
