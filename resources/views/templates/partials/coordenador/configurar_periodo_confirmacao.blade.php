@@ -48,7 +48,7 @@
           <div class="form-group form-inline">
             {!! Form::label('prazo_confirmacao_mes_2', 'Prazo para confirmação de interesse:') !!}
             <div class='input-group' id='prazo_confirmacao_mes_2'>
-              {!! Form::text('prazo_confirmacao_mes_2', null, ['class' => 'form-control', 'required' => '']) !!}
+              {!! Form::text('prazo_confirmacao_mes_2', null, ['class' => 'form-control']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
