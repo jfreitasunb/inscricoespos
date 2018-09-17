@@ -33,17 +33,17 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 {
 
-	public function getConfiguraInscricaoPos()
+	public function getConfiguraPeriodoConfirmacao()
 	{
 
-		// $inscricao_pos = new ConfiguraInscricaoPos();
+		$inscricao_pos = new ConfiguraInscricaoPos();
 
 		$programas_pos_mat = ProgramaPos::get()->all();
 
 		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('programas_pos_mat'));
 	}
 
-	public function postConfiguraInscricaoPos(Request $request)
+	public function postConfiguraPeriodoConfirmacao(Request $request)
 	{
 
 		$this->validate($request, [
