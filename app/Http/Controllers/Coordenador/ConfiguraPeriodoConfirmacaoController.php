@@ -41,22 +41,43 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
         $edital_vigente = $edital->retorna_edital_vigente();
 
         $edital = str_pad(explode('-', $edital_vigente->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode('-', $edital_vigente->edital)[0];
-        $programas_pos_mat = ProgramaPos::get()->all();
 
-		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('programas_pos_mat', 'edital'));
+		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('edital', 'edital_vigente'));
 	}
 
 	public function postConfiguraPeriodoConfirmacao(Request $request)
 	{
+        $user = Auth::user();
+
+        $id_coordenador = $user->id_user;
 
 		$this->validate($request, [
-			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
-			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
-			'prazo_carta' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
-			'edital_ano' => 'required',
-			'edital_numero' => 'required',
-			'escolhas_coordenador' => 'required',
+			'mes_inicio_1' => 'required',
+			'prazo_confirmacao_mes_1' => 'required|date_format:"d/m/Y"|after:today',
 		]);
+
+        $id_inscricao_pos = (int)$request->id_inscricao_pos;
+
+        $mes_inicio_1 = (int)$request->mes_inicio_1;
+
+        $prazo_confirmacao_mes_1 = Carbon::createFromFormat('d/m/Y', $request->prazo_confirmacao_mes_1);
+
+        $edital_vigente = ConfiguraInscricaoPos::find($id_inscricao_pos);
+
+        $configura_inicio = new ConfiguraInicioPrograma();
+
+        $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
+
+        $configura_inicio->mes_inicio = $mes_inicio_1;
+
+        $configura_inicio->prazo_confirmacao = $prazo_confirmacao_mes_1;
+
+        $configura_inicio->id_coordenador = $id_coordenador;
+
+        $configura_inicio->save();
+
+        dd("parou aqui");
+
 
 
 		$configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
