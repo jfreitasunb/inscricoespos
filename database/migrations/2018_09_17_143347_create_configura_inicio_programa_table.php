@@ -19,6 +19,8 @@ class CreateConfiguraInicioProgramaTable extends Migration
             $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->integer('mes_inicio');
             $table->date('prazo_confirmacao');
+            $table->unsignedInteger('id_coordenador');
+            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
