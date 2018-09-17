@@ -40,7 +40,7 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 
 		$programas_pos_mat = ProgramaPos::get()->all();
 
-		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat'));
+		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('programas_pos_mat'));
 	}
 
 	public function postConfiguraInscricaoPos(Request $request)
