@@ -124,6 +124,7 @@ class User extends Authenticatable
             $novo_usuario = new User();
             $novo_usuario->nome = $novo_recomendante['nome'];
             $novo_usuario->email = $novo_recomendante['email'];
+            $novo_usuario->locale = "en";
             $novo_usuario->password = bcrypt(date("d-m-Y H:i:s:u").str_random(10));
             $novo_usuario->user_type =  "recomendante";
             $novo_usuario->ativo = true;
