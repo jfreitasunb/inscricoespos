@@ -23,6 +23,8 @@ class CreateCandidatosSelecionadosTable extends Migration
             $table->foreign('programa_pretendido')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
             $table->boolean('selecionado');
             $table->boolean('confirmou_presenca')->default(False);
+            $table->unsignedInteger('inicio_no_programa');
+            $table->foreign('inicio_no_programa')->references('id_inicio_programa')->on('configura_inicio_programa')->onDelete('cascade');
             $table->unsignedInteger('id_coordenador');
             $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
             $table->softDeletes();
