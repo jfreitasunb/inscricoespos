@@ -100,6 +100,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('inscricoes.nao.finalizadas') }}">Inscrições Não Finalizadas</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('homologa.inscricoes') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('homologa.inscricoes') }}">Homologa Inscrições</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -163,6 +168,7 @@
                 @yield('acha_indicacoes')
                 @yield('associa_recomendate')
                 @yield('nao_finalizadas')
+                @yield('homologa_inscricoes')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
