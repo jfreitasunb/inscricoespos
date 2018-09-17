@@ -66,6 +66,8 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 
         $configura_inicio = new ConfiguraInicioPrograma();
 
+        $configura_inicio->limpa_configuracoes_anteriores($id_inscricao_pos);
+
         $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
 
         $configura_inicio->mes_inicio = $mes_inicio_1;
@@ -76,74 +78,33 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 
         $configura_inicio->save();
 
-        dd("parou aqui");
+        if (!is_null($request->mes_inicio_2)) {
+            $this->validate($request, [
+                'mes_inicio_2' => 'required|date_format:"m"|after:mes_inicio_1',
+                'prazo_confirmacao_mes_2' => 'required|date_format:"d/m/Y"|after:prazo_confirmacao_mes_1',
+            ]);
 
+            $prazo_confirmacao_mes_2 = Carbon::createFromFormat('d/m/Y', $request->prazo_confirmacao_mes_2);
 
+            $mes_inicio_2 = (int)$request->mes_inicio_2;
 
-		$configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
+            $edital_vigente = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
-		$user = Auth::user();
+            $configura_inicio = new ConfiguraInicioPrograma();
 
-		$local_documentos = storage_path('app/');
-        $arquivos_editais = storage_path("app/public/editais/");
+            $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
 
-        File::isDirectory($arquivos_editais) or File::makeDirectory($arquivos_editais,0775,true);
-    
-    	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
-    	$fim = Carbon::createFromFormat('d/m/Y', $request->fim_inscricao);
-    	$prazo = Carbon::createFromFormat('d/m/Y', $request->prazo_carta);
+            $configura_inicio->mes_inicio = $mes_inicio_2;
 
-    	$data_inicio = $inicio->format('Y-m-d');
-    	$data_fim = $fim->format('Y-m-d');
-    	$prazo_carta = $prazo->format('Y-m-d');
+            $configura_inicio->prazo_confirmacao = $prazo_confirmacao_mes_2;
 
+            $configura_inicio->id_coordenador = $id_coordenador;
 
-    	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
+            $configura_inicio->save();
+        }
 
-    		$configura_nova_inscricao_pos->inicio_inscricao = $data_inicio;
-			$configura_nova_inscricao_pos->fim_inscricao = $data_fim;
-			$configura_nova_inscricao_pos->prazo_carta = $prazo_carta;
-			$configura_nova_inscricao_pos->edital = $request->edital_ano."-".$request->edital_numero;
-			$configura_nova_inscricao_pos->programa = implode("_", $request->escolhas_coordenador);
-			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
+        notify()->flash('Período de confirmação configurado com sucesso!','success', ['timer' => 3000,]);
 
-			$temp_file = $request->edital->store("arquivos_temporarios");
-
-        	$nome_temporario_edital = $local_documentos.$temp_file;
-
-	        $nome_final_edital = $arquivos_editais."Edital_MAT_".$configura_nova_inscricao_pos->edital.".pdf";
-
-			if (File::copy($nome_temporario_edital,$nome_final_edital)) {
-				
-				File::delete($nome_temporario_edital);
-				$configura_nova_inscricao_pos->save();
-
-				$dados_email['inicio_inscricao'] = $request->inicio_inscricao;
-				$dados_email['fim_inscricao'] = $request->fim_inscricao;
-				$dados_email['prazo_carta'] = $request->prazo_carta;
-
-				foreach ($request->escolhas_coordenador as $key) {
-					
-					$nome_programa_pos = new ProgramaPos();
-
-					$temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $this->locale_default);
-				}
-
-				$dados_email['programa'] = implode('/', $temp);
-
-				Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
-
-				notify()->flash('Inscrição configurada com sucesso.','success');
-				return redirect()->route('configura.inscricao');
-
-
-			}else{
-				notify()->flash('Houve um problema na hora de enviar o edital. Tente novamente.','error');
-				return redirect()->route('configura.inscricao');
-			}
-    	}else{
-    		notify()->flash('Já existe uma inscrição ativa para esse período.','error');
-			return redirect()->back('configura.inscricao');
-    	}
+        return redirect()->route('home');
 	}
 }
