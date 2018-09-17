@@ -7,6 +7,24 @@ $(function () {
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
         });
+        $('#mes_inicio_1').datetimepicker({
+            locale: 'pt-br',
+            format: 'MM',
+            viewMode: "months"
+        });
+        $('#mes_inicio_2').datetimepicker({
+            locale: 'pt-br',
+            format: 'MM',
+            viewMode: "months"
+        });
+        $('#prazo_confirmacao_mes_1').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
+        $('#prazo_confirmacao_mes_2').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
         $('#prazo_carta').datetimepicker({
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
