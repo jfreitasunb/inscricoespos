@@ -35,8 +35,6 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 	public function getConfiguraInscricaoPos()
 	{
 
-		$inscricao_pos = new ConfiguraInscricaoPos();
-
 		$programas_pos_mat = ProgramaPos::get()->all();
 
 		return view('templates.partials.coordenador.configurar_inscricao')->with(compact('programas_pos_mat'));
