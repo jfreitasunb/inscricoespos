@@ -174,6 +174,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::post('configura/inscricao', '\InscricoesPos\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@postConfiguraInscricaoPos');
 
+	Route::get('configura/periodo/confirmacao', '\InscricoesPos\Http\Controllers\Coordenador\ConfiguraPeriodoConfirmacaoController@getConfiguraPeriodoConfirmacao')->name('configura.periodo.confirmacao');
+
+	Route::post('configura/periodo/confirmacao', '\InscricoesPos\Http\Controllers\Coordenador\ConfiguraPeriodoConfirmacaoController@postConfiguraPeriodoConfirmacao');
+
 	Route::get('cadastra/area/pos', '\InscricoesPos\Http\Controllers\Coordenador\CadastraAreaPosController@getCadastraAreaPos')->name('cadastra.area.pos');
 
 	Route::post('cadastra/area/pos', '\InscricoesPos\Http\Controllers\Coordenador\CadastraAreaPosController@postCadastraAreaPos');
