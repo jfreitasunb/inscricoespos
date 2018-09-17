@@ -11,7 +11,7 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       {!! Form::open(array('route' => 'configura.inscricao','data-parsley-validate' => '' ,'enctype' => 'multipart/form-data')) !!}
-        <legend>Configurar período da abertura da inscrição</legend>
+        <legend>Configurar o(s) período(s) de confirmação para o edital n<sup>o</sup> {{ $edital }}</legend>
         <div class="col-xs-4">
           <div class="form-group form-inline">
             {!! Form::label('inicio_inscricao', 'Início da Inscrição:') !!}
