@@ -61,6 +61,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('configura.periodo.confirmacao') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('configura.periodo.confirmacao') }}">Configurar Período Confirmação</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('editar.inscricao') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.inscricao') }}">Editar Inscrição</a>
                                     </td>
@@ -151,6 +156,7 @@
                 @yield('visualiza_associacoes')
                 @yield('cadastra_disciplina')
                 @yield('configura_inscricao')
+                @yield('configurar_periodo_confirmacao')
                 @yield('editar_inscricao')
                 @yield('reativar_inscricao_candidato')
                 @yield('reativar_carta_enviada')
