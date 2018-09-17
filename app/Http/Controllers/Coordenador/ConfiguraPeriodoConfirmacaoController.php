@@ -36,11 +36,14 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 	public function getConfiguraPeriodoConfirmacao()
 	{
 
-		$inscricao_pos = new ConfiguraInscricaoPos();
+		$edital = new ConfiguraInscricaoPos();
 
-		$programas_pos_mat = ProgramaPos::get()->all();
+        $edital_vigente = $edital->retorna_edital_vigente();
 
-		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('programas_pos_mat'));
+        $edital = str_pad(explode('-', $edital_vigente->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode('-', $edital_vigente->edital)[0];
+        $programas_pos_mat = ProgramaPos::get()->all();
+
+		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('programas_pos_mat', 'edital'));
 	}
 
 	public function postConfiguraPeriodoConfirmacao(Request $request)
