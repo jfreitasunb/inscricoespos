@@ -88,8 +88,12 @@ class ConfirmaPresencaController extends BaseController
 
 			$configura_inicio = new ConfiguraInicioPrograma();
 
-			dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
-			
+			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
+
+			if (!$libera_tela) {
+				return redirect()->back();
+			}
+
 			$nome = User::find($id_user)->nome;
 
 			$programa_pos = new ProgramaPos();
