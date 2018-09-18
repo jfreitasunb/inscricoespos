@@ -3,6 +3,7 @@
 namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 
@@ -23,7 +24,29 @@ class ConfiguraInicioPrograma extends FuncoesModels
 
     public function retorna_meses_para_inicio($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->get();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_inicio_programa')->get();
+    }
+
+    public function libera_tela_confirmacao($id_inscricao_pos)
+    {
+        $periodos_confirmacao = $this->retorna_meses_para_inicio($id_inscricao_pos);
+        
+        $data_hoje = (new Carbon())->format('Y-m-d');
+
+        foreach ($periodos_confirmacao as $periodo) {
+            
+            $prazo = Carbon::createFromFormat('Y-m-d', $periodo->prazo_confirmacao);
+
+            if ($data_hoje <= $prazo) {
+                $liberar_tela = true;
+            }else{
+                $liberar_tela = false;
+            }
+        }
+        
+        return $liberar_tela;
+
+        
     }
 
     public function limpa_configuracoes_anteriores($id_inscricao_pos)
