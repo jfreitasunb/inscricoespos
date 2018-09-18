@@ -247,9 +247,6 @@ class FinalizarInscricaoController extends BaseController
 			
 			Notification::send(User::find($id_candidato), new NotificaCandidato($dados_email_candidato));
 
-
-			@unlink($request->ficha_inscricao);
-
 			notify()->flash(trans('mensagens_gerais.envio_final'),'success');
 
 			return redirect()->route('home');
