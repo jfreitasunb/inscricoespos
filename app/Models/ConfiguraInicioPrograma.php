@@ -21,6 +21,11 @@ class ConfiguraInicioPrograma extends FuncoesModels
         'deleted_at',
     ];
 
+    public function retorna_meses_para_inicio($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->get();
+    }
+
     public function limpa_configuracoes_anteriores($id_inscricao_pos)
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
