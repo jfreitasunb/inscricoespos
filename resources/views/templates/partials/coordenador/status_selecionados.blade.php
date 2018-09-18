@@ -18,6 +18,7 @@
           <th>Nome do Candidato</th>
           <th>Programa</th>
           <th>Confirmou Presença?</th>
+          <th>Mês de Início</th>
         </tr>
       </thead>
       <tbody>
@@ -30,6 +31,7 @@
             @else
               <td class="lista_carta carta_incompleta"> Não
             @endif </td>
+            <td>Mes</td>
           </tr>
         @endforeach
       </tbody>
