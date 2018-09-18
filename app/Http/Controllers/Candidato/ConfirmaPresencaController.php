@@ -12,6 +12,9 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\ConfiguraInicioPrograma;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\CandidatosSelecionados;
 use InscricoesPos\Notifications\NotificaCandidato;
@@ -83,6 +86,10 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->route('home');
 			}
 
+			$configura_inicio = new ConfiguraInicioPrograma();
+
+			dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
+			
 			$nome = User::find($id_user)->nome;
 
 			$programa_pos = new ProgramaPos();
@@ -109,6 +116,10 @@ class ConfirmaPresencaController extends BaseController
 		$id_candidato = $request->id_candidato;
 
 		$id_inscricao_pos = $request->id_inscricao_pos;
+		
+		$configura_inicio = new ConfiguraInicioPrograma();
+
+		dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
 
 		$id_programa_pretendido = $request->id_programa_pretendido;
 
