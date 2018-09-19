@@ -43,10 +43,7 @@ class ConfiguraInicioPrograma extends FuncoesModels
                 $liberar_tela = false;
             }
         }
-        
-        return $liberar_tela;
-
-        
+        return $liberar_tela; 
     }
 
     public function limpa_configuracoes_anteriores($id_inscricao_pos)
