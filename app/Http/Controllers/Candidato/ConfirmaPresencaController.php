@@ -89,6 +89,23 @@ class ConfirmaPresencaController extends BaseController
 			$configura_inicio = new ConfiguraInicioPrograma();
 
 			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
+			$array_months = [];
+			$array_months[1]  = trans('meses.mes_1');
+			$array_months[2]  = trans('meses.mes_2');
+			$array_months[3]  = trans('meses.mes_3');
+			$array_months[4]  = trans('meses.mes_4');
+			$array_months[5]  = trans('meses.mes_5');
+			$array_months[6]  = trans('meses.mes_6');
+			$array_months[7]  = trans('meses.mes_7');
+			$array_months[8]  = trans('meses.mes_8');
+			$array_months[9]  = trans('meses.mes_9');
+			$array_months[10] = trans('meses.mes_10');
+			$array_months[11] = trans('meses.mes_11');
+			$array_months[12] = trans('meses.mes_12');
+
+			dd( $array_months[10]);
+			dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
+
 
 			if (!$libera_tela) {
 				return redirect()->back();
