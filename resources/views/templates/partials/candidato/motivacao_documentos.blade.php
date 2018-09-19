@@ -34,7 +34,7 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf, image/png, image/jpeg, image/jpg, image/gif" name="documentos_pessoais" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="documentos_pessoais" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>
@@ -55,7 +55,7 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf, image/png, image/jpeg, image/jpg, image/gif" name="historico" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="historico" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>

@@ -102,8 +102,8 @@ class MotivacaoDocumentosController extends BaseController
 	{
 		$this->validate($request, [
 			'motivacao' => 'required',
-			'documentos_pessoais' => 'required|max:20000',
-			'historico' => 'required|max:20000',
+			'documentos_pessoais' => 'required|max:50000|mimes:pdf',
+			'historico' => 'required|max:50000|mimes:pdf',
 			'concorda_termos' => 'required',
 		]);
 
@@ -124,6 +124,7 @@ class MotivacaoDocumentosController extends BaseController
 			$arquivo->save();
 
 			$hist = $request->historico->store('uploads');
+
 			$arquivo = new Documento();
 			$arquivo->id_candidato = $id_candidato;
 			$arquivo->nome_arquivo = $hist;
