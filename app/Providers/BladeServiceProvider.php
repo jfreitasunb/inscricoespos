@@ -217,10 +217,10 @@ class BladeServiceProvider extends ServiceProvider
 
             $configura_inicio = new ConfiguraInicioPrograma();
 
-            $libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
-
+            $liberar_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
+            
             if (!is_null($status_selecao)) {
-                if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca and $libera_tela) {
+                if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca and $liberar_tela) {
                     return true;
                 }else{
                     return false;
