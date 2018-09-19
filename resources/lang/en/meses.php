@@ -1,21 +1,21 @@
 <?php
 
 /*
-*Tradução dos textos para Português
+*Tradução dos textos para Inglês
  */
 
 
 return [
-    'mes_1'  => 'Janeiro',
-    'mes_2'  => 'Fevereiro',
-    'mes_3'  => 'Março',
-    'mes_4'  => 'Abril',
-    'mes_5'  => 'Maio',
-    'mes_6'  => 'Junho',
-    'mes_7'  => 'Julho',
-    'mes_8'  => 'Agosto',
-    'mes_9'  => 'Setembro',
-    'mes_10' => 'Outubro',
-    'mes_12' => 'Novembro',
-    'mes_12' => 'Dezembro',
+    'mes_1'  => 'January',
+    'mes_2'  => 'February',
+    'mes_3'  => 'March',
+    'mes_4'  => 'April',
+    'mes_5'  => 'May',
+    'mes_6'  => 'June',
+    'mes_7'  => 'July',
+    'mes_8'  => 'August',
+    'mes_9'  => 'September',
+    'mes_10' => 'October',
+    'mes_12' => 'November',
+    'mes_12' => 'December',
 ];
