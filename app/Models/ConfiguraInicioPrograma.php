@@ -19,6 +19,7 @@ class ConfiguraInicioPrograma extends FuncoesModels
         'id_inscricao_pos',
         'mes_inicio',
         'id_coordenador',
+        'programa_para_confirmar',
         'deleted_at',
     ];
 
@@ -34,7 +35,7 @@ class ConfiguraInicioPrograma extends FuncoesModels
         $data_hoje = (new Carbon())->format('Y-m-d');
 
         $liberar_tela = false;
-        
+
         foreach ($periodos_confirmacao as $periodo) {
             
             $prazo = Carbon::createFromFormat('Y-m-d', $periodo->prazo_confirmacao);
