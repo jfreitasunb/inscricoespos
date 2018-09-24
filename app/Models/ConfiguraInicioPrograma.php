@@ -17,6 +17,7 @@ class ConfiguraInicioPrograma extends FuncoesModels
 
     protected $fillable = [
         'id_inscricao_pos',
+        'prazo_confirmacao',
         'mes_inicio',
         'id_coordenador',
         'programa_para_confirmar',
@@ -25,7 +26,7 @@ class ConfiguraInicioPrograma extends FuncoesModels
 
     public function retorna_meses_para_inicio($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_inicio_programa')->get();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('prazo_confirmacao')->get();
     }
 
     public function retorna_se_precisam_confirmar_mes($id_inscricao_pos, $id_programa_pos)
