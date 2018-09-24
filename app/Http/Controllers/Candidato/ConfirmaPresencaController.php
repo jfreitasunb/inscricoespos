@@ -57,6 +57,26 @@ class ConfirmaPresencaController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
+			$configura_inicio = new ConfiguraInicioPrograma();
+
+			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
+
+			$array_months = [];
+			$array_months[1]  = trans('meses.mes_1');
+			$array_months[2]  = trans('meses.mes_2');
+			$array_months[3]  = trans('meses.mes_3');
+			$array_months[4]  = trans('meses.mes_4');
+			$array_months[5]  = trans('meses.mes_5');
+			$array_months[6]  = trans('meses.mes_6');
+			$array_months[7]  = trans('meses.mes_7');
+			$array_months[8]  = trans('meses.mes_8');
+			$array_months[9]  = trans('meses.mes_9');
+			$array_months[10] = trans('meses.mes_10');
+			$array_months[11] = trans('meses.mes_11');
+			$array_months[12] = trans('meses.mes_12');
+
+
+
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
 			if (!$status_inscricao) {
@@ -75,7 +95,7 @@ class ConfirmaPresencaController extends BaseController
 			$selecionado = new CandidatosSelecionados();
 
 			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
-
+			
 			if (!$status_selecao->selecionado) {
 				return redirect()->back();
 			}
@@ -86,26 +106,25 @@ class ConfirmaPresencaController extends BaseController
 				return redirect()->route('home');
 			}
 
-			$configura_inicio = new ConfiguraInicioPrograma();
+			
+			$confirmar_mes = $configura_inicio->retorna_se_precisam_confirmar_mes($id_inscricao_pos, $status_selecao->programa_pretendido);
+			
+			$meses_inicio = [];
+			
+			if ($confirmar_mes) {
+				$retorna_meses_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
 
-			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
-			$array_months = [];
-			$array_months[1]  = trans('meses.mes_1');
-			$array_months[2]  = trans('meses.mes_2');
-			$array_months[3]  = trans('meses.mes_3');
-			$array_months[4]  = trans('meses.mes_4');
-			$array_months[5]  = trans('meses.mes_5');
-			$array_months[6]  = trans('meses.mes_6');
-			$array_months[7]  = trans('meses.mes_7');
-			$array_months[8]  = trans('meses.mes_8');
-			$array_months[9]  = trans('meses.mes_9');
-			$array_months[10] = trans('meses.mes_10');
-			$array_months[11] = trans('meses.mes_11');
-			$array_months[12] = trans('meses.mes_12');
+				foreach ($retorna_meses_confirmacao as $mes_confirmacao) {
+					
+					if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
+						$meses_inicio[] = $array_months[$mes_confirmacao->mes_inicio];
+					}
 
-			dd( $array_months[10]);
-			dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
-
+					if (is_null($mes_confirmacao->programa_para_confirmar)) {
+						$meses_inicio[] = $array_months[$mes_confirmacao->mes_inicio];
+					}
+				}
+			}
 
 			if (!$libera_tela) {
 				return redirect()->back();
@@ -125,7 +144,7 @@ class ConfirmaPresencaController extends BaseController
 			
 			$dados_para_template['programa_pretendido'] = $nome_programa_pretendido;
 
-			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template'));
+			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template', 'meses_inicio'));
 
 		}else{
 			return redirect()->back();
