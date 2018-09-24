@@ -161,92 +161,97 @@ class ConfirmaPresencaController extends BaseController
 
 	public function postConfirmaPresenca(Request $request)
 	{	
-		dd($request);
-
 		$id_candidato = (int)$request->id_candidato;
 
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		
 		$configura_inicio = new ConfiguraInicioPrograma();
 
-		dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
+		$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
 
-		$id_programa_pretendido = $request->id_programa_pretendido;
+		if ($libera_tela) {
+			dd("aqui");
+			$id_inicio_programa = (int)$request->id_inicio_programa;
 
-		if (isset($request->confirma)) {
-			$confirmou_presenca = True;
-		}else{
-			$confirmou_presenca = False;
-		}
+			$id_programa_pretendido = $request->id_programa_pretendido;
 
-		$user = $this->SetUser();
-		
-		$id_user = $user->id_user;
-
-		$locale_candidato = Session::get('locale');
-
-		$edital_ativo = new ConfiguraInscricaoPos();
-
-		if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
-			return redirect()->back();
-		}
-		
-		if ($id_candidato != $id_user) {
-			return redirect()->back();
-		}
-
-		
-		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-		
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-
-		if (!$autoriza_inscricao) {
-			
-			$finaliza_inscricao = new FinalizaInscricao();
-
-			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
-
-			if (!$status_inscricao) {
-
-				return redirect()->back();
-			}
-
-			$homologa = new HomologaInscricoes();
-
-			$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
-
-			if (!$candidato_homologado) {
-				return redirect()->back();
-			}
-
-			$selecionado = new CandidatosSelecionados();
-
-			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
-
-			if (!$status_selecao->selecionado) {
-				return redirect()->back();
-			}
-
-			if ($status_selecao->confirmou_presenca) {
-				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
-			
-				return redirect()->route('home');
-			}
-
-			$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
-
-			if ($status_resposta) {
-				notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
-			
-				return redirect()->route('home');
+			if (isset($request->confirma)) {
+				$confirmou_presenca = True;
 			}else{
-				notify()->flash(trans('mensagens_gerais.confirmou_presenca_erro'),'error');
-			
-				return redirect()->route('home');
+				$confirmou_presenca = False;
 			}
 
+			$user = $this->SetUser();
+			
+			$id_user = $user->id_user;
+
+			$locale_candidato = Session::get('locale');
+
+			$edital_ativo = new ConfiguraInscricaoPos();
+
+			if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
+				return redirect()->back();
+			}
+			
+			if ($id_candidato != $id_user) {
+				return redirect()->back();
+			}
+
+			
+			$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+			
+			$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+			if (!$autoriza_inscricao) {
+				
+				$finaliza_inscricao = new FinalizaInscricao();
+
+				$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+
+				if (!$status_inscricao) {
+
+					return redirect()->back();
+				}
+
+				$homologa = new HomologaInscricoes();
+
+				$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
+
+				if (!$candidato_homologado) {
+					return redirect()->back();
+				}
+
+				$selecionado = new CandidatosSelecionados();
+
+				$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+				if (!$status_selecao->selecionado) {
+					return redirect()->back();
+				}
+
+				if ($status_selecao->confirmou_presenca) {
+					notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
+				
+					return redirect()->route('home');
+				}
+
+				$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
+
+				if ($status_resposta) {
+					notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
+				
+					return redirect()->route('home');
+				}else{
+					notify()->flash(trans('mensagens_gerais.confirmou_presenca_erro'),'error');
+				
+					return redirect()->route('home');
+				}
+
+			}else{
+				return redirect()->back();
+			}
 		}else{
-			return redirect()->back();
+			return redirect()->route('home');
 		}
 	}
 }
