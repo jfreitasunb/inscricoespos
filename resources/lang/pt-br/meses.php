@@ -16,6 +16,6 @@ return [
     'mes_8'  => 'Agosto',
     'mes_9'  => 'Setembro',
     'mes_10' => 'Outubro',
-    'mes_12' => 'Novembro',
+    'mes_11' => 'Novembro',
     'mes_12' => 'Dezembro',
 ];
