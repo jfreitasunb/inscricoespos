@@ -49,44 +49,4 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados'));
 	}
-
-    public function postSelecinarCandidatos(Request $request)
-    {
-        $user = Auth::user();
-
-        $id_user = $user->id_user;
-
-        $this->validate($request, [
-            'selecionar' => 'required',
-        ]);
-        
-        $id_inscricao_pos = (int)$request->id_inscricao_pos;
-
-        $limpa_homologacoes = new CandidatosSelecionados();
-
-        $limpa_homologacoes->limpa_selecoes_anteriores($id_inscricao_pos);
-
-        foreach ($request->selecionar as $id => $selecionar) {
-            
-            $homologa = new CandidatosSelecionados();
-
-            $homologa->id_candidato = $id;
-
-            $homologa->id_inscricao_pos = $id_inscricao_pos;
-
-            $homologa->programa_pretendido = explode("_", $selecionar)[1];
-
-            $homologa->selecionado = explode("_", $selecionar)[0];
-
-            $homologa->id_coordenador = $id_user;
-
-            $homologa->save();
-        }
-
-        notify()->flash('Dados salvos com sucesso.','success', [
-            'timer' => 2000,
-        ]);
-
-        return redirect()->back();
-    }
 }
