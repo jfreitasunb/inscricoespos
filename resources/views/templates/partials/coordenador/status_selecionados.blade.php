@@ -31,14 +31,11 @@
             @else
               <td class="lista_carta carta_incompleta"> Não
             @endif </td>
-            <td>Mes</td>
+            <td>{{ $mes_candidato[$dados['id_candidato']] }}</td>
           </tr>
         @endforeach
       </tbody>
     </table>
-  </div>
-  <div class="text-center">
-    {{ $candidatos_selecionados->render() }}
   </div>
 </fieldset>
 

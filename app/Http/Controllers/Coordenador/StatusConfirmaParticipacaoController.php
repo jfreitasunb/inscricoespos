@@ -12,6 +12,7 @@ use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\ConfiguraInicioPrograma;
 use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\Formacao;
@@ -45,7 +46,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $selecionados = new CandidatosSelecionados;
 
-        $candidatos_selecionados = $selecionados->retorna_dados_candidatos_selecionados($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
+        $candidatos_selecionados = $selecionados->retorna_dados_candidatos_selecionados($relatorio_disponivel->id_inscricao_pos, $this->locale_default);
 
         $array_meses[1]  = 'Janeiro';
         $array_meses[2]  = 'Fevereiro';
@@ -60,7 +61,16 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
         $array_meses[11] = 'Novembro';
         $array_meses[12] = 'Dezembro';
 
+        foreach ($candidatos_selecionados as $selecionado) {
 
-      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados'));
+            if (is_null($selecionado->inicio_no_programa)) {
+                $mes_candidato[$selecionado->id_candidato] = "Não informado";
+            }else{
+                $mes = ConfiguraInicioPrograma::find($selecionado->inicio_no_programa)->mes_inicio;
+                $mes_candidato[$selecionado->id_candidato] = $array_meses[$mes];
+            }
+        }
+
+      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato'));
 	}
 }
