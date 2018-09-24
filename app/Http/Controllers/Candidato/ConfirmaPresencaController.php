@@ -163,9 +163,9 @@ class ConfirmaPresencaController extends BaseController
 	{	
 		dd($request);
 
-		$id_candidato = $request->id_candidato;
+		$id_candidato = (int)$request->id_candidato;
 
-		$id_inscricao_pos = $request->id_inscricao_pos;
+		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		
 		$configura_inicio = new ConfiguraInicioPrograma();
 
