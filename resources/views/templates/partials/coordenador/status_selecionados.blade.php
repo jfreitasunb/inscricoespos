@@ -9,7 +9,7 @@
 @section('status_selecionados')
 
 <fieldset class="scheduler-border">
-  <legend class="scheduler-border">Recomendantes indicados por candidato</legend>
+  <legend class="scheduler-border">Situação das confirmações</legend>
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
