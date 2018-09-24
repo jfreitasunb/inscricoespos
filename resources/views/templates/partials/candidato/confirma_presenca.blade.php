@@ -16,7 +16,7 @@
       <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
       @foreach ($meses_inicio as $key => $mes_escolha)
       <div class="col-md-4">
-       <label class="radio-inline">{{ Form::radio('mes_escolha', $key, false, ['required' => '']) }}{{ $mes_escolha }}</label>
+       <label class="radio-inline">{{ Form::radio('id_inicio_programa', $key, false, ['required' => '']) }}{{ $mes_escolha }}</label>
       </div>
       @endforeach
     @endif
