@@ -47,6 +47,20 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $candidatos_selecionados = $selecionados->retorna_dados_candidatos_selecionados($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
+        $array_meses[1]  = 'Janeiro';
+        $array_meses[2]  = 'Fevereiro';
+        $array_meses[3]  = 'Março';
+        $array_meses[4]  = 'Abril';
+        $array_meses[5]  = 'Maio';
+        $array_meses[6]  = 'Junho';
+        $array_meses[7]  = 'Julho';
+        $array_meses[8]  = 'Agosto';
+        $array_meses[9]  = 'Setembro';
+        $array_meses[10] = 'Outubro';
+        $array_meses[11] = 'Novembro';
+        $array_meses[12] = 'Dezembro';
+
+
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados'));
 	}
 }
