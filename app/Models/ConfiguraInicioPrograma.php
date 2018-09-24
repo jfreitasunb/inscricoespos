@@ -33,6 +33,8 @@ class ConfiguraInicioPrograma extends FuncoesModels
         
         $data_hoje = (new Carbon())->format('Y-m-d');
 
+        $liberar_tela = false;
+        
         foreach ($periodos_confirmacao as $periodo) {
             
             $prazo = Carbon::createFromFormat('Y-m-d', $periodo->prazo_confirmacao);
