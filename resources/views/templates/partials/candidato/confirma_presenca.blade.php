@@ -7,7 +7,7 @@
 @endsection
 
 @section('confirma_presenca')
-
+{!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
     <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
 
@@ -16,13 +16,11 @@
       <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
       @foreach ($meses_inicio as $key => $mes_escolha)
       <div class="col-md-4">
-       <label class="radio-inline">{{ Form::radio('mes_escolha', $key) }}{{ $mes_escolha }}</label>
+       <label class="radio-inline">{{ Form::radio('mes_escolha', $key, false, ['required' => '']) }}{{ $mes_escolha }}</label>
       </div>
       @endforeach
     @endif
   </fieldset>
-
-  {!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
     {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
     {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
     {!! Form::hidden('programa_pretendido', $dados_para_template['programa_pretendido'], []) !!}
