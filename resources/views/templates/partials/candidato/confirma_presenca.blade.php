@@ -8,28 +8,33 @@
 
 @section('confirma_presenca')
 
-<fieldset class="scheduler-border">
-  <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
 
-  <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.departamento')!!}</p>
-  @if (sizeof($meses_inicio) > 0)
-    <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
-  @endif
+    <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.departamento')!!}</p>
+    @if (sizeof($meses_inicio) > 0)
+      <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
+      @foreach ($meses_inicio as $key => $mes_escolha)
+      <div class="col-md-4">
+       <label class="radio-inline">{{ Form::radio('mes_escolha', $key) }}{{ $mes_escolha }}</label>
+      </div>
+      @endforeach
+    @endif
+  </fieldset>
+
   {!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-  {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
-  {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
-  {!! Form::hidden('programa_pretendido', $dados_para_template['programa_pretendido'], []) !!}
-  <div class="form-group">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 text-center">
-        {!! Form::submit(trans('tela_confirma_presenca.confirma'), ['class' => 'btn btn-success btn-lg submit-aceita', 'name' =>'confirma']) !!}
-        {!! Form::button(trans('tela_confirma_presenca.declina'), ['class' => 'btn btn-danger btn-lg submit-declina', 'onclick' => 'return archiveFunction(event)', 'id' => 'declina']) !!}
+    {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
+    {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
+    {!! Form::hidden('programa_pretendido', $dados_para_template['programa_pretendido'], []) !!}
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+          {!! Form::submit(trans('tela_confirma_presenca.confirma'), ['class' => 'btn btn-success btn-lg submit-aceita', 'name' =>'confirma']) !!}
+          {!! Form::button(trans('tela_confirma_presenca.declina'), ['class' => 'btn btn-danger btn-lg submit-declina', 'onclick' => 'return archiveFunction(event)', 'id' => 'declina']) !!}
+        </div>
       </div>
     </div>
-  </div>
-{!! Form::close() !!}
-</fieldset>
-
+  {!! Form::close() !!}
 
 @endsection
 
