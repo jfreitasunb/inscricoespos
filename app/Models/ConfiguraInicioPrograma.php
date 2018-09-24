@@ -28,6 +28,33 @@ class ConfiguraInicioPrograma extends FuncoesModels
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_inicio_programa')->get();
     }
 
+    public function retorna_se_precisam_confirmar_mes($id_inscricao_pos, $id_programa_pos)
+    {   
+        $confirmacoes = $this->where('id_inscricao_pos', $id_inscricao_pos)->get();
+
+        foreach ($confirmacoes as $precisa_confirmar) {
+            if (is_null($precisa_confirmar->programa_para_confirmar)) {
+                $todos = true;
+            }else{
+                $todos = false;
+            }
+        }
+
+        if (!$todos) {
+
+            $programa_confirmar = $this->where('programa_para_confirmar', $id_programa_pos)->where('id_inscricao_pos', $id_inscricao_pos)->value('programa_para_confirmar');
+
+            if (is_null($programa_confirmar)) {
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return $todos;
+        }
+        
+    }
+
     public function libera_tela_confirmacao($id_inscricao_pos)
     {
         $periodos_confirmacao = $this->retorna_meses_para_inicio($id_inscricao_pos);
