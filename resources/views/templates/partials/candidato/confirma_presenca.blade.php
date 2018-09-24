@@ -11,8 +11,10 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
 
-  <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.mensagem_fim')!!}</p>
-
+  <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.departamento')!!}</p>
+  @if (sizeof($meses_inicio) > 0)
+    <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
+  @endif
   {!! Form::open(array('route' => 'confirma.presenca', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
   {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
   {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
