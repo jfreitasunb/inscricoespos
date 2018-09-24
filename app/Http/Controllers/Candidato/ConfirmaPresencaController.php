@@ -117,11 +117,11 @@ class ConfirmaPresencaController extends BaseController
 				foreach ($retorna_meses_confirmacao as $mes_confirmacao) {
 					
 					if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
-						$meses_inicio[] = $array_months[$mes_confirmacao->mes_inicio];
+						$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
 					}
 
 					if (is_null($mes_confirmacao->programa_para_confirmar)) {
-						$meses_inicio[] = $array_months[$mes_confirmacao->mes_inicio];
+						$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
 					}
 				}
 			}
