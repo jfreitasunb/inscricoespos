@@ -170,7 +170,7 @@ class ConfirmaPresencaController extends BaseController
 		$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
 
 		if ($libera_tela) {
-			dd("aqui");
+			
 			$id_inicio_programa = (int)$request->id_inicio_programa;
 
 			$id_programa_pretendido = $request->id_programa_pretendido;
@@ -235,7 +235,18 @@ class ConfirmaPresencaController extends BaseController
 					return redirect()->route('home');
 				}
 
-				$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca);
+				$data_hoje = (new Carbon())->format('Y-m-d');
+
+				$mes_escolhido = ConfiguraInicioPrograma::find($id_inicio_programa);
+
+				if ($data_hoje <= $mes_escolhido->prazo_confirmacao) {
+					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
+				}else{
+					notify()->flash(trans('mensagens_gerais.presenca_erro_fora_prazo'),'error');
+				
+					return redirect()->route('home');
+				}
+				
 
 				if ($status_resposta) {
 					notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
