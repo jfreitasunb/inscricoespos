@@ -111,17 +111,25 @@ class ConfirmaPresencaController extends BaseController
 			
 			$meses_inicio = [];
 			
+			$data_hoje = (new Carbon())->format('Y-m-d');
+
 			if ($confirmar_mes) {
 				$retorna_meses_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
 
 				foreach ($retorna_meses_confirmacao as $mes_confirmacao) {
 					
-					if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
-						$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
-					}
+					
+					$prazo = Carbon::createFromFormat('Y-m-d', $mes_confirmacao->prazo_confirmacao);
 
-					if (is_null($mes_confirmacao->programa_para_confirmar)) {
-						$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
+					if ($data_hoje <= $prazo) {
+						if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
+							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
+						}
+
+						if (is_null($mes_confirmacao->programa_para_confirmar)) {
+							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
+						}
+
 					}
 				}
 			}
@@ -153,6 +161,8 @@ class ConfirmaPresencaController extends BaseController
 
 	public function postConfirmaPresenca(Request $request)
 	{	
+		dd($request);
+
 		$id_candidato = $request->id_candidato;
 
 		$id_inscricao_pos = $request->id_inscricao_pos;
