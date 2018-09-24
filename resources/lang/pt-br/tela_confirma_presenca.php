@@ -17,4 +17,6 @@ return [
     'sim_envia' => 'Sim',
     'nao_envia' => 'Não',
     'envio_cancelado' => 'Envio cancelado!',
+    'departamento' => ' no MAT/UnB.',
+    'escolha_mes' => 'Abaixo você deve informar em qual mês deseja iniciar no programa ao qual foi selecionado:'
 ];
