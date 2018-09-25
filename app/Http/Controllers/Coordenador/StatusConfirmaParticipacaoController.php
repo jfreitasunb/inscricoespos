@@ -97,7 +97,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
         
         foreach ($candidatos_selecionados as $candidato) {
             
-            $linha_arquivo['nome']               = $this->titleCase($candidato->nome);
+            $linha_arquivo['nome']               = $candidato->nome;
             $linha_arquivo['email']              = $candidato->email;
             $linha_arquivo['programa']           = $candidato->tipo_programa_pos_ptbr;
             $linha_arquivo['confirmou_presenca'] = $candidato->confirmou_presenca? "Sim" : "Não";
