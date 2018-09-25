@@ -86,5 +86,14 @@
                 </table>
             @endforeach
         </div>
+        <div><br></div>
+        <div>
+            <p align="right">Brasília, {{ $dia }} de {{ $nome_mes }} de {{ $ano_homologacao }}</p>
+        </div>
+        <div><br></div>
+        <div>
+            <p align="center">{{ $nome_coordenador }}</p>
+            <p align="center">{{ $genero_coordenador }} de Pós-Graduação MAT/UnB</p>
+        </div>
     </body>
 </html>
