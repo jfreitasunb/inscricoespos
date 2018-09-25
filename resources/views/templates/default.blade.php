@@ -19,10 +19,11 @@
 <body>
     @include('templates.partials.alertas_erros')
     @include('templates.partials.cabecalho')
-    <div class="container">
+    
       @if (Auth::check())
         {{-- @include($templatemenu) --}}
         @candidato(Auth()->user())
+        <div class="container">
           @include('templates.partials.candidato.menu_candidato')
           @yield('dados_pessoais')
           @yield('dados_academicos')
@@ -31,8 +32,11 @@
           @yield('finaliza_inscricao')
           @yield('status_cartas')
           @yield('confirma_presenca')
+        </div>
         @endcandidato
         @coordenador(Auth()->user())
+        <div class="container-fluid">
+        <div class="row-fluid">
           @include('templates.partials.coordenador.menu_coordenador')
           {{-- @yield('cadastra_disciplina') --}}
           @yield('configura_inscricao')
@@ -47,6 +51,8 @@
           @yield('seleciona_candidatos')
           @yield('status_selecionados')
           @yield('link_acesso')
+        </div>
+      </div>
         @endcoordenador
         @recomendante(Auth()->user())
           @include('templates.partials.recomendante.menu_recomendante')
@@ -57,6 +63,8 @@
           @yield('carta_parte_final')
         @endrecomendante
         @admin(Auth()->user())
+        <div class="container-fluid">
+        <div class="row-fluid">
           @include('templates.partials.admin.menu_admin')
           @impersonating_recomendante
             @yield('dados_pessoais_recomendante')
@@ -72,6 +80,8 @@
             @yield('finaliza_inscricao')
             @yield('status_cartas')
           @endimpersonating_candidato
+        </div>
+      </div>
         @endadmin
       @else
         @yield('inicio')
