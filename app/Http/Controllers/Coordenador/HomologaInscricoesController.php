@@ -120,9 +120,18 @@ class HomologaInscricoesController extends CoordenadorController
             $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
         }
 
-        dd($texto_cursos_pos);
+        $mes_fim_inscricao = explode("-", $relatorio_disponivel->fim_inscricao)[1];
 
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos'));
+        if ($mes_fim_inscricao >= 6) {
+            $texto_semestre = 'primeiro';
+            $numero_semestre = 1;
+            $ano = explode("-", $relatorio_disponivel->fim_inscricao)[0] + 1;
+        }else{
+            $texto_semestre = 'segundo';
+            $numero_semestre = 2;
+            $ano = explode("-", $relatorio_disponivel->fim_inscricao)[0];
+        }
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano'));
         
         return $pdf->stream();
         
