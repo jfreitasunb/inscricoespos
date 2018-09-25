@@ -64,6 +64,8 @@ class HomologaInscricoesController extends CoordenadorController
 
         $id_user = $user->id_user;
 
+        $locale = "pt-br";
+
         $relatorio = new ConfiguraInscricaoPos();
 
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
@@ -77,7 +79,6 @@ class HomologaInscricoesController extends CoordenadorController
             return redirect()->back();
         }
         
-
         $this->validate($request, [
             'homologar' => 'required',
         ]);
@@ -109,6 +110,22 @@ class HomologaInscricoesController extends CoordenadorController
             'timer' => 2000,
         ]);
 
-        return redirect()->back();
+        $edital = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
+
+        $numero_pragramas = count(explode("_", $relatorio_disponivel->programa));
+
+        if ($numero_pragramas > 1) {
+            $texto_cursos_pos = "os cursos de Doutorado e Mestrado";
+        }else{
+            $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
+        }
+
+        dd($texto_cursos_pos);
+
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital'));
+        
+        return $pdf->stream();
+        
+        // return redirect()->back();
     }
 }
