@@ -524,13 +524,13 @@ class RelatorioController extends BaseController
 
     $locale_relatorio = 'pt-br';
 
-  $relatorio = new ConfiguraInscricaoPos();
+    $relatorio = new ConfiguraInscricaoPos();
 
-  $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+    $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-  $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
+    $programas_disponiveis = explode("_", $relatorio->retorna_inscricao_ativa()->programa);
 
-  $nome_programa_pos = new ProgramaPos();
+    $nome_programa_pos = new ProgramaPos();
 
     foreach ($programas_disponiveis as $programa) {
      
@@ -539,21 +539,21 @@ class RelatorioController extends BaseController
      $contagem[$programa_para_inscricao[$programa]] = $this->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
     }
 
-  $total_inscritos = array_sum($contagem);
-  
-  $nome_programas = implode('/', $programa_para_inscricao);
+    $total_inscritos = array_sum($contagem);
+    
+    $nome_programas = implode('/', $programa_para_inscricao);
 
-  $monitoria = $id_inscricao_pos;
+    $monitoria = $id_inscricao_pos;
 
-  $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
+    $local_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
-  $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
+    $endereco_zip_mudar = '/var/www/inscricoespos/storage/app/public/';
 
-  $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
+    $local_arquivos['local_relatorios'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['local_relatorios']);
 
-  $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
+    $local_arquivos['arquivo_zip'] = str_replace($endereco_zip_mudar, 'storage/', $local_arquivos['arquivo_zip']);
 
-  return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem', 'total_inscritos', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
+    return view('templates.partials.coordenador.relatorio_pos_edital_vigente')->with(compact('monitoria','nome_programas', 'programa_para_inscricao','contagem', 'total_inscritos', 'relatorio_disponivel','arquivos_zipados_para_view','relatorio_csv','local_arquivos'));
   }
 
 
