@@ -572,6 +572,11 @@ class RelatorioController extends BaseController
       @unlink($fileName);
     }
 
+    foreach (glob( $locais_arquivos['arquivo_zip']."*.zip") as $ZIPfile ){
+      @unlink($ZIPfile);
+    }
+    
+
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     
 
