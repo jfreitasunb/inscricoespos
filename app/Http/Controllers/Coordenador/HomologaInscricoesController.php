@@ -14,6 +14,7 @@ use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\DadoCoordenadorPos;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\ProgramaPos;
@@ -65,6 +66,10 @@ class HomologaInscricoesController extends CoordenadorController
         $id_user = $user->id_user;
 
         $locale = "pt-br";
+
+        $coordenador = new DadoCoordenadorPos();
+
+        $dados_coordenador = $coordenador->retorna_dados_coordenador_atual();
 
         $relatorio = new ConfiguraInscricaoPos();
 
@@ -161,6 +166,10 @@ class HomologaInscricoesController extends CoordenadorController
         $dados_homologacao['nome_mes'] = $this->array_meses[str_replace("0", "", explode("-",$relatorio_disponivel->data_homologacao)[1])];
 
         $dados_homologacao['ano_homologacao'] = explode("-",$relatorio_disponivel->data_homologacao)[0];
+
+        $dados_homologacao['nome_coordenador'] = explode("_", $dados_coordenador->tratamento)[1]." ".$dados_coordenador->nome_coordenador;
+
+        $dados_homologacao['tratamento'] = explode("_", $dados_coordenador->tratamento)[0];
 
         $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes', 'dados_homologacao'));
         
