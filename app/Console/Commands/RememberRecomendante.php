@@ -3,6 +3,7 @@
 namespace InscricoesPos\Console\Commands;
 
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
 use InscricoesPos\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao, ContatoRecomendante, FinalizaInscricao};
@@ -70,12 +71,14 @@ class RememberRecomendante extends Command
             $dados_recomendantes = User::find($id_user)->nome;
 
             $enviar_email = FALSE;
-            
+
             foreach ($candidatos as $candidato) {
                 $finalizou = (new FinalizaInscricao())->retorna_se_finalizou($candidato->id_candidato, $id_inscricao_pos);
                 
                 if ($finalizou) {
                     $enviar_email = TRUE;
+
+                    $id_candidato = $candidato->id_candidato;
                 }
             }
             
@@ -83,6 +86,8 @@ class RememberRecomendante extends Command
                 $dados_email['nome_professor'] = $dados_recomendantes;
                 
                 Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
+                
+                DB::table('contatos_recomendantes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_user)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
             }
            }
         }
