@@ -41,5 +41,7 @@
         <div>
             <p>O Departamento de Matemática torna pública a homologação das inscrições para {{ $texto_cursos_pos }} em Matemática, com início no {{ $texto_semestre }} período letivo de {{ $ano }}, conforme item 7.1 do edital nº {{ $edital }}. </p>
         </div>
+
+        <div><br></div>
     </body>
 </html>
