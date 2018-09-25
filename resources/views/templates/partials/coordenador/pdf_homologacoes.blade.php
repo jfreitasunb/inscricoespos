@@ -88,7 +88,7 @@
         </div>
         <div><br></div>
         <div>
-            <p align="right">Brasília, {{ $dia }} de {{ $nome_mes }} de {{ $ano_homologacao }}</p>
+            <p align="right">Brasília, {{ $dados_homologacao['dia'] }} de {{ $dados_homologacao['nome_mes'] }} de {{ $dados_homologacao['ano_homologacao'] }}</p>
         </div>
         <div><br></div>
         <div>
