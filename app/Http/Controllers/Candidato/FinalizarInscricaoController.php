@@ -239,7 +239,7 @@ class FinalizarInscricaoController extends BaseController
 				
 				$finalizar_inscricao->id_candidato = $id_candidato;
 				$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
-				$finalizar_inscricao->finalizada = true;
+				$finalizar_inscricao->finalizada = TRUE;
 				$finalizar_inscricao->save();
 			}
 
