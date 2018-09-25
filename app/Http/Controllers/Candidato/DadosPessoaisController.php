@@ -69,20 +69,20 @@ class DadosPessoaisController extends BaseController
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		if (is_null($dados_pessoais)) {
-				$dados = [
-					'nome' => $user->nome,
-					'data_nascimento' => '',
-					'numerorg' => '',
-					'emissorrg' => '',
-					'cpf' => '',
-					'data_nascimento' => '',
-					'endereco' => '',
-					'pais' => '',
-					'estado' => '',
-					'cidade' => '',
-					'cep' => '',
-					'celular' => '',
-				];
+			$dados = [
+				'nome' => $this->titleCase($user->nome),
+				'data_nascimento' => '',
+				'numerorg' => '',
+				'emissorrg' => '',
+				'cpf' => '',
+				'data_nascimento' => '',
+				'endereco' => '',
+				'pais' => '',
+				'estado' => '',
+				'cidade' => '',
+				'cep' => '',
+				'celular' => '',
+			];
 		}else{
 			if (!is_null($dados_pessoais->data_nascimento)) {
 			
@@ -122,7 +122,7 @@ class DadosPessoaisController extends BaseController
 			}
 
 			$dados = [
-				'nome' => $dados_pessoais->nome,
+				'nome' => $this->titleCase($dados_pessoais->nome),
 				'data_nascimento' => $dados_pessoais->data_nascimento,
 				'numerorg' => $dados_pessoais->numerorg,
 				'emissorrg' => $dados_pessoais->emissorrg,
@@ -160,7 +160,7 @@ class DadosPessoaisController extends BaseController
 
 		if (is_null($dados_pessoais)) {
 			$dados = [
-					'nome' => $user->nome,
+					'nome' => $this->titleCase($user->nome),
 					'data_nascimento' => '',
 					'numerorg' => '',
 					'emissorrg' => '',
@@ -172,10 +172,10 @@ class DadosPessoaisController extends BaseController
 					'cidade' => '',
 					'cep' => '',
 					'celular' => '',
-				];
+			];
 		}else{
 			$dados = [
-				'nome' => $dados_pessoais->nome,
+				'nome' => $this->titleCase($dados_pessoais->nome),
 				'data_nascimento' => $dados_pessoais->data_nascimento,
 				'numerorg' => $dados_pessoais->numerorg,
 				'emissorrg' => $dados_pessoais->emissorrg,
@@ -231,7 +231,7 @@ class DadosPessoaisController extends BaseController
 		
 		$usuario = User::find($id_candidato);
 
-		$update_nome['nome'] = Purifier::clean(trim($request->input('nome')));;
+		$update_nome['nome'] = $this->titleCase(Purifier::clean(trim($request->input('nome'))));
 
 		if (is_null($candidato)) {
 			$cria_candidato = new DadoPessoalCandidato();
