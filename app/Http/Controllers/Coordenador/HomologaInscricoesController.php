@@ -71,6 +71,8 @@ class HomologaInscricoesController extends CoordenadorController
 
         $dados_coordenador = $coordenador->retorna_dados_coordenador_atual();
 
+        $dados_homologacao = [];
+
         $relatorio = new ConfiguraInscricaoPos();
 
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
@@ -115,17 +117,17 @@ class HomologaInscricoesController extends CoordenadorController
             'timer' => 2000,
         ]);
 
-        $edital = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
+        $dados_homologacao['edital'] = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
 
         $numero_programas = count(explode("_", $relatorio_disponivel->programa));
 
         if ($numero_programas > 1) {
-            $texto_cursos_pos = "os cursos de Doutorado e Mestrado Acadêmico";
+            $dados_homologacao['texto_cursos_pos'] = "os cursos de Doutorado e Mestrado Acadêmico";
         }else{
             if ($relatorio_disponivel->programa == 1) {
-                $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale)."Acadêmico";
+                $dados_homologacao['texto_cursos_pos'] = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale)."Acadêmico";
             }else{
-                $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
+                $dados_homologacao['texto_cursos_pos'] = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
             }
             
         }
@@ -133,13 +135,13 @@ class HomologaInscricoesController extends CoordenadorController
         $mes_fim_inscricao = explode("-", $relatorio_disponivel->fim_inscricao)[1];
 
         if ($mes_fim_inscricao >= 6) {
-            $texto_semestre = 'primeiro';
-            $numero_semestre = 1;
-            $ano = explode("-", $relatorio_disponivel->fim_inscricao)[0] + 1;
+            $dados_homologacao['texto_semestre'] = 'primeiro';
+            $dados_homologacao['numero_semestre'] = 1;
+            $dados_homologacao['ano_inicio'] = explode("-", $relatorio_disponivel->fim_inscricao)[0] + 1;
         }else{
-            $texto_semestre = 'segundo';
-            $numero_semestre = 2;
-            $ano = explode("-", $relatorio_disponivel->fim_inscricao)[0];
+            $dados_homologacao['texto_semestre'] = 'segundo';
+            $dados_homologacao['numero_semestre'] = 2;
+            $dados_homologacao['ano_inicio'] = explode("-", $relatorio_disponivel->fim_inscricao)[0];
         }
 
         $homologa = new HomologaInscricoes;
@@ -159,8 +161,6 @@ class HomologaInscricoesController extends CoordenadorController
         }
         asort($homologacoes);
         
-        $dados_homologacao = [];
-        
         $dados_homologacao['dia'] = explode("-",$relatorio_disponivel->data_homologacao)[2];
 
         $dados_homologacao['nome_mes'] = $this->array_meses[str_replace("0", "", explode("-",$relatorio_disponivel->data_homologacao)[1])];
@@ -170,12 +170,11 @@ class HomologaInscricoesController extends CoordenadorController
         $dados_homologacao['nome_coordenador'] = explode("_", $dados_coordenador->tratamento)[1]." ".$dados_coordenador->nome_coordenador;
 
         $dados_homologacao['tratamento'] = explode("_", $dados_coordenador->tratamento)[0];
-
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes', 'dados_homologacao'));
+        
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('homologacoes', 'dados_homologacao'));
         $nome_arquivo_homologacao = "Homologacao-.pdf";
         
         return $pdf->download($nome_arquivo_homologacao);
         
-        // return redirect()->back();
     }
 }
