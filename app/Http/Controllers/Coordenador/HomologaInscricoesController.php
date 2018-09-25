@@ -172,8 +172,9 @@ class HomologaInscricoesController extends CoordenadorController
         $dados_homologacao['tratamento'] = explode("_", $dados_coordenador->tratamento)[0];
 
         $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes', 'dados_homologacao'));
+        $nome_arquivo_homologacao = "Homologacao-.pdf";
         
-        return $pdf->stream();
+        return $pdf->download($nome_arquivo_homologacao);
         
         // return redirect()->back();
     }
