@@ -153,8 +153,16 @@ class HomologaInscricoesController extends CoordenadorController
             }
         }
         asort($homologacoes);
+        
+        $dados_homologacao = [];
+        
+        $dados_homologacao['dia'] = explode("-",$relatorio_disponivel->data_homologacao)[2];
 
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes'));
+        $dados_homologacao['nome_mes'] = $this->array_meses[str_replace("0", "", explode("-",$relatorio_disponivel->data_homologacao)[1])];
+
+        $dados_homologacao['ano_homologacao'] = explode("-",$relatorio_disponivel->data_homologacao)[0];
+
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes', 'dados_homologacao'));
         
         return $pdf->stream();
         
