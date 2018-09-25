@@ -255,7 +255,7 @@ class EscolhaCandidatoController extends BaseController
 
 				for ($i=0; $i < count($email_contatos_recomendantes); $i++) {
 
-					$novo_recomendante['nome'] = Purifier::clean($request->nome_recomendante[$i]);
+					$novo_recomendante['nome'] = $this->titleCase(Purifier::clean($request->nome_recomendante[$i]));
 					
 					$novo_recomendante['email'] = $email_contatos_recomendantes[$i];
 
