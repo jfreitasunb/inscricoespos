@@ -112,9 +112,9 @@ class HomologaInscricoesController extends CoordenadorController
 
         $edital = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
 
-        $numero_pragramas = count(explode("_", $relatorio_disponivel->programa));
+        $numero_programas = count(explode("_", $relatorio_disponivel->programa));
 
-        if ($numero_pragramas > 1) {
+        if ($numero_programas > 1) {
             $texto_cursos_pos = "os cursos de Doutorado e Mestrado Acadêmico";
         }else{
             if ($relatorio_disponivel->programa == 1) {
@@ -136,7 +136,25 @@ class HomologaInscricoesController extends CoordenadorController
             $numero_semestre = 2;
             $ano = explode("-", $relatorio_disponivel->fim_inscricao)[0];
         }
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano'));
+
+        $homologa = new HomologaInscricoes;
+
+        $inscricoes_homologadas = $homologa->retorna_inscricoes_homologadas($id_inscricao_pos);
+
+        $programas = explode("_", $relatorio_disponivel->programa);
+
+        foreach ($programas as $programa) {
+            
+            foreach ($inscricoes_homologadas as $homologada) {
+                if ($homologada->programa_pretendido == $programa) {
+                    $homologacoes[(new ProgramaPos())->pega_programa_pos_mat($programa, $locale)][] = $this->titleCase(User::find($homologada->id_candidato)->nome);
+                }
+                
+            }
+        }
+        asort($homologacoes);
+
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos', 'texto_semestre', 'numero_semestre', 'ano', 'homologacoes'));
         
         return $pdf->stream();
         
