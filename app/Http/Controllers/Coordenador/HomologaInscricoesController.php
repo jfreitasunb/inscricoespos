@@ -115,9 +115,14 @@ class HomologaInscricoesController extends CoordenadorController
         $numero_pragramas = count(explode("_", $relatorio_disponivel->programa));
 
         if ($numero_pragramas > 1) {
-            $texto_cursos_pos = "os cursos de Doutorado e Mestrado";
+            $texto_cursos_pos = "os cursos de Doutorado e Mestrado Acadêmico";
         }else{
-            $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
+            if ($relatorio_disponivel->programa == 1) {
+                $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale)."Acadêmico";
+            }else{
+                $texto_cursos_pos = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale);
+            }
+            
         }
 
         $mes_fim_inscricao = explode("-", $relatorio_disponivel->fim_inscricao)[1];
