@@ -9,11 +9,6 @@
             label.motivacao {font-weight: normal;text-align:justify;}
             p.motivacao {font-weight: normal;text-align:justify;}
             .page_break { page-break-before: always;}
-            table.tftable {font-size:12px;width:100%;border-width: 1px;border-collapse: collapse;}
-    		table.tftable th {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;text-align:center;}
-    		table.tftable td {font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
-            table.tftable td.valor_celula {text-align:center;font-weight: bold;font-size:14px;border-width: 1px;padding: 8px;border-style: solid;}
-            table.tftable td.cabecalho {text-align:center;font-size:12px;border-width: 1px;padding: 8px;border-style: solid;}
             .footer {
                 width: 100%;
                 text-align: center;
@@ -25,6 +20,35 @@
                 content: counter(page);
             }
             p:last-child { page-break-after: never; }
+            table.customTable {
+                border-collapse: collapse;
+                border-width: 2px;
+                border-color: #080A0F;
+                border-style: solid;
+                color: #000000;
+            }
+
+            table.customTable th.tg-baqh{
+                width: 10%;
+            }
+            table.customTable th.tg-0lax{
+                width: 100%;
+            }
+
+            tr:nth-child(even) {
+                background-color: #B3B3B3
+            }
+
+            table.customTable td, table.customTable th {
+                border-width: 2px;
+                border-color: #080A0F;
+                border-style: solid;
+                padding: 5px;
+            }
+
+            table.customTable thead {
+                background-color: #F8F8F8;
+            }
         </style>
     </head>
 
@@ -43,5 +67,24 @@
         </div>
 
         <div><br></div>
+
+        <div>
+            @foreach ($homologacoes as $key => $candidato)
+            
+                <h3 align="center">{{ $key }}:</h3>
+                <table class="customTable" align="center">
+                  <tr>
+                    <th class="tg-baqh" align="center">Ordem</th>
+                    <th class="tg-0lax" align="center">Nome</th>
+                  </tr>
+                  @foreach ($candidato as $ordem => $nome)
+                    <tr>
+                        <td class="tg-baqh" align="center">{{ $ordem + 1}}</td>
+                        <td class="tg-0lax">{{ $nome }}</td>
+                    </tr>
+                  @endforeach
+                </table>
+            @endforeach
+        </div>
     </body>
 </html>
