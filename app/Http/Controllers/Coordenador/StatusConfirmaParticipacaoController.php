@@ -87,12 +87,12 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $local_arquivo_confirmacoes = storage_path("app/public/relatorios/edital_".$edital."/");
 
-        $relatorio_csv = Writer::createFromPath($local_arquivo_confirmacoes.$nome_arquivo_csv, 'w+');
+        $confirmacoes_csv = Writer::createFromPath($local_arquivo_confirmacoes.$nome_arquivo_csv, 'w+');
     
 
-        $relatorio_csv->insertOne($cabecalho_csv);
+        $confirmacoes_csv->insertOne($cabecalho_csv);
 
-        $relatorio_csv->setOutputBOM(Reader::BOM_UTF8);
+        $confirmacoes_csv->setOutputBOM(Reader::BOM_UTF8);
         
         foreach ($candidatos_selecionados as $candidato) {
             
@@ -102,10 +102,8 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             $linha_arquivo['confirmou_presenca'] = $candidato->confirmou_presenca? "Sim" : "Não";
             $linha_arquivo['mes_inicio']         = $mes_candidato[$candidato->id_candidato];
 
-            $relatorio_csv->insertOne($linha_arquivo);
+            $confirmacoes_csv->insertOne($linha_arquivo);
         }
-        
-        // $relatorio_csv->insertOne($linha_arquivo);
 
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato'));
 	}
