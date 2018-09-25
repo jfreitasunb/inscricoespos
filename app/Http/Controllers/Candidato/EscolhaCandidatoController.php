@@ -270,16 +270,6 @@ class EscolhaCandidatoController extends BaseController
 					notify()->flash(trans('mensagens_gerais.inicio_erro_email_recomendantes').implode(", ", $array_erro).trans('mensagens_gerais.final_erro_email_recomendantes'),'warning');
 					return redirect()->back();
 				}
-				
-				// $dados_iniciais_recomendante = new DadoPessoalRecomendante();
-
-				// for ($j=0; $j < count($email_contatos_recomendantes); $j++) {
-
-				// 	$id_recomendante = $novo_usuario->retorna_user_por_email($email_contatos_recomendantes[$j]);
-					
-				// 	$grava_dados_inicias = $dados_iniciais_recomendante->grava_dados_iniciais_recomendante($id_recomendante->id_user, Purifier::clean($request->nome_recomendante[$j]));
-				// }
-
 
 				$contatos_recomendantes = new ContatoRecomendante();
 
