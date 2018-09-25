@@ -92,8 +92,8 @@
         </div>
         <div><br></div>
         <div>
-            <p align="center">{{ $nome_coordenador }}</p>
-            <p align="center">{{ $genero_coordenador }} de Pós-Graduação MAT/UnB</p>
+            <p align="center">{{ $dados_homologacao['nome_coordenador'] }}</p>
+            <p align="center">{{ $dados_homologacao['tratamento'] }} de Pós-Graduação MAT/UnB</p>
         </div>
     </body>
 </html>
