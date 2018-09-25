@@ -23,6 +23,7 @@ use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use League\Csv\Writer;
+use League\Csv\Reader;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\BaseController;
 use InscricoesPos\Http\Controllers\CidadeController;
@@ -44,6 +45,8 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 		$relatorio = new ConfiguraInscricaoPos();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $edital = $relatorio_disponivel->edital;
 
         $selecionados = new CandidatosSelecionados;
 
@@ -80,14 +83,29 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             4 => 'Mês de Início',
         ];
 
-        dd($cabecalho_csv);
-        
-        $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+        $nome_arquivo_csv = "Confirmacoes_Edital_".$edital.".csv";
+
+        $local_arquivo_confirmacoes = storage_path("app/public/relatorios/edital_".$edital."/");
+
+        $relatorio_csv = Writer::createFromPath($local_arquivo_confirmacoes.$nome_arquivo_csv, 'w+');
     
 
-        $relatorio_csv->insertOne();
+        $relatorio_csv->insertOne($cabecalho_csv);
 
-        $relatorio_csv->insertOne($linha_arquivo);
+        $relatorio_csv->setOutputBOM(Reader::BOM_UTF8);
+        
+        foreach ($candidatos_selecionados as $candidato) {
+            
+            $linha_arquivo['nome']               = $candidato->nome;
+            $linha_arquivo['email']              = $candidato->email;
+            $linha_arquivo['programa']           = $candidato->tipo_programa_pos_ptbr;
+            $linha_arquivo['confirmou_presenca'] = $candidato->confirmou_presenca? "Sim" : "Não";
+            $linha_arquivo['mes_inicio']         = $mes_candidato[$candidato->id_candidato];
+
+            $relatorio_csv->insertOne($linha_arquivo);
+        }
+        
+        // $relatorio_csv->insertOne($linha_arquivo);
 
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato'));
 	}
