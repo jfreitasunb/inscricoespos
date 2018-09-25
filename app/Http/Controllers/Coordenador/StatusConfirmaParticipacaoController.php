@@ -22,6 +22,7 @@ use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
+use League\Csv\Writer;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\BaseController;
 use InscricoesPos\Http\Controllers\CidadeController;
@@ -70,6 +71,23 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
                 $mes_candidato[$selecionado->id_candidato] = $array_meses[$mes];
             }
         }
+
+        $cabecalho_csv = [
+            0 => 'Nome',
+            1 => 'E-mail',
+            2 => 'Programa',
+            3 => 'Confirmou Presença?',
+            4 => 'Mês de Início',
+        ];
+
+        dd($cabecalho_csv);
+        
+        $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
+    
+
+        $relatorio_csv->insertOne();
+
+        $relatorio_csv->insertOne($linha_arquivo);
 
       	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato'));
 	}
