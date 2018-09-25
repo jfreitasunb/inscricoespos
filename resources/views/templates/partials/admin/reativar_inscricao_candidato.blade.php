@@ -22,7 +22,7 @@
 @if (!$modo_pesquisa)
 	{!! Form::hidden('id', $finalizou->id, []) !!}
 	{!! Form::hidden('id_inscricao_pos', $finalizou->id_inscricao_pos, []) !!}
-	{!! Form::hidden('id_user', $finalizou->id_user, []) !!}
+	{!! Form::hidden('id_candidato', $finalizou->id_candidato, []) !!}
 	{!! Form::hidden('email_candidato', $email_candidato, []) !!}
 	 <div class="form-group">
 	{!! Form::label('edital', 'Edital', ['class' => 'col-md-4 control-label']) !!}

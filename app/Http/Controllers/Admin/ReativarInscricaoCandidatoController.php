@@ -53,7 +53,7 @@ class ReativarInscricaoCandidatoController extends AdminController
 
 		$email_candidato = strtolower(trim($request->email_candidato));
 
-		$id_user = $this->getPesquisaCandidato($email_candidato);
+		$id_candidato = $this->getPesquisaCandidato($email_candidato);
 
 		$edital = new ConfiguraInscricaoPos;
 
@@ -61,7 +61,7 @@ class ReativarInscricaoCandidatoController extends AdminController
 
 		$finaliza_inscricao = new FinalizaInscricao;
 
-		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_user, $this->locale_default);
+		$finalizou = $finaliza_inscricao->retorna_usuario_inscricao_finalizada($edital_vigente->id_inscricao_pos, $id_candidato, $this->locale_default);
 
 		if (!is_null($finalizou)) {
 			
@@ -88,7 +88,7 @@ class ReativarInscricaoCandidatoController extends AdminController
 
 		$id = (int)$request->id;
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
-		$id_user = (int)$request->id_user;
+		$id_candidato = (int)$request->id_candidato;
 		$email_candidato = $request->email_candidato;
 
 
