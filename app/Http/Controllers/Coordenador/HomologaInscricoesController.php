@@ -122,7 +122,7 @@ class HomologaInscricoesController extends CoordenadorController
 
         dd($texto_cursos_pos);
 
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital'));
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('edital', 'texto_cursos_pos'));
         
         return $pdf->stream();
         
