@@ -56,7 +56,9 @@
         <script type="text/php">
             if (isset($pdf)) {
                 $font = $fontMetrics->getFont("Arial", "bold");
-                $pdf->page_text(35, 750, "MAT/UnB", $font, 7, array(0, 0, 0) );
+                $pdf->page_text(35, 750, "Campus Universitário Darcy Ribeiro
+ICC-Centro - Bloco A - Sala - AT-425 Térreo
+Brasília – DF – CEP 70.910-900", $font, 7, array(0, 0, 0) );
                 $pdf->page_text(540, 750, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
