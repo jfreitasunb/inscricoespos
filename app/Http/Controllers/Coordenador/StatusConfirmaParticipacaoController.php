@@ -38,7 +38,6 @@ use URL;
 */
 class StatusConfirmaParticipacaoController extends CoordenadorController
 {
-
 	public function getStatusCandidatosSelecionados()
 	{
 		
@@ -83,6 +82,8 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             4 => 'Mês de Início',
         ];
 
+        @unlink($local_arquivo_confirmacoes.$nome_arquivo_csv);
+
         $nome_arquivo_csv = "Confirmacoes_Edital_".$edital.".csv";
 
         $local_arquivo_confirmacoes = storage_path("app/public/relatorios/edital_".$edital."/");
@@ -96,12 +97,12 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
         
         foreach ($candidatos_selecionados as $candidato) {
             
-            $linha_arquivo['nome']               = $candidato->nome;
+            $linha_arquivo['nome']               = $this->titleCase($candidato->nome);
             $linha_arquivo['email']              = $candidato->email;
             $linha_arquivo['programa']           = $candidato->tipo_programa_pos_ptbr;
             $linha_arquivo['confirmou_presenca'] = $candidato->confirmou_presenca? "Sim" : "Não";
             $linha_arquivo['mes_inicio']         = $mes_candidato[$candidato->id_candidato];
-
+            
             $confirmacoes_csv->insertOne($linha_arquivo);
         }
 
