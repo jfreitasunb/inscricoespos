@@ -47,6 +47,8 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 			'inicio_inscricao' => 'required|date_format:"d/m/Y"|before:fim_inscricao|after:today',
 			'fim_inscricao' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
 			'prazo_carta' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
+            'data_homologacao' => 'required|date_format:"d/m/Y"|after:fim_inscricao|after:today',
+            'data_divulgacao_resultado' => 'required|date_format:"d/m/Y"|after:data_homologacao|after:today',
 			'edital_ano' => 'required',
 			'edital_numero' => 'required',
 			'escolhas_coordenador' => 'required',
