@@ -67,10 +67,14 @@ class ConfiguraInscricaoPosController extends CoordenadorController
     	$inicio = Carbon::createFromFormat('d/m/Y', $request->inicio_inscricao);
     	$fim = Carbon::createFromFormat('d/m/Y', $request->fim_inscricao);
     	$prazo = Carbon::createFromFormat('d/m/Y', $request->prazo_carta);
+        $homologacao = Carbon::createFromFormat('d/m/Y', $request->data_homologacao);
+        $divulgacao_resultado = Carbon::createFromFormat('d/m/Y', $request->data_divulgacao_resultado);
 
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
     	$prazo_carta = $prazo->format('Y-m-d');
+        $data_homologacao = $homologacao->format('Y-m-d');
+        $data_divulgacao_resultado = $divulgacao_resultado->format('Y-m-d');
 
 
     	if ($configura_nova_inscricao_pos->autoriza_configuracao_inscricao($data_inicio)) {
@@ -81,6 +85,8 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 			$configura_nova_inscricao_pos->edital = $request->edital_ano."-".$request->edital_numero;
 			$configura_nova_inscricao_pos->programa = implode("_", $request->escolhas_coordenador);
 			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
+            $configura_nova_inscricao_pos->data_homologacao = $data_homologacao;
+            $configura_nova_inscricao_pos->data_divulgacao_resultado = $data_divulgacao_resultado;
 
 			$temp_file = $request->edital->store("arquivos_temporarios");
 
