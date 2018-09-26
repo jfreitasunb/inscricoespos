@@ -45,6 +45,30 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-4 col-md-offset-1">
+          <div class="form-group form-inline">
+            {!! Form::label('data_homologacao', 'Data da Homologação das Inscrições:') !!}
+            <div class='input-group' id='data_homologacao'>
+              {!! Form::text('data_homologacao', null, ['class' => 'form-control', 'required' => '']) !!}
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4 col-md-offset-1">
+          <div class="form-group form-inline">
+            {!! Form::label('data_divulgacao_resultado', 'Data da divulgação do resultado:') !!}
+            <div class='input-group' id='data_divulgacao_resultado'>
+              {!! Form::text('data_divulgacao_resultado', null, ['class' => 'form-control', 'required' => '']) !!}
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        </div>
         <legend>Escolher os programas para Inscrição:</legend>
           @foreach($programas_pos_mat as $programa)
             <div class="col-xs-6">
