@@ -19,6 +19,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->date('fim_inscricao');
             $table->date('prazo_carta');
             $table->date('data_homologacao');
+            $table->date('data_divulgacao_resultado');
             $table->string('programa', 7);
             $table->string('edital', 7);
             $table->unsignedInteger('id_coordenador');

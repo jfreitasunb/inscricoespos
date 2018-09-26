@@ -27,6 +27,7 @@ class ConfiguraInscricaoPos extends Model
         'fim_inscricao',
         'prazo_carta',
         'data_homologacao',
+        'data_divulgacao_resultado',
         'programa',
         'edital',
         'id_coordenador',
