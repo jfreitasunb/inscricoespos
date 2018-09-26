@@ -30,6 +30,18 @@
 	</div>
 </div>
 <div class="form-group">
+    {!! Form::label('data_homologacao', 'Data da Homologação:', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+        {!! Form::text('data_homologacao', $edital_vigente->data_homologacao, ['class' => 'form-control input-md']) !!}
+    </div>
+</div>
+<div class="form-group">
+    {!! Form::label('data_divulgacao_resultado', 'Data da divulgação do resultado:', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-4">
+        {!! Form::text('data_divulgacao_resultado', $edital_vigente->data_divulgacao_resultado, ['class' => 'form-control input-md']) !!}
+    </div>
+</div>
+<div class="form-group">
 	{!! Form::label('programa', 'Programas para inscrição', ['class' => 'col-md-4 control-label']) !!}
 	<div class="col-md-4">
 		{!! Form::text('programa', $edital_vigente->programa, ['class' => 'form-control input-md']) !!}
