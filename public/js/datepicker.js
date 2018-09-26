@@ -7,6 +7,14 @@ $(function () {
             locale: 'pt-br',
             format: 'DD/MM/YYYY'
         });
+        $('#data_homologacao').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
+        $('#data_divulgacao_resultado').datetimepicker({
+            locale: 'pt-br',
+            format: 'DD/MM/YYYY'
+        });
         $('#mes_inicio_1').datetimepicker({
             locale: 'pt-br',
             format: 'MM',
