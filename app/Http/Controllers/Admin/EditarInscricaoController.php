@@ -43,6 +43,8 @@ class EditarInscricaoController extends AdminController
 			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
 			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
 			'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
+			'data_homologacao' => 'required|date_format:"Y-m-d"|after:fim_inscricao',
+			'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao',
 			'edital' => 'required',
 			'programa' => 'required',
 		]);
@@ -54,6 +56,8 @@ class EditarInscricaoController extends AdminController
 		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
 		$novos_dados_edital['programa'] = $request->programa;
 		$novos_dados_edital['edital'] = $request->edital;
+		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
+		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
 
 		$edital_vigente->update($novos_dados_edital);
 
