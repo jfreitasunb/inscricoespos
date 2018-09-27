@@ -9,28 +9,11 @@
     <fieldset class="scheduler-border">
       <legend class="scheduler-border">Dados do(a) Coordenador(a) da Pós-Graduação do MAT/UnB</legend>
       {!! Form::open(array('route' => 'dados.coordenador.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}  
-        <div class="form-group" {{ $errors->has('email') ? ' has-error' : '' }}>
-          <div class="row">
-            <label class="col-md-2 control-label" for="email">Informe o e-mail do novo coordenador:</label>  
-            <div class="col-md-2">
-              <input id="email" name="email" type="text" class="form-control input-md" required="" data-parsley-type="email" value="{{Request::old('email') ?: '' }}">
-            </div>
+        <div class="form-group">
+          {!! Form::label('nome_coordenador', 'Nome do(a) Coordenador(a)', ['class' => 'col-md-4 control-label']) !!}
+          <div class="col-md-6">
+            {!! Form::text('nome_coordenador', '', ['class' => 'form-control input-md']) !!}
           </div>
-          @if ($errors->has('email'))
-            <span class="help-block">{{ $errors->first('email') }}</span>
-          @endif
-        </div>
-
-        <div class="form-group" {{ $errors->has('login') ? ' has-error' : '' }}>
-          <div class="row">
-            <label class="col-md-2 control-label" for="login">Login:</label>  
-            <div class="col-md-2">
-              <input id="login" name="login" type="text" class="form-control input-md" required="" value="{{Request::old('login') ?: '' }}">
-            </div>
-          </div>
-          @if ($errors->has('login'))
-            <span class="help-block">{{ $errors->first('login') }}</span>
-          @endif
         </div>
 
         <div class="col-xs-12" style="height:35px;"></div>
