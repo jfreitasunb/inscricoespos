@@ -113,10 +113,6 @@ class HomologaInscricoesController extends CoordenadorController
             $homologa->save();
         }
 
-        notify()->flash('Dados salvos com sucesso.','success', [
-            'timer' => 2000,
-        ]);
-
         $dados_homologacao['edital'] = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
 
         $numero_programas = count(explode("_", $relatorio_disponivel->programa));
@@ -174,6 +170,10 @@ class HomologaInscricoesController extends CoordenadorController
         $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('homologacoes', 'dados_homologacao'));
         $nome_arquivo_homologacao = "Homologacao-".$dados_homologacao['ano_inicio']."-".$dados_homologacao['numero_semestre'].".pdf";
         
+        notify()->flash('Dados salvos com sucesso.','success', [
+            'timer' => 2000,
+        ]);
+
         return $pdf->download($nome_arquivo_homologacao);
         
     }
