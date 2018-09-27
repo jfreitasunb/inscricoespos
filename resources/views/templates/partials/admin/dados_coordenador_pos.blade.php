@@ -6,7 +6,7 @@
 
 @section('dados_coordenador_pos')
   <div class="row">
-    <form action="{{ route('criar.coordenador') }}" method="POST" data-parsley-validate class="form-horizontal">
+    <form action="{{ route('dados.coordenador.pos') }}" method="POST" data-parsley-validate class="form-horizontal">
       <fieldset class="scheduler-border">
         <legend class="scheduler-border">Criar conta de Coordenador</legend>
         
