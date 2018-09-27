@@ -6,10 +6,9 @@
 
 @section('dados_coordenador_pos')
   <div class="row">
-    <form action="{{ route('dados.coordenador.pos') }}" method="POST" data-parsley-validate class="form-horizontal">
-      <fieldset class="scheduler-border">
-        <legend class="scheduler-border">Dados do(a) Coordenador(a) da Pós-Graduação do MAT/UnB</legend>
-        
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">Dados do(a) Coordenador(a) da Pós-Graduação do MAT/UnB</legend>
+      {!! Form::open(array('route' => 'dados.coordenador.pos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}  
         <div class="form-group" {{ $errors->has('email') ? ' has-error' : '' }}>
           <div class="row">
             <label class="col-md-2 control-label" for="email">Informe o e-mail do novo coordenador:</label>  
@@ -42,9 +41,8 @@
             </div>
           </div>
         </div>
-      </fieldset>
-      <input type="hidden" name="_token" value="{{ Session::token() }}">
-    </form>
+      {!! Form::close() !!}
+    </fieldset>
   </div>
 @endsection
 
