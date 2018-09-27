@@ -21,7 +21,7 @@ class DadoCoordenadorPos extends Model
     public function retorna_dados_coordenador_atual()
     {
         
-        return $this->orderBy('created_at')->get()->first();
+        return $this->orderBy('created_at', 'DESC')->get()->first();
 
     }
 }
