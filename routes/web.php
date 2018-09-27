@@ -160,9 +160,8 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
+	Route::get('admin/datatable/users', '\InscricoesPos\Http\Controllers\Admin\AdministraUserController@index')->name('lista.edita.usuarios');
 });
-
-Route::resource('admin/datatable/users', 'DataTable\UserController');
 
 
 
