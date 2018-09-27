@@ -4,7 +4,7 @@ namespace InscricoesPos\Http\Controllers\Admin;
 
 use Auth;
 use Session;
-use InscricoesPos\Models\{User, DadosCoordenadorPos};
+use InscricoesPos\Models\{User, DadoCoordenadorPos};
 use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
 use InscricoesPos\Http\Controllers\AuthController;
@@ -27,31 +27,27 @@ class DadosCoordenadorPosController extends AdminController
 
 	public function postDadosCoordenadorPos(Request $request)
 	{
-
+		
 		$this->validate($request, [
-			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
-			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'data_homologacao' => 'required|date_format:"Y-m-d"|after:fim_inscricao',
-			'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao',
-			'edital' => 'required',
-			'programa' => 'required',
+			'nome_coordenador' => 'required',
+			'prof_tratamento' => 'required',
+			'tipo_coord' => 'required',
 		]);
 
-		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
+		$nome_coordenador = trim($request->nome_coordenador);
 
-		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
-		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
-		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
-		$novos_dados_edital['programa'] = $request->programa;
-		$novos_dados_edital['edital'] = $request->edital;
-		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
-		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
+		$tratamento = $request->prof_tratamento."_".$request->tipo_coord;
 
-		$edital_vigente->update($novos_dados_edital);
+		$coordenador = new DadoCoordenadorPos();
 
-		notify()->flash('Inscrição alterada com sucesso!','success', ['timer' => 3000,]);
+		$coordenador->nome_coordenador = $nome_coordenador;
 
-		return redirect()->route('editar.inscricao');
+		$coordenador->tratamento = $tratamento;
+
+		$coordenador->save();
+
+		notify()->flash('Dados salvos com sucesso!','success', ['timer' => 3000,]);
+
+		return redirect()->route('home');
 	}
 }
