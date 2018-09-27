@@ -27,7 +27,7 @@ class AdministraUserController extends AdminController
 {
 	public function index()
 	{
-		return view('templates.partials.admin.lista_usuarios');
+		return view('templates.partials.admin.lista_edita_usuarios');
 	}
 	
 }

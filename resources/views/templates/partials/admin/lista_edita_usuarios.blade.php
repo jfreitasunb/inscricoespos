@@ -6,9 +6,15 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('lista_usuarios')
+@section('lista_edita_usuarios')
 
-
+<div class="containter">
+  <div class="row">
+    <div class="col-md-12">
+      Tabela
+    </div>
+  </div>
+</div>
 
 @endsection
 
