@@ -15,6 +15,20 @@
             {!! Form::text('nome_coordenador', '', ['class' => 'form-control input-md']) !!}
           </div>
         </div>
+        <div class="form-group">
+          {!! Form::label('prof_tratamento', 'Forma de Tratamento', ['class' => 'col-md-4 control-label']) !!}
+          <div class="col-md-6">
+            {!! Form::radio('prof_tratamento', 'Prof', ['class' => 'form-control input-md']) !!} Prof.
+            {!! Form::radio('prof_tratamento', 'Profa', ['class' => 'form-control input-md']) !!} Profa.
+          </div>
+        </div>
+        <div class="form-group">
+          {!! Form::label('tipo_coord', 'Tipo', ['class' => 'col-md-4 control-label']) !!}
+          <div class="col-md-6">
+            {!! Form::radio('tipo_coord', 'Coordenador', ['class' => 'form-control input-md']) !!} Coordenador
+            {!! Form::radio('tipo_coord', 'Coordenadora', ['class' => 'form-control input-md']) !!} Coordenadora
+          </div>
+        </div>
 
         <div class="form-group">
           <div class="row">
