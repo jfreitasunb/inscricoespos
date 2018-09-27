@@ -8,10 +8,10 @@
 
 @section('lista_edita_usuarios')
 
-<div class="containter">
+<div id="app">
   <div class="row">
     <div class="col-md-12">
-      Tabela
+      <example></example>
     </div>
   </div>
 </div>
