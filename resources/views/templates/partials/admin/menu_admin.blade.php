@@ -12,6 +12,11 @@
                     <div class="panel-body">
                         <table class="table">
                             <tr>
+                                <td class= "{{ Route::currentRouteNamed('dados.coordenador.pos') ? 'active_link' : '' }}">
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('dados.coordenador.pos') }}">Dados do coordenador da Pós</a>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class= "{{ Route::currentRouteNamed('pesquisa.email.muda.senha') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('pesquisa.email.muda.senha') }}">Link mudança de senha</a>
                                 </td>
@@ -164,6 +169,7 @@
         </div>
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
+                @yield('dados_coordenador_pos')
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
