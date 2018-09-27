@@ -19,17 +19,13 @@ use Illuminate\Pagination\LengthAwarePaginator;
 class DadosCoordenadorPosController extends AdminController
 {
 
-	public function getEditarInscricao()
+	public function getDadosCoordenadorPos()
 	{
 
-		$edital = new ConfiguraInscricaoPos();
-
-      	$edital_vigente = $edital->retorna_edital_vigente();
-
-      	return view('templates.partials.admin.editar_inscricao')->with(compact('edital_vigente'));
+      	return view('templates.partials.admin.dados_coordenador_pos');
 	}
 
-	public function postEditarInscricao(Request $request)
+	public function postDadosCoordenadorPos(Request $request)
 	{
 
 		$this->validate($request, [
