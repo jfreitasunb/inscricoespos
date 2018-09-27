@@ -96,6 +96,10 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group(function () {
 
 	Route::get('/', '\InscricoesPos\Http\Controllers\Admin\AdminController@getMenu')->name('menu.admin');
+	
+	Route::get('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@getDadosCoordenadorPos')->name('dados.coordenador.pos');
+
+	Route::post('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@postDadosCoordenadorPos');
 
 	Route::get('contas/users/impersonate','\InscricoesPos\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
 
