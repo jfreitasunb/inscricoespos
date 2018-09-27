@@ -8,7 +8,7 @@
   <div class="row">
     <form action="{{ route('dados.coordenador.pos') }}" method="POST" data-parsley-validate class="form-horizontal">
       <fieldset class="scheduler-border">
-        <legend class="scheduler-border">Criar conta de Coordenador</legend>
+        <legend class="scheduler-border">Dados do(a) Coordenador(a) da Pós-Graduação do MAT/UnB</legend>
         
         <div class="form-group" {{ $errors->has('email') ? ' has-error' : '' }}>
           <div class="row">
