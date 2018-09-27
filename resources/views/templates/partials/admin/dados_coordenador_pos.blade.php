@@ -18,8 +18,8 @@
         <div class="form-group">
           {!! Form::label('prof_tratamento', 'Forma de Tratamento', ['class' => 'col-md-4 control-label']) !!}
           <div class="col-md-6">
-            {!! Form::radio('prof_tratamento', 'Prof', ['class' => 'form-control input-md']) !!} Prof.
-            {!! Form::radio('prof_tratamento', 'Profa', ['class' => 'form-control input-md']) !!} Profa.
+            {!! Form::radio('prof_tratamento', 'Prof.', ['class' => 'form-control input-md']) !!} Prof.
+            {!! Form::radio('prof_tratamento', 'Profa.', ['class' => 'form-control input-md']) !!} Profa.
           </div>
         </div>
         <div class="form-group">
