@@ -12,6 +12,11 @@
                     <div class="panel-body">
                         <table class="table">
                             <tr>
+                                <td class= "{{ Route::currentRouteNamed('lista.edita.usuarios') ? 'active_link' : '' }}">
+                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('lista.edita.usuarios') }}">Lista/Edita Usuários</a>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class= "{{ Route::currentRouteNamed('dados.coordenador.pos') ? 'active_link' : '' }}">
                                     <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('dados.coordenador.pos') }}">Dados do coordenador da Pós</a>
                                 </td>
@@ -169,6 +174,7 @@
         </div>
         <div class="col-sm-9 col-md-10">
             <div class="menuadmin well">
+                @yield('lista_edita_usuarios')
                 @yield('dados_coordenador_pos')
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
