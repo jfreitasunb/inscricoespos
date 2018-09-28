@@ -81,8 +81,6 @@
                 this.sort.key  = column
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
-
-                console.log(this.sort)
             }
         },
 
