@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <example></example>
+      <data-table-user></data-table-user>
     </div>
   </div>
 </div>
