@@ -50,6 +50,6 @@ abstract class DataTableController extends BaseController
 
     protected function getRecords()
     {
-        return $this->builder()->get();
+        return $this->builder()->get($this->getDisplayableColumns());
     }
 }
