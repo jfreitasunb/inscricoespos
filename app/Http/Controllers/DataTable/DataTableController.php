@@ -9,4 +9,9 @@ use InscricoesPos\Http\Controllers\BaseController;
 abstract class DataTableController extends BaseController
 {
     abstract public function builder();
+
+    public function index()
+    {
+        # code...
+    }
 }
