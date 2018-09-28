@@ -47367,12 +47367,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['endpoint'],
     data: function data() {
         return {
             response: {
+                table: '',
                 displayable: [],
                 records: []
             }
@@ -47403,40 +47405,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [_vm._v("NAME OF TABLE")]),
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v(_vm._s(_vm.response.table))
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [
       _c("div", { staticClass: "table-responsive" }, [
-        _c("table", [
+        _c("table", { staticClass: "table table-striped" }, [
           _c("thead", [
             _c(
               "tr",
-              _vm._l(_vm.response.displayable, function(column) {
-                return _c("th", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(column) +
-                      "\n                        "
-                  )
-                ])
-              })
+              [
+                _vm._l(_vm.response.displayable, function(column) {
+                  return _c("th", [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(column) +
+                        "\n                        "
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v(" ")])
+              ],
+              2
             )
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c(
+            "tbody",
+            _vm._l(_vm.response.records, function(record) {
+              return _c(
+                "tr",
+                [
+                  _vm._l(record, function(columnValue, column) {
+                    return _c("td", [_vm._v(_vm._s(columnValue))])
+                  }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v("Editar")])
+                ],
+                2
+              )
+            })
+          )
         ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tbody", [_c("tr", [_c("td")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
