@@ -31,7 +31,7 @@ abstract class DataTableController extends BaseController
     {   
         return response()->json([
             'data' => [
-                'displayable' => $this->getDisplayableColumns(),
+                'displayable' => array_values($this->getDisplayableColumns()),
                 'records' => $this->getRecords(),
             ]
         ]);
