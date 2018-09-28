@@ -1,10 +1,9 @@
 <template>    
     <div class="panel panel-default">
         <div class="panel-heading">NAME OF TABLE</div>
-
         <div class="panel-body">
             <div class="table-responsive">
-                <table>
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th v-for="column in response.displayable">
@@ -13,8 +12,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td></td>
+                        <tr v-for="record in response.records">
+                            <td v-for="columnValue, column in record">{{ columnValue }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -35,6 +34,7 @@
             }
         },
         mounted () {
+            console.log(this.endpoint)
             this.getRecords()
         },
 
