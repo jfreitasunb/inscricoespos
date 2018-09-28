@@ -13,4 +13,11 @@ class UserDataTableController extends DataTableController
     {
         return User::query();
     }
+
+    public function getDisplayableColumns()
+    {
+        return [
+            'id', 'nome', 'email', 'locale', 'user_type', 'ativo'
+        ];
+    }
 }
