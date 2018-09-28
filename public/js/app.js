@@ -47360,11 +47360,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['endpoint'],
+    data: function data() {
+        return {
+            response: {
+                displayable: [],
+                records: []
+            }
+        };
+    },
     mounted: function mounted() {
-        console.log(this.endpoint);
+        this.getRecords();
+    },
+
+
+    methods: {
+        getRecords: function getRecords() {
+            var _this = this;
+
+            return axios.get('' + this.endpoint).then(function (response) {
+                _this.response = response.data.data;
+            });
+        }
     }
 });
 
@@ -47376,22 +47402,39 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [_vm._v("NAME OF TABLE")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", [
+          _c("thead", [
+            _c(
+              "tr",
+              _vm._l(_vm.response.displayable, function(column) {
+                return _c("th", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(column) +
+                      "\n                        "
+                  )
+                ])
+              })
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [_vm._v("NAME OF TABLE")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _c("div", { staticClass: "table-responsive" }, [
-          _c("table", [_c("thead", [_c("tr", [_c("th", [_vm._v("Coluna")])])])])
-        ])
-      ])
-    ])
+    return _c("tbody", [_c("tr", [_c("td")])])
   }
 ]
 render._withStripped = true
