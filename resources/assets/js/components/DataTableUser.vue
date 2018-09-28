@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">NAME OF TABLE</div>
+        <div class="panel-heading">{{ response.table }}</div>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -9,11 +9,13 @@
                             <th v-for="column in response.displayable">
                                 {{ column }}
                             </th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="record in response.records">
                             <td v-for="columnValue, column in record">{{ columnValue }}</td>
+                            <td>Editar</td>
                         </tr>
                     </tbody>
                 </table>
@@ -28,13 +30,13 @@
         data () {
             return {
                 response: {
+                    table: '',
                     displayable: [],
                     records: []
                 }
             }
         },
         mounted () {
-            console.log(this.endpoint)
             this.getRecords()
         },
 
