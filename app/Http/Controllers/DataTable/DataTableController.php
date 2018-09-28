@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
 use InscricoesPos\Http\Controllers\BaseController;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Schema;
 
 abstract class DataTableController extends BaseController
 {
@@ -33,6 +34,11 @@ abstract class DataTableController extends BaseController
                 'records' => $this->getRecords(),
             ]
         ]);
+    }
+
+    public function getDisplayableColumns()
+    {
+        return Schema::getColumnListing($this->builder->getModel()->getTable);
     }
 
     protected function getRecords()
