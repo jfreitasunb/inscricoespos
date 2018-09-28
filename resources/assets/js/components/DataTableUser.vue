@@ -7,7 +7,7 @@
                     <thead>
                         <tr>
                             <th v-for="column in response.displayable">
-                                {{ column }}
+                                <span @click="sortBy(column)">{{ column }}</span>
                             </th>
                             <th>&nbsp;</th>
                         </tr>
@@ -33,13 +33,36 @@
                     table: '',
                     displayable: [],
                     records: []
-                }
+                },
+
+                sort: {
+                key: 'id_user',
+                order: 'asc'
+            }
             }
         },
 
         computed: {
             filteredRecords () {
-                return this.response.records;
+                
+                let data = this.response.records
+
+                if (this.sort.key) {
+
+                    data = _.orderBy(data, (i) => {
+
+                        let value = i[this.sort.key]
+
+                        if (!isNaN(parseFloat(value))) {
+
+                            return parseFloat(value)
+                        }
+
+                        return String(i[this.sort.key]).toLowerCase()
+                    }, this.sort.order)
+                }
+
+                return data
             }
         },
 
@@ -49,6 +72,15 @@
                 return axios.get(`${this.endpoint}`).then((response) => {
                     this.response = response.data.data
                 })
+            },
+
+            sortBy (column) {
+                
+                this.sort.key  = column
+
+                this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
+
+                console.log(this.sort)
             }
         },
 
