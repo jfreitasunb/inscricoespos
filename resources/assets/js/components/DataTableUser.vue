@@ -13,7 +13,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="record in response.records">
+                        <tr v-for="record in filteredRecords">
                             <td v-for="columnValue, column in record">{{ columnValue }}</td>
                             <td>Editar</td>
                         </tr>
@@ -36,8 +36,11 @@
                 }
             }
         },
-        mounted () {
-            this.getRecords()
+
+        computed: {
+            filteredRecords () {
+                return this.response.records;
+            }
         },
 
         methods: {
@@ -47,7 +50,11 @@
                     this.response = response.data.data
                 })
             }
-        }
+        },
+
+        mounted () {
+            this.getRecords()
+        },
     }
 </script>
 
