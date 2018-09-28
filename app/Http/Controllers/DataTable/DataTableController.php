@@ -31,6 +31,7 @@ abstract class DataTableController extends BaseController
     {   
         return response()->json([
             'data' => [
+                'table' => $this->builder->getModel()->getTable(),
                 'displayable' => array_values($this->getDisplayableColumns()),
                 'records' => $this->getRecords(),
             ]
@@ -50,6 +51,6 @@ abstract class DataTableController extends BaseController
 
     protected function getRecords()
     {
-        return $this->builder()->get($this->getDisplayableColumns());
+        return $this->builder()->orderBy('id_user')->get($this->getDisplayableColumns());
     }
 }
