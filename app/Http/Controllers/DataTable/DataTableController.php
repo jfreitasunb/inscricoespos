@@ -29,7 +29,9 @@ abstract class DataTableController extends BaseController
     public function index()
     {   
         return response()->json([
-            
+            'data' => [
+                'records' => $this->getRecords(),
+            ]
         ]);
     }
 
