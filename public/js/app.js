@@ -47431,8 +47431,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.sort.key = column;
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
-
-            console.log(this.sort);
         }
     },
 
