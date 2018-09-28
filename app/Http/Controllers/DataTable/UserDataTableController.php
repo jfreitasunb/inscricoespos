@@ -17,7 +17,7 @@ class UserDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id', 'nome', 'email', 'locale', 'user_type', 'ativo'
+            'id_user', 'nome', 'email', 'locale', 'user_type', 'ativo'
         ];
     }
 }
