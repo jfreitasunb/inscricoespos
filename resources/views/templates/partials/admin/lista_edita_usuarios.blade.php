@@ -1,7 +1,5 @@
 @extends('templates.default')
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
 @section('stylesheets')
   {!! Html::style( asset('css/parsley.css') ) !!}
   {!! Html::style( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') ) !!}
@@ -13,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <data-table-user endpoint="{{ route('lista.edita.usuarios') }}"></data-table-user>
+      <data-table-user endpoint="{{ route('users.index') }}"></data-table-user>
     </div>
   </div>
 </div>
