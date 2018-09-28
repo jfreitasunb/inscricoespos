@@ -31,6 +31,7 @@ abstract class DataTableController extends BaseController
     {   
         return response()->json([
             'data' => [
+                'displayable' => $this->getDisplayableColumns(),
                 'records' => $this->getRecords(),
             ]
         ]);
@@ -38,7 +39,7 @@ abstract class DataTableController extends BaseController
 
     public function getDisplayableColumns()
     {
-        return Schema::getColumnListing($this->builder->getModel()->getTable);
+        return Schema::getColumnListing($this->builder->getModel()->getTable());
     }
 
     protected function getRecords()
