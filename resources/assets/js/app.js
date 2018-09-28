@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('data-table-user', require('./components/DataTableUser.vue'));
 
 const app = new Vue({
     el: '#app'
