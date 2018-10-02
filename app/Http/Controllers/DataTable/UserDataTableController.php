@@ -20,4 +20,11 @@ class UserDataTableController extends DataTableController
             'id_user', 'nome', 'email', 'locale', 'user_type', 'ativo'
         ];
     }
+
+    public function getUpdatableColumns()
+    {
+        return [
+            'nome', 'email', 'locale', 'user_type', 'ativo'
+        ];
+    }
 }
