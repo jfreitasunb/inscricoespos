@@ -8,7 +8,13 @@
                     <input type="text" id="filter" class="form-control" v-model="quickSearchQuery">
                 </div>
                 <div class="form-group col-md-2">
-                    {{ quickSearchQuery }}
+                    <label id="limit">Limitar resultados à:</label>
+                    <select id="limit" class="form-control">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="1000">1000</option>
+                        <option value="">Todos</option>
+                    </select>
                 </div>
             </div>
             <div class="table-responsive">
