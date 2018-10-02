@@ -33,7 +33,9 @@
                         <tr v-for="record in filteredRecords">
                             <td v-for="columnValue, column in record">
                                 <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
-                                    impute
+                                    
+                                    <input type="text" class="form-control"  v-model="editing.form[column]">
+
                                 </template> 
 
                                 <template v-else>
@@ -44,7 +46,8 @@
                                 <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
 
                                 <template v-if=" editing.id_user === record.id_user">
-                                    <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>    
+                                    <a href="#" @click.prevent="update()">Salvar</a><br>
+                                    <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>  
                                 </template>
                             </td>
                         </tr>
@@ -151,6 +154,11 @@
             isUpdatable (column) {
 
                 return this.response.updatable.includes(column)
+            },
+
+            update () {
+
+                console.log(this.editing.form)
             }
         },
 
