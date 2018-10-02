@@ -9,7 +9,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label id="limit">Limitar resultados à:</label>
-                    <select id="limit" class="form-control">
+                    <select id="limit" class="form-control" v-model="limit">
                         <option value="50">50</option>
                         <option value="100">100</option>
                         <option value="1000">1000</option>
@@ -53,11 +53,13 @@
                 },
 
                 sort: {
-                key: 'id_user',
-                order: 'asc'
-            },
+                    key: 'id_user',
+                    order: 'asc'
+                },
 
-            quickSearchQuery: ''
+                limit: 50,
+
+                quickSearchQuery: ''
             }
         },
 
