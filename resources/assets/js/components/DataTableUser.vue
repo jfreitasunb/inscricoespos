@@ -9,7 +9,7 @@
                 </div>
                 <div class="form-group col-md-2">
                     <label id="limit">Limitar resultados à:</label>
-                    <select id="limit" class="form-control" v-model="limit">
+                    <select id="limit" class="form-control" v-model="limit" @change="getRecords">
                         <option value="50">50</option>
                         <option value="100">100</option>
                         <option value="1000">1000</option>
@@ -42,6 +42,9 @@
 </template>
 
 <script>
+
+    import queryString from 'query-string'
+
     export default {
         props: ['endpoint'],
         data () {
@@ -98,8 +101,16 @@
         methods: {
 
             getRecords () {
-                return axios.get(`${this.endpoint}`).then((response) => {
+                return axios.get(`${this.endpoint}?${this.getQueryParameters()}`).then((response) => {
                     this.response = response.data.data
+                })
+            },
+
+            getQueryParameters () {
+
+                return queryString.stringify({
+
+                    limit: this.limit
                 })
             },
 
