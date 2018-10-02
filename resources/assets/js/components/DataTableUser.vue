@@ -31,7 +31,15 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td v-for="columnValue, column in record">{{ columnValue }}</td>
+                            <td v-for="columnValue, column in record">
+                                <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
+                                    impute
+                                </template> 
+
+                                <template v-else>
+                                    {{ columnValue }}    
+                                </template>
+                            </td>
                             <td>
                                 <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
 
@@ -138,6 +146,11 @@
                 this.editing.errors = []
                 this.editing.id_user = record.id_user
                 this.editing.form = _.pick(record, this.response.updatable)
+            },
+
+            isUpdatable (column) {
+
+                return this.response.updatable.includes(column)
             }
         },
 
