@@ -20,6 +20,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "query-string": "^6.1.0",
         "vue-resource": "^1.5.1"
     }
 }
