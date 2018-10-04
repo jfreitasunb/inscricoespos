@@ -34,7 +34,7 @@
                             <td v-for="columnValue, column in record">
                                 <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
                                     
-                                    <input type="text" class="form-control"  v-model="editing.form[column]">
+                                    <input type="text" class="form-control" :name="columnValue" v-model="editing.form[column]">
 
                                 </template> 
 
