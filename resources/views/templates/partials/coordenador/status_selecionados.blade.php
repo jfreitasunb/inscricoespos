@@ -11,7 +11,7 @@
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Situação das confirmações</legend>
   <p>Para baixar o arquivo com as confirmações
-    <a target="_blank" href="{{asset($local_arquivo_confirmacoes.$nome_arquivo_csv)}}" >clique aqui!</a>
+    <a target="_blank" href="{{asset($local_arquivo_confirmacoes_template.$nome_arquivo_csv)}}" >clique aqui!</a>
   </p>
 
   <div class="table-responsive">

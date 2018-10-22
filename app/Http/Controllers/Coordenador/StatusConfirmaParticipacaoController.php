@@ -75,6 +75,8 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $local_arquivo_confirmacoes = storage_path("app/public/relatorios/edital_".$edital."/");
 
+        $local_arquivo_confirmacoes_template = "storage/relatorios/edital_".$edital."/";
+
         $confirmacoes_csv = Writer::createFromPath($local_arquivo_confirmacoes.$nome_arquivo_csv, 'w+');
     
 
@@ -93,6 +95,6 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             $confirmacoes_csv->insertOne($linha_arquivo);
         }
 
-      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato', 'local_arquivo_confirmacoes', 'nome_arquivo_csv'));
+      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato', 'local_arquivo_confirmacoes_template', 'nome_arquivo_csv'));
 	}
 }
