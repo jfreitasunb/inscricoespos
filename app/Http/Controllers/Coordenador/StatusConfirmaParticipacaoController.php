@@ -93,6 +93,6 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             $confirmacoes_csv->insertOne($linha_arquivo);
         }
 
-      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato'));
+      	return view('templates.partials.coordenador.status_selecionados', compact('relatorio_disponivel','candidatos_selecionados', 'mes_candidato', 'local_arquivo_confirmacoes', 'nome_arquivo_csv'));
 	}
 }
