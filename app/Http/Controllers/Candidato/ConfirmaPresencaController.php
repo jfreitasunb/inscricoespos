@@ -161,6 +161,7 @@ class ConfirmaPresencaController extends BaseController
 
 	public function postConfirmaPresenca(Request $request)
 	{	
+
 		$id_candidato = (int)$request->id_candidato;
 
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
@@ -171,9 +172,11 @@ class ConfirmaPresencaController extends BaseController
 
 		if ($libera_tela) {
 			
-			$id_inicio_programa = (int)$request->id_inicio_programa;
-
-			$id_programa_pretendido = $request->id_programa_pretendido;
+			if (isset($request->id_inicio_programa)) {
+				$id_inicio_programa = (int)$request->id_inicio_programa;
+			}else{
+				$id_inicio_programa = null;
+			}
 
 			if (isset($request->confirma)) {
 				$confirmou_presenca = True;
@@ -239,7 +242,6 @@ class ConfirmaPresencaController extends BaseController
 
 				if (!$id_inicio_programa) {
 					$id_inicio_programa = $mes_escolhido = (new ConfiguraInicioPrograma())->retorna_meses_para_inicio($id_inscricao_pos)[0]->id_inicio_programa;
-
 				}
 
 				$mes_escolhido = ConfiguraInicioPrograma::find($id_inicio_programa);
