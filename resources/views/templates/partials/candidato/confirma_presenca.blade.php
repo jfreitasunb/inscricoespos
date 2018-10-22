@@ -12,7 +12,7 @@
     <legend class="scheduler-border">{{trans('tela_confirma_presenca.confirma_presenca')}}</legend>
 
     <p>{!! trans('tela_confirma_presenca.mensagem_inicio').'<strong>'.$dados_para_template['nome'].'</strong>'.trans('tela_confirma_presenca.mensagem_meio').'<strong>'.$dados_para_template['programa_pretendido'].'</strong>'.trans('tela_confirma_presenca.departamento')!!}</p>
-    @if (sizeof($meses_inicio) > 1)
+    @if (sizeof($meses_inicio) >= 1)
       <p>{!! trans('tela_confirma_presenca.escolha_mes')!!}</p>
       @foreach ($meses_inicio as $key => $mes_escolha)
       <div class="col-md-4">
