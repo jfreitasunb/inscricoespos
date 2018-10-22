@@ -173,6 +173,7 @@ class ConfirmaPresencaController extends BaseController
 		if ($libera_tela) {
 			
 			if (isset($request->id_inicio_programa)) {
+
 				$id_inicio_programa = (int)$request->id_inicio_programa;
 			}else{
 				$id_inicio_programa = null;
@@ -240,13 +241,21 @@ class ConfirmaPresencaController extends BaseController
 
 				$data_hoje = (new Carbon())->format('Y-m-d');
 
-				if (!$id_inicio_programa) {
+				if (!is_null($id_inicio_programa)) {
 					$id_inicio_programa = $mes_escolhido = (new ConfiguraInicioPrograma())->retorna_meses_para_inicio($id_inscricao_pos)[0]->id_inicio_programa;
 				}
 
-				$mes_escolhido = ConfiguraInicioPrograma::find($id_inicio_programa);
+				if (is_null($id_inicio_programa)) {
+					
+					$mes_escolhido = new ConfiguraInicioPrograma();
 
-				$prazo_confirmacao = $mes_escolhido->prazo_confirmacao;
+					$prazo_confirmacao = $mes_escolhido->retorna_meses_para_inicio($id_inscricao_pos)[1]->prazo_confirmacao;
+				}else{
+					$mes_escolhido = ConfiguraInicioPrograma::find($id_inicio_programa);
+
+					$prazo_confirmacao = $mes_escolhido->prazo_confirmacao;
+				}
+				
 
 				if ($data_hoje <= $prazo_confirmacao) {
 					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
