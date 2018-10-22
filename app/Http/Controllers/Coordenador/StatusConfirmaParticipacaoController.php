@@ -53,7 +53,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         foreach ($candidatos_selecionados as $selecionado) {
 
-            if (is_null($selecionado->inicio_no_programa)) {
+            if (is_null($selecionado->inicio_no_programa) or $selecionado->id_programa_pos ==2) {
                 $mes_candidato[$selecionado->id_candidato] = "Não informado";
             }else{
                 $mes = ConfiguraInicioPrograma::find($selecionado->inicio_no_programa)->mes_inicio;
@@ -83,7 +83,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
         $confirmacoes_csv->setOutputBOM(Reader::BOM_UTF8);
         
         foreach ($candidatos_selecionados as $candidato) {
-            
+  
             $linha_arquivo['nome']               = $candidato->nome;
             $linha_arquivo['email']              = $candidato->email;
             $linha_arquivo['programa']           = $candidato->tipo_programa_pos_ptbr;
