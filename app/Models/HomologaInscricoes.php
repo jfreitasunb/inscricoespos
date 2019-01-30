@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HomologaInscricoes extends FuncoesModels
 {
-    use SoftDeletes;
 
     protected $primaryKey = 'id';
 
@@ -19,7 +18,6 @@ class HomologaInscricoes extends FuncoesModels
         'programa_pretendido',
         'homologada',
         'id_coordenador',
-        'deleted_at',
     ];
 
     public function retorna_se_foi_homologado($id_candidato, $id_inscricao_pos)
@@ -32,10 +30,10 @@ class HomologaInscricoes extends FuncoesModels
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('homologada', 'True')->get();
     }
 
-    public function limpa_homologacoes_anteriores($id_inscricao_pos)
-    {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
-    }
+    // public function limpa_homologacoes_anteriores($id_inscricao_pos)
+    // {
+    //     return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
+    // }
 
     public function retorna_dados_homologados($id_inscricao_pos, $locale)
     {
