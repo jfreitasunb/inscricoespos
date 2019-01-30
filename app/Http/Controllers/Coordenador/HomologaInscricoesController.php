@@ -92,10 +92,6 @@ class HomologaInscricoesController extends CoordenadorController
         
         $id_inscricao_pos = (int)$request->id_inscricao_pos;
 
-        $limpa_homologacoes = new HomologaInscricoes();
-
-        $limpa_homologacoes->limpa_homologacoes_anteriores($id_inscricao_pos);
-
         foreach ($request->homologar as $id => $homologar) {
             
             $homologa = new HomologaInscricoes();
