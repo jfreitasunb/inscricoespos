@@ -37,6 +37,34 @@ class RememberRecomendante extends Command
         parent::__construct();
     }
 
+    public function checa_envio_anterior($id_candidato, $id_recomendante, $id_inscricao_pos)
+    {
+        $searchthis = $id_candidato.";".$id_recomendante.";".$id_inscricao_pos;
+        
+        $matches = array();
+
+        $handle = @fopen(storage_path('app/')."recomendantes_notificados.csv", "r");
+        
+        if ($handle)
+        {
+            while (!feof($handle))
+            {
+                $buffer = fgets($handle);
+                if(strpos($buffer, $searchthis) !== FALSE)
+                    $matches[] = $buffer;
+            }
+            fclose($handle);
+        }
+        
+        if (sizeof($matches) > 0) {
+
+            return TRUE;
+
+        }else{
+            return FALSE;
+        }
+    }
+
     /**
      * Execute the console command.
      *
@@ -62,7 +90,7 @@ class RememberRecomendante extends Command
 
         $locale = 'en';
 
-        if ($data_hoje->diffInDays($prazo_carta) == 2) {
+        if ($data_hoje->diffInDays($prazo_carta) <= 3) {
            
            foreach ($cartas_nao_enviadas as $id_user) {
             
@@ -79,15 +107,29 @@ class RememberRecomendante extends Command
                     $enviar_email = TRUE;
 
                     $id_candidato = $candidato->id_candidato;
+
+                    $ja_enviou_antes = $this->checa_envio_anterior($id_candidato, $id_user, $id_inscricao_pos);
                 }
             }
             
             if (!is_null($dados_recomendantes) AND $enviar_email) {
-                $dados_email['nome_professor'] = $dados_recomendantes;
+
+                if (!$ja_enviou_antes) {
+                    
+                    $dados_email['nome_professor'] = $dados_recomendantes;
                 
-                Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
+                    Notification::send(User::find($id_user), new EmailRememberRecomendante($dados_email));
                 
-                DB::table('contatos_recomendantes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_user)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
+                    DB::table('contatos_recomendantes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_user)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
+
+                    $handle = @fopen(storage_path('app/')."recomendantes_notificados.csv", "a");
+
+                    $txt = $id_candidato.";".$id_user.";".$id_inscricao_pos;
+        
+                    fwrite($handle, $txt."\n");
+        
+                    fclose($handle);
+                }
             }
            }
         }
