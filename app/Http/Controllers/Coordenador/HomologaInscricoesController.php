@@ -10,6 +10,7 @@ use File;
 use PDF;
 use Notification;
 use Carbon\Carbon;
+use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\AreaPosMat;
@@ -43,10 +44,26 @@ class HomologaInscricoesController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
         $finalizacoes = new FinalizaInscricao;
 
         if ($relatorio->autoriza_homologacao()){
-            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
+
+            $inscricoes_homologadas = new HomologaInscricoes();
+
+            $ja_homologou = $inscricoes_homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
+
+            if (sizeof($ja_homologou) > 0) {
+                
+                notify()->flash('As inscrições já foram homologadas. Não é possível homologar novamente.','warning', [
+                    'timer' => 3000,
+                ]);
+
+                return redirect()->back();
+            }
+            
+            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos, $this->locale_default)->get();
 
             return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));    
         }else{
@@ -107,6 +124,22 @@ class HomologaInscricoesController extends CoordenadorController
             $homologa->id_coordenador = $id_user;
 
             $homologa->save();
+
+            if (explode("_", $homologar)[0]) {
+                
+                $auxilia_selecao = new AuxiliaSelecao();
+
+                $auxilia_selecao->id_candidato = $id;
+
+                $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
+
+                $auxilia_selecao->programa_pretendido = explode("_", $homologar)[1];
+
+                $auxilia_selecao->id_coordenador = $id_user;
+
+                $auxilia_selecao->save();
+
+            }
         }
 
         $dados_homologacao['edital'] = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
