@@ -73,11 +73,11 @@ class EscolhaCandidato extends Model
 
     public function retorna_area_distintas($id_inscricao_pos)
     {
-        return $this->select('area_pos')->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', '2')->distinct()->orderBy('area_pos')->pluck('area_pos');
+        return $this->select('area_pos_principal')->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', '2')->distinct()->orderBy('area_pos_principal')->pluck('area_pos_principal');
     }
 
     public function retorna_inscritos_por_area_pos($area_pos, $id_inscricao_pos)
     {
-        return $this->select('id_candidato')->where('programa_pretendido', '2')->where('area_pos', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_candidato');
+        return $this->select('id_candidato')->where('programa_pretendido', '2')->where('area_pos_principal', $area_pos)->where('id_inscricao_pos', $id_inscricao_pos)->get()->pluck('id_candidato');
     }
 }
