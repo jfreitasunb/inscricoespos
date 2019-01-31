@@ -17,6 +17,8 @@ use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\DadoPessoalCandidato;
 use InscricoesPos\Models\Paises;
+use InscricoesPos\Models\HomologaInscricoes;
+use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\Estado;
 use InscricoesPos\Models\Cidade;
@@ -58,9 +60,29 @@ class RelatorioController extends BaseController
 
   public function ContaInscricoes($id_inscricao_pos, $programa)
   {
-     
-    return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_candidato', 'escolhas_candidato.id_candidato')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
+    $locale = 'pt-br';
 
+    $homologadas = new HomologaInscricoes();
+
+    $inscricoes_homologadas = $homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
+    
+    if (sizeof($inscricoes_homologadas) == 0) {
+        
+        return DB::table('escolhas_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->where('escolhas_candidato.programa_pretendido', $programa)->join('finaliza_inscricao', 'finaliza_inscricao.id_candidato', 'escolhas_candidato.id_candidato')->where('finaliza_inscricao.finalizada', true)->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->count();
+
+    }else{
+
+        $dados_auxiliares = new AuxiliaSelecao();
+
+        if (sizeof($dados_auxiliares->retorna_inscricoes_auxiliares($id_inscricao_pos)) == 0){
+            
+            return DB::table('homologa_inscricoes')->where('homologa_inscricoes.id_inscricao_pos', $id_inscricao_pos)->where('homologa_inscricoes.programa_pretendido', $programa)->where('homologa_inscricoes.homologada', true)->count();
+
+        }else{
+
+            return DB::table('auxilia_selecao')->where('auxilia_selecao.id_inscricao_pos', $id_inscricao_pos)->where('auxilia_selecao.programa_pretendido', $programa)->where('auxilia_selecao.desclassificado', false)->count();
+        }
+    }
   }
 
 
@@ -582,6 +604,7 @@ class RelatorioController extends BaseController
 
 
     $finaliza = new FinalizaInscricao();
+    
     $usuarios_finalizados = $finaliza->retorna_usuarios_relatorios($id_inscricao_pos);
 
     foreach ($usuarios_finalizados as $candidato) {
