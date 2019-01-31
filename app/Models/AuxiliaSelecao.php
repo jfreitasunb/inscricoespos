@@ -20,6 +20,10 @@ class AuxiliaSelecao extends FuncoesModels
         'id_coordenador',
     ];
 
+    public function retorna_inscricoes_auxiliares($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('desclassificado', false)->get();
+    }
 
     public function retorna_dados_auxiliares_relatorio($id_inscricao_pos, $locale)
     {
