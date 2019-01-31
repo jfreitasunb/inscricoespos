@@ -23,10 +23,26 @@ class AuxiliaSelecaoDataTableController extends DataTableController
         ];
     }
 
+    public function getVisibleColumns()
+    {
+        return [
+            'id_candidato', 'nome', 'nome_programa_pretendido'
+        ];
+    }
+
     public function getUpdatableColumns()
     {
         return [
             'desclassificado'
+        ];
+    }
+
+    public function getCustomColumnNanes()
+    {
+        return [
+            'id_candidato' => 'Identificador',
+            'nome' => 'Nome',
+            'nome_programa_pretendido' => 'Programa desejado'
         ];
     }
 
@@ -36,6 +52,8 @@ class AuxiliaSelecaoDataTableController extends DataTableController
             'data' => [
                 'table' => $this->builder->getModel()->getTable(),
                 'displayable' => array_values($this->getDisplayableColumns()),
+                'visivel' => array_values($this->getVisibleColumns()),
+                'custom_columns' => $this->getCustomColumnNanes(),
                 'updatable' => $this->getUpdatableColumns(),
                 'records' => $this->getRecords($request),
             ]
@@ -54,7 +72,7 @@ class AuxiliaSelecaoDataTableController extends DataTableController
 
         foreach ($dados_temporarios as $dados) {
 
-            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'id_programa_pretendido' => $dados->id_candidato, 'programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos];
+            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr];
         }
 
         return $teste;

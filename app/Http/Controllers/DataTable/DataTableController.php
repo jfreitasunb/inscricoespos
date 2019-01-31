@@ -44,6 +44,11 @@ abstract class DataTableController extends BaseController
         return array_diff($this->getDatabaseColumnNames(), $this->builder->getModel()->getHidden());
     }
 
+    public function getCustomColumnNanes()
+    {
+        return [];
+    }
+
     public function getUpdatableColumns()
     {
         return $this->getDisplayableColumns();

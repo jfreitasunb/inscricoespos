@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">{{ response.table }}</div>
+        <div class="panel-heading">Tela de desclassificação de candidatos</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
@@ -21,8 +21,8 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th v-for="column in response.displayable">
-                                <span class="sortable" @click="sortBy(column)">{{ column }}</span>
+                            <th v-for="column in response.visivel">
+                                <span class="sortable" @click="sortBy(column)">{{ response.custom_columns[column] || column }}</span>
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
@@ -32,23 +32,14 @@
                     <tbody>
                         <tr v-for="record in filteredRecords">
                             <td v-for="columnValue, column in record">
-                                <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
-                                    
-                                    <input type="text" class="form-control" :name="columnValue" v-model="editing.form[column]">
+                                
 
-                                </template> 
-
-                                <template v-else>
+                                
                                     {{ columnValue }}    
-                                </template>
+                                
                             </td>
                             <td>
-                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
-
-                                <template v-if=" editing.id_user === record.id_user">
-                                    <a href="#" @click.prevent="update()">Salvar</a><br>
-                                    <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>  
-                                </template>
+                                
                             </td>
                         </tr>
                     </tbody>
@@ -69,11 +60,12 @@
                 response: {
                     table: '',
                     displayable: [],
+                    visivel: [],
                     records: []
                 },
 
                 sort: {
-                    key: 'id_user',
+                    key: 'id_candidato',
                     order: 'asc'
                 },
 
@@ -81,11 +73,6 @@
 
                 quickSearchQuery: '',
 
-                editing: {
-                    id_user: null,
-                    form: {},
-                    errors: []
-                }
             }
         },
 
@@ -144,21 +131,9 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            edit (record) {
+            update (record) {
 
-                this.editing.errors = []
-                this.editing.id_user = record.id_user
-                this.editing.form = _.pick(record, this.response.updatable)
-            },
-
-            isUpdatable (column) {
-
-                return this.response.updatable.includes(column)
-            },
-
-            update () {
-
-                console.log(this.editing.form)
+                console.log(record)
             }
         },
 

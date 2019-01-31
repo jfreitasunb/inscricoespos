@@ -49143,15 +49143,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -49163,23 +49154,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             response: {
                 table: '',
                 displayable: [],
+                visivel: [],
                 records: []
             },
 
             sort: {
-                key: 'id_user',
+                key: 'id_candidato',
                 order: 'asc'
             },
 
             limit: 50,
 
-            quickSearchQuery: '',
+            quickSearchQuery: ''
 
-            editing: {
-                id_user: null,
-                form: {},
-                errors: []
-            }
         };
     },
 
@@ -49238,19 +49225,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
         },
-        edit: function edit(record) {
+        update: function update(record) {
 
-            this.editing.errors = [];
-            this.editing.id_user = record.id_user;
-            this.editing.form = _.pick(record, this.response.updatable);
-        },
-        isUpdatable: function isUpdatable(column) {
-
-            return this.response.updatable.includes(column);
-        },
-        update: function update() {
-
-            console.log(this.editing.form);
+            console.log(record);
         }
     },
 
@@ -49269,7 +49246,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "panel panel-default" }, [
     _c("div", { staticClass: "panel-heading" }, [
-      _vm._v(_vm._s(_vm.response.table))
+      _vm._v("Tela de desclassificação de candidatos")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "panel-body" }, [
@@ -49358,7 +49335,7 @@ var render = function() {
             _c(
               "tr",
               [
-                _vm._l(_vm.response.displayable, function(column) {
+                _vm._l(_vm.response.visivel, function(column) {
                   return _c("th", [
                     _c(
                       "span",
@@ -49370,7 +49347,11 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(column))]
+                      [
+                        _vm._v(
+                          _vm._s(_vm.response.custom_columns[column] || column)
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _vm.sort.key === column
@@ -49398,104 +49379,16 @@ var render = function() {
                 "tr",
                 [
                   _vm._l(record, function(columnValue, column) {
-                    return _c(
-                      "td",
-                      [
-                        _vm.editing.id_user === record.id_user &&
-                        _vm.isUpdatable(column)
-                          ? [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.editing.form[column],
-                                    expression: "editing.form[column]"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: { type: "text", name: columnValue },
-                                domProps: { value: _vm.editing.form[column] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.editing.form,
-                                      column,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]
-                          : [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(columnValue) +
-                                  "    \n                            "
-                              )
-                            ]
-                      ],
-                      2
-                    )
+                    return _c("td", [
+                      _vm._v(
+                        "\n                            \n\n                            \n                                " +
+                          _vm._s(columnValue) +
+                          "    \n                            \n                        "
+                      )
+                    ])
                   }),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      _vm.editing.id_user !== record.id_user
-                        ? _c(
-                            "a",
-                            {
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  $event.preventDefault()
-                                  _vm.edit(record)
-                                }
-                              }
-                            },
-                            [_vm._v("Editar")]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.editing.id_user === record.id_user
-                        ? [
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.update()
-                                  }
-                                }
-                              },
-                              [_vm._v("Salvar")]
-                            ),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                attrs: { href: "#" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    _vm.editing.id_user = null
-                                  }
-                                }
-                              },
-                              [_vm._v("Cancelar")]
-                            )
-                          ]
-                        : _vm._e()
-                    ],
-                    2
-                  )
+                  _c("td")
                 ],
                 2
               )

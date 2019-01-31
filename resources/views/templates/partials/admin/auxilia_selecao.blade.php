@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <auxilia-selecao endpoint="{{ route('auxilia.index') }}"></auxilia>
+      <auxilia-selecao endpoint="{{ route('auxilia.index') }}"></auxilia-selecao>
     </div>
   </div>
 </div>
