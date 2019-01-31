@@ -41,16 +41,6 @@ class AuxiliaSelecaoDataTableController extends DataTableController
         ]);
     }
 
-    public function getDisplayableColumns()
-    {
-        return array_diff($this->getDatabaseColumnNames(), $this->builder->getModel()->getHidden());
-    }
-
-    public function getUpdatableColumns()
-    {
-        return $this->getDisplayableColumns();
-    }
-
     protected function getDatabaseColumnNames()
     {
         return Schema::getColumnListing($this->builder->getModel()->getTable());
