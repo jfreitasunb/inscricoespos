@@ -7,6 +7,7 @@ use InscricoesPos\Http\Controllers\Controller;
 
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\AuxiliaSelecao;
+use InscricoesPos\Models\ProgramaPos;
 
 class AuxiliaSelecaoDataTableController extends DataTableController
 {
@@ -48,7 +49,14 @@ class AuxiliaSelecaoDataTableController extends DataTableController
 
 
     protected function getRecords(Request $request)
-    {
-        return $this->builder()->limit($request->limit)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+    {   
+        $dados_temporarios = $this->builder()->limit($request->limit)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+
+        foreach ($dados_temporarios as $dados) {
+
+            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'id_programa_pretendido' => $dados->id_candidato, 'programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos];
+        }
+
+        return $teste;
     }
 }

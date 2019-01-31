@@ -205,6 +205,7 @@
                 @yield('datatable_users')
                 @yield('ficha_individual')
                 @yield('graficos')
+                @yield('auxilia_selecao')
             </div>
         </div>
     </div>

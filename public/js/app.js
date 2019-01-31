@@ -13943,12 +13943,21 @@ window.Vue = __webpack_require__(36);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('data-table-user', __webpack_require__(39));
+// Vue.component('data-table-user', require('./components/DataTableUser.vue'));
 
-Vue.component('auxilia-selecao', __webpack_require__(55));
+// Vue.component('auxilia-selecao', require('./components/AuxiliaSelecao.vue'));
+
+// const app = new Vue({
+//     el: '#app'
+// });
+
+
+var DataTableUser = __webpack_require__(39);
+var AuxiliaSelecao = __webpack_require__(55);
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: { DataTableUser: DataTableUser, AuxiliaSelecao: AuxiliaSelecao }
 });
 
 /***/ }),

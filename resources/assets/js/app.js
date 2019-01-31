@@ -15,10 +15,19 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('data-table-user', require('./components/DataTableUser.vue'));
+// Vue.component('data-table-user', require('./components/DataTableUser.vue'));
 
-Vue.component('auxilia-selecao', require('./components/AuxiliaSelecao.vue'));
+// Vue.component('auxilia-selecao', require('./components/AuxiliaSelecao.vue'));
+
+// const app = new Vue({
+//     el: '#app'
+// });
+
+
+const DataTableUser =  require('./components/DataTableUser.vue');
+const AuxiliaSelecao = require('./components/AuxiliaSelecao.vue');
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    components: { DataTableUser, AuxiliaSelecao }
 });
