@@ -17,6 +17,8 @@ window.Vue = require('vue');
 
 Vue.component('data-table-user', require('./components/DataTableUser.vue'));
 
+Vue.component('auxilia-selecao', require('./components/AuxiliaSelecao.vue'));
+
 const app = new Vue({
     el: '#app'
 });

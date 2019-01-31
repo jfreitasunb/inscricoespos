@@ -163,6 +163,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('lista/users', '\InscricoesPos\Http\Controllers\Admin\AdministraUserController@index')->name('lista.edita.usuarios');
 
 	Route::resource('datatable/users','\InscricoesPos\Http\Controllers\DataTable\UserDataTableController');
+
+	Route::get('relatorio/auxilia/selecao', '\InscricoesPos\Http\Controllers\Admin\AuxiliaSelecaoController@index')->name('auxilia.selecao');
+
+	Route::resource('datatable/auxilia','\InscricoesPos\Http\Controllers\DataTable\AuxiliaSelecaoDataTableController');
 });
 
 

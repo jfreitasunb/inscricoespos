@@ -140,6 +140,11 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('auxilia.selecao') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('auxilia.selecao') }}">Auxilia Seleção</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>
                                     </td>
