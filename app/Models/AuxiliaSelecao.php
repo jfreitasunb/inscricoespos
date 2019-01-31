@@ -19,4 +19,12 @@ class AuxiliaSelecao extends FuncoesModels
         'desclassificado',
         'id_coordenador',
     ];
+
+
+    public function retorna_dados_auxiliares_relatorio($id_inscricao_pos, $locale)
+    {
+        $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
+
+        return $this->where('auxilia_selecao.id_inscricao_pos', $id_inscricao_pos)->where('auxilia_selecao.desclassificado', false)->join('dados_pessoais_candidato', 'dados_pessoais_candidato.id_candidato','auxilia_selecao.id_candidato')->join('users', 'users.id_user', 'auxilia_selecao.id_candidato')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'dados_pessoais_candidato.id_candidato')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('auxilia_selecao.id_candidato', 'auxilia_selecao.id_inscricao_pos','users.nome', 'users.email', 'programa_pos_mat.id_programa_pos', 'programa_pos_mat.'.$nome_coluna)->orderBy('escolhas_candidato.programa_pretendido' , 'desc')->orderBy('users.nome','asc');
+    }
 }
