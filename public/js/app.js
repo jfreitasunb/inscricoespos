@@ -49143,6 +49143,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -49225,7 +49228,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
         },
-        update: function update(record) {
+        desclassificar: function desclassificar(record) {
+
+            console.log(record);
+        },
+        naodesclassificar: function naodesclassificar(record) {
 
             console.log(record);
         }
@@ -49366,7 +49373,7 @@ var render = function() {
                   ])
                 }),
                 _vm._v(" "),
-                _c("th", [_vm._v(" ")])
+                _c("th", [_vm._v("Desclassificar?")])
               ],
               2
             )
@@ -49375,23 +49382,62 @@ var render = function() {
           _c(
             "tbody",
             _vm._l(_vm.filteredRecords, function(record) {
-              return _c(
-                "tr",
-                [
-                  _vm._l(record, function(columnValue, column) {
-                    return _c("td", [
-                      _vm._v(
-                        "\n                            \n\n                            \n                                " +
-                          _vm._s(columnValue) +
-                          "    \n                            \n                        "
-                      )
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("td")
-                ],
-                2
-              )
+              return _c("tr", [
+                _c("td", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(record.id_candidato) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(record.nome) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(record.nome_programa_pretendido) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.desclassificar(record)
+                        }
+                      }
+                    },
+                    [_vm._v("Sim")]
+                  ),
+                  _vm._v("   \n                           "),
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.naodesclassificar(record)
+                        }
+                      }
+                    },
+                    [_vm._v("Não")]
+                  ),
+                  _c("br")
+                ])
+              ])
             }),
             0
           )

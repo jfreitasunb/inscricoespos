@@ -26,20 +26,23 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>&nbsp;</th>
+                            <th>Desclassificar?</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td v-for="columnValue, column in record">
-                                
-
-                                
-                                    {{ columnValue }}    
-                                
+                            <td>
+                                {{ record.id_candidato }}
                             </td>
                             <td>
-                                
+                                {{ record.nome }}
+                            </td>
+                            <td>
+                                {{ record.nome_programa_pretendido }}
+                            </td>
+                            <td>
+                               <a href="#" @click.prevent="desclassificar(record)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="naodesclassificar(record)">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
@@ -131,7 +134,12 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            update (record) {
+            desclassificar (record) {
+
+                console.log(record)
+            },
+
+            naodesclassificar (record) {
 
                 console.log(record)
             }

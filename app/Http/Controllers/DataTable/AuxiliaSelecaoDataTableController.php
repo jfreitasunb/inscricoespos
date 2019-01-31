@@ -19,7 +19,7 @@ class AuxiliaSelecaoDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'programa_pretendido'
+            'id_candidato', 'id_inscricao_pos', 'programa_pretendido',
         ];
     }
 
@@ -72,7 +72,7 @@ class AuxiliaSelecaoDataTableController extends DataTableController
 
         foreach ($dados_temporarios as $dados) {
 
-            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr];
+            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
         }
 
         return $teste;
