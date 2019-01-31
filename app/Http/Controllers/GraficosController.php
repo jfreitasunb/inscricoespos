@@ -61,9 +61,9 @@ class GraficosController extends BaseController
 
         foreach ($programas_disponiveis as $programa) {
 
-        $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $this->locale_default);
-      
-        $contagem[$programa_para_inscricao[$programa]] = $relatorio_para_grafico->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
+            $programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $this->locale_default);
+          
+            $contagem[$programa_para_inscricao[$programa]] = $relatorio_para_grafico->ContaInscricoes($relatorio_disponivel->id_inscricao_pos, $programa);
 
         }
 
