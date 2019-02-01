@@ -49168,7 +49168,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             limit: 50,
 
-            quickSearchQuery: ''
+            quickSearchQuery: '',
+
+            desclassifica: {
+                id_candidato: null,
+                id_inscricao_pos: null,
+                programa_pretendido: null,
+                errors: []
+            }
 
         };
     },
@@ -49229,12 +49236,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
         },
         desclassificar: function desclassificar(record) {
+            var _this3 = this;
 
-            console.log(record);
-        },
-        naodesclassificar: function naodesclassificar(record) {
-
-            console.log(record);
+            this.desclassifica.id_candidato = record.id_candidato;
+            this.desclassifica.id_inscricao_pos = record.id_inscricao_pos;
+            this.desclassifica.programa_pretendido = record.id_programa_pretendido;
+            axios.patch(this.endpoint + '/' + this.desclassifica.id_candidato, this.desclassifica).then(function () {
+                _this3.getRecords().then(function () {
+                    _this3.desclassifica.id_candidato = null;
+                    _this3.desclassifica.id_inscricao_pos = null;
+                    _this3.desclassifica.programa_pretendido = null;
+                });
+            });
         }
     },
 
@@ -49429,7 +49442,6 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.naodesclassificar(record)
                         }
                       }
                     },

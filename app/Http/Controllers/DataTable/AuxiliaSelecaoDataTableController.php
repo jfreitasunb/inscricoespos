@@ -9,6 +9,8 @@ use InscricoesPos\Models\User;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\ProgramaPos;
 
+use DB;
+
 class AuxiliaSelecaoDataTableController extends DataTableController
 {
     public function builder()
@@ -68,7 +70,7 @@ class AuxiliaSelecaoDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         foreach ($dados_temporarios as $dados) {
 
@@ -76,5 +78,10 @@ class AuxiliaSelecaoDataTableController extends DataTableController
         }
 
         return $teste;
+    }
+
+    public function update($id_candidato, Request $request)
+    {   
+        DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }
