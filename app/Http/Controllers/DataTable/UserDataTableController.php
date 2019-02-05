@@ -7,6 +7,8 @@ use InscricoesPos\Http\Controllers\Controller;
 
 use InscricoesPos\Models\User;
 
+use Illuminate\Validation\Rule;
+
 class UserDataTableController extends DataTableController
 {
     public function builder()
@@ -33,8 +35,12 @@ class UserDataTableController extends DataTableController
         $this->validate($request, [
             'nome' => 'required|max:255',
             'email'  => 'required|email|max:255',
-            'locale' => 'required',
-            'user_type' => 'required',
+            'locale' => [
+                    'required', Rule::in(['en', 'es', 'pt-br'])
+                        ],
+            'user_type' => [
+                    'required', Rule::in(['coordenador', 'candidato', 'recomendante'])
+                        ],
             'ativo' => 'required',
         ]);
 
