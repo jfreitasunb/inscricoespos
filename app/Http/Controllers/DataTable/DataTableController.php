@@ -39,6 +39,11 @@ abstract class DataTableController extends BaseController
         ]);
     }
 
+
+    public function update(Request $request)
+    {
+
+    }
     public function getDisplayableColumns()
     {
         return array_diff($this->getDatabaseColumnNames(), $this->builder->getModel()->getHidden());
