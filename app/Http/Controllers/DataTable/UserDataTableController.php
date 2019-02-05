@@ -27,4 +27,17 @@ class UserDataTableController extends DataTableController
             'nome', 'email', 'locale', 'user_type', 'ativo'
         ];
     }
+
+    public function update($id_user, Request $request)
+    {
+        $this->validate($request, [
+            'nome' => 'required|max:255',
+            'email'  => 'required|unique:users|email|max:255',
+            'locale' => 'required',
+            'user_type' => 'required',
+            'ativo' => 'required',
+        ]);
+
+        $this->builder->find($id_user)->update($request->only($this->getUpdatableColumns()));
+    }
 }
