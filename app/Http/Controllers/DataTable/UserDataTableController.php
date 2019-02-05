@@ -32,7 +32,7 @@ class UserDataTableController extends DataTableController
     {
         $this->validate($request, [
             'nome' => 'required|max:255',
-            'email'  => 'required|unique:users|email|max:255',
+            'email'  => 'required|email|max:255',
             'locale' => 'required',
             'user_type' => 'required',
             'ativo' => 'required',
