@@ -40,10 +40,11 @@ abstract class DataTableController extends BaseController
     }
 
 
-    public function update(Request $request)
+    public function update($id_user, Request $request)
     {
-
+        $this->builder->find($id_user)->update($request->only($this->getUpdatableColumns()));
     }
+
     public function getDisplayableColumns()
     {
         return array_diff($this->getDatabaseColumnNames(), $this->builder->getModel()->getHidden());
