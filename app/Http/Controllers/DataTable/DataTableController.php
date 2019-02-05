@@ -72,15 +72,32 @@ abstract class DataTableController extends BaseController
 
         if ($this->hasSearchQuery($request)) {
             
-            $builder = $builder;
+            $builder = $this->buildSearch($builder, $request);
 
         }
-        
-        return $this->builder()->limit($request->limit)->orderBy('id_user')->get($this->getDisplayableColumns());
+
+        return $builder->limit($request->limit)->orderBy('id_user')->get($this->getDisplayableColumns());
     }
 
     protected function hasSearchQuery(Request $request)
     {
         return count(array_filter($request->only(['column', 'operator', 'value']))) == 3;
+    }
+
+    protected function buildSearch(Builder $builder, Request $request)
+    {
+        $queryParts = $this->resolveQueryParts($request->operator, $request->value);
+
+        return $builder->where($request->column, $queryParts['operator'], $queryParts['value']);
+    }
+
+    protected function resolveQueryParts($operator, $value)
+    {
+        return array_get([
+            'equals' => [
+                'operator' => '=',
+                'value' => $value
+            ]
+        ], $operator);
     }
 }
