@@ -31,13 +31,13 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td>
+                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
                                 {{ record.id_candidato }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
                                 {{ record.nome }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
