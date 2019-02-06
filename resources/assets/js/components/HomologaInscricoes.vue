@@ -32,7 +32,7 @@
                     <tbody>
                         <tr v-for="record in filteredRecords">
                             <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
-                                {{ record.id_candidato }}
+                                {{ record.id }}
                             </td>
                             <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
                                 {{ record.nome }}
@@ -72,7 +72,7 @@
                     order: 'asc'
                 },
 
-                limit: 50,
+                limit: '',
 
                 quickSearchQuery: '',
 
