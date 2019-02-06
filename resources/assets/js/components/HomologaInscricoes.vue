@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Tela de desclassificação de candidatos</div>
+        <div class="panel-heading">Tela de Homologação da Inscrições</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
@@ -26,7 +26,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Desclassificar?</th>
+                            <th>Homologar?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +41,8 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="desclassificar(record)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="">Não</a><br>
+                               <a href="#" @click.prevent="homologar_inscricao(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="homologar_inscricao(record, 0)">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
