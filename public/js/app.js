@@ -14611,10 +14611,11 @@ window.Vue = __webpack_require__(40);
 
 var DataTableUser = __webpack_require__(43);
 var AuxiliaSelecao = __webpack_require__(51);
+var HomologaInscricoes = __webpack_require__(60);
 
 var app = new Vue({
   el: '#app',
-  components: { DataTableUser: DataTableUser, AuxiliaSelecao: AuxiliaSelecao }
+  components: { DataTableUser: DataTableUser, AuxiliaSelecao: AuxiliaSelecao, HomologaInscricoes: HomologaInscricoes }
 });
 
 /***/ }),
@@ -48541,6 +48542,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -48883,7 +48889,29 @@ var render = function() {
                     }
                   }
                 },
-                [_c("option", { attrs: { value: "equals" } }, [_vm._v("=")])]
+                [
+                  _c("option", { attrs: { value: "equals" } }, [_vm._v("=")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "contains" } }, [
+                    _vm._v("Contém")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "starts_with" } }, [
+                    _vm._v("Começa com")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ends_with" } }, [
+                    _vm._v("Termina com")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "greater_than" } }, [
+                    _vm._v("Maio que")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "less_than" } }, [
+                    _vm._v("Menor que")
+                  ])
+                ]
               )
             ]),
             _vm._v(" "),
@@ -49015,7 +49043,11 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v(_vm._s(column))]
+                      [
+                        _vm._v(
+                          _vm._s(_vm.response.custom_columns[column] || column)
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _vm.sort.key === column
@@ -49684,6 +49716,515 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(61)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(63)
+/* template */
+var __vue_template__ = __webpack_require__(64)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/HomologaInscricoes.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0352c663", Component.options)
+  } else {
+    hotAPI.reload("data-v-0352c663", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(62);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("24efebc8", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0352c663\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./HomologaInscricoes.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0352c663\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./HomologaInscricoes.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.sortable {\n  cursor: pointer;\n}\n.arrow {\n  display: inline-block;\n  vertical-align: middle;\n  width: 0;\n  height: 0;\n  margin-left: 5px;\n  opacity: .6;\n}\n.arrow--asc {\n    border-left: 4px solid transparent;\n    border-right: 4px solid transparent;\n    border-bottom: 4px solid #222;\n}\n.arrow--desc {\n    border-left: 4px solid transparent;\n    border-right: 4px solid transparent;\n    border-top: 4px solid #222;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_query_string__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_query_string___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_query_string__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['endpoint'],
+    data: function data() {
+        return {
+            response: {
+                table: '',
+                displayable: [],
+                visivel: [],
+                records: []
+            },
+
+            sort: {
+                key: 'id_candidato',
+                order: 'asc'
+            },
+
+            limit: '',
+
+            quickSearchQuery: '',
+
+            homologa: {
+                id_candidato: null,
+                id_inscricao_pos: null,
+                programa_pretendido: null,
+                status: null,
+                errors: []
+            }
+
+        };
+    },
+
+
+    computed: {
+        filteredRecords: function filteredRecords() {
+            var _this = this;
+
+            var data = this.response.records;
+
+            data = data.filter(function (row) {
+
+                return Object.keys(row).some(function (key) {
+
+                    return String(row[key]).toLowerCase().indexOf(_this.quickSearchQuery.toLowerCase()) > -1;
+                });
+            });
+
+            if (this.sort.key) {
+
+                data = _.orderBy(data, function (i) {
+
+                    var value = i[_this.sort.key];
+
+                    if (!isNaN(parseFloat(value))) {
+
+                        return parseFloat(value);
+                    }
+
+                    return String(i[_this.sort.key]).toLowerCase();
+                }, this.sort.order);
+            }
+
+            return data;
+        }
+    },
+
+    methods: {
+        getRecords: function getRecords() {
+            var _this2 = this;
+
+            return axios.get(this.endpoint + '?' + this.getQueryParameters()).then(function (response) {
+                _this2.response = response.data.data;
+            });
+        },
+        getQueryParameters: function getQueryParameters() {
+
+            return __WEBPACK_IMPORTED_MODULE_0_query_string___default.a.stringify({
+
+                limit: this.limit
+            });
+        },
+        sortBy: function sortBy(column) {
+
+            this.sort.key = column;
+
+            this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
+        },
+        homologar: function homologar(record, status) {
+            var _this3 = this;
+
+            this.homologa.id_candidato = record.id_candidato;
+            this.homologa.id_inscricao_pos = record.id_inscricao_pos;
+            this.homologa.programa_pretendido = record.id_programa_pretendido;
+            this.homologa.status = status;
+            axios.patch(this.endpoint + '/' + this.homologa.id_candidato, this.homologa).then(function () {
+                _this3.getRecords().then(function () {
+                    _this3.homologa.id_candidato = null;
+                    _this3.homologa.id_inscricao_pos = null;
+                    _this3.homologa.programa_pretendido = null;
+                    _this3.homologa.status = null;
+                });
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.getRecords();
+    }
+});
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel panel-default" }, [
+    _c("div", { staticClass: "panel-heading" }, [
+      _vm._v("Tela de Homologação da Inscrições")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "form-group col-md-10" }, [
+          _c("label", { attrs: { for: "filter" } }, [
+            _vm._v("Pesquisa rápida")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.quickSearchQuery,
+                expression: "quickSearchQuery"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", id: "filter" },
+            domProps: { value: _vm.quickSearchQuery },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.quickSearchQuery = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-2" }, [
+          _c("label", { attrs: { id: "limit" } }, [
+            _vm._v("Limitar resultados à:")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.limit,
+                  expression: "limit"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "limit" },
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.limit = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  _vm.getRecords
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1000" } }, [_vm._v("1000")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "" } }, [_vm._v("Todos")])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "table-responsive" }, [
+        _c("table", { staticClass: "table table-hover" }, [
+          _c("thead", [
+            _c(
+              "tr",
+              [
+                _vm._l(_vm.response.visivel, function(column) {
+                  return _c("th", [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "sortable",
+                        on: {
+                          click: function($event) {
+                            _vm.sortBy(column)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.response.custom_columns[column] || column)
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.sort.key === column
+                      ? _c("div", {
+                          staticClass: "arrow",
+                          class: {
+                            "arrow--asc": _vm.sort.order === "asc",
+                            "arrow--desc": _vm.sort.order === "desc"
+                          }
+                        })
+                      : _vm._e()
+                  ])
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v("Homologar?")])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.filteredRecords, function(record) {
+              return _c("tr", [
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.foi_homologado === true,
+                      carta_incompleta: record.foi_homologado == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.id) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.foi_homologado === true,
+                      carta_incompleta: record.foi_homologado == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.nome) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.foi_homologado === true,
+                      carta_incompleta: record.foi_homologado == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.nome_programa_pretendido) +
+                        "\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.homologar(record, 1)
+                        }
+                      }
+                    },
+                    [_vm._v("Sim")]
+                  ),
+                  _vm._v("   \n                           "),
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.homologar(record, 0)
+                        }
+                      }
+                    },
+                    [_vm._v("Não")]
+                  ),
+                  _c("br")
+                ])
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0352c663", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
