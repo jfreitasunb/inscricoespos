@@ -49,7 +49,7 @@ class HomologaInscricoesController extends CoordenadorController
 
         if ($relatorio->autoriza_homologacao()){
 
-            return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));    
+            return view('templates.partials.coordenador.homologa_inscricoes');    
         }else{
             notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
                 'timer' => 3000,
