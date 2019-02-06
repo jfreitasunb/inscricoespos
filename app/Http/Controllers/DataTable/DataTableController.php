@@ -36,6 +36,7 @@ abstract class DataTableController extends BaseController
                 'table' => $this->builder->getModel()->getTable(),
                 'displayable' => array_values($this->getDisplayableColumns()),
                 'updatable' => $this->getUpdatableColumns(),
+                'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
             ]
         ]);

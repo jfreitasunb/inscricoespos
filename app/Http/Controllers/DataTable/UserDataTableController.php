@@ -30,6 +30,18 @@ class UserDataTableController extends DataTableController
         ];
     }
 
+    public function getCustomColumnNanes()
+    {
+        return [
+            'id_user' => 'Identificador',
+            'nome' => 'Nome',
+            'email' => 'E-mail',
+            'locale' => 'Idioma',
+            'user_type' => 'Tipo de Usuário',
+            'ativo' => 'Ativo',
+        ];
+    }
+
     public function update($id_user, Request $request)
     {
         $this->validate($request, [
