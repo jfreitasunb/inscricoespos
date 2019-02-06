@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <homologa-inscricoes endpoint="{{ route('homologa.inscricoes') }}"></homologa-inscricoes>
+      <homologa-inscricoes endpoint="{{ route('homologa.index') }}"></homologa-inscricoes>
     </div>
   </div>
 </div>
