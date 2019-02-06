@@ -31,7 +31,7 @@ class HomologaInscricoesDataTableController extends DataTableController
     public function getVisibleColumns()
     {
         return [
-            'id_candidato', 'nome', 'nome_programa_pretendido'
+            'id', 'nome', 'nome_programa_pretendido'
         ];
     }
 
@@ -45,6 +45,7 @@ class HomologaInscricoesDataTableController extends DataTableController
     public function getCustomColumnNanes()
     {
         return [
+            'id' => 'Inscrição',
             'id_candidato' => 'Identificador',
             'nome' => 'Nome',
             'nome_programa_pretendido' => 'Programa desejado'
@@ -80,6 +81,7 @@ class HomologaInscricoesDataTableController extends DataTableController
 
         $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
+        $i = 1;
         foreach ($dados_temporarios as $dados) {
 
             $escolha = new EscolhaCandidato();
@@ -91,10 +93,12 @@ class HomologaInscricoesDataTableController extends DataTableController
             $ja_homologou = $homologa->retorna_se_foi_homologado($dados->id_candidato, $id_inscricao_pos);
 
             if (is_null($ja_homologou)) {
-                $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
+                $teste[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
             }else{
-                $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
+                $teste[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
             }
+
+            $i++;
         }
 
         return $teste;
