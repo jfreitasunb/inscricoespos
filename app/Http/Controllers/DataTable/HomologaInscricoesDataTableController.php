@@ -54,6 +54,20 @@ class HomologaInscricoesDataTableController extends DataTableController
 
     public function index(Request $request)
     {   
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+        
+        $finalizadas = new FinalizaInscricao();
+
+        $total_inscritos = $finalizadas->retorna_total_inscricoes_finalizadas($id_inscricao_pos);
+
+        $homologa = new HomologaInscricoes();
+
+        $total_homologados =  $homologa->retorna_total_inscricoes_homologadas($id_inscricao_pos);
+
         return response()->json([
             'data' => [
                 'table' => $this->builder->getModel()->getTable(),
@@ -61,6 +75,8 @@ class HomologaInscricoesDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
+                'total_inscritos' => $total_inscritos,
+                'total_homologados' => $total_homologados,
             ]
         ]);
     }
@@ -82,6 +98,7 @@ class HomologaInscricoesDataTableController extends DataTableController
         $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         $i = 1;
+
         foreach ($dados_temporarios as $dados) {
 
             $escolha = new EscolhaCandidato();

@@ -98,4 +98,9 @@ class FinalizaInscricao extends FuncoesModels
     {
         return $this->select('finalizada')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->value('finalizada');
     }
+
+    public function retorna_total_inscricoes_finalizadas($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos',$id_inscricao_pos)->where('finalizada', TRUE)->count();
+    }
 }

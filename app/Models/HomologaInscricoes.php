@@ -30,6 +30,11 @@ class HomologaInscricoes extends FuncoesModels
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('homologada', 'True')->get();
     }
 
+    public function retorna_total_inscricoes_homologadas($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->count();
+    }
+
     public function retorna_dados_homologados($id_inscricao_pos, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
