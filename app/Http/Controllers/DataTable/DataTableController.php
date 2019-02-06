@@ -9,6 +9,8 @@ use InscricoesPos\Http\Controllers\BaseController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Database\QueryException;
+
 abstract class DataTableController extends BaseController
 {
     protected $builder;
@@ -76,7 +78,12 @@ abstract class DataTableController extends BaseController
 
         }
 
-        return $builder->limit($request->limit)->orderBy('id_user')->get($this->getDisplayableColumns());
+        try {
+            return $builder->limit($request->limit)->orderBy('id_user')->get($this->getDisplayableColumns());
+        } catch (QueryException $e) {
+            return [];
+        }
+        
     }
 
     protected function hasSearchQuery(Request $request)
