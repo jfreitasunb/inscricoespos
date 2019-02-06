@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th v-for="column in response.visivel">
@@ -41,8 +41,8 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="homologar_inscricao(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="homologar_inscricao(record, 0)">Não</a><br>
+                               <a href="#" @click.prevent="homologar(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="homologar(record, 0)">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
@@ -76,10 +76,11 @@
 
                 quickSearchQuery: '',
 
-                desclassifica: {
+                homologa: {
                     id_candidato: null,
                     id_inscricao_pos: null,
                     programa_pretendido: null,
+                    status: null,
                     errors: []
                 }
 
@@ -141,15 +142,17 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            desclassificar (record) {
-                this.desclassifica.id_candidato = record.id_candidato
-                this.desclassifica.id_inscricao_pos = record.id_inscricao_pos
-                this.desclassifica.programa_pretendido = record.id_programa_pretendido
-                axios.patch(`${this.endpoint}/${this.desclassifica.id_candidato}`, this.desclassifica).then(() =>{
+            homologar (record, status) {
+                this.homologa.id_candidato = record.id_candidato
+                this.homologa.id_inscricao_pos = record.id_inscricao_pos
+                this.homologa.programa_pretendido = record.id_programa_pretendido
+                this.homologa.status = status
+                axios.patch(`${this.endpoint}/${this.homologa.id_candidato}`, this.homologa).then(() =>{
                     this.getRecords().then(() => {
-                        this.desclassifica.id_candidato = null
-                        this.desclassifica.id_inscricao_pos = null
-                        this.desclassifica.programa_pretendido = null
+                        this.homologa.id_candidato = null
+                        this.homologa.id_inscricao_pos = null
+                        this.homologa.programa_pretendido = null
+                        this.homologa.status = null
                     })
                 })
             }
