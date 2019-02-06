@@ -86,7 +86,15 @@ class HomologaInscricoesDataTableController extends DataTableController
 
             $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
 
-            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido];
+            $homologa = new HomologaInscricoes();
+
+            $ja_homologou = $homologa->retorna_se_foi_homologado($dados->id_candidato, $id_inscricao_pos);
+
+            if (is_null($ja_homologou)) {
+                $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
+            }else{
+                $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
+            }
         }
 
         return $teste;
@@ -114,7 +122,5 @@ class HomologaInscricoesDataTableController extends DataTableController
         }else{
             DB::table('homologa_inscricoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['homologada' => $request->status, 'updated_at' => date('Y-m-d H:i:s')]);
         }
-
-        // DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }
