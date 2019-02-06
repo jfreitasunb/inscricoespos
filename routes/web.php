@@ -170,7 +170,7 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@index')->name('homologa.inscricoes');
 
-	Route::resource('datatable/homologa/inscricoes','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
+	Route::resource('datatable/homologa','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
 });
 
 
