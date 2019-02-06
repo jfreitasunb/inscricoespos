@@ -37,6 +37,28 @@ use URL;
 class HomologaInscricoesController extends CoordenadorController
 {
 
+    public function index()
+    {
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $finalizacoes = new FinalizaInscricao;
+
+        if ($relatorio->autoriza_homologacao()){
+
+            return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));    
+        }else{
+            notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
+                'timer' => 3000,
+            ]);
+
+            return redirect()->back();
+        }
+    }
+
 	public function getHomologarInscritos()
 	{
 		
