@@ -4,10 +4,13 @@ namespace InscricoesPos\Http\Controllers\DataTable;
 
 use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
-
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\HomologaInscricoes;
+use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\EscolhaCandidato;
 
 use DB;
 
@@ -15,13 +18,13 @@ class HomologaInscricoesDataTableController extends DataTableController
 {
     public function builder()
     {
-        return AuxiliaSelecao::query();
+        return FinalizaInscricao::query();
     }
 
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'programa_pretendido',
+            'id_candidato', 'id_inscricao_pos', 'finalizada',
         ];
     }
 
@@ -32,12 +35,12 @@ class HomologaInscricoesDataTableController extends DataTableController
         ];
     }
 
-    public function getUpdatableColumns()
-    {
-        return [
-            'desclassificado'
-        ];
-    }
+    // public function getUpdatableColumns()
+    // {
+    //     return [
+    //         'desclassificado'
+    //     ];
+    // }
 
     public function getCustomColumnNanes()
     {
@@ -56,7 +59,6 @@ class HomologaInscricoesDataTableController extends DataTableController
                 'displayable' => array_values($this->getDisplayableColumns()),
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
-                'updatable' => $this->getUpdatableColumns(),
                 'records' => $this->getRecords($request),
             ]
         ]);
@@ -70,11 +72,21 @@ class HomologaInscricoesDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         foreach ($dados_temporarios as $dados) {
 
-            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
+            $escolha = new EscolhaCandidato();
+
+            $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
+
+            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido];
         }
 
         return $teste;
@@ -82,6 +94,27 @@ class HomologaInscricoesDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
-        DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
+        
+        $homologa = new HomologaInscricoes();
+
+        $ja_homologou = $homologa->retorna_se_foi_homologado($id_candidato, $request->id_inscricao_pos);
+
+        if (is_null($ja_homologou)) {
+            $homologa->id_candidato = $request->id_candidato;
+
+            $homologa->id_inscricao_pos = $request->id_inscricao_pos;
+
+            $homologa->programa_pretendido = $request->programa_pretendido;
+
+            $homologa->homologada = $request->status;
+
+            $homologa->id_coordenador = 1;
+
+            $homologa->save();
+        }else{
+            DB::table('homologa_inscricoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['homologada' => $request->status, 'updated_at' => date('Y-m-d H:i:s')]);
+        }
+
+        // DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }
