@@ -12,6 +12,7 @@ use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\EscolhaCandidato;
 
+use Auth;
 use DB;
 
 class HomologaInscricoesDataTableController extends DataTableController
@@ -123,7 +124,10 @@ class HomologaInscricoesDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
-        
+        $user = Auth::user();
+
+        $id_user = $user->id_user;
+
         $homologa = new HomologaInscricoes();
 
         $ja_homologou = $homologa->retorna_se_foi_homologado($id_candidato, $request->id_inscricao_pos);
@@ -137,7 +141,7 @@ class HomologaInscricoesDataTableController extends DataTableController
 
             $homologa->homologada = $request->status;
 
-            $homologa->id_coordenador = 1;
+            $homologa->id_coordenador = $id_user;
 
             $homologa->save();
         }else{
