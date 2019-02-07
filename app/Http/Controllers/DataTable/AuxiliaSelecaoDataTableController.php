@@ -72,12 +72,16 @@ class AuxiliaSelecaoDataTableController extends DataTableController
     {   
         $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
-        foreach ($dados_temporarios as $dados) {
+        if (sizeof($dados_temporarios) > 0) {
+            foreach ($dados_temporarios as $dados) {
 
-            $teste[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
+            }
+        }else{
+            $dados_vue = [];
         }
-
-        return $teste;
+        
+        return $dados_vue;
     }
 
     public function update($id_candidato, Request $request)
