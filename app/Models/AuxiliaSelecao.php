@@ -26,6 +26,11 @@ class AuxiliaSelecao extends FuncoesModels
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('desclassificado', false)->get();
     }
 
+    public function retorna_presenca_tabela_inscricoes_auxiliares($id_inscricao_pos, $id_candidato)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->count();
+    }
+
     public function retorna_dados_auxiliares_relatorio($id_inscricao_pos, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
