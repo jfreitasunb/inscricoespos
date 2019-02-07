@@ -1,4 +1,4 @@
-<template>    
+<template>
     <div class="panel panel-default">
         <div class="panel-heading">Tela de Homologação da Inscrições</div>
         <div class="panel-body">
@@ -15,6 +15,11 @@
                         <option value="1000">1000</option>
                         <option value="">Todos</option>
                     </select>
+                </div>
+                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos !== response.total_homologados">
+                    <form action="#" @submit.prevent="getPDFHomologacao()">
+                        <button type="submit" class="btn btn-success">Gerar Arquivo de Homologação</button>    
+                    </form>
                 </div>
             </div>
             <div class="table-responsive">
@@ -64,6 +69,8 @@
                     table: '',
                     displayable: [],
                     visivel: [],
+                    total_inscritos: null,
+                    total_homologados: 0,
                     records: []
                 },
 
@@ -155,6 +162,10 @@
                         this.homologa.status = null
                     })
                 })
+            },
+
+            getPDFHomologacao(){
+                axios.patch(`${this.endpoint}/${this.response.id_inscricao_pos}`)
             }
         },
 

@@ -78,6 +78,7 @@ class HomologaInscricoesDataTableController extends DataTableController
                 'records' => $this->getRecords($request),
                 'total_inscritos' => $total_inscritos,
                 'total_homologados' => $total_homologados,
+                'id_inscricao_pos' => $id_inscricao_pos
             ]
         ]);
     }
@@ -174,5 +175,10 @@ class HomologaInscricoesDataTableController extends DataTableController
 
             $auxilia_selecao->save();
         }
+    }
+
+    public function show($id_inscricao_pos)
+    {
+        dd($id_inscricao_pos);
     }
 }
