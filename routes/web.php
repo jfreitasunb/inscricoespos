@@ -167,10 +167,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('relatorio/auxilia/selecao', '\InscricoesPos\Http\Controllers\Admin\AuxiliaSelecaoController@index')->name('auxilia.selecao');
 
 	Route::resource('datatable/auxilia','\InscricoesPos\Http\Controllers\DataTable\AuxiliaSelecaoDataTableController');
-
-	Route::get('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@index')->name('homologa.inscricoes');
-
-	Route::resource('datatable/homologa','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
 });
 
 
@@ -232,6 +228,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 
 	Route::post('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
+
+	Route::get('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@index')->name('homologa.inscricoes');
+
+	Route::resource('datatable/homologa','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
 });
 
 
