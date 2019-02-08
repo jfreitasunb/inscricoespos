@@ -116,6 +116,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('pdf.homologa.inscricoes') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('pdf.homologa.inscricoes') }}">PDF com Homologações</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('seleciona.candidatos') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('seleciona.candidatos') }}">Candidatos Selecionados</a>
                                     </td>

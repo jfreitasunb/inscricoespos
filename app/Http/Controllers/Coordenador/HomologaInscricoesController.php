@@ -30,7 +30,7 @@ use InscricoesPos\Http\Controllers\RelatorioController;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use UrlSigner;
 use URL;
-
+use Response;
 /**
 * Classe para visualização da página inicial.
 */
@@ -100,7 +100,7 @@ class HomologaInscricoesController extends CoordenadorController
 
     public function postHomologarInscritos()
     {
-        dd("aqui");
+
         $user = Auth::user();
 
         $id_user = $user->id_user;
@@ -116,6 +116,10 @@ class HomologaInscricoesController extends CoordenadorController
         $relatorio = new ConfiguraInscricaoPos();
 
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $edital = $relatorio_disponivel->edital;
+
+        $local_arquivo_homologacoes = storage_path("app/public/relatorios/edital_".$edital."/");
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
@@ -228,7 +232,9 @@ class HomologaInscricoesController extends CoordenadorController
         //     'timer' => 2000,
         // ]);
 
-        return $pdf->download($nome_arquivo_homologacao);
+        $pdf->save($local_arquivo_homologacoes.$nome_arquivo_homologacao);
+
+        return Response::download($local_arquivo_homologacoes.$nome_arquivo_homologacao, $nome_arquivo_homologacao);
         
     }
 }

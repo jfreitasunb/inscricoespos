@@ -16,11 +16,6 @@
                         <option value="">Todos</option>
                     </select>
                 </div>
-                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos !== response.total_homologados">
-                    <form action="#" @submit.prevent="getPDFHomologacao()">
-                        <button type="submit" class="btn btn-success">Gerar Arquivo de Homologação</button>    
-                    </form>
-                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -163,10 +158,6 @@
                     })
                 })
             },
-
-            getPDFHomologacao(){
-                axios.patch(`${this.endpoint}/${this.response.id_inscricao_pos}`)
-            }
         },
 
         mounted () {

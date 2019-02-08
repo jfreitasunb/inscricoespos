@@ -49864,11 +49864,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -49976,9 +49971,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this3.homologa.status = null;
                 });
             });
-        },
-        getPDFHomologacao: function getPDFHomologacao() {
-            axios.patch(this.endpoint + '/' + this.response.id_inscricao_pos);
         }
     },
 
@@ -50077,34 +50069,7 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Todos")])
             ]
           )
-        ]),
-        _vm._v(" "),
-        _vm.response.total_inscritos !== _vm.response.total_homologados
-          ? _c("div", { staticClass: "col-md-offset-3 col-md-6" }, [
-              _c(
-                "form",
-                {
-                  attrs: { action: "#" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      _vm.getPDFHomologacao()
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Gerar Arquivo de Homologação")]
-                  )
-                ]
-              )
-            ])
-          : _vm._e()
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "table-responsive" }, [
