@@ -77,6 +77,8 @@ class HomologaInscricoesDataTableController extends DataTableController
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
                 'total_inscritos' => $total_inscritos,
+                'total_homologados' => $total_homologados,
+                'id_inscricao_pos' => $id_inscricao_pos
             ]
         ]);
     }

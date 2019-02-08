@@ -49864,12 +49864,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['endpoint'],
+    props: ['endpoint', 'route'],
     data: function data() {
         return {
             response: {
@@ -50069,7 +50072,25 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Todos")])
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _vm.response.total_inscritos == _vm.response.total_homologados
+          ? _c("div", { staticClass: "col-md-offset-3 col-md-6" }, [
+              _c(
+                "a",
+                {
+                  staticStyle: { "font-size": "30px" },
+                  attrs: { href: this.route }
+                },
+                [
+                  _c("span", {
+                    staticClass: "glyphicon glyphicon-download-alt"
+                  }),
+                  _vm._v(" Download do PDF com as Homologações")
+                ]
+              )
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "table-responsive" }, [

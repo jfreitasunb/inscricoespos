@@ -16,6 +16,9 @@
                         <option value="">Todos</option>
                     </select>
                 </div>
+                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos == response.total_homologados">
+                    <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download do PDF com as Homologações</a>
+                </div>
             </div>
             <div class="table-responsive">
                 <table class="table table-hover">
@@ -57,7 +60,7 @@
     import queryString from 'query-string'
 
     export default {
-        props: ['endpoint'],
+        props: ['endpoint', 'route'],
         data () {
             return {
                 response: {
