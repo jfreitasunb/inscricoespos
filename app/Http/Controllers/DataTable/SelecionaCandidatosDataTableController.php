@@ -11,6 +11,7 @@ use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\EscolhaCandidato;
+use InscricoesPos\Models\CandidatosSelecionados;
 
 use Auth;
 use DB;
@@ -19,13 +20,13 @@ class SelecionaCandidatosDataTableController extends DataTableController
 {
     public function builder()
     {
-        return FinalizaInscricao::query();
+        return CandidatosSelecionados::query();
     }
 
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'finalizada',
+            'id_candidato', 'id_inscricao_pos', 'selecionado', 'classificacao'
         ];
     }
 
