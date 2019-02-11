@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover table-striped">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th v-for="column in response.visivel">
@@ -35,16 +35,16 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td>
+                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 {{ record.id }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 {{ record.nome }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 {{ record.nome_programa_pretendido }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 <div class="form-group row">
                                     <div class="col-3">
                                         <input type="text" v-model="seleciona.classificacao[record.id_candidato]">
