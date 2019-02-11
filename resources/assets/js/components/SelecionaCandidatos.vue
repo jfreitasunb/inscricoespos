@@ -29,7 +29,8 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Homologar?</th>
+                            <th>Candidato Selecionado?</th>
+                            <th>Classificacao</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,8 +45,11 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="homologar(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="homologar(record, 0)">Não</a><br>
+                               <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
+                            </td>
+                            <td>
+                               <input type="text" class="form-control" v-model="seleciona.classificacao[record.id_candidato]">
                             </td>
                         </tr>
                     </tbody>
@@ -81,11 +85,13 @@
 
                 quickSearchQuery: '',
 
-                homologa: {
+                seleciona: {
                     id_candidato: null,
                     id_inscricao_pos: null,
                     programa_pretendido: null,
                     status: null,
+                    classificacao: [],
+                    colocacao: null,
                     errors: []
                 }
 
@@ -147,17 +153,20 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            homologar (record, status) {
-                this.homologa.id_candidato = record.id_candidato
-                this.homologa.id_inscricao_pos = record.id_inscricao_pos
-                this.homologa.programa_pretendido = record.id_programa_pretendido
-                this.homologa.status = status
-                axios.patch(`${this.endpoint}/${this.homologa.id_candidato}`, this.homologa).then(() =>{
+            selecionarcandidato (record, status) {
+                this.seleciona.id_candidato = record.id_candidato
+                this.seleciona.id_inscricao_pos = record.id_inscricao_pos
+                this.seleciona.programa_pretendido = record.id_programa_pretendido
+                this.seleciona.status = status
+                this.seleciona.colocacao = this.seleciona.classificacao[record.id_candidato]
+                axios.patch(`${this.endpoint}/${this.seleciona.id_candidato}`, this.seleciona).then(() =>{
                     this.getRecords().then(() => {
-                        this.homologa.id_candidato = null
-                        this.homologa.id_inscricao_pos = null
-                        this.homologa.programa_pretendido = null
-                        this.homologa.status = null
+                        this.seleciona.id_candidato = null
+                        this.seleciona.id_inscricao_pos = null
+                        this.seleciona.programa_pretendido = null
+                        this.seleciona.status = null
+                        this.seleciona.classificacao = []
+                        this.seleciona.colocacao = null
                     })
                 })
             },
