@@ -29,8 +29,8 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Candidato Selecionado?</th>
                             <th>Classificacao</th>
+                            <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,11 +45,15 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <input type="text" v-model="seleciona.classificacao[record.id_candidato]">
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                               <input type="text" class="form-control" v-model="seleciona.classificacao[record.id_candidato]">
+                               <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
