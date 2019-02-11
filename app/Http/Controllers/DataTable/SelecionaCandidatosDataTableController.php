@@ -26,7 +26,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'homologada'
+            'id_candidato', 'id_inscricao_pos'
         ];
     }
 
@@ -50,7 +50,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
             'id' => 'Inscrição',
             'id_candidato' => 'Identificador',
             'nome' => 'Nome',
-            'nome_programa_pretendido' => 'Programa desejado'
+            'nome_programa_pretendido' => 'Programa desejado',
         ];
     }
 
@@ -135,47 +135,49 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
         $id_user = $user->id_user;
 
-        $homologa = new HomologaInscricoes();
+        $selecionado = new CandidatosSelecionados();
 
         $id_inscricao_pos = $request->id_inscricao_pos;
 
-        $ja_homologou = $homologa->retorna_se_foi_homologado($id_candidato, $id_inscricao_pos);
+        $ja_foi_selecionado = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
-        if (is_null($ja_homologou)) {
-            $homologa->id_candidato = $request->id_candidato;
+        if (is_null($ja_foi_selecionado)) {
+            $selecionado->id_candidato = $request->id_candidato;
 
-            $homologa->id_inscricao_pos = $id_inscricao_pos;
+            $selecionado->id_inscricao_pos = $id_inscricao_pos;
 
-            $homologa->programa_pretendido = $request->programa_pretendido;
+            $selecionado->programa_pretendido = $request->programa_pretendido;
 
-            $homologa->homologada = $request->status;
+            $selecionado->selecionado = $request->status;
 
-            $homologa->id_coordenador = $id_user;
+            $selecionado->classificacao = $request->colocacao;
 
-            $homologa->save();
+            $selecionado->id_coordenador = $id_user;
+
+            $selecionado->save();
         }else{
-            DB::table('homologa_inscricoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['homologada' => $request->status, 'updated_at' => date('Y-m-d H:i:s')]);
+            DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $request->colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
         }
 
-        $auxilia_selecao = new AuxiliaSelecao();
+        // $auxilia_selecao = new AuxiliaSelecao();
 
-        $esta_presente = $auxilia_selecao->retorna_presenca_tabela_inscricoes_auxiliares($id_inscricao_pos, $id_candidato);
+        // $esta_presente = $auxilia_selecao->retorna_presenca_tabela_inscricoes_auxiliares($id_inscricao_pos, $id_candidato);
 
-        if ($esta_presente > 0) {
-            DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => !($request->status), 'updated_at' => date('Y-m-d H:i:s')]);
-        }else{
-            $auxilia_selecao->id_candidato = $id_candidato;
+        // if ($esta_presente > 0) {
+        //     DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => !($request->status), 'updated_at' => date('Y-m-d H:i:s')]);
+        // }else{
+        //     $auxilia_selecao->id_candidato = $id_candidato;
 
-            $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
+        //     $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
 
-            $auxilia_selecao->programa_pretendido = $request->programa_pretendido;
+        //     $auxilia_selecao->programa_pretendido = $request->programa_pretendido;
 
-            $auxilia_selecao->desclassificado = !($request->status);
+        //     $auxilia_selecao->desclassificado = !($request->status);
 
-            $auxilia_selecao->id_coordenador = $id_user;
+        //     $auxilia_selecao->id_coordenador = $id_user;
 
-            $auxilia_selecao->save();
-        }
+        //     $auxilia_selecao->save();
+        // }
     }
 
     public function show($id_inscricao_pos)
