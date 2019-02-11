@@ -26,14 +26,14 @@ class SelecionaCandidatosDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos'
+            'id_candidato', 'id_inscricao_pos',
         ];
     }
 
     public function getVisibleColumns()
     {
         return [
-            'id', 'nome', 'nome_programa_pretendido'
+            'id', 'nome', 'nome_programa_pretendido', 'classificacao'
         ];
     }
 
@@ -50,7 +50,8 @@ class SelecionaCandidatosDataTableController extends DataTableController
             'id' => 'Inscrição',
             'id_candidato' => 'Identificador',
             'nome' => 'Nome',
-            'nome_programa_pretendido' => 'Programa desejado',
+            'nome_programa_pretendido' => 'Programa Desejado',
+            'classificacao' => 'Ordem'
         ];
     }
 
@@ -131,6 +132,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
+        
         $user = Auth::user();
 
         $id_user = $user->id_user;
@@ -138,6 +140,8 @@ class SelecionaCandidatosDataTableController extends DataTableController
         $selecionado = new CandidatosSelecionados();
 
         $id_inscricao_pos = $request->id_inscricao_pos;
+
+        $colocacao = $request->colocacao;
 
         $ja_foi_selecionado = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
@@ -150,13 +154,13 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
             $selecionado->selecionado = $request->status;
 
-            $selecionado->classificacao = $request->colocacao;
+            $selecionado->classificacao = $colocacao;
 
             $selecionado->id_coordenador = $id_user;
 
             $selecionado->save();
         }else{
-            DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $request->colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
+            DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
         }
 
         // $auxilia_selecao = new AuxiliaSelecao();
