@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <seleciona-candidatos route="{{route('pdf.homologa.inscricoes')}}" endpoint="{{ route('homologa.index') }}"></seleciona-candidatos>
+      <seleciona-candidatos route="{{route('pdf.homologa.inscricoes')}}" endpoint="{{ route('seleciona.index') }}"></seleciona-candidatos>
     </div>
   </div>
 </div>
