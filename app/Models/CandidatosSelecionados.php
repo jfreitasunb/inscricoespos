@@ -8,8 +8,6 @@ use DB;
 
 class CandidatosSelecionados extends FuncoesModels
 {
-    use SoftDeletes;
-
     protected $primaryKey = 'id';
 
     protected $table = 'candidatos_selecionados';
@@ -34,11 +32,6 @@ class CandidatosSelecionados extends FuncoesModels
     public function retorna_candidatos_selecionados($id_inscricao_pos)
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('selecionado', 'True')->get();
-    }
-
-    public function limpa_selecoes_anteriores($id_inscricao_pos)
-    {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
     }
 
     public function retorna_dados_candidatos_selecionados($id_inscricao_pos, $locale)
