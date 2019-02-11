@@ -29,7 +29,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Classificação</th>
+                            <th align="text-center">Colocação a ser publicada</th>
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
@@ -45,12 +45,16 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
-                                <div class="form-group row">
-                                    <div class="col-3">
-                                        <input type="text" v-model="seleciona.classificacao[record.id_candidato] || record.colocacao">
+                                <template>
+                                    <div class="form-group" :class="{ 'has-error': seleciona.errors['colocao'] }">
+                                        <input type="text" class="form-control" :name="record.id_candidato" v-model="seleciona.classificacao[record.id_candidato]">
+                                        <span class="help-block" v-if="seleciona.errors['colocao']">
+                                            <strong>{{ seleciona.errors['colocao'][0] }}</strong>
+                                        </span>
                                     </div>
-                                </div>
+                                </template>
                             </td>
+                            <td align="text-center">{{ record.colocacao }}</td>
                             <td>
                                <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
                                <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
@@ -95,7 +99,6 @@
                     programa_pretendido: null,
                     status: null,
                     classificacao: [],
-                    colocacao: null,
                     errors: []
                 }
 
@@ -163,6 +166,7 @@
                 this.seleciona.programa_pretendido = record.id_programa_pretendido
                 this.seleciona.status = status
                 this.seleciona.colocacao = this.seleciona.classificacao[record.id_candidato]
+                this.seleciona.classificacao = []
                 axios.patch(`${this.endpoint}/${this.seleciona.id_candidato}`, this.seleciona).then(() =>{
                     this.getRecords().then(() => {
                         this.seleciona.id_candidato = null
@@ -172,6 +176,9 @@
                         this.seleciona.classificacao = []
                         this.seleciona.colocacao = null
                     })
+                }).catch((error) => {
+
+                    this.seleciona.errors = error.response.data.errors
                 })
             },
         },
