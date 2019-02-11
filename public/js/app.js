@@ -50397,6 +50397,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -50423,11 +50435,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             quickSearchQuery: '',
 
-            homologa: {
+            seleciona: {
                 id_candidato: null,
                 id_inscricao_pos: null,
                 programa_pretendido: null,
                 status: null,
+                classificacao: [],
                 errors: []
             }
 
@@ -50489,20 +50502,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
         },
-        homologar: function homologar(record, status) {
+        selecionarcandidato: function selecionarcandidato(record, status) {
             var _this3 = this;
 
-            this.homologa.id_candidato = record.id_candidato;
-            this.homologa.id_inscricao_pos = record.id_inscricao_pos;
-            this.homologa.programa_pretendido = record.id_programa_pretendido;
-            this.homologa.status = status;
-            axios.patch(this.endpoint + '/' + this.homologa.id_candidato, this.homologa).then(function () {
+            this.seleciona.id_candidato = record.id_candidato;
+            this.seleciona.id_inscricao_pos = record.id_inscricao_pos;
+            this.seleciona.programa_pretendido = record.id_programa_pretendido;
+            this.seleciona.status = status;
+            this.seleciona.colocacao = this.seleciona.classificacao[record.id_candidato];
+            this.seleciona.classificacao = [];
+            axios.patch(this.endpoint + '/' + this.seleciona.id_candidato, this.seleciona).then(function () {
                 _this3.getRecords().then(function () {
-                    _this3.homologa.id_candidato = null;
-                    _this3.homologa.id_inscricao_pos = null;
-                    _this3.homologa.programa_pretendido = null;
-                    _this3.homologa.status = null;
+                    _this3.seleciona.id_candidato = null;
+                    _this3.seleciona.id_inscricao_pos = null;
+                    _this3.seleciona.programa_pretendido = null;
+                    _this3.seleciona.status = null;
+                    _this3.seleciona.classificacao = [];
+                    _this3.seleciona.colocacao = null;
                 });
+            }).catch(function (error) {
+
+                _this3.seleciona.errors = error.response.data.errors;
             });
         }
     },
@@ -50660,7 +50680,11 @@ var render = function() {
                   ])
                 }),
                 _vm._v(" "),
-                _c("th", [_vm._v("Homologar?")])
+                _c("th", { attrs: { align: "text-center" } }, [
+                  _vm._v("Colocação a ser publicada")
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v("Candidato Selecionado?")])
               ],
               2
             )
@@ -50674,8 +50698,8 @@ var render = function() {
                   "td",
                   {
                     class: {
-                      carta_completa: record.foi_homologado === true,
-                      carta_incompleta: record.foi_homologado == false
+                      carta_completa: record.selecionado === true,
+                      carta_incompleta: record.selecionado == false
                     }
                   },
                   [
@@ -50691,8 +50715,8 @@ var render = function() {
                   "td",
                   {
                     class: {
-                      carta_completa: record.foi_homologado === true,
-                      carta_incompleta: record.foi_homologado == false
+                      carta_completa: record.selecionado === true,
+                      carta_incompleta: record.selecionado == false
                     }
                   },
                   [
@@ -50708,8 +50732,8 @@ var render = function() {
                   "td",
                   {
                     class: {
-                      carta_completa: record.foi_homologado === true,
-                      carta_incompleta: record.foi_homologado == false
+                      carta_completa: record.selecionado === true,
+                      carta_incompleta: record.selecionado == false
                     }
                   },
                   [
@@ -50721,6 +50745,78 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.selecionado === true,
+                      carta_incompleta: record.selecionado == false
+                    }
+                  },
+                  [
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "form-group",
+                          class: {
+                            "has-error": _vm.seleciona.errors["colocao"]
+                          }
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value:
+                                  _vm.seleciona.classificacao[
+                                    record.id_candidato
+                                  ],
+                                expression:
+                                  "seleciona.classificacao[record.id_candidato]"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", name: record.id_candidato },
+                            domProps: {
+                              value:
+                                _vm.seleciona.classificacao[record.id_candidato]
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.seleciona.classificacao,
+                                  record.id_candidato,
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.seleciona.errors["colocao"]
+                            ? _c("span", { staticClass: "help-block" }, [
+                                _c("strong", [
+                                  _vm._v(
+                                    _vm._s(_vm.seleciona.errors["colocao"][0])
+                                  )
+                                ])
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    ]
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c("td", { attrs: { align: "text-center" } }, [
+                  _vm._v(_vm._s(record.colocacao))
+                ]),
+                _vm._v(" "),
                 _c("td", [
                   _c(
                     "a",
@@ -50729,7 +50825,7 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.homologar(record, 1)
+                          _vm.selecionarcandidato(record, 1)
                         }
                       }
                     },
@@ -50743,7 +50839,7 @@ var render = function() {
                       on: {
                         click: function($event) {
                           $event.preventDefault()
-                          _vm.homologar(record, 0)
+                          _vm.selecionarcandidato(record, 0)
                         }
                       }
                     },
