@@ -8,37 +8,13 @@
 
 @section('seleciona_candidatos')
 
-<fieldset class="scheduler-border">
-  <legend class="scheduler-border">Seleciona candidatos</legend>
-  {!! Form::open(array('route' => 'seleciona.candidatos', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
-    {!! Form::hidden('id_inscricao_pos', $relatorio_disponivel->id_inscricao_pos, []) !!}
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col">{{ trans('tela_cartas_pendentes.nome_candidato') }}</th>
-            <th scope="col">{{ trans('tela_cartas_pendentes.tipo_programa') }}</th>
-            <th>Candidato foi selecionado?</th>
-          </tr>
-        </thead>
-        <tbody>
-          @foreach( $inscricoes_finalizadas as $finalizada)
-            <tr class="">
-              {!! Form::hidden('id_programa_pos', $finalizada['id_programa_pos'], []) !!}
-              <td>{{ $finalizada['nome'] }}</td>
-              <td>{{ $finalizada['tipo_programa_pos_ptbr'] }}</td>
-              <td>{!! Form::radio('selecionar['.$finalizada['id_candidato'].']','1_'.$finalizada['id_programa_pos'],false) !!} Sim {!! Form::radio('selecionar['.$finalizada['id_candidato'].']','0_'.$finalizada['id_programa_pos'],true) !!} Não</td>
-            </tr>
-          @endforeach
-        </tbody>
-        
-      </table>
+<div id="app">
+  <div class="row">
+    <div class="col-md-12">
+      <seleciona-candidatos route="{{route('pdf.homologa.inscricoes')}}" endpoint="{{ route('homologa.index') }}"></seleciona-candidatos>
     </div>
-    <div class="col-md-10 text-center"> 
-      {!! Form::submit('Enviar', array('class' => 'register-submit btn btn-primary btn-lg', 'id' => 'register-submit', 'tabindex' => '4')) !!}
-    </div>
-  {!! Form::close() !!}
-</fieldset>
+  </div>
+</div>
 
 @endsection
 

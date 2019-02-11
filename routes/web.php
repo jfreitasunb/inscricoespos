@@ -231,7 +231,7 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::resource('datatable/homologa','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
 
-	Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecinarCandidatos')->name('seleciona.candidatos');
+	Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecionarCandidatos')->name('seleciona.candidatos');
 
 	Route::resource('datatable/seleciona','\InscricoesPos\Http\Controllers\DataTable\SelecionaCandidatosDataTableController');
 

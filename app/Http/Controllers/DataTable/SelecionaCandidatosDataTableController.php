@@ -20,13 +20,13 @@ class SelecionaCandidatosDataTableController extends DataTableController
 {
     public function builder()
     {
-        return CandidatosSelecionados::query();
+        return HomologaInscricoes::query();
     }
 
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'selecionado', 'classificacao'
+            'id_candidato', 'id_inscricao_pos', 'homologada'
         ];
     }
 
@@ -98,7 +98,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('id_inscricao_pos', $id_inscricao_pos)->where('homologada', TRUE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         $i = 1;
 

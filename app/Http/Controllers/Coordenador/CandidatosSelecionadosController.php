@@ -36,7 +36,7 @@ use URL;
 class CandidatosSelecionadosController extends CoordenadorController
 {
 
-	public function getSelecinarCandidatos()
+	public function getSelecionarCandidatos()
 	{
 		
 		$relatorio = new ConfiguraInscricaoPos();
