@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-hover table-striped">
                     <thead>
                         <tr>
                             <th v-for="column in response.visivel">
@@ -34,13 +34,13 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
+                            <td>
                                 {{ record.id }}
                             </td>
-                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
+                            <td>
                                 {{ record.nome }}
                             </td>
-                            <td :class="{ 'carta_completa': record.foi_homologado === true, 'carta_incompleta': record.foi_homologado == false}">
+                            <td>
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
