@@ -116,7 +116,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
                 if (is_null($foi_selecionado)) {
                     $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => 'nao_definido'];
                 }else{
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => $foi_selecionado->selecionado];
+                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => $foi_selecionado->selecionado, 'colocacao' => $foi_selecionado->classificacao];
                 }
 
                 $i++;
