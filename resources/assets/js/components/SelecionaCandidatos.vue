@@ -29,7 +29,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Classificacao</th>
+                            <th>Classificação</th>
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
@@ -47,7 +47,7 @@
                             <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <input type="text" v-model="seleciona.classificacao[record.id_candidato]">
+                                        <input type="text" v-model="seleciona.classificacao[record.id_candidato] || record.colocacao">
                                     </div>
                                 </div>
                             </td>
