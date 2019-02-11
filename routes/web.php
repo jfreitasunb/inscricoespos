@@ -215,9 +215,9 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	// Route::post('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@postHomologarInscritos')->name('homologa.inscricoes');
 
-	Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecinarCandidatos')->name('seleciona.candidatos');
+	// Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecinarCandidatos')->name('seleciona.candidatos');
 
-	Route::post('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@postSelecinarCandidatos')->name('seleciona.candidatos');
+	// Route::post('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@postSelecinarCandidatos')->name('seleciona.candidatos');
 
 	Route::get('status/selecionados', '\InscricoesPos\Http\Controllers\Coordenador\StatusConfirmaParticipacaoController@getStatusCandidatosSelecionados')->name('status.selecionados');
 
@@ -230,6 +230,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('pdf/homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@postHomologarInscritos')->name('pdf.homologa.inscricoes');
 
 	Route::resource('datatable/homologa','\InscricoesPos\Http\Controllers\DataTable\HomologaInscricoesDataTableController');
+
+	Route::get('seleciona/candidatos', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@getSelecinarCandidatos')->name('seleciona.candidatos');
+
+	Route::resource('datatable/seleciona','\InscricoesPos\Http\Controllers\DataTable\SelecionaCandidatosDataTableController');
 
 	Route::get('relatorio/auxilia/selecao', '\InscricoesPos\Http\Controllers\Admin\AuxiliaSelecaoController@index')->name('auxilia.selecao');
 
