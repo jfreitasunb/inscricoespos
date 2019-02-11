@@ -20,7 +20,7 @@ class CandidatosSelecionados extends FuncoesModels
         'confirmou_presenca',
         'inicio_no_programa',
         'id_coordenador',
-        'deleted_at',
+        'classificacao',
     ];
 
 
