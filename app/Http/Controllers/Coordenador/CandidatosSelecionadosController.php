@@ -168,54 +168,6 @@ class CandidatosSelecionadosController extends CoordenadorController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        // if ($relatorio->autoriza_inscricao()) {
-            
-        //     notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
-        //         'timer' => 3000,
-        //     ]);
-
-        //     return redirect()->back();
-        // }
-        
-        // $this->validate($request, [
-        //     'homologar' => 'required',
-        // ]);
-        
-        // $id_inscricao_pos = (int)$request->id_inscricao_pos;
-
-        // foreach ($request->homologar as $id => $homologar) {
-            
-        //     $homologa = new HomologaInscricoes();
-
-        //     $homologa->id_candidato = $id;
-
-        //     $homologa->id_inscricao_pos = $id_inscricao_pos;
-
-        //     $homologa->programa_pretendido = explode("_", $homologar)[1];
-
-        //     $homologa->homologada = explode("_", $homologar)[0];
-
-        //     $homologa->id_coordenador = $id_user;
-
-        //     $homologa->save();
-
-        //     if (explode("_", $homologar)[0]) {
-                
-        //         $auxilia_selecao = new AuxiliaSelecao();
-
-        //         $auxilia_selecao->id_candidato = $id;
-
-        //         $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
-
-        //         $auxilia_selecao->programa_pretendido = explode("_", $homologar)[1];
-
-        //         $auxilia_selecao->id_coordenador = $id_user;
-
-        //         $auxilia_selecao->save();
-
-        //     }
-        // }
-
         $dados_homologacao['edital'] = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
 
         $numero_programas = count(explode("_", $relatorio_disponivel->programa));
@@ -273,10 +225,6 @@ class CandidatosSelecionadosController extends CoordenadorController
         
         $pdf = PDF::loadView('templates.partials.coordenador.pdf_candidatos_selecionados', compact('homologacoes', 'dados_homologacao'));
         $nome_arquivo_homologacao = "Candidados_Selecionados_Edital-".$edital.".pdf";
-        
-        // notify()->flash('Dados salvos com sucesso.','success', [
-        //     'timer' => 2000,
-        // ]);
 
         $pdf->save($local_arquivo_selecionados.$nome_arquivo_homologacao);
 
