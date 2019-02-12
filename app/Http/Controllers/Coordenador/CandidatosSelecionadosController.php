@@ -164,7 +164,7 @@ class CandidatosSelecionadosController extends CoordenadorController
 
         $edital = $relatorio_disponivel->edital;
 
-        $local_arquivo_homologacoes = storage_path("app/public/relatorios/edital_".$edital."/");
+        $local_arquivo_selecionados = storage_path("app/public/relatorios/edital_".$edital."/");
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
@@ -277,9 +277,9 @@ class CandidatosSelecionadosController extends CoordenadorController
         //     'timer' => 2000,
         // ]);
 
-        $pdf->save($local_arquivo_homologacoes.$nome_arquivo_homologacao);
+        $pdf->save($local_arquivo_selecionados.$nome_arquivo_homologacao);
 
-        return Response::download($local_arquivo_homologacoes.$nome_arquivo_homologacao, $nome_arquivo_homologacao);
+        return Response::download($local_arquivo_selecionados.$nome_arquivo_homologacao, $nome_arquivo_homologacao);
         
     }
 }
