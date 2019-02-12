@@ -31,7 +31,7 @@ class CandidatosSelecionados extends FuncoesModels
 
     public function retorna_candidatos_selecionados($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('selecionado', 'True')->orderBy('programa_pretendido')->orderBy('classificacao')->get();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('selecionado', 'True')->orderBy('programa_pretendido', 'DESC')->orderBy('classificacao')->get();
     }
 
     public function retorna_dados_candidatos_selecionados($id_inscricao_pos, $locale)
