@@ -50409,6 +50409,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -50509,7 +50510,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.seleciona.id_inscricao_pos = record.id_inscricao_pos;
             this.seleciona.programa_pretendido = record.id_programa_pretendido;
             this.seleciona.status = status;
-            this.seleciona.colocacao = this.seleciona.classificacao[record.id_candidato];
+            this.seleciona.colocacao = this.seleciona.classificacao[record.id];
             this.seleciona.classificacao = [];
             axios.patch(this.endpoint + '/' + this.seleciona.id_candidato, this.seleciona).then(function () {
                 _this3.getRecords().then(function () {
@@ -50624,7 +50625,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm.response.total_inscritos == _vm.response.total_homologados
+        _vm.response.total_selecionados === _vm.response.total_homologados
           ? _c("div", { staticClass: "col-md-offset-3 col-md-6" }, [
               _c(
                 "a",
@@ -50679,10 +50680,6 @@ var render = function() {
                       : _vm._e()
                   ])
                 }),
-                _vm._v(" "),
-                _c("th", { attrs: { align: "text-center" } }, [
-                  _vm._v("Colocação a ser publicada")
-                ]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Candidato Selecionado?")])
               ],
@@ -50761,47 +50758,56 @@ var render = function() {
                           staticClass: "form-group",
                           class: {
                             "has-error": _vm.seleciona.errors["colocao"]
-                          }
+                          },
+                          attrs: { id: "colocao" }
                         },
                         [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value:
-                                  _vm.seleciona.classificacao[
-                                    record.id_candidato
-                                  ],
-                                expression:
-                                  "seleciona.classificacao[record.id_candidato]"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text", name: record.id_candidato },
-                            domProps: {
-                              value:
-                                _vm.seleciona.classificacao[record.id_candidato]
-                            },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
+                          _c("div", { staticClass: "col-sm-3" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.seleciona.classificacao[record.id],
+                                  expression:
+                                    "seleciona.classificacao[record.id]"
                                 }
-                                _vm.$set(
-                                  _vm.seleciona.classificacao,
-                                  record.id_candidato,
-                                  $event.target.value
-                                )
+                              ],
+                              staticClass: "form-control",
+                              attrs: { type: "text", name: record.id },
+                              domProps: {
+                                value: _vm.seleciona.classificacao[record.id]
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.seleciona.classificacao,
+                                    record.id,
+                                    $event.target.value
+                                  )
+                                }
                               }
-                            }
-                          }),
+                            })
+                          ]),
                           _vm._v(" "),
-                          _vm.seleciona.errors["colocao"]
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 control-label",
+                              attrs: { for: "inputType" }
+                            },
+                            [_vm._v(_vm._s(record.colocacao))]
+                          ),
+                          _vm._v(" "),
+                          _vm.seleciona.errors["colocacao"] &&
+                          _vm.seleciona.id_candidato === record.id_candidato
                             ? _c("span", { staticClass: "help-block" }, [
                                 _c("strong", [
                                   _vm._v(
-                                    _vm._s(_vm.seleciona.errors["colocao"][0])
+                                    _vm._s(_vm.seleciona.errors["colocacao"][0])
                                   )
                                 ])
                               ])
@@ -50812,10 +50818,6 @@ var render = function() {
                   ],
                   2
                 ),
-                _vm._v(" "),
-                _c("td", { attrs: { align: "text-center" } }, [
-                  _vm._v(_vm._s(record.colocacao))
-                ]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
