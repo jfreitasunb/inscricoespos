@@ -48,7 +48,7 @@
                                 <template>
                                     <div class="form-group" id="colocao" :class="{ 'has-error': seleciona.errors['colocao'] }">
                                         <div class="col-sm-3">
-                                            <input type="text" class="form-control" :name="record.id_candidato" v-model="seleciona.classificacao[record.id_candidato]">
+                                            <input type="text" class="form-control" :name="record.id" v-model="seleciona.classificacao[record.id]">
                                         </div>
                                         <label for="inputType" class="col-sm-2 control-label">{{ record.colocacao }}</label>
                                         <span class="help-block" v-if="seleciona.errors['colocao']">
@@ -169,7 +169,7 @@
                 this.seleciona.id_inscricao_pos = record.id_inscricao_pos
                 this.seleciona.programa_pretendido = record.id_programa_pretendido
                 this.seleciona.status = status
-                this.seleciona.colocacao = this.seleciona.classificacao[record.id_candidato]
+                this.seleciona.colocacao = this.seleciona.classificacao[record.id]
                 this.seleciona.classificacao = []
                 axios.patch(`${this.endpoint}/${this.seleciona.id_candidato}`, this.seleciona).then(() =>{
                     this.getRecords().then(() => {
