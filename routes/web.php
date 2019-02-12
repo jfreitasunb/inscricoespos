@@ -235,11 +235,12 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::resource('datatable/seleciona','\InscricoesPos\Http\Controllers\DataTable\SelecionaCandidatosDataTableController');
 
+	Route::get('pdf/candidatos/selecionados', '\InscricoesPos\Http\Controllers\Coordenador\CandidatosSelecionadosController@postCandidadosSelecionados')->name('pdf.candidados.selecionados');
+
 	Route::get('relatorio/auxilia/selecao', '\InscricoesPos\Http\Controllers\Admin\AuxiliaSelecaoController@index')->name('auxilia.selecao');
 
 	Route::resource('datatable/auxilia','\InscricoesPos\Http\Controllers\DataTable\AuxiliaSelecaoDataTableController');
 });
-
 
 
 /**
