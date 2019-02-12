@@ -163,9 +163,4 @@ class SelecionaCandidatosDataTableController extends DataTableController
             DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
         }
     }
-
-    public function show($id_inscricao_pos)
-    {
-        dd($id_inscricao_pos);
-    }
 }
