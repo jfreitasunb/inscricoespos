@@ -258,14 +258,14 @@ class CandidatosSelecionadosController extends CoordenadorController
                 
             }
         }
-        
+
         ksort($homologacoes);
 
-        $dados_homologacao['dia'] = explode("-",$relatorio_disponivel->data_homologacao)[2];
+        $dados_homologacao['dia'] = Carbon::now()->day;
 
-        $dados_homologacao['nome_mes'] = $this->array_meses[str_replace("0", "", explode("-",$relatorio_disponivel->data_homologacao)[1])];
+        $dados_homologacao['nome_mes'] = $this->array_meses[Carbon::now()->month];
 
-        $dados_homologacao['ano_homologacao'] = explode("-",$relatorio_disponivel->data_homologacao)[0];
+        $dados_homologacao['ano_homologacao'] = Carbon::now()->year;
 
         $dados_homologacao['nome_coordenador'] = explode("_", $dados_coordenador->tratamento)[0]." ".$dados_coordenador->nome_coordenador;
 
