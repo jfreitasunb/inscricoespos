@@ -132,7 +132,10 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
-        
+        $this->validate($request, [
+            'colocacao' => 'integer|required_if:status,1',
+        ]);
+
         $user = Auth::user();
 
         $id_user = $user->id_user;
