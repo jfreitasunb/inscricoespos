@@ -29,7 +29,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th align="text-center">Colocação a ser publicada</th>
+                            <!-- <th align="text-center">Colocação a ser publicada</th> -->
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
@@ -46,15 +46,19 @@
                             </td>
                             <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 <template>
-                                    <div class="form-group" :class="{ 'has-error': seleciona.errors['colocao'] }">
-                                        <input type="text" class="form-control" :name="record.id_candidato" v-model="seleciona.classificacao[record.id_candidato]">
+                                    <div class="form-group" id="colocao" :class="{ 'has-error': seleciona.errors['colocao'] }">
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" :name="record.id_candidato" v-model="seleciona.classificacao[record.id_candidato]">
+                                        </div>
+                                        <label for="inputType" class="col-sm-2 control-label">{{ record.colocacao }}</label>
                                         <span class="help-block" v-if="seleciona.errors['colocao']">
                                             <strong>{{ seleciona.errors['colocao'][0] }}</strong>
                                         </span>
+                                        
                                     </div>
                                 </template>
                             </td>
-                            <td align="text-center">{{ record.colocacao }}</td>
+                            <!-- <td align="text-center">{{ record.colocacao }}</td> -->
                             <td>
                                <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
                                <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
