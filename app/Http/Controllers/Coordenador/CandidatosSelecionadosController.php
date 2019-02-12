@@ -270,8 +270,8 @@ class CandidatosSelecionadosController extends CoordenadorController
 
         $dados_homologacao['tratamento'] = explode("_", $dados_coordenador->tratamento)[1];
         
-        $pdf = PDF::loadView('templates.partials.coordenador.pdf_homologacoes', compact('homologacoes', 'dados_homologacao'));
-        $nome_arquivo_homologacao = "Homologacao-".$dados_homologacao['ano_inicio']."-".$dados_homologacao['numero_semestre'].".pdf";
+        $pdf = PDF::loadView('templates.partials.coordenador.pdf_candidatos_selecionados', compact('homologacoes', 'dados_homologacao'));
+        $nome_arquivo_homologacao = "Candidados_Selecionados_Edital-".$edital.".pdf";
         
         // notify()->flash('Dados salvos com sucesso.','success', [
         //     'timer' => 2000,
