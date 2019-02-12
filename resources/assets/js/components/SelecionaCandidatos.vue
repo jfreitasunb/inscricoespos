@@ -16,7 +16,7 @@
                         <option value="">Todos</option>
                     </select>
                 </div>
-                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos !== response.total_homologados">
+                <div class="col-md-offset-3 col-md-6" v-if="response.total_selecionados === response.total_homologados">
                     <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download do PDF com as Homologações</a>
                 </div>
             </div>
