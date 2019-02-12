@@ -63,9 +63,9 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
         
-        $finalizadas = new FinalizaInscricao();
+        $finalizadas = new CandidatosSelecionados();
 
-        $total_inscritos = $finalizadas->retorna_total_inscricoes_finalizadas($id_inscricao_pos);
+        $total_selecionados = $finalizadas->retorna_total_candidatos_selecionados($id_inscricao_pos);
 
         $homologa = new HomologaInscricoes();
 
@@ -78,7 +78,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
-                'total_inscritos' => $total_inscritos,
+                'total_selecionados' => $total_selecionados,
                 'total_homologados' => $total_homologados,
                 'id_inscricao_pos' => $id_inscricao_pos
             ]

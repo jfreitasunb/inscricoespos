@@ -49,4 +49,9 @@ class CandidatosSelecionados extends FuncoesModels
 
         return $status_gravacao;
     }
+
+    public function retorna_total_candidatos_selecionados($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos',$id_inscricao_pos)->count();
+    }
 }
