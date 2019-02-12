@@ -243,9 +243,9 @@ class CandidatosSelecionadosController extends CoordenadorController
             $dados_homologacao['ano_inicio'] = explode("-", $relatorio_disponivel->fim_inscricao)[0];
         }
 
-        $homologa = new HomologaInscricoes;
+        $homologa = new CandidatosSelecionados;
 
-        $inscricoes_homologadas = $homologa->retorna_inscricoes_homologadas($id_inscricao_pos);
+        $inscricoes_homologadas = $homologa->retorna_candidatos_selecionados($id_inscricao_pos);
 
         $programas = explode("_", $relatorio_disponivel->programa);
 
