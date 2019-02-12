@@ -67,7 +67,7 @@ Brasília – DF – CEP 70.910-900", $font, 7, array(0, 0, 0) );
         <br>
         <h3>Resultado Final da Seleção para o Programa de Pós-graduação em Matemática - {{ $dados_homologacao['numero_semestre'] }}º/{{ $dados_homologacao['ano_inicio'] }}</h3>
         <div>
-            <p>O Departamento de Matemática torna público o Resultado Final do Processo de Seleção para {{ $dados_homologacao['texto_cursos_pos'] }} em Matemática, com início no {{ $dados_homologacao['texto_semestre'] }} período letivo de {{ $dados_homologacao['ano_inicio'] }}, conforme item 7.1 do edital nº {{ $dados_homologacao['edital'] }}. </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O Departamento de Matemática torna público o Resultado Final do Processo de Seleção para {{ $dados_homologacao['texto_cursos_pos'] }} em Matemática, com início no {{ $dados_homologacao['texto_semestre'] }} período letivo de {{ $dados_homologacao['ano_inicio'] }}, conforme item 7.1 do edital nº {{ $dados_homologacao['edital'] }}. </p>
         </div>
 
         <div><br></div>
