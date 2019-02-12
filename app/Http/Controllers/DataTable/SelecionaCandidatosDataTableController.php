@@ -162,26 +162,6 @@ class SelecionaCandidatosDataTableController extends DataTableController
         }else{
             DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
         }
-
-        // $auxilia_selecao = new AuxiliaSelecao();
-
-        // $esta_presente = $auxilia_selecao->retorna_presenca_tabela_inscricoes_auxiliares($id_inscricao_pos, $id_candidato);
-
-        // if ($esta_presente > 0) {
-        //     DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => !($request->status), 'updated_at' => date('Y-m-d H:i:s')]);
-        // }else{
-        //     $auxilia_selecao->id_candidato = $id_candidato;
-
-        //     $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
-
-        //     $auxilia_selecao->programa_pretendido = $request->programa_pretendido;
-
-        //     $auxilia_selecao->desclassificado = !($request->status);
-
-        //     $auxilia_selecao->id_coordenador = $id_user;
-
-        //     $auxilia_selecao->save();
-        // }
     }
 
     public function show($id_inscricao_pos)
