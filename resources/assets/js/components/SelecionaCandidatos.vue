@@ -51,10 +51,9 @@
                                             <input type="text" class="form-control" :name="record.id" v-model="seleciona.classificacao[record.id]">
                                         </div>
                                         <label for="inputType" class="col-sm-2 control-label">{{ record.colocacao }}</label>
-                                        <span class="help-block" v-if="seleciona.errors['colocao']">
-                                            <strong>{{ seleciona.errors['colocao'][0] }}</strong>
+                                        <span class="help-block" v-if="seleciona.errors['colocacao'] && seleciona.id_candidato === record.id_candidato">
+                                            <strong>{{ seleciona.errors['colocacao'][0] }}</strong>
                                         </span>
-                                        
                                     </div>
                                 </template>
                             </td>
