@@ -221,7 +221,7 @@ class CandidatosSelecionadosController extends CoordenadorController
         $numero_programas = count(explode("_", $relatorio_disponivel->programa));
 
         if ($numero_programas > 1) {
-            $dados_homologacao['texto_cursos_pos'] = "os cursos de Doutorado e Mestrado Acadêmico";
+            $dados_homologacao['texto_cursos_pos'] = "os cursos de Mestrado Acadêmico e Doutorado";
         }else{
             if ($relatorio_disponivel->programa == 1) {
                 $dados_homologacao['texto_cursos_pos'] = "o curso de ".(new ProgramaPos())->pega_programa_pos_mat($relatorio_disponivel->programa, $locale)."Acadêmico";
