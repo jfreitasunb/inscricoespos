@@ -258,8 +258,9 @@ class CandidatosSelecionadosController extends CoordenadorController
                 
             }
         }
-        asort($homologacoes);
         
+        ksort($homologacoes);
+
         $dados_homologacao['dia'] = explode("-",$relatorio_disponivel->data_homologacao)[2];
 
         $dados_homologacao['nome_mes'] = $this->array_meses[str_replace("0", "", explode("-",$relatorio_disponivel->data_homologacao)[1])];
