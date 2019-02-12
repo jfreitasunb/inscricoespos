@@ -16,7 +16,7 @@
                         <option value="">Todos</option>
                     </select>
                 </div>
-                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos == response.total_homologados">
+                <div class="col-md-offset-3 col-md-6" v-if="response.total_inscritos !== response.total_homologados">
                     <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download do PDF com as Homologações</a>
                 </div>
             </div>
@@ -29,7 +29,6 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <!-- <th align="text-center">Colocação a ser publicada</th> -->
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
@@ -57,7 +56,6 @@
                                     </div>
                                 </template>
                             </td>
-                            <!-- <td align="text-center">{{ record.colocacao }}</td> -->
                             <td>
                                <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
                                <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
