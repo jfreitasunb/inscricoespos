@@ -26,6 +26,7 @@
                 border-color: #080A0F;
                 border-style: solid;
                 color: #000000;
+                page-break-after: always;
             }
 
             table.customTable th.tg-baqh{
