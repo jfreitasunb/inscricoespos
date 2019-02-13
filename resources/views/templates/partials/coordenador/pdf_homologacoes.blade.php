@@ -3,6 +3,14 @@
     <head>
         <meta charset="utf-8">
         <style>
+            body {
+                margin: 50px;
+            }
+
+            #header{
+                position: fixed;
+            }
+
             h2 {text-align:center;}
             
             label {font-weight: bold;}
@@ -25,7 +33,6 @@
                 border-color: #080A0F;
                 border-style: solid;
                 color: #000000;
-                margin-top: 100px !important;
             }
 
             table.customTable th.tg-baqh{
@@ -52,17 +59,22 @@
             if (isset($pdf)) {
                 $w = $pdf->get_width();
                 $font = $fontMetrics->getFont("Arial", "bold");
+                $pdf->page_script('
+                    $w = $pdf->get_width();
+                    $pdf->line(35,750,$w-35,750,array(0,0,0),0.5);
+                ');
                 {{-- $pdf->line(35,10,$w-35,10,array(0,0,0),1.5);
                 $pdf->page_text(35, 10, "UnB-Universidade de Brasília", $font, 7, array(0, 0, 0));
                 $pdf->page_text(35, 20, "IE-Instituto de Ciências Exatas", $font, 7, array(0, 0, 0) );
                 $pdf->page_text(35, 30, "MAT-Departamento de Matemática", $font, 7, array(0, 0, 0) );
-                $pdf->line(35,40,$w-35,40,array(0,0,0),0.5);
+                
                 $pdf->page_text(35, 40, "Campus Universitário Darcy Ribeiro 70.910-900", $font, 7, array(0, 0, 0) );
                 $pdf->page_text(440, 40, "Fone: (61) 3107-6479/6480 Fax: (61) 3107-6482", $font, 7, array(0, 0, 0) ); --}}
+                $pdf->page_text(40, 750, "PPG/MAT-UnB", $font, 7, array(0, 0, 0));
                 $pdf->page_text(540, 750, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
-        <header><hr></header>
+        <div id="header"><hr>UnB-Universidade de Brasília</div>
         <div>
             <h2>Homologação das inscrições para o Programa de Pós-Graduação em Matemática - {{ $dados_homologacao['numero_semestre'] }}º/{{ $dados_homologacao['ano_inicio'] }}</h2>
             <div>
