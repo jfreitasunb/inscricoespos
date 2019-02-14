@@ -94,9 +94,9 @@
                 Campus Universitário Darcy Ribeiro 70.910-900
                 <br>
             </div>
-                <div id="fonemat">
-                    Fone: (61) 3107-6479/6480 Fax: (61) 3107-6482
-                </div>
+            <div id="fonemat">
+                Fone: (61) 3107-6479/6480 Fax: (61) 3107-6482
+            </div>
         </div>
         <div>
             <h2>Homologação das inscrições para o Programa de Pós-Graduação em Matemática - {{ $dados_homologacao['numero_semestre'] }}º/{{ $dados_homologacao['ano_inicio'] }}</h2>
