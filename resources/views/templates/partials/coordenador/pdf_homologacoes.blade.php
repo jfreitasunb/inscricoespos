@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <style>
             body {
-                margin: 50px;
+                margin: 100px;
             }
 
             #header{
@@ -12,15 +12,15 @@
             }
 
             #unb{
-                font-size: 6px;
+                font-size: 10px;
             }
 
             #ied{
-                font-size: 6px;
+                font-size: 8px;
             }
 
             #fonemat{
-                font-size: 6px;
+                font-size: 8px;
                 text-align: right;
                 margin-top: -5px;
             }
