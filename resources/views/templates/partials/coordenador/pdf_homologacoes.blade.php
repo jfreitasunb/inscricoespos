@@ -11,6 +11,21 @@
                 position: fixed;
             }
 
+            #unb{
+                font-size: 6px;
+            }
+
+            #ied{
+                font-size: 6px;
+            }
+
+            #fonemat{
+                font-size: 6px;
+                text-align: right;
+                margin-top: -5px;
+            }
+            
+
             h2 {text-align:center;}
             
             label {font-weight: bold;}
@@ -74,7 +89,20 @@
                 $pdf->page_text(540, 750, "Página {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
             }
         </script>
-        <div id="header"><hr>UnB-Universidade de Brasília</div>
+        <div id="header">
+            <hr style="height:1.5px;border:none;color:#333;background-color:#333;">
+            <div id="unb">
+                UnB-Universidade de Brasília
+            </div>
+            <div id="ied">
+                <img src="{{ public_path('imagens/logo/unb_contorno.png') }}" alt="Logo" height="25px" align="right" vspace="-10px">
+                IE-Instituto de Ciências Exatas<br>MAT-Departamento de Matemática
+                <br>
+                <hr style="height:0.75px;border:none;color:#333;background-color:#333;">
+                Campus Universitário Darcy Ribeiro 70.910-900
+                <br>
+            </div>
+                <div id="fonemat">Fone: (61) 3107-6479/6480 Fax: (61) 3107-6482</div></div>
         <div>
             <h2>Homologação das inscrições para o Programa de Pós-Graduação em Matemática - {{ $dados_homologacao['numero_semestre'] }}º/{{ $dados_homologacao['ano_inicio'] }}</h2>
             <div>
