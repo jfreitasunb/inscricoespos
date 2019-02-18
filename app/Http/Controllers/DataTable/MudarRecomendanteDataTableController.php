@@ -82,7 +82,7 @@ class MudarRecomendanteDataTableController extends DataTableController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         $i = 1;
 
