@@ -63,22 +63,48 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td v-for="columnValue, column in record">
-                                <template v-if="editing.id_candidato === record.id_candidato && isUpdatable(column)">
-                                    <div class="form-group" :class="{ 'has-error': editing.errors[column] }">
-                                        <input type="text" class="form-control" :name="columnValue" v-model="editing.form[column]">
-                                        <span class="help-block" v-if="editing.errors[column]">
-                                            <strong>{{ editing.errors[column][0] }}</strong>
+                            <td>
+                                {{ record.id }}
+                            </td>
+                            <td>
+                                {{ record.nome_candidato }}
+                            </td>
+                            <td>
+                                {{ record.nome_programa_pretendido }}
+                            </td>
+                            <td>
+                                <template v-if="editing.id_candidato === record.id_candidato && !record.status_carta && editing.id_recomendante === record.id_recomendante && isUpdatable('nome_recomendante')">
+                                    <div class="form-group" :class="{ 'has-error': editing.errors['nome_recomendante'] }">
+                                        <input type="text" class="form-control" :name="record.nome_recomendante" v-model="editing.form['nome_recomendante']">
+                                        <span class="help-block" v-if="editing.errors['nome_recomendante']">
+                                            <strong>{{ editing.errors['nome_recomendante'][0] }}</strong>
                                         </span>
                                     </div>
                                 </template> 
 
                                 <template v-else>
-                                    {{ columnValue }}    
+                                    {{ record.nome_recomendante }}    
                                 </template>
                             </td>
                             <td>
-                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_candidato !== record.id_candidato">Editar</a>
+                                <template v-if="editing.id_candidato === record.id_candidato && editing.id_recomendante === record.id_recomendante && !record.status_carta && isUpdatable('email_recomendante')">
+                                    <div class="form-group" :class="{ 'has-error': editing.errors['email_recomendante'] }">
+                                        <input type="text" class="form-control" :name="record.email_recomendante" v-model="editing.form['email_recomendante']">
+                                        <span class="help-block" v-if="editing.errors['email_recomendante']">
+                                            <strong>{{ editing.errors['email_recomendante'][0] }}</strong>
+                                        </span>
+                                    </div>
+                                </template> 
+
+                                <template v-else>
+                                    {{ record.email_recomendante }}    
+                                </template>
+                            </td>
+                            <td>
+                                {{ record.status_carta }}
+                            </td>
+                            <td>
+                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_candidato !== record.id_candidato && !record.status_carta">Editar</a>
 
                                 <template v-if=" editing.id_candidato === record.id_candidato">
                                     <a href="#" @click.prevent="update()">Salvar</a><br>
@@ -118,6 +144,7 @@
 
                 editing: {
                     id_candidato: null,
+                    id_recomendante: null,
                     form: {},
                     errors: []
                 },
@@ -190,6 +217,7 @@
 
                 this.editing.errors = []
                 this.editing.id_candidato = record.id_candidato
+                this.editing.id_recomendante = record.id_recomendante
                 this.editing.form = _.pick(record, this.response.updatable)
             },
 
@@ -198,8 +226,14 @@
                 return this.response.updatable.includes(column)
             },
 
+            isVisible (column) {
+
+                return this.response.visivel.includes(column)
+            },
+
             update () {
 
+                console.log(this.editing.form)
                 axios.patch(`${this.endpoint}/${this.editing.id_candidato}`, this.editing.form).then(() => {
 
                     this.getRecords().then(() => {
