@@ -29,24 +29,27 @@ class MudarRecomendanteDataTableController extends DataTableController
     public function getVisibleColumns()
     {
         return [
-            'id', 'nome', 'nome_programa_pretendido'
+            'id', 'nome_candidato', 'nome_programa_pretendido', 'nome_recomendante', 'email_recomendante'
         ];
     }
 
-    // public function getUpdatableColumns()
-    // {
-    //     return [
-    //         'desclassificado'
-    //     ];
-    // }
+    public function getUpdatableColumns()
+    {
+        return [
+            'nome_recomendante', 'email_recomendante'
+        ];
+    }
 
     public function getCustomColumnNanes()
     {
         return [
             'id' => 'Inscrição',
             'id_candidato' => 'Identificador',
-            'nome' => 'Nome',
-            'nome_programa_pretendido' => 'Programa desejado'
+            'nome_candidato' => 'Nome',
+            'nome_programa_pretendido' => 'Programa desejado',
+            'nome_recomendante' => 'Nome Recomendante',
+            'email_recomendante' => 'E-mail Recomendante',
+            'status_carta' => 'Carta enviada?'
         ];
     }
 
@@ -63,6 +66,7 @@ class MudarRecomendanteDataTableController extends DataTableController
                 'table' => $this->builder->getModel()->getTable(),
                 'displayable' => array_values($this->getDisplayableColumns()),
                 'visivel' => array_values($this->getVisibleColumns()),
+                'updatable' => $this->getUpdatableColumns(),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
                 'id_inscricao_pos' => $id_inscricao_pos
@@ -99,7 +103,7 @@ class MudarRecomendanteDataTableController extends DataTableController
 
                 $status_carta = $carta->retorna_status_carta_recomendacao($dados->id_recomendante, $dados->id_candidato, $id_inscricao_pos);
                 
-                $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, "id_programa_pretendido" => $id_programa_pretendido, 'id_recomendante' => $dados->id_recomendante, 'nome_recomendante' => (User::find($dados->id_recomendante))->nome, 'email_recomendante' => (User::find($dados->id_recomendante))->email, 'status_carta' => $status_carta];
+                $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome_candidato' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, "id_programa_pretendido" => $id_programa_pretendido, 'id_recomendante' => $dados->id_recomendante, 'nome_recomendante' => (User::find($dados->id_recomendante))->nome, 'email_recomendante' => (User::find($dados->id_recomendante))->email, 'status_carta' => $status_carta];
 
                 $i++;
             }
