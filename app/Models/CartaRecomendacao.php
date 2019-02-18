@@ -66,6 +66,13 @@ class CartaRecomendacao extends FuncoesModels
 
     }
 
+    public function retorna_status_carta_recomendacao($id_recomendante, $id_candidato, $id_inscricao_pos)
+    {
+
+        return $this->select('completada')->where("id_recomendante", $id_recomendante)->where('id_candidato',$id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->value('completada');
+
+    }
+
     public function retorna_carta_recomendacao_antiga($id_recomendante,$id_candidato,$id_inscricao_pos)
     {
 
