@@ -10,7 +10,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <homologa-inscricoes route="{{route('pdf.homologa.inscricoes')}}" endpoint="{{ route('alterarecomendante.index') }}"></homologa-inscricoes>
+      <muda-recomendante endpoint="{{ route('alterarecomendante.index') }}"></muda-recomendante>
     </div>
   </div>
 </div>
