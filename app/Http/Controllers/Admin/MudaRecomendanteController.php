@@ -41,6 +41,10 @@ class MudaRecomendanteController extends AdminController
 		return $user->retorna_user_por_email($email_candidato)->id_user;
 	}
 
+	public function getAlteraRecomendantes()
+	{
+		return view('templates.partials.admin.altera_recomendantes_candidato');
+	}
 
 	public function postPesquisarRecomendantes(Request $request)
 	{

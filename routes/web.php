@@ -139,11 +139,11 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/salvar/alteracao', '\InscricoesPos\Http\Controllers\Admin\ReativarInscricaoCandidatoController@postReativarInscricaoCandidato')->name('salvar.alteracao');
 
-	Route::get('inscricao/pesquisa/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
+	// Route::get('inscricao/pesquisa/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@getPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
-	Route::post('inscricao/pesquisa/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
+	// Route::post('inscricao/pesquisa/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
 
-	Route::post('inscricao/altera/recomendante','\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
+	// Route::post('inscricao/altera/recomendante','\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
 
 
 	Route::get('inscricao/pesquisa/cartas/enviadas', '\InscricoesPos\Http\Controllers\Admin\PesquisaRecomendanteController@getPesquisarCartaEnviada')->name('pesquisa.carta');
@@ -159,6 +159,14 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('chart', '\InscricoesPos\Http\Controllers\GraficosController@index')->name('ver.charts');
 
 	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+
+	Route::get('inscricao/altera/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@getAlteraRecomendantes')->name('altera.recomendante');
+
+	Route::resource('datatable/alterarecomendante','\InscricoesPos\Http\Controllers\DataTable\MudarRecomendanteDataTableController');
+
+	// Route::post('inscricao/pesquisa/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postPesquisarRecomendantes')->name('pesquisa.recomendantes');
+
+	// Route::post('inscricao/altera/recomendante','\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@postAlteraRecomendante')->name('altera.recomendante');
 
 	Route::get('lista/users', '\InscricoesPos\Http\Controllers\Admin\AdministraUserController@index')->name('lista.edita.usuarios');
 

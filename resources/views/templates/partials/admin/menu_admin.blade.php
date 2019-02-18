@@ -91,8 +91,8 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('pesquisa.recomendantes') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-random fa-fw"></span><a href="{{ route('pesquisa.recomendantes') }}">Mudar Recomendante</a>
+                                    <td class= "{{ Route::currentRouteNamed('altera.recomendante') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-random fa-fw"></span><a href="{{ route('altera.recomendante') }}">Mudar Recomendante</a>
                                     </td>
                                 </tr>
                                 <tr>
