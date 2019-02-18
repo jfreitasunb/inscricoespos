@@ -215,9 +215,4 @@ class HomologaInscricoesDataTableController extends DataTableController
             $auxilia_selecao->save();
         }
     }
-
-    public function show($id_inscricao_pos)
-    {
-        dd($id_inscricao_pos);
-    }
 }
