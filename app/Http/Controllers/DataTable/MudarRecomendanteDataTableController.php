@@ -20,7 +20,7 @@ class MudarRecomendanteDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'finalizada',
+            'id_candidato', 'id_recomendante', 'email_enviado',
         ];
     }
 
@@ -55,14 +55,6 @@ class MudarRecomendanteDataTableController extends DataTableController
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
-        
-        $finalizadas = new FinalizaInscricao();
-
-        $total_inscritos = $finalizadas->retorna_total_inscricoes_finalizadas($id_inscricao_pos);
-
-        $homologa = new HomologaInscricoes();
-
-        $total_homologados =  $homologa->retorna_total_inscricoes_homologadas($id_inscricao_pos);
 
         return response()->json([
             'data' => [
@@ -71,8 +63,6 @@ class MudarRecomendanteDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'records' => $this->getRecords($request),
-                'total_inscritos' => $total_inscritos,
-                'total_homologados' => $total_homologados,
                 'id_inscricao_pos' => $id_inscricao_pos
             ]
         ]);
