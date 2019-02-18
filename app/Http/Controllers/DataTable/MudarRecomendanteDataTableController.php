@@ -4,10 +4,10 @@ namespace InscricoesPos\Http\Controllers\DataTable;
 
 use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
-
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ContatoRecomendante;
-
+use InscricoesPos\Models\EscolhaCandidato;
 use Illuminate\Validation\Rule;
 
 class MudarRecomendanteDataTableController extends DataTableController
