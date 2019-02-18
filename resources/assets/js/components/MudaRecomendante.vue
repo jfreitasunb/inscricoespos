@@ -7,7 +7,7 @@
                 <div class="row row-fluid">
                     <div class="group col-md-3">
                         <select class="form-control" v-model="search.column">
-                            <option :value="column" v-for="column in response.displayable">
+                            <option :value="column" v-for="column in response.visivel">
                                 {{ column }}
                             </option>
                         </select>
@@ -53,7 +53,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th v-for="column in response.displayable">
+                            <th v-for="column in response.visivel">
                                 <span class="sortable" @click="sortBy(column)">{{ response.custom_columns[column] || column }}</span>
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
@@ -64,7 +64,7 @@
                     <tbody>
                         <tr v-for="record in filteredRecords">
                             <td v-for="columnValue, column in record">
-                                <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
+                                <template v-if="editing.id_candidato === record.id_candidato && isUpdatable(column)">
                                     <div class="form-group" :class="{ 'has-error': editing.errors[column] }">
                                         <input type="text" class="form-control" :name="columnValue" v-model="editing.form[column]">
                                         <span class="help-block" v-if="editing.errors[column]">
@@ -78,11 +78,11 @@
                                 </template>
                             </td>
                             <td>
-                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
+                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_candidato !== record.id_candidato">Editar</a>
 
-                                <template v-if=" editing.id_user === record.id_user">
+                                <template v-if=" editing.id_candidato === record.id_candidato">
                                     <a href="#" @click.prevent="update()">Salvar</a><br>
-                                    <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>  
+                                    <a href="#" @click.prevent="editing.id_candidato = null">Cancelar</a>  
                                 </template>
                             </td>
                         </tr>
@@ -108,7 +108,7 @@
                 },
 
                 sort: {
-                    key: 'id_user',
+                    key: 'id_candidato',
                     order: 'asc'
                 },
 
@@ -117,7 +117,7 @@
                 quickSearchQuery: '',
 
                 editing: {
-                    id_user: null,
+                    id_candidato: null,
                     form: {},
                     errors: []
                 },
@@ -125,7 +125,7 @@
                 search: {
                     value: null,
                     operator: 'equals',
-                    column: 'id_user'
+                    column: 'id_candidato'
                 }
             }
         },
@@ -189,7 +189,7 @@
             edit (record) {
 
                 this.editing.errors = []
-                this.editing.id_user = record.id_user
+                this.editing.id_candidato = record.id_candidato
                 this.editing.form = _.pick(record, this.response.updatable)
             },
 
@@ -200,11 +200,11 @@
 
             update () {
 
-                axios.patch(`${this.endpoint}/${this.editing.id_user}`, this.editing.form).then(() => {
+                axios.patch(`${this.endpoint}/${this.editing.id_candidato}`, this.editing.form).then(() => {
 
                     this.getRecords().then(() => {
 
-                        this.editing.id_user = null
+                        this.editing.id_candidato = null
                         this.editing.form = {}
 
                     })
