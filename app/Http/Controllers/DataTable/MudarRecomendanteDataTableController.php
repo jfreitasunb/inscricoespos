@@ -11,6 +11,10 @@ use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\CartaRecomendacao;
 use Illuminate\Validation\Rule;
+use DB;
+use Notification;
+use Carbon\Carbon;
+use InscricoesPos\Notifications\NotificaRecomendante;
 
 class MudarRecomendanteDataTableController extends DataTableController
 {
@@ -117,55 +121,77 @@ class MudarRecomendanteDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
-        $user = Auth::user();
+        $this->validate($request, [
+            'id_candidato' => 'required',
+            'id_recomendante' => 'required',
+            'nome_recomendante' => 'required',
+            'email_recomendante' => 'required|email',
+        ]);
 
-        $id_user = $user->id_user;
+        $relatorio = new ConfiguraInscricaoPos();
 
-        $homologa = new HomologaInscricoes();
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-        $id_inscricao_pos = $request->id_inscricao_pos;
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        $ja_homologou = $homologa->retorna_se_foi_homologado($id_candidato, $id_inscricao_pos);
+        $id_candidato = (int)$request->id_candidato;
 
-        if (is_null($ja_homologou)) {
-            $homologa->id_candidato = $request->id_candidato;
+        $id_recomendante = (int)$request->id_recomendante;
 
-            $homologa->id_inscricao_pos = $id_inscricao_pos;
+        $email_recomendante = strtolower(trim($request->email_recomendante));
 
-            $homologa->programa_pretendido = $request->programa_pretendido;
+        $nome_recomendante = trim($request->nome_recomendante);
 
-            $homologa->homologada = $request->status;
+        $email_candidato = strtolower(trim($request->email_candidato));
+        
+        $novo_recomendante['nome'] = $nome_recomendante;
+        
+        $novo_recomendante['email'] = $email_recomendante;
 
-            $homologa->id_coordenador = $id_user;
+        $user_recomendante = new User;
 
-            $homologa->save();
+        $acha_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante);
+
+        if (is_null($acha_recomendante)) {
+            
+            $user_recomendante->registra_recomendante($novo_recomendante);
+            
+            $id_novo_recomendante = $user_recomendante->retorna_user_por_email($email_recomendante)->id_user;
         }else{
-            DB::table('homologa_inscricoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['homologada' => $request->status, 'updated_at' => date('Y-m-d H:i:s')]);
+
+            if ($acha_recomendante->user_type === 'recomendante') {
+                $id_novo_recomendante = $acha_recomendante->id_user;
+            }else{
+
+                notify()->flash('O e-mail: '.$email_recomendante.' pertence a um candidato!','error');
+                return redirect()->back();
+            }   
         }
 
-        $auxilia_selecao = new AuxiliaSelecao();
+        $carta_recomendacao = new CartaRecomendacao();
 
-        $esta_presente = $auxilia_selecao->retorna_presenca_tabela_inscricoes_auxiliares($id_inscricao_pos, $id_candidato);
+        $ja_enviou_carta = $carta_recomendacao->retorna_carta_recomendacao($id_recomendante, $id_candidato, $id_inscricao_pos);
 
-        if ($esta_presente > 0) {
-            DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => !($request->status), 'updated_at' => date('Y-m-d H:i:s')]);
+        if ($ja_enviou_carta->completada) {
+            
+            return redirect()->back();
+            
         }else{
-            $auxilia_selecao->id_candidato = $id_candidato;
+            $mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
-            $auxilia_selecao->id_inscricao_pos = $id_inscricao_pos;
+            DB::table('contatos_recomendantes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
-            $auxilia_selecao->programa_pretendido = $request->programa_pretendido;
+            $edital = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
-            $auxilia_selecao->desclassificado = !($request->status);
+            $prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
 
-            $auxilia_selecao->id_coordenador = $id_user;
+            $dados_email['nome_professor'] = $nome_recomendante;
+            $dados_email['nome_candidato'] = $request->nome_candidato;
+            $dados_email['programa'] = $request->programa;
+            $dados_email['email_recomendante'] = $email_recomendante;
+            $dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
-            $auxilia_selecao->save();
+            Notification::send(User::find($id_novo_recomendante), new NotificaRecomendante($dados_email));
         }
-    }
-
-    public function show($id_inscricao_pos)
-    {
-        dd($id_inscricao_pos);
     }
 }

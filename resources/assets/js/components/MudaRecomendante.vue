@@ -218,7 +218,7 @@
                 this.editing.errors = []
                 this.editing.id_candidato = record.id_candidato
                 this.editing.id_recomendante = record.id_recomendante
-                this.editing.form = _.pick(record, this.response.updatable)
+                this.editing.form = record
             },
 
             isUpdatable (column) {
@@ -232,8 +232,6 @@
             },
 
             update () {
-
-                console.log(this.editing.form)
                 axios.patch(`${this.endpoint}/${this.editing.id_candidato}`, this.editing.form).then(() => {
 
                     this.getRecords().then(() => {

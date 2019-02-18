@@ -122,7 +122,6 @@ class MudaRecomendanteController extends AdminController
 			'id_candidato' => 'required',
 			'id_inscricao_pos' => 'required',
 			'id_recomendante' => 'required',
-			'id_recomendante' => 'required',
 			'nome_recomendante' => 'required',
 			'email_recomendante' => 'required|email',
 		]);
