@@ -29,7 +29,7 @@ class MudarRecomendanteDataTableController extends DataTableController
     public function getVisibleColumns()
     {
         return [
-            'id', 'nome_candidato', 'nome_programa_pretendido', 'nome_recomendante', 'email_recomendante'
+            'id', 'nome_candidato', 'nome_programa_pretendido', 'nome_recomendante', 'email_recomendante', 'status_carta'
         ];
     }
 
