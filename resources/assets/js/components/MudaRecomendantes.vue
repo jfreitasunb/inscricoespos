@@ -1,6 +1,6 @@
 <template>
     <div class="panel panel-default">
-        <div class="panel-heading">Tela de Seleção dos Candidatos</div>
+        <div class="panel-heading">Mudar Recomendante</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
