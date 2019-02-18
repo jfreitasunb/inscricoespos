@@ -113,45 +113,6 @@ class MudarRecomendanteDataTableController extends DataTableController
         return $dados_vue;
     }
 
-    protected function getRecordsHomologados(Request $request)
-    {   
-        $relatorio = new ConfiguraInscricaoPos();
-
-        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
-
-        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
-
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
-
-        $i = 1;
-
-        if (sizeof($dados_temporarios) > 0) {
-            foreach ($dados_temporarios as $dados) {
-
-                $escolha = new EscolhaCandidato();
-
-                $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
-
-                $homologa = new HomologaInscricoes();
-
-                $ja_homologou = $homologa->retorna_se_foi_homologado($dados->id_candidato, $id_inscricao_pos);
-
-                if (is_null($ja_homologou)) {
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
-                }else{
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
-                }
-
-                $i++;
-            }
-        }else{
-            $dados_vue = [];
-        }
-        
-
-        return $dados_vue;
-    }
-
     public function update($id_candidato, Request $request)
     {   
         $user = Auth::user();
