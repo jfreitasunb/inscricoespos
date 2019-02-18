@@ -9,6 +9,7 @@ use InscricoesPos\Models\User;
 use InscricoesPos\Models\ContatoRecomendante;
 use InscricoesPos\Models\EscolhaCandidato;
 use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\CartaRecomendacao;
 use Illuminate\Validation\Rule;
 
 class MudarRecomendanteDataTableController extends DataTableController
@@ -93,8 +94,12 @@ class MudarRecomendanteDataTableController extends DataTableController
                 $escolha = new EscolhaCandidato();
 
                 $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
+
+                $carta = new CartaRecomendacao();
+
+                $status_carta = $carta->retorna_status_carta_recomendacao($dados->id_recomendante, $dados->id_candidato, $id_inscricao_pos);
                 
-                $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, "id_programa_pretendido" => $id_programa_pretendido];
+                $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, "id_programa_pretendido" => $id_programa_pretendido, 'id_recomendante' => $dados->id_recomendante, 'nome_recomendante' => (User::find($dados->id_recomendante))->nome, 'email_recomendante' => (User::find($dados->id_recomendante))->email, 'status_carta' => $status_carta];
 
                 $i++;
             }
