@@ -1,7 +1,39 @@
-<template>
+<template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Mudar Recomendante</div>
+        <div class="panel-heading">{{ response.table }}</div>
         <div class="panel-body">
+            <form action="#" @submit.prevent="getRecords">
+                <label for="search">Pesquisa</label>
+                <div class="row row-fluid">
+                    <div class="group col-md-3">
+                        <select class="form-control" v-model="search.column">
+                            <option :value="column" v-for="column in response.displayable">
+                                {{ column }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="group col-md-3">
+                        <select class="form-control" v-model="search.operator">
+                            <option value="equals">=</option>
+                            <option value="contains">Contém</option>
+                            <option value="starts_with">Começa com</option>
+                            <option value="ends_with">Termina com</option>
+                            <option value="greater_than">Maio que</option>
+                            <option value="less_than">Menor que</option>
+                        </select>
+                    </div>
+                    <div class="group col-md-3">
+                        <div class="input-group">
+                            <input type="text" id="search" v-model="search.value" class="form-control">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">Pesquisar</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
             <div class="row">
                 <div class="form-group col-md-10">
                     <label for="filter">Pesquisa rápida</label>
@@ -16,49 +48,42 @@
                         <option value="">Todos</option>
                     </select>
                 </div>
-                <div class="col-md-offset-3 col-md-6" v-if="response.total_selecionados === response.total_homologados">
-                    <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download do PDF com as Homologações</a>
-                </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th v-for="column in response.visivel">
+                            <th v-for="column in response.displayable">
                                 <span class="sortable" @click="sortBy(column)">{{ response.custom_columns[column] || column }}</span>
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Candidato Selecionado?</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
-                                {{ record.id }}
-                            </td>
-                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
-                                {{ record.nome }}
-                            </td>
-                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
-                                {{ record.nome_programa_pretendido }}
-                            </td>
-                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
-                                <template>
-                                    <div class="form-group" id="colocao" :class="{ 'has-error': seleciona.errors['colocao'] }">
-                                        <div class="col-sm-3">
-                                            <input type="text" class="form-control" :name="record.id" v-model="seleciona.classificacao[record.id]">
-                                        </div>
-                                        <label for="inputType" class="col-sm-2 control-label">{{ record.colocacao }}</label>
-                                        <span class="help-block" v-if="seleciona.errors['colocacao'] && seleciona.id_candidato === record.id_candidato">
-                                            <strong>{{ seleciona.errors['colocacao'][0] }}</strong>
+                            <td v-for="columnValue, column in record">
+                                <template v-if="editing.id_user === record.id_user && isUpdatable(column)">
+                                    <div class="form-group" :class="{ 'has-error': editing.errors[column] }">
+                                        <input type="text" class="form-control" :name="columnValue" v-model="editing.form[column]">
+                                        <span class="help-block" v-if="editing.errors[column]">
+                                            <strong>{{ editing.errors[column][0] }}</strong>
                                         </span>
                                     </div>
+                                </template> 
+
+                                <template v-else>
+                                    {{ columnValue }}    
                                 </template>
                             </td>
                             <td>
-                               <a href="#" @click.prevent="selecionarcandidato(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="selecionarcandidato(record, 0)">Não</a><br>
+                                <a href="#" @click.prevent="edit(record)" v-if="editing.id_user !== record.id_user">Editar</a>
+
+                                <template v-if=" editing.id_user === record.id_user">
+                                    <a href="#" @click.prevent="update()">Salvar</a><br>
+                                    <a href="#" @click.prevent="editing.id_user = null">Cancelar</a>  
+                                </template>
                             </td>
                         </tr>
                     </tbody>
@@ -73,36 +98,35 @@
     import queryString from 'query-string'
 
     export default {
-        props: ['endpoint', 'route'],
+        props: ['endpoint'],
         data () {
             return {
                 response: {
                     table: '',
                     displayable: [],
-                    visivel: [],
-                    total_inscritos: null,
-                    total_homologados: 0,
                     records: []
                 },
 
                 sort: {
-                    key: 'id_candidato',
+                    key: 'id_user',
                     order: 'asc'
                 },
 
-                limit: '',
+                limit: 50,
 
                 quickSearchQuery: '',
 
-                seleciona: {
-                    id_candidato: null,
-                    id_inscricao_pos: null,
-                    programa_pretendido: null,
-                    status: null,
-                    classificacao: [],
+                editing: {
+                    id_user: null,
+                    form: {},
                     errors: []
-                }
+                },
 
+                search: {
+                    value: null,
+                    operator: 'equals',
+                    column: 'id_user'
+                }
             }
         },
 
@@ -150,7 +174,8 @@
 
                 return queryString.stringify({
 
-                    limit: this.limit
+                    limit: this.limit,
+                    ...this.search
                 })
             },
 
@@ -161,27 +186,34 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            selecionarcandidato (record, status) {
-                this.seleciona.id_candidato = record.id_candidato
-                this.seleciona.id_inscricao_pos = record.id_inscricao_pos
-                this.seleciona.programa_pretendido = record.id_programa_pretendido
-                this.seleciona.status = status
-                this.seleciona.colocacao = this.seleciona.classificacao[record.id]
-                this.seleciona.classificacao = []
-                axios.patch(`${this.endpoint}/${this.seleciona.id_candidato}`, this.seleciona).then(() =>{
+            edit (record) {
+
+                this.editing.errors = []
+                this.editing.id_user = record.id_user
+                this.editing.form = _.pick(record, this.response.updatable)
+            },
+
+            isUpdatable (column) {
+
+                return this.response.updatable.includes(column)
+            },
+
+            update () {
+
+                axios.patch(`${this.endpoint}/${this.editing.id_user}`, this.editing.form).then(() => {
+
                     this.getRecords().then(() => {
-                        this.seleciona.id_candidato = null
-                        this.seleciona.id_inscricao_pos = null
-                        this.seleciona.programa_pretendido = null
-                        this.seleciona.status = null
-                        this.seleciona.classificacao = []
-                        this.seleciona.colocacao = null
+
+                        this.editing.id_user = null
+                        this.editing.form = {}
+
                     })
+
                 }).catch((error) => {
 
-                    this.seleciona.errors = error.response.data.errors
+                    this.editing.errors = error.response.data.errors
                 })
-            },
+            }
         },
 
         mounted () {
