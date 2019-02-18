@@ -104,6 +104,8 @@ class MotivacaoDocumentosController extends BaseController
 			'motivacao' => 'required',
 			'documentos_pessoais' => 'required|max:50000|mimes:pdf',
 			'historico' => 'required|max:50000|mimes:pdf',
+			'comprovante_ingles' => 'required|max:50000|mimes:pdf',
+			'comprovante_proficiencia' => 'required|max:50000|mimes:pdf',
 			'concorda_termos' => 'required',
 		]);
 
@@ -129,6 +131,24 @@ class MotivacaoDocumentosController extends BaseController
 			$arquivo->id_candidato = $id_candidato;
 			$arquivo->nome_arquivo = $hist;
 			$arquivo->tipo_arquivo = "Histórico";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
+
+			$comprovante_en = $request->comprovante_ingles->store('uploads');
+
+			$arquivo = new Documento();
+			$arquivo->id_candidato = $id_candidato;
+			$arquivo->nome_arquivo = $comprovante_en;
+			$arquivo->tipo_arquivo = "Comprovante Inglês";
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			$arquivo->save();
+
+			$comprovante_prof = $request->comprovante_proficiencia->store('uploads');
+
+			$arquivo = new Documento();
+			$arquivo->id_candidato = $id_candidato;
+			$arquivo->nome_arquivo = $comprovante_proficiencia;
+			$arquivo->tipo_arquivo = "Comprovante Proficiencia Inglês";
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
 			$arquivo->save();
 
