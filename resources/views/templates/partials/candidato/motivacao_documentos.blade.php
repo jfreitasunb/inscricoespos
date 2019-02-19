@@ -65,7 +65,7 @@
         </div>
   </fieldset>
 
-  <fieldset class="scheduler-border">
+  {{-- <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.comprovante_ingles') }}</legend>
         <div class="form-horizontal"{{ $errors->has('comprovante_ingles') ? ' has-error' : '' }}>
           <div class="row">
@@ -105,7 +105,7 @@
             <span class="help-block">{{ $errors->first('comprovante_proficiencia') }}</span>
           @endif
         </div>
-  </fieldset>
+  </fieldset> --}}
   
   <fieldset class="scheduler-border">
       <div class="row">
