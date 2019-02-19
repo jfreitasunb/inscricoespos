@@ -24,10 +24,10 @@
       </div>
   </fieldset>
 
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{ trans('tela_escolha_candidato.area_doutorado') }}</legend>
-    <div class="row">
-      @if(isset($areas_pos))
+  @if(isset($areas_pos))
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">{{ trans('tela_escolha_candidato.area_doutorado') }}</legend>
+      <div class="row">
         <div class="col-md-4">
           {!! Form::label('area_principal', trans('tela_escolha_candidato.area_principal'), ['class' => 'col-md-4 control-label'])!!}
         </div>
@@ -39,11 +39,11 @@
         </div>
         <div class="col-md-2">
           <label class="radio">{!! Form::select('area_pos_secundaria', $areas_pos, $dados['area_pos'] ? : '',  ['class' => 'form-control col-md-6']) !!}</label>
-        </div>  
-      @endif
-    </div>
-  </fieldset>
-
+        </div>
+      </div>
+    </fieldset>
+  @endif
+  
   <fieldset class="scheduler-border">
   <legend class="scheduler-border"></legend>
     <div class="row">
