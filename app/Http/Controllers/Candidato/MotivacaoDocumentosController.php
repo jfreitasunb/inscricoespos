@@ -54,6 +54,8 @@ class MotivacaoDocumentosController extends BaseController
 		
 		$id_candidato = $user->id_user;
 
+		$locale_candidato = Session::get('locale');
+
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
