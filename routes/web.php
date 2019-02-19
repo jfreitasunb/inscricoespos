@@ -96,10 +96,6 @@ Route::prefix('recomendante')->middleware('user.role:recomendante,admin','define
 Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group(function () {
 
 	Route::get('/', '\InscricoesPos\Http\Controllers\Admin\AdminController@getMenu')->name('menu.admin');
-	
-	Route::get('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@getDadosCoordenadorPos')->name('dados.coordenador.pos');
-
-	Route::post('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@postDadosCoordenadorPos');
 
 	Route::get('contas/users/impersonate','\InscricoesPos\Http\Controllers\Admin\ImpersonateController@index')->name('admin.impersonate');
 
@@ -156,8 +152,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/acha/indicacoes', '\InscricoesPos\Http\Controllers\Admin\ListaQuemIndicouController@postAchaIndicacoes')->name('pesquisa.indicacoes');
 
-	Route::get('chart', '\InscricoesPos\Http\Controllers\GraficosController@index')->name('ver.charts');
-
 	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
 	Route::get('inscricao/altera/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@getAlteraRecomendantes')->name('altera.recomendante');
@@ -182,6 +176,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(function () {
 
 	Route::get('/','\InscricoesPos\Http\Controllers\Coordenador\CoordenadorController@getMenu')->name('menu.coordenador');
+
+	Route::get('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@getDadosCoordenadorPos')->name('dados.coordenador.pos');
+
+	Route::post('contas/coordenador/pos','\InscricoesPos\Http\Controllers\Admin\DadosCoordenadorPosController@postDadosCoordenadorPos');
 
 	Route::get('configura/inscricao', '\InscricoesPos\Http\Controllers\Coordenador\ConfiguraInscricaoPosController@getConfiguraInscricaoPos')->name('configura.inscricao');
 
@@ -219,6 +217,8 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('relatorios/anteriores', '\InscricoesPos\Http\Controllers\RelatorioController@getListaRelatoriosAnteriores')->name('relatorio.anteriores');
 
+	Route::get('chart', '\InscricoesPos\Http\Controllers\GraficosController@index')->name('ver.charts');
+	
 	// Route::get('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@getHomologarInscritos')->name('homologa.inscricoes');
 
 	// Route::post('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@postHomologarInscritos')->name('homologa.inscricoes');
