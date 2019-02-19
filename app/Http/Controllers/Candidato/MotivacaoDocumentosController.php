@@ -61,6 +61,8 @@ class MotivacaoDocumentosController extends BaseController
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		$arquivos_editais = "storage/editais/";
+
+		$edital_pdf = 'Edital_MAT_'.$edital.'ptbr';
 	
 		if ($autoriza_inscricao) {
 		
@@ -82,12 +84,12 @@ class MotivacaoDocumentosController extends BaseController
 				if (is_null($fez_carta_motivacao)) {
 					$dados['motivacao'] = '';
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital', 'dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais', 'edital', 'edital_pdf', 'dados'));
 				}else{
 
 					$dados['motivacao'] = $fez_carta_motivacao->motivacao;
 
-					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais','edital','dados'));
+					return view('templates.partials.candidato.motivacao_documentos',compact('arquivos_editais', 'edital', 'edital_pdf', 'dados'));
 				}
 				
 			}
