@@ -9,7 +9,7 @@ return [
 	'tela_escolhas' => 'Escolha',
     'texto_programa' => 'No quadro abaixo você deve assinalar o programa pretendido. Para o doutorado, deve marcar ainda a subárea de interesse. A relação de orientadores em cada subárea pode ser encontrada no site do PPG/MAT.',
 	'programa_disponivel' => 'Programa Pretendido',
-    'area_doutorado' => 'Abaixo você deverá indicar as áreas de interesse para o doutorado',
+    'area_doutorado' => 'Abaixo você deverá indicar a área de interesse para o doutorado',
     'texto_bolsas' => 'O programa conta com algumas bolsas de estudo que podem ser utilizadas por alunos que não possuam vínculo empregatício.',
     'interesse_bolsa' => 'Tem interesse em bolsa?',
     'vinculo_empregaticio' => 'Possui vínculo empregatício?',
