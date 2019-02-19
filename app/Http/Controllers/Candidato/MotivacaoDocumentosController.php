@@ -55,7 +55,7 @@ class MotivacaoDocumentosController extends BaseController
 		$id_candidato = $user->id_user;
 
 		$locale_candidato = User::find($id_candidato)->locale;
-		
+
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
@@ -123,70 +123,70 @@ class MotivacaoDocumentosController extends BaseController
 			'concorda_termos' => 'required',
 		]);
 
-			$user = $this->SetUser();
+		$user = $this->SetUser();
+		
+		$id_candidato = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		
+		$doc_pessoais = $request->documentos_pessoais->store('uploads');
+		$arquivo = new Documento();
+		$arquivo->id_candidato = $id_candidato;
+		$arquivo->nome_arquivo = $doc_pessoais;
+		$arquivo->tipo_arquivo = "Documentos";
+		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		$arquivo->save();
+
+		$hist = $request->historico->store('uploads');
+
+		$arquivo = new Documento();
+		$arquivo->id_candidato = $id_candidato;
+		$arquivo->nome_arquivo = $hist;
+		$arquivo->tipo_arquivo = "Histórico";
+		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		$arquivo->save();
+
+		$comprovante_en = $request->comprovante_ingles->store('uploads');
+
+		$arquivo = new Documento();
+		$arquivo->id_candidato = $id_candidato;
+		$arquivo->nome_arquivo = $comprovante_en;
+		$arquivo->tipo_arquivo = "Comprovante Inglês";
+		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		$arquivo->save();
+
+		$comprovante_prof = $request->comprovante_proficiencia->store('uploads');
+
+		$arquivo = new Documento();
+		$arquivo->id_candidato = $id_candidato;
+		$arquivo->nome_arquivo = $comprovante_prof;
+		$arquivo->tipo_arquivo = "Comprovante Proficiencia Inglês";
+		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		$arquivo->save();
+
+		$motivacao = new CartaMotivacao();
+
+		$carta_motivacao = $motivacao->retorna_carta_motivacao($id_candidato, $id_inscricao_pos);
+
+
+		if (is_null($carta_motivacao)) {
+			$nova_motivacao = new CartaMotivacao();
+			$nova_motivacao->id_candidato = $id_candidato;
+			$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
+			$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
+			$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
+			$nova_motivacao->save();
+		}else{
+			$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
+			$dados_motivacao['updated_at'] = date('Y-m-d H:i:s');
 			
-			$id_candidato = $user->id_user;
+			DB::table('carta_motivacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
+		}
 
-			$edital_ativo = new ConfiguraInscricaoPos();
+		notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
 
-			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-			
-			$doc_pessoais = $request->documentos_pessoais->store('uploads');
-			$arquivo = new Documento();
-			$arquivo->id_candidato = $id_candidato;
-			$arquivo->nome_arquivo = $doc_pessoais;
-			$arquivo->tipo_arquivo = "Documentos";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$hist = $request->historico->store('uploads');
-
-			$arquivo = new Documento();
-			$arquivo->id_candidato = $id_candidato;
-			$arquivo->nome_arquivo = $hist;
-			$arquivo->tipo_arquivo = "Histórico";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$comprovante_en = $request->comprovante_ingles->store('uploads');
-
-			$arquivo = new Documento();
-			$arquivo->id_candidato = $id_candidato;
-			$arquivo->nome_arquivo = $comprovante_en;
-			$arquivo->tipo_arquivo = "Comprovante Inglês";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$comprovante_prof = $request->comprovante_proficiencia->store('uploads');
-
-			$arquivo = new Documento();
-			$arquivo->id_candidato = $id_candidato;
-			$arquivo->nome_arquivo = $comprovante_prof;
-			$arquivo->tipo_arquivo = "Comprovante Proficiencia Inglês";
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			$arquivo->save();
-
-			$motivacao = new CartaMotivacao();
-
-			$carta_motivacao = $motivacao->retorna_carta_motivacao($id_candidato, $id_inscricao_pos);
-
-
-			if (is_null($carta_motivacao)) {
-				$nova_motivacao = new CartaMotivacao();
-				$nova_motivacao->id_candidato = $id_candidato;
-				$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
-				$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
-				$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
-				$nova_motivacao->save();
-			}else{
-				$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
-				$dados_motivacao['updated_at'] = date('Y-m-d H:i:s');
-				
-				DB::table('carta_motivacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
-			}
-
-			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');
-
-			return redirect()->route('finalizar.inscricao');		
+		return redirect()->route('finalizar.inscricao');		
 	}
 }
