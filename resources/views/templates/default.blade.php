@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ asset('css/css_monitoria.css') }}" rel="stylesheet">
-  {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
   <script src="https://use.fontawesome.com/96ea273a00.js"></script>
   <link href="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.css') }}" rel="stylesheet">
   <script>
@@ -20,9 +19,7 @@
 <body>
     @include('templates.partials.alertas_erros')
     @include('templates.partials.cabecalho')
-    
       @if (Auth::check())
-        {{-- @include($templatemenu) --}}
         @candidato(Auth()->user())
         <div class="container">
           @include('templates.partials.candidato.menu_candidato')
@@ -37,23 +34,10 @@
         @endcandidato
         @coordenador(Auth()->user())
         <div class="container-fluid">
-        <div class="row-fluid">
-          @include('templates.partials.coordenador.menu_coordenador')
-          {{-- @yield('cadastra_disciplina') --}}
-          @yield('configura_inscricao')
-          @yield('cadastra_area_pos')
-          @yield('edita_area_pos')
-          @yield('edita_formacao')
-          @yield('relatorio_pos_edital_vigente')
-          @yield('relatorio_pos_editais_anteriores')
-          @yield('ficha_individual')
-          @yield('tabela_indicacoes')
-          @yield('homologa_inscricoes')
-          @yield('seleciona_candidatos')
-          @yield('status_selecionados')
-          @yield('link_acesso')
+          <div class="row-fluid">
+            @include('templates.partials.coordenador.menu_coordenador')
+          </div>
         </div>
-      </div>
         @endcoordenador
         @recomendante(Auth()->user())
           @include('templates.partials.recomendante.menu_recomendante')
@@ -65,24 +49,24 @@
         @endrecomendante
         @admin(Auth()->user())
         <div class="container-fluid">
-        <div class="row-fluid">
-          @include('templates.partials.admin.menu_admin')
-          @impersonating_recomendante
-            @yield('dados_pessoais_recomendante')
-            @yield('cartas_pendentes')
-            @yield('carta_parte_inicial')
-            @yield('carta_parte_final')
-          @endimpersonating_recomendante
-          @impersonating_candidato
-            @yield('dados_pessoais')
-            @yield('dados_academicos')
-            @yield('escolha_monitoria')
-            @yield('motivacao_documentos')
-            @yield('finaliza_inscricao')
-            @yield('status_cartas')
-          @endimpersonating_candidato
+          <div class="row-fluid">
+            @include('templates.partials.admin.menu_admin')
+            @impersonating_recomendante
+              @yield('dados_pessoais_recomendante')
+              @yield('cartas_pendentes')
+              @yield('carta_parte_inicial')
+              @yield('carta_parte_final')
+            @endimpersonating_recomendante
+            @impersonating_candidato
+              @yield('dados_pessoais')
+              @yield('dados_academicos')
+              @yield('escolha_monitoria')
+              @yield('motivacao_documentos')
+              @yield('finaliza_inscricao')
+              @yield('status_cartas')
+            @endimpersonating_candidato
+          </div>
         </div>
-      </div>
         @endadmin
       @else
         @yield('inicio')
@@ -92,9 +76,7 @@
     </div>
     @include('templates.partials.rodape')
 </body>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="{{ asset('jquery/jquery-3.1.1.min.js') }}"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/monitoria.js') }}"></script>
   <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
