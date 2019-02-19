@@ -473,7 +473,6 @@ class RelatorioController extends BaseController
 
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
-    // dd($nome_uploads);
     $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_comprovante_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
     $process->setTimeout(3600);
