@@ -21,9 +21,9 @@ class BladeServiceProvider extends ServiceProvider
     
     private $accordion_contas = ['lista.edita.usuarios', 'dados.coordenador.pos', 'pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes'];
 
-    private $accordion_inscricoes = ['configura.inscricao', 'configura.periodo.confirmacao', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes', 'lista.recomendacoes', 'reativar.carta', 'inscricoes.nao.finalizadas', 'status.selecionados', 'seleciona.candidatos', 'homologa.inscricoes'];
+    private $accordion_inscricoes = ['configura.inscricao', 'configura.periodo.confirmacao', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes', 'lista.recomendacoes', 'reativar.carta', 'inscricoes.nao.finalizadas', 'status.selecionados', 'seleciona.candidatos', 'homologa.inscricoes', 'cadastra.area.pos', 'editar.area.pos', 'editar.formacao', 'dados.coordenador.pos'];
 
-    private $accordion_relatorios = ['auxilia.selecao', 'relatorio.atual', 'relatorio.anteriores', 'gera.ficha.individual', 'ver.charts'];
+    private $accordion_relatorios = ['auxilia.selecao', 'relatorio.atual', 'relatorio.anteriores', 'gera.ficha.individual', 'ver.charts', 'link.acesso'];
 
 
     public function ativa_accordion_contas()
@@ -111,6 +111,12 @@ class BladeServiceProvider extends ServiceProvider
             if (!$user) {
                 return false;
             }
+
+            View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
+            
+            View::share('keep_open_accordion_inscricoes', $this->ativa_accordion_inscricoes());
+
+            View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
 
             return $user->isCoordenador();
         });
