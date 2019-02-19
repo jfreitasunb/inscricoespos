@@ -463,7 +463,7 @@ class RelatorioController extends BaseController
     $nome_uploads['documento_pdf'] = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
     $nome_uploads['historico_pdf'] = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
 
-    $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_pdf),'pdf', $nome_historico_banco);
+    $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_historico_banco);
 
     $nome_uploads['nome_comprovante_pdf'] = str_replace(File::extension($nome_comprovante_banco),'pdf', $nome_historico_banco);
 
