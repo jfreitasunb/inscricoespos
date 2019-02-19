@@ -54,18 +54,28 @@ class MotivacaoDocumentosController extends BaseController
 		
 		$id_candidato = $user->id_user;
 
-		$locale_candidato = Session::get('locale');
-
+		$locale_candidato = User::find($id_candidato)->locale;
+		
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		$arquivos_editais = "storage/editais/";
 
-		$edital_pdf = 'Edital_MAT_'.$edital.'ptbr';
-	
+		$edital_pdf = 'Edital_MAT_'.$edital.'_ptbr';
+
+		if ($locale_candidato == 'en' && file_exists(storage_path("app/public/editais/").'Edital_MAT_'.$edital.'_en.pdf') ) {
+			$edital_pdf = 'Edital_MAT_'.$edital.'_en';
+		}
+		
+		if ($locale_candidato == 'es' && file_exists(storage_path("app/public/editais/").'Edital_MAT_'.$edital.'_es.pdf') ) {
+			$edital_pdf = 'Edital_MAT_'.$edital.'_es';
+		}
+
 		if ($autoriza_inscricao) {
 		
 			$finaliza_inscricao = new FinalizaInscricao();
