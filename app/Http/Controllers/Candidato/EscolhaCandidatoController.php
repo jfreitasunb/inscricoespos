@@ -71,7 +71,6 @@ class EscolhaCandidatoController extends BaseController
 
 			$nome_programa_pos = new ProgramaPos();
 
-
 			foreach ($programas_disponiveis as $programa) {
 				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_candidato);
 			}
@@ -112,33 +111,33 @@ class EscolhaCandidatoController extends BaseController
 
 			if (!is_null($candidato_ja_escolheu)) {
 
-					$canditato_recomendante = new ContatoRecomendante();
+				$canditato_recomendante = new ContatoRecomendante();
 
-					$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
+				$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
 
-					if (count($contatos_recomendantes) > 0) {
-						$i = 1;
-						foreach ($contatos_recomendantes as $recomendante) {
+				if (count($contatos_recomendantes) > 0) {
+					$i = 1;
+					foreach ($contatos_recomendantes as $recomendante) {
+				
+						$usuario_recomendante = User::find($recomendante->id_recomendante);
 					
-							$usuario_recomendante = User::find($recomendante->id_recomendante);
-						
-							$dado_recomendante = new DadoPessoalRecomendante();
+						$dado_recomendante = new DadoPessoalRecomendante();
 
-							$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
-						
-							$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
-						
-							$dados['nome_recomendante_'.$i] = $dados_recomendante->nome;
+						$dados_recomendante = $dado_recomendante->retorna_dados_pessoais_recomendante($recomendante->id_recomendante);
+					
+						$dados['email_recomendante_'.$i] = $usuario_recomendante->email;
+					
+						$dados['nome_recomendante_'.$i] = $dados_recomendante->nome;
 
-							$i++;
-						}
+						$i++;
 					}
-
-					$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
-					$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
-					$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
-					$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
 				}
+
+				$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
+				$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
+				$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
+				$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
+			}
 
 			if (in_array(2, $programas_disponiveis)) {
 
