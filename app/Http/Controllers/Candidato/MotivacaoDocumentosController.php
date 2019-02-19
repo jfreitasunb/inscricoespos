@@ -161,7 +161,7 @@ class MotivacaoDocumentosController extends BaseController
 
 			$arquivo = new Documento();
 			$arquivo->id_candidato = $id_candidato;
-			$arquivo->nome_arquivo = $comprovante_proficiencia;
+			$arquivo->nome_arquivo = $comprovante_prof;
 			$arquivo->tipo_arquivo = "Comprovante Proficiencia Inglês";
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
 			$arquivo->save();
