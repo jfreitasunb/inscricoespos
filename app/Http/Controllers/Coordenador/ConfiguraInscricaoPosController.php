@@ -97,7 +97,35 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 			if (File::copy($nome_temporario_edital_portugues, $nome_final_edital_portugues)) {
 				
 				File::delete($nome_temporario_edital_portugues);
-                
+
+                if (isset($request->edital_ingles)) {
+                    
+                    $temp_file_ingles = $request->edital_ingles->store("arquivos_temporarios");
+
+                    $nome_temporario_edital_ingles = $local_documentos.$temp_file_ingles;
+
+                    $nome_final_edital_ingles = $arquivos_editais."Edital_MAT_".$configura_nova_inscricao_pos->edital."_en.pdf";
+
+                    if (File::copy($nome_temporario_edital_ingles, $nome_final_edital_ingles)){
+
+                        File::delete($nome_temporario_edital_ingles);
+                    }
+                }
+
+                if (isset($request->edital_espanhol)) {
+                    
+                    $temp_file_ingles = $request->edital_espanhol->store("arquivos_temporarios");
+
+                    $nome_temporario_edital_espanhol = $local_documentos.$temp_file_ingles;
+
+                    $nome_final_edital_espanhol = $arquivos_editais."Edital_MAT_".$configura_nova_inscricao_pos->edital."_es.pdf";
+
+                    if (File::copy($nome_temporario_edital_espanhol, $nome_final_edital_espanhol)){
+
+                        File::delete($nome_temporario_edital_espanhol);
+                    }
+                }
+
 				$configura_nova_inscricao_pos->save();
 
 				$dados_email['inicio_inscricao'] = $request->inicio_inscricao;
