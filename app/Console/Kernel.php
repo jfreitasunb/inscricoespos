@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\RememberRecomendante::class,
+        Commands\RememberCandidadoFimPrazo::class,
     ];
 
     /**
@@ -25,8 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('reme:reco')
-                 // ->everyMinute();
                  ->dailyAt('01:00');
+        $schedule->command('reme:candidato')
+                 ->dailyAt('01:30');
     }
 
     /**
