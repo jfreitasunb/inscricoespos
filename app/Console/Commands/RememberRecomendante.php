@@ -18,7 +18,7 @@ class RememberRecomendante extends Command
      *
      * @var string
      */
-    protected $signature = 'reme:reco';
+    protected $signature = 'remember:recomendante';
 
     /**
      * The console command description.

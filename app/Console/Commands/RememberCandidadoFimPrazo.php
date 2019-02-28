@@ -18,7 +18,7 @@ class RememberCandidadoFimPrazo extends Command
      *
      * @var string
      */
-    protected $signature = 'reme:candidato';
+    protected $signature = 'remember:candidato';
 
     /**
      * The console command description.
