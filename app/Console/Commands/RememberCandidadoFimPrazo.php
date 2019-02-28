@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Notification;
 use InscricoesPos\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao, ContatoRecomendante, FinalizaInscricao};
 use InscricoesPos\Notifications\EmailRememberRecomendante;
+use InscricoesPos\Notifications\NotificaCandidatoFimPrazo;
 
 use Illuminate\Console\Command;
 
@@ -87,8 +88,6 @@ class RememberCandidadoFimPrazo extends Command
         $locale = 'en';
 
         if (($data_hoje->diffInDays($fim_inscricao) > 0) AND ($data_hoje->diffInDays($fim_inscricao) <= 3)) {
-           
-           foreach ($cartas_nao_enviadas as $id_user) {
             
             $candidatos_nao_finaliados = (new FinalizaInscricao())->retorna_registros_tabela_finaliza_inscricao($id_inscricao_pos);
 
@@ -102,14 +101,14 @@ class RememberCandidadoFimPrazo extends Command
 
                     $id_candidato = $candidato->id_candidato;
 
-                    $ja_enviou_antes = $this->checa_envio_anterior($id_candidato, $id_user, $id_inscricao_pos);
+                    $ja_enviou_antes = $this->checa_envio_anterior($id_candidato, $id_inscricao_pos);
                 }
 
                 if (!$ja_enviou_antes  AND $enviar_email) {
                     
                     $dados_email['nome_candidato'] = User::find($candidato->id_candidato)->nome;
                 
-                    Notification::send(User::find($id_user), new NotificaCandidatoFimPrazo($dados_email));
+                    Notification::send(User::find($id_candidato), new NotificaCandidatoFimPrazo($dados_email));
 
                     $handle = @fopen(storage_path('app/')."candidatos_notificados.csv", "a");
 
@@ -121,7 +120,6 @@ class RememberCandidadoFimPrazo extends Command
                 }
 
             }
-           }
         }
     }
 }
