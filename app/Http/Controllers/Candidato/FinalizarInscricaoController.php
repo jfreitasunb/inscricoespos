@@ -246,7 +246,7 @@ class FinalizarInscricaoController extends BaseController
 			$dados_email_candidato['ficha_inscricao'] = str_replace("storage/relatorios/", "/var/www/inscricoespos/storage/app/public/relatorios/", $request->ficha_inscricao);
 			
 			//Para uso no MAT
-			$dados_email_candidato['ficha_inscricao'] = str_replace("storage/relatorios/", "storage/app/public/relatorios/", $request->ficha_inscricao);
+			// $dados_email_candidato['ficha_inscricao'] = str_replace("storage/relatorios/", "storage/app/public/relatorios/", $request->ficha_inscricao);
 
 			Notification::send(User::find($id_candidato), new NotificaCandidato($dados_email_candidato));
 
