@@ -103,4 +103,9 @@ class FinalizaInscricao extends FuncoesModels
     {
         return $this->where('id_inscricao_pos',$id_inscricao_pos)->where('finalizada', TRUE)->count();
     }
+
+    public function retorna_registros_tabela_finaliza_inscricao($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->get();
+    }
 }

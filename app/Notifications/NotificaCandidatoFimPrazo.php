@@ -36,7 +36,7 @@ class NotificaCandidatoFimPrazo extends Notification
             ->from('posgrad@mat.unb.br', trans('mensagens_gerais.comite'))
             ->subject(trans('mensagens_gerais.inscricao_mat'))
             ->line(trans('mensagens_gerais.inscricao_mat_1').$this->dados_email['nome_candidato'].',')
-            ->line('Sua inscrição não consta como finalizada em nosso sistema. O prazo para envio termina no dia '.$this->dados_email['prazo_inscricao'].'.')
+            ->line('Sua inscrição não consta como finalizada em nosso sistema. O prazo para envio termina no dia '.$this->dados_email['fim_inscricao'].'.')
             ->action('Clique aqui para acessar o sistema e finalizar sua inscrição.', url('/'))
             ->line('Caso não lembre sua senha clique aqui '.url('esqueci/senha'))
             ->line('Sincerely,')
