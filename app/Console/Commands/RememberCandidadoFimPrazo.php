@@ -6,8 +6,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 use Notification;
-use InscricoesPos\Models\{User, ConfiguraInscricaoPos, DadoPessoalRecomendante, CartaRecomendacao, ContatoRecomendante, FinalizaInscricao};
-use InscricoesPos\Notifications\EmailRememberRecomendante;
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, FinalizaInscricao};
 use InscricoesPos\Notifications\NotificaCandidatoFimPrazo;
 
 use Illuminate\Console\Command;
