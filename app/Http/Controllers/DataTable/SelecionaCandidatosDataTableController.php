@@ -69,7 +69,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
         $homologa = new HomologaInscricoes();
 
-        $total_homologados =  $homologa->retorna_total_inscricoes_homologadas($id_inscricao_pos);
+        $total_homologados =  $homologa->retorna_total_inscricoes_homologadas_validas($id_inscricao_pos);
 
         return response()->json([
             'data' => [
