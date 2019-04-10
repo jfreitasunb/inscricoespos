@@ -21,8 +21,8 @@ return [
     'menu_enviar' => 'Enviar',
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
-    'area_principal' => 'Primeira área',
-    'area_secundaria' => 'Segunda área',
+    'area_principal' => 'Área Principal',
+    'area_secundaria' => 'Área Secundária',
     'sim' => 'Sim',
     'nao' => 'Não',
 ];

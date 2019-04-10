@@ -17,6 +17,9 @@ return [
     'nome' => 'Name: ',
     'confirmar_email' => 'Confirm Email:',
     'menu_enviar' => 'Submit',
+    'area_doutorado' => 'Below you should indicate the area of ​​interest for the Doctorate',
+    'area_principal' => 'Main Area',
+    'area_secundaria' => 'Secondary Area',
     'sim' => 'Yes',
     'nao' => 'No',
 ];

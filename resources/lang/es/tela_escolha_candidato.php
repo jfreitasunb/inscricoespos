@@ -18,6 +18,9 @@ return [
     'confirmar_email' => 'Confirmar e-mail:',
     'motivacao' => 'Escriba en el espacio de  abajo su motivación y expectativa con respecto al programa que aspira:',
     'menu_enviar' => 'Enviar',
+    'area_doutorado' => 'Abajo debe indicar el área de interés para el Doctorado.',
+    'area_principal' => 'Area Principal',
+    'area_secundaria' => 'Area Secundaria',
     'sim' => 'Sí',
     'nao' => 'No',
 ];
