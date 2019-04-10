@@ -113,9 +113,9 @@ class HomologaInscricoesDataTableController extends DataTableController
                 $ja_homologou = $homologa->retorna_se_foi_homologado($dados->id_candidato, $id_inscricao_pos);
 
                 if (is_null($ja_homologou)) {
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
+                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => 'nao_definido'];
                 }else{
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
+                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'foi_homologado' => $ja_homologou];
                 }
 
                 $i++;
