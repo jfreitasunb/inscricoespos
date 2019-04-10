@@ -39,4 +39,6 @@ return [
     'dois_programas' => 'Formulario de Inscripción para Maestría y Doctorado',
     'inscricao_mestrado' => 'Formulario de Inscripción para Maestría',
     'inscricao_doutorado' => 'Formulario de Inscripción para Doctorado',
+    'inscricao_nao_finalizada' => 'Su registro no está finalizado en nuestro sistema. El tiempo para la salida ',
+    'acesso_para_finalizada' => 'Haga clic aquí para acceder al sistema y finalizar la suscripción.',
 ];

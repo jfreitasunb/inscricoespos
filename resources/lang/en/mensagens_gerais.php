@@ -38,4 +38,6 @@ return [
     'dois_programas' => 'Application form for the Postgraduate Program: MSc and P.h.D.',
     'inscricao_mestrado' => 'Application form for the Postgraduate Program: MSc.',
     'inscricao_doutorado' => 'Application form for the Postgraduate Program: P.h.D.',
+    'inscricao_nao_finalizada' => 'Your registration is not finalized in our system. The deadline for submission ends on ',
+    'acesso_para_finalizada' => 'Click here to access the system and finalize your subscription.',
 ];
