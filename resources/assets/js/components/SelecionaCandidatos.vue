@@ -29,6 +29,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
+                            <th>Contemplado com bolsa?</th>
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>

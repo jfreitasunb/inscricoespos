@@ -51,7 +51,8 @@ class SelecionaCandidatosDataTableController extends DataTableController
             'id_candidato' => 'Identificador',
             'nome' => 'Nome',
             'nome_programa_pretendido' => 'Programa Desejado',
-            'classificacao' => 'Ordem'
+            'classificacao' => 'Ordem',
+            'bolsa_disponivel' => 'Contemplado com bolsa?'
         ];
     }
 
