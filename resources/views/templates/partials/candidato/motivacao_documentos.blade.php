@@ -84,7 +84,7 @@
             <span class="help-block">{{ $errors->first('comprovante_ingles') }}</span>
           @endif
         </div>
-  </fieldset>
+  </fieldset> --}}
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.comprovante_proficiencia') }}</legend>
@@ -105,7 +105,7 @@
             <span class="help-block">{{ $errors->first('comprovante_proficiencia') }}</span>
           @endif
         </div>
-  </fieldset> --}}
+  </fieldset>
   
   <fieldset class="scheduler-border">
       <div class="row">
