@@ -409,7 +409,10 @@ class RelatorioController extends BaseController
 
     $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
-    $nome_proficiencia_banco = $local_documentos.$documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos)->nome_arquivo;
+
+    if (!is_null($documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos))){
+      $nome_proficiencia_banco = $local_documentos.$documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos)->nome_arquivo;
+    }
 
     // $nome_comprovante_banco = $local_documentos.$documento->retorna_comprovante_ingles($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
@@ -436,7 +439,7 @@ class RelatorioController extends BaseController
       $success = $img->writeImage($nome_historico_pdf);
     }
 
-    if (File::extension($nome_proficiencia_banco) != 'pdf')
+    if (!is_null($documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos)) AND File::extension($nome_proficiencia_banco) != 'pdf')
     {
 
       $nome_historico_pdf = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
@@ -464,7 +467,10 @@ class RelatorioController extends BaseController
     
     $nome_uploads['historico_pdf'] = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
 
-    $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
+    if (!is_null($documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos))) {
+      $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
+    }
+    
 
     // $nome_uploads['nome_comprovante_pdf'] = str_replace(File::extension($nome_comprovante_banco),'pdf', $nome_comprovante_banco);
 
@@ -473,9 +479,11 @@ class RelatorioController extends BaseController
 
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
-    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
-
-    // $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    if (array_key_exists('nome_proficiencia_pdf', $nome_uploads)) {
+      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    }else{
+      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    }
 
     $process->setTimeout(3600);
     
