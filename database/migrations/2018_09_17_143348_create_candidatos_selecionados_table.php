@@ -22,6 +22,7 @@ class CreateCandidatosSelecionadosTable extends Migration
             $table->unsignedInteger('programa_pretendido');
             $table->foreign('programa_pretendido')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
             $table->boolean('selecionado');
+            $table->boolean('bolsa_disponivel')->default(False);
             $table->integer('classificacao')->nullable();
             $table->boolean('confirmou_presenca')->default(False);
             $table->unsignedInteger('inicio_no_programa')->nullable();
