@@ -119,7 +119,7 @@ class MotivacaoDocumentosController extends BaseController
 			'documentos_pessoais' => 'required|max:50000|mimes:pdf',
 			'historico' => 'required|max:50000|mimes:pdf',
 			// 'comprovante_ingles' => 'required|max:50000|mimes:pdf',
-			// 'comprovante_proficiencia' => 'required|max:50000|mimes:pdf',
+			'comprovante_proficiencia' => 'max:50000|mimes:pdf',
 			'concorda_termos' => 'required',
 		]);
 
@@ -157,14 +157,14 @@ class MotivacaoDocumentosController extends BaseController
 		// $arquivo->id_inscricao_pos = $id_inscricao_pos;
 		// $arquivo->save();
 
-		// $comprovante_prof = $request->comprovante_proficiencia->store('uploads');
+		$comprovante_proficiencia = $request->comprovante_proficiencia->store('uploads');
 
-		// $arquivo = new Documento();
-		// $arquivo->id_candidato = $id_candidato;
-		// $arquivo->nome_arquivo = $comprovante_prof;
-		// $arquivo->tipo_arquivo = "Comprovante Proficiência Inglês";
-		// $arquivo->id_inscricao_pos = $id_inscricao_pos;
-		// $arquivo->save();
+		$arquivo = new Documento();
+		$arquivo->id_candidato = $id_candidato;
+		$arquivo->nome_arquivo = $comprovante_proficiencia;
+		$arquivo->tipo_arquivo = "Comprovante Proficiência Inglês";
+		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		$arquivo->save();
 
 		$motivacao = new CartaMotivacao();
 

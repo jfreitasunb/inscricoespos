@@ -46,7 +46,7 @@ class Documento extends Model
         }
     }
 
-    public function retorna_proficiencia($id_candidato,$id_inscricao_pos)
+    public function retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)
     {   
         if (!is_null($this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Comprovante Proficiência Inglês')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first())) {
             

@@ -409,9 +409,9 @@ class RelatorioController extends BaseController
 
     $nome_historico_banco = $local_documentos.$documento->retorna_historico($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
-    $nome_proficiencia_banco = $local_documentos.$documento->retorna_proficiencia($id_candidato, $id_inscricao_pos)->nome_arquivo;
+    $nome_proficiencia_banco = $local_documentos.$documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
-    $nome_comprovante_banco = $local_documentos.$documento->retorna_comprovante_ingles($id_candidato, $id_inscricao_pos)->nome_arquivo;
+    // $nome_comprovante_banco = $local_documentos.$documento->retorna_comprovante_ingles($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
     if (File::extension($nome_documento_banco) != 'pdf')
     {
@@ -436,17 +436,17 @@ class RelatorioController extends BaseController
       $success = $img->writeImage($nome_historico_pdf);
     }
 
-    // if (File::extension($nome_proficiencia_banco) != 'pdf')
-    // {
+    if (File::extension($nome_proficiencia_banco) != 'pdf')
+    {
 
-    //   $nome_historico_pdf = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
+      $nome_historico_pdf = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
       
-    //   DB::table('arquivos_enviados')->where('nome_arquivo', $nome_proficiencia_banco)->where('tipo_arquivo', 'Comprovante Proficiencia Inglês')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_historico_pdf]);
+      DB::table('arquivos_enviados')->where('nome_arquivo', $nome_proficiencia_banco)->where('tipo_arquivo', 'Comprovante Proficiencia Inglês')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_historico_pdf]);
 
-    //   $img = new Imagick($nome_proficiencia_banco);
-    //   $img->setImageFormat('pdf');
-    //   $success = $img->writeImage($nome_proficiencia_pdf);
-    // }
+      $img = new Imagick($nome_proficiencia_banco);
+      $img->setImageFormat('pdf');
+      $success = $img->writeImage($nome_proficiencia_pdf);
+    }
 
     // if (File::extension($nome_comprovante_banco) != 'pdf')
     // {
@@ -464,7 +464,7 @@ class RelatorioController extends BaseController
     
     $nome_uploads['historico_pdf'] = str_replace(File::extension($nome_historico_banco),'pdf', $nome_historico_banco);
 
-    // $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
+    $nome_uploads['nome_proficiencia_pdf'] = str_replace(File::extension($nome_proficiencia_banco),'pdf', $nome_proficiencia_banco);
 
     // $nome_uploads['nome_comprovante_pdf'] = str_replace(File::extension($nome_comprovante_banco),'pdf', $nome_comprovante_banco);
 
@@ -473,9 +473,9 @@ class RelatorioController extends BaseController
 
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
-    // $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_comprovante_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
-    $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+    // $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
 
     $process->setTimeout(3600);
     
