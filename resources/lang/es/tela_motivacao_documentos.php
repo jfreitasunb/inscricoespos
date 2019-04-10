@@ -16,5 +16,5 @@ return [
 	'texto_link_edital' => 'normas establecidas en el Acta del Programa de Matemáticas de la UnB',
 	'concordancia_3' => 'Leí y estoy de acuerdo con la declaración anterior.',
     'menu_enviar' => 'Enviar',
-    
+    'comprovante_proficiencia' => 'Certificados de competencia en idioma en Inglés',
 ];
