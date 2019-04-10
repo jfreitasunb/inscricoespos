@@ -50411,6 +50411,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -50681,6 +50682,8 @@ var render = function() {
                       : _vm._e()
                   ])
                 }),
+                _vm._v(" "),
+                _c("th", [_vm._v("Contemplado com bolsa?")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Candidato Selecionado?")])
               ],
