@@ -36,7 +36,7 @@ class ListaTodasIndicacoesController extends AdminController
 		$finalizacoes = new FinalizaInscricao;
 		
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_lista_indicacoes($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
 		$dados_para_template = [];
 
