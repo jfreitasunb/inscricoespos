@@ -86,7 +86,7 @@ class RememberCandidadoFimPrazo extends Command
 
         $locale = 'en';
 
-        if (($data_hoje->diffInDays($fim_inscricao) > 0) AND ($data_hoje->diffInDays($fim_inscricao) <= 3 OR $data_hoje->diffInDays($fim_inscricao) <= 7)) {
+        if (($data_hoje->diffInDays($fim_inscricao) > 0) AND ($data_hoje->diffInDays($fim_inscricao) <= 7)) {
             
             $candidatos_nao_finaliados = (new FinalizaInscricao())->retorna_registros_tabela_finaliza_inscricao($id_inscricao_pos);
 
