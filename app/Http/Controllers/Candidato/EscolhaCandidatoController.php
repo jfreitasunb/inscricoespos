@@ -199,6 +199,20 @@ class EscolhaCandidatoController extends BaseController
 				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
 
 				return redirect()->back();
+			}else{
+
+				$id_finalizada_inicializada = $finaliza_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+				if (count($id_finalizada_inicializada) == 0) {
+					
+					$finaliza_inscricao->id_candidato = $id_candidato;
+					
+					$finaliza_inscricao->id_inscricao_pos = $id_inscricao_pos;
+					
+					$finaliza_inscricao->finalizada = FALSE;
+					
+					$finaliza_inscricao->save();
+				}
 			}
 
 			$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
