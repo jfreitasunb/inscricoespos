@@ -193,6 +193,7 @@ class FinalizarInscricaoController extends BaseController
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
+				
 				notify()->flash(trans('mensagens_gerais.inscricao_finalizada'),'warning');
 
 				return redirect()->back();
@@ -200,9 +201,28 @@ class FinalizarInscricaoController extends BaseController
 
 			$dados_pessoais_candidato = User::find($id_candidato);
 
+			$finalizar_inscricao = new FinalizaInscricao();
+
+			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
+
+			if (count($id_finalizada_anteriormente)>0){
+
+				DB::table('finaliza_inscricao')->where('id', $id_finalizada_anteriormente[0])->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
+			}else{
+				
+				$finalizar_inscricao->id_candidato = $id_candidato;
+				
+				$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
+				
+				$finalizar_inscricao->finalizada = TRUE;
+				
+				$finalizar_inscricao->save();
+			}
+
 			$escolha_candidato = new EscolhaCandidato();
 
 			$programa_pretendido = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos)->programa_pretendido;
+			
 			$programa_pos = new ProgramaPos();
 
 			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido, $locale_fixo);
@@ -240,8 +260,7 @@ class FinalizarInscricaoController extends BaseController
 				}
 			}
 			
-			$finalizar_inscricao = new FinalizaInscricao();
-
+			
 			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
 			if (count($id_finalizada_anteriormente)>0){
