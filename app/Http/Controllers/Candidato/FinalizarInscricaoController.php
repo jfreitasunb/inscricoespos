@@ -69,6 +69,8 @@ class FinalizarInscricaoController extends BaseController
 
 			$finaliza_inscricao = new FinalizaInscricao();
 
+			$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
+
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
@@ -182,6 +184,8 @@ class FinalizarInscricaoController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
+			$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
+			
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {

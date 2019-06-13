@@ -111,6 +111,8 @@ class EscolhaCandidatoController extends BaseController
 
 			if (!is_null($candidato_ja_escolheu)) {
 
+				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
+				
 				$canditato_recomendante = new ContatoRecomendante();
 
 				$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
@@ -251,6 +253,7 @@ class EscolhaCandidatoController extends BaseController
 					}
 				}
 
+				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
 				$novo_usuario = new User();
 				$array_erro = [];
@@ -280,6 +283,8 @@ class EscolhaCandidatoController extends BaseController
 				$carta_recomendacao = new CartaRecomendacao();
 
 				$inicia_carta = $carta_recomendacao->inicia_carta_candidato($id_candidato, $id_inscricao_pos, $email_contatos_recomendantes);
+
+				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
 			}
 			
