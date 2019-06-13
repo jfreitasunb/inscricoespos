@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\ConfiguraInicioPrograma;
+use InscricoesPos\Models\ConfiguraEnvioDocumentosMatricula;
 use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\ProgramaPos;
@@ -58,41 +59,15 @@ class EnviaDocumentosMatriculaController extends BaseController
 			
 			$finaliza_inscricao = new FinalizaInscricao();
 
-			$configura_inicio = new ConfiguraInicioPrograma();
+			$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
-
-			$array_months = [];
-			
-			$array_months[1]  = trans('meses.mes_1');
-			
-			$array_months[2]  = trans('meses.mes_2');
-			
-			$array_months[3]  = trans('meses.mes_3');
-			
-			$array_months[4]  = trans('meses.mes_4');
-			
-			$array_months[5]  = trans('meses.mes_5');
-			
-			$array_months[6]  = trans('meses.mes_6');
-			
-			$array_months[7]  = trans('meses.mes_7');
-			
-			$array_months[8]  = trans('meses.mes_8');
-			
-			$array_months[9]  = trans('meses.mes_9');
-			
-			$array_months[10] = trans('meses.mes_10');
-			
-			$array_months[11] = trans('meses.mes_11');
-			
-			$array_months[12] = trans('meses.mes_12');
+			$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
 			if (!$status_inscricao) {
 
-				return redirect()->back();
+				return redirect()->route('home');
 			}
 
 			$homologa = new HomologaInscricoes();
@@ -100,7 +75,8 @@ class EnviaDocumentosMatriculaController extends BaseController
 			$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
 
 			if (!$candidato_homologado) {
-				return redirect()->back();
+				
+				return redirect()->route('home');
 			}
 
 			$selecionado = new CandidatosSelecionados();
@@ -109,47 +85,18 @@ class EnviaDocumentosMatriculaController extends BaseController
 			
 			if (!$status_selecao->selecionado) {
 
-				return redirect()->back();
+				return redirect()->route('home');
 			}
 
-			if ($status_selecao->confirmou_presenca) {
+			if (!$status_selecao->confirmou_presenca) {
 
-				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
-			
 				return redirect()->route('home');
 			}
 			
-			$confirmar_mes = $configura_inicio->retorna_se_precisam_confirmar_mes($id_inscricao_pos, $status_selecao->programa_pretendido);
-			
-			$meses_inicio = [];
-			
-			$data_hoje = (new Carbon())->format('Y-m-d');
-
-			if ($confirmar_mes) {
-
-				$retorna_meses_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
-
-				foreach ($retorna_meses_confirmacao as $mes_confirmacao) {
-										
-					$prazo = Carbon::createFromFormat('Y-m-d', $mes_confirmacao->prazo_confirmacao);
-
-					if ($data_hoje <= $prazo) {
-					
-						if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
-					
-							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
-						}
-
-						if (is_null($mes_confirmacao->programa_para_confirmar)) {
-					
-							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
-						}
-					}
-				}
-			}
 
 			if (!$libera_tela) {
-				return redirect()->back();
+				
+				return redirect()->route('home');
 			}
 
 			$nome = User::find($id_user)->nome;
@@ -166,7 +113,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 			
 			$dados_para_template['programa_pretendido'] = $nome_programa_pretendido;
 
-			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template', 'meses_inicio'));
+			return view('templates.partials.candidato.envia_documentos_matricula');
 
 		}else{
 			
