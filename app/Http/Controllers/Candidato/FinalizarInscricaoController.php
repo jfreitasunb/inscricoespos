@@ -60,8 +60,11 @@ class FinalizarInscricaoController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
 		$arquivos_editais = storage_path("/app/editais/");
 
 		if ($autoriza_inscricao) {
@@ -94,7 +97,6 @@ class FinalizarInscricaoController extends BaseController
 			}
 
 			$informou_dados_academicos = DadoAcademicoCandidato::find($id_candidato);
-
 
 			if (is_null($informou_dados_academicos)) {
 				
@@ -177,7 +179,9 @@ class FinalizarInscricaoController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		if ($autoriza_inscricao) {
@@ -185,7 +189,7 @@ class FinalizarInscricaoController extends BaseController
 			$finaliza_inscricao = new FinalizaInscricao();
 
 			$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
-			
+
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 			if ($status_inscricao) {
@@ -204,6 +208,7 @@ class FinalizarInscricaoController extends BaseController
 			$nome_programa_pos_candidato = $programa_pos->pega_programa_pos_mat($programa_pretendido, $locale_fixo);
 
 			$dados_email_candidato['nome_candidato'] = $dados_pessoais_candidato->nome;
+
 			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
 
 			$recomendantes_candidato = new ContatoRecomendante();
@@ -216,13 +221,16 @@ class FinalizarInscricaoController extends BaseController
 
 					$dado_pessoal_recomendante = User::find($recomendante->id_recomendante);
 
-
 					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
 
 					$dados_email['nome_professor'] = $dado_pessoal_recomendante->nome;
+
         			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
+
 			        $dados_email['programa'] = $nome_programa_pos_candidato;
+
         			$dados_email['email_recomendante'] = $dado_pessoal_recomendante->email;
+
         			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
 					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
@@ -242,8 +250,11 @@ class FinalizarInscricaoController extends BaseController
 			}else{
 				
 				$finalizar_inscricao->id_candidato = $id_candidato;
+				
 				$finalizar_inscricao->id_inscricao_pos = $id_inscricao_pos;
+				
 				$finalizar_inscricao->finalizada = TRUE;
+				
 				$finalizar_inscricao->save();
 			}
 			//Para testes

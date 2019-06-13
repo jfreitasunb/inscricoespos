@@ -84,33 +84,50 @@ class DadosAcademicosController extends BaseController
 		$dados_academicos_candidato = $dados_academicos->retorna_dados_academicos($id_candidato);
 
 		$nivel_candidato[0] = 'Especialista';
+		
 		$nivel_candidato[1] = 'Mestrado';
+		
 		$nivel_candidato[2] = 'Doutorado';
 
-
 		if (is_null($dados_academicos_candidato)) {
+
 			$dados = [];
+
 			$dados['curso_graduacao'] = '';
+
 			$dados['tipo_curso_graduacao'] = '';
+
 			$dados['instituicao_graduacao'] = '';
+
 			$dados['ano_conclusao_graduacao'] = '';
+
 			$dados['curso_pos'] = '';
+
 			$dados['tipo_curso_pos'] = '';
 			// $dados['nivel_pos'] = '';
 			$dados['instituicao_pos'] = '';
+
 			$dados['ano_conclusao_pos'] = '';
+
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos'));
 		}else{
+
 			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
+
 			$dados['tipo_curso_graduacao'] = $dados_academicos_candidato->tipo_curso_graduacao;
+
 			$dados['instituicao_graduacao'] = $dados_academicos_candidato->instituicao_graduacao;
+
 			$dados['ano_conclusao_graduacao'] = $dados_academicos_candidato->ano_conclusao_graduacao;
+
 			$dados['curso_pos'] = $dados_academicos_candidato->curso_pos;
 			// $dados['nivel_pos'] = $dados_academicos_candidato->nivel_pos;
-			$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
-			$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
-			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
+			$dados['tipo_curso_pos'] = $dados_academicos_candidato->tipo_curso_pos;
+
+			$dados['instituicao_pos'] = $dados_academicos_candidato->instituicao_pos;
+
+			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
 			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos'));
 		}
@@ -118,6 +135,7 @@ class DadosAcademicosController extends BaseController
 
 	public function postDadosAcademicos(Request $request)
 	{
+
 		$this->validate($request, [
 			'curso_pos' => 'required_without_all:curso_graduacao',
 			'tipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
@@ -132,38 +150,57 @@ class DadosAcademicosController extends BaseController
 		$formacao = new Formacao;
 
 		$nivel_candidato[0] = 'Especialista';
+
 		$nivel_candidato[1] = 'Mestrado';
+
 		$nivel_candidato[2] = 'Doutorado';
 
 		$dados_academicos = DadoAcademicoCandidato::find($id_candidato);
 
 		$cria_dados_academicos['curso_graduacao'] = $this->titleCase(Purifier::clean(trim($request->input('curso_graduacao'))));
+
 		$cria_dados_academicos['tipo_curso_graduacao'] = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+
 		$cria_dados_academicos['instituicao_graduacao'] = $this->titleCase(Purifier::clean(trim($request->input('instituicao_graduacao'))));
+
 		$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+
 		$cria_dados_academicos['curso_pos'] = $this->titleCase(Purifier::clean(trim($request->input('curso_pos'))));
 		// $cria_dados_academicos['nivel_pos'] = $formacao->retorna_id_formacao($nivel_candidato[(int)$request->nivel_pos],'Pós-Graduação');
 		
 		if (is_null(($request->input('tipo_curso_pos')))) {
+
 			$cria_dados_academicos['tipo_curso_pos'] = 9;
 		}else{
+
 			$cria_dados_academicos['tipo_curso_pos'] = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 		}
 		
 		$cria_dados_academicos['instituicao_pos'] = $this->titleCase(Purifier::clean(trim($request->input('instituicao_pos'))));
+
 		$cria_dados_academicos['ano_conclusao_pos'] = (int)Purifier::clean(trim($request->input('ano_conclusao_pos')));
 
 		if (is_null($dados_academicos)) {
+
 			$cria_dados_academicos = new DadoAcademicoCandidato();
+
 			$cria_dados_academicos->id_candidato = $id_candidato;
+
 			$cria_dados_academicos->curso_graduacao = Purifier::clean(trim($request->input('curso_graduacao')));
+
 			$cria_dados_academicos->tipo_curso_graduacao = (int)Purifier::clean(trim($request->input('tipo_curso_graduacao')));
+
 			$cria_dados_academicos->instituicao_graduacao = Purifier::clean(trim($request->input('instituicao_graduacao')));
+
 			$cria_dados_academicos->ano_conclusao_graduacao = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
+
 			$cria_dados_academicos->curso_pos = Purifier::clean(trim($request->input('curso_pos')));
+
 			if (is_null(($request->input('tipo_curso_pos')))) {
+
 				$cria_dados_academicos->tipo_curso_pos = 9;	
 			}else{
+
 				$cria_dados_academicos->tipo_curso_pos = (int)Purifier::clean(trim($request->input('tipo_curso_pos')));
 			}
 			
@@ -172,8 +209,7 @@ class DadosAcademicosController extends BaseController
 
 			$cria_dados_academicos->save();
 
-		}else{
-			
+		}else{			
 
 			$dados_academicos->update($cria_dados_academicos);
 		}

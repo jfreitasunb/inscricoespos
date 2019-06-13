@@ -66,9 +66,11 @@ class DadosPessoaisController extends BaseController
 		$editar_dados = false;
 		
 		$candidato = new DadoPessoalCandidato();
+		
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		if (is_null($dados_pessoais)) {
+			
 			$dados = [
 				'nome' => $this->titleCase($user->nome),
 				'data_nascimento' => '',
@@ -84,12 +86,14 @@ class DadosPessoaisController extends BaseController
 				'celular' => '',
 			];
 		}else{
+			
 			if (!is_null($dados_pessoais->data_nascimento)) {
 			
 				$nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
 
 				$data_nascimento = $nascimento->format('d/m/Y');
 			}else{
+			
 				$data_nascimento = '';
 			}
 			
@@ -101,6 +105,7 @@ class DadosPessoaisController extends BaseController
 			$nome_cidade = new Cidade;
 
 			if (!is_null($dados_pessoais->pais)) {
+			
 				$pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
 			}else{
 
@@ -108,6 +113,7 @@ class DadosPessoaisController extends BaseController
 			}
 
 			if (!is_null($dados_pessoais->estado)) {
+			
 				$estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
 			}else{
 
@@ -115,6 +121,7 @@ class DadosPessoaisController extends BaseController
 			}
 
 			if (!is_null($dados_pessoais->cidade)) {
+				
 				$cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
 			}else{
 
@@ -138,7 +145,6 @@ class DadosPessoaisController extends BaseController
 		}
 
 		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
-		
 	}
 
 	public function getDadosPessoaisEditar()
@@ -151,14 +157,17 @@ class DadosPessoaisController extends BaseController
 		$user = $this->SetUser();
 		
 		$nome = $user->nome;
+		
 		$id_user = $user->id_user;
 
 		$editar_dados = true;
 		
 		$candidato = new DadoPessoalCandidato();
+		
 		$dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
 		if (is_null($dados_pessoais)) {
+			
 			$dados = [
 					'nome' => $this->titleCase($user->nome),
 					'data_nascimento' => '',
@@ -174,6 +183,7 @@ class DadosPessoaisController extends BaseController
 					'celular' => '',
 			];
 		}else{
+			
 			$dados = [
 				'nome' => $this->titleCase($dados_pessoais->nome),
 				'data_nascimento' => $dados_pessoais->data_nascimento,
@@ -190,9 +200,7 @@ class DadosPessoaisController extends BaseController
 			];
 		}
 
-
 		return view('templates.partials.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
-		
 	}
 
 	public function postDadosPessoais(Request $request)
@@ -234,16 +242,27 @@ class DadosPessoaisController extends BaseController
 		$update_nome['nome'] = $this->titleCase(Purifier::clean(trim($request->input('nome'))));
 
 		if (is_null($candidato)) {
+
 			$cria_candidato = new DadoPessoalCandidato();
+
 			$cria_candidato->id_candidato = $id_candidato;
+
 			$cria_candidato->data_nascimento = $data_nascimento;
+
 			$cria_candidato->numerorg = Purifier::clean(trim($request->input('numerorg')));
+
 			$cria_candidato->endereco = Purifier::clean(trim($request->input('endereco')));
+
 			$cria_candidato->cep = Purifier::clean(trim($request->input('cep')));
+
 			$cria_candidato->estado = $request->input('estado');
+
 			$cria_candidato->cidade = $request->input('cidade');
+
 			$cria_candidato->pais = $request->input('pais');
+
 			$cria_candidato->celular = Purifier::clean(trim($request->input('celular')));
+
 			$cria_candidato->save($dados_pessoais);
 
 			$usuario->update($update_nome);
@@ -261,7 +280,9 @@ class DadosPessoaisController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		$finaliza_inscricao = new FinalizaInscricao();
@@ -269,11 +290,11 @@ class DadosPessoaisController extends BaseController
 		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos);
 
 		if ($autoriza_inscricao and !$status_inscricao) {
+
 			return redirect()->route('dados.academicos');
 		}else{
 
 			return redirect()->back();
-
 		}
 	}
 }

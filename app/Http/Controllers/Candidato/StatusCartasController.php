@@ -58,7 +58,9 @@ class StatusCartasController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		
 		$status_carta = $edital_ativo->visualiza_status_carta();
 
 		if ($status_carta) {
@@ -89,12 +91,9 @@ class StatusCartasController extends BaseController
 				$carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$id_user,$id_inscricao_pos);
 
 				$dados_para_template[$recomendante->id_recomendante]['status_carta'] = $carta_aluno->completada;
-
 			}
 			
-
 			return view('templates.partials.candidato.status_cartas',compact('dados_para_template'));
-
 		}else{
 			return redirect()->back();
 		}

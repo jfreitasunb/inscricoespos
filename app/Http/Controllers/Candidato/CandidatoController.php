@@ -59,12 +59,16 @@ class CandidatoController extends BaseController
     public function getCidades($idEstado)
     {
         $estado = $this->estadoModel->find($idEstado);
+        
         $cidades = $estado->cidades()->getQuery()->get(['id', 'cidade']);
+        
         return Response::json($cidades);
     }
+
 	public function getMenu()
 	{	
-		Session::get('locale');
+	
+    	Session::get('locale');
         
         $user = $this->SetUser();
         
@@ -79,8 +83,10 @@ class CandidatoController extends BaseController
         $status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
         if (!is_null($status_selecao)) {
+    
             if ($status_selecao->selecionado AND !$status_selecao->confirmou_presenca) {
-            return redirect()->route('confirma.presenca');
+    
+                return redirect()->route('confirma.presenca');
             }
         }
         

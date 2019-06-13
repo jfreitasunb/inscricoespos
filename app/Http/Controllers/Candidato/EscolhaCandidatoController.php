@@ -64,14 +64,17 @@ class EscolhaCandidatoController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		if ($autoriza_inscricao) {
+		
 			$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);
 
 			$nome_programa_pos = new ProgramaPos();
 
 			foreach ($programas_disponiveis as $programa) {
+				
 				$programa_para_inscricao[$programa] = $nome_programa_pos->pega_programa_pos_mat($programa, $locale_candidato);
 			}
 
@@ -87,22 +90,37 @@ class EscolhaCandidatoController extends BaseController
 			}
 
 			$dados = [];
+			
 			$dados['programa_pretendido'] = null;
+			
 			$dados['area_pos'] = null;
+			
 			$dados['interesse_bolsa'] = null;
+			
 			$dados['vinculo_empregaticio'] = null;
 					
 			$dados['nome_recomendante_1'] = null;
+			
 			$dados['nome_recomendante_2'] = null;
+			
 			$dados['nome_recomendante_3'] = null;
+			
 			$dados['email_recomendante_1'] = null;
+			
 			$dados['email_recomendante_2'] = null;
+			
 			$dados['email_recomendante_3'] = null;
+			
 			$dados['nome_recomendante_1'] = null;
+			
 			$dados['nome_recomendante_2'] = null;
+			
 			$dados['nome_recomendante_3'] = null;
+			
 			$dados['email_recomendante_1'] = null;
+			
 			$dados['email_recomendante_2'] = null;
+			
 			$dados['email_recomendante_3'] = null;
 
 			$escolha_candidato = new EscolhaCandidato();
@@ -112,7 +130,7 @@ class EscolhaCandidatoController extends BaseController
 			if (!is_null($candidato_ja_escolheu)) {
 
 				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
-				
+
 				$canditato_recomendante = new ContatoRecomendante();
 
 				$contatos_recomendantes = $canditato_recomendante->retorna_recomendante_candidato($id_user,$id_inscricao_pos);
@@ -136,8 +154,11 @@ class EscolhaCandidatoController extends BaseController
 				}
 
 				$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
+				
 				$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
+				
 				$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
+				
 				$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
 			}
 
@@ -168,8 +189,6 @@ class EscolhaCandidatoController extends BaseController
 
 				return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','desativa_recomendante'));
 			}
-
-
 		}else{
 			
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
@@ -188,6 +207,7 @@ class EscolhaCandidatoController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		if ($autoriza_inscricao) {
@@ -228,6 +248,7 @@ class EscolhaCandidatoController extends BaseController
 				}
 
 				if (($request->area_pos_principal == $request->area_pos_secundaria) and ($request->programa_pretendido === '2')) {
+		
 					notify()->flash(trans('mensagens_gerais.areas_diferentes'),'warning');
 
 					return redirect()->back();
@@ -249,6 +270,7 @@ class EscolhaCandidatoController extends BaseController
 					$existe_associacao = $associa_email->retorna_associacao($email_contatos_recomendantes[$i]);
 
 					if (!is_null($existe_associacao)) {
+		
 						$email_contatos_recomendantes[$i] = $existe_associacao;
 					}
 				}
@@ -256,6 +278,7 @@ class EscolhaCandidatoController extends BaseController
 				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
 				$novo_usuario = new User();
+				
 				$array_erro = [];
 
 				for ($i=0; $i < count($email_contatos_recomendantes); $i++) {
@@ -267,12 +290,15 @@ class EscolhaCandidatoController extends BaseController
 					$novo_usuario_recomendante = $novo_usuario->registra_recomendante($novo_recomendante);
 
 					if ($novo_usuario_recomendante) {
+				
 						$array_erro[$i] = $email_contatos_recomendantes[$i];
 					}
 				}
 
 				if (!empty($array_erro)) {
+				
 					notify()->flash(trans('mensagens_gerais.inicio_erro_email_recomendantes').implode(", ", $array_erro).trans('mensagens_gerais.final_erro_email_recomendantes'),'warning');
+				
 					return redirect()->back();
 				}
 
@@ -285,7 +311,6 @@ class EscolhaCandidatoController extends BaseController
 				$inicia_carta = $carta_recomendacao->inicia_carta_candidato($id_candidato, $id_inscricao_pos, $email_contatos_recomendantes);
 
 				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
-
 			}
 			
 			notify()->flash(trans('mensagens_gerais.mensagem_sucesso'),'success');

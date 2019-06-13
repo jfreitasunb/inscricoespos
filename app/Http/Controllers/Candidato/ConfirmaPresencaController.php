@@ -62,20 +62,30 @@ class ConfirmaPresencaController extends BaseController
 			$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
 
 			$array_months = [];
+			
 			$array_months[1]  = trans('meses.mes_1');
+			
 			$array_months[2]  = trans('meses.mes_2');
+			
 			$array_months[3]  = trans('meses.mes_3');
+			
 			$array_months[4]  = trans('meses.mes_4');
+			
 			$array_months[5]  = trans('meses.mes_5');
+			
 			$array_months[6]  = trans('meses.mes_6');
+			
 			$array_months[7]  = trans('meses.mes_7');
+			
 			$array_months[8]  = trans('meses.mes_8');
+			
 			$array_months[9]  = trans('meses.mes_9');
+			
 			$array_months[10] = trans('meses.mes_10');
+			
 			$array_months[11] = trans('meses.mes_11');
+			
 			$array_months[12] = trans('meses.mes_12');
-
-
 
 			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
@@ -97,15 +107,16 @@ class ConfirmaPresencaController extends BaseController
 			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 			
 			if (!$status_selecao->selecionado) {
+
 				return redirect()->back();
 			}
 
 			if ($status_selecao->confirmou_presenca) {
+
 				notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
 			
 				return redirect()->route('home');
 			}
-
 			
 			$confirmar_mes = $configura_inicio->retorna_se_precisam_confirmar_mes($id_inscricao_pos, $status_selecao->programa_pretendido);
 			
@@ -114,22 +125,24 @@ class ConfirmaPresencaController extends BaseController
 			$data_hoje = (new Carbon())->format('Y-m-d');
 
 			if ($confirmar_mes) {
+
 				$retorna_meses_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
 
 				foreach ($retorna_meses_confirmacao as $mes_confirmacao) {
-					
-					
+										
 					$prazo = Carbon::createFromFormat('Y-m-d', $mes_confirmacao->prazo_confirmacao);
 
 					if ($data_hoje <= $prazo) {
+					
 						if ($mes_confirmacao->programa_para_confirmar == $status_selecao->programa_pretendido) {
+					
 							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
 						}
 
 						if (is_null($mes_confirmacao->programa_para_confirmar)) {
+					
 							$meses_inicio[$mes_confirmacao->id_inicio_programa] = $array_months[$mes_confirmacao->mes_inicio];
 						}
-
 					}
 				}
 			}
@@ -155,6 +168,7 @@ class ConfirmaPresencaController extends BaseController
 			return view('templates.partials.candidato.confirma_presenca',compact('dados_para_template', 'meses_inicio'));
 
 		}else{
+			
 			return redirect()->back();
 		}
 	}
@@ -176,12 +190,15 @@ class ConfirmaPresencaController extends BaseController
 
 				$id_inicio_programa = (int)$request->id_inicio_programa;
 			}else{
+			
 				$id_inicio_programa = null;
 			}
 
 			if (isset($request->confirma)) {
+			
 				$confirmou_presenca = True;
 			}else{
+			
 				$confirmou_presenca = False;
 			}
 
@@ -194,14 +211,15 @@ class ConfirmaPresencaController extends BaseController
 			$edital_ativo = new ConfiguraInscricaoPos();
 
 			if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
+			
 				return redirect()->back();
 			}
 			
 			if ($id_candidato != $id_user) {
+			
 				return redirect()->back();
 			}
 
-			
 			$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 			
 			$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
@@ -222,6 +240,7 @@ class ConfirmaPresencaController extends BaseController
 				$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
 
 				if (!$candidato_homologado) {
+
 					return redirect()->back();
 				}
 
@@ -230,10 +249,12 @@ class ConfirmaPresencaController extends BaseController
 				$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
 				if (!$status_selecao->selecionado) {
+
 					return redirect()->back();
 				}
 
 				if ($status_selecao->confirmou_presenca) {
+
 					notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
 				
 					return redirect()->route('home');
@@ -253,10 +274,11 @@ class ConfirmaPresencaController extends BaseController
 					$prazo_confirmacao = $mes_escolhido->prazo_confirmacao;
 				}
 				
-
 				if ($data_hoje <= $prazo_confirmacao) {
+					
 					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
 				}else{
+					
 					notify()->flash(trans('mensagens_gerais.presenca_erro_fora_prazo'),'error');
 				
 					return redirect()->route('home');
@@ -264,19 +286,23 @@ class ConfirmaPresencaController extends BaseController
 				
 
 				if ($status_resposta) {
+					
 					notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
 				
 					return redirect()->route('home');
 				}else{
+					
 					notify()->flash(trans('mensagens_gerais.confirmou_presenca_erro'),'error');
 				
 					return redirect()->route('home');
 				}
 
 			}else{
+				
 				return redirect()->back();
 			}
 		}else{
+			
 			return redirect()->route('home');
 		}
 	}

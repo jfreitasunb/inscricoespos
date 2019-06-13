@@ -134,24 +134,35 @@ class MotivacaoDocumentosController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		
 		$finaliza_inscricao = new FinalizaInscricao();
-		
+
 		$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
 		$doc_pessoais = $request->documentos_pessoais->store('uploads');
+		
 		$arquivo = new Documento();
+		
 		$arquivo->id_candidato = $id_candidato;
+		
 		$arquivo->nome_arquivo = $doc_pessoais;
+		
 		$arquivo->tipo_arquivo = "Documentos";
+		
 		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		
 		$arquivo->save();
 
 		$hist = $request->historico->store('uploads');
 
 		$arquivo = new Documento();
+		
 		$arquivo->id_candidato = $id_candidato;
+		
 		$arquivo->nome_arquivo = $hist;
+		
 		$arquivo->tipo_arquivo = "Histórico";
+		
 		$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		
 		$arquivo->save();
 
 		// $comprovante_en = $request->comprovante_ingles->store('uploads');
@@ -168,10 +179,15 @@ class MotivacaoDocumentosController extends BaseController
 			$comprovante_proficiencia = $request->comprovante_proficiencia->store('uploads');
 
 			$arquivo = new Documento();
+			
 			$arquivo->id_candidato = $id_candidato;
+			
 			$arquivo->nome_arquivo = $comprovante_proficiencia;
+			
 			$arquivo->tipo_arquivo = "Comprovante Proficiência Inglês";
+			
 			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			
 			$arquivo->save();
 		}
 
@@ -181,14 +197,23 @@ class MotivacaoDocumentosController extends BaseController
 
 
 		if (is_null($carta_motivacao)) {
+			
 			$nova_motivacao = new CartaMotivacao();
+			
 			$nova_motivacao->id_candidato = $id_candidato;
+			
 			$nova_motivacao->motivacao = Purifier::clean($request->input('motivacao'));
+			
 			$nova_motivacao->concorda_termos = (bool)$request->input('concorda_termos');
+			
 			$nova_motivacao->id_inscricao_pos = $id_inscricao_pos;
+			
 			$nova_motivacao->save();
+
 		}else{
+			
 			$dados_motivacao['motivacao'] = Purifier::clean($request->input('motivacao'));
+			
 			$dados_motivacao['updated_at'] = date('Y-m-d H:i:s');
 			
 			DB::table('carta_motivacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update($dados_motivacao);
