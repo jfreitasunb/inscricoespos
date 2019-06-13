@@ -35,7 +35,7 @@ class FinalizaInscricao extends FuncoesModels
     }
     
 
-    public function retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos)
+    public function retorna_inscricao_finalizada($id_candidato, $id_inscricao_pos)
     {
         $finalizou_inscricao = $this->select('finalizada')->where("id_candidato", $id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get();
 
