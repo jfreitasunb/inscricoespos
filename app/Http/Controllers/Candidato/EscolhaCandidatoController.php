@@ -201,18 +201,7 @@ class EscolhaCandidatoController extends BaseController
 				return redirect()->back();
 			}else{
 
-				$id_finalizada_inicializada = $finaliza_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
-
-				if (count($id_finalizada_inicializada) == 0) {
-					
-					$finaliza_inscricao->id_candidato = $id_candidato;
-					
-					$finaliza_inscricao->id_inscricao_pos = $id_inscricao_pos;
-					
-					$finaliza_inscricao->finalizada = FALSE;
-					
-					$finaliza_inscricao->save();
-				}
+				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 			}
 
 			$programas_disponiveis = explode("_", $edital_ativo->retorna_inscricao_ativa()->programa);

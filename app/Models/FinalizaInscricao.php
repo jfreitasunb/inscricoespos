@@ -16,6 +16,25 @@ class FinalizaInscricao extends FuncoesModels
     protected $fillable = [
     ];
 
+    public function inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos)
+    {
+        $id_finalizada_inicializada = $this->select('id')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->pluck('id');
+
+        if (count($id_finalizada_inicializada) == 0) {
+            
+            $finaliza_inscricao = new FinalizaInscricao();
+            
+            $finaliza_inscricao->id_candidato = $id_candidato;
+            
+            $finaliza_inscricao->id_inscricao_pos = $id_inscricao_pos;
+            
+            $finaliza_inscricao->finalizada = FALSE;
+            
+            $finaliza_inscricao->save();
+        }
+    }
+    
+
     public function retorna_inscricao_finalizada($id_candidato,$id_inscricao_pos)
     {
         $finalizou_inscricao = $this->select('finalizada')->where("id_candidato", $id_candidato)->where("id_inscricao_pos", $id_inscricao_pos)->get();
