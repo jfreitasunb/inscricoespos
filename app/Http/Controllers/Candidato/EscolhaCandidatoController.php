@@ -129,7 +129,7 @@ class EscolhaCandidatoController extends BaseController
 
 			if (!is_null($candidato_ja_escolheu)) {
 
-				$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
+				$finaliza_inscricao->inicializa_tabela_finalizacao($id_user, $id_inscricao_pos);
 
 				$canditato_recomendante = new ContatoRecomendante();
 
