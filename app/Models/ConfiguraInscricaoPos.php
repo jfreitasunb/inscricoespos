@@ -57,23 +57,24 @@ class ConfiguraInscricaoPos extends Model
     {
 
         if (!is_null($this->retorna_inscricao_ativa())){
+            
             $programas = explode('_', $this->retorna_inscricao_ativa()->programa);
 
             
-                if (sizeof($programas) > 1) {
-                    return $texto_inscricao_pos = 'dois_programas';
-                }else{
-                    if ($programas[0] == 1) {
+            if (sizeof($programas) > 1) {
+                return $texto_inscricao_pos = 'dois_programas';
+            }else{
+                
+                if ($programas[0] == 1) {
+                    
                     return $texto_inscricao_pos = 'inscricao_mestrado';
                 }
 
-                    if ($programas[0] == 2) {
+                if ($programas[0] == 2) {
+                    
                     return $texto_inscricao_pos = 'inscricao_doutorado';
-                    }
                 }
-
-                
-
+            }
         }
     }
 
@@ -91,8 +92,6 @@ class ConfiguraInscricaoPos extends Model
         }
 
         $data_hoje = (new Carbon())->format('Y-m-d');
-        
-
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
             if (Session::get('locale') == 'en') {
@@ -185,37 +184,42 @@ class ConfiguraInscricaoPos extends Model
         if (!is_null($this->retorna_inscricao_ativa())) {
             
             $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
+            
             $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
 
             $data_inicio = $inicio->format('Y-m-d');
+            
             $data_fim = $fim->format('Y-m-d');
 
             if ($nova_inscricao_inicio > $data_fim) {
+                
                 return true;
             }else{
+                
                 return false;
             }
         }else{
 
             return true;
         }
-        
     }
 
     public function ira_ano_semestre()
     {    
         $date = new Carbon();
+        
         $mes = $date->format('m');
+        
         $ano = $date->format('y');
     
         if ($mes < 7) {
+            
             $ano_semestre_ira = "02/".($ano-1);
         }else{
+            
             $ano_semestre_ira = "01/".$ano;
         }
 
         return $ano_semestre_ira;
     }
-
-    
 }
