@@ -256,10 +256,8 @@ class FinalizarInscricaoController extends BaseController
 					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
 
 					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_candidato', $recomendante->id_candidato)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
-
 				}
 			}
-			
 			
 			$id_finalizada_anteriormente = $finalizar_inscricao->select('id')->where('id_candidato',$id_candidato)->where('id_inscricao_pos',$id_inscricao_pos)->pluck('id');
 
