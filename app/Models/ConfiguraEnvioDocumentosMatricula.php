@@ -4,13 +4,10 @@ namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 
 class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
 {
-    use SoftDeletes;
-
     protected $primaryKey = 'id';
 
     protected $table = 'configura_envio_documentos_matricula';
@@ -22,30 +19,24 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
         'id_coordenador',
     ];
 
-    public function libera_tela_confirmacao($id_inscricao_pos)
+    public function libera_tela_documento_matricula($id_inscricao_pos)
     {
-        $periodos_confirmacao = $this->retorna_meses_para_inicio($id_inscricao_pos);
+        $periodo_envio_documentos = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
         
         $data_hoje = (new Carbon())->format('Y-m-d');
-
-        $liberar_tela = false;
-
-        foreach ($periodos_confirmacao as $periodo) {
             
-            $prazo = Carbon::createFromFormat('Y-m-d', $periodo->prazo_confirmacao);
+        $inicio_prazo = Carbon::createFromFormat('Y-m-d', $periodo_envio_documentos->inicio_envio_documentos)->format('Y-m-d');
 
-            if ($data_hoje <= $prazo) {
-                $liberar_tela = true;
-            }else{
-                $liberar_tela = false;
-            }
+        $fim_prazo = Carbon::createFromFormat('Y-m-d', $periodo_envio_documentos->fim_envio_documentos)->format('Y-m-d');
+
+        if (($data_hoje >= $inicio_prazo) AND ( $data_hoje <= $fim_prazo)) {
+        
+            $liberar_tela = true;
+        }else{
+        
+            $liberar_tela = false;
         }
+        
         return $liberar_tela; 
     }
-
-    public function limpa_configuracoes_anteriores($id_inscricao_pos)
-    {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
-    }
-
 }
