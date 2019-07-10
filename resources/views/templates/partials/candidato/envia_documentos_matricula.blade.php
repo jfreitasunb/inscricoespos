@@ -12,17 +12,7 @@
     </div>
 </fieldset>
 
-{!! Form::open(array('route' => 'motivacao.documentos', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
-      
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_envia_documentos_matricula.motivacao')}}</legend>
-      <div class="row">
-        <div class="col-md-12">
-          {!! Form::textarea('motivacao', $dados['motivacao'] ?: '' , ['class' => 'form-control', 'rows' => '15', 'required' => '']) !!} 
-        </div>
-      </div>
-  </fieldset>
-
+{!! Form::open(array('route' => 'documentos.matricula', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.documentos_pessoais') }}</legend>
         <div class="form-horizontal"{{ $errors->has('documentos_pessoais') ? ' has-error' : '' }}>
@@ -65,26 +55,7 @@
         </div>
   </fieldset>
 
-  {{-- <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.comprovante_ingles') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('comprovante_ingles') ? ' has-error' : '' }}>
-          <div class="row">
-            <span class="input-group-btn">
-                <!-- image-preview-clear button -->
-                <button type="button" class="btn btn-primary" style="display:none;">
-                    <span class="glyphicon glyphicon-remove"></span> Clear
-                </button>
-                <!-- image-preview-input -->
-                <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="comprovante_ingles" required=""/> <!-- rename it -->
-                </div>
-            </span>
-          </div>
-           @if ($errors->has('comprovante_ingles'))
-            <span class="help-block">{{ $errors->first('comprovante_ingles') }}</span>
-          @endif
-        </div>
-  </fieldset> --}}
+  
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.comprovante_proficiencia') }}</legend>
