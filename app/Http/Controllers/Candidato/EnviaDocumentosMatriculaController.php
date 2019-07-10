@@ -32,7 +32,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use InscricoesPos\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-
+use App\Rules\ArrayUnico;
 /**
 * Classe para manipulação do candidato.
 */
@@ -123,6 +123,10 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 	public function postConfirmaPresencaEnviaDocumentosMatricula(Request $request)
 	{	
+		// $request->validate([
+  //           'name'      =>  ['required','max:255', new ArrayUnico],
+  //           'email'     =>  'required|email|unique:customers',
+		// ]);
 
 		$id_candidato = (int)$request->id_candidato;
 
