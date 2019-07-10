@@ -27,6 +27,9 @@ use InscricoesPos\Notifications\AtivaConta;
 */
 class AuthController extends BaseController
 {
+	protected $maxAttempts = 5;
+
+	protected $decayMinutes = 5;
 
 	public function getSignup()
 	{	
