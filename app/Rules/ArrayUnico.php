@@ -23,9 +23,15 @@ class ArrayUnico implements Rule
      * @param  mixed  $value
      * @return bool
      */
+    
+    public function array_has_duplicates($array)
+    {
+        return count($array) !== count(array_unique($array));
+    }
+    
     public function passes($attribute, $value)
     {
-        //
+        return $this->array_has_duplicates($value);
     }
 
     /**
@@ -35,6 +41,6 @@ class ArrayUnico implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Você anexou documentos duplicados. Verifique e envie os documentos corretos.';
     }
 }
