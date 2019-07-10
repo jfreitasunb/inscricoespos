@@ -19,6 +19,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 use InscricoesPos\Notifications\AtivaConta;
+use ThrottlesLogins;
 
 
 
@@ -27,9 +28,16 @@ use InscricoesPos\Notifications\AtivaConta;
 */
 class AuthController extends BaseController
 {
+	use \Illuminate\Foundation\Auth\ThrottlesLogins;
+
 	protected $maxAttempts = 5;
 
 	protected $decayMinutes = 5;
+
+	public function username()
+	{
+    	return 'email';
+	}
 
 	public function getSignup()
 	{	
@@ -84,6 +92,13 @@ class AuthController extends BaseController
 
 	public function postLogin(Request $request)
 	{
+		
+
+			if ($this->hasTooManyLoginAttempts($request)) {
+    			$this->fireLockoutEvent($request);
+    			return $this->sendLockoutResponse($request);
+			}
+
 		$this->validate($request, [
 			'email' => 'required|email',
 			'password' => 'required',
@@ -102,12 +117,14 @@ class AuthController extends BaseController
 		}
 
 		if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+			$this->incrementLoginAttempts($request);
 			notify()->flash(trans('mensagens_gerais.erro_login'), 'error',[
 				'timer' => 3000,
 			]);
 			return redirect()->back();
 		}
 		
+		$this->clearLoginAttempts($request);
 
 		$user_type = DB::table('users')->where('email', $email)->value('user_type');
 
