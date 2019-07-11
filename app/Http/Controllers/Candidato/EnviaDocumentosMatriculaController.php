@@ -202,7 +202,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
 				}else{
 					
-					notify()->flash(trans('mensagens_gerais.presenca_erro_fora_prazo'),'error');
+					notify()->flash(trans('mensagens_gerais.documentos_matricula_erro_fora_prazo'),'error');
 				
 					return redirect()->route('home');
 				}
