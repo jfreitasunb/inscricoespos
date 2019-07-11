@@ -20,7 +20,7 @@
           <li class="{{ Route::currentRouteNamed('status.cartas') ? 'active' : '' }}"><a href="{{ route('status.cartas') }}">{{ trans('tela_status_cartas.status_cartas') }}</a></li>
         @endstatuscarta
         @confirmacao_participacao
-            <li class="{{ Route::currentRouteNamed('confirma.presenca') ? 'active' : '' }}"><a href="{{ route('confirma.presenca') }}">{{ trans('tela_envia_documentos_matricula.documentos_matricula') }}</a></li>
+            <li class="{{ Route::currentRouteNamed('confirma.presenca') ? 'active' : '' }}"><a href="{{ route('confirma.presenca') }}">{{ trans('tela_confirma_presenca.confirma_presenca') }}</a></li>
           @endconfirmacao_participacao
           @envia_documentos_matricula
             <li class="{{ Route::currentRouteNamed('envia.documentos.matricula') ? 'active' : '' }}"><a href="{{ route('envia.documentos.matricula') }}">{{ trans('tela_envia_documentos_matricula.documentos_matricula') }}</a></li>
