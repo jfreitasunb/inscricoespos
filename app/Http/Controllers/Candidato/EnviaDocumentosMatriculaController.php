@@ -32,7 +32,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use InscricoesPos\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use App\Rules\ArrayUnico;
+use InscricoesPos\Rules\ArrayUnico;
 /**
 * Classe para manipulação do candidato.
 */
@@ -121,12 +121,11 @@ class EnviaDocumentosMatriculaController extends BaseController
 		}
 	}
 
-	public function postConfirmaPresencaEnviaDocumentosMatricula(Request $request)
+	public function postEnviaDocumentosMatricula(Request $request)
 	{	
-		// $request->validate([
-  //           'name'      =>  ['required','max:255', new ArrayUnico],
-  //           'email'     =>  'required|email|unique:customers',
-		// ]);
+		$request->validate([
+            'arquivos_matricula' =>  ['required',new ArrayUnico],
+		]);
 
 		$id_candidato = (int)$request->id_candidato;
 
