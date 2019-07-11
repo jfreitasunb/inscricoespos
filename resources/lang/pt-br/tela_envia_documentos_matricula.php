@@ -7,14 +7,13 @@
 
 return [
     'documentos_matricula' => 'Documentos para Matrícula',
-    'nome_recomendante' => 'Nome',
-	'atualizar_dados' => 'Prezado(a) recomendante, antes de enviar sua recomendação, por favor atualize seus dados.',
-    'instituicao_recomendante' => 'Instituição',
-	'titulacao_recomendante' => 'Grau acadêmico mais alto obtido',
-    'area_recomendante' => 'Área',
-    'ano_titulacao' => 'Ano de obtenção deste grau',
-    'inst_obtencao_titulo' => 'Instituição de obtenção deste grau',
-    'endereco_recomendante' => 'Endereço institucional',
+    'ficha_cadastral' => 'Ficha Cadastral',
+    'modelo' => 'Clique aqui para baixar o modelo',
+	'diploma_graduacao' => 'Diploma do curso de Graduação',
+    'historico_graduacao' => 'Histórico Escolar do curso de Graduação (completo)',
+	'carteira_identidade' => 'Carteira de Identidade ou CNH (Carteira de Habilitação)',
+    'cpf' => 'CPF',
+    'titulo_eleitor' => 'Título de Eleitor com último comprovante de votação (candidatos brasileiros)',
+    'carteira_identidade_estrangeiro' => 'Carteira de Identidade de Estrangeiro (somente para os estrangeiros)',    
     'menu_enviar' => 'Enviar',
-    'menu_editar' => 'Editar',
 ];
