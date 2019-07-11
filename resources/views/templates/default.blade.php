@@ -30,6 +30,7 @@
           @yield('finaliza_inscricao')
           @yield('status_cartas')
           @yield('confirma_presenca')
+          @yield('envia_documentos_matricula')
         </div>
         @endcandidato
         @coordenador(Auth()->user())
