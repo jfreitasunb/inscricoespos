@@ -120,8 +120,10 @@ class EnviaDocumentosMatriculaController extends BaseController
 	public function postEnviaDocumentosMatricula(Request $request)
 	{	
 		// $request->validate([
-  //           'arquivos_matricula' =>  ['required',new ArrayUnico],
+  //           'arquivos_matricula' =>  ['required', new ArrayUnico],
 		// ]);
+
+		$array_tipos_documentos = ['fc', 'dg', 'hg', 'ci', 'cp', 'te', 'ce'];
 
 		$id_candidato = (int)$request->id_candidato;
 
@@ -190,12 +192,36 @@ class EnviaDocumentosMatriculaController extends BaseController
 					return redirect()->back();
 				}
 
-
 				$data_hoje = (new Carbon())->format('Y-m-d');
 				
 				if (($data_hoje >= $inicio_prazo) && ($data_hoje <= $fim_prazo)) {
 					
-					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
+					foreach ($array_tipos_documentos as $key) {
+						
+						$file = $request->file('arquivos_matricula['.$key.']');
+
+						dd($request->file('arquivos_matricula['.$key.']'));
+
+						$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
+		
+						$arquivo_matricula = new DocumentoMatricula();
+						
+						$arquivo_matricula->id_candidato = $id_candidato;
+
+						$arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+
+						$arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
+						
+						$arquivo_matricula->tipo_arquivo = $key;
+
+						$arquivo_matricula->nome_arquivo = $arquivo;
+						
+						$arquivo_matricula->arquivo_recebido = Storage::exists($arquivo);
+
+						$arquivo_matricula->arquivo_final = FALSE;
+						
+						$arquivo_matricula->save();
+					}
 				}else{
 					
 					notify()->flash(trans('mensagens_gerais.documentos_matricula_erro_fora_prazo'),'error');
