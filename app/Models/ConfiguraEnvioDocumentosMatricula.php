@@ -39,4 +39,9 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
         
         return $liberar_tela; 
     }
+
+    public function retorna_prazo_envio_documentos($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+    }
 }
