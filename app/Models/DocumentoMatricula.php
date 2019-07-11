@@ -23,5 +23,16 @@ class DocumentoMatricula extends Model
         'arquivo_final',
     ];
 
+    public function retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $tipo_arquivo)
+    {
+        $temp = $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_programa_pretendido', $id_programa_pretendido)->where('tipo_arquivo', $tipo_arquivo)->get()->first();
+
+        if (is_null($temp)) {
+            return null;
+        }else{
+            return $temp->nome_arquivo;
+        }
+    }
+
     
 }
