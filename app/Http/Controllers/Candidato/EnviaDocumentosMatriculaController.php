@@ -131,9 +131,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 		
-		$configura_inicio = new ConfiguraInicioPrograma();
+		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-		$libera_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
+		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
 		if ($libera_tela) {
 			
