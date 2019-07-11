@@ -197,30 +197,39 @@ class EnviaDocumentosMatriculaController extends BaseController
 				if (($data_hoje >= $inicio_prazo) && ($data_hoje <= $fim_prazo)) {
 					
 					foreach ($array_tipos_documentos as $key) {
-						
-						$file = $request->file('arquivos_matricula['.$key.']');
-
-						dd($request->file('arquivos_matricula['.$key.']'));
-
-						$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
 		
 						$arquivo_matricula = new DocumentoMatricula();
 						
-						$arquivo_matricula->id_candidato = $id_candidato;
+						$arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key);
 
-						$arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+						if (is_null($arquivo_ja_enviado)) {
 
-						$arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
+							$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
+
+							$arquivo_matricula->id_candidato = $id_candidato;
+
+							$arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+
+							$arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
+							
+							$arquivo_matricula->tipo_arquivo = $key;
+
+							$arquivo_matricula->nome_arquivo = $arquivo;
+							
+							$arquivo_matricula->arquivo_recebido = Storage::exists($arquivo);
+
+							$arquivo_matricula->arquivo_final = FALSE;
+							
+							$arquivo_matricula->save();
+						}else{
+
+							$nome_arquivo = explode("/", $arquivo_ja_enviado);
+
+							$request->arquivos_matricula[$key]->storeAs('arquivos_internos', $nome_arquivo[1]);
+
+							//atualizar banco
+						}
 						
-						$arquivo_matricula->tipo_arquivo = $key;
-
-						$arquivo_matricula->nome_arquivo = $arquivo;
-						
-						$arquivo_matricula->arquivo_recebido = Storage::exists($arquivo);
-
-						$arquivo_matricula->arquivo_final = FALSE;
-						
-						$arquivo_matricula->save();
 					}
 				}else{
 					
