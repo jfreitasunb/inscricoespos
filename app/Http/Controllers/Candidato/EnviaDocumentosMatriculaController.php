@@ -196,18 +196,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 				}
 
 				$data_hoje = (new Carbon())->format('Y-m-d');
-
-				if (is_null($id_inicio_programa)) {
-					
-					$mes_escolhido = new ConfiguraInicioPrograma();
-
-					$prazo_confirmacao = $mes_escolhido->retorna_meses_para_inicio($id_inscricao_pos)[1]->prazo_confirmacao;
-				}else{
-
-					$mes_escolhido = ConfiguraInicioPrograma::find($id_inicio_programa);
-
-					$prazo_confirmacao = $mes_escolhido->prazo_confirmacao;
-				}
 				
 				if ($data_hoje <= $prazo_confirmacao) {
 					
