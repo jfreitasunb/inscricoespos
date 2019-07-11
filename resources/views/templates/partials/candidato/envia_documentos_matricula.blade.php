@@ -9,7 +9,7 @@
 {!! Form::open(array('route' => 'envia.documentos.matricula', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.ficha_cadastral') }} - {{ link_to('ARQUIVO_MODELO.pdf',trans('tela_envia_documentos_matricula.modelo'), array('target' => '_blank' )) }}</legend>
-        <div class="form-horizontal"{{ $errors->has('ficha_cadastral') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula["fc"]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -18,12 +18,12 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="ficha_cadastral" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula['fc']" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('ficha_cadastral'))
-            <span class="help-block">{{ $errors->first('ficha_cadastral') }}</span>
+           @if ($errors->has('arquivos_matricula['fc']'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula["fc"]') }}</span>
           @endif
         </div>
   </fieldset>
