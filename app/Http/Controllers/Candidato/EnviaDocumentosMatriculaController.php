@@ -131,9 +131,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 		
 		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-		$prazo_confirmacao = $configura_inicio->retorna_prazo_envio_documentos($id_inscricao_pos);
-		
-		dd($prazo_confirmacao);
+		$inicio_prazo = $configura_inicio->retorna_inicio_prazo_envio_documentos($id_inscricao_pos);
+
+		$fim_prazo = $configura_inicio->retorna_fim_prazo_envio_documentos($id_inscricao_pos);
 
 		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
@@ -193,7 +193,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 				$data_hoje = (new Carbon())->format('Y-m-d');
 				
-				if ($data_hoje <= $prazo_confirmacao) {
+				if (($data_hoje >= $inicio_prazo) && ($data_hoje <= $fim_prazo)) {
 					
 					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
 				}else{
