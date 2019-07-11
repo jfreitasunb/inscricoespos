@@ -131,8 +131,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 		
 		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-		$prazo_confirmacao = Carbon::createFromFormat('Y-m-d', $configura_inicio->retorna_prazo_envio_documentos($id_inscricao_pos)->fim_envio_documentos)->format('Y-m-d');
+		$prazo_confirmacao = $configura_inicio->retorna_prazo_envio_documentos($id_inscricao_pos);
 		
+		dd($prazo_confirmacao);
 
 		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 

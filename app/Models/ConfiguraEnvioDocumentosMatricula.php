@@ -42,6 +42,6 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
 
     public function retorna_prazo_envio_documentos($id_inscricao_pos)
     {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+        return Carbon::createFromFormat('Y-m-d', $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first()->fim_envio_documentos)->format('Y-m-d');
     }
 }
