@@ -14,7 +14,13 @@ class DocumentoMatricula extends Model
     protected $table = 'documentos_matricula';
 
     protected $fillable = [
+        'id_candidato',
+        'id_inscricao_pos',
+        'id_programa_pretendido',
+        'tipo_arquivo',
         'nome_arquivo',
+        'arquivo_recebido',
+        'arquivo_final',
     ];
 
     

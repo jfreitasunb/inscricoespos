@@ -20,10 +20,11 @@ class CreateDocumentosMatriculaTable extends Migration
             $table->unsignedInteger('id_inscricao_pos');
             $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->unsignedInteger('programa_pretendido');
-            $table->foreign('programa_pretendido')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
+            $table->foreign('id_programa_pretendido')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
             $table->string('tipo_arquivo',255);
             $table->string('nome_arquivo',255);
             $table->boolean('arquivo_recebido')->default(FALSE);
+            $table->boolean('arquivo_final')->default(FALSE);
             $table->timestamps();
         });
     }
