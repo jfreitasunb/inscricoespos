@@ -101,19 +101,15 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 			$nome = User::find($id_user)->nome;
 
-			$programa_pos = new ProgramaPos();
-
-			$nome_programa_pretendido = $programa_pos->pega_programa_pos_mat($status_selecao->programa_pretendido, $locale_candidato);
-
 			$dados_para_template['id_candidato'] = $id_user;
 
 			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
 
 			$dados_para_template['nome'] = $nome;
 			
-			$dados_para_template['programa_pretendido'] = $nome_programa_pretendido;
+			$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
 
-			return view('templates.partials.candidato.envia_documentos_matricula');
+			return view('templates.partials.candidato.envia_documentos_matricula', compact('dados_para_template'));
 
 		}else{
 			
@@ -123,15 +119,20 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 	public function postEnviaDocumentosMatricula(Request $request)
 	{	
-		$request->validate([
-            'arquivos_matricula' =>  ['required',new ArrayUnico],
-		]);
+		// $request->validate([
+  //           'arquivos_matricula' =>  ['required',new ArrayUnico],
+		// ]);
 
 		$id_candidato = (int)$request->id_candidato;
 
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+
+		$id_programa_pretendido = (int)$request->id_programa_pretendido;
 		
 		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+
+		$prazo_confirmacao = Carbon::createFromFormat('Y-m-d', $configura_inicio->retorna_prazo_envio_documentos($id_inscricao_pos)->fim_envio_documentos)->format('Y-m-d');
+		
 
 		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
