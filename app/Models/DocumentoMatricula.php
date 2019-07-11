@@ -34,5 +34,18 @@ class DocumentoMatricula extends Model
         }
     }
 
+    public function atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $tipo_arquivo, $arquivo_recebido)
+    {
+        DB::table('documentos_matricula')
+            ->where('id_candidato', $id_candidato)
+            ->where('id_inscricao_pos', $id_inscricao_pos)
+            ->where('id_programa_pretendido', $id_programa_pretendido)
+            ->where('tipo_arquivo', $tipo_arquivo)
+            ->update([
+                'arquivo_recebido' => $arquivo_recebido,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+    }
+
     
 }
