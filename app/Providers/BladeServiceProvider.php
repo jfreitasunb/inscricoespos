@@ -6,6 +6,7 @@ use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\CandidatosSelecionados;
 use InscricoesPos\Models\ConfiguraInicioPrograma;
+use InscricoesPos\Models\ConfiguraEnvioDocumentosMatricula;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
@@ -227,6 +228,33 @@ class BladeServiceProvider extends ServiceProvider
             
             if (!is_null($status_selecao)) {
                 if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca and $liberar_tela) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+                     
+        });
+
+        Blade::if('envia_documentos_matricula', function ( $user = null ){
+
+            $user = auth()->user();
+            $id_user = $user->id_user;
+
+            $edital_ativo = new ConfiguraInscricaoPos();
+
+            $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+            
+            $selecao_candidatos = new CandidatosSelecionados();
+
+            $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+            $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+
+            $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+            
+            if (!is_null($status_selecao)) {
+                if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
                     return true;
                 }else{
                     return false;
