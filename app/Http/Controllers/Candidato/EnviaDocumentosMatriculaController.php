@@ -227,6 +227,8 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 							$request->arquivos_matricula[$key]->storeAs('arquivos_internos', $nome_arquivo[1]);
 
+							$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key, Storage::exists($arquivo_ja_enviado));
+
 							//atualizar banco
 						}
 						
