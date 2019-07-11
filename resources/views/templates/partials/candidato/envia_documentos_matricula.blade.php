@@ -153,7 +153,9 @@
           @endif
         </div>
   </fieldset>
-  
+  {!! Form::hidden('id_inscricao_pos', $dados_para_template['id_inscricao_pos'], []) !!}
+  {!! Form::hidden('id_candidato', $dados_para_template['id_candidato'], []) !!}
+  {!! Form::hidden('id_programa_pretendido', $dados_para_template['id_programa_pretendido'], []) !!}
   <div class="form-group">
     <div class="row">
       <div class="col-md-6 col-md-offset-3 text-center">
