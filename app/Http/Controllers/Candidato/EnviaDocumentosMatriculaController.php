@@ -188,12 +188,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 					return redirect()->back();
 				}
 
-				if ($status_selecao->confirmou_presenca) {
-
-					notify()->flash(trans('mensagens_gerais.confirmou_presenca'),'success');
-				
-					return redirect()->route('home');
-				}
 
 				$data_hoje = (new Carbon())->format('Y-m-d');
 				
