@@ -136,22 +136,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
 		if ($libera_tela) {
-			
-			if (isset($request->id_inicio_programa)) {
-
-				$id_inicio_programa = (int)$request->id_inicio_programa;
-			}else{
-			
-				$id_inicio_programa = null;
-			}
-
-			if (isset($request->confirma)) {
-			
-				$confirmou_presenca = True;
-			}else{
-			
-				$confirmou_presenca = False;
-			}
 
 			$user = $this->SetUser();
 			
@@ -234,20 +218,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 				
 					return redirect()->route('home');
 				}
-				
-
-				if ($status_resposta) {
-					
-					notify()->flash(trans('mensagens_gerais.confirma_presenca'),'success');
-				
-					return redirect()->route('home');
-				}else{
-					
-					notify()->flash(trans('mensagens_gerais.confirmou_presenca_erro'),'error');
-				
-					return redirect()->route('home');
-				}
-
 			}else{
 				
 				return redirect()->back();
