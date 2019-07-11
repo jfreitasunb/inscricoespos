@@ -56,9 +56,9 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 
 	Route::post('confirma/presenca', '\InscricoesPos\Http\Controllers\Candidato\ConfirmaPresencaController@postConfirmaPresenca')->name('confirma.presenca');
 
-	Route::get('envia/documentos/matricula', '\InscricoesPos\Http\Controllers\Candidato\EnviaDocumentosMatriculaController@getEnviaDocumentosMatricula')->name('confirma.presenca');
+	Route::get('envia/documentos/matricula', '\InscricoesPos\Http\Controllers\Candidato\EnviaDocumentosMatriculaController@getEnviaDocumentosMatricula')->name('envia.documentos.matricula');
 
-	Route::post('envia/documentos/matricula', '\InscricoesPos\Http\Controllers\Candidato\EnviaDocumentosMatriculaController@postEnviaDocumentosMatricula')->name('confirma.presenca');
+	Route::post('envia/documentos/matricula', '\InscricoesPos\Http\Controllers\Candidato\EnviaDocumentosMatriculaController@postEnviaDocumentosMatricula')->name('envia.documentos.matricula');
 });
 
 
