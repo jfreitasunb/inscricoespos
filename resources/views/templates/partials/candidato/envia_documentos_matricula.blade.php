@@ -93,7 +93,7 @@
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.cpf') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[cpf]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[cp]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -102,12 +102,12 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[cpf]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[cp]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[cpf]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[cpf]') }}</span>
+           @if ($errors->has('arquivos_matricula[cp]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[cp]') }}</span>
           @endif
         </div>
   </fieldset>
