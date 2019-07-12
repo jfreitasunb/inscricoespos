@@ -24,11 +24,6 @@ class ArrayUnico implements Rule
      * @return bool
      */
     
-    public function array_has_duplicates($array)
-    {
-        return !(count($array) !== count(array_unique($array)));
-    }
-    
     public function passes($attribute, $value)
     {   
         foreach ($value as $key => $value) {
