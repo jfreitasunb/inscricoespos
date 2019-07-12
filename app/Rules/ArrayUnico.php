@@ -40,6 +40,6 @@ class ArrayUnico implements Rule
      */
     public function message()
     {
-        return 'Você anexou documentos duplicados. Verifique e envie os documentos corretos.';
+        return trans('documentos_matricula.documentos_duplicados');
     }
 }
