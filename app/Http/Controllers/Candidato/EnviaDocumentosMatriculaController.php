@@ -127,7 +127,7 @@ class EnviaDocumentosMatriculaController extends BaseController
         [
             'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
             'arquivos_matricula' => new ArrayUnico,
-            'arquivo_matricula' => "min:2",
+            'arquivo_matricula' => "min:4",
             
         ],[
             'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
