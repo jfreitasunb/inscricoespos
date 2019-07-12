@@ -123,23 +123,25 @@ class EnviaDocumentosMatriculaController extends BaseController
 		$input_data = $request->all();
 		
 		$validator = Validator::make(
-        $input_data, 
-        [
-            'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
-            'arquivos_matricula' => new ArrayUnico,
-            'arquivo_matricula' => "min:4",
-            
-        ],[
-            'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
-            'arquivos_matricula.*.mimes' => trans('documentos_matricula.somente_pdf'),
-            'arquivos_matricula.*.max' => trans('documentos_matricula.tamanho_maximo'),
-            'arquivo_matricula.*.originalName' => trans('documentos_matricula.arquivos_duplicados'),
-        ]
-    );
+        	$input_data, 
+		        [
+		            'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
+		            'arquivos_matricula' => new ArrayUnico,
+		            'arquivo_matricula' => "min:4",
+		            
+		        ],[
+		            'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
+		            'arquivos_matricula.*.mimes' => trans('documentos_matricula.somente_pdf'),
+		            'arquivos_matricula.*.max' => trans('documentos_matricula.tamanho_maximo'),
+		            'arquivo_matricula.*.originalName' => trans('documentos_matricula.arquivos_duplicados'),
+		        ]
+    		);
+		
 		if ($validator->fails()) {
-        notify()->flash($validator->messages()->first(),'error');
+        	
+        	notify()->flash($validator->messages()->first(),'error');
 				
-					return redirect()->route('envia.documentos.matricula');
+			return redirect()->route('envia.documentos.matricula');
     	}
 
 		$array_tipos_documentos = ['fc', 'dg', 'hg', 'ci', 'cp', 'te', 'ce'];
