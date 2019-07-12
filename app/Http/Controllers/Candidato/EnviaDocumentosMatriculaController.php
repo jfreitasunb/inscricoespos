@@ -119,9 +119,28 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 	public function postEnviaDocumentosMatricula(Request $request)
 	{	
-		// $request->validate([
-  //           'arquivos_matricula' =>  ['required', new ArrayUnico],
-		// ]);
+		
+		$input_data = $request->all();
+		
+		$validator = Validator::make(
+        $input_data, 
+        [
+            'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
+            'arquivos_matricula' => new ArrayUnico,
+            'arquivo_matricula' => "min:2",
+            
+        ],[
+            'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
+            'arquivos_matricula.*.mimes' => trans('documentos_matricula.somente_pdf'),
+            'arquivos_matricula.*.max' => trans('documentos_matricula.tamanho_maximo'),
+            'arquivo_matricula.*.originalName' => trans('documentos_matricula.arquivos_duplicados'),
+        ]
+    );
+		if ($validator->fails()) {
+        notify()->flash($validator->messages()->first(),'error');
+				
+					return redirect()->route('envia.documentos.matricula');
+    	}
 
 		$array_tipos_documentos = ['fc', 'dg', 'hg', 'ci', 'cp', 'te', 'ce'];
 
@@ -228,8 +247,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 							$request->arquivos_matricula[$key]->storeAs('arquivos_internos', $nome_arquivo[1]);
 
 							$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key, Storage::exists($arquivo_ja_enviado));
-
-							//atualizar banco
 						}
 						
 					}
