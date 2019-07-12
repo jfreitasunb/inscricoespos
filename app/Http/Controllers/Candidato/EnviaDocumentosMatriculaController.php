@@ -145,8 +145,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 			return redirect()->route('envia.documentos.matricula');
     	}
 
-    	
-		$array_tipos_documentos = ['fc', 'dg', 'hg', 'ci', 'cp', 'te', 'ce'];
+    	foreach ($input_data['arquivos_matricula'] as $key => $value) {
+    		$array_tipos_documentos[] = $key;
+    	}
 
 		$id_candidato = (int)$request->id_candidato;
 
