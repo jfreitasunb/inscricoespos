@@ -33,6 +33,8 @@ use InscricoesPos\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use InscricoesPos\Rules\ArrayUnico;
+use InscricoesPos\Rules\NumeroUploads;
+
 /**
 * Classe para manipulação do candidato.
 */
@@ -127,13 +129,12 @@ class EnviaDocumentosMatriculaController extends BaseController
 		        [
 		            'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
 		            'arquivos_matricula' => new ArrayUnico,
-		            'arquivo_matricula' => "min:4",
+		            'arquivo_matricula' => new NumeroUploads,
 		            
 		        ],[
 		            'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
 		            'arquivos_matricula.*.mimes' => trans('documentos_matricula.somente_pdf'),
 		            'arquivos_matricula.*.max' => trans('documentos_matricula.tamanho_maximo'),
-		            'arquivo_matricula.*.originalName' => trans('documentos_matricula.arquivos_duplicados'),
 		        ]
     		);
 		
@@ -144,6 +145,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 			return redirect()->route('envia.documentos.matricula');
     	}
 
+    	
 		$array_tipos_documentos = ['fc', 'dg', 'hg', 'ci', 'cp', 'te', 'ce'];
 
 		$id_candidato = (int)$request->id_candidato;
