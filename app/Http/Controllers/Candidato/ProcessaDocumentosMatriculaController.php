@@ -111,8 +111,12 @@ class ProcessaDocumentosMatriculaController extends BaseController
 		// 	$dados_para_template['nome'] = $nome;
 			
 		// 	$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
+			
+			$ficha_inscricao = 'teste';
 
-		// 	return view('templates.partials.candidato.envia_documentos_matricula', compact('dados_para_template'));
+			$nome_candidato = 'testador';
+
+			return view('templates.partials.candidato.processa_documentos_matricula', compact('ficha_inscricao','nome_candidato'));
 
 		// }else{
 			
