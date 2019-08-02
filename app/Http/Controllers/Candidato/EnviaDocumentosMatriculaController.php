@@ -252,7 +252,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 							$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key, Storage::exists($arquivo_ja_enviado));
 						}
-						
+						notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
+				
+						return redirect()->route('documento.final.matricula');
 					}
 				}else{
 					
