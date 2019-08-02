@@ -43,85 +43,83 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 	public function getProcessaDocumentosMatricula(){
 
-		// dd("cheguei");
-		// $user = $this->SetUser();
+		$user = $this->SetUser();
 		
-		// $id_user = $user->id_user;
+		$id_user = $user->id_user;
 
-		// $locale_candidato = Session::get('locale');
+		$locale_candidato = Session::get('locale');
 
-		// $edital_ativo = new ConfiguraInscricaoPos();
+		$edital_ativo = new ConfiguraInscricaoPos();
 
-		// $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 		
-		// $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 		
-		// $autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
-		// if (!$autoriza_inscricao) {
+		if (!$autoriza_inscricao) {
 			
-		// 	$finaliza_inscricao = new FinalizaInscricao();
+			$finaliza_inscricao = new FinalizaInscricao();
 
-		// 	$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+			$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-		// 	$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+			$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
 
-		// 	$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+			$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
-		// 	if (!$status_inscricao) {
+			if (!$status_inscricao) {
 
-		// 		return redirect()->route('home');
-		// 	}
+				return redirect()->route('home');
+			}
 
-		// 	$homologa = new HomologaInscricoes();
+			$homologa = new HomologaInscricoes();
 
-		// 	$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
+			$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
 
-		// 	if (!$candidato_homologado) {
+			if (!$candidato_homologado) {
 				
-		// 		return redirect()->route('home');
-		// 	}
+				return redirect()->route('home');
+			}
 
-		// 	$selecionado = new CandidatosSelecionados();
+			$selecionado = new CandidatosSelecionados();
 
-		// 	$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
+			$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 			
-		// 	if (!$status_selecao->selecionado) {
+			if (!$status_selecao->selecionado) {
 
-		// 		return redirect()->route('home');
-		// 	}
+				return redirect()->route('home');
+			}
 
-		// 	if (!$status_selecao->confirmou_presenca) {
+			if (!$status_selecao->confirmou_presenca) {
 
-		// 		return redirect()->route('home');
-		// 	}
+				return redirect()->route('home');
+			}
 			
 
-		// 	if (!$libera_tela) {
+			if (!$libera_tela) {
 				
-		// 		return redirect()->route('home');
-		// 	}
+				return redirect()->route('home');
+			}
 
-		// 	$nome = User::find($id_user)->nome;
+			$nome = User::find($id_user)->nome;
 
-		// 	$dados_para_template['id_candidato'] = $id_user;
+			$dados_para_template['id_candidato'] = $id_user;
 
-		// 	$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
+			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
 
-		// 	$dados_para_template['nome'] = $nome;
+			$dados_para_template['nome'] = $nome;
 			
-		// 	$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
+			$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
 			
 			$ficha_inscricao = 'teste';
 
 			$nome_candidato = 'testador';
 
 			return view('templates.partials.candidato.processa_documentos_matricula', compact('ficha_inscricao','nome_candidato'));
-
-		// }else{
+		}else{
 			
-		// 	return redirect()->back();
-		// }
+			return redirect()->back();
+		}
 	}
 
 	public function postProcessaDocumentosMatricula(Request $request)

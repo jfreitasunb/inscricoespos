@@ -61,6 +61,8 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 	Route::post('envia/documentos/matricula', '\InscricoesPos\Http\Controllers\Candidato\EnviaDocumentosMatriculaController@postEnviaDocumentosMatricula')->name('envia.documentos.matricula');
 
 	Route::get('documento/final/matricula', '\InscricoesPos\Http\Controllers\Candidato\ProcessaDocumentosMatriculaController@getProcessaDocumentosMatricula')->name('documento.final.matricula');
+
+	Route::post('documento/final/matricula', '\InscricoesPos\Http\Controllers\Candidato\ProcessaDocumentosMatriculaController@postProcessaDocumentosMatricula');
 });
 
 
