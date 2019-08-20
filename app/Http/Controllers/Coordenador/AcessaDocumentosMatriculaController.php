@@ -98,9 +98,11 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         
 	}
 
-    public function postHomologarInscritos()
+    public function postPDFMatricula()
     {
 
+        dd("aqui");
+        
         $user = Auth::user();
 
         $id_user = $user->id_user;
