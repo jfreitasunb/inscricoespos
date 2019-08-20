@@ -4,6 +4,7 @@ namespace InscricoesPos\Http\Controllers\Candidato;
 
 use Auth;
 use DB;
+use File;
 use Mail;
 use Session;
 use Validator;
@@ -123,23 +124,29 @@ class ProcessaDocumentosMatriculaController extends BaseController
 				$argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
 			}
 
-			dd('pdftk '.$argumento_pdftk.' cat output '.storage_path('app/')."arquivos_internos/".str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf");
+			// dd('pdftk '.$argumento_pdftk.' cat output '.storage_path('app/')."arquivos_internos/".str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf");
 
-			$process = new Process('pdftk '.$argumento_pdftk.' cat output '.storage_path('app/')."arquivos_internos/".str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf");
+			$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
+
+			$endereco_arquivo_matricula = storage_path('app/')."arquivos_internos/".$nome_arquivo_matricula;
+
+			$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+			$process->setTimeout(3600);
+			
+			$process->run();
 
 			$dados_para_template['id_candidato'] = $id_user;
 
 			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
 
-			$dados_para_template['nome'] = $nome;
+			$dados_para_template['nome_candidato'] = $nome;
 			
 			$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
-			
-			$ficha_inscricao = 'teste';
 
-			$nome_candidato = 'testador';
+			$dados_para_template['ficha_inscricao'] = $nome_arquivo_matricula;
 
-			return view('templates.partials.candidato.processa_documentos_matricula', compact('ficha_inscricao','nome_candidato'));
+			return view('templates.partials.candidato.processa_documentos_matricula', compact('dados_para_template'));
 		}else{
 			
 			return redirect()->back();
@@ -148,154 +155,134 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 	public function postProcessaDocumentosMatricula(Request $request)
 	{	
+		$local_documentos = storage_path('app/')."arquivos_internos/";
+
+		$id_candidato = (int)$request->id_candidato;
+
+		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+
+		$id_programa_pretendido = (int)$request->id_programa_pretendido;
+
+		$ficha_inscricao = $request->ficha_inscricao;
+
 		
-		// $input_data = $request->all();
-		
-		// $validator = Validator::make(
-  //       	$input_data, 
-		//         [
-		//             'arquivos_matricula.*' => 'required|mimes:pdf|max:20000',
-		//             'arquivos_matricula' => new ArrayUnico,
-		//             'arquivos_matricula' => new NumeroUploads,
-		//         ],[
-		//             'arquivos_matricula.*.required' => trans('documentos_matricula.obrigatorio'),
-		//             'arquivos_matricula.*.mimes' => trans('documentos_matricula.somente_pdf'),
-		//             'arquivos_matricula.*.max' => trans('documentos_matricula.tamanho_maximo'),
-		//         ]
-  //   		);
-		
-		// if ($validator->fails()) {
-        	
-  //       	notify()->flash($validator->messages()->first(),'error');
+		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+
+		$inicio_prazo = $configura_inicio->retorna_inicio_prazo_envio_documentos($id_inscricao_pos);
+
+		$fim_prazo = $configura_inicio->retorna_fim_prazo_envio_documentos($id_inscricao_pos);
+
+		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+
+		if ($libera_tela) {
+
+			$user = $this->SetUser();
+			
+			$id_user = $user->id_user;
+
+			$locale_candidato = Session::get('locale');
+
+			$edital_ativo = new ConfiguraInscricaoPos();
+
+			if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
+			
+				return redirect()->back();
+			}
+			
+			if ($id_candidato != $id_user) {
+			
+				return redirect()->back();
+			}
+
+			$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+			
+			$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+			if (!$autoriza_inscricao) {
 				
-		// 	return redirect()->route('envia.documentos.matricula');
-  //   	}
+				$finaliza_inscricao = new FinalizaInscricao();
 
-  //   	foreach ($input_data['arquivos_matricula'] as $key => $value) {
-  //   		$array_tipos_documentos[] = $key;
-  //   	}
+				$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
 
-		// $id_candidato = (int)$request->id_candidato;
+				if (!$status_inscricao) {
 
-		// $id_inscricao_pos = (int)$request->id_inscricao_pos;
+					return redirect()->back();
+				}
 
-		// $id_programa_pretendido = (int)$request->id_programa_pretendido;
-		
-		// $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+				$homologa = new HomologaInscricoes();
 
-		// $inicio_prazo = $configura_inicio->retorna_inicio_prazo_envio_documentos($id_inscricao_pos);
+				$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
 
-		// $fim_prazo = $configura_inicio->retorna_fim_prazo_envio_documentos($id_inscricao_pos);
+				if (!$candidato_homologado) {
 
-		// $libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+					return redirect()->back();
+				}
 
-		// if ($libera_tela) {
+				$selecionado = new CandidatosSelecionados();
 
-		// 	$user = $this->SetUser();
-			
-		// 	$id_user = $user->id_user;
+				$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
-		// 	$locale_candidato = Session::get('locale');
+				if (!$status_selecao->selecionado) {
 
-		// 	$edital_ativo = new ConfiguraInscricaoPos();
+					return redirect()->back();
+				}
 
-		// 	if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
-			
-		// 		return redirect()->back();
-		// 	}
-			
-		// 	if ($id_candidato != $id_user) {
-			
-		// 		return redirect()->back();
-		// 	}
-
-		// 	$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-			
-		// 	$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-
-		// 	if (!$autoriza_inscricao) {
+				$data_hoje = (new Carbon())->format('Y-m-d');
 				
-		// 		$finaliza_inscricao = new FinalizaInscricao();
-
-		// 		$status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
-
-		// 		if (!$status_inscricao) {
-
-		// 			return redirect()->back();
-		// 		}
-
-		// 		$homologa = new HomologaInscricoes();
-
-		// 		$candidato_homologado = $homologa->retorna_se_foi_homologado($id_user, $id_inscricao_pos);
-
-		// 		if (!$candidato_homologado) {
-
-		// 			return redirect()->back();
-		// 		}
-
-		// 		$selecionado = new CandidatosSelecionados();
-
-		// 		$status_selecao = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_user);
-
-		// 		if (!$status_selecao->selecionado) {
-
-		// 			return redirect()->back();
-		// 		}
-
-		// 		$data_hoje = (new Carbon())->format('Y-m-d');
-				
-		// 		if (($data_hoje >= $inicio_prazo) && ($data_hoje <= $fim_prazo)) {
+				if (($data_hoje >= $inicio_prazo) && ($data_hoje <= $fim_prazo)) {
 					
-		// 			foreach ($array_tipos_documentos as $key) {
-		
-		// 				$arquivo_matricula = new DocumentoMatricula();
+					$arquivo_matricula = new DocumentoMatricula();
+					
+					$arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df');
+
+					if (is_null($arquivo_ja_enviado)) {
+
+						$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
+
+						File::copy($local_documentos.$ficha_inscricao, $local_documentos.$nome_final);
+
+						$arquivo_matricula->id_candidato = $id_candidato;
+
+						$arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+
+						$arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
 						
-		// 				$arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key);
+						$arquivo_matricula->tipo_arquivo = 'df';
 
-		// 				if (is_null($arquivo_ja_enviado)) {
+						$arquivo_matricula->nome_arquivo = "arquivos_internos/".$nome_final;
+						
+						$arquivo_matricula->arquivo_recebido = Storage::exists($local_documentos.$ficha_inscricao);
 
-		// 					$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
+						$arquivo_matricula->arquivo_final = True;
+						
+						$arquivo_matricula->save();
+					}else{
 
-		// 					$arquivo_matricula->id_candidato = $id_candidato;
+						$nome_arquivo = explode("/", $arquivo_ja_enviado);
 
-		// 					$arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+						File::copy($local_documentos.$ficha_inscricao, $local_documentos.$nome_arquivo[1]);
 
-		// 					$arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
-							
-		// 					$arquivo_matricula->tipo_arquivo = $key;
+						$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df', Storage::exists($arquivo_ja_enviado));
+					}
 
-		// 					$arquivo_matricula->nome_arquivo = $arquivo;
-							
-		// 					$arquivo_matricula->arquivo_recebido = Storage::exists($arquivo);
-
-		// 					$arquivo_matricula->arquivo_final = FALSE;
-							
-		// 					$arquivo_matricula->save();
-		// 				}else{
-
-		// 					$nome_arquivo = explode("/", $arquivo_ja_enviado);
-
-		// 					$request->arquivos_matricula[$key]->storeAs('arquivos_internos', $nome_arquivo[1]);
-
-		// 					$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key, Storage::exists($arquivo_ja_enviado));
-		// 				}
-		// 				notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
-				
-		// 			return redirect()->route('documento.final.matricula');
-		// 			}
-		// 		}else{
+					File::delete($local_documentos.$ficha_inscricao);
 					
-		// 			notify()->flash(trans('mensagens_gerais.documentos_matricula_erro_fora_prazo'),'error');
+					notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
 				
-		// 			return redirect()->route('home');
-		// 		}
-		// 	}else{
+					return redirect()->route('home');
+				}else{
+					
+					notify()->flash(trans('mensagens_gerais.documentos_matricula_erro_fora_prazo'),'error');
 				
-		// 		return redirect()->back();
-		// 	}
-		// }else{
+					return redirect()->route('home');
+				}
+			}else{
+				
+				return redirect()->back();
+			}
+		}else{
 			
-		// 	return redirect()->route('home');
-		// }
+			return redirect()->route('home');
+		}
 	}
 }
