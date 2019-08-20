@@ -51,14 +51,16 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             $candidatos = $selecionados_documentos->retorna_usuarios_documentos_enviados($id_inscricao_pos);
 
             foreach ($candidatos as $candidato) {
-                
+
                 $id_candidato = $candidato->id_candidato;
 
-                $dados_template[$id_candidato]['nome_candidato'] = 'nome';
+                $dados_template[$id_candidato]['nome_candidato'] = User::find($id_candidato)->nome;
+
+                $dados_template[$id_candidato]['email'] = User::find($id_candidato)->email;
 
                 $dados_template[$id_candidato]['programa_pretendido'] = 'programa_pretendido';
 
-                $dados_template[$id_candidato]['arquivo_final'] = (!is_null($selecionados_documentos->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df')) ? True: False);
+                $dados_template[$id_candidato]['arquivo_final'] = (!is_null($selecionados_documentos->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, 1, 'df')) ? True: False);
 
                 $dados_template[$id_candidato]['nome_arquivo'] = 'nome_arquivo';
             }
