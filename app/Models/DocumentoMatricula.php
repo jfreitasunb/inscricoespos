@@ -47,5 +47,10 @@ class DocumentoMatricula extends Model
             ]);
     }
 
+    public function retorna_documentos_matricula_enviados($id_candidato, $id_inscricao_pos)
+    {
+        return $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->get();
+    }
+
     
 }
