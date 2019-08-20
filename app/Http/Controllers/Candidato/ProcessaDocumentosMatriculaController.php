@@ -103,6 +103,10 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 			$nome = User::find($id_user)->nome;
 
+			$documentos_matricula = new DocumentoMatricula();
+
+			dd($documentos_matricula->retorna_documentos_matricula_enviados($id_user, $id_inscricao_pos));
+
 			$dados_para_template['id_candidato'] = $id_user;
 
 			$dados_para_template['id_inscricao_pos'] = $id_inscricao_pos;
