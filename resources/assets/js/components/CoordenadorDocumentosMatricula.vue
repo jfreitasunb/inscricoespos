@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Tela de desclassificação de candidatos</div>
+        <div class="panel-heading">Documentos dos Selecionados</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
