@@ -258,8 +258,6 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::resource('datatable/auxilia','\InscricoesPos\Http\Controllers\DataTable\AuxiliaSelecaoDataTableController');
 
 	Route::get('acessa/documentos/matricula', '\InscricoesPos\Http\Controllers\Coordenador\AcessaDocumentosMatriculaController@index')->name('coordenador.documentos.matricula');
-
-	Route::resource('datatable/documentosmatricula','\InscricoesPos\Http\Controllers\DataTable\DocumentosMatriculaDataTableController');
 });
 
 
