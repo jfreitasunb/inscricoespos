@@ -73,6 +73,8 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         $nome_arquivo_csv = "Confirmacoes_Edital_".$edital.".csv";
 
+        File::isDirectory(storage_path("app/public/relatorios/edital_".$edital."/")) or File::makeDirectory(storage_path("app/public/relatorios/edital_".$edital."/"),0775,true);
+
         $local_arquivo_confirmacoes = storage_path("app/public/relatorios/edital_".$edital."/");
 
         $local_arquivo_confirmacoes_template = "storage/relatorios/edital_".$edital."/";
