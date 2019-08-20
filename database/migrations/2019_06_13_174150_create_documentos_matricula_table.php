@@ -25,6 +25,7 @@ class CreateDocumentosMatriculaTable extends Migration
             $table->string('nome_arquivo',255);
             $table->boolean('arquivo_recebido')->default(FALSE);
             $table->boolean('arquivo_final')->default(FALSE);
+            $table->boolean('arquivo_final_valido')->default(null);
             $table->timestamps();
         });
     }
