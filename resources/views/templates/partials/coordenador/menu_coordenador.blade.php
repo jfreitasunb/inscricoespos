@@ -61,6 +61,11 @@
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('status.selecionados') }}">Status das Confirmações</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('coordenador.documentos.matricula') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('coordenador.documentos.matricula') }}">Documentos para Matrícula</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>

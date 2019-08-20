@@ -49,7 +49,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         if ($relatorio->autoriza_homologacao()){
 
-            return view('templates.partials.coordenador.homologa_inscricoes');    
+            return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
             notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
                 'timer' => 3000,
@@ -87,7 +87,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             
             $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos, $this->locale_default)->get();
 
-            return view('templates.partials.coordenador.homologa_inscricoes', compact('relatorio_disponivel','inscricoes_finalizadas'));    
+            return view('templates.partials.coordenador.acessa_documentos_matricula', compact('relatorio_disponivel','inscricoes_finalizadas'));    
         }else{
             notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
                 'timer' => 3000,
