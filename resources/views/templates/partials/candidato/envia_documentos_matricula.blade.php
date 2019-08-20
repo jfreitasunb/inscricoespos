@@ -134,6 +134,27 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
+        <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.certificado_reservista') }}</legend>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[cr]') ? ' has-error' : '' }}>
+          <div class="row">
+            <span class="input-group-btn">
+                <!-- image-preview-clear button -->
+                <button type="button" class="btn btn-primary" style="display:none;">
+                    <span class="glyphicon glyphicon-remove"></span> Clear
+                </button>
+                <!-- image-preview-input -->
+                <div class="btn btn-primary">
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[cr]"/> <!-- rename it -->
+                </div>
+            </span>
+          </div>
+           @if ($errors->has('arquivos_matricula[te]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[te]') }}</span>
+          @endif
+        </div>
+  </fieldset>
+
+  <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.carteira_identidade_estrangeiro') }}</legend>
         <div class="form-horizontal"{{ $errors->has('arquivos_matricula[ce]') ? ' has-error' : '' }}>
           <div class="row">
