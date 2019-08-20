@@ -107,7 +107,6 @@ class ProcessaDocumentosMatriculaController extends BaseController
 				return redirect()->route('home');
 			}
 			
-
 			if (!$libera_tela) {
 				
 				return redirect()->route('home');
@@ -123,8 +122,6 @@ class ProcessaDocumentosMatriculaController extends BaseController
 			foreach ($arquivos_matricula_recebidos as $key) {
 				$argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
 			}
-
-			// dd('pdftk '.$argumento_pdftk.' cat output '.storage_path('app/')."arquivos_internos/".str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf");
 
 			$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
 
@@ -165,7 +162,6 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 		$ficha_inscricao = $request->ficha_inscricao;
 
-		
 		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
 		$inicio_prazo = $configura_inicio->retorna_inicio_prazo_envio_documentos($id_inscricao_pos);
