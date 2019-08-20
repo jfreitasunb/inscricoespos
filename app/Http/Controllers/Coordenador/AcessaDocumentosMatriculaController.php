@@ -37,7 +37,7 @@ use Response;
 class AcessaDocumentosMatriculaController extends CoordenadorController
 {
 
-    public function index()
+    public function getAcessoDocumentosMatricula()
     {
         $relatorio = new ConfiguraInscricaoPos();
 
@@ -102,7 +102,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
     {
 
         dd("aqui");
-        
+
         $user = Auth::user();
 
         $id_user = $user->id_user;
