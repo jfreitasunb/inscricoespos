@@ -9,7 +9,7 @@
 {!! Form::open(array('route' => 'envia.documentos.matricula', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.ficha_cadastral') }} - {{ link_to('ARQUIVO_MODELO.pdf',trans('tela_envia_documentos_matricula.modelo'), array('target' => '_blank' )) }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[fc]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[1_fc]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -18,19 +18,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[fc]" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[1_fc]" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[fc]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[fc]') }}</span>
+           @if ($errors->has('arquivos_matricula[1_fc]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[1_fc]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.diploma_graduacao') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[dg]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[2_dg]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -39,19 +39,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[dg]" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[2_dg]" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[dg]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[dg]') }}</span>
+           @if ($errors->has('arquivos_matricula[2_dg]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[2_dg]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.historico_graduacao') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[hg]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[3_hg]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -60,19 +60,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[hg]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[3_hg]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[hg]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[hg]') }}</span>
+           @if ($errors->has('arquivos_matricula[3_hg]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[3_hg]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.carteira_identidade') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[ci]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[4_ci]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -81,19 +81,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[ci]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[4_ci]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[ci]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[ci]') }}</span>
+           @if ($errors->has('arquivos_matricula[4_ci]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[4_ci]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.cpf') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[cp]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[5_cp]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -102,19 +102,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[cp]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[5_cp]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[cp]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[cp]') }}</span>
+           @if ($errors->has('arquivos_matricula[5_cp]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[5_cp]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.titulo_eleitor') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[te]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[6_te]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -123,19 +123,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[te]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[6_te]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[te]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[te]') }}</span>
+           @if ($errors->has('arquivos_matricula[6_te]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[6_te]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.certificado_reservista') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[cr]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[7_cr]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -144,19 +144,19 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[cr]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[7_cr]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[te]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[te]') }}</span>
+           @if ($errors->has('arquivos_matricula[7_cr]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[7_cr]') }}</span>
           @endif
         </div>
   </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.carteira_identidade_estrangeiro') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[ce]') ? ' has-error' : '' }}>
+        <div class="form-horizontal"{{ $errors->has('arquivos_matricula[8_ce]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -165,12 +165,12 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="arquivos_matricula[ce]"/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="arquivos_matricula[8_ce]"/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('arquivos_matricula[ce]'))
-            <span class="help-block">{{ $errors->first('arquivos_matricula[ce]') }}</span>
+           @if ($errors->has('arquivos_matricula[8_ce]'))
+            <span class="help-block">{{ $errors->first('arquivos_matricula[8_ce]') }}</span>
           @endif
         </div>
   </fieldset>
