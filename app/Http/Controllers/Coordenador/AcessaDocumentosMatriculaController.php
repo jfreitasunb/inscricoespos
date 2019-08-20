@@ -42,9 +42,13 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        $finalizacoes = new ConfiguraEnvioDocumentosMatricula;
+        $configura_envio_documentos = new ConfiguraEnvioDocumentosMatricula;
 
-        if ($relatorio->libera_tela_documento_matricula($id_inscricao_pos)()){
+        if ($configura_envio_documentos->libera_tela_documento_matricula($id_inscricao_pos)){
+
+            $selecionados_documentos = new DocumentoMatricula();
+            
+            dd($selecionados_documentos->retorna_usuarios_documentos_enviados($id_inscricao_pos));
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
