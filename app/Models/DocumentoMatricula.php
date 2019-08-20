@@ -52,5 +52,9 @@ class DocumentoMatricula extends Model
         return $this->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('tipo_arquivo', '<>', 'df')->orderBy('tipo_arquivo')->get();
     }
 
+    public function retorna_usuarios_documentos_enviados($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->distinct('id_candidato')->get(['id_candidato']);
+    }
     
 }
