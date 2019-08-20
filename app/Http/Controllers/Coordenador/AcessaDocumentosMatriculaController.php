@@ -16,7 +16,7 @@ use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\ConfiguraEnvioDocumentosMatricula;
 use InscricoesPos\Models\ProgramaPos;
-use InscricoesPos\Models\FinalizaInscricao;
+use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Notifications\NotificaNovaInscricao;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
