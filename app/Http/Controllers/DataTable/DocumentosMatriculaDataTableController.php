@@ -8,6 +8,7 @@ use InscricoesPos\Http\Controllers\Controller;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\DocumentoMatricula;
 
 use DB;
 
