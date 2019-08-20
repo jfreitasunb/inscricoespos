@@ -142,6 +142,7 @@
                 @yield('ficha_individual')
                 @yield('graficos')
                 @yield('auxilia_selecao')
+                @yield('documentos_matricula_coordenador')
             </div>
         </div>
     </div>
