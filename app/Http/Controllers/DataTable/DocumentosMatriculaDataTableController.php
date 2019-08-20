@@ -15,7 +15,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
 {
     public function builder()
     {
-        return AuxiliaSelecao::query();
+        return DocumentoMatricula::query();
     }
 
     public function getDisplayableColumns()
