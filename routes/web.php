@@ -256,6 +256,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('relatorio/auxilia/selecao', '\InscricoesPos\Http\Controllers\Admin\AuxiliaSelecaoController@index')->name('auxilia.selecao');
 
 	Route::resource('datatable/auxilia','\InscricoesPos\Http\Controllers\DataTable\AuxiliaSelecaoDataTableController');
+
+	Route::get('acessa/documentos/matricula', '\InscricoesPos\Http\Controllers\Coordenador\AcessaDocumentosMatriculaController@index')->name('coordenador.documentos.matricula');
+
+	Route::resource('datatable/documentos/matricula','\InscricoesPos\Http\Controllers\DataTable\DocumentosMatriculaDataTableController');
 });
 
 

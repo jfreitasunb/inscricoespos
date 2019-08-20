@@ -23,7 +23,7 @@ window.Vue = require('vue');
 //     el: '#app'
 // });
 
-
+const CoordenadorDocumentosMatricula =  require('./components/CoordenadorDocumentosMatricula.vue');
 const DataTableUser =  require('./components/DataTableUser.vue');
 const AuxiliaSelecao = require('./components/AuxiliaSelecao.vue');
 const HomologaInscricoes = require('./components/HomologaInscricoes.vue');
@@ -32,5 +32,5 @@ const MudaRecomendante = require('./components/MudaRecomendante.vue');
 
 const app = new Vue({
     el: '#app',
-    components: { DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante }
+    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante }
 });
