@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <coordenador-documentos-matricula route="{{route('pdf.candidados.selecionados')}}" endpoint="{{ route('seleciona.index') }}"></coordenador-documentos-matricula>
+      <coordenador-documentos-matricula route="{{route('coordenador.documentos.matricula')}}" endpoint="{{ route('documentosmatricula.index') }}"></coordenador-documentos-matricula>
     </div>
   </div>
 </div>
