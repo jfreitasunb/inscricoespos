@@ -224,7 +224,6 @@ class EnviaDocumentosMatriculaController extends BaseController
 						$arquivo_matricula = new DocumentoMatricula();
 						
 						$arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key);
-
 						if (is_null($arquivo_ja_enviado)) {
 
 							$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
@@ -244,6 +243,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 							$arquivo_matricula->arquivo_final = FALSE;
 							
 							$arquivo_matricula->save();
+
 						}else{
 
 							$nome_arquivo = explode("/", $arquivo_ja_enviado);
@@ -252,10 +252,10 @@ class EnviaDocumentosMatriculaController extends BaseController
 
 							$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key, Storage::exists($arquivo_ja_enviado));
 						}
-						notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
-				
-						return redirect()->route('documento.final.matricula');
 					}
+					notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
+				
+					return redirect()->route('documento.final.matricula');
 				}else{
 					
 					notify()->flash(trans('mensagens_gerais.documentos_matricula_erro_fora_prazo'),'error');
