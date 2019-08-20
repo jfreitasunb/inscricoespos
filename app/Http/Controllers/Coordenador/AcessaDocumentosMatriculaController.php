@@ -47,8 +47,23 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         if ($configura_envio_documentos->libera_tela_documento_matricula($id_inscricao_pos)){
 
             $selecionados_documentos = new DocumentoMatricula();
-            
-            dd($selecionados_documentos->retorna_usuarios_documentos_enviados($id_inscricao_pos));
+
+            $candidatos = $selecionados_documentos->retorna_usuarios_documentos_enviados($id_inscricao_pos);
+
+            foreach ($candidatos as $candidato) {
+                
+                $id_candidato = $candidato->id_candidato;
+
+                $dados_template[$id_candidato]['nome_candidato'] = 'nome';
+
+                $dados_template[$id_candidato]['programa_pretendido'] = 'programa_pretendido';
+
+                $dados_template[$id_candidato]['arquivo_final'] = (!is_null($selecionados_documentos->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df')) ? True: False);
+
+                $dados_template[$id_candidato]['nome_arquivo'] = 'nome_arquivo';
+            }
+
+            dd($dados_template);
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
