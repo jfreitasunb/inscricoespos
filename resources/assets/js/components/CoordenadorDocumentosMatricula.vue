@@ -73,15 +73,7 @@
 
                 limit: 50,
 
-                quickSearchQuery: '',
-
-                desclassifica: {
-                    id_candidato: null,
-                    id_inscricao_pos: null,
-                    programa_pretendido: null,
-                    errors: []
-                }
-
+                quickSearchQuery: ''
             }
         },
 
@@ -137,19 +129,6 @@
                 this.sort.key  = column
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
-            },
-
-            desclassificar (record) {
-                this.desclassifica.id_candidato = record.id_candidato
-                this.desclassifica.id_inscricao_pos = record.id_inscricao_pos
-                this.desclassifica.programa_pretendido = record.id_programa_pretendido
-                axios.patch(`${this.endpoint}/${this.desclassifica.id_candidato}`, this.desclassifica).then(() =>{
-                    this.getRecords().then(() => {
-                        this.desclassifica.id_candidato = null
-                        this.desclassifica.id_inscricao_pos = null
-                        this.desclassifica.programa_pretendido = null
-                    })
-                })
             }
         },
 
