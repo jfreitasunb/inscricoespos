@@ -48027,7 +48027,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -48050,15 +48049,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             limit: 50,
 
-            quickSearchQuery: '',
-
-            desclassifica: {
-                id_candidato: null,
-                id_inscricao_pos: null,
-                programa_pretendido: null,
-                errors: []
-            }
-
+            quickSearchQuery: ''
         };
     },
 
@@ -48097,11 +48088,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-
-        downloadPDF: function downloadPDF(link) {
-            window.open(link, 'Download');
-        },
-
         getRecords: function getRecords() {
             var _this2 = this;
 
@@ -48121,20 +48107,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.sort.key = column;
 
             this.sort.order = this.sort.order === 'asc' ? 'desc' : 'asc';
-        },
-        desclassificar: function desclassificar(record) {
-            var _this3 = this;
-
-            this.desclassifica.id_candidato = record.id_candidato;
-            this.desclassifica.id_inscricao_pos = record.id_inscricao_pos;
-            this.desclassifica.programa_pretendido = record.id_programa_pretendido;
-            axios.patch(this.endpoint + '/' + this.desclassifica.id_candidato, this.desclassifica).then(function () {
-                _this3.getRecords().then(function () {
-                    _this3.desclassifica.id_candidato = null;
-                    _this3.desclassifica.id_inscricao_pos = null;
-                    _this3.desclassifica.programa_pretendido = null;
-                });
-            });
         }
     },
 
@@ -48421,24 +48393,18 @@ var render = function() {
                   _c(
                     "a",
                     {
+                      staticStyle: { "font-size": "18px" },
                       attrs: {
                         href: "" + record.link_arquivo,
                         download: "" + record.nome_tratado
                       }
                     },
-                    [_vm._v("Teste")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      on: {
-                        click: function($event) {
-                          _vm.downloadPDF(record.link_arquivo)
-                        }
-                      }
-                    },
-                    [_vm._v("Documento para Matrícula")]
+                    [
+                      _c("span", {
+                        staticClass: "glyphicon glyphicon-download-alt"
+                      }),
+                      _vm._v(_vm._s(record.nome_tratado))
+                    ]
                   )
                 ])
               ])
