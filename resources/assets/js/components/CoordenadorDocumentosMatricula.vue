@@ -42,7 +42,6 @@
                             </td>
                             <td>
                                 <a :href="''+record.link_arquivo" :download="''+record.nome_tratado">Teste</a>
-                               <a v-on:click="downloadPDF(record.link_arquivo)"></span>Documento para Matrícula</a>
                             </td>
                         </tr>
                     </tbody>
@@ -119,11 +118,6 @@
         },
 
         methods: {
-                
-            downloadPDF: function (link) {
-                window.open(link, 'Download');
-            },
-
             getRecords () {
                 return axios.get(`${this.endpoint}?${this.getQueryParameters()}`).then((response) => {
                     this.response = response.data.data
