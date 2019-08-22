@@ -41,7 +41,7 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                                <a :href="''+record.link_arquivo" :download="''+record.nome_tratado">Teste</a>
+                                <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
                             </td>
                         </tr>
                     </tbody>
