@@ -86,22 +86,14 @@ class DocumentosMatriculaDataTableController extends DataTableController
     {   
         $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
-        $local_arquivos_matricula = storage_path('app/arquivos_internos/JDHfkI74/');
-
-        $url_arquivo = "http://localhost:8084/inscricoespos/".str_replace('/var/www/inscricoespos/','',storage_path('app/arquivos_internos/JDHfkI74/'));
-
-        File::isDirectory($local_arquivos_matricula) or File::makeDirectory($local_arquivos_matricula,0775,true);
+        $url_arquivo = "http://localhost:8084/inscricoespos/".str_replace('/var/www/inscricoespos/','',storage_path('app/'));
 
         if (sizeof($dados_temporarios) > 0) {
             foreach ($dados_temporarios as $dados) {
 
-            $link_arquivo_original = storage_path('app/').$dados->nome_arquivo;
-
             $nome_final = str_replace(' ', '_',strtr((User::find($dados->id_candidato))->nome, $this->normalizeChars)).".pdf";
 
-            File::copy($link_arquivo_original, $local_arquivos_matricula.$nome_final);
-
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $url_arquivo.$nome_final, 'nome_tratado' => $nome_final];
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $url_arquivo.$dados->nome_arquivo, 'nome_tratado' => $nome_final];
             }
         }else{
             $dados_vue = [];
