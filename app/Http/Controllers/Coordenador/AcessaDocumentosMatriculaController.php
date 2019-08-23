@@ -13,14 +13,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
-use InscricoesPos\Models\AreaPosMat;
-use InscricoesPos\Models\CartaRecomendacao;
-use InscricoesPos\Models\DadoCoordenadorPos;
-use InscricoesPos\Models\Formacao;
-use InscricoesPos\Models\HomologaInscricoes;
-use InscricoesPos\Models\ProgramaPos;
-use InscricoesPos\Models\FinalizaInscricao;
-use InscricoesPos\Notifications\NotificaNovaInscricao;
+use InscricoesPos\Models\DocumentoMatricula;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\BaseController;
@@ -59,7 +52,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         }
     }
 
-    public function postHomologarInscritos()
+    public function getZIPDocumentosMatricula()
     {
 
         $user = Auth::user();
@@ -75,10 +68,14 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         $edital = $relatorio_disponivel->edital;
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+        
+        $nome_arquivo_ZIP = "Documentos_Candidatos_Selecionados_Edital_".$edital.".zip";
 
-        $mes_fim_inscricao = explode("-", $relatorio_disponivel->fim_inscricao)[1];
+        $documentos_matricula = new DocumentoMatricula();
 
-        return Response::download($local_arquivo_homologacoes.$nome_arquivo_homologacao, $nome_arquivo_homologacao);
+        dd($documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos));
+
+        // return Response::download($local_arquivo_homologacoes.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
         
     }
 }
