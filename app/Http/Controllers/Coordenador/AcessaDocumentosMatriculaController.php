@@ -59,45 +59,6 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         }
     }
 
-	public function getHomologarInscritos()
-	{
-		
-		$relatorio = new ConfiguraInscricaoPos();
-
-      	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
-
-        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
-
-        $finalizacoes = new FinalizaInscricao;
-
-        if ($relatorio->autoriza_homologacao()){
-
-            $inscricoes_homologadas = new HomologaInscricoes();
-
-            $ja_homologou = $inscricoes_homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
-
-            if (sizeof($ja_homologou) > 0) {
-                
-                notify()->flash('As inscrições já foram homologadas. Não é possível homologar novamente.','warning', [
-                    'timer' => 3000,
-                ]);
-
-                return redirect()->back();
-            }
-            
-            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos, $this->locale_default)->get();
-
-            return view('templates.partials.coordenador.acessa_documentos_matricula', compact('relatorio_disponivel','inscricoes_finalizadas'));    
-        }else{
-            notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
-                'timer' => 3000,
-            ]);
-
-            return redirect()->back();
-        }
-        
-	}
-
     public function postHomologarInscritos()
     {
 
