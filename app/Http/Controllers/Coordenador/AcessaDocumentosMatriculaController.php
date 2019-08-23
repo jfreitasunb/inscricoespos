@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\ConfiguraEnvioDocumentosMatricula;
 use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
@@ -51,9 +52,9 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
-        $finalizacoes = new FinalizaInscricao;
+        $configura_envio_documentos = new ConfiguraEnvioDocumentosMatricula;
 
-        if ($relatorio->autoriza_homologacao()){
+        if ($configura_envio_documentos->libera_tela_documento_matricula($id_inscricao_pos)){
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
