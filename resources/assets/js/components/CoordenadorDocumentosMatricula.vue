@@ -26,7 +26,6 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Arquivo enviado</th>
                         </tr>
                     </thead>
                     <tbody>
