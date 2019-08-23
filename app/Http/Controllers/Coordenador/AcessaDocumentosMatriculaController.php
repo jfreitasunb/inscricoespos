@@ -15,6 +15,7 @@ use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\DocumentoMatricula;
+use InscricoesPos\Models\ProgramaPos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\BaseController;
@@ -30,6 +31,16 @@ use Response;
 */
 class AcessaDocumentosMatriculaController extends CoordenadorController
 {
+    protected $normalizeChars = array(
+      'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+      'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+      'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+      'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+      'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+      'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+      'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+      'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
+    );
 
     public function index()
     {
@@ -74,12 +85,20 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $documentos_matricula = new DocumentoMatricula();
 
-        dd($documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos));
+        $candidatos_com_documentos = $documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos);
 
-        $local_zip = storage_path('app/arquivos_internos/FJhkfudYt/');
+        $local_zip = storage_path('app/arquivos_internos/').$edital;
 
         File::isDirectory($local_zip) or File::makeDirectory($local_zip,0775,true);
-        
+
+        foreach ($candidatos_com_documentos as $candidato) {
+
+            $nome_arquivo = str_replace(' ', '_',strtr((User::find($candidato->id_candidato))->nome, $this->normalizeChars))."_".(ProgramaPos::find($candidato->id_programa_pretendido))->tipo_programa_pos_ptbr.".pdf";
+
+            File::copy(storage_path('app/').$candidato->nome_arquivo, $local_zip.'/'.$nome_arquivo);
+        }
+
+
 
         $zip = new ZipArchive;
 
