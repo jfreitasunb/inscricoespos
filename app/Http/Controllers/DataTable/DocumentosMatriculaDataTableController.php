@@ -35,7 +35,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'id_programa_pretendido', 'nome_arquivo'
+            'id_candidato', 'id_inscricao_pos', 'id_programa_pretendido', 'nome_arquivo', 'arquivo_final'
         ];
     }
 
@@ -85,7 +85,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         $url_arquivo = str_replace('/public', '/', URL::to('/')).str_replace('/var/www/inscricoespos/','',storage_path('app/'));
 
@@ -94,7 +94,13 @@ class DocumentosMatriculaDataTableController extends DataTableController
 
             $nome_final = str_replace(' ', '_',strtr((User::find($dados->id_candidato))->nome, $this->normalizeChars)).".pdf";
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $url_arquivo.$dados->nome_arquivo, 'nome_tratado' => $nome_final];
+            if ($dados->arquivo_final) {
+                $link_arquivo = $url_arquivo.$dados->nome_arquivo;
+            }else{
+                $link_arquivo = NULL;
+            }
+
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $link_arquivo, 'nome_tratado' => $nome_final, 'arquivo_final' => $dados->arquivo_final];
             }
         }else{
             $dados_vue = [];
