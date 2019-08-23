@@ -7,6 +7,7 @@ use DB;
 use Mail;
 use Session;
 use File;
+use ZipArchive;
 use PDF;
 use Notification;
 use Carbon\Carbon;
@@ -74,6 +75,23 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         $documentos_matricula = new DocumentoMatricula();
 
         dd($documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos));
+
+        $local_zip = storage_path('app/arquivos_internos/FJhkfudYt/');
+
+        File::isDirectory($local_zip) or File::makeDirectory($local_zip,0775,true);
+        
+
+        $zip = new ZipArchive;
+
+        if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
+            
+            foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName ){
+                $file = basename( $fileName );
+                $zip->addFile( $fileName, $file );
+            }
+
+            $zip->close();
+        }
 
         // return Response::download($local_arquivo_homologacoes.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
         
