@@ -117,7 +117,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         File::deleteDirectory(storage_path('app/arquivos_internos/').$edital);
 
-        // return Response::download($local_arquivo_homologacoes.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
+        return Response::download($local_zip.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
         
     }
 }
