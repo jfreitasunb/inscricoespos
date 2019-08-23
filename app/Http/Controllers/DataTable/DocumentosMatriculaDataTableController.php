@@ -12,6 +12,7 @@ use InscricoesPos\Models\DocumentoMatricula;
 
 use DB;
 use File;
+use URL;
 
 class DocumentosMatriculaDataTableController extends DataTableController
 {   
@@ -86,7 +87,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
     {   
         $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
-        $url_arquivo = "http://localhost:8084/inscricoespos/".str_replace('/var/www/inscricoespos/','',storage_path('app/'));
+        $url_arquivo = str_replace('/public', '/', URL::to('/')).str_replace('/var/www/inscricoespos/','',storage_path('app/'));
 
         if (sizeof($dados_temporarios) > 0) {
             foreach ($dados_temporarios as $dados) {
