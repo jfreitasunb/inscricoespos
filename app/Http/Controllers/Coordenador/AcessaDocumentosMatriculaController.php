@@ -9,6 +9,7 @@ use Session;
 use File;
 use ZipArchive;
 use PDF;
+use Storage;
 use Notification;
 use Carbon\Carbon;
 use InscricoesPos\Models\AuxiliaSelecao;
@@ -110,9 +111,11 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
                 $file = basename( $fileName );
                 $zip->addFile( $fileName, $file );
             }
-            
+
             $zip->close();
         }
+
+        File::deleteDirectory(storage_path('app/arquivos_internos/').$edital);
 
         // return Response::download($local_arquivo_homologacoes.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
         
