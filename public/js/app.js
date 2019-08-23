@@ -48027,12 +48027,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['endpoint'],
+    props: ['endpoint', 'route'],
     data: function data() {
         return {
             response: {
@@ -48315,49 +48320,58 @@ var render = function() {
               _c("option", { attrs: { value: "" } }, [_vm._v("Todos")])
             ]
           )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-offset-3 col-md-6" }, [
+          _c(
+            "a",
+            {
+              staticStyle: { "font-size": "30px" },
+              attrs: { href: this.route }
+            },
+            [
+              _c("span", { staticClass: "glyphicon glyphicon-download-alt" }),
+              _vm._v(" Download do documento de todos os alunos")
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "table-responsive" }, [
-        _c("table", { staticClass: "table table-striped" }, [
+        _c("table", { staticClass: "table table-hover" }, [
           _c("thead", [
             _c(
               "tr",
-              [
-                _vm._l(_vm.response.visivel, function(column) {
-                  return _c("th", [
-                    _c(
-                      "span",
-                      {
-                        staticClass: "sortable",
-                        on: {
-                          click: function($event) {
-                            _vm.sortBy(column)
-                          }
+              _vm._l(_vm.response.visivel, function(column) {
+                return _c("th", [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "sortable",
+                      on: {
+                        click: function($event) {
+                          _vm.sortBy(column)
                         }
-                      },
-                      [
-                        _vm._v(
-                          _vm._s(_vm.response.custom_columns[column] || column)
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm.sort.key === column
-                      ? _c("div", {
-                          staticClass: "arrow",
-                          class: {
-                            "arrow--asc": _vm.sort.order === "asc",
-                            "arrow--desc": _vm.sort.order === "desc"
-                          }
-                        })
-                      : _vm._e()
-                  ])
-                }),
-                _vm._v(" "),
-                _c("th", [_vm._v("Arquivo enviado")])
-              ],
-              2
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.response.custom_columns[column] || column)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm.sort.key === column
+                    ? _c("div", {
+                        staticClass: "arrow",
+                        class: {
+                          "arrow--asc": _vm.sort.order === "asc",
+                          "arrow--desc": _vm.sort.order === "desc"
+                        }
+                      })
+                    : _vm._e()
+                ])
+              })
             )
           ]),
           _vm._v(" "),
@@ -48365,48 +48379,88 @@ var render = function() {
             "tbody",
             _vm._l(_vm.filteredRecords, function(record) {
               return _c("tr", [
-                _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(record.id_candidato) +
-                      "\n                        "
-                  )
-                ]),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.arquivo_final === true,
+                      carta_incompleta: record.arquivo_final == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.id_candidato) +
+                        "\n                        "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(record.nome) +
-                      "\n                        "
-                  )
-                ]),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.arquivo_final === true,
+                      carta_incompleta: record.arquivo_final == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.nome) +
+                        "\n                        "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(record.nome_programa_pretendido) +
-                      "\n                        "
-                  )
-                ]),
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.arquivo_final === true,
+                      carta_incompleta: record.arquivo_final == false
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(record.nome_programa_pretendido) +
+                        "\n                        "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticStyle: { "font-size": "18px" },
-                      attrs: {
-                        href: "" + record.link_arquivo,
-                        download: "" + record.nome_tratado
-                      }
-                    },
-                    [
-                      _c("span", {
-                        staticClass: "glyphicon glyphicon-download-alt"
-                      }),
-                      _vm._v(_vm._s(record.nome_tratado))
-                    ]
-                  )
-                ])
+                _c(
+                  "td",
+                  {
+                    class: {
+                      carta_completa: record.arquivo_final === true,
+                      carta_incompleta: record.arquivo_final == false
+                    }
+                  },
+                  [
+                    record.link_arquivo !== null
+                      ? _c("div", [
+                          _c(
+                            "a",
+                            {
+                              staticStyle: { "font-size": "18px" },
+                              attrs: {
+                                href: "" + record.link_arquivo,
+                                download: "" + record.nome_tratado
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "glyphicon glyphicon-download-alt"
+                              }),
+                              _vm._v(_vm._s(record.nome_tratado))
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
               ])
             })
           )
