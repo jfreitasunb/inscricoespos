@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th v-for="column in response.visivel">
@@ -30,16 +30,16 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 {{ record.id_candidato }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 {{ record.nome }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 {{ record.nome_programa_pretendido }}
                             </td>
-                            <td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 <div v-if="record.link_arquivo !== null">
                                     <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
                                 </div>
