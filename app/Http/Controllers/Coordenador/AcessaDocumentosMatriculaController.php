@@ -87,7 +87,9 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $candidatos_com_documentos = $documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos);
 
-        $local_zip = storage_path('app/arquivos_internos/').$edital;
+        $local_arquivos_zipar = storage_path('app/arquivos_internos/').$edital;
+
+        $local_zip = storage_path('app/arquivos_internos/');
 
         File::isDirectory($local_zip) or File::makeDirectory($local_zip,0775,true);
 
@@ -102,13 +104,13 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $zip = new ZipArchive;
 
-        if ( $zip->open( $arquivo_zip.$inscricoes_zipadas, ZipArchive::CREATE ) === true ){
+        if ( $zip->open( $local_zip.$nome_arquivo_ZIP, ZipArchive::CREATE ) === true ){
             
-            foreach (glob( $local_relatorios.'Inscricao_'.$nome_programa.'*') as $fileName ){
+            foreach (glob( $local_arquivos_zipar.'*.pdf') as $fileName ){
                 $file = basename( $fileName );
                 $zip->addFile( $fileName, $file );
             }
-
+            
             $zip->close();
         }
 
