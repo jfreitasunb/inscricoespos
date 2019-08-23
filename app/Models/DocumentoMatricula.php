@@ -56,5 +56,10 @@ class DocumentoMatricula extends Model
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->distinct('id_candidato')->get(['id_candidato']);
     }
+
+    public function retorna_usuarios_documentos_final($id_inscricao_pos)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('arquivo_final', TRUE)->get();
+    }
     
 }
