@@ -40,7 +40,10 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                                <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
+                                <div v-if="record.link_arquivo !== null">
+                                    <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
+                                </div>
+                                
                             </td>
                         </tr>
                     </tbody>
