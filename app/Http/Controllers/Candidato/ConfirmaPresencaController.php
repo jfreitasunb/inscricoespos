@@ -17,6 +17,7 @@ use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\CandidatosSelecionados;
+use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Notifications\NotificaCandidato;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
@@ -277,6 +278,23 @@ class ConfirmaPresencaController extends BaseController
 				if ($data_hoje <= $prazo_confirmacao) {
 					
 					$status_resposta = $selecionado->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
+
+					if ($confirmou_presenca) {
+						
+						$inicia_documentos_matricula = new DocumentoMatricula();
+						
+						$inicia_documentos_matricula->id_candidato = $id_candidato;
+						
+						$inicia_documentos_matricula->id_inscricao_pos = $id_inscricao_pos;
+						
+						$inicia_documentos_matricula->tipo_arquivo = 'df';
+						
+						$inicia_documentos_matricula->nome_arquivo = NULL;
+        				
+        				$inicia_documentos_matricula->arquivo_final = False;
+
+        				$inicia_documentos_matricula->save();
+					}
 				}else{
 					
 					notify()->flash(trans('mensagens_gerais.presenca_erro_fora_prazo'),'error');
