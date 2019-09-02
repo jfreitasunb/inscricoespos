@@ -414,7 +414,7 @@ class RelatorioController extends BaseController
       $nome_proficiencia_banco = $local_documentos.$documento->retorna_comprovante_proficiencia($id_candidato, $id_inscricao_pos)->nome_arquivo;
     }
 
-    // $nome_comprovante_banco = $local_documentos.$documento->retorna_comprovante_ingles($id_candidato, $id_inscricao_pos)->nome_arquivo;
+    $nome_projeto_banco = $local_documentos.$documento->retorna_projeto($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
     if (File::extension($nome_documento_banco) != 'pdf')
     {
@@ -451,17 +451,17 @@ class RelatorioController extends BaseController
       $success = $img->writeImage($nome_proficiencia_pdf);
     }
 
-    // if (File::extension($nome_comprovante_banco) != 'pdf')
-    // {
+    if (File::extension($nome_projeto_banco) != 'pdf')
+    {
 
-    //   $nome_historico_pdf = str_replace(File::extension($nome_comprovante_banco),'pdf', $nome_comprovante_banco);
+      $nome_projeto_pdf = str_replace(File::extension($nome_projeto_banco),'pdf', $nome_projeto_banco);
       
-    //   DB::table('arquivos_enviados')->where('nome_arquivo', $nome_comprovante_banco)->where('tipo_arquivo', 'Comprovante Inglês')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_historico_pdf]);
+      DB::table('arquivos_enviados')->where('nome_arquivo', $nome_projeto_banco)->where('tipo_arquivo', 'Projeto')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_projeto_pdf]);
 
-    //   $img = new Imagick($nome_comprovante_banco);
-    //   $img->setImageFormat('pdf');
-    //   $success = $img->writeImage($nome_comprovante_pdf);
-    // }
+      $img = new Imagick($nome_projeto_banco);
+      $img->setImageFormat('pdf');
+      $success = $img->writeImage($nome_comprovante_pdf);
+    }
 
     $nome_uploads['documento_pdf'] = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
     
@@ -472,7 +472,7 @@ class RelatorioController extends BaseController
     }
     
 
-    // $nome_uploads['nome_comprovante_pdf'] = str_replace(File::extension($nome_comprovante_banco),'pdf', $nome_comprovante_banco);
+    $nome_uploads['nome_projeto_pdf'] = str_replace(File::extension($nome_projeto_banco),'pdf', $nome_projeto_banco);
 
     return $nome_uploads;
   }
@@ -480,9 +480,9 @@ class RelatorioController extends BaseController
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
     if (array_key_exists('nome_proficiencia_pdf', $nome_uploads)) {
-      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
     }else{
-      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
     }
 
     $process->setTimeout(3600);
