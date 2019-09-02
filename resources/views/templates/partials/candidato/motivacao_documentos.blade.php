@@ -65,9 +65,9 @@
         </div>
   </fieldset>
 
-  {{-- <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.comprovante_ingles') }}</legend>
-        <div class="form-horizontal"{{ $errors->has('comprovante_ingles') ? ' has-error' : '' }}>
+  <fieldset class="scheduler-border">
+        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.projeto') }}</legend>
+        <div class="form-horizontal"{{ $errors->has('projeto') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
@@ -76,15 +76,15 @@
                 </button>
                 <!-- image-preview-input -->
                 <div class="btn btn-primary">
-                    <input type="file" accept="application/pdf" name="comprovante_ingles" required=""/> <!-- rename it -->
+                    <input type="file" accept="application/pdf" name="projeto" required=""/> <!-- rename it -->
                 </div>
             </span>
           </div>
-           @if ($errors->has('comprovante_ingles'))
-            <span class="help-block">{{ $errors->first('comprovante_ingles') }}</span>
+           @if ($errors->has('projeto'))
+            <span class="help-block">{{ $errors->first('projeto') }}</span>
           @endif
         </div>
-  </fieldset> --}}
+  </fieldset>
 
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.comprovante_proficiencia') }}</legend>

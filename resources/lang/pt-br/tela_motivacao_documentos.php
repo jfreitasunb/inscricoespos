@@ -20,4 +20,5 @@ para a própria Comissão nas hipóteses de erros procedimentais ou materiais. (
     'menu_registro_sucesso_parte_inicial' => 'Conta criada com sucesso. Foi enviado para o e-mail: ',
     'menu_registro_sucesso_parte_final' => 'um link de ativação da sua conta. Somente após ativação você conseguirá fazer login no sistema.',
     'comprovante_proficiencia' => 'Certificados de proficiência em língua Inglesa',
+    'projeto' => 'Pré-projeto',
 ];
