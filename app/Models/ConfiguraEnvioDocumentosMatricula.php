@@ -22,6 +22,10 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
     public function libera_tela_documento_matricula($id_inscricao_pos)
     {
         $periodo_envio_documentos = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+
+        if (is_null($periodo_envio_documentos)) {
+            return false;
+        }
         
         $data_hoje = (new Carbon())->format('Y-m-d');
             
