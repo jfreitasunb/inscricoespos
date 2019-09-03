@@ -10,12 +10,12 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       {!! Form::open(array('route' => 'configura.periodo.confirmacao','data-parsley-validate' => '' ,'enctype' => 'multipart/form-data')) !!}
-        <legend>Configurar o(s) período(s) de confirmação para o edital n<sup>o</sup> <strong>{{ $edital }}</strong></legend>
+        <legend>Configurar o período de envio dos documentos de matrícula para os(as) candidatos(as) selecionados(as) no edital n<sup>o</sup> <strong>{{ $edital }}</strong></legend>
         <div class="col-xs-6">
           <div class="form-group form-inline">
-            {!! Form::label('mes_inicio_1', 'Mês de início no programa:') !!}
-            <div class='input-group' id='mes_inicio_1'>
-              {!! Form::text('mes_inicio_1', null, ['class' => 'form-control', 'required' => '']) !!}
+            {!! Form::label('inicio_entrega', 'Início:') !!}
+            <div class='input-group' id='inicio_entrega'>
+              {!! Form::text('inicio_entrega', null, ['class' => 'form-control', 'required' => '']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -24,31 +24,9 @@
         </div>
         <div class="col-xs-6">
           <div class="form-group form-inline">
-            {!! Form::label('prazo_confirmacao_mes_1', 'Prazo para confirmação de interesse:') !!}
-            <div class='input-group' id='prazo_confirmacao_mes_1'>
-              {!! Form::text('prazo_confirmacao_mes_1', null, ['class' => 'form-control', 'required' => '']) !!}
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="form-group form-inline">
-            {!! Form::label('mes_inicio_2', 'Mês de início no programa:') !!}
-            <div class='input-group' id='mes_inicio_2'>
-              {!! Form::text('mes_inicio_2', null, ['class' => 'form-control']) !!}
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-6">
-          <div class="form-group form-inline">
-            {!! Form::label('prazo_confirmacao_mes_2', 'Prazo para confirmação de interesse:') !!}
-            <div class='input-group' id='prazo_confirmacao_mes_2'>
-              {!! Form::text('prazo_confirmacao_mes_2', null, ['class' => 'form-control']) !!}
+            {!! Form::label('fim_entrega', 'Fim:') !!}
+            <div class='input-group' id='fim_entrega'>
+              {!! Form::text('fim_entrega', null, ['class' => 'form-control', 'required' => '']) !!}
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
