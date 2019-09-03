@@ -52,15 +52,15 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
         $id_coordenador = $user->id_user;
 
 		$this->validate($request, [
-			'mes_inicio_1' => 'required',
-			'prazo_confirmacao_mes_1' => 'required|date_format:"d/m/Y"|after:today',
+			'inicio_entrega' => 'required',
+			'fim_entrega' => 'required|date_format:"d/m/Y"|after:today',
 		]);
 
         $id_inscricao_pos = (int)$request->id_inscricao_pos;
 
-        $mes_inicio_1 = (int)$request->mes_inicio_1;
+        $inicio_entrega = (int)$request->inicio_entrega;
 
-        $prazo_confirmacao_mes_1 = Carbon::createFromFormat('d/m/Y', $request->prazo_confirmacao_mes_1);
+        $fim_entrega = Carbon::createFromFormat('d/m/Y', $request->fim_entrega);
 
         $edital_vigente = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
@@ -70,9 +70,9 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
 
-        $configura_inicio->mes_inicio = $mes_inicio_1;
+        $configura_inicio->mes_inicio = $inicio_entrega;
 
-        $configura_inicio->prazo_confirmacao = $prazo_confirmacao_mes_1;
+        $configura_inicio->prazo_confirmacao = $fim_entrega;
 
         $configura_inicio->id_coordenador = $id_coordenador;
 
@@ -80,8 +80,8 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         if (!is_null($request->mes_inicio_2)) {
             $this->validate($request, [
-                'mes_inicio_2' => 'required|date_format:"m"|after:mes_inicio_1',
-                'prazo_confirmacao_mes_2' => 'required|date_format:"d/m/Y"|after:prazo_confirmacao_mes_1',
+                'mes_inicio_2' => 'required|date_format:"m"|after:inicio_entrega',
+                'prazo_confirmacao_mes_2' => 'required|date_format:"d/m/Y"|after:fim_entrega',
             ]);
 
             $prazo_confirmacao_mes_2 = Carbon::createFromFormat('d/m/Y', $request->prazo_confirmacao_mes_2);
