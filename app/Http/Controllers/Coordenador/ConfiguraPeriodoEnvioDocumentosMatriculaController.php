@@ -52,6 +52,8 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $id_coordenador = $user->id_user;
 
+        dd($request);
+
 		$this->validate($request, [
 			'inicio_entrega' => 'required',
 			'fim_entrega' => 'required|date_format:"d/m/Y"|after:today',
@@ -65,19 +67,17 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $edital_vigente = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
-        $configura_inicio = new ConfiguraInicioPrograma();
+        $configura_envio_documentos = new ConfiguraEnvioDocumentosMatricula();
 
-        $configura_inicio->limpa_configuracoes_anteriores($id_inscricao_pos);
+        $configura_envio_documentos->id_inscricao_pos = $id_inscricao_pos;
 
-        $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
+        $configura_envio_documentos->inicio_envio_documentos = $inicio_entrega;
 
-        $configura_inicio->mes_inicio = $inicio_entrega;
+        $configura_envio_documentos->fim_envio_documentos = $fim_entrega;
 
-        $configura_inicio->prazo_confirmacao = $fim_entrega;
+        $configura_envio_documentos->id_coordenador = $id_coordenador;
 
-        $configura_inicio->id_coordenador = $id_coordenador;
-
-        $configura_inicio->save();
+        $configura_envio_documentos->save();
 
         notify()->flash('Período de confirmação configurado com sucesso!','success', ['timer' => 3000,]);
 
