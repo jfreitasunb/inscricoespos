@@ -9,7 +9,7 @@
 @section('configurar_periodo_envio_documentos_matricula')
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      {!! Form::open(array('route' => 'configura.periodo.confirmacao','data-parsley-validate' => '' ,'enctype' => 'multipart/form-data')) !!}
+      {!! Form::open(array('route' => 'configura.periodo.matricula','data-parsley-validate' => '' ,'enctype' => 'multipart/form-data')) !!}
         <legend>Configurar o período de envio dos documentos de matrícula para os(as) candidatos(as) selecionados(as) no edital n<sup>o</sup> <strong>{{ $edital }}</strong></legend>
         <div class="col-xs-6">
           <div class="form-group form-inline">
