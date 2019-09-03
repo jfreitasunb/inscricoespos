@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\ConfiguraInicioPrograma;
+use InscricoesPos\Models\ConfiguraEnvioDocumentosMatricula;
 use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaRecomendacao;
 use InscricoesPos\Models\Formacao;
