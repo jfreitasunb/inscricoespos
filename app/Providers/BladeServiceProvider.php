@@ -22,7 +22,7 @@ class BladeServiceProvider extends ServiceProvider
     
     private $accordion_contas = ['lista.edita.usuarios', 'dados.coordenador.pos', 'pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes'];
 
-    private $accordion_inscricoes = ['configura.inscricao', 'configura.periodo.confirmacao', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes', 'lista.recomendacoes', 'reativar.carta', 'inscricoes.nao.finalizadas', 'status.selecionados', 'seleciona.candidatos', 'homologa.inscricoes', 'cadastra.area.pos', 'editar.area.pos', 'editar.formacao', 'dados.coordenador.pos'];
+    private $accordion_inscricoes = ['dados.coordenador.pos', 'configura.inscricao', 'cadastra.area.pos',  'editar.area.pos', 'editar.formacao', 'configura.periodo.confirmacao', 'configura.periodo.matricula', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes', 'lista.recomendacoes', 'reativar.carta', 'inscricoes.nao.finalizadas', 'seleciona.candidatos', 'status.selecionados', 'homologa.inscricoes', 'lista.recomendacoes', 'coordenador.documentos.matricula' ];
 
     private $accordion_relatorios = ['auxilia.selecao', 'relatorio.atual', 'relatorio.anteriores', 'gera.ficha.individual', 'ver.charts', 'link.acesso'];
 
