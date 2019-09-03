@@ -42,6 +42,11 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class= "{{ Route::currentRouteNamed('configura.periodo.matricula') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('configura.periodo.matricula') }}">Configurar Envio de Documentos</a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class= "{{ Route::currentRouteNamed('lista.recomendacoes') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('lista.recomendacoes') }}">Lista as indicações por candidato</a>
                                     </td>
@@ -132,6 +137,7 @@
                 @yield('edita_formacao')
                 @yield('configura_inscricao')
                 @yield('configurar_periodo_confirmacao')
+                @yield('configurar_periodo_envio_documentos_matricula')
                 @yield('homologa_inscricoes')
                 @yield('seleciona_candidatos')
                 @yield('status_selecionados')
