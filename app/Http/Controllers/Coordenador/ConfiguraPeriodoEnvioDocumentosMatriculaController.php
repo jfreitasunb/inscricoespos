@@ -78,31 +78,6 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $configura_inicio->save();
 
-        if (!is_null($request->mes_inicio_2)) {
-            $this->validate($request, [
-                'mes_inicio_2' => 'required|date_format:"m"|after:inicio_entrega',
-                'prazo_confirmacao_mes_2' => 'required|date_format:"d/m/Y"|after:fim_entrega',
-            ]);
-
-            $prazo_confirmacao_mes_2 = Carbon::createFromFormat('d/m/Y', $request->prazo_confirmacao_mes_2);
-
-            $mes_inicio_2 = (int)$request->mes_inicio_2;
-
-            $edital_vigente = ConfiguraInscricaoPos::find($id_inscricao_pos);
-
-            $configura_inicio = new ConfiguraInicioPrograma();
-
-            $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
-
-            $configura_inicio->mes_inicio = $mes_inicio_2;
-
-            $configura_inicio->prazo_confirmacao = $prazo_confirmacao_mes_2;
-
-            $configura_inicio->id_coordenador = $id_coordenador;
-
-            $configura_inicio->save();
-        }
-
         notify()->flash('Período de confirmação configurado com sucesso!','success', ['timer' => 3000,]);
 
         return redirect()->route('home');
