@@ -33,7 +33,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorController
 {
 
-	public function getConfiguraPeriodoConfirmacao()
+	public function getConfiguraPeriodoMatricula()
 	{
 
 		$edital = new ConfiguraInscricaoPos();
@@ -42,10 +42,10 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $edital = str_pad(explode('-', $edital_vigente->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode('-', $edital_vigente->edital)[0];
 
-		return view('templates.partials.coordenador.configurar_periodo_confirmacao')->with(compact('edital', 'edital_vigente'));
+		return view('templates.partials.coordenador.configurar_periodo_envio_documentos_matricula')->with(compact('edital', 'edital_vigente'));
 	}
 
-	public function postConfiguraPeriodoConfirmacao(Request $request)
+	public function getConfiguraPeriodoMatricula(Request $request)
 	{
         $user = Auth::user();
 
