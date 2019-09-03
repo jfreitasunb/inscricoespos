@@ -52,8 +52,6 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $id_coordenador = $user->id_user;
 
-        dd($request);
-
 		$this->validate($request, [
 			'inicio_entrega' => 'required',
 			'fim_entrega' => 'required|date_format:"d/m/Y"|after:today',
@@ -61,7 +59,7 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 
         $id_inscricao_pos = (int)$request->id_inscricao_pos;
 
-        $inicio_entrega = (int)$request->inicio_entrega;
+        $inicio_entrega = Carbon::createFromFormat('d/m/Y', $request->inicio_entrega);
 
         $fim_entrega = Carbon::createFromFormat('d/m/Y', $request->fim_entrega);
 
