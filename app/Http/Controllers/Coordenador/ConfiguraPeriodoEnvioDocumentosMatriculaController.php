@@ -45,7 +45,7 @@ class ConfiguraPeriodoEnvioDocumentosMatriculaController extends CoordenadorCont
 		return view('templates.partials.coordenador.configurar_periodo_envio_documentos_matricula')->with(compact('edital', 'edital_vigente'));
 	}
 
-	public function getConfiguraPeriodoMatricula(Request $request)
+	public function postConfiguraPeriodoMatricula(Request $request)
 	{
         $user = Auth::user();
 
