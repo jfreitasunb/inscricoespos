@@ -45,6 +45,13 @@ class CandidatosSelecionadosController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+        if (is_null($relatorio_disponivel->data_homologacao) || is_null($relatorio_disponivel->data_divulgacao_resultado)) {
+            notify()->flash('Não foi configurada a data de divulgação do resultado. Faça isso antes de continuar.','warning', [
+                'timer' => 3000,
+            ]);
+            return redirect()->route('editar.inscricao');
+        }
+
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
         if ($relatorio->autoriza_homologacao()){
