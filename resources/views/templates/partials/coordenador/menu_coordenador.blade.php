@@ -40,12 +40,11 @@
                     <div id="collapseDois" class="panel-collapse collapse {{ $keep_open_accordion_dados_pos }}">
                         <div class="panel-body">
                             <table class="table">
-                              <tr>
-                                <td class= "{{ Route::currentRouteNamed('dados.coordenador.pos') ? 'active_link' : '' }}">
-                                    <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('dados.coordenador.pos') }}">Dados do coordenador da Pós</a>
-                                </td>
-                              </tr>
-                                
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('dados.coordenador.pos') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-cog fa-fw"></span><a href="{{ route('dados.coordenador.pos') }}">Dados do coordenador da Pós</a>
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('cadastra.area.pos') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('cadastra.area.pos') }}">Cadastrar nova área Pós</a>
