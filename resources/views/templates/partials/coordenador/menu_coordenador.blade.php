@@ -176,7 +176,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <span class="glyphicon glyphicon-log-out fa-fw"></span><a href="{{ route('ver.charts') }}">Estatísticas</a>
+                            <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Estatísticas</a>
                         </h4>
                     </div>
                 </div>
