@@ -58,7 +58,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
-            notify()->flash('As inscrições não terminaram ainda. Não é possível homologar.','warning', [
+            notify()->flash('As inscrições não terminaram ainda. Não é possível ver os documentos enviados.','warning', [
                 'timer' => 3000,
             ]);
 
