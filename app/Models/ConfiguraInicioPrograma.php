@@ -24,6 +24,11 @@ class ConfiguraInicioPrograma extends FuncoesModels
         'deleted_at',
     ];
 
+    public function retorna_configuracao_confirmacao($id_inscricao_pos)
+    {
+        return is_null($this->where('id_inscricao_pos', $id_inscricao_pos)->value('prazo_confirmacao'));
+    }
+
     public function retorna_meses_para_inicio($id_inscricao_pos)
     {
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('prazo_confirmacao')->get();
