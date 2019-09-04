@@ -48331,7 +48331,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "glyphicon glyphicon-download-alt" }),
-              _vm._v(" Download do documento de todos os alunos")
+              _vm._v(" Download dos documentos de todos os alunos")
             ]
           )
         ])
@@ -50423,7 +50423,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -50694,8 +50693,6 @@ var render = function() {
                       : _vm._e()
                   ])
                 }),
-                _vm._v(" "),
-                _c("th", [_vm._v("Contemplado com bolsa?")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("Candidato Selecionado?")])
               ],
