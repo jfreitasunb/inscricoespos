@@ -45,6 +45,19 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $configurado_inicio = new ConfiguraInicioPrograma();
+
+        $nao_foi_configurado = $configurado_inicio->retorna_configuracao_confirmacao($id_inscricao_pos);
+
+        if ($nao_foi_configurado) {
+            notify()->flash('Não foi configurada o período de confirmação. Faça isso antes de continuar.','warning', [
+                'timer' => 3000,
+            ]);
+            return redirect()->route('configura.periodo.confirmacao');
+        }
+
         $edital = $relatorio_disponivel->edital;
 
         $selecionados = new CandidatosSelecionados;
