@@ -19,13 +19,55 @@ class BladeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    
-    private $accordion_contas = ['lista.edita.usuarios', 'dados.coordenador.pos', 'pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes'];
+    private $accordion_configurar_edital = ['configura.inscricao', 'configura.periodo.confirmacao', 'configura.periodo.matricula',];
 
-    private $accordion_inscricoes = ['dados.coordenador.pos', 'configura.inscricao', 'cadastra.area.pos',  'editar.area.pos', 'editar.formacao', 'configura.periodo.confirmacao', 'configura.periodo.matricula', 'pesquisa.candidato', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes', 'lista.recomendacoes', 'reativar.carta', 'inscricoes.nao.finalizadas', 'seleciona.candidatos', 'status.selecionados', 'homologa.inscricoes', 'lista.recomendacoes', 'coordenador.documentos.matricula' ];
+    private $accordion_contas = ['lista.edita.usuarios', 'pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes'];
 
-    private $accordion_relatorios = ['auxilia.selecao', 'relatorio.atual', 'relatorio.anteriores', 'gera.ficha.individual', 'ver.charts', 'link.acesso'];
+    private $accordion_dados_pos = ['dados.coordenador.pos', 'cadastra.area.pos',  'editar.area.pos', 'editar.formacao', 'pesquisa.candidato',  'coordenador.documentos.matricula' ];
 
+    private $accordion_acompanhar_inscricoes = ['lista.recomendacoes', 'gera.ficha.individual', 'auxilia.selecao', 'editar.inscricao', 'reativar.candidato', 'pesquisa.carta', 'altera.recomendante', 'pesquisa.indicacoes',  'reativar.carta', 'inscricoes.nao.finalizadas', 'lista.recomendacoes', 'link.acesso'];
+
+    private $accordion_relatorios = [ 'relatorio.atual', 'relatorio.anteriores'];
+
+    private $accordion_processo_selecao = ['seleciona.candidatos', 'homologa.inscricoes'];
+
+    private $accordion_acompanha_selecionados = ['status.selecionados', 'coordenador.documentos.matricula'];
+
+    public function ativa_accordion_acomponha_selecionado()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_acompanha_selecionados)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
+
+    public function ativa_accordion_processo_selecao()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_processo_selecao)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
+
+    public function ativa_accordion_configura_edital()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_configurar_edital)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
+
+    public function ativa_accordion_acompanhar_inscricoes()
+    {
+        if (in_array(Route::currentRouteName(), $this->accordion_acompanhar_inscricoes)) {
+            return 'in';
+        }else{
+            return '';
+        }
+    }
 
     public function ativa_accordion_contas()
     {
@@ -36,9 +78,9 @@ class BladeServiceProvider extends ServiceProvider
         }
     }
 
-    public function ativa_accordion_inscricoes()
+    public function ativa_accordion_dados_pos()
     {
-        if (in_array(Route::currentRouteName(), $this->accordion_inscricoes)) {
+        if (in_array(Route::currentRouteName(), $this->accordion_dados_pos)) {
             return 'in';
         }else{
             return '';
@@ -96,7 +138,7 @@ class BladeServiceProvider extends ServiceProvider
 
             View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
             
-            View::share('keep_open_accordion_inscricoes', $this->ativa_accordion_inscricoes());
+            View::share('keep_open_accordion_dados_pos', $this->ativa_accordion_dados_pos());
 
             View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
 
@@ -113,11 +155,17 @@ class BladeServiceProvider extends ServiceProvider
                 return false;
             }
 
-            View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
+            View::share('keep_open_accordion_configurar_edital', $this->ativa_accordion_configura_edital());
+
+            View::share('keep_open_accordion_acompanhar_inscricoes', $this->ativa_accordion_acompanhar_inscricoes());
             
-            View::share('keep_open_accordion_inscricoes', $this->ativa_accordion_inscricoes());
+            View::share('keep_open_accordion_dados_pos', $this->ativa_accordion_dados_pos());
 
             View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
+
+            View::share('keep_open_accordion_processo_selecao', $this->ativa_accordion_processo_selecao());
+
+            View::share('keep_open_accordion_acomponha_selecionados', $this->ativa_accordion_acomponha_selecionado());
 
             return $user->isCoordenador();
         });
