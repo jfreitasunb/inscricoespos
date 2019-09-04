@@ -19,6 +19,11 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
         'id_coordenador',
     ];
 
+    public function foi_configurado_envio_documentos($id_inscricao_pos)
+    {
+        return is_null($this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first());
+    }
+
     public function libera_tela_documento_matricula($id_inscricao_pos)
     {
         $periodo_envio_documentos = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
