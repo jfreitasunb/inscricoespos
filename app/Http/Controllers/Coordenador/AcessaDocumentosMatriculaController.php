@@ -54,6 +54,16 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $configura_envio_documentos = new ConfiguraEnvioDocumentosMatricula;
 
+        $nao_foi_configurado = $configura_envio_documentos->foi_configurado_envio_documentos($id_inscricao_pos);
+
+        if ($nao_foi_configurado) {
+            notify()->flash('O período de envio dos documentos de matrícula não foi configurado ainda. Faça isso antes de continuar.','warning', [
+                'timer' => 3000,
+            ]);
+
+            return redirect()->route('configura.periodo.matricula');
+        }
+
         if ($configura_envio_documentos->libera_tela_documento_matricula($id_inscricao_pos)){
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
