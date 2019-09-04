@@ -205,11 +205,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseCinco"><span class="glyphicon glyphicon-file fa-fw">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeis"><span class="glyphicon glyphicon-file fa-fw">
                             </span>Processo de Seleção</a>
                         </h4>
                     </div>
-                    <div id="collapseCinco" class="panel-collapse collapse {{ $keep_open_accordion_processo_selecao }}">
+                    <div id="collapseSeis" class="panel-collapse collapse {{ $keep_open_accordion_processo_selecao }}">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -229,11 +229,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeis"><span class="glyphicon glyphicon-file fa-fw">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeite><span class="glyphicon glyphicon-file fa-fw">
                             </span>Acompanha Selecionados</a>
                         </h4>
                     </div>
-                    <div id="collapseSeis" class="panel-collapse collapse {{ $keep_open_accordion_acomponha_selecionados }}">
+                    <div id="collapseSete" class="panel-collapse collapse {{ $keep_open_accordion_acomponha_selecionados }}">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -248,6 +248,13 @@
                                 </tr>
                             </table>
                         </div> 
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-stats fa-fw"></span><a href="{{ route('ver.charts') }}">Estatísticas</a>
+                        </h4>
                     </div>
                 </div>
                 <div class="panel panel-default">
