@@ -17,7 +17,7 @@
                     </select>
                 </div>
                 <div class="col-md-offset-3 col-md-6">
-                    <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download do documento de todos os alunos</a>
+                    <a :href="this.route" style="font-size:30px;"><span class="glyphicon glyphicon-download-alt"></span> Download dos documentos de todos os alunos</a>
                 </div>
             </div>
             <div class="table-responsive">
