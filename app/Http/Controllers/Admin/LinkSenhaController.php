@@ -19,6 +19,7 @@ use InscricoesPos\Notifications\NotificaRecomendante;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Str;
 
 /**
 * Classe para visualização da página inicial.
@@ -60,7 +61,7 @@ class LinkSenhaController extends AdminController
 			
 			$modo_pesquisa = false;
 
-			$token_link = str_random(64);
+			$token_link = Str::random(60);
 
 			$url_mudar_senha = url('esqueci/senha').'/'.$token_link;
 			$token = (bcrypt($token_link));
