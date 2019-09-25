@@ -27,7 +27,7 @@ class CreateCartasRecomendacoesTable extends Migration
             $table->string('circunstancia_2', 10)->nullable();
             $table->string('circunstancia_3', 10)->nullable();
             $table->string('circunstancia_4', 10)->nullable();
-            $table->string('circunstancia_outra', 256)->nullable();
+            $table->text('circunstancia_outra')->nullable();
             $table->integer('desempenho_academico')->nullable();
             $table->integer('capacidade_aprender')->nullable();
             $table->integer('capacidade_trabalhar')->nullable();
