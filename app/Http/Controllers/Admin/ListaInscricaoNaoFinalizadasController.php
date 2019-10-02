@@ -32,7 +32,7 @@ class ListaInscricaoNaoFinalizadasController extends AdminController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
-		$tipo_programa_pos = new EscolhaCandidato;
+		$tipo_programa_pos = new FinalizaInscricao;
 
 		$inscricoes_nao_finalizadas = $tipo_programa_pos->usuarios_nao_finalizados($relatorio_disponivel->id_inscricao_pos)->paginate(10);
 
