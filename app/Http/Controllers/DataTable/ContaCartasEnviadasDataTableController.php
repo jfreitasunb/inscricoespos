@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
 
 use InscricoesPos\Models\User;
-use InscricoesPos\Models\AuxiliaSelecao;
-use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\CartaRecomendacao;
+
 
 use DB;
 
@@ -15,36 +15,29 @@ class ContaCartasEnviadasDataTableController extends DataTableController
 {
     public function builder()
     {
-        return AuxiliaSelecao::query();
+        return User::query();
     }
 
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'programa_pretendido',
+            'id_user', 'nome', 'email',
         ];
     }
 
     public function getVisibleColumns()
     {
         return [
-            'id_candidato', 'nome', 'nome_programa_pretendido'
-        ];
-    }
-
-    public function getUpdatableColumns()
-    {
-        return [
-            'desclassificado'
+            'id_user', 'nome', 'email'
         ];
     }
 
     public function getCustomColumnNanes()
     {
         return [
-            'id_candidato' => 'Identificador',
+            'id_user' => 'Identificador',
             'nome' => 'Nome',
-            'nome_programa_pretendido' => 'Programa desejado'
+            'email' => 'Email'
         ];
     }
 
@@ -56,7 +49,6 @@ class ContaCartasEnviadasDataTableController extends DataTableController
                 'displayable' => array_values($this->getDisplayableColumns()),
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
-                'updatable' => $this->getUpdatableColumns(),
                 'records' => $this->getRecords($request),
             ]
         ]);
@@ -70,22 +62,17 @@ class ContaCartasEnviadasDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->where('user_type', 'recomendante')->orderBy('id_user')->get($this->getDisplayableColumns());
 
-        if (sizeof($dados_temporarios) > 0) {
-            foreach ($dados_temporarios as $dados) {
+        foreach ($dados_temporarios as $dados) {
+            
+            $cartas_recebidas = new CartaRecomendacao();
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
-            }
-        }else{
-            $dados_vue = [];
+            $total_cartas = $cartas_recebidas->conta_cartas_enviadas_por_recomendante($dados->id_user);
+
+            $dados_vue[] = ['id_user' => $dados->id_user, 'nome' => $dados->nome, 'email' => $dados->email, 'total_cartas' => $total_cartas];
         }
         
         return $dados_vue;
-    }
-
-    public function update($id_candidato, Request $request)
-    {   
-        DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 }
