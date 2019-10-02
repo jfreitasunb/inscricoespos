@@ -7,7 +7,6 @@
 @endsection
 
 @section('nao_finalizadas')
-
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Inscrições não finalizadas</legend>
 
@@ -21,6 +20,7 @@
       </thead>
       <tbody>
         @foreach( $inscricoes_nao_finalizadas as $nao_finalizada)
+        {{ dd($inscricoes_nao_finalizadas) }}
           <tr>
             <td>{{ $nao_finalizada['nome'] }}</td>
             <td>{{ $nao_finalizada['tipo_programa_pos_ptbr'] }}</td>

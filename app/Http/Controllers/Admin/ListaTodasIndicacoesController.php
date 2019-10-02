@@ -32,9 +32,10 @@ class ListaTodasIndicacoesController extends AdminController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+      	$edital_vigente = explode("-",$relatorio_disponivel->edital)[1]."/".explode("-",$relatorio_disponivel->edital)[0];
+
 
 		$finalizacoes = new FinalizaInscricao;
-		
 
 		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_lista_indicacoes($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
@@ -67,7 +68,13 @@ class ListaTodasIndicacoesController extends AdminController
 				$i++;
 			}
 		}
+
+		$totaliza = new CartaRecomendacao();
+
+		$total_cartas_recebidas = $totaliza->conta_total_cartas_por_edital_situacao($relatorio_disponivel->id_inscricao_pos, true);
+
+		$total_cartas_solicitas = $totaliza->conta_total_cartas_por_edital_situacao($relatorio_disponivel->id_inscricao_pos, false);
 		
-		return view('templates.partials.admin.tabela_indicacoes')->with(compact('dados_para_template', 'inscricoes_finalizadas'));
+		return view('templates.partials.admin.tabela_indicacoes')->with(compact('dados_para_template', 'inscricoes_finalizadas', 'edital_vigente', 'total_cartas_solicitas', 'total_cartas_recebidas'));
 	}
 }

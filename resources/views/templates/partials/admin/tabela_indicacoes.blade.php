@@ -10,6 +10,11 @@
 
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">Recomendantes indicados por candidato</legend>
+  <ul>
+    <li><strong>Total de cartas solicitadas para o edital {{ $edital_vigente }}: {{ $total_cartas_solicitas }} </strong></li>
+    <li><strong>Total de cartas recebidas até o momento: {{ $total_cartas_recebidas }} </strong></li>
+  </ul>
+  
 
   <div class="table-responsive">
     <table class="table table-bordered table-hover">

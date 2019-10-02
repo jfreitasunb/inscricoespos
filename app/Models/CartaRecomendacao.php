@@ -2,6 +2,7 @@
 
 namespace InscricoesPos\Models;
 
+use InscricoesPos\Models\ContatoRecomendante;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,6 +49,24 @@ class CartaRecomendacao extends FuncoesModels
     public function conta_cartas_enviadas_por_recomendante($id_recomendante)
     {
         return $this->where('id_recomendante',$id_recomendante)->where('completada',TRUE)->count();
+    }
+
+    public function conta_total_cartas_por_edital_situacao($id_inscricao_pos, $situacao)
+    {
+        $total = 0;
+        $recomendantes_indicados = ContatoRecomendante::select('id_recomendante')->where('id_inscricao_pos', $id_inscricao_pos)->get();
+
+        foreach ($recomendantes_indicados as $recomendante) {
+            $id_recomendante = $recomendante->id_recomendante;
+
+            $status = $this->select('completada')->where('id_recomendante',$id_recomendante)->where('id_inscricao_pos', $id_inscricao_pos)->value('completada');
+
+            if ($status == $situacao) {
+                $total++;
+            }
+        }
+
+        return $total;
     }
 
     public function retorna_cartas_por_recomendante($id_recomendante, $locale)
