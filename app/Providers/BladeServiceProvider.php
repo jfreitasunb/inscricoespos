@@ -33,7 +33,7 @@ class BladeServiceProvider extends ServiceProvider
 
     private $accordion_acompanha_selecionados = ['status.selecionados', 'coordenador.documentos.matricula'];
 
-    public function ativa_accordion_acomponha_selecionado()
+    public function ativa_accordion_acompanha_selecionado()
     {
         if (in_array(Route::currentRouteName(), $this->accordion_acompanha_selecionados)) {
             return 'in';
@@ -165,7 +165,7 @@ class BladeServiceProvider extends ServiceProvider
 
             View::share('keep_open_accordion_processo_selecao', $this->ativa_accordion_processo_selecao());
 
-            View::share('keep_open_accordion_acomponha_selecionados', $this->ativa_accordion_acomponha_selecionado());
+            View::share('keep_open_accordion_acomponha_selecionados', $this->ativa_accordion_acompanha_selecionado());
 
             return $user->isCoordenador();
         });
