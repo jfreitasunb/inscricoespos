@@ -46,6 +46,11 @@
                                     <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('visualiza.associacoes') }}">Associações existentes</a>
                                 </td>
                             </tr>
+                            <tr>
+                                <td class= "{{ Route::currentRouteNamed('visualiza.associacoesconta.cartas.recomendante') ? 'active_link' : '' }}">
+                                    <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('conta.cartas.recomendante') }}">Total de cartas por recomendante</a>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     </div>
@@ -273,6 +278,7 @@
                 @yield('edita_area_pos')
                 @yield('admin_impersonate')
                 @yield('cadastra_area_pos')
+                @yield('lista_contagem_cartas')
                 @yield('edita_formacao')
                 @yield('admin_impersonate')
                 @yield('ativa_conta')
