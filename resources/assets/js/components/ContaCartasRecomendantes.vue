@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Tela de desclassificação de candidatos</div>
+        <div class="panel-heading">Total de cartas enviadas por cada recomendante</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
@@ -26,23 +26,21 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Desclassificar?</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
                             <td>
-                                {{ record.id_candidato }}
+                                {{ record.id_user }}
                             </td>
                             <td>
                                 {{ record.nome }}
                             </td>
                             <td>
-                                {{ record.nome_programa_pretendido }}
+                                {{ record.email }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="desclassificar(record)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="">Não</a><br>
+                                {{ record.total_cartas }}
                             </td>
                         </tr>
                     </tbody>
@@ -68,21 +66,13 @@
                 },
 
                 sort: {
-                    key: 'id_candidato',
+                    key: 'id_user',
                     order: 'asc'
                 },
 
                 limit: 50,
 
                 quickSearchQuery: '',
-
-                desclassifica: {
-                    id_candidato: null,
-                    id_inscricao_pos: null,
-                    programa_pretendido: null,
-                    errors: []
-                }
-
             }
         },
 
@@ -139,19 +129,6 @@
                 this.sort.key  = column
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
-            },
-
-            desclassificar (record) {
-                this.desclassifica.id_candidato = record.id_candidato
-                this.desclassifica.id_inscricao_pos = record.id_inscricao_pos
-                this.desclassifica.programa_pretendido = record.id_programa_pretendido
-                axios.patch(`${this.endpoint}/${this.desclassifica.id_candidato}`, this.desclassifica).then(() =>{
-                    this.getRecords().then(() => {
-                        this.desclassifica.id_candidato = null
-                        this.desclassifica.id_inscricao_pos = null
-                        this.desclassifica.programa_pretendido = null
-                    })
-                })
             }
         },
 
