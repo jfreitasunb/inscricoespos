@@ -45,6 +45,11 @@ class CartaRecomendacao extends FuncoesModels
         return $this->where('id_inscricao_pos',$id_inscricao_pos)->where('id_candidato',$id_candidato)->where('completada',TRUE)->count();
     }
 
+    public function conta_cartas_enviadas_por_recomendante($id_recomendante)
+    {
+        return $this->where('id_recomendante',$id_recomendante)->where('completada',TRUE)->count();
+    }
+
     public function retorna_cartas_por_recomendante($id_recomendante, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_tipo_programa_pos($locale);
