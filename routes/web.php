@@ -173,6 +173,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('lista/users', '\InscricoesPos\Http\Controllers\Admin\AdministraUserController@index')->name('lista.edita.usuarios');
 
 	Route::resource('datatable/users','\InscricoesPos\Http\Controllers\DataTable\UserDataTableController');
+
+	Route::get('conta/cartas', '\InscricoesPos\Http\Controllers\Admin\ContaCartasRecomendantesController@getContaCartas')->name('conta.cartas.recomendante');
+
+	Route::resource('datatable/conta/cartas','\InscricoesPos\Http\Controllers\DataTable\ContaCartasEnviadasDataTableController');
 });
 
 
