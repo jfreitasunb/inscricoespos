@@ -29,8 +29,9 @@ const AuxiliaSelecao = require('./components/AuxiliaSelecao.vue');
 const HomologaInscricoes = require('./components/HomologaInscricoes.vue');
 const SelecionaCandidatos = require('./components/SelecionaCandidatos.vue');
 const MudaRecomendante = require('./components/MudaRecomendante.vue');
+const ContaCartasRecomendantes = require('./components/ContaCartasRecomendantes.vue');
 
 const app = new Vue({
     el: '#app',
-    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante }
+    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante, ContaCartasRecomendantes }
 });
