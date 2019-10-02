@@ -176,7 +176,7 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::get('conta/cartas', '\InscricoesPos\Http\Controllers\Admin\ContaCartasRecomendantesController@getContaCartas')->name('conta.cartas.recomendante');
 
-	Route::resource('datatable/conta/cartas','\InscricoesPos\Http\Controllers\DataTable\ContaCartasEnviadasDataTableController');
+	Route::resource('datatable/contacartasrecomendante','\InscricoesPos\Http\Controllers\DataTable\ContaCartasEnviadasDataTableController');
 });
 
 
