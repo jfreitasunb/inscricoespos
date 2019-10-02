@@ -21,14 +21,14 @@ class ContaCartasEnviadasDataTableController extends DataTableController
     public function getDisplayableColumns()
     {
         return [
-            'id_user', 'nome', 'email',
+            'id_user', 'nome', 'email'
         ];
     }
 
     public function getVisibleColumns()
     {
         return [
-            'id_user', 'nome', 'email'
+            'id_user', 'nome', 'email', 'total_cartas'
         ];
     }
 
@@ -37,7 +37,8 @@ class ContaCartasEnviadasDataTableController extends DataTableController
         return [
             'id_user' => 'Identificador',
             'nome' => 'Nome',
-            'email' => 'Email'
+            'email' => 'Email',
+            'total_cartas' => 'Total de cartas enviadas'
         ];
     }
 
