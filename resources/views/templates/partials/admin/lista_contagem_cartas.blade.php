@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <conta-cartas-recomendantes endpoint="{{ route('conta.cartas.recomendante') }}"></conta-cartas-recomendantes>
+      <conta-cartas-recomendantes endpoint="{{ route('contacartasrecomendante.index') }}"></conta-cartas-recomendantes>
     </div>
   </div>
 </div>
