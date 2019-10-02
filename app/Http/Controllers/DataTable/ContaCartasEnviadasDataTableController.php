@@ -63,7 +63,7 @@ class ContaCartasEnviadasDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->where('user_type', 'recomendante')->orderBy('id_user')->get($this->getDisplayableColumns());
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('user_type', 'recomendante')->orderBy('id_user')->get($this->getDisplayableColumns());
 
         foreach ($dados_temporarios as $dados) {
             
