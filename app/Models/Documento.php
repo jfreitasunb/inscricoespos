@@ -69,4 +69,9 @@ class Documento extends Model
 
         }
     }
+
+    public function retorna_existencia_documentos($id_candidato, $id_inscricao_pos)
+    {
+        return !is_null($this->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->get());
+    }
 }
