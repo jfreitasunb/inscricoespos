@@ -125,9 +125,19 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
             }
             
 
-            $dados_vue[] = ['id_candidato' => $id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m'), 'recomendante1' => $recomendante[1], 'recomendante2' => $recomendante[2], 'recomendante3' => $recomendante[3], 'documentos' => $documentos, 'comprovante' => $comprovante, 'historico' => $historico, 'projeto' => $projeto];
+            $dados_vue[] = ['id_candidato' => $id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m'), 'recomendante1' => $recomendante[1], 'recomendante2' => $recomendante[2], 'recomendante3' => $recomendante[3], 'documentos' => $documentos, 'comprovante' => $comprovante, 'historico' => $historico, 'projeto' => $projeto, 'id_inscricao_pos' => $id_inscricao_pos];
         }
         
         return $dados_vue;
+    }
+
+    public function update($id, Request $request)
+    {
+        
+        $id_candidato = explode("_", $id)[0];
+
+        $id_inscricao_pos = explode("_", $id)[1];
+
+        // $this->builder->find($id_user)->update($request->only($this->getUpdatableColumns()));
     }
 }
