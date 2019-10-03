@@ -135,8 +135,8 @@ class FinalizaInscricao extends FuncoesModels
         return $this->where('id_inscricao_pos', $id_inscricao_pos)->get();
     }
 
-    public function usuarios_nao_finalizados($id_inscricao_pos)
+    public function retorna_candidatos_finalizaram_inscricao($id_inscricao_pos)
     {
-        $this->where('finaliza_inscricao.id_inscricao_pos', $id_inscricao_pos)->where('finaliza_inscricao.finalizada', false)->where('finaliza_inscricao.id_candidato', $id_candidato)->join('users', 'users.id_user','finaliza_inscricao.id_candidato')->join('configura_inscricao_pos','configura_inscricao_pos.id_inscricao_pos', 'finaliza_inscricao.id_inscricao_pos')->join('escolhas_candidato', 'escolhas_candidato.id_candidato', 'users.id_user')->where('escolhas_candidato.id_inscricao_pos', $id_inscricao_pos)->join('programa_pos_mat', 'id_programa_pos', 'escolhas_candidato.programa_pretendido')->select('finaliza_inscricao.id', 'finaliza_inscricao.id_candidato', 'finaliza_inscricao.id_inscricao_pos', 'finaliza_inscricao.finalizada', 'configura_inscricao_pos.edital', 'users.nome','programa_pos_mat.tipo_programa_pos_ptbr')->get();
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', TRUE)->get();
     }
 }
