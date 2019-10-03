@@ -26,6 +26,8 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,6 +49,23 @@
                             </td>
                             <td>
                                 {{ record.updated_at }}
+                            </td>
+                            <td>
+                                <button @click='toggle = !toggle'> click here </button>
+                                <div v-show='toggle'>
+                                    <a href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br>
+                                    <a href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br>
+                                    <a href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br>
+                                    <a href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br>
+                                    <ul>
+                                        <li>O recomendante 1 <span style="color: #2ecc71" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
+                                        <li>O recomendante 2 <span style="color: #2ecc71" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
+                                        <li>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td>
+                                
                             </td>
                         </tr>
                     </tbody>
@@ -70,6 +89,7 @@
                     visivel: [],
                     records: []
                 },
+                toggle: false,
 
                 sort: {
                     key: 'id_user',
@@ -79,6 +99,18 @@
                 limit: 50,
 
                 quickSearchQuery: '',
+
+                detalhes: {
+                    id_user: null,
+                    form: {},
+                    errors: []
+                },
+
+                finalizar: {
+                    id_user: null,
+                    form: {},
+                    errors: []
+                },
             }
         },
 
@@ -115,6 +147,9 @@
         },
 
         methods: {
+            myFunction: function (arquivo) {   
+                window.open(arquivo, "_blank");    
+            },
 
             getRecords () {
                 return axios.get(`${this.endpoint}?${this.getQueryParameters()}`).then((response) => {
@@ -135,6 +170,30 @@
                 this.sort.key  = column
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
+            },
+
+            detalhe (record) {
+
+                this.detalhes.errors = []
+                this.detalhes.id_user = record.id_user
+                this.detalhes.form = _.pick(record, this.response.updatable)
+            },
+
+            update () {
+
+                axios.patch(`${this.endpoint}/${this.editing.id_user}`, this.editing.form).then(() => {
+
+                    this.getRecords().then(() => {
+
+                        this.editing.id_user = null
+                        this.editing.form = {}
+
+                    })
+
+                }).catch((error) => {
+
+                    this.editing.errors = error.response.data.errors
+                })
             }
         },
 
