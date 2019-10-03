@@ -160,8 +160,6 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('inscricao/acha/indicacoes', '\InscricoesPos\Http\Controllers\Admin\ListaQuemIndicouController@postAchaIndicacoes')->name('pesquisa.indicacoes');
 
-	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
-
 	Route::get('inscricao/altera/recomendantes', '\InscricoesPos\Http\Controllers\Admin\MudaRecomendanteController@getAlteraRecomendantes')->name('altera.recomendante');
 
 	Route::resource('datatable/alterarecomendante','\InscricoesPos\Http\Controllers\DataTable\MudarRecomendanteDataTableController');
@@ -177,6 +175,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('conta/cartas', '\InscricoesPos\Http\Controllers\Admin\ContaCartasRecomendantesController@getContaCartas')->name('conta.cartas.recomendante');
 
 	Route::resource('datatable/contacartasrecomendante','\InscricoesPos\Http\Controllers\DataTable\ContaCartasEnviadasDataTableController');
+
+	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
+
+	Route::resource('datatable/inscricoesnaofinalizadas','\InscricoesPos\Http\Controllers\DataTable\InscricoesNaoFinalizadasDataTableController');
 });
 
 
