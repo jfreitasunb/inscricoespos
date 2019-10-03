@@ -3,6 +3,7 @@
 namespace InscricoesPos\Models;
 
 use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\FinalizaInscricao;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -54,15 +55,23 @@ class CartaRecomendacao extends FuncoesModels
     public function conta_total_cartas_por_edital_situacao($id_inscricao_pos, $situacao)
     {
         $total = 0;
-        $recomendantes_indicados = ContatoRecomendante::select('id_recomendante')->where('id_inscricao_pos', $id_inscricao_pos)->get();
+        $candidatos_finalizados = new FinalizaInscricao();
 
-        foreach ($recomendantes_indicados as $recomendante) {
-            $id_recomendante = $recomendante->id_recomendante;
+        $finalizados = $candidatos_finalizados->retorna_candidatos_finalizaram_inscricao($id_inscricao_pos);
 
-            $status = $this->select('completada')->where('id_recomendante',$id_recomendante)->where('id_inscricao_pos', $id_inscricao_pos)->value('completada');
+        foreach ($finalizados as $candidato) {
+            $id_candidato = $candidato->id_candidato;
 
-            if ($status == $situacao) {
-                $total++;
+            $recomendantes_inidicados = ContatoRecomendante::where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->get();
+
+            foreach ($recomendantes_inidicados as $recomendante) {
+                $id_recomendante = $recomendante->id_recomendante;
+                
+                $status = $this->select('completada')->where('id_recomendante', $id_recomendante)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_candidato', $id_candidato)->value('completada');
+
+                if ($status == $situacao) {
+                    $total++;
+                }
             }
         }
 
