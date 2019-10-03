@@ -79,10 +79,15 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
         foreach ($dados_temporarios as $dados) {
             
             $escolha = new EscolhaCandidato();
+            if (!is_object($escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos))) {
+                $programa_pretendido = null;
+            }else{
+                $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
+                $programa_pretendido = (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr;
+            }
+            
 
-            $id_programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
-
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m')];
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m')];
         }
         
         return $dados_vue;
