@@ -51,21 +51,22 @@
                                 {{ record.updated_at }}
                             </td>
                             <td>
-                                <button @click='toggle = !toggle'> click here </button>
-                                <div v-show='toggle'>
-                                    <a href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br>
-                                    <a href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br>
-                                    <a href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br>
-                                    <a href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br>
-                                    <ul>
-                                        <li>O recomendante 1 <span style="color: #2ecc71" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
-                                        <li>O recomendante 2 <span style="color: #2ecc71" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
-                                        <li>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</li>
-                                    </ul>
-                                </div>
+                                <a href="#" @click.prevent="ver_detalhes(record.id_candidato)" v-if="detalhe.id_candidato !== record.id_candidato"> Detalhes </a>
+                                <template v-if="detalhe.id_candidato === record.id_candidato">
+                                    <div>
+                                        <a href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br>
+                                        <a href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br>
+                                        <a href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br>
+                                        <a href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br>
+                                        <p>O recomendante 1 <span style="color: #2ecc71" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
+                                        <p>O recomendante 2 <span style="color: #2ecc71" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
+                                        <p>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
+                                    </div>
+                                    <a href="#" @click.provent="detalhe.id_candidato = null">Fechar</a>
+                                </template>
                             </td>
                             <td>
-                                
+                                <a href="#" @click.provent="update(record.id_candidato, record.id_inscricao_pos)">Finalizar manualmente</a>
                             </td>
                         </tr>
                     </tbody>
@@ -100,15 +101,13 @@
 
                 quickSearchQuery: '',
 
-                detalhes: {
-                    id_user: null,
-                    form: {},
-                    errors: []
+                detalhe: {
+                    id_candidato: null,
                 },
 
                 finalizar: {
-                    id_user: null,
-                    form: {},
+                    id_candidato: null,
+                    id_inscricao_pos: null,
                     errors: []
                 },
             }
@@ -172,27 +171,24 @@
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
 
-            detalhe (record) {
-
-                this.detalhes.errors = []
-                this.detalhes.id_user = record.id_user
-                this.detalhes.form = _.pick(record, this.response.updatable)
+            ver_detalhes (id_candidato) {
+                this.detalhe.id_candidato = id_candidato
             },
 
-            update () {
-
-                axios.patch(`${this.endpoint}/${this.editing.id_user}`, this.editing.form).then(() => {
+            update (id_candidato, id_inscricao_pos) {
+                axios.patch(`${this.endpoint}/${id_candidato+"_"+id_inscricao_pos}`, this.id_inscricao_pos).then(() => {
 
                     this.getRecords().then(() => {
 
-                        this.editing.id_user = null
-                        this.editing.form = {}
+                        this.finalizar.id_candidato = null
+                        this.finalizar.id_inscricao_pos = null
+                        
 
                     })
 
                 }).catch((error) => {
 
-                    this.editing.errors = error.response.data.errors
+                    this.finalizar.errors = error.response.data.errors
                 })
             }
         },
