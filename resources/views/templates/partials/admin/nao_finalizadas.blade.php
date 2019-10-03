@@ -20,7 +20,6 @@
       </thead>
       <tbody>
         @foreach( $inscricoes_nao_finalizadas as $nao_finalizada)
-        {{ dd($inscricoes_nao_finalizadas) }}
           <tr>
             <td>{{ $nao_finalizada['nome'] }}</td>
             <td>{{ $nao_finalizada['tipo_programa_pos_ptbr'] }}</td>
