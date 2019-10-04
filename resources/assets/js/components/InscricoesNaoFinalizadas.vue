@@ -1,6 +1,6 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Total de cartas enviadas por cada recomendante</div>
+        <div class="panel-heading">Inscrições que não foram finalizadas</div>
         <div class="panel-body">
             <div class="row">
                 <div class="form-group col-md-10">
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th v-for="column in response.visivel">
@@ -51,18 +51,21 @@
                                 {{ record.updated_at }}
                             </td>
                             <td>
-                                <a href="#" @click.prevent="ver_detalhes(record.id_candidato)" v-if="detalhe.id_candidato !== record.id_candidato"> Detalhes </a>
+                                <a class="myhover" href="#" @click.prevent="ver_detalhes(record.id_candidato)" v-if="detalhe.id_candidato !== record.id_candidato"> Detalhes </a>
                                 <template v-if="detalhe.id_candidato === record.id_candidato">
-                                    <div>
-                                        <a href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br>
-                                        <a href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br>
-                                        <a href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br>
-                                        <a href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br>
-                                        <p>O recomendante 1 <span style="color: #009fe5" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
-                                        <p>O recomendante 2 <span style="color: #009fe5" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
-                                        <p>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
+                                    <div class="container">
+                                        <div class="row">
+                                        <a class="myhover" href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br><br>
+                                        <a class="myhover" href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br><br>
+                                        <a class="myhover" href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br><br>
+                                        <a class="myhover" href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br><br>
+                                        <p :class="(record.recomendante1) ? 'mybg-success' : 'mybg-danger'">O recomendante 1 <span v-if="record.recomendante1"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
+                                        <p :class="(record.recomendante2) ? 'mybg-success' : 'mybg-danger'">O recomendante 2 <span v-if="record.recomendante2"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
+                                        <p :class="(record.recomendante3) ? 'mybg-success' : 'mybg-danger'">O recomendante 3 <span v-if="record.recomendante3"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
+                                    </div>    
                                     </div>
-                                    <a href="#" @click.provent="detalhe.id_candidato = null">Fechar</a>
+                                    
+                                    <a class="myhover" href="#" @click.provent="detalhe.id_candidato = null">Fechar</a>
                                 </template>
                             </td>
                             <td>
