@@ -1,7 +1,14 @@
 <template>    
     <div class="panel panel-default">
-        <div class="panel-heading">Tela de desclassificação de candidatos</div>
+        <div class="panel-heading">Situação das cartas de recomendação</div>
         <div class="panel-body">
+            <div class="row">
+                <div class="container">
+                    <p class="mybg-info">Total de cartas solicitadas para o edital {{ response.edital }}: {{ response.total_cartas_solicitas }}</p><br>
+                    <p class="mybg-info">Total de cartas recebidas até o momento: {{ response.total_cartas_recebidas }}</p>    
+                </div>
+                
+            </div>
             <div class="row">
                 <div class="form-group col-md-10">
                     <label for="filter">Pesquisa rápida</label>
@@ -18,28 +25,39 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th v-for="column in response.visivel">
+                            <th style="text-align: center;" v-for="column in response.visivel">
                                 <span class="sortable" @click="sortBy(column)">{{ response.custom_columns[column] || column }}</span>
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
+                            <th style="text-align: center;">Recomendante 1</th>
+                            <th style="text-align: center;">Recomendante 2</th>
+                            <th style="text-align: center;">Recomendante 3</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="record in filteredRecords">
-                            <td>
-                                {{ record.id_candidato }}
+                        <tr class="" v-for="record in filteredRecords">
+                            <td class="lista_carta">
+                                {{ record.nome }}<br>
+                                {{ record.email }}
                             </td>
-                            <td>
-                                {{ record.nome }}
-                            </td>
-                            <td>
+                            <td class="lista_carta">
                                 {{ record.nome_programa_pretendido }}
                             </td>
-                            <td>
+                            <td :class="(record.status_carta_1) ? 'lista_carta carta_completa' : 'lista_carta carta_incompleta'">
+                                {{ record.nome_recomendante_1 }}<br>
+                                {{ record.email_recomendante_1 }}
+                            </td>
+                            <td :class="(record.status_carta_2) ? 'lista_carta carta_completa' : 'lista_carta carta_incompleta'">
+                                {{ record.nome_recomendante_2 }}<br>
+                                {{ record.email_recomendante_2 }}
+                            </td>
+                            <td :class="(record.status_carta_3) ? 'lista_carta carta_completa' : 'lista_carta carta_incompleta'">
+                                {{ record.nome_recomendante_3 }}<br>
+                                {{ record.email_recomendante_3 }}
                             </td>
                         </tr>
                     </tbody>
