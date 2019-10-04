@@ -141,9 +141,4 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
         
         return $dados_vue;
     }
-
-    public function update($id_candidato, Request $request)
-    {   
-        DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
-    }
 }
