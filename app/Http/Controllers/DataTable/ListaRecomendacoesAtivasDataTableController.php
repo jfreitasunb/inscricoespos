@@ -32,7 +32,7 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
     public function getVisibleColumns()
     {
         return [
-            'id_candidato', 'nome', 'nome_programa_pretendido'
+            'nome', 'nome_programa_pretendido'
         ];
     }
 
@@ -46,9 +46,8 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
     public function getCustomColumnNanes()
     {
         return [
-            'id_candidato' => 'Identificador',
-            'nome' => 'Nome',
-            'nome_programa_pretendido' => 'Programa desejado'
+            'nome' => 'Nome do Candidato',
+            'nome_programa_pretendido' => 'Programa'
         ];
     }
 
@@ -59,6 +58,8 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $edital_vigente = explode("-",$relatorio_disponivel->edital)[1]."/".explode("-",$relatorio_disponivel->edital)[0];
 
         $finalizacoes = new FinalizaInscricao;
 
@@ -71,6 +72,7 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'updatable' => $this->getUpdatableColumns(),
+                'edital' => $edital_vigente,
                 'total_cartas_solicitas' => $finalizacoes->retorna_total_inscricoes_finalizadas($id_inscricao_pos)*3,
                 'total_cartas_recebidas' => $totaliza->conta_total_cartas_por_edital_situacao($id_inscricao_pos, true),
                 'records' => $this->getRecords($request),
@@ -92,8 +94,6 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
         $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
-
-        $edital_vigente = explode("-",$relatorio_disponivel->edital)[1]."/".explode("-",$relatorio_disponivel->edital)[0];
 
         $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
         
@@ -132,7 +132,7 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
 
             $programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($programa_pretendido))->tipo_programa_pos_ptbr, 'email_recomendante_1' => $dados_temporarios['email_recomendante_1'], 'nome_recomendante_1' => $dados_temporarios['nome_recomendante_1'], 'status_carta_1' => $dados_temporarios['status_carta_1'], 'email_recomendante_2' => $dados_temporarios['email_recomendante_2'], 'nome_recomendante_2' => $dados_temporarios['nome_recomendante_2'], 'status_carta_2' => $dados_temporarios['status_carta_2'], 'email_recomendante_3' => $dados_temporarios['email_recomendante_3'], 'nome_recomendante_3' => $dados_temporarios['nome_recomendante_3'], 'status_carta_3' => $dados_temporarios['status_carta_3'] ];
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'nome_programa_pretendido' => (ProgramaPos::find($programa_pretendido))->tipo_programa_pos_ptbr, 'email_recomendante_1' => $dados_temporarios['email_recomendante_1'], 'nome_recomendante_1' => $dados_temporarios['nome_recomendante_1'], 'status_carta_1' => $dados_temporarios['status_carta_1'], 'email_recomendante_2' => $dados_temporarios['email_recomendante_2'], 'nome_recomendante_2' => $dados_temporarios['nome_recomendante_2'], 'status_carta_2' => $dados_temporarios['status_carta_2'], 'email_recomendante_3' => $dados_temporarios['email_recomendante_3'], 'nome_recomendante_3' => $dados_temporarios['nome_recomendante_3'], 'status_carta_3' => $dados_temporarios['status_carta_3'] ];
             }
 
         }else{
