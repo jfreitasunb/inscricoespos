@@ -26,7 +26,6 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
-                            <th>Desclassificar?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +40,6 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td>
-                               <a href="#" @click.prevent="desclassificar(record)">Sim</a>&nbsp;&nbsp;&nbsp;
-                               <a href="#" @click.prevent="">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
@@ -75,13 +72,6 @@
                 limit: 50,
 
                 quickSearchQuery: '',
-
-                desclassifica: {
-                    id_candidato: null,
-                    id_inscricao_pos: null,
-                    programa_pretendido: null,
-                    errors: []
-                }
 
             }
         },
@@ -140,19 +130,6 @@
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
             },
-
-            desclassificar (record) {
-                this.desclassifica.id_candidato = record.id_candidato
-                this.desclassifica.id_inscricao_pos = record.id_inscricao_pos
-                this.desclassifica.programa_pretendido = record.id_programa_pretendido
-                axios.patch(`${this.endpoint}/${this.desclassifica.id_candidato}`, this.desclassifica).then(() =>{
-                    this.getRecords().then(() => {
-                        this.desclassifica.id_candidato = null
-                        this.desclassifica.id_inscricao_pos = null
-                        this.desclassifica.programa_pretendido = null
-                    })
-                })
-            }
         },
 
         mounted () {
