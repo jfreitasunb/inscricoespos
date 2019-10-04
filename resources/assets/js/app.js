@@ -31,8 +31,9 @@ const SelecionaCandidatos = require('./components/SelecionaCandidatos.vue');
 const MudaRecomendante = require('./components/MudaRecomendante.vue');
 const ContaCartasRecomendantes = require('./components/ContaCartasRecomendantes.vue');
 const InscricoesNaoFinalizadas = require('./components/InscricoesNaoFinalizadas.vue');
+const ListaRecomendacoesAtivas  = require('./components/ListaRecomendacoesAtivas.vue');
 
 const app = new Vue({
     el: '#app',
-    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante, ContaCartasRecomendantes, InscricoesNaoFinalizadas }
+    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante, ContaCartasRecomendantes, InscricoesNaoFinalizadas, ListaRecomendacoesAtivas }
 });
