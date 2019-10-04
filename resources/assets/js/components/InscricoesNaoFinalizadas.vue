@@ -58,9 +58,9 @@
                                         <a href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br>
                                         <a href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br>
                                         <a href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br>
-                                        <p>O recomendante 1 <span style="color: #2ecc71" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
-                                        <p>O recomendante 2 <span style="color: #2ecc71" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
-                                        <p>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO </span>foi notificado</p>
+                                        <p>O recomendante 1 <span style="color: #009fe5" v-if="record.recomendante1"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
+                                        <p>O recomendante 2 <span style="color: #009fe5" v-if="record.recomendante2"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
+                                        <p>O recomendante 3 <span style="color: #009fe5" v-if="record.recomendante3"> FOI </span> <span v-else style="color: #e74c3c"> NÃO FOI </span>foi notificado</p>
                                     </div>
                                     <a href="#" @click.provent="detalhe.id_candidato = null">Fechar</a>
                                 </template>
