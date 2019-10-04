@@ -95,12 +95,15 @@ class RememberCandidadoFimPrazo extends Command
             foreach ($candidatos_nao_finaliados as $candidato) {
                 $finalizou = $candidato->finalizada;
                 
+                $ja_enviou_antes = true;
+
                 if (!$finalizou) {
                     $enviar_email = TRUE;
 
                     $id_candidato = $candidato->id_candidato;
 
                     $ja_enviou_antes = $this->checa_envio_anterior($id_candidato, $id_inscricao_pos);
+
                 }
 
                 if (!$ja_enviou_antes  AND $enviar_email) {
