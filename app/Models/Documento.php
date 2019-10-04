@@ -46,6 +46,12 @@ class Documento extends Model
         }
     }
 
+    public function retorna_arquivo_edital_atual($id_candidato,$id_inscricao_pos, $tipo_arquivo)
+    {   
+        
+        return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo', $tipo_arquivo)->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
+    }
+
     public function retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)
     {   
         if (!is_null($this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Comprovante Proficiência Inglês')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first())) {
@@ -73,5 +79,14 @@ class Documento extends Model
     public function retorna_existencia_documentos($id_candidato, $id_inscricao_pos)
     {
         return !is_null($this->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->get());
+    }
+
+    public function atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $tipo_arquivo)
+    {
+        DB::table('arquivos_enviados')
+            ->where('id_candidato', $id_candidato)
+            ->where('id_inscricao_pos', $id_inscricao_pos)
+            ->where('tipo_arquivo', $tipo_arquivo)
+            ->update(['updated_at' => date('Y-m-d H:i:s')]);
     }
 }

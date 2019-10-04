@@ -137,58 +137,115 @@ class MotivacaoDocumentosController extends BaseController
 
 		$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
-		$doc_pessoais = $request->documentos_pessoais->store('uploads');
-		
 		$arquivo = new Documento();
-		
-		$arquivo->id_candidato = $id_candidato;
-		
-		$arquivo->nome_arquivo = $doc_pessoais;
-		
-		$arquivo->tipo_arquivo = "Documentos";
-		
-		$arquivo->id_inscricao_pos = $id_inscricao_pos;
-		
-		$arquivo->save();
+				
+		$doc_pessoais_ja_enviados = $arquivo->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Documentos');
 
-		$hist = $request->historico->store('uploads');
+		if (is_null($doc_pessoais_ja_enviados)) {
 
-		$arquivo = new Documento();
-		
-		$arquivo->id_candidato = $id_candidato;
-		
-		$arquivo->nome_arquivo = $hist;
-		
-		$arquivo->tipo_arquivo = "Histórico";
-		
-		$arquivo->id_inscricao_pos = $id_inscricao_pos;
-		
-		$arquivo->save();
+			$doc_pessoais = $request->documentos_pessoais->store('uploads');
 
-		$projeto = $request->projeto->store('uploads');
+			$arquivo->id_candidato = $id_candidato;
+		
+			$arquivo->nome_arquivo = $doc_pessoais;
+		
+			$arquivo->tipo_arquivo = "Documentos";
+		
+			$arquivo->id_inscricao_pos = $id_inscricao_pos;
+		
+			$arquivo->save();
+		}else{
+			
+			$nome_arquivo = explode("/", $doc_pessoais_ja_enviados->nome_arquivo);
 
-		$arquivo = new Documento();
-		$arquivo->id_candidato = $id_candidato;
-		$arquivo->nome_arquivo = $projeto;
-		$arquivo->tipo_arquivo = "Projeto";
-		$arquivo->id_inscricao_pos = $id_inscricao_pos;
-		$arquivo->save();
+			$request->documentos_pessoais->storeAs('uploads', $nome_arquivo[1]);
+
+			$arquivo->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Documentos');
+		}
+		
+		$historico = new Documento();
+				
+		$historico_ja_enviado = $historico->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Histórico');
+
+		if (is_null($historico_ja_enviado)) {
+			
+			$hist = $request->historico->store('uploads');
+
+			$historico->id_candidato = $id_candidato;
+		
+			$historico->nome_arquivo = $hist;
+		
+			$historico->tipo_arquivo = "Histórico";
+		
+			$historico->id_inscricao_pos = $id_inscricao_pos;
+		
+			$historico->save();
+
+		}else{
+			
+			$nome_historico = explode("/", $historico_ja_enviado->nome_arquivo);
+
+			$request->historico->storeAs('uploads', $nome_historico[1]);
+
+			$historico->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Histórico');
+		}
+
+		$projeto = new Documento();
+				
+		$projeto_ja_enviado = $projeto->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Projeto');
+
+		if (is_null($projeto_ja_enviado)) {
+			
+			$proj = $request->projeto->store('uploads');
+
+			$projeto->id_candidato = $id_candidato;
+		
+			$projeto->nome_arquivo = $proj;
+		
+			$projeto->tipo_arquivo = "Projeto";
+		
+			$projeto->id_inscricao_pos = $id_inscricao_pos;
+		
+			$projeto->save();
+
+		}else{
+			
+			$nome_projeto = explode("/", $projeto_ja_enviado->nome_arquivo);
+
+			$request->projeto->storeAs('uploads', $nome_projeto[1]);
+
+			$projeto->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Projeto');
+		}
+
 
 		if (!is_null($request->comprovante_proficiencia)) {
 			
-			$comprovante_proficiencia = $request->comprovante_proficiencia->store('uploads');
+			$comprovante = new Documento();
+				
+			$comprovante_ja_enviado = $comprovante->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Comprovante Proficiência Inglês');
 
-			$arquivo = new Documento();
+			if (is_null($comprovante_ja_enviado)) {
+				
+				$comprove = $request->comprovante_proficiencia->store('uploads');
+
+				$comprovante->id_candidato = $id_candidato;
 			
-			$arquivo->id_candidato = $id_candidato;
+				$comprovante->nome_arquivo = $comprove;
 			
-			$arquivo->nome_arquivo = $comprovante_proficiencia;
+				$comprovante->tipo_arquivo = "Comprovante Proficiência Inglês";
 			
-			$arquivo->tipo_arquivo = "Comprovante Proficiência Inglês";
+				$comprovante->id_inscricao_pos = $id_inscricao_pos;
 			
-			$arquivo->id_inscricao_pos = $id_inscricao_pos;
-			
-			$arquivo->save();
+				$comprovante->save();
+
+			}else{
+				
+				$nome_comprovante = explode("/", $comprovante_ja_enviado->nome_arquivo);
+				
+				$request->comprovante_proficiencia->storeAs('uploads', $nome_comprovante[1]);
+
+				$comprovante->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Comprovante Proficiência Inglês');
+			}
 		}
 
 		$motivacao = new CartaMotivacao();
