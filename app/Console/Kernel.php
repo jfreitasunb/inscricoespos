@@ -25,10 +25,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $filePath="/home/vagrant/remember_recomendante.log";
+
+        $filePath2="/home/vagrant/remember_candidato.log";
+
+
         $schedule->command('remember:recomendante')
-                 ->dailyAt('01:00');
+                 ->everyMinute()
+                 ->sendOutputTo($filePath);
         $schedule->command('remember:candidato')
-                 ->dailyAt('01:30');
+                 ->everyMinute()
+                 ->sendOutputTo($filePath2);
     }
 
     /**
