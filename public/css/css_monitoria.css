@@ -302,7 +302,6 @@ legend.scheduler-border {
 .menuadmin{
     margin-top:30px;
 }
-
 .table tbody tr.carta_completa {
   background-color: #2ecc71;
 }
@@ -333,6 +332,24 @@ legend.scheduler-border {
 .button:hover {
   border: 5px solid #81D9FF;
   cursor: pointer;
+}
+a.myhover:hover {
+  background-color: yellow;
+}
+p.mybg-success{
+  margin: 0 0 1.1em;
+  background-color: #2ecc71;
+  display: inline-block;
+}
+p.mybg-danger{
+  margin: 0 0 1.1em;
+  background-color: #e74c3c;
+  display: inline-block;
+}
+p.mybg-info{
+  margin: 0 0 1.1em;
+  background-color: #D9EDF7;
+  display: inline-block;   
 }
 /* Required field END */
 
