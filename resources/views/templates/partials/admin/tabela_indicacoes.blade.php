@@ -81,7 +81,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <lista-recomendacoes-ativas endpoint="{{ route('inscricoesnaofinalizadas.index') }}"></lista-recomendacoes-ativas>
+      <lista-recomendacoes-ativas endpoint="{{ route('inscricaolistarecomendacoes.index') }}"></lista-recomendacoes-ativas>
     </div>
   </div>
 </div>
