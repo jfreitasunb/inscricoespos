@@ -90,7 +90,7 @@ class RememberRecomendante extends Command
 
         $locale = 'en';
         
-        if (($data_hoje->diffInDays($prazo_carta, false) > 0) AND ($data_hoje->diffInDays($prazo_carta) <= 3)) {
+        if (($data_hoje->diffInDays($prazo_carta, false) > 0) AND ($data_hoje->diffInDays($prazo_carta, false) <= 3)) {
            
            foreach ($cartas_nao_enviadas as $id_user) {
             
