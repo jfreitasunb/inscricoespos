@@ -37,13 +37,6 @@ class SelecionaCandidatosDataTableController extends DataTableController
         ];
     }
 
-    // public function getUpdatableColumns()
-    // {
-    //     return [
-    //         'desclassificado'
-    //     ];
-    // }
-
     public function getCustomColumnNanes()
     {
         return [

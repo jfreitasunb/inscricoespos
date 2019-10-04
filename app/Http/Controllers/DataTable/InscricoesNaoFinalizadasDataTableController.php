@@ -187,9 +187,6 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
             DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_candidato', $recomendante->id_candidato)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
         }
 
-
         DB::table('finaliza_inscricao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
-
-        // $this->builder->find($id_user)->update($request->only($this->getUpdatableColumns()));
     }
 }

@@ -127,7 +127,6 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
                 $i++;
             }
 
-            // dd($dados_temporarios);
             $escolha = new EscolhaCandidato();
 
             $programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
