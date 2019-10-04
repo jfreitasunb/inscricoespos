@@ -35,5 +35,15 @@ const ListaRecomendacoesAtivas  = require('./components/ListaRecomendacoesAtivas
 
 const app = new Vue({
     el: '#app',
-    components: { CoordenadorDocumentosMatricula, DataTableUser, AuxiliaSelecao, HomologaInscricoes, SelecionaCandidatos, MudaRecomendante, ContaCartasRecomendantes, InscricoesNaoFinalizadas, ListaRecomendacoesAtivas }
+    components: { 
+        CoordenadorDocumentosMatricula,
+        DataTableUser,
+        AuxiliaSelecao,
+        HomologaInscricoes,
+        SelecionaCandidatos,
+        MudaRecomendante,
+        ContaCartasRecomendantes,
+        InscricoesNaoFinalizadas,
+        ListaRecomendacoesAtivas
+    }
 });
