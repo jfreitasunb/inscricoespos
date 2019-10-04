@@ -14,7 +14,7 @@ return [
     'selecionar' => 'Selecione',
     'mensagem_sucesso' => 'Dados salvos com sucesso',
     'envio_final' => 'Sua inscrição foi envidada corretamente para nosso sistema.',
-    'inscricao_mat' => 'inscrição para o Programa de Pós-Graduação do MAT/UnB',
+    'inscricao_mat' => 'Inscrição para o Programa de Pós-Graduação do MAT/UnB',
     'inscricao_mat_1' => 'Prezado(a) candidato(a), ',
     'inscricao_mat_2' => 'Sua inscrição para o programa de ',
     'inscricao_mat_3' => ' no MAT/UnB foi recebida com sucesso em nosso sistema. Em anexo você encontrará uma cópia da sua ficha de inscrição.',
