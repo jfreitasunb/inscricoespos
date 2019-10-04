@@ -245,7 +245,7 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::get('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@getListaIndicacoes')->name('lista.recomendacoes');
 
-	Route::post('inscricao/lista/recomendacoes', '\InscricoesPos\Http\Controllers\Admin\ListaTodasIndicacoesController@postListaIndicacoes');
+	Route::resource('datatable/inscricaolistarecomendacoes', '\InscricoesPos\Http\Controllers\DataTable\ListaRecomendacoesAtivasDataTableController');
 
 	Route::get('homologa/inscricoes', '\InscricoesPos\Http\Controllers\Coordenador\HomologaInscricoesController@index')->name('homologa.inscricoes');
 
