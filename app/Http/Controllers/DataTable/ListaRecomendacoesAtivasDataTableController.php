@@ -54,6 +54,16 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
 
     public function index(Request $request)
     {   
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $finalizacoes = new FinalizaInscricao;
+
+        $totaliza = new CartaRecomendacao();
+
         return response()->json([
             'data' => [
                 'table' => $this->builder->getModel()->getTable(),
@@ -61,6 +71,8 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'updatable' => $this->getUpdatableColumns(),
+                'total_cartas_solicitas' => $finalizacoes->retorna_total_inscricoes_finalizadas($id_inscricao_pos)*3,
+                'total_cartas_recebidas' => $totaliza->conta_total_cartas_por_edital_situacao($id_inscricao_pos, true),
                 'records' => $this->getRecords($request),
             ]
         ]);
@@ -87,16 +99,6 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
         
 
         if (sizeof($dados_temporarios) > 0) {
-            
-            $finalizacoes = new FinalizaInscricao;
-
-            $totaliza = new CartaRecomendacao();
-        
-            $total_cartas_solicitas = $finalizacoes->retorna_total_inscricoes_finalizadas($id_inscricao_pos)*3;
-
-            $total_cartas_recebidas = $totaliza->conta_total_cartas_por_edital_situacao($id_inscricao_pos, true);
-
-            $dados_vue[] = ['total_cartas_solicitas' => $total_cartas_solicitas, 'total_cartas_recebidas' => $total_cartas_recebidas];
 
             foreach ($dados_temporarios as $dados) {
 
