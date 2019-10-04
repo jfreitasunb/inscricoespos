@@ -87,7 +87,7 @@
                     order: 'asc'
                 },
 
-                limit: 50,
+                limit: '',
 
                 quickSearchQuery: '',
 
