@@ -5,9 +5,13 @@ namespace InscricoesPos\Http\Controllers\DataTable;
 use Illuminate\Http\Request;
 use InscricoesPos\Http\Controllers\Controller;
 
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\User;
-use InscricoesPos\Models\AuxiliaSelecao;
+use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\ProgramaPos;
+use InscricoesPos\Models\ContatoRecomendante;
+use InscricoesPos\Models\CartaRecomendacao;
+use InscricoesPos\Models\EscolhaCandidato;
 
 use DB;
 
@@ -15,13 +19,13 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
 {
     public function builder()
     {
-        return AuxiliaSelecao::query();
+        return FinalizaInscricao::query();
     }
 
     public function getDisplayableColumns()
     {
         return [
-            'id_candidato', 'id_inscricao_pos', 'programa_pretendido',
+            'id_candidato', 'id_inscricao_pos'
         ];
     }
 
@@ -70,13 +74,65 @@ class ListaRecomendacoesAtivasDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $edital_vigente = explode("-",$relatorio_disponivel->edital)[1]."/".explode("-",$relatorio_disponivel->edital)[0];
+
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('finalizada', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        
 
         if (sizeof($dados_temporarios) > 0) {
+            
+            $finalizacoes = new FinalizaInscricao;
+
+            $totaliza = new CartaRecomendacao();
+        
+            $total_cartas_solicitas = $finalizacoes->retorna_total_inscricoes_finalizadas($id_inscricao_pos)*3;
+
+            $total_cartas_recebidas = $totaliza->conta_total_cartas_por_edital_situacao($id_inscricao_pos, true);
+
+            $dados_vue[] = ['total_cartas_solicitas' => $total_cartas_solicitas, 'total_cartas_recebidas' => $total_cartas_recebidas];
+
             foreach ($dados_temporarios as $dados) {
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->programa_pretendido];
+            $recomendante_candidato = new ContatoRecomendante();
+
+            $recomendantes_candidato = $recomendante_candidato->retorna_recomendante_candidato($dados->id_candidato, $id_inscricao_pos);
+
+            $i = 1;
+
+            $dados_temporarios = [];
+
+            foreach ($recomendantes_candidato as $recomendante) {
+
+                $usuario_recomendante = User::find($recomendante->id_recomendante);
+
+                $dados_temporarios['email_recomendante_'.$i] = $usuario_recomendante->email;
+
+                $dados_temporarios['nome_recomendante_'.$i] = $usuario_recomendante->nome;
+
+                $carta_recomendacao = new CartaRecomendacao();
+                    
+                $carta_aluno = $carta_recomendacao->retorna_carta_recomendacao($recomendante->id_recomendante,$dados->id_candidato,$id_inscricao_pos);
+
+                $dados_temporarios['status_carta_'.$i] = $carta_aluno->completada;
+
+                $i++;
             }
+
+            // dd($dados_temporarios);
+            $escolha = new EscolhaCandidato();
+
+            $programa_pretendido = $escolha->retorna_escolha_candidato($dados->id_candidato, $id_inscricao_pos)->programa_pretendido;
+
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($programa_pretendido))->tipo_programa_pos_ptbr, 'email_recomendante_1' => $dados_temporarios['email_recomendante_1'], 'nome_recomendante_1' => $dados_temporarios['nome_recomendante_1'], 'status_carta_1' => $dados_temporarios['status_carta_1'], 'email_recomendante_2' => $dados_temporarios['email_recomendante_2'], 'nome_recomendante_2' => $dados_temporarios['nome_recomendante_2'], 'status_carta_2' => $dados_temporarios['status_carta_2'], 'email_recomendante_3' => $dados_temporarios['email_recomendante_3'], 'nome_recomendante_3' => $dados_temporarios['nome_recomendante_3'], 'status_carta_3' => $dados_temporarios['status_carta_3'] ];
+            }
+
         }else{
             $dados_vue = [];
         }
