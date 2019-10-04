@@ -89,8 +89,8 @@ class RememberRecomendante extends Command
         $dados_email['prazo_carta'] = $prazo_carta->format('d/m/Y');
 
         $locale = 'en';
-
-        if (($data_hoje->diffInDays($prazo_carta) > 0) AND ($data_hoje->diffInDays($prazo_carta) <= 3)) {
+        
+        if (($data_hoje->diffInDays($prazo_carta, false) > 0) AND ($data_hoje->diffInDays($prazo_carta) <= 3)) {
            
            foreach ($cartas_nao_enviadas as $id_user) {
             
