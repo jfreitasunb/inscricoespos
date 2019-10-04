@@ -182,8 +182,6 @@
 
                         this.finalizar.id_candidato = null
                         this.finalizar.id_inscricao_pos = null
-                        
-
                     })
 
                 }).catch((error) => {
