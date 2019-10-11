@@ -96,6 +96,7 @@ class FinalizaInscricao extends FuncoesModels
         }else{
 
             $dados_auxiliares = new AuxiliaSelecao();
+            $locale = "pt-br";
 
             if (sizeof($dados_auxiliares->retorna_inscricoes_auxiliares($id_inscricao_pos)) == 0){
                 
