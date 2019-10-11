@@ -88,6 +88,9 @@ class FinalizaInscricao extends FuncoesModels
         $homologadas = new HomologaInscricoes;
 
         $inscricoes_homologadas = $homologadas->retorna_inscricoes_homologadas($id_inscricao_pos);
+
+        $locale = "pt-br";
+
         
         if (sizeof($inscricoes_homologadas) == 0) {
             
