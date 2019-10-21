@@ -45,6 +45,8 @@ class CandidatosSelecionadosController extends CoordenadorController
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
         if (is_null($relatorio_disponivel->data_homologacao) || is_null($relatorio_disponivel->data_divulgacao_resultado)) {
             notify()->flash('Não foi configurada a data de divulgação do resultado. Faça isso antes de continuar.','warning', [
                 'timer' => 3000,
@@ -70,7 +72,7 @@ class CandidatosSelecionadosController extends CoordenadorController
 
             $finalizacoes = new FinalizaInscricao;
 
-            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->get();
+            $inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($id_inscricao_pos, $this->locale_default);
 
             return view('templates.partials.coordenador.seleciona_candidatos');
         }else{
