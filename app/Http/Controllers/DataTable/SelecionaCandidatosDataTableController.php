@@ -109,9 +109,9 @@ class SelecionaCandidatosDataTableController extends DataTableController
                 $foi_selecionado = $seleciona->retorna_status_selecionado($id_inscricao_pos, $dados->id_candidato);
 
                 if (is_null($foi_selecionado)) {
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => 'nao_definido'];
+                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => 'nao_definido', 'contemplado' => ''];
                 }else{
-                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => $foi_selecionado->selecionado, 'colocacao' => $foi_selecionado->classificacao];
+                    $dados_vue[] = ['id' => $i, 'id_candidato' => $dados->id_candidato, 'nome' => $this->titleCase((User::find($dados->id_candidato))->nome), 'nome_programa_pretendido' => (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $id_programa_pretendido, 'selecionado' => $foi_selecionado->selecionado, 'colocacao' => $foi_selecionado->classificacao, 'contemplado_bolsa' => ($foi_selecionado->bolsa_disponivel ? 'Sim' : 'Não')];
                 }
 
                 $i++;
@@ -126,8 +126,11 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
     public function update($id_candidato, Request $request)
     {   
+        
         $this->validate($request, [
             'colocacao' => 'integer|required_if:status,1',
+            'contemplado_com_bolsa' => 'required_if:status,1',
+
         ]);
 
         $user = Auth::user();
@@ -139,6 +142,8 @@ class SelecionaCandidatosDataTableController extends DataTableController
         $id_inscricao_pos = $request->id_inscricao_pos;
 
         $colocacao = $request->colocacao;
+
+        $bolsa_disponivel = ($request->contemplado_com_bolsa == 1 ? true : false);
 
         $ja_foi_selecionado = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
@@ -157,7 +162,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
             $selecionado->save();
         }else{
-            DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $colocacao , 'updated_at' => date('Y-m-d H:i:s')]);
+            DB::table('candidatos_selecionados')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['selecionado' => $request->status, 'classificacao' => $colocacao , 'updated_at' => date('Y-m-d H:i:s'), 'bolsa_disponivel' => $bolsa_disponivel]);
         }
     }
 }
