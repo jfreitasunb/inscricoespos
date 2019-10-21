@@ -143,7 +143,7 @@ class SelecionaCandidatosDataTableController extends DataTableController
 
         $colocacao = $request->colocacao;
 
-        $bolsa_disponivel = ($request->contemplado_com_bolsa == 1 ? true : false);
+        $bolsa_disponivel = ((int)$request->contemplado_com_bolsa == 1 ? true : false);
 
         $ja_foi_selecionado = $selecionado->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
