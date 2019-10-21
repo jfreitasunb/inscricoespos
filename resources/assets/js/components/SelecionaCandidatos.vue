@@ -29,6 +29,7 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
+                            <th>Contemplado com bolsa?</br> 1 - SIM</br> 0 - NÃO</th>
                             <th>Candidato Selecionado?</th>
                         </tr>
                     </thead>
@@ -46,12 +47,25 @@
                             <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
                                 <template>
                                     <div class="form-group" id="colocao" :class="{ 'has-error': seleciona.errors['colocao'] }">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-4">
                                             <input type="text" class="form-control" :name="record.id" v-model="seleciona.classificacao[record.id]">
                                         </div>
-                                        <label for="inputType" class="col-sm-2 control-label">{{ record.colocacao }}</label>
+                                        <label for="inputType" class="col-sm-3 control-label">{{ record.colocacao }}</label>
                                         <span class="help-block" v-if="seleciona.errors['colocacao'] && seleciona.id_candidato === record.id_candidato">
                                             <strong>{{ seleciona.errors['colocacao'][0] }}</strong>
+                                        </span>
+                                    </div>
+                                </template>
+                            </td>
+                            <td :class="{ 'carta_completa': record.selecionado === true, 'carta_incompleta': record.selecionado == false}">
+                                <template>
+                                    <div class="form-group" id="tera_bolsa" :class="{ 'has-error': seleciona.errors['contemplado_bolsa'] }">
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" :name="record.id" v-model="seleciona.contemplado[record.id]">
+                                        </div>
+                                        <label for="inputType" class="col-sm-3 control-label">{{ record.contemplado_bolsa }}</label>
+                                        <span class="help-block" v-if="seleciona.errors['contemplado_bolsa'] && seleciona.id_candidato === record.id_candidato">
+                                            <strong>{{ seleciona.errors['contemplado_bolsa'][0] }}</strong>
                                         </span>
                                     </div>
                                 </template>
@@ -100,6 +114,7 @@
                     programa_pretendido: null,
                     status: null,
                     classificacao: [],
+                    contemplado: [],
                     errors: []
                 }
 
@@ -168,6 +183,12 @@
                 this.seleciona.status = status
                 this.seleciona.colocacao = this.seleciona.classificacao[record.id]
                 this.seleciona.classificacao = []
+                if (typeof this.seleciona.contemplado[record.id] == 'undefined') {
+                    this.seleciona.contemplado_com_bolsa = 0
+                }else{
+                    this.seleciona.contemplado_com_bolsa = this.seleciona.contemplado[record.id]    
+                }
+                this.seleciona.contemplado = []
                 axios.patch(`${this.endpoint}/${this.seleciona.id_candidato}`, this.seleciona).then(() =>{
                     this.getRecords().then(() => {
                         this.seleciona.id_candidato = null
@@ -176,6 +197,7 @@
                         this.seleciona.status = null
                         this.seleciona.classificacao = []
                         this.seleciona.colocacao = null
+                        this.seleciona.contemplado_com_bolsa = null
                     })
                 }).catch((error) => {
 
