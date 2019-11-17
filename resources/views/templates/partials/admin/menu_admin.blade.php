@@ -280,7 +280,6 @@
                 @yield('cadastra_area_pos')
                 @yield('lista_contagem_cartas')
                 @yield('edita_formacao')
-                @yield('admin_impersonate')
                 @yield('ativa_conta')
                 @yield('link_muda_senha')
                 @yield('contas_inativas')
