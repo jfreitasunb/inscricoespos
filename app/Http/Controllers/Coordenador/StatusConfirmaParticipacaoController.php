@@ -69,8 +69,13 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
             if (is_null($selecionado->inicio_no_programa) or $selecionado->id_programa_pos ==2) {
                 $mes_candidato[$selecionado->id_candidato] = "Não informado";
             }else{
-                $mes = ConfiguraInicioPrograma::find($selecionado->inicio_no_programa)->mes_inicio;
-                $mes_candidato[$selecionado->id_candidato] = $this->array_meses[$mes];
+                
+                $mes = ConfiguraInicioPrograma::find($selecionado->inicio_no_programa)['mes_inicio'];
+                if (is_null($mes)) {
+                    $mes_candidato[$selecionado->id_candidato] = "Não informado";
+                }else{
+                    $mes_candidato[$selecionado->id_candidato] = $this->array_meses[$mes];    
+                }
             }
         }
 
