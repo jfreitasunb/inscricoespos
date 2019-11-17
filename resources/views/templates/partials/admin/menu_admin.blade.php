@@ -234,7 +234,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeite><span class="glyphicon glyphicon-file fa-fw">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSete"><span class="glyphicon glyphicon-file fa-fw">
                             </span>Acompanha Selecionados</a>
                         </h4>
                     </div>
