@@ -65,6 +65,7 @@
               @yield('escolha_monitoria')
               @yield('motivacao_documentos')
               @yield('finaliza_inscricao')
+              @yield('confirma_presenca')
               @yield('status_cartas')
             @endimpersonating_candidato
           </div>
