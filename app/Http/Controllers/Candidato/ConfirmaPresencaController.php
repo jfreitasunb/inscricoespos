@@ -286,6 +286,8 @@ class ConfirmaPresencaController extends BaseController
 						$inicia_documentos_matricula->id_candidato = $id_candidato;
 						
 						$inicia_documentos_matricula->id_inscricao_pos = $id_inscricao_pos;
+
+						$inicia_documentos_matricula->id_programa_pretendido = $status_selecao->programa_pretendido;
 						
 						$inicia_documentos_matricula->tipo_arquivo = 'df';
 						
