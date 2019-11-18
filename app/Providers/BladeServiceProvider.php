@@ -165,7 +165,7 @@ class BladeServiceProvider extends ServiceProvider
 
             View::share('keep_open_accordion_processo_selecao', $this->ativa_accordion_processo_selecao());
 
-            View::share('keep_open_accordion_acomponha_selecionados', $this->ativa_accordion_acompanha_selecionado());
+            View::share('keep_open_accordion_acompanha_selecionados', $this->ativa_accordion_acompanha_selecionado());
 
             return $user->isCoordenador();
         });
