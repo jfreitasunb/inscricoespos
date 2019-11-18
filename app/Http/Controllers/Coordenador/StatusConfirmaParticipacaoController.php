@@ -66,7 +66,7 @@ class StatusConfirmaParticipacaoController extends CoordenadorController
 
         foreach ($candidatos_selecionados as $selecionado) {
 
-            if (is_null($selecionado->inicio_no_programa) or $selecionado->id_programa_pos ==2) {
+            if (is_null($selecionado->inicio_no_programa)) {
                 $mes_candidato[$selecionado->id_candidato] = "Não informado";
             }else{
                 
