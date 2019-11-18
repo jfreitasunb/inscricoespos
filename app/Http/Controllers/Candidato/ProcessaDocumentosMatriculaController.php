@@ -250,6 +250,8 @@ class ProcessaDocumentosMatriculaController extends BaseController
 						$arquivo_matricula->arquivo_recebido = Storage::exists($local_documentos.$ficha_inscricao);
 
 						$arquivo_matricula->arquivo_final = True;
+
+						$arquivo_matricula->arquivo_final_valido = True;
 						
 						$arquivo_matricula->save();
 					}else{
