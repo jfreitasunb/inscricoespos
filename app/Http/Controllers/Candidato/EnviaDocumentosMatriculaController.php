@@ -241,6 +241,8 @@ class EnviaDocumentosMatriculaController extends BaseController
 							$arquivo_matricula->arquivo_recebido = Storage::exists($arquivo);
 
 							$arquivo_matricula->arquivo_final = FALSE;
+
+							$arquivo_matricula->arquivo_final_valido = FALSE;
 							
 							$arquivo_matricula->save();
 
