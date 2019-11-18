@@ -83,7 +83,7 @@ class RelatorioPosController extends CoordenadorController
 		}
 		
 
-		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
+		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default);
 
 
 		foreach ($inscricoes_finalizadas as $candidato ) {
