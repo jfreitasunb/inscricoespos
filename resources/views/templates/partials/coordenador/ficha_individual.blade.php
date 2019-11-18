@@ -33,9 +33,6 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center">
-    {{ $inscricoes_finalizadas->render() }}
-  </div>
 </fieldset>
 
 @endsection
