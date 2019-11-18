@@ -154,7 +154,7 @@
                             </span>Acompanha Selecionados</a>
                         </h4>
                     </div>
-                    <div id="collapseSeis" class="panel-collapse collapse {{ $keep_open_accordion_acomponha_selecionados }}">
+                    <div id="collapseSeis" class="panel-collapse collapse {{ $keep_open_accordion_acompanha_selecionados }}">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
