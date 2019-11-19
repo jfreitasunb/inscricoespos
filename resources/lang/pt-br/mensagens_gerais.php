@@ -45,4 +45,5 @@ return [
     'inscricao_doutorado' => 'Inscrições para o Doutorado',
     'inscricao_nao_finalizada' => 'Sua inscrição não consta como finalizada em nosso sistema. O prazo para envio termina no dia ',
     'acesso_para_finalizada' => 'Clique aqui para acessar o sistema e finalizar sua inscrição.',
+    'documentos_matricula_sucesso' => 'Seus documentos foram recebidos corretamente em nosso sistema!',
 ];
