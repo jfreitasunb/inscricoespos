@@ -40,4 +40,5 @@ return [
     'inscricao_doutorado' => 'Application form for the Postgraduate Program: P.h.D.',
     'inscricao_nao_finalizada' => 'Your registration is not finalized in our system. The deadline for submission ends on ',
     'acesso_para_finalizada' => 'Click here to access the system and finalize your subscription.',
+    'documentos_matricula_sucesso' => 'Yours documents where successfully received in our system!',
 ];
