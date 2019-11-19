@@ -14,6 +14,7 @@ return [
 	'carteira_identidade' => 'Carteira de Identidade ou CNH (Carteira de Habilitação)',
     'cpf' => 'CPF',
     'titulo_eleitor' => 'Título de Eleitor com último comprovante de votação (candidatos brasileiros)',
+    'certificado_reservista' => 'Certificado de Reservista (candidatos brasileiros)',
     'carteira_identidade_estrangeiro' => 'Carteira de Identidade de Estrangeiro (somente para os estrangeiros)',    
     'menu_enviar' => 'Enviar',
 ];
