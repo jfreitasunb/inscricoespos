@@ -19,6 +19,7 @@ class CreateDocumentosMatriculaTable extends Migration
             $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_inscricao_pos');
             $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
+            $table->unsignedInteger('id_programa_pretendido');
             $table->foreign('id_programa_pretendido')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
             $table->string('tipo_arquivo',255);
             $table->string('nome_arquivo',255);
