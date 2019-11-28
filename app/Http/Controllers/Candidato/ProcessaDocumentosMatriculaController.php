@@ -55,6 +55,8 @@ class ProcessaDocumentosMatriculaController extends BaseController
     
 	public function getProcessaDocumentosMatricula(){
 
+		$endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
+
 		$user = $this->SetUser();
 		
 		$id_user = $user->id_user;
@@ -125,7 +127,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 			$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
 
-			$endereco_arquivo_matricula = storage_path('app/')."arquivos_internos/".$nome_arquivo_matricula;
+			$endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
 
 			$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
 
@@ -141,7 +143,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 			
 			$dados_para_template['id_programa_pretendido'] = $status_selecao->programa_pretendido;
 
-			$dados_para_template['ficha_inscricao'] = $nome_arquivo_matricula;
+			$dados_para_template['ficha_inscricao'] = str_replace($endereco_mudar,'storage/', $endereco_arquivo_matricula);
 
 			return view('templates.partials.candidato.processa_documentos_matricula', compact('dados_para_template'));
 		}else{
@@ -152,7 +154,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 	public function postProcessaDocumentosMatricula(Request $request)
 	{	
-		$local_documentos = storage_path('app/')."arquivos_internos/";
+		$local_documentos = storage_path("app/public/relatorios/matricula/");
 
 		$id_candidato = (int)$request->id_candidato;
 
@@ -160,7 +162,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 		$id_programa_pretendido = (int)$request->id_programa_pretendido;
 
-		$ficha_inscricao = $request->ficha_inscricao;
+		$ficha_inscricao = str_replace("storage/relatorios/matricula/", "", $request->ficha_inscricao);
 
 		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
@@ -235,7 +237,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 						$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
 
-						File::copy($local_documentos.$ficha_inscricao, $local_documentos.$nome_final);
+						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos".$nome_final);
 
 						$arquivo_matricula->id_candidato = $id_candidato;
 
@@ -258,7 +260,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 						$nome_arquivo = explode("/", $arquivo_ja_enviado);
 
-						File::copy($local_documentos.$ficha_inscricao, $local_documentos.$nome_arquivo[1]);
+						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos".$nome_arquivo[1]);
 
 						$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df', Storage::exists($arquivo_ja_enviado));
 					}
