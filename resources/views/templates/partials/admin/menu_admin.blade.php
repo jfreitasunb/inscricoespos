@@ -306,6 +306,8 @@
                 @yield('graficos')
                 @yield('auxilia_selecao')
                 @yield('documentos_matricula_coordenador')
+                @yield('envia_documentos_matricula')
+                @yield('processa_documentos_matricula')
             </div>
         </div>
     </div>
