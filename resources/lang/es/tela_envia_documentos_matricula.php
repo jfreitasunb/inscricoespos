@@ -6,16 +6,17 @@
 
 
 return [
-    'documentos_matricula' => 'Documents for Registration',
-    'ficha_cadastral' => 'Registration',
-    'modelo' => 'Click here to download the model',
-	'diploma_graduacao' => 'Diploma of higher education (both sides)',
-    'historico_graduacao' => ' Records of higher education',
-	'carteira_identidade' => 'ID Card',
-    'cpf' => 'CPF (only for applicants residing in Brazil)',
-    'titulo_eleitor' => 'Voter title with the latest proof of voting or certificate of electoral discharge issued by the TSE website (only for applicants residing in Brazil)',
-    'certificado_reservista' => 'Reservist Certificate (only for male applicants residing in Brazil)',
-    'carteira_identidade_estrangeiro' => 'Foreigner’s Identity Card (foreign applicants) or passport identification page
-accompanied by document with the name of the applicant\'s parents',
-    'menu_enviar' => 'Send',
+    'documentos_matricula' => 'Documentos para Registro',
+    'ficha_cadastral' => 'Formulario de Registrato',
+    'modelo' => 'Haga clic aquí para descargar el modelo',
+	'diploma_graduacao' => 'Diploma de estudios superiores y de Maestría para los/as candidatos/as a Doctorado, si ya
+los tuviesen (ambos lados)',
+    'historico_graduacao' => 'Certificado de Notas de estudios superiores y de Maestría para los/as candidatos/as a
+Doctorado, si ya los tuviesen',
+	'carteira_identidade' => ' Documento de Identidad',
+    'cpf' => 'CPF (solo para solicitantes que residen en Brasil)',
+    'titulo_eleitor' => 'Título de Elector, con el último comprobante de votación o justificante emitido por el site del TSE (solo para solicitantes que residen en Brasil)',
+    'certificado_reservista' => 'Certificado de Reservista (candidatos de sexo masculino que residen en Brasil)',
+    'carteira_identidade_estrangeiro' => ' Documento de Identidad de Extranjero (CIE) para los/as candidatos/as extranjeros/as o página de identificación del pasaporte, acompañada de un documento con el nombre de los padres del/la candidato/a',
+    'menu_enviar' => 'Enviar',
 ];
