@@ -10,7 +10,7 @@ return [
     'ficha_cadastral' => 'Registration form',
     'modelo' => 'Click here to download the model',
 	'diploma_graduacao' => 'Diploma of higher education (both sides)',
-    'historico_graduacao' => ' Records of higher education',
+    'historico_graduacao' => 'Records of higher education',
 	'carteira_identidade' => 'ID Card',
     'cpf' => 'CPF (only for applicants residing in Brazil)',
     'titulo_eleitor' => 'Voter title with the latest proof of voting or certificate of electoral discharge issued by the TSE website (only for applicants residing in Brazil)',
