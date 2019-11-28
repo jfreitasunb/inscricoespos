@@ -6,15 +6,16 @@
 
 
 return [
-    'documentos_matricula' => 'Documentos para Matrícula',
-    'ficha_cadastral' => 'Ficha Cadastral',
-    'modelo' => 'Clique aqui para baixar o modelo',
-	'diploma_graduacao' => 'Diploma do curso de Graduação (frente e verso)',
-    'historico_graduacao' => 'Histórico Escolar do curso de Graduação (completo)',
-	'carteira_identidade' => 'Carteira de Identidade ou CNH (Carteira de Habilitação)',
-    'cpf' => 'CPF',
-    'titulo_eleitor' => 'Título de Eleitor com último comprovante de votação (candidatos brasileiros)',
-    'certificado_reservista' => 'Certificado de Reservista (candidatos brasileiros)',
-    'carteira_identidade_estrangeiro' => 'Carteira de Identidade de Estrangeiro (somente para os estrangeiros)',
-    'menu_enviar' => 'Enviar',
+    'documentos_matricula' => 'Documents for Registration',
+    'ficha_cadastral' => 'Registration',
+    'modelo' => 'Click here to download the model',
+	'diploma_graduacao' => 'Diploma of higher education (both sides)',
+    'historico_graduacao' => ' Records of higher education',
+	'carteira_identidade' => 'ID Card',
+    'cpf' => 'CPF (only for applicants residing in Brazil)',
+    'titulo_eleitor' => 'Voter title with the latest proof of voting or certificate of electoral discharge issued by the TSE website (only for applicants residing in Brazil)',
+    'certificado_reservista' => 'Reservist Certificate (only for male applicants residing in Brazil)',
+    'carteira_identidade_estrangeiro' => 'Foreigner’s Identity Card (foreign applicants) or passport identification page
+accompanied by document with the name of the applicant\'s parents',
+    'menu_enviar' => 'Send',
 ];
