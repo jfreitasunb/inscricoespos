@@ -7,7 +7,7 @@
 
 return [
     'documentos_matricula' => 'Documentos para Registro',
-    'ficha_cadastral' => 'Formulario de Registrato',
+    'ficha_cadastral' => 'Formulario de Registro',
     'modelo' => 'Haga clic aquí para descargar el modelo',
 	'diploma_graduacao' => 'Diploma de estudios superiores y de Maestría para los/as candidatos/as a Doctorado, si ya
 los tuviesen (ambos lados)',
