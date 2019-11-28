@@ -99,17 +99,19 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $candidatos_com_documentos = $documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos);
 
-        $local_arquivos_zipar = storage_path('app/arquivos_internos/').$edital;
+        $local_arquivos_zipar = storage_path('app/public/relatorios/');
 
-        $local_zip = storage_path('app/arquivos_internos/');
+        $local_arquivos_tratados_zip = storage_path('app/public/relatorios/arquivos_internos/')."temporario";
 
-        File::isDirectory($local_zip) or File::makeDirectory($local_zip,0775,true);
+        $local_zip = storage_path('app/public/relatorios/arquivos_internos/');
+
+        File::isDirectory($local_arquivos_tratados_zip) or File::makeDirectory($local_arquivos_tratados_zip,0775,true);
 
         foreach ($candidatos_com_documentos as $candidato) {
 
             $nome_arquivo = str_replace(' ', '_',strtr((User::find($candidato->id_candidato))->nome, $this->normalizeChars))."_".(ProgramaPos::find($candidato->id_programa_pretendido))->tipo_programa_pos_ptbr.".pdf";
 
-            File::copy(storage_path('app/').$candidato->nome_arquivo, $local_zip.'/'.$nome_arquivo);
+            File::copy($local_arquivos_zipar.$candidato->nome_arquivo, $local_arquivos_tratados_zip.'/'.$nome_arquivo);
         }
 
 
@@ -118,7 +120,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         if ( $zip->open( $local_zip.$nome_arquivo_ZIP, ZipArchive::CREATE ) === true ){
             
-            foreach (glob( $local_arquivos_zipar.'*.pdf') as $fileName ){
+            foreach (glob( $local_arquivos_tratados_zip.'/*.pdf') as $fileName ){
                 $file = basename( $fileName );
                 $zip->addFile( $fileName, $file );
             }
@@ -126,7 +128,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             $zip->close();
         }
 
-        File::deleteDirectory(storage_path('app/arquivos_internos/').$edital);
+        File::deleteDirectory(storage_path('app/public/relatorios/arquivos_internos/')."temporario/");
 
         return Response::download($local_zip.$nome_arquivo_ZIP, $nome_arquivo_ZIP);
         

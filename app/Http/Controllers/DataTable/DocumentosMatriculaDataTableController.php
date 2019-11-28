@@ -87,7 +87,8 @@ class DocumentosMatriculaDataTableController extends DataTableController
     {   
         $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
-        $url_arquivo = str_replace('/public', '/', URL::to('/')).str_replace('/var/www/inscricoespos/','',storage_path('app/'));
+        $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
+
 
         if (sizeof($dados_temporarios) > 0) {
             foreach ($dados_temporarios as $dados) {
