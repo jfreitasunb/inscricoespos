@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, ConfiguraInicioPrograma};
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\Controller;
@@ -31,7 +31,11 @@ class EditarPeriodoConfirmacaoController extends AdminController
 
 		$edital = new ConfiguraInscricaoPos();
 
-      	$edital_vigente = $edital->retorna_edital_vigente();
+      	$id_inscricao_pos = $edital->retorna_edital_vigente()->id_inscricao_pos;
+
+      	$configura_inicio = new ConfiguraInicioPrograma();
+      	
+      	dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
 
       	return view('templates.partials.admin.editar_periodo_homologacao')->with(compact('edital_vigente'));
 	}
