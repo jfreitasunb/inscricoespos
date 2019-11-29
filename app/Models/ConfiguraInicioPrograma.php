@@ -4,12 +4,12 @@ namespace InscricoesPos\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 
 class ConfiguraInicioPrograma extends FuncoesModels
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     protected $primaryKey = 'id_inicio_programa';
 
@@ -82,9 +82,9 @@ class ConfiguraInicioPrograma extends FuncoesModels
         return $liberar_tela; 
     }
 
-    public function limpa_configuracoes_anteriores($id_inscricao_pos)
-    {
-        return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
-    }
+    // public function limpa_configuracoes_anteriores($id_inscricao_pos)
+    // {
+    //     return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
+    // }
 
 }

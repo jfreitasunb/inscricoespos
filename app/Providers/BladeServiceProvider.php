@@ -19,7 +19,7 @@ class BladeServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private $accordion_configurar_edital = ['configura.inscricao', 'configura.periodo.confirmacao', 'configura.periodo.matricula', 'editar.inscricao'];
+    private $accordion_configurar_edital = ['configura.inscricao', 'configura.periodo.confirmacao', 'configura.periodo.matricula', 'editar.inscricao', 'editar.periodo.confirmacao', 'editar.periodo.envio.documentos.matricula'];
 
     private $accordion_contas = ['lista.edita.usuarios', 'pesquisa.email.muda.senha', 'admin.impersonate', 'pesquisa.usuario', 'criar.coordenador', 'lista.inativos', 'associa.recomendantes', 'visualiza.associacoes', 'conta.cartas.recomendante'];
 

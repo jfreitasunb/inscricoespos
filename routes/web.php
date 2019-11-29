@@ -109,6 +109,14 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 
 	Route::post('contas/users/impersonate','\InscricoesPos\Http\Controllers\Admin\ImpersonateController@store');
 
+	Route::get('edita/periodo/confirmacao','\InscricoesPos\Http\Controllers\Admin\EditarPeriodoConfirmacaoController@getEditarPeriodoConfirmacao')->name('editar.periodo.confirmacao');
+
+	Route::post('edita/periodo/confirmacao','\InscricoesPos\Http\Controllers\Admin\EditarPeriodoConfirmacaoController@postEditarPeriodoConfirmacao');
+
+	Route::get('edita/periodo/envio/documentos/matricula','\InscricoesPos\Http\Controllers\Admin\EditarPeriodoEnvioDocumentosMatriculaController@getEditarPeriodoEnvioDocumentosMatricula')->name('editar.periodo.envio.documentos.matricula');
+
+	Route::post('edita/periodo/envio/documentos/matricula','\InscricoesPos\Http\Controllers\Admin\EditarPeriodoEnvioDocumentosMatriculaController@postEditarPeriodoEnvioDocumentosMatricula');
+
 	Route::delete('contas/users/impersonate','\InscricoesPos\Http\Controllers\Admin\ImpersonateController@destroy');
 
 	Route::get('contas/users/link/senha', '\InscricoesPos\Http\Controllers\Admin\LinkSenhaController@getPesquisaLinkMudarSenha')->name('pesquisa.email.muda.senha');

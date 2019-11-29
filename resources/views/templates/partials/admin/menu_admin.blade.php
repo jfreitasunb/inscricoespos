@@ -119,6 +119,16 @@
                                         <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.inscricao') }}">Editar detalhes da inscrição</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('editar.periodo.confirmacao') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.periodo.confirmacao') }}">Editar período de homologação</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('editar.periodo.envio.documentos.matricula') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.periodo.envio.documentos.matricula') }}">Editar período de envio de documentos</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div> 
                     </div>
@@ -277,6 +287,8 @@
                 @yield('dados_coordenador_pos')
                 @yield('edita_area_pos')
                 @yield('admin_impersonate')
+                @yield('editar_periodo_homologacao')
+                @yield('editar_periodo_envio_documentos_matricula')
                 @yield('cadastra_area_pos')
                 @yield('lista_contagem_cartas')
                 @yield('edita_formacao')
