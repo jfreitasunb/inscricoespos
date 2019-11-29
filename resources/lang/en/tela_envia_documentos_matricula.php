@@ -9,7 +9,7 @@ return [
     'documentos_matricula' => 'Documents for Registration',
     'ficha_cadastral' => 'Registration form',
     'modelo' => 'Click here to download the model',
-	'diploma_graduacao' => 'Diploma of higher education (both sides)',
+	'diploma_graduacao' => 'Diploma of higher education (both sides) or certificate of conclusion',
     'historico_graduacao' => 'Records of higher education',
 	'carteira_identidade' => 'ID Card',
     'cpf' => 'CPF (only for applicants residing in Brazil)',
