@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, RelatorioController, FinalizaInscricao, ContatoRecomendante, DadoRecomendante, DadoPessoal, EscolhaCandidato, CartaRecomendacao, AssociaEmailsRecomendante};
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, ConfiguraInicioPrograma};
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\Controller;
