@@ -82,6 +82,11 @@ class ConfiguraInicioPrograma extends FuncoesModels
         return $liberar_tela; 
     }
 
+    public function retorna_id_confirmacao($id_inscricao_pos, $mes_inicio)
+    {
+        return $this->where('id_inscricao_pos', $id_inscricao_pos)->where('mes_inicio', $mes_inicio)->value('id_inicio_programa');
+    }
+
     // public function limpa_configuracoes_anteriores($id_inscricao_pos)
     // {
     //     return $this->where('id_inscricao_pos', $id_inscricao_pos)->delete();
