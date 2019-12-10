@@ -8,24 +8,28 @@
 
 @section('editar_periodo_confirmacao')
 {!! Form::open(array('route' => 'editar.periodo.confirmacao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+
+{!! Form::hidden('id_inscricao_pos', $id_inscricao_pos, []) !!}
+
 <label>1 -> Mestrado, 2 -> Doutorado, 1_2 -> Ambos</label>
+
 @foreach ($periodo_confirmacao as $periodo)
   <div class="form-group">
     {!! Form::label('inicio_inscricao', 'Mês de Início na Pós', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-      {!! Form::text('mes_inicio_inscricao_'.$periodo->id_inscricao_pos.'_'.$periodo->id_inicio_programa, $periodo->mes_inicio, ['class' => 'form-control input-md']) !!}
+      {!! Form::text('mes_inicio_inscricao_'.$periodo->id_inicio_programa, $periodo->mes_inicio, ['class' => 'form-control input-md']) !!}
     </div>
   </div>
   <div class="form-group">
     {!! Form::label('fim_inscricao', 'Fim da Confirmação', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-      {!! Form::text('fim_confirmacao_'.$periodo->id_inscricao_pos.'_'.$periodo->id_inicio_programa, $periodo->prazo_confirmacao , ['class' => 'form-control input-md']) !!}
+      {!! Form::text('fim_confirmacao_'.$periodo->id_inicio_programa, $periodo->prazo_confirmacao , ['class' => 'form-control input-md']) !!}
     </div>
   </div>
   <div class="form-group">
     {!! Form::label('programa_para_confirmar', 'Programa da Pós', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-      {!! Form::text('programa_para_confirmar_'.$periodo->id_inscricao_pos.'_'.$periodo->id_inicio_programa, $periodo->programa_para_confirmar , ['class' => 'form-control input-md']) !!}
+      {!! Form::text('programa_para_confirmar_'.$periodo->id_inicio_programa, $periodo->programa_para_confirmar , ['class' => 'form-control input-md']) !!}
     </div>
   </div>
   <hr>
