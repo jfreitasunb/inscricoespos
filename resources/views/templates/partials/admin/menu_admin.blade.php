@@ -287,7 +287,7 @@
                 @yield('dados_coordenador_pos')
                 @yield('edita_area_pos')
                 @yield('admin_impersonate')
-                @yield('editar_periodo_homologacao')
+                @yield('editar_periodo_confirmacao')
                 @yield('editar_periodo_envio_documentos_matricula')
                 @yield('cadastra_area_pos')
                 @yield('lista_contagem_cartas')

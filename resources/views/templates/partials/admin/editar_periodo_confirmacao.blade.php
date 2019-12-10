@@ -6,7 +6,7 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('editar_periodo_homologacao')
+@section('editar_periodo_confirmacao')
 {!! Form::open(array('route' => 'editar.inscricao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
 {!! Form::hidden('id_inscricao_pos', $edital_vigente->id_inscricao_pos, []) !!}
