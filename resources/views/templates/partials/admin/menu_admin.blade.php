@@ -121,7 +121,7 @@
                                 </tr>
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('editar.periodo.confirmacao') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.periodo.confirmacao') }}">Editar período de homologação</a>
+                                        <span class="glyphicon glyphicon-pencil fa-fw"></span><a href="{{ route('editar.periodo.confirmacao') }}">Editar período de confirmação</a>
                                     </td>
                                 </tr>
                                 <tr>

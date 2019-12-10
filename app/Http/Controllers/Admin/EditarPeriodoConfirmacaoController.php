@@ -35,9 +35,13 @@ class EditarPeriodoConfirmacaoController extends AdminController
 
       	$configura_inicio = new ConfiguraInicioPrograma();
       	
-      	dd($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos));
+      	if (sizeof($configura_inicio->retorna_meses_para_inicio($id_inscricao_pos)) == 0) {
+      		notify()->flash('Período de confirmação não configurado ainda!','warning', ['timer' => 3000,]);
 
-      	return view('templates.partials.admin.editar_periodo_homologacao')->with(compact('edital_vigente'));
+			return redirect()->route('home');
+      	}else{
+      		return view('templates.partials.admin.editar_periodo_confirmacao')->with(compact('edital_vigente'));
+      	}
 	}
 
 	public function postEditarPeriodoConfirmacao(Request $request)
