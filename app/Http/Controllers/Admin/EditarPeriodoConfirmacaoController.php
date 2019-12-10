@@ -43,36 +43,30 @@ class EditarPeriodoConfirmacaoController extends AdminController
       		
       		$periodo_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
 
-      		return view('templates.partials.admin.editar_periodo_confirmacao')->with(compact('periodo_confirmacao'));
+      		return view('templates.partials.admin.editar_periodo_confirmacao')->with(compact('periodo_confirmacao', 'id_inscricao_pos'));
       	}
 	}
 
 	public function postEditarPeriodoConfirmacao(Request $request)
 	{
+		$configura_inicio = new ConfiguraInicioPrograma();
 
-		$this->validate($request, [
-			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
-			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'data_homologacao' => 'required|date_format:"Y-m-d"|after:fim_inscricao',
-			'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao',
-			'edital' => 'required',
-			'programa' => 'required',
-		]);
+		$periodos_existentes = $configura_inicio->retorna_meses_para_inicio($request->id_inscricao_pos);
 
-		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
+		foreach ($periodos_existentes as $existe) {
+			
+			$periodo_existente = ConfiguraInicioPrograma::find($existe->id_inicio_programa);
 
-		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
-		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
-		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
-		$novos_dados_edital['programa'] = $request->programa;
-		$novos_dados_edital['edital'] = $request->edital;
-		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
-		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
+			$novo_periodio_confirmacao['mes_inicio'] = $request->{'mes_inicio_inscricao_'.$existe->id_inicio_programa};
+			
+			$novo_periodio_confirmacao['prazo_confirmacao'] = $request->{'fim_confirmacao_'.$existe->id_inicio_programa};
+			
+			$novo_periodio_confirmacao['programa_para_confirmar'] = $request->{'programa_para_confirmar_'.$existe->id_inicio_programa};
+			
+			$periodo_existente->update($novo_periodio_confirmacao);
+		}
 
-		$edital_vigente->update($novos_dados_edital);
-
-		notify()->flash('Inscrição alterada com sucesso!','success', ['timer' => 3000,]);
+		notify()->flash('Período de confirmação alterado com sucesso!','success', ['timer' => 3000,]);
 
 		return redirect()->route('editar.periodo.confirmacao');
 	}
