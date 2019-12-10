@@ -126,6 +126,39 @@ class StatusConfirmaParticipacaoController extends AdminController
 
     public function postStatusCandidatosSelecionados(Request $request)
     {
-        dd($request);
+
+        $this->validate($request, [
+            'dados_candidato' => 'required',
+            'mes_inicio_candidato' => 'required',
+        ]);
+
+        $id_candidato = explode("_", $request->dados_candidato)[0];
+
+        $id_inscricao_pos = explode("_", $request->dados_candidato)[1];
+
+        $id_programa_pos = explode("_", $request->dados_candidato)[2];
+
+        $mes_inicio = $request->mes_inicio_candidato;
+
+        $configura_inicio = new ConfiguraInicioPrograma();
+
+        $id_inicio_programa = $configura_inicio->retorna_id_confirmacao($id_inscricao_pos, $mes_inicio);
+
+        $confirma_presenca = new CandidatosSelecionados();
+
+        $status = $confirma_presenca->grava_resposta_participacao($id_candidato, $id_inscricao_pos, TRUE, $id_inicio_programa);
+
+        if ($status) {
+            
+            notify()->flash('Inscrição alterada com sucesso!','success', ['timer' => 3000,]);
+
+            return redirect()->route('altera.status.selecionados');
+        }else{
+
+            notify()->flash('Houve um erro ao efetuar a operação!','error');
+
+            return redirect()->route('altera.status.selecionados');
+        }
+
     }
 }
