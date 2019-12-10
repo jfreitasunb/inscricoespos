@@ -7,52 +7,27 @@
 @endsection
 
 @section('editar_periodo_envio_documentos_matricula')
-{!! Form::open(array('route' => 'editar.inscricao', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+{!! Form::open(array('route' => 'editar.periodo.envio.documentos.matricula', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
 
-{!! Form::hidden('id_inscricao_pos', $edital_vigente->id_inscricao_pos, []) !!}
+{!! Form::hidden('id_inscricao_pos', $id_inscricao_pos, []) !!}
 
-<div class="form-group">
-	{!! Form::label('inicio_inscricao', 'Início da Inscrição', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('inicio_inscricao', $edital_vigente->inicio_inscricao, ['class' => 'form-control input-md']) !!}
-	</div>
-</div>
-<div class="form-group">
-	{!! Form::label('fim_inscricao', 'Fim da Inscrição', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('fim_inscricao', $edital_vigente->fim_inscricao, ['class' => 'form-control input-md']) !!}
-	</div>
-</div>
-<div class="form-group">
-	{!! Form::label('prazo_carta', 'Prazo da Carta', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('prazo_carta', $edital_vigente->prazo_carta, ['class' => 'form-control input-md']) !!}
-	</div>
-</div>
-<div class="form-group">
-    {!! Form::label('data_homologacao', 'Data da Homologação:', ['class' => 'col-md-4 control-label']) !!}
+<label>1 -> Mestrado, 2 -> Doutorado, 1_2 -> Ambos</label>
+
+@foreach ($perido_envio_documentos as $periodo)
+  <div class="form-group">
+    {!! Form::label('inicio_envio_documentos', 'Início do Envio dos Documentos', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::text('data_homologacao', $edital_vigente->data_homologacao, ['class' => 'form-control input-md']) !!}
+      {!! Form::text('inicio_envio_documentos_'.$periodo->id, $periodo->inicio_envio_documentos, ['class' => 'form-control input-md']) !!}
     </div>
-</div>
-<div class="form-group">
-    {!! Form::label('data_divulgacao_resultado', 'Data da divulgação do resultado:', ['class' => 'col-md-4 control-label']) !!}
+  </div>
+  <div class="form-group">
+    {!! Form::label('fim_envio_documentos', 'Fim do Envio dos Documentos', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-4">
-        {!! Form::text('data_divulgacao_resultado', $edital_vigente->data_divulgacao_resultado, ['class' => 'form-control input-md']) !!}
+      {!! Form::text('fim_envio_documentos_'.$periodo->id, $periodo->fim_envio_documentos , ['class' => 'form-control input-md']) !!}
     </div>
-</div>
-<div class="form-group">
-	{!! Form::label('programa', 'Programas para inscrição', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('programa', $edital_vigente->programa, ['class' => 'form-control input-md']) !!}
-	</div>
-</div>
-<div class="form-group">
-	{!! Form::label('edital', 'Edital', ['class' => 'col-md-4 control-label']) !!}
-	<div class="col-md-4">
-		{!! Form::text('edital', $edital_vigente->edital, ['class' => 'form-control input-md']) !!}
-	</div>
-</div>
+  </div>
+  <hr>
+@endforeach
 <div class="form-group">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">

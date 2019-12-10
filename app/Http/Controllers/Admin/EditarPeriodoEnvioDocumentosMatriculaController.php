@@ -8,7 +8,7 @@ use Mail;
 use Session;
 use Notification;
 use Carbon\Carbon;
-use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, ConfiguraInicioPrograma};
+use InscricoesPos\Models\{User, ConfiguraInscricaoPos, AreaPosMat, ProgramaPos, ConfiguraEnvioDocumentosMatricula};
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\Controller;
@@ -31,35 +31,45 @@ class EditarPeriodoEnvioDocumentosMatriculaController extends AdminController
 
 		$edital = new ConfiguraInscricaoPos();
 
-      	$edital_vigente = $edital->retorna_edital_vigente();
+      	$id_inscricao_pos = $edital->retorna_edital_vigente()->id_inscricao_pos;
 
-      	return view('templates.partials.admin.editar_periodo_envio_documentos_matricula')->with(compact('edital_vigente'));
+      	$envio_documentos = new ConfiguraEnvioDocumentosMatricula();
+      	
+      	$perido_envio_documentos = $envio_documentos->retorna_periodo_envio_documentos_matricula($id_inscricao_pos);
+
+      	return view('templates.partials.admin.editar_periodo_envio_documentos_matricula')->with(compact('perido_envio_documentos', 'id_inscricao_pos'));
 	}
 
 	public function postEditarPeriodoEnvioDocumentosMatricula(Request $request)
 	{
 
-		$this->validate($request, [
-			'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao',
-			'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao',
-			'data_homologacao' => 'required|date_format:"Y-m-d"|after:fim_inscricao',
-			'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao',
-			'edital' => 'required',
-			'programa' => 'required',
-		]);
+		$id_inscricao_pos = $request->id_inscricao_pos;
 
-		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
+		$configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
-		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
-		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
-		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
-		$novos_dados_edital['programa'] = $request->programa;
-		$novos_dados_edital['edital'] = $request->edital;
-		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
-		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
+		$periodos_existentes = $configura_inicio->retorna_periodo_envio_documentos_matricula($id_inscricao_pos);
 
-		$edital_vigente->update($novos_dados_edital);
+		foreach ($periodos_existentes as $existe) {
+			
+			$periodo_existente = ConfiguraEnvioDocumentosMatricula::find($existe->id);
+
+			$prazo_inicio_envio_documentos = Carbon::createFromFormat('Y-m-d', $request->{'inicio_envio_documentos_'.$existe->id});
+
+			$prazo_fim_envio_documentos = Carbon::createFromFormat('Y-m-d', $request->{'fim_envio_documentos_'.$existe->id});
+
+			if ($prazo_inicio_envio_documentos > $prazo_fim_envio_documentos) {
+				
+				notify()->flash('O prazo de início de envio dos documentos deve ser inferior à data: '.$prazo_fim_envio_documentos->format('Y-m-d'),'error');
+
+				return redirect()->route('editar.periodo.envio.documentos.matricula');
+			}
+			
+			$novo_periodo_envio['inicio_envio_documentos'] = $request->{'inicio_envio_documentos_'.$existe->id};
+			
+			$novo_periodo_envio['fim_envio_documentos'] = $request->{'fim_envio_documentos_'.$existe->id};
+			
+			$periodo_existente->update($novo_periodo_envio);
+		}
 
 		notify()->flash('Inscrição alterada com sucesso!','success', ['timer' => 3000,]);
 
