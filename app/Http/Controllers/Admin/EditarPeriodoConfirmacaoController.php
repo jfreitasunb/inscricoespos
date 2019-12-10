@@ -57,6 +57,33 @@ class EditarPeriodoConfirmacaoController extends AdminController
 			
 			$periodo_existente = ConfiguraInicioPrograma::find($existe->id_inicio_programa);
 
+			if ($request->{'mes_inicio_inscricao_'.$existe->id_inicio_programa} <1 or $request->{'mes_inicio_inscricao_'.$existe->id_inicio_programa} > 12) {
+				
+				notify()->flash('O mês deve ser um número entre 1 e 12!','error');
+
+				return redirect()->route('editar.periodo.confirmacao');
+			}
+
+			$prazo_divulgacao = Carbon::createFromFormat('Y-m-d', ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos)->data_divulgacao_resultado);
+
+			$prazo = Carbon::createFromFormat('Y-m-d', $request->{'fim_confirmacao_'.$existe->id_inicio_programa});
+
+			if ($prazo < $prazo_divulgacao) {
+				
+				notify()->flash('O prazo de confirmação deve ser superior à data: '.$prazo_divulgacao->format('Y-m-d'),'error');
+
+				return redirect()->route('editar.periodo.confirmacao');
+			}
+
+			$codigo_programa_pos_valido = ['1', '2', '1_2', null];
+
+			if (!in_array($request->{'programa_para_confirmar_'.$existe->id_inicio_programa}, $codigo_programa_pos_valido)) {
+				
+				notify()->flash('Código de programa da Pós inválido!','error');
+
+				return redirect()->route('editar.periodo.confirmacao');
+			}
+			
 			$novo_periodio_confirmacao['mes_inicio'] = $request->{'mes_inicio_inscricao_'.$existe->id_inicio_programa};
 			
 			$novo_periodio_confirmacao['prazo_confirmacao'] = $request->{'fim_confirmacao_'.$existe->id_inicio_programa};
