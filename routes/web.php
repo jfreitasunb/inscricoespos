@@ -187,6 +187,10 @@ Route::prefix('admin')->middleware('user.role:admin', 'impersonate.user')->group
 	Route::get('inscricoes/nao/finalizadas', '\InscricoesPos\Http\Controllers\Admin\ListaInscricaoNaoFinalizadasController@getInscricoesNaoFinalizadas')->name('inscricoes.nao.finalizadas');
 
 	Route::resource('datatable/inscricoesnaofinalizadas','\InscricoesPos\Http\Controllers\DataTable\InscricoesNaoFinalizadasDataTableController');
+
+	Route::get('status/selecionados', '\InscricoesPos\Http\Controllers\Admin\StatusConfirmaParticipacaoController@getStatusCandidatosSelecionados')->name('altera.status.selecionados');
+
+	Route::post('status/selecionados', '\InscricoesPos\Http\Controllers\Admin\StatusConfirmaParticipacaoController@postStatusCandidatosSelecionados');
 });
 
 

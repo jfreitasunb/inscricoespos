@@ -22,6 +22,7 @@
           <th>Programa</th>
           <th>Confirmou Presença?</th>
           <th>Mês de Início</th>
+          <th>Confirmar manualmente?</th>
         </tr>
       </thead>
       <tbody>
@@ -35,6 +36,17 @@
               <td class="lista_carta carta_incompleta"> Não
             @endif </td>
             <td>{{ $mes_candidato[$dados['id_candidato']] }}</td>
+            <td>
+              {!! Form::open(array('route' => 'altera.status.selecionados', 'class' => 'form-horizontal', 'data-parsley-validate' => '' )) !!}
+              {!! Form::hidden('dados_candidato', $dados->id_candidato.'_'.$dados->id_inscricao_pos.'_'.$dados->id_programa_pos, []) !!}
+                @foreach($meses_disponiveis as $meses)
+                  <div class="col-md-4">
+                    <label class="radio-inline">{!! Form::radio('mes_inicio_candidato', $meses, '', ['required' => '']) !!} {!! $meses !!}</label>
+                  </div>
+                @endforeach
+                <button>Sim</button>
+            {!! Form::close() !!}
+          </td>
           </tr>
         @endforeach
       </tbody>

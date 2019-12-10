@@ -252,8 +252,8 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
-                                    <td class= "{{ Route::currentRouteNamed('status.selecionados') ? 'active_link' : '' }}">
-                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('status.selecionados') }}">Status das Confirmações</a>
+                                    <td class= "{{ Route::currentRouteNamed('altera.status.selecionados') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-list fa-fw"></span><a href="{{ route('altera.status.selecionados') }}">Status das Confirmações</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -308,7 +308,7 @@
                 @yield('nao_finalizadas')
                 @yield('homologa_inscricoes')
                 @yield('seleciona_candidatos')
-                @yield('status_selecionados')
+                @yield('altera_status_selecionados')
                 @yield('tabela_indicacoes')
                 @yield('altera_recomendantes')
                 @yield('relatorio_pos_edital_vigente')
