@@ -40,7 +40,10 @@ class EditarPeriodoConfirmacaoController extends AdminController
 
 			return redirect()->route('home');
       	}else{
-      		return view('templates.partials.admin.editar_periodo_confirmacao')->with(compact('edital_vigente'));
+      		
+      		$periodo_confirmacao = $configura_inicio->retorna_meses_para_inicio($id_inscricao_pos);
+
+      		return view('templates.partials.admin.editar_periodo_confirmacao')->with(compact('periodo_confirmacao'));
       	}
 	}
 
