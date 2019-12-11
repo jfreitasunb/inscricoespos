@@ -46,8 +46,9 @@
                   </div>
                 @endforeach
               </td>
-              <td>
-                {!! Form::submit('Sim', ['class' => 'btn btn-danger center-block']) !!}
+              <td class="col-md-4">
+                {!! Form::submit('Sim', ['class' => 'btn btn-danger center-block', 'name' => 'SIM']) !!}
+                {!! Form::submit('Não', ['class' => 'btn btn-warning center-block', 'name' => 'NAO']) !!}
               </td>
             {!! Form::close() !!}
           </td>
