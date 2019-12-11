@@ -140,13 +140,23 @@ class StatusConfirmaParticipacaoController extends AdminController
 
         $mes_inicio = $request->mes_inicio_candidato;
 
-        $configura_inicio = new ConfiguraInicioPrograma();
+        if (is_null($request->NAO)) {
+            
+            $configura_inicio = new ConfiguraInicioPrograma();
 
-        $id_inicio_programa = $configura_inicio->retorna_id_confirmacao($id_inscricao_pos, $mes_inicio);
+            $id_inicio_programa = $configura_inicio->retorna_id_confirmacao($id_inscricao_pos, $mes_inicio);
+
+            $confirmou_presenca = TRUE;
+        }else{
+            
+            $confirmou_presenca = FALSE;
+            
+            $id_inicio_programa= NULL;
+        }
 
         $confirma_presenca = new CandidatosSelecionados();
 
-        $status = $confirma_presenca->grava_resposta_participacao($id_candidato, $id_inscricao_pos, TRUE, $id_inicio_programa);
+        $status = $confirma_presenca->grava_resposta_participacao($id_candidato, $id_inscricao_pos, $confirmou_presenca, $id_inicio_programa);
 
         if ($status) {
             
