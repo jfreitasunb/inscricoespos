@@ -22,6 +22,7 @@
           <th>Programa</th>
           <th>Confirmou Presença?</th>
           <th>Mês de Início</th>
+          <th>Selecione o mês para início</th>
           <th>Confirmar manualmente?</th>
         </tr>
       </thead>
@@ -44,7 +45,10 @@
                     <label class="radio-inline">{!! Form::radio('mes_inicio_candidato', $meses, '', ['required' => '']) !!} {!! $meses !!}</label>
                   </div>
                 @endforeach
-                <button>Sim</button>
+              </td>
+              <td>
+                {!! Form::submit('Sim', ['class' => 'btn btn-danger center-block']) !!}
+              </td>
             {!! Form::close() !!}
           </td>
           </tr>
