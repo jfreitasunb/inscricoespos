@@ -29,9 +29,9 @@ class BladeServiceProvider extends ServiceProvider
 
     private $accordion_relatorios = [ 'relatorio.atual', 'relatorio.anteriores'];
 
-    private $accordion_processo_selecao = ['seleciona.candidatos', 'altera.status.selecionados', 'homologa.inscricoes'];
+    private $accordion_processo_selecao = ['seleciona.candidatos', 'homologa.inscricoes'];
 
-    private $accordion_acompanha_selecionados = ['status.selecionados', 'coordenador.documentos.matricula'];
+    private $accordion_acompanha_selecionados = ['altera.status.selecionados', 'status.selecionados', 'coordenador.documentos.matricula'];
 
     public function ativa_accordion_acompanha_selecionado()
     {
