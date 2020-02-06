@@ -64,7 +64,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             return redirect()->route('configura.periodo.matricula');
         }
 
-        if ($configura_envio_documentos->libera_tela_documento_matricula($id_inscricao_pos)){
+        if ($configura_envio_documentos->libera_tela_documento_matricula_coordenador($id_inscricao_pos)){
 
             return view('templates.partials.coordenador.acessa_documentos_matricula');    
         }else{
