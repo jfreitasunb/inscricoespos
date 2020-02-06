@@ -49,6 +49,27 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
         return $liberar_tela; 
     }
 
+    public function libera_tela_documento_matricula_coordenador($id_inscricao_pos)
+    {
+        $periodo_envio_documentos = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+
+        if (is_null($periodo_envio_documentos)) {
+            return false;
+        }
+        
+        $data_hoje = (new Carbon())->format('Y-m-d');
+            
+        $inicio_prazo = Carbon::createFromFormat('Y-m-d', $periodo_envio_documentos->inicio_envio_documentos)->format('Y-m-d');
+
+        $fim_prazo = Carbon::createFromFormat('Y-m-d', $periodo_envio_documentos->fim_envio_documentos)->format('Y-m-d');
+
+        if (($data_hoje >= $inicio_prazo)) {
+        
+            $liberar_tela = true;
+        }
+        
+        return $liberar_tela; 
+    }
     public function retorna_inicio_prazo_envio_documentos($id_inscricao_pos)
     {
         return Carbon::createFromFormat('Y-m-d', $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first()->inicio_envio_documentos)->format('Y-m-d');
