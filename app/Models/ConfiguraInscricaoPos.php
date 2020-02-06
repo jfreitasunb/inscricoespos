@@ -39,7 +39,7 @@ class ConfiguraInscricaoPos extends Model
         return $this->orderBy('id_inscricao_pos','desc')->paginate(5);
     }
 
-     public function retorna_edital_vigente($id_inscricao_pos = null)
+    public function retorna_edital_vigente($id_inscricao_pos = null)
     {
         if (is_null($id_inscricao_pos)) {
 
@@ -47,8 +47,7 @@ class ConfiguraInscricaoPos extends Model
         }else{
             
             return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
-        }
-        
+        }    
     }
 
     public function retorna_inscricao_ativa($id_inscricao_pos = null)
@@ -59,8 +58,7 @@ class ConfiguraInscricaoPos extends Model
         }else{
             
             return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
-        }
-        
+        }   
     }
 
     public function define_texto_inscricao()

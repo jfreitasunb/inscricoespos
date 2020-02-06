@@ -5,6 +5,7 @@ namespace InscricoesPos\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
+use Carbon\Carbon;
 
 class CandidatosSelecionados extends FuncoesModels
 {
@@ -28,7 +29,22 @@ class CandidatosSelecionados extends FuncoesModels
         $temp = $this->where('id_candidato', $id_candidato)->orderBy('created_at', 'desc')->get();
 
         if (count($temp)) {
-            return $temp[0]->id_inscricao_pos;
+
+            $configura = new ConfiguraInscricaoPos();
+
+            $edital_ativo = $configura->retorna_edital_vigente();
+
+            $inicio_inscricao = Carbon::createFromFormat('Y-m-d', $edital_ativo->inicio_inscricao)->format('Y-m-d');
+
+            $fim_inscricao = Carbon::createFromFormat('Y-m-d', $edital_ativo->fim_inscricao)->format('Y-m-d');
+
+            $configura_envio = new ConfiguraEnvioDocumentosMatricula();
+
+            $fim_envio_matricula = $configura_envio->retorna_fim_prazo_envio_documentos($temp[0]->id_inscricao_pos);
+
+            if (($fim_envio_matricula >= $inicio_inscricao) AND ($fim_envio_matricula <= $fim_inscricao)) {
+                return $temp[0]->id_inscricao_pos;
+            }
         }else{
             return 0;
         }

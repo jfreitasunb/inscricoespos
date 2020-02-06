@@ -72,12 +72,29 @@ class ConfiguraEnvioDocumentosMatricula extends FuncoesModels
     }
     public function retorna_inicio_prazo_envio_documentos($id_inscricao_pos)
     {
-        return Carbon::createFromFormat('Y-m-d', $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first()->inicio_envio_documentos)->format('Y-m-d');
+        $temp = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+
+        if (!is_null($temp)) {
+            
+            return Carbon::createFromFormat('Y-m-d', $temp->inicio_envio_documentos)->format('Y-m-d');
+        }else{
+
+            return Carbon::createFromFormat('Y-m-d', '2000-01-01')->format('Y-m-d');
+        }
+        
     }
 
     public function retorna_fim_prazo_envio_documentos($id_inscricao_pos)
-    {
-        return Carbon::createFromFormat('Y-m-d', $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first()->fim_envio_documentos)->format('Y-m-d');
+    {   
+        $temp = $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+        
+        if (!is_null($temp)) {
+
+            return Carbon::createFromFormat('Y-m-d', $temp->fim_envio_documentos)->format('Y-m-d');
+        }else{
+            
+            return Carbon::createFromFormat('Y-m-d', '2000-01-02')->format('Y-m-d');
+        }
     }
 
     public function retorna_periodo_envio_documentos_matricula($id_inscricao_pos)

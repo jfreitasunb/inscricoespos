@@ -124,6 +124,9 @@ class EnviaDocumentosMatriculaController extends BaseController
 				return redirect()->back();
 			}
 		}else{
+
+			$id_inscricao_pos = $id_inscricao_pos_candidato;
+			
 			$edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos_candidato)->edital;
 			
 			$autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
