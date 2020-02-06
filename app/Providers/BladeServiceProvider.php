@@ -199,23 +199,54 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('liberamenu', function ( $user = null ){
 
             $user = auth()->user();
+            
             $id_user = $user->id_user;
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-            $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-            $autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
-            $finaliza_inscricao = new FinalizaInscricao();
+            $candidato_selecionado = new CandidatosSelecionados();
 
-            $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user,$id_inscricao_pos);
+            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_user);
 
-            if ($autoriza_inscricao and !$status_inscricao) {
-                return true;
+            $edital_ativo = new ConfiguraInscricaoPos();
+
+            $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+            if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
+
+                $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+                
+                $autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+
+                $finaliza_inscricao = new FinalizaInscricao();
+
+                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user, $id_inscricao_pos);
+
+                if ($autoriza_inscricao and !$status_inscricao) {
+                    return true;
+                }else{
+                    return false;
+                }
             }else{
-                return false;
-            }         
+
+                $id_inscricao_pos = $id_inscricao_pos_candidato;
+
+                $edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->edital;
+                
+                $autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
+
+                $finaliza_inscricao = new FinalizaInscricao();
+
+                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user, $id_inscricao_pos);
+
+                if ($autoriza_inscricao and !$status_inscricao) {
+                    return true;
+                }else{
+                    return false;
+                }
+            }    
         });
 
         Blade::if('liberacarta', function ( $user = null ){
@@ -287,25 +318,52 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('envia_documentos_matricula', function ( $user = null ){
 
             $user = auth()->user();
+            
             $id_user = $user->id_user;
+
+            $candidato_selecionado = new CandidatosSelecionados();
+
+            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_user);
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-            
-            $selecao_candidatos = new CandidatosSelecionados();
 
-            $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+            if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
+                
+                $selecao_candidatos = new CandidatosSelecionados();
 
-            $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
 
-            $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
-            
-            if (!is_null($status_selecao)) {
-                if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
-                    return true;
-                }else{
-                    return false;
+                $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+
+                $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+                
+                if (!is_null($status_selecao)) {
+                    if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }else{
+
+                $id_inscricao_pos = $id_inscricao_pos_candidato;
+
+                $selecao_candidatos = new CandidatosSelecionados();
+
+                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+
+                $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
+
+                $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+                
+                if (!is_null($status_selecao)) {
+                    if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
+                        return true;
+                    }else{
+                        return false;
+                    }
                 }
             }
                      
