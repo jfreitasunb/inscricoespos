@@ -23,6 +23,17 @@ class CandidatosSelecionados extends FuncoesModels
         'classificacao',
     ];
 
+    public function encontra_id_tabela($id_candidato)
+    {
+        $temp = $this->where('id_candidato', $id_candidato)->orderBy('created_at', 'desc')->get();
+
+        if (count($temp)) {
+            return $temp[0]->id_inscricao_pos;
+        }else{
+            return 0;
+        }
+        
+    }
 
     public function retorna_status_selecionado($id_inscricao_pos, $id_candidato)
     {

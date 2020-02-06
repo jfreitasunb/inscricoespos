@@ -39,18 +39,28 @@ class ConfiguraInscricaoPos extends Model
         return $this->orderBy('id_inscricao_pos','desc')->paginate(5);
     }
 
-     public function retorna_edital_vigente()
+     public function retorna_edital_vigente($id_inscricao_pos = null)
     {
+        if (is_null($id_inscricao_pos)) {
 
-        return $this->orderBy('id_inscricao_pos','desc')->get()->first();
-
+            return $this->orderBy('id_inscricao_pos','desc')->get()->first();
+        }else{
+            
+            return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+        }
+        
     }
 
-    public function retorna_inscricao_ativa()
+    public function retorna_inscricao_ativa($id_inscricao_pos = null)
     {
-
-        return $this->get()->sortByDesc('id_inscricao_pos')->first();
-
+        if (is_null($id_inscricao_pos)) {
+            
+            return $this->get()->sortByDesc('id_inscricao_pos')->first();
+        }else{
+            
+            return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+        }
+        
     }
 
     public function define_texto_inscricao()
@@ -111,10 +121,18 @@ class ConfiguraInscricaoPos extends Model
         }
     }
 
-    public function autoriza_inscricao()
-    {
-        $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
-        $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
+    public function autoriza_inscricao($id_inscricao_pos = null)
+    {   
+        if (is_null($id_inscricao_pos)) {
+            
+            $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
+            $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
+        }else{
+
+            $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa($id_inscricao_pos)->inicio_inscricao);
+            $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa($id_inscricao_pos)->fim_inscricao);
+        }
+        
 
         $data_inicio = $inicio->format('Y-m-d');
         $data_fim = $fim->format('Y-m-d');
