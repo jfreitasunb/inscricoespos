@@ -9,6 +9,7 @@ use InscricoesPos\Models\User;
 use InscricoesPos\Models\AuxiliaSelecao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\DocumentoMatricula;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 
 use DB;
 use File;
@@ -42,7 +43,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
     public function getVisibleColumns()
     {
         return [
-            'id_candidato', 'nome', 'nome_programa_pretendido', 'nome_arquivo'
+            'id_candidato', 'nome', 'edital', 'nome_programa_pretendido', 'nome_arquivo'
         ];
     }
 
@@ -58,6 +59,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
         return [
             'id_candidato' => 'Identificador',
             'nome' => 'Nome',
+            'edital' => 'Edital',
             'nome_programa_pretendido' => 'Programa desejado',
             'nome_arquivo' => 'Arquivo Enviado'
         ];
@@ -72,6 +74,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'updatable' => $this->getUpdatableColumns(),
+                'editais' => $this->geteditais(),
                 'records' => $this->getRecords($request),
             ]
         ]);
@@ -82,10 +85,37 @@ class DocumentosMatriculaDataTableController extends DataTableController
         return Schema::getColumnListing($this->builder->getModel()->getTable());
     }
 
+    protected function geteditais()
+    {
+        $dados_temporarios = $this->builder()->select('id_inscricao_pos')->distinct()->get();
+        
+        if (sizeof($dados_temporarios) > 0) {
+
+            foreach ($dados_temporarios as $dado) {
+                
+                $edital = new ConfiguraInscricaoPos();
+                
+                $temp = explode("-", $edital->retorna_edital_vigente($dado->id_inscricao_pos)->edital);
+                
+                $dados_editais_vue[] = ['id_inscricao_pos' => $dado->id_inscricao_pos, 'edital' => $temp[1]."/".$temp[0]];
+            }
+        }else{
+            $dados_editais_vue = [];
+        }
+
+        return $dados_editais_vue;
+    }
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        if (is_null($request->id)) {
+            $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        }else{
+
+            $id_inscricao_pos = $request->id;
+
+            $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        }
 
         $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
 
@@ -101,7 +131,11 @@ class DocumentosMatriculaDataTableController extends DataTableController
                 $link_arquivo = NULL;
             }
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, "id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $link_arquivo, 'nome_tratado' => $nome_final, 'arquivo_final' => $dados->arquivo_final];
+            $edital = new ConfiguraInscricaoPos();
+                
+            $temp = explode("-", $edital->retorna_edital_vigente($dados->id_inscricao_pos)->edital);
+
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, 'edital' => $temp[1]."/".$temp[0],"id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $link_arquivo, 'nome_tratado' => $nome_final, 'arquivo_final' => $dados->arquivo_final];
             }
         }else{
             $dados_vue = [];

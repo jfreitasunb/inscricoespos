@@ -3,16 +3,22 @@
         <div class="panel-heading">Documentos dos Selecionados</div>
         <div class="panel-body">
             <div class="row">
-                <div class="form-group col-md-10">
+                <div class="form-group col-md-8">
                     <label for="filter">Pesquisa rápida</label>
                     <input type="text" id="filter" class="form-control" v-model="quickSearchQuery">
                 </div>
                 <div class="form-group col-md-2">
+                    <label id="seleciona_edital">Selecione o Edital</label>
+                    <select id="seleciona_edital" class="form-control" v-model="seleciona_edital" @change="getRecords">
+                        <option v-for="dado in response.editais" :value="dado.id_inscricao_pos">{{ dado.edital }}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-2">
                     <label id="limit">Limitar resultados à:</label>
                     <select id="limit" class="form-control" v-model="limit" @change="getRecords">
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                        <option value="1000">1000</option>
+                        <option value="10">5</option>
+                        <option value="20">10</option>
+                        <option value="30">15</option>
                         <option value="">Todos</option>
                     </select>
                 </div>
@@ -38,6 +44,9 @@
                             </td>
                             <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 {{ record.nome }}
+                            </td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                                {{ record.edital }}
                             </td>
                             <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
                                 {{ record.nome_programa_pretendido }}
@@ -76,7 +85,9 @@
                     order: 'asc'
                 },
 
-                limit: 50,
+                limit: 30,
+
+                seleciona_edital: null,
 
                 quickSearchQuery: ''
             }
@@ -125,7 +136,8 @@
 
                 return queryString.stringify({
 
-                    limit: this.limit
+                    limit: this.limit,
+                    id: this.seleciona_edital
                 })
             },
 
