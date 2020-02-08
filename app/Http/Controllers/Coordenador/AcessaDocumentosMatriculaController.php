@@ -62,16 +62,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             ]);
         }
 
-        if ($configura_envio_documentos->libera_tela_documento_matricula_coordenador($id_inscricao_pos)){
-
-            return view('templates.partials.coordenador.acessa_documentos_matricula');    
-        }else{
-            notify()->flash('Ainda não é o período de envio de documentos.','warning', [
-                'timer' => 3000,
-            ]);
-
-            return redirect()->route('home');
-        }
+        return view('templates.partials.coordenador.acessa_documentos_matricula');
     }
 
     public function getZIPDocumentosMatricula()
