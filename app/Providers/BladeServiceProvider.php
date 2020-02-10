@@ -232,7 +232,7 @@ class BladeServiceProvider extends ServiceProvider
             }else{
 
                 if ($id_inscricao_pos_candidato != 0) {
-                    
+
                     $id_inscricao_pos = $id_inscricao_pos_candidato;
                 }
                 
@@ -351,7 +351,7 @@ class BladeServiceProvider extends ServiceProvider
                 }
             }else{
 
-                $if ($id_inscricao_pos_candidato != 0) {
+                if ($id_inscricao_pos_candidato != 0) {
                     
                     $id_inscricao_pos = $id_inscricao_pos_candidato;
                 }
