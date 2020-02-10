@@ -11,7 +11,7 @@
 <div id="app">
   <div class="row">
     <div class="col-md-12">
-      <admin-documentos-matricula route="{{ route('admin.documentos.matricula.zip') }}" endpoint="{{ route('documentosmatricula.index') }}"></coordenador-documentos-matricula>
+      <admin-documentos-matricula route="{{ route('coordenador.documentos.matricula.zip') }}" endpoint="{{ route('documentosmatricula.index') }}"></coordenador-documentos-matricula>
     </div>
   </div>
 </div>
