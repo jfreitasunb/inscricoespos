@@ -125,7 +125,10 @@ class EnviaDocumentosMatriculaController extends BaseController
 			}
 		}else{
 
-			$id_inscricao_pos = $id_inscricao_pos_candidato;
+			if ($id_inscricao_pos_candidato != 0) {
+                    
+                $id_inscricao_pos = $id_inscricao_pos_candidato;
+            }
 			
 			$edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos_candidato)->edital;
 			

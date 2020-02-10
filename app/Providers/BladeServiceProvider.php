@@ -231,8 +231,11 @@ class BladeServiceProvider extends ServiceProvider
                 }
             }else{
 
-                $id_inscricao_pos = $id_inscricao_pos_candidato;
-
+                if ($id_inscricao_pos_candidato != 0) {
+                    
+                    $id_inscricao_pos = $id_inscricao_pos_candidato;
+                }
+                
                 $edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->edital;
                 
                 $autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
@@ -348,7 +351,10 @@ class BladeServiceProvider extends ServiceProvider
                 }
             }else{
 
-                $id_inscricao_pos = $id_inscricao_pos_candidato;
+                $if ($id_inscricao_pos_candidato != 0) {
+                    
+                    $id_inscricao_pos = $id_inscricao_pos_candidato;
+                }
 
                 $selecao_candidatos = new CandidatosSelecionados();
 
