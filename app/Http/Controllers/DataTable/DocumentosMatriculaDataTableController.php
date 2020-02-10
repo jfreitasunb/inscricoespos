@@ -74,7 +74,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
                 'visivel' => array_values($this->getVisibleColumns()),
                 'custom_columns' => $this->getCustomColumnNanes(),
                 'updatable' => $this->getUpdatableColumns(),
-                'editais' => $this->geteditais(),
+                'editais' => $this->getEditais(),
                 'records' => $this->getRecords($request),
             ]
         ]);
@@ -85,7 +85,7 @@ class DocumentosMatriculaDataTableController extends DataTableController
         return Schema::getColumnListing($this->builder->getModel()->getTable());
     }
 
-    protected function geteditais()
+    protected function getEditais()
     {
         $dados_temporarios = $this->builder()->select('id_inscricao_pos')->distinct()->get();
         
