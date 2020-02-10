@@ -6,7 +6,7 @@
   {!! Html::style( asset('bower_components/moment/locale/fr.js') ) !!}
 @endsection
 
-@section('documentos_matricula_coordenador')
+@section('altera_documentos_matricula_coordenador')
 
 <div id="app">
   <div class="row">

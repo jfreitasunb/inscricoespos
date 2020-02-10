@@ -11,9 +11,13 @@ use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 
+use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Storage;
+
 use DB;
 use File;
 use URL;
+use Auth;
 
 class DocumentosMatriculaDataTableController extends DataTableController
 {   
@@ -108,34 +112,59 @@ class DocumentosMatriculaDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
+        $user = Auth::user();
+        
         if (is_null($request->id)) {
-            $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
+
+            if ($user->user_type === "admin") {
+                $dados_temporarios = $this->builder()->limit($request->limit)->orderBy('id_candidato')->get();
+            }else{
+                $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+            }
+            
         }else{
 
             $id_inscricao_pos = $request->id;
 
-            $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orWhere('nome_arquivo', 'NULL')->orderBy('id_candidato')->get($this->getDisplayableColumns());
+            if ($user->user_type === "admin") {
+
+                $dados_temporarios = $this->builder()->limit($request->limit)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+            }else{
+                $dados_temporarios = $this->builder()->limit($request->limit)->where('arquivo_final', TRUE)->where('id_inscricao_pos', $id_inscricao_pos)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+            }
         }
 
-        $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
-
+        if (!$user->user_type === "admin") {
+            $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
+        }
 
         if (sizeof($dados_temporarios) > 0) {
             foreach ($dados_temporarios as $dados) {
 
             $nome_final = str_replace(' ', '_',strtr((User::find($dados->id_candidato))->nome, $this->normalizeChars)).".pdf";
 
-            if ($dados->arquivo_final) {
+            if ($user->user_type === "admin") {
+                if ($dados->tipo_arquivo === "df") {
+                    $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
+                }else{
+                    $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app','storage/app',storage_path('app/'));
+                }
                 $link_arquivo = $url_arquivo.$dados->nome_arquivo;
+                $tipo_arquivo = $dados->tipo_arquivo;
             }else{
-                $link_arquivo = NULL;
+                if ($dados->arquivo_final) {
+                    $link_arquivo = $url_arquivo.$dados->nome_arquivo;
+                }else{
+                    $link_arquivo = NULL;
+                }
+                $tipo_arquivo = NULL;
             }
-
+            
             $edital = new ConfiguraInscricaoPos();
                 
             $temp = explode("-", $edital->retorna_edital_vigente($dados->id_inscricao_pos)->edital);
 
-            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, 'edital' => $temp[1]."/".$temp[0],"id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $link_arquivo, 'nome_tratado' => $nome_final, 'arquivo_final' => $dados->arquivo_final];
+            $dados_vue[] = ['id_candidato' => $dados->id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'nome_programa_pretendido' => (ProgramaPos::find($dados->id_programa_pretendido))->tipo_programa_pos_ptbr, 'id_inscricao_pos' => $dados->id_inscricao_pos, 'edital' => $temp[1]."/".$temp[0],"id_programa_pretendido" => $dados->id_programa_pretendido, 'link_arquivo' => $link_arquivo, 'nome_tratado' => $nome_final, 'arquivo_final' => $dados->arquivo_final, 'tipo_arquivo'=> $tipo_arquivo];
             }
         }else{
             $dados_vue = [];
@@ -144,8 +173,79 @@ class DocumentosMatriculaDataTableController extends DataTableController
         return $dados_vue;
     }
 
-    public function update($id_candidato, Request $request)
+    public function update($id_status, Request $request)
     {   
-        DB::table('auxilia_selecao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $request->id_inscricao_pos)->where('programa_pretendido', $request->programa_pretendido)->update(['desclassificado' => true, 'updated_at' => date('Y-m-d H:i:s')]);
+        $local_documentos = storage_path("app/public/relatorios/matricula/");
+
+        $temp = explode("_", $id_status);
+
+        $id_candidato = $temp[0];
+
+        $id_inscricao_pos = $temp[1];
+
+        $status_arquivo = $temp[2];
+
+        $id_programa_pretendido = $temp[3];
+
+        $nome = User::find($id_candidato)->nome;
+
+        $documentos_matricula = new DocumentoMatricula();
+
+        $arquivos_matricula_recebidos = $documentos_matricula->retorna_documentos_matricula_enviados($id_candidato, $id_inscricao_pos);
+
+        $argumento_pdftk = "";
+        foreach ($arquivos_matricula_recebidos as $key) {
+            $argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
+        }
+
+        $nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
+
+        $ficha_inscricao = str_replace("storage/relatorios/matricula/", "", $nome_arquivo_matricula);
+
+        $endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
+
+        $process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+        $process->setTimeout(3600);
+        
+        $process->run();
+
+        $arquivo_matricula = new DocumentoMatricula();
+                    
+        $arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df');
+
+        if (is_null($arquivo_ja_enviado)) {
+
+            $nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
+
+            File::copy($local_documentos.$ficha_inscricao, storage_path("app/public/relatorios/")."arquivos_internos/".$nome_final);
+
+            $arquivo_matricula->id_candidato = $id_candidato;
+
+            $arquivo_matricula->id_inscricao_pos = $id_inscricao_pos;
+
+            $arquivo_matricula->id_programa_pretendido = $id_programa_pretendido;
+            
+            $arquivo_matricula->tipo_arquivo = 'df';
+
+            $arquivo_matricula->nome_arquivo = "arquivos_internos/".$nome_final;
+            
+            $arquivo_matricula->arquivo_recebido = Storage::exists($local_documentos.$ficha_inscricao);
+
+            $arquivo_matricula->arquivo_final = True;
+
+            $arquivo_matricula->arquivo_final_valido = True;
+            
+            $arquivo_matricula->save();
+        }else{
+
+            $nome_arquivo = explode("/", $arquivo_ja_enviado);
+
+            File::copy($local_documentos.$ficha_inscricao, storage_path("app/public/relatorios/")."arquivos_internos/".$nome_arquivo[1]);
+
+            $arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df', Storage::exists($arquivo_ja_enviado));
+        }
+
+        File::delete($local_documentos.$ficha_inscricao);        
     }
 }

@@ -62,7 +62,17 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
             ]);
         }
 
-        return view('templates.partials.coordenador.acessa_documentos_matricula');
+        $user = Auth::user();
+
+        $id_user = $user->id_user;
+
+        if ($user->user_type === "admin") {
+            return view('templates.partials.admin.acessa_altera_documentos_matricula');
+        }else{
+            return view('templates.partials.coordenador.acessa_documentos_matricula');
+        }
+        
+        
     }
 
     public function getZIPDocumentosMatricula()

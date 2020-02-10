@@ -317,7 +317,7 @@
                 @yield('ficha_individual')
                 @yield('graficos')
                 @yield('auxilia_selecao')
-                @yield('documentos_matricula_coordenador')
+                @yield('altera_documentos_matricula_coordenador')
                 @yield('envia_documentos_matricula')
                 @yield('processa_documentos_matricula')
             </div>

@@ -35,6 +35,8 @@
 
                                 <div class="arrow" v-if="sort.key === column" :class="{ 'arrow--asc': sort.order === 'asc', 'arrow--desc': sort.order === 'desc' }"></div>
                             </th>
+                            <th>Tipo de arquivo</th>
+                            <th>Documentaçao Correta?</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,10 +54,17 @@
                                 {{ record.nome_programa_pretendido }}
                             </td>
                             <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
-                                <div v-if="record.link_arquivo !== null">
+                                <div>
                                     <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
                                 </div>
                                 
+                            </td>
+                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                                {{ record.tipo_arquivo }}
+                            </td>
+                            <td>
+                               <a href="#" @click.prevent="aceitadocumentacao(record, 1)">Sim</a>&nbsp;&nbsp;&nbsp;
+                               <a href="#" @click.prevent="aceitadocumentacao(record, 0)">Não</a><br>
                             </td>
                         </tr>
                     </tbody>
@@ -146,7 +155,19 @@
                 this.sort.key  = column
 
                 this.sort.order = this.sort.order  === 'asc' ? 'desc' : 'asc'
-            }
+            },
+
+            aceitadocumentacao (record, status) {
+                
+                axios.patch(`${this.endpoint}/${record.id_candidato +"_"+ record.id_inscricao_pos + "_" + record.id_programa_pretendido + "_" + status}`).then(() =>{
+                    this.getRecords().then(() => {
+                        // this.homologa.id_candidato = null
+                        // this.homologa.id_inscricao_pos = null
+                        // this.homologa.programa_pretendido = null
+                        // this.homologa.status = null
+                    })
+                })
+            },
         },
 
         mounted () {
