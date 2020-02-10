@@ -23,6 +23,7 @@ window.Vue = require('vue');
 //     el: '#app'
 // });
 
+const AdminDocumentosMatricula =  require('./components/AdminDocumentosMatricula.vue');
 const CoordenadorDocumentosMatricula =  require('./components/CoordenadorDocumentosMatricula.vue');
 const DataTableUser =  require('./components/DataTableUser.vue');
 const AuxiliaSelecao = require('./components/AuxiliaSelecao.vue');
@@ -35,7 +36,8 @@ const ListaRecomendacoesAtivas  = require('./components/ListaRecomendacoesAtivas
 
 const app = new Vue({
     el: '#app',
-    components: { 
+    components: {
+        AdminDocumentosMatricula,
         CoordenadorDocumentosMatricula,
         DataTableUser,
         AuxiliaSelecao,
