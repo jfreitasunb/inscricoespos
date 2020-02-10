@@ -41,25 +41,25 @@
                     </thead>
                     <tbody>
                         <tr v-for="record in filteredRecords">
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 {{ record.id_candidato }}
                             </td>
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 {{ record.nome }}
                             </td>
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 {{ record.edital }}
                             </td>
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 {{ record.nome_programa_pretendido }}
                             </td>
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 <div>
                                     <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
                                 </div>
                                 
                             </td>
-                            <td :class="{ 'carta_completa': record.arquivo_final === true, 'carta_incompleta': record.arquivo_final == false}">
+                            <td :class="{ 'carta_completa': (record.arquivo_final === true && record.tipo_arquivo === 'df'), 'carta_incompleta':( record.arquivo_final == false && record.tipo_arquivo === 'df')}">
                                 {{ record.tipo_arquivo }}
                             </td>
                             <td>
