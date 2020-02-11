@@ -249,7 +249,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 						$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
 
-						File::copy($local_documentos.$ficha_inscricao, storage_path("app/public/relatorios/")."arquivos_internos/".$nome_final);
+						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_final);
 
 						$arquivo_matricula->id_candidato = $id_candidato;
 
@@ -272,7 +272,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 						$nome_arquivo = explode("/", $arquivo_ja_enviado);
 
-						File::copy($local_documentos.$ficha_inscricao, storage_path("app/public/relatorios/")."arquivos_internos/".$nome_arquivo[1]);
+						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_arquivo[1]);
 
 						$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df', Storage::exists($arquivo_ja_enviado));
 					}
