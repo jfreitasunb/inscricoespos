@@ -78,6 +78,8 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
 
         $id_inscricao_pos = $edital_vigente->id_inscricao_pos;
 
+        $necessita_recomendante = $edital_vigente->necessita_recomendante;
+
         $dados_temporarios = $this->builder()->limit($request->limit)->where('id_inscricao_pos', $id_inscricao_pos)->where('finalizada', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         if (sizeof($dados_temporarios) > 0) {
@@ -94,21 +96,23 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
                     $programa_pretendido = (ProgramaPos::find($id_programa_pretendido))->tipo_programa_pos_ptbr;
                 }
 
-                $contatos = new ContatoRecomendante();
+                if ($necessita_recomendante) {
+                    $contatos = new ContatoRecomendante();
                 
-                $situacao_recomendante = $contatos->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
-                if (!is_null($situacao_recomendante)) {
-                    $i=1;
-                    foreach ($situacao_recomendante as $situacao) {
-                        $recomendante[$i] = $situacao->email_enviado;
-                        $i++;
+                    $situacao_recomendante = $contatos->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
+                    if (!is_null($situacao_recomendante)) {
+                        $i=1;
+                        foreach ($situacao_recomendante as $situacao) {
+                            $recomendante[$i] = $situacao->email_enviado;
+                            $i++;
+                        }
+                    }else{
+                        $recomendante[1] = null;
+                        $recomendante[2] = null;
+                        $recomendante[3] = null;
                     }
-                }else{
-                    $recomendante[1] = null;
-                    $recomendante[2] = null;
-                    $recomendante[3] = null;
                 }
-
+                
                 $documentos_enviados = new Documento();
 
                 if ($documentos_enviados->retorna_existencia_documentos($id_candidato, $id_inscricao_pos)){
@@ -127,7 +131,12 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
                     $projeto = null;
                 }
 
-                $dados_vue[] = ['id_candidato' => $id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m'), 'recomendante1' => $recomendante[1], 'recomendante2' => $recomendante[2], 'recomendante3' => $recomendante[3], 'documentos' => $documentos, 'comprovante' => $comprovante, 'historico' => $historico, 'projeto' => $projeto, 'id_inscricao_pos' => $id_inscricao_pos];
+                if ($necessita_recomendante) {
+                    $dados_vue[] = ['id_candidato' => $id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m'), 'recomendante1' => $recomendante[1], 'recomendante2' => $recomendante[2], 'recomendante3' => $recomendante[3], 'documentos' => $documentos, 'comprovante' => $comprovante, 'historico' => $historico, 'projeto' => $projeto, 'id_inscricao_pos' => $id_inscricao_pos, 'necessita_recomendante' => $necessita_recomendante];
+                }else{
+                    $dados_vue[] = ['id_candidato' => $id_candidato, 'nome' => (User::find($dados->id_candidato))->nome, 'email' => (User::find($dados->id_candidato))->email, 'programa_pretendido' => $programa_pretendido, 'created_at' => $dados->created_at->format('d/m/Y'). " ".$dados->created_at->format('H:m'), 'updated_at' => $dados->updated_at->format('d/m/Y'). " ".$dados->updated_at->format('H:m'), 'documentos' => $documentos, 'comprovante' => $comprovante, 'historico' => $historico, 'projeto' => $projeto, 'id_inscricao_pos' => $id_inscricao_pos, 'necessita_recomendante' => $necessita_recomendante];
+                }
+                
             }
         }else{
             $dados_vue = [];
