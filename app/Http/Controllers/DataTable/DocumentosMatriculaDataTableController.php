@@ -142,12 +142,13 @@ class DocumentosMatriculaDataTableController extends DataTableController
             $nome_final = str_replace(' ', '_',strtr((User::find($dados->id_candidato))->nome, $this->normalizeChars)).".pdf";
 
             if ($user->user_type === "admin") {
-                if ($dados->tipo_arquivo === "df") {
-                    $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app/public','storage',storage_path('app/public/relatorios/'));
-                }else{
-                    $url_arquivo = URL::to('/')."/".str_replace('/var/www/inscricoespos/storage/app','storage/app',storage_path('app/'));
+                
+                if ($dados->tipo_arquivo !== "df") {
+                    File::copy(storage_path("app/").$dados->nome_arquivo, storage_path("app/public/relatorios/").$dados->nome_arquivo);
                 }
+
                 $link_arquivo = $url_arquivo.$dados->nome_arquivo;
+                
                 $tipo_arquivo = $dados->tipo_arquivo;
             }else{
                 if ($dados->arquivo_final) {
