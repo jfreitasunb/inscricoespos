@@ -320,6 +320,7 @@
                 @yield('altera_documentos_matricula_coordenador')
                 @yield('envia_documentos_matricula')
                 @yield('processa_documentos_matricula')
+                @yield('link_acesso')
             </div>
         </div>
     </div>
