@@ -75,7 +75,7 @@ class EditarInscricaoController extends AdminController
 			case 'n':
 				$necessita_recomendante = false;
 				break;
-			case '0'
+			case '0':
 				$necessita_recomendante = false;
 				break;
 				
