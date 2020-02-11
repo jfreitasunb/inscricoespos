@@ -49,6 +49,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 			'prazo_carta' => 'required|date_format:"d/m/Y"|after:inicio_inscricao|after:today',
             'data_homologacao' => 'required|date_format:"d/m/Y"|after:fim_inscricao|after:today',
             'data_divulgacao_resultado' => 'required|date_format:"d/m/Y"|after:data_homologacao|after:today',
+            'necessita_recomendante' => 'required',
 			'edital_ano' => 'required',
 			'edital_numero' => 'required',
 			'escolhas_coordenador' => 'required',
@@ -60,6 +61,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 		$user = Auth::user();
 
 		$local_documentos = storage_path('app/');
+
         $arquivos_editais = storage_path("app/public/editais/");
 
         File::isDirectory($arquivos_editais) or File::makeDirectory($arquivos_editais,0775,true);
@@ -69,6 +71,8 @@ class ConfiguraInscricaoPosController extends CoordenadorController
     	$prazo = Carbon::createFromFormat('d/m/Y', $request->prazo_carta);
         $homologacao = Carbon::createFromFormat('d/m/Y', $request->data_homologacao);
         $divulgacao_resultado = Carbon::createFromFormat('d/m/Y', $request->data_divulgacao_resultado);
+
+        $necessita_recomendante = $request->necessita_recomendante;
 
     	$data_inicio = $inicio->format('Y-m-d');
     	$data_fim = $fim->format('Y-m-d');
@@ -87,6 +91,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 			$configura_nova_inscricao_pos->id_coordenador = $user->id_user;
             $configura_nova_inscricao_pos->data_homologacao = $data_homologacao;
             $configura_nova_inscricao_pos->data_divulgacao_resultado = $data_divulgacao_resultado;
+            $configura_nova_inscricao_pos->necessita_recomendante = $necessita_recomendante;
 
 			$temp_file_portugues = $request->edital_portugues->store("arquivos_temporarios");
 

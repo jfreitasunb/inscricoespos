@@ -79,7 +79,18 @@
               </div>
             </div>
           @endforeach
-        
+  
+        <legend>É necessário indicar recomendantes?</legend>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="radio-inline">{!! Form::radio('necessita_recomendante', 1, true, ['class' => 'col-md-4 control-label', 'required' => '']) !!}Sim</label>
+          </div>
+          <div class="col-md-4">
+            <label class="radio-inline">{!! Form::radio('necessita_recomendante', 0, false, ['class' => 'col-md-4 control-label']) !!}Não</label>
+          </div>
+        </div>
+        <div class="row">&nbsp;</div>
+
         <legend>Edital</legend>
         <div class="col-xs-6">
           
