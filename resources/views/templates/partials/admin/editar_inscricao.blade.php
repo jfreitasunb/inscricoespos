@@ -54,6 +54,12 @@
 	</div>
 </div>
 <div class="form-group">
+  {!! Form::label('edital', 'Necessita de recomendante?', ['class' => 'col-md-4 control-label']) !!}
+  <div class="col-md-4">
+    {!! Form::text('necessita_recomendante', $edital_vigente->necessita_recomendante? 'Sim' : 'Não', ['class' => 'form-control input-md']) !!}
+  </div>
+</div>
+<div class="form-group">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
       {!! Form::submit('Salvar', ['class' => 'btn btn-primary btn-lg register-submit']) !!}

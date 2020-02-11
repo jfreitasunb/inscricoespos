@@ -47,6 +47,7 @@ class EditarInscricaoController extends AdminController
 			'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao',
 			'edital' => 'required',
 			'programa' => 'required',
+			'necessita_recomendante' => 'required',
 		]);
 
 		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
@@ -58,6 +59,32 @@ class EditarInscricaoController extends AdminController
 		$novos_dados_edital['edital'] = $request->edital;
 		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
 		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
+
+		$temp = strtolower($request->necessita_recomendante);
+
+
+
+		switch ($temp) {
+			case 'nao':
+				$necessita_recomendante = false;
+				break;
+			case 'não':
+				$necessita_recomendante = false;
+				break;
+			
+			case 'n':
+				$necessita_recomendante = false;
+				break;
+			case '0'
+				$necessita_recomendante = false;
+				break;
+				
+			default:
+				$necessita_recomendante = true;
+				break;
+		}
+
+		$novos_dados_edital['necessita_recomendante'] = $necessita_recomendante;
 
 		$edital_vigente->update($novos_dados_edital);
 
