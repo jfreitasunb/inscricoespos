@@ -65,11 +65,19 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 		$edital_ativo = new ConfiguraInscricaoPos();
 
-		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		$candidato_selecionado = new CandidatosSelecionados();
+
+		$id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_user);
+
+		if ($id_inscricao_pos_candidato != 0) {
+			$id_inscricao_pos = $id_inscricao_pos_candidato;
+		}else{
+			$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+		}
 		
-		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+		$edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->edital;
 		
-		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+		$autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
 
 		if (!$autoriza_inscricao) {
 			
@@ -158,6 +166,10 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 		$id_candidato = (int)$request->id_candidato;
 
+		$candidato_selecionado = new CandidatosSelecionados();
+
+		$id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_candidato);
+
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
 
 		$id_programa_pretendido = (int)$request->id_programa_pretendido;
@@ -182,7 +194,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 			$edital_ativo = new ConfiguraInscricaoPos();
 
-			if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos) {
+			if ($id_inscricao_pos != $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->id_inscricao_pos) {
 			
 				return redirect()->back();
 			}
@@ -192,9 +204,9 @@ class ProcessaDocumentosMatriculaController extends BaseController
 				return redirect()->back();
 			}
 
-			$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+			$edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->edital;
 			
-			$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
+			$autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
 
 			if (!$autoriza_inscricao) {
 				
