@@ -71,7 +71,9 @@
                                 </template>
                             </td>
                             <td>
-                                <a href="#" @click.provent="update(record.id_candidato, record.id_inscricao_pos)">Finalizar manualmente</a>
+                                <div v-if="record.programa_pretendido !== null">
+                                    <a href="#" @click.provent="update(record.id_candidato, record.id_inscricao_pos)">Finalizar manualmente</a>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
