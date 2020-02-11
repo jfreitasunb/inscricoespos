@@ -59,9 +59,11 @@
                                         <a class="myhover" href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br><br>
                                         <a class="myhover" href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br><br>
                                         <a class="myhover" href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br><br>
+                                        <div v-if="record.necessita_recomendante">
                                         <p :class="(record.recomendante1) ? 'mybg-success' : 'mybg-danger'">O recomendante 1 <span v-if="record.recomendante1"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
                                         <p :class="(record.recomendante2) ? 'mybg-success' : 'mybg-danger'">O recomendante 2 <span v-if="record.recomendante2"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
                                         <p :class="(record.recomendante3) ? 'mybg-success' : 'mybg-danger'">O recomendante 3 <span v-if="record.recomendante3"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
+                                        </div>
                                     </div>    
                                     </div>
                                     
