@@ -103,7 +103,6 @@ class RememberCandidadoFimPrazo extends Command
                     $id_candidato = $candidato->id_candidato;
 
                     $ja_enviou_antes = $this->checa_envio_anterior($id_candidato, $id_inscricao_pos);
-
                 }
 
                 if (!$ja_enviou_antes  AND $enviar_email) {
@@ -120,7 +119,6 @@ class RememberCandidadoFimPrazo extends Command
         
                     fclose($handle);
                 }
-
             }
         }
     }
