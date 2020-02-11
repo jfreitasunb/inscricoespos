@@ -722,6 +722,8 @@ class RelatorioController extends BaseController
 
     $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
 
+    $necessita_recomendante = $relatorio_disponivel->necessita_recomendante;
+
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
     $dados_candidato_para_relatorio['edital'] = $relatorio_disponivel->edital;
@@ -740,10 +742,12 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio[$key] = $value;
     }
 
-    $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+    if ($necessita_recomendante) {
+      $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-    foreach ($contatos_indicados  as $id ) {
-      $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+      foreach ($contatos_indicados  as $id ) {
+        $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+      }
     }
 
     $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));

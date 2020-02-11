@@ -53,7 +53,6 @@ class RelatorioPosController extends CoordenadorController
 
 		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default)->paginate(10);
 
-
 		return view('templates.partials.coordenador.ficha_individual', compact('inscricoes_finalizadas', 'nome_pdf', 'id_aluno_pdf'));
 
 	}
@@ -66,7 +65,6 @@ class RelatorioPosController extends CoordenadorController
 		$relatorio = new ConfiguraInscricaoPos();
 
       	$relatorio_disponivel = $relatorio->retorna_edital_vigente();
-
 
 		$finalizacoes = new FinalizaInscricao;
 
@@ -84,7 +82,6 @@ class RelatorioPosController extends CoordenadorController
 		
 
 		$inscricoes_finalizadas = $finalizacoes->retorna_usuarios_relatorio_individual($relatorio_disponivel->id_inscricao_pos, $this->locale_default);
-
 
 		foreach ($inscricoes_finalizadas as $candidato ) {
 
