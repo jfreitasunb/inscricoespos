@@ -237,31 +237,34 @@ class FinalizarInscricaoController extends BaseController
 
 			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
 
-			$recomendantes_candidato = new ContatoRecomendante();
-
-			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
-
-			foreach ($informou_recomendantes as $recomendante) {
+			if ($necessita_recomendante) {
 				
-				if (!$recomendante->email_enviado) {
+				$recomendantes_candidato = new ContatoRecomendante();
 
-					$dado_pessoal_recomendante = User::find($recomendante->id_recomendante);
+				$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
 
-					$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
+				foreach ($informou_recomendantes as $recomendante) {
+					
+					if (!$recomendante->email_enviado) {
 
-					$dados_email['nome_professor'] = $dado_pessoal_recomendante->nome;
+						$dado_pessoal_recomendante = User::find($recomendante->id_recomendante);
 
-        			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
+						$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital_ativo->retorna_inscricao_ativa()->prazo_carta);
 
-			        $dados_email['programa'] = $nome_programa_pos_candidato;
+						$dados_email['nome_professor'] = $dado_pessoal_recomendante->nome;
 
-        			$dados_email['email_recomendante'] = $dado_pessoal_recomendante->email;
+	        			$dados_email['nome_candidato'] = $dados_pessoais_candidato->nome;
 
-        			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
+				        $dados_email['programa'] = $nome_programa_pos_candidato;
 
-					Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
+	        			$dados_email['email_recomendante'] = $dado_pessoal_recomendante->email;
 
-					DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_candidato', $recomendante->id_candidato)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
+	        			$dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
+
+						Notification::send(User::find($recomendante->id_recomendante), new NotificaRecomendante($dados_email));
+
+						DB::table('contatos_recomendantes')->where('id', $recomendante->id)->where('id_candidato', $recomendante->id_candidato)->where('id_inscricao_pos', $recomendante->id_inscricao_pos)->update(['email_enviado' => TRUE, 'updated_at' => date('Y-m-d H:i:s')]);
+					}
 				}
 			}
 			
