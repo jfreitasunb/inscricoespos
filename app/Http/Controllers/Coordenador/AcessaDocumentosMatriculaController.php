@@ -75,7 +75,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         
     }
 
-    public function getZIPDocumentosMatricula($id_inscricao_pos)
+    public function getZIPDocumentosMatricula($id_inscricao_pos = null)
     {
         $user = Auth::user();
 
@@ -108,7 +108,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         $local_zip = storage_path('app/public/relatorios/arquivos_internos/');
 
         File::isDirectory($local_arquivos_tratados_zip) or File::makeDirectory($local_arquivos_tratados_zip,0775,true);
-
+        
         foreach ($candidatos_com_documentos as $candidato) {
 
             $nome_arquivo = "Ficha_Matricula_".str_replace(' ', '_',strtr((User::find($candidato->id_candidato))->nome, $this->normalizeChars))."_".(ProgramaPos::find($candidato->id_programa_pretendido))->tipo_programa_pos_ptbr.".pdf";
