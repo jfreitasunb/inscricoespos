@@ -100,14 +100,16 @@
             <label>{{ trans('tela_escolha_candidato.vinculo_empregaticio') }}: </label> {{ $dados_candidato_para_relatorio['vinculo_empregaticio'] ? trans('tela_escolha_candidato.sim')  :  trans('tela_escolha_candidato.nao') }}
         </div>
 
-        <hr>
-        <h3>{{ trans('tela_escolha_candidato.recomendante') }}</h3>
-        @foreach ($recomendantes_candidato as $recomendante)
-        <div>
-            <label> {{ trans('tela_escolha_candidato.nome') }}: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
-        </div>
-        @endforeach
-
+        @if ($necessita_recomendante)
+            <hr>
+            <h3>{{ trans('tela_escolha_candidato.recomendante') }}</h3>
+            @foreach ($recomendantes_candidato as $recomendante)
+            <div>
+                <label> {{ trans('tela_escolha_candidato.nome') }}: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
+            </div>
+            @endforeach
+        @endif
+        
         <hr>
         <h3>{{ trans('tela_motivacao_documentos.tela_motivacao_documentos') }}</h3>
         <p class="motivacao">

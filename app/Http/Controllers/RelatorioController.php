@@ -862,6 +862,8 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = $relatorio->retorna_edital_vigente();
 
+    $necessita_recomendante = $relatorio_disponivel->necessita_recomendante;
+
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel->edital);
 
     $dados_candidato_para_relatorio = [];
@@ -882,20 +884,22 @@ class RelatorioController extends BaseController
       $dados_candidato_para_relatorio[$key] = $value;
     }
 
-
-    $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
-
-
+    if ($necessita_recomendante) {
+      $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+    }
+    
     $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
 
-    $recomendantes_candidato = $this->ConsolidaNomeRecomendantes($contatos_indicados,$id_aluno,$id_inscricao_pos);
-
+    if ($necessita_recomendante) {
+      $recomendantes_candidato = $this->ConsolidaNomeRecomendantes($contatos_indicados,$id_aluno,$id_inscricao_pos);
+    }
+    
     $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['ficha_inscricao'], $dados_candidato_para_relatorio);
     
-    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
+    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante'));
     $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
-    $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos);
+    $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos, $necessita_recomendante);
 
     $this->ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads);
 

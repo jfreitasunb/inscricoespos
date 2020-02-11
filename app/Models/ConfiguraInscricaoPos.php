@@ -31,6 +31,7 @@ class ConfiguraInscricaoPos extends Model
         'programa',
         'edital',
         'id_coordenador',
+        'necessita_recomendante'
     ];
 
     public function retorna_lista_para_relatorio()

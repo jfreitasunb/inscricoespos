@@ -63,6 +63,8 @@ class FinalizarInscricaoController extends BaseController
 
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 
+		$necessita_recomendante = $edital_ativo->retorna_inscricao_ativa()->necessita_recomendante;
+
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
 		$arquivos_editais = storage_path("/app/editais/");
@@ -118,18 +120,20 @@ class FinalizarInscricaoController extends BaseController
 				return redirect()->route('dados.escolhas');
 			}
 
-			$recomendantes_candidato = new ContatoRecomendante();
+			if ($necessita_recomendante) {
+				$recomendantes_candidato = new ContatoRecomendante();
 
-			$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
+				$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
 
 
-			if (count($informou_recomendantes) < 3) {
-				
-				notify()->flash(trans('tela_finalizar_inscricao.falta_recomendante'),'warning');
+				if (count($informou_recomendantes) < 3) {
+					
+					notify()->flash(trans('tela_finalizar_inscricao.falta_recomendante'),'warning');
 
-				return redirect()->route('dados.escolhas');
+					return redirect()->route('dados.escolhas');
+				}
 			}
-
+			
 			$informou_motivacao = new CartaMotivacao();
 
 			$fez_carta_motivacao = $informou_motivacao->retorna_carta_motivacao($id_candidato, $id_inscricao_pos);
@@ -181,6 +185,8 @@ class FinalizarInscricaoController extends BaseController
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
+
+		$necessita_recomendante = $edital_ativo->retorna_inscricao_ativa()->necessita_recomendante;
 
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
