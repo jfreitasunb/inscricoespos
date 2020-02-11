@@ -121,6 +121,7 @@ class FinalizarInscricaoController extends BaseController
 			}
 
 			if ($necessita_recomendante) {
+				
 				$recomendantes_candidato = new ContatoRecomendante();
 
 				$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);
@@ -238,7 +239,7 @@ class FinalizarInscricaoController extends BaseController
 			$dados_email_candidato['programa'] = $nome_programa_pos_candidato;
 
 			if ($necessita_recomendante) {
-				
+
 				$recomendantes_candidato = new ContatoRecomendante();
 
 				$informou_recomendantes = $recomendantes_candidato->retorna_recomendante_candidato($id_candidato,$id_inscricao_pos);

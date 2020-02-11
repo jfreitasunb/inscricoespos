@@ -90,197 +90,200 @@
             <label>Possui vínculo empregatício: </label> {{ $dados_candidato_para_relatorio['vinculo_empregaticio'] ? 'Sim' : 'Não' }}
         </div>
 
-        <hr>
-        <h3>Dados dos Recomendantes</h3>
-        @foreach ($recomendantes_candidato as $recomendante)
-        <div>
-            <label> Nome: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
-        </div>
-        @endforeach
+        @if ($necessita_recomendante)
+            <hr>
+            <h3>Dados dos Recomendantes</h3>
+            @foreach ($recomendantes_candidato as $recomendante)
+            <div>
+                <label> Nome: </label> {{ $recomendante['nome'] }}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <label>Email: </label>{{ $recomendante['email'] }}
+            </div>
+            @endforeach
 
-        <hr>
-        <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
-        <p class="motivacao">
-            {!! $dados_candidato_para_relatorio['motivacao'] !!}
-        </p>
+            <hr>
+            <h3>Motivação e expectativa do candidato em relação ao programa pretendido</h3>
+            <p class="motivacao">
+                {!! $dados_candidato_para_relatorio['motivacao'] !!}
+            </p>
 
-        @foreach ($recomendantes_candidato as $recomendante)
-        <div class="page_break"></div>
-        <h3>Carta de Recomendação - {{ $recomendante['nome'] }}</h3>
-        <div>
-            <label>Conhece o candidato há quanto tempo? </label> {{ $recomendante['tempo_conhece_candidato'] }}
-        </div>
-        <div>
-            <label>Conhece o candidato sob as seguintes circunstâncias: </label> {{ $recomendante['circunstancia_1'] }} {{ $recomendante['circunstancia_2'] }} {{ $recomendante['circunstancia_3'] }} {{ $recomendante['circunstancia_4'] }}
-        </div>
-        <div>
-            <label>Conhece o candidato sob outras circunstâncias: </label> {{ $recomendante['circunstancia_outra'] }}
-        </div>
-        <hr size="0">
-        <label>Avaliações</label>
+            @foreach ($recomendantes_candidato as $recomendante)
+            <div class="page_break"></div>
+            <h3>Carta de Recomendação - {{ $recomendante['nome'] }}</h3>
+            <div>
+                <label>Conhece o candidato há quanto tempo? </label> {{ $recomendante['tempo_conhece_candidato'] }}
+            </div>
+            <div>
+                <label>Conhece o candidato sob as seguintes circunstâncias: </label> {{ $recomendante['circunstancia_1'] }} {{ $recomendante['circunstancia_2'] }} {{ $recomendante['circunstancia_3'] }} {{ $recomendante['circunstancia_4'] }}
+            </div>
+            <div>
+                <label>Conhece o candidato sob outras circunstâncias: </label> {{ $recomendante['circunstancia_outra'] }}
+            </div>
+            <hr size="0">
+            <label>Avaliações</label>
 
-        <table class="tftable" border="1">
-            <tbody>
-                <tr>
-                    <td> </td>
-                    <td class="cabecalho">Excelente</td>
-                    <td class="cabecalho">Bom</td>
-                    <td class="cabecalho">Regular</td>
-                    <td class="cabecalho">Insuficiente</td>
-                    <td class="cabecalho">Não Sabe</td>
-                </tr>
-                <tr>
-                    <td>Desempenho acadêmico</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Capacidade de aprender novos conceitos</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Capacidade de trabalhar sozinho</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Criatividade</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['criatividade'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Curiosidade</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['curiosidade'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Esforço, persistência</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['esforco'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Expressão escrita</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Expressão oral</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['expressao_oral'] == '5' ? 'X' : '' }}</td>
-                </tr>
-                <tr>
-                    <td>Relacionamento com colegas</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '1' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '2' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '3' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '4' ? 'X' : '' }}</td>
-                    <td class="valor_celula">{{ $recomendante['relacionamento'] == '5' ? 'X' : '' }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <hr size="0">
-        <p class="motivacao">
-            <label>Opinião sobre os antecedentes acadêmicos, profissionais e/ou técnicos do candidato:</label>
-            {{ $recomendante['antecedentes_academicos'] }}
-        </p>
-
-        <hr size="0">
-        <p class="motivacao">
-            <label>Opinião sobre seu possível aproveitamento, se aceito no Programa:</label>
-            {{ $recomendante['possivel_aproveitamento'] }}
-        </p>
-
-        <hr size="0">
-        <p class="motivacao">
-            <label>Outras informaçõoes relevantes:</label>
-            {{ $recomendante['informacoes_relevantes'] }}
-        </p>
-
-        <hr size="0">
-        <div>
-            <label>Entre os estudantes que já conheceu, você diria que o candidato está entre os:</label>
             <table class="tftable" border="1">
                 <tbody>
                     <tr>
                         <td> </td>
-                        <td class="cabecalho">5% melhores</td>
-                        <td class="cabecalho">10% melhores</td>
-                        <td class="cabecalho">25% melhores</td>
-                        <td class="cabecalho">50% melhores</td>
+                        <td class="cabecalho">Excelente</td>
+                        <td class="cabecalho">Bom</td>
+                        <td class="cabecalho">Regular</td>
+                        <td class="cabecalho">Insuficiente</td>
                         <td class="cabecalho">Não Sabe</td>
                     </tr>
                     <tr>
-                        <td>Como aluno, em aulas</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '1' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '2' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '3' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '4' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_aluno'] == '5' ? 'X' : '' }}</td>
+                        <td>Desempenho acadêmico</td>
+                        <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['desempenho_academico'] == '5' ? 'X' : '' }}</td>
                     </tr>
                     <tr>
-                        <td>Como orientado</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '1' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '2' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '3' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '4' ? 'X' : '' }}</td>
-                        <td class="valor_celula">{{ $recomendante['como_orientando'] == '5' ? 'X' : '' }}</td>
+                        <td>Capacidade de aprender novos conceitos</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_aprender'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Capacidade de trabalhar sozinho</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['capacidade_trabalhar'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Criatividade</td>
+                        <td class="valor_celula">{{ $recomendante['criatividade'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['criatividade'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['criatividade'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['criatividade'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['criatividade'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Curiosidade</td>
+                        <td class="valor_celula">{{ $recomendante['curiosidade'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['curiosidade'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['curiosidade'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['curiosidade'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['curiosidade'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Esforço, persistência</td>
+                        <td class="valor_celula">{{ $recomendante['esforco'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['esforco'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['esforco'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['esforco'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['esforco'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Expressão escrita</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_escrita'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Expressão oral</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_oral'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_oral'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_oral'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_oral'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['expressao_oral'] == '5' ? 'X' : '' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Relacionamento com colegas</td>
+                        <td class="valor_celula">{{ $recomendante['relacionamento'] == '1' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['relacionamento'] == '2' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['relacionamento'] == '3' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['relacionamento'] == '4' ? 'X' : '' }}</td>
+                        <td class="valor_celula">{{ $recomendante['relacionamento'] == '5' ? 'X' : '' }}</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
 
-        <hr size="0">
-        <div>
-            <label>Dados do Recomendante</label>
+
+            <hr size="0">
+            <p class="motivacao">
+                <label>Opinião sobre os antecedentes acadêmicos, profissionais e/ou técnicos do candidato:</label>
+                {{ $recomendante['antecedentes_academicos'] }}
+            </p>
+
+            <hr size="0">
+            <p class="motivacao">
+                <label>Opinião sobre seu possível aproveitamento, se aceito no Programa:</label>
+                {{ $recomendante['possivel_aproveitamento'] }}
+            </p>
+
+            <hr size="0">
+            <p class="motivacao">
+                <label>Outras informaçõoes relevantes:</label>
+                {{ $recomendante['informacoes_relevantes'] }}
+            </p>
+
+            <hr size="0">
             <div>
-                <label>Nome: </label> {{ $recomendante['nome'] }}
+                <label>Entre os estudantes que já conheceu, você diria que o candidato está entre os:</label>
+                <table class="tftable" border="1">
+                    <tbody>
+                        <tr>
+                            <td> </td>
+                            <td class="cabecalho">5% melhores</td>
+                            <td class="cabecalho">10% melhores</td>
+                            <td class="cabecalho">25% melhores</td>
+                            <td class="cabecalho">50% melhores</td>
+                            <td class="cabecalho">Não Sabe</td>
+                        </tr>
+                        <tr>
+                            <td>Como aluno, em aulas</td>
+                            <td class="valor_celula">{{ $recomendante['como_aluno'] == '1' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_aluno'] == '2' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_aluno'] == '3' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_aluno'] == '4' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_aluno'] == '5' ? 'X' : '' }}</td>
+                        </tr>
+                        <tr>
+                            <td>Como orientado</td>
+                            <td class="valor_celula">{{ $recomendante['como_orientando'] == '1' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_orientando'] == '2' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_orientando'] == '3' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_orientando'] == '4' ? 'X' : '' }}</td>
+                            <td class="valor_celula">{{ $recomendante['como_orientando'] == '5' ? 'X' : '' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+            <hr size="0">
             <div>
-                <label>Instituição: </label> {{ $recomendante['instituicao_recomendante'] }}
+                <label>Dados do Recomendante</label>
+                <div>
+                    <label>Nome: </label> {{ $recomendante['nome'] }}
+                </div>
+                <div>
+                    <label>Instituição: </label> {{ $recomendante['instituicao_recomendante'] }}
+                </div>
+                <div>
+                    <label>Grau acadêmico mais alto obtido: </label> {{ $recomendante['titulacao_recomendante'] }}
+                </div>
+                <div>
+                    <label>Área: </label> {{ $recomendante['area_recomendante'] }}
+                </div>
+                <div>
+                    <label>Ano de obtenção deste grau: </label> {{ $recomendante['ano_titulacao'] }}
+                </div>
+                <div>
+                    <label>Instituição de obtenção deste grau:  </label> {{ $recomendante['inst_obtencao_titulo'] }}
+                </div>
+                <div>
+                    <label>Endereço institucional do recomendante: </label> {{ $recomendante['endereco_recomendante'] }}
+                </div>
             </div>
-            <div>
-                <label>Grau acadêmico mais alto obtido: </label> {{ $recomendante['titulacao_recomendante'] }}
-            </div>
-            <div>
-                <label>Área: </label> {{ $recomendante['area_recomendante'] }}
-            </div>
-            <div>
-                <label>Ano de obtenção deste grau: </label> {{ $recomendante['ano_titulacao'] }}
-            </div>
-            <div>
-                <label>Instituição de obtenção deste grau:  </label> {{ $recomendante['inst_obtencao_titulo'] }}
-            </div>
-            <div>
-                <label>Endereço institucional do recomendante: </label> {{ $recomendante['endereco_recomendante'] }}
-            </div>
-        </div>
-        @endforeach
+            @endforeach
+        @endif
+        
     </body>
 </html>

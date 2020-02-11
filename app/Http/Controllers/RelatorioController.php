@@ -628,6 +628,8 @@ class RelatorioController extends BaseController
 
     $relatorio = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
+    $necessita_recomendante = $relatorio->necessita_recomendante;
+
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->edital);
 
     foreach (glob( $locais_arquivos['local_relatorios']."Inscri*") as $fileName ){
@@ -638,10 +640,8 @@ class RelatorioController extends BaseController
       @unlink($ZIPfile);
     }
     
-
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
     
-
     $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
 
 
@@ -679,22 +679,24 @@ class RelatorioController extends BaseController
 
       $contatos_indicados = [];
 
-      $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+      if ($necessita_recomendante) {
+        $contatos_indicados = $this->ConsolidaIndicaoes($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
 
-      $recomendantes_candidato = [];
+        $recomendantes_candidato = [];
 
-      foreach ($contatos_indicados  as $id ) {
-        $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+        foreach ($contatos_indicados  as $id ) {
+          $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+        }
       }
-
-
+      
       $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
 
       $nome_arquivos = [];
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
 
-      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato'));
+      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante'));
+
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
       $nome_uploads = $this->ConsolidaDocumentosPDF($dados_candidato_para_relatorio['id_aluno'], $locais_arquivos['local_documentos'], $id_inscricao_pos);
