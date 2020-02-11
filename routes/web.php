@@ -283,7 +283,7 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 
 	Route::resource('datatable/documentosmatricula','\InscricoesPos\Http\Controllers\DataTable\DocumentosMatriculaDataTableController');
 
-	Route::get('documentos/matricula/zip', '\InscricoesPos\Http\Controllers\Coordenador\AcessaDocumentosMatriculaController@getZIPDocumentosMatricula')->name('coordenador.documentos.matricula.zip');
+	Route::get('documentos/matricula/zip/{id_inscricao_pos?}', '\InscricoesPos\Http\Controllers\Coordenador\AcessaDocumentosMatriculaController@getZIPDocumentosMatricula')->name('coordenador.documentos.matricula.zip');
 });
 
 

@@ -75,9 +75,8 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
         
     }
 
-    public function getZIPDocumentosMatricula()
+    public function getZIPDocumentosMatricula($id_inscricao_pos)
     {
-
         $user = Auth::user();
 
         $id_user = $user->id_user;
@@ -86,8 +85,12 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $relatorio = new ConfiguraInscricaoPos();
 
-        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
-
+        if ($id_inscricao_pos === 'null') {
+            $relatorio_disponivel = $relatorio->retorna_edital_vigente();    
+        }else{
+            $relatorio_disponivel = $relatorio->retorna_edital_vigente($id_inscricao_pos);
+        }
+        
         $edital = $relatorio_disponivel->edital;
 
         $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
@@ -98,7 +101,7 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         $candidatos_com_documentos = $documentos_matricula->retorna_usuarios_documentos_final($id_inscricao_pos);
 
-        $local_arquivos_zipar = storage_path('app/public/relatorios/');
+        $local_arquivos_zipar = storage_path('app/');
 
         $local_arquivos_tratados_zip = storage_path('app/public/relatorios/arquivos_internos/')."temporario";
 
@@ -108,12 +111,10 @@ class AcessaDocumentosMatriculaController extends CoordenadorController
 
         foreach ($candidatos_com_documentos as $candidato) {
 
-            $nome_arquivo = str_replace(' ', '_',strtr((User::find($candidato->id_candidato))->nome, $this->normalizeChars))."_".(ProgramaPos::find($candidato->id_programa_pretendido))->tipo_programa_pos_ptbr.".pdf";
+            $nome_arquivo = "Ficha_Matricula_".str_replace(' ', '_',strtr((User::find($candidato->id_candidato))->nome, $this->normalizeChars))."_".(ProgramaPos::find($candidato->id_programa_pretendido))->tipo_programa_pos_ptbr.".pdf";
 
             File::copy($local_arquivos_zipar.$candidato->nome_arquivo, $local_arquivos_tratados_zip.'/'.$nome_arquivo);
         }
-
-
 
         $zip = new ZipArchive;
 
