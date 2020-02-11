@@ -70,7 +70,13 @@ class AuxiliaSelecaoDataTableController extends DataTableController
 
     protected function getRecords(Request $request)
     {   
-        $dados_temporarios = $this->builder()->limit($request->limit)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
+        $relatorio = new ConfiguraInscricaoPos();
+
+        $relatorio_disponivel = $relatorio->retorna_edital_vigente();
+
+        $id_inscricao_pos = $relatorio_disponivel->id_inscricao_pos;
+
+        $dados_temporarios = $this->builder()->limit($request->limit)->where('id_inscricao_pos', $id_inscricao_pos)->where('desclassificado', FALSE)->orderBy('id_candidato')->get($this->getDisplayableColumns());
 
         if (sizeof($dados_temporarios) > 0) {
             foreach ($dados_temporarios as $dados) {
