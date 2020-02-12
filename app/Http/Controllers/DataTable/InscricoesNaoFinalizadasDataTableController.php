@@ -238,5 +238,35 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
         }
 
         DB::table('finaliza_inscricao')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => True, 'updated_at' => date('Y-m-d H:i:s')]);
+
+        $documentos_enviados = new Documento();
+
+        $temp = explode("/", $documentos_enviados->retorna_documento($id_candidato,$id_inscricao_pos)['nome_arquivo']);
+
+        if (count($temp) > 1) {
+            
+            File::delete(storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+        }
+        
+        $temp = explode("/", $documentos_enviados->retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)['nome_arquivo']);
+
+        if (count($temp) > 1) {
+            
+            File::delete(storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+        }
+        
+        $temp = explode("/", $documentos_enviados->retorna_historico($id_candidato,$id_inscricao_pos)['nome_arquivo']);
+
+        if (count($temp) > 1) {
+            
+            File::delete(storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+        }
+        
+        $temp = explode("/", $documentos_enviados->retorna_projeto($id_candidato,$id_inscricao_pos)['nome_arquivo']);
+
+        if (count($temp) > 1) {
+            
+            File::delete(storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+        }
     }
 }
