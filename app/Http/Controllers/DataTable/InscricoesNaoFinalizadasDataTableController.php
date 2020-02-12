@@ -123,28 +123,35 @@ class InscricoesNaoFinalizadasDataTableController extends DataTableController
                     
                     $temp = explode("/", $documentos_enviados->retorna_documento($id_candidato,$id_inscricao_pos)['nome_arquivo']);
 
-                    File::copy(storage_path("app/").$documentos_enviados->retorna_documento($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+                    if (count($temp) > 1) {
+                        File::copy(storage_path("app/").$documentos_enviados->retorna_documento($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
 
                     $documentos = $url_arquivo.$temp[1];
-
-
+                    }
+                    
                     $temp = explode("/", $documentos_enviados->retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)['nome_arquivo']);
 
-                    File::copy(storage_path("app/").$documentos_enviados->retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+                    if (count($temp) > 1) {
+                        File::copy(storage_path("app/").$documentos_enviados->retorna_comprovante_proficiencia($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
 
-                    $comprovante = $url_arquivo.$temp[1];
-
+                        $comprovante = $url_arquivo.$temp[1];
+                    }
+                    
                     $temp = explode("/", $documentos_enviados->retorna_historico($id_candidato,$id_inscricao_pos)['nome_arquivo']);
 
-                    File::copy(storage_path("app/").$documentos_enviados->retorna_historico($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+                    if (count($temp) > 1) {
+                        File::copy(storage_path("app/").$documentos_enviados->retorna_historico($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
 
-                    $historico = $url_arquivo.$temp[1];
-
+                        $historico = $url_arquivo.$temp[1];
+                    }
+                    
                     $temp = explode("/", $documentos_enviados->retorna_projeto($id_candidato,$id_inscricao_pos)['nome_arquivo']);
 
-                    File::copy(storage_path("app/").$documentos_enviados->retorna_projeto($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
+                    if (count($temp) > 1) {
+                        File::copy(storage_path("app/").$documentos_enviados->retorna_projeto($id_candidato,$id_inscricao_pos)['nome_arquivo'], storage_path("app/public/relatorios/")."arquivos_auxiliares/".$temp[1]);
 
-                    $projeto = $url_arquivo.$temp[1];
+                        $projeto = $url_arquivo.$temp[1];
+                    }
 
                 }else{
                     $documentos = null;
