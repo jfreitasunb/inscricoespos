@@ -55,10 +55,18 @@
                                 <template v-if="detalhe.id_candidato === record.id_candidato">
                                     <div class="container">
                                         <div class="row">
-                                        <a class="myhover" href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br><br>
-                                        <a class="myhover" href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br><br>
-                                        <a class="myhover" href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br><br>
-                                        <a class="myhover" href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br><br>
+                                            <div v-if="record.documentos !== null">
+                                                <a class="myhover" href="#" @click.prevent="myFunction(record.documentos)">Documentos pessoais</a><br><br>
+                                            </div>
+                                            <div v-if="record.comprovante !== null">
+                                                <a class="myhover" href="#" @click.prevent="myFunction(record.comprovante)">Comprovante de idioma</a><br><br>
+                                            </div>
+                                            <div v-if="record.historico !== null">
+                                                <a class="myhover" href="#" @click.prevent="myFunction(record.historico)">Histórico</a><br><br>
+                                            </div>
+                                            <div v-if="record.projeto !== null">
+                                                <a class="myhover" href="#" @click.prevent="myFunction(record.projeto)">Projeto</a><br><br>
+                                            </div>
                                         <div v-if="record.necessita_recomendante">
                                         <p :class="(record.recomendante1) ? 'mybg-success' : 'mybg-danger'">O recomendante 1 <span v-if="record.recomendante1"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
                                         <p :class="(record.recomendante2) ? 'mybg-success' : 'mybg-danger'">O recomendante 2 <span v-if="record.recomendante2"> FOI </span> <span v-else> NÃO FOI </span>foi notificado</p><br>
