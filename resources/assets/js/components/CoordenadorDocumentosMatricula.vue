@@ -16,10 +16,9 @@
                 <div class="form-group col-md-2">
                     <label id="limit">Limitar resultados à:</label>
                     <select id="limit" class="form-control" v-model="limit" @change="getRecords">
-                        <option value="10">5</option>
-                        <option value="20">10</option>
-                        <option value="30">15</option>
-                        <option value="">Todos</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
                     </select>
                 </div>
                 <div class="col-md-offset-3 col-md-6">
@@ -85,7 +84,7 @@
                     order: 'asc'
                 },
 
-                limit: 30,
+                limit: '',
 
                 seleciona_edital: null,
 
