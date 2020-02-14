@@ -19,6 +19,7 @@
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
+                        <option value="">Todos</option>
                     </select>
                 </div>
                 <div class="col-md-offset-3 col-md-6">
@@ -54,7 +55,6 @@
                                 <div v-if="record.link_arquivo !== null">
                                     <a :href="''+record.link_arquivo" :download="''+record.nome_tratado" style="font-size:18px;"><span class="glyphicon glyphicon-download-alt"></span>{{ record.nome_tratado }}</a>
                                 </div>
-                                
                             </td>
                         </tr>
                     </tbody>
