@@ -45,7 +45,7 @@ class Kernel extends ConsoleKernel
                  ->sendOutputTo($filePath2);
 
         $schedule->command('limpa:arquivos')
-                 ->everyMinute()
+                 ->dailyAt('02:00')
                  ->sendOutputTo($filePath3);
 
         $schedule->command('limpa:temporarios')
