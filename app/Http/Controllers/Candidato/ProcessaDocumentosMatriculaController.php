@@ -20,7 +20,7 @@ use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\CandidatosSelecionados;
-use InscricoesPos\Notifications\NotificaCandidato;
+use InscricoesPos\Notifications\DocumentosMatriculaRecebidos;
 use Illuminate\Http\Request;
 use InscricoesPos\Mail\EmailVerification;
 use InscricoesPos\Http\Controllers\Controller;
@@ -280,6 +280,10 @@ class ProcessaDocumentosMatriculaController extends BaseController
 					File::delete($local_documentos.$ficha_inscricao);
 					
 					notify()->flash(trans('mensagens_gerais.documentos_matricula_sucesso'),'success');
+					
+					$dados_email['nome_candidato'] = $user->nome;
+
+					Notification::send(User::find($id_candidato), new DocumentosMatriculaRecebidos($dados_email));
 				
 					return redirect()->route('home');
 				}else{
