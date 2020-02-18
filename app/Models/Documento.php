@@ -89,4 +89,9 @@ class Documento extends Model
             ->where('tipo_arquivo', $tipo_arquivo)
             ->update(['updated_at' => date('Y-m-d H:i:s')]);
     }
+
+    public function retorna_arquivo_para_limpeza()
+    {
+        return $this->where('removido', FALSE)->orderBy('created_at', 'ASC')->get();
+    }
 }

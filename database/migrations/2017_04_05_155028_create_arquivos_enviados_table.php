@@ -22,6 +22,10 @@ class CreateArquivosEnviadosTable extends Migration
             $table->unsignedInteger('id_inscricao_pos');
             $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->timestamps();
+            $table->boolean('removido')->default(FALSE);
+            $table->timestamp('data_remocao');
+            $table->boolean('removido')->default(FALSE);
+            $table->timestamp('data_remocao');
         });
     }
 
