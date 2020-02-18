@@ -268,9 +268,11 @@ class ProcessaDocumentosMatriculaController extends BaseController
 					if (is_null($arquivo_ja_enviado)) {
 
 						$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
-						
-						$tamanho_arquivo = $relatorio->size_documento($arquivo_ja_enviado);
 
+						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_final);
+
+						$tamanho_arquivo = $relatorio->size_documento("arquivos_internos/".$nome_final);
+						
 						if ($tamanho_arquivo == 0) {
 							
 							$nome = User::find($id_user)->nome;
@@ -295,9 +297,11 @@ class ProcessaDocumentosMatriculaController extends BaseController
 							$process->setTimeout(3600);
 								
 							$process->run();
-						}
 
-						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_final);
+							$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
+
+							File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_final);
+						}
 
 						$arquivo_matricula->id_candidato = $id_candidato;
 
@@ -309,7 +313,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 						$arquivo_matricula->nome_arquivo = "arquivos_internos/".$nome_final;
 						
-						$arquivo_matricula->arquivo_recebido = Storage::exists($local_documentos.$ficha_inscricao);
+						$arquivo_matricula->arquivo_recebido = Storage::exists("arquivos_internos/".$nome_final);
 
 						$arquivo_matricula->arquivo_final = True;
 
@@ -349,7 +353,7 @@ class ProcessaDocumentosMatriculaController extends BaseController
 						}
 
 						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_arquivo[1]);
-
+						
 						$arquivo_matricula->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, $id_programa_pretendido, 'df', Storage::exists($arquivo_ja_enviado));
 					}
 
