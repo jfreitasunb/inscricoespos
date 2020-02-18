@@ -39,7 +39,14 @@ class LimpezaArquivosAntigos extends Command
      * @return mixed
      */
     public function handle()
-    {
+    {   
+        $documentos = new Documento();
+
+        $arquivos_enviados = $documentos->retorna_arquivo_para_limpeza();
+
+        foreach ($arquivos_enviados as $arquivo) {
+            dd($arquivo);
+        }
         echo "rodei";
     }
 }
