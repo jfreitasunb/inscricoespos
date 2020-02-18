@@ -11,11 +11,16 @@ use InscricoesPos\Models\Documento;
 class LimpezaArquivosAntigos extends Command
 {
     /**
+     * Tempo em anos que os arquivos serão mantidos no servidor.
+     */
+    
+    protected $tempo_permanencia = 5;
+
+    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $tempo_permanencia = 5;
 
     protected $signature = 'limpa:arquivos';
 

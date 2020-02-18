@@ -9,12 +9,17 @@ use InscricoesPos\Models\DocumentoMatricula;
 class LimpezaArquivosTemporarios extends Command
 {
     /**
+     * Tempo em meses que os arquivos de um dado edital serão mantidos no servidor.
+     */
+    
+    protected $tempo_permanencia_relatorios_editais = 2;
+    
+    /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $tempo_permanencia_relatorios_editais = 2;
-    
+
     protected $diretorios_limpar = ['app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
 
     protected $signature = 'limpa:temporarios';
