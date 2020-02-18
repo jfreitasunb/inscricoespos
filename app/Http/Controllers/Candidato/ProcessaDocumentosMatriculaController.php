@@ -144,10 +144,16 @@ class ProcessaDocumentosMatriculaController extends BaseController
 
 			$endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
 
+			$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+			$process->setTimeout(3600);
+				
+			$process->run();
+
 			$tamanho_arquivo_final = $relatorio->size_documento("public/relatorios/matricula/".$nome_arquivo_matricula);
 
 			if ($tamanho_arquivo_final < $tamanho_total_uploads) {
-				
+
 				$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
 
 				$process->setTimeout(3600);
@@ -195,6 +201,8 @@ class ProcessaDocumentosMatriculaController extends BaseController
 		$fim_prazo = $configura_inicio->retorna_fim_prazo_envio_documentos($id_inscricao_pos);
 
 		$libera_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
+
+		$relatorio = new RelatorioController();
 
 		if ($libera_tela) {
 
@@ -260,6 +268,34 @@ class ProcessaDocumentosMatriculaController extends BaseController
 					if (is_null($arquivo_ja_enviado)) {
 
 						$nome_final = md5(uniqid($ficha_inscricao, true)).".pdf";
+						
+						$tamanho_arquivo = $relatorio->size_documento($arquivo_ja_enviado);
+
+						if ($tamanho_arquivo == 0) {
+							
+							$nome = User::find($id_user)->nome;
+
+							$documentos_matricula = new DocumentoMatricula();
+
+							$arquivos_matricula_recebidos = $documentos_matricula->retorna_documentos_matricula_enviados($id_user, $id_inscricao_pos);
+
+							$argumento_pdftk = "";
+
+							foreach ($arquivos_matricula_recebidos as $key) {
+
+								$argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
+							}
+
+							$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
+
+							$endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
+
+							$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+							$process->setTimeout(3600);
+								
+							$process->run();
+						}
 
 						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_final);
 
@@ -283,6 +319,34 @@ class ProcessaDocumentosMatriculaController extends BaseController
 					}else{
 
 						$nome_arquivo = explode("/", $arquivo_ja_enviado);
+
+						$tamanho_arquivo = $relatorio->size_documento($arquivo_ja_enviado);
+
+						if ($tamanho_arquivo == 0) {
+							
+							$nome = User::find($id_user)->nome;
+
+							$documentos_matricula = new DocumentoMatricula();
+
+							$arquivos_matricula_recebidos = $documentos_matricula->retorna_documentos_matricula_enviados($id_user, $id_inscricao_pos);
+
+							$argumento_pdftk = "";
+
+							foreach ($arquivos_matricula_recebidos as $key) {
+
+								$argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
+							}
+
+							$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
+
+							$endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
+
+							$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+							$process->setTimeout(3600);
+								
+							$process->run();
+						}
 
 						File::copy($local_documentos.$ficha_inscricao, storage_path("app/")."arquivos_internos/".$nome_arquivo[1]);
 
