@@ -15,6 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\RememberRecomendante::class,
         Commands\RememberCandidadoFimPrazo::class,
+        Commands\LimpezaArquivosAntigos::class,
+        Commands\LimpezaArquivosTemporarios::class,
     ];
 
     /**
@@ -29,13 +31,26 @@ class Kernel extends ConsoleKernel
 
         $filePath2="/home/vagrant/remember_candidato.log";
 
+        $filePath3="/home/vagrant/limpeza_arquivos_antigos.log";
+
+        $filePath4="/home/vagrant/limpeza_arquivos_temporarios.log";
+
 
         $schedule->command('remember:recomendante')
                  ->everyMinute()
                  ->sendOutputTo($filePath);
+
         $schedule->command('remember:candidato')
                  ->everyMinute()
                  ->sendOutputTo($filePath2);
+
+        $schedule->command('limpa:arquivos')
+                 ->everyMinute()
+                 ->sendOutputTo($filePath3);
+
+        $schedule->command('limpa:temporarios')
+                 ->everyMinute()
+                 ->sendOutputTo($filePath4);
     }
 
     /**
