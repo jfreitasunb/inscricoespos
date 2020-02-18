@@ -302,6 +302,7 @@ class EnviaDocumentosMatriculaController extends BaseController
 						$arquivo_matricula = new DocumentoMatricula();
 						
 						$arquivo_ja_enviado = $arquivo_matricula->retorna_se_arquivo_foi_enviado($id_candidato, $id_inscricao_pos, $id_programa_pretendido, $key);
+						
 						if (is_null($arquivo_ja_enviado)) {
 
 							$arquivo = $request->arquivos_matricula[$key]->store('arquivos_internos');
