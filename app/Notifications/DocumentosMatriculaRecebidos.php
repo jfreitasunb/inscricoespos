@@ -46,8 +46,8 @@ class DocumentosMatriculaRecebidos extends Notification
         return (new MailMessage)
             ->from('posgrad@mat.unb.br', trans('mensagens_gerais.comite'))
             ->subject(trans('mensagens_gerais.inscricao_mat'))
-            ->line(trans('mensagens_gerais.inscricao_mat_1').$this->dados_email['nome_candidato'].',')
-            ->line(trans('mensagens_gerais.inscricao_nao_finalizada'))
+            ->line(trans('mensagens_gerais.selecionado_mat').$this->dados_email['nome_candidato'])
+            ->line(trans('mensagens_gerais.selecionado_documentos'))
             ->line(trans('mensagens_gerais.saudacoes_finais'));
     }
 
