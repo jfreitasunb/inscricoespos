@@ -11,14 +11,14 @@ class LimpezaArquivosAntigos extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'limpa:arquivos';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Remove arquivos com mais de 5 anos.';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,6 @@ class LimpezaArquivosAntigos extends Command
      */
     public function handle()
     {
-        //
+        echo "rodei";
     }
 }
