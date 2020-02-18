@@ -94,4 +94,14 @@ class Documento extends Model
     {
         return $this->where('removido', FALSE)->orderBy('created_at', 'ASC')->get();
     }
+
+    public function marca_arquivo_removido($id)
+    {
+        DB::table('arquivos_enviados')
+            ->where('id', $id)
+            ->update([
+                'removido' => TRUE,
+                'data_remocao' => date('Y-m-d H:i:s'),
+            ]);
+    }
 }
