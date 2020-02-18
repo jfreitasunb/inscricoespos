@@ -5,7 +5,6 @@ namespace InscricoesPos\Console\Commands;
 use Illuminate\Console\Command;
 
 use InscricoesPos\Models\DocumentoMatricula;
-use InscricoesPos\Models\Documento;
 
 class LimpezaArquivosTemporarios extends Command
 {
