@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 
 use Carbon\Carbon;
 use Storage;
-use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Models\Documento;
 
 class LimpezaArquivosAntigos extends Command
@@ -60,7 +59,7 @@ class LimpezaArquivosAntigos extends Command
                     
                     Storage::delete($arquivo->nome_arquivo);
                 }
-                
+
                 $documentos->marca_arquivo_removido($arquivo->id);
             }
         }
