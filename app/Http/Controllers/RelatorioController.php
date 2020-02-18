@@ -58,6 +58,11 @@ class RelatorioController extends BaseController
       'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
     );
 
+  public function size_documento($arquivo)
+  {
+    return Storage::size($arquivo);
+  }
+
   public function ContaInscricoes($id_inscricao_pos, $programa)
   {
     $locale = 'pt-br';
