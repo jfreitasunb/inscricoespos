@@ -22,8 +22,6 @@ class NotificaCandidato extends Notification
     public function __construct(array $dados_email)
     {
         $this->dados_email = $dados_email;
-
-
     }
 
     public function via($notifiable)
