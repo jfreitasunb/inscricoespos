@@ -4,6 +4,7 @@ namespace InscricoesPos\Console\Commands;
 
 use Illuminate\Console\Command;
 
+use Carbon\Carbon;
 use InscricoesPos\Models\DocumentoMatricula;
 use InscricoesPos\Models\Documento;
 
@@ -14,6 +15,8 @@ class LimpezaArquivosAntigos extends Command
      *
      * @var string
      */
+    protected $tempo_permanencia = 1;
+
     protected $signature = 'limpa:arquivos';
 
     /**
@@ -42,11 +45,18 @@ class LimpezaArquivosAntigos extends Command
     {   
         $documentos = new Documento();
 
+        // $data_hoje = Carbon::now();
+
         $arquivos_enviados = $documentos->retorna_arquivo_para_limpeza();
 
         foreach ($arquivos_enviados as $arquivo) {
-            dd($arquivo);
+            
+            $diferenca = Carbon::now()->diffInYears($arquivo->created_at);
+
+            if ($diferenca > $this->tempo_permanencia) {
+                echo "deletando arquivo: ".$arquivo->id;
+            }
         }
-        echo "rodei";
+        
     }
 }
