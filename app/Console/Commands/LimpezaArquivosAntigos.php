@@ -59,8 +59,9 @@ class LimpezaArquivosAntigos extends Command
                 if (Storage::exists($arquivo->nome_arquivo)) {
                     
                     Storage::delete($arquivo->nome_arquivo);
-                    $documentos->marca_arquivo_removido($arquivo->id);
                 }
+                
+                $documentos->marca_arquivo_removido($arquivo->id);
             }
         }
         
