@@ -13,6 +13,9 @@ class LimpezaArquivosTemporarios extends Command
      *
      * @var string
      */
+    
+    protected $diretorios_limpar = ['app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
+
     protected $signature = 'limpa:temporarios';
 
     /**
