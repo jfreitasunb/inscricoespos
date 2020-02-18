@@ -129,19 +129,31 @@ class ProcessaDocumentosMatriculaController extends BaseController
 			$arquivos_matricula_recebidos = $documentos_matricula->retorna_documentos_matricula_enviados($id_user, $id_inscricao_pos);
 
 			$argumento_pdftk = "";
+
+			$relatorio = new RelatorioController();
+
+			$tamanho_total_uploads = 0;
+
 			foreach ($arquivos_matricula_recebidos as $key) {
 				$argumento_pdftk .= storage_path('app/').$key->nome_arquivo." ";
+
+				$tamanho_total_uploads = $tamanho_total_uploads + $relatorio->size_documento($key->nome_arquivo);
 			}
 
 			$nome_arquivo_matricula = str_replace(' ', '-', strtr($nome, $this->normalizeChars)).".pdf";
 
 			$endereco_arquivo_matricula = storage_path("app/public/relatorios/matricula/").$nome_arquivo_matricula;
 
-			$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+			$tamanho_arquivo_final = $relatorio->size_documento("public/relatorios/matricula/".$nome_arquivo_matricula);
 
-			$process->setTimeout(3600);
-			
-			$process->run();
+			if ($tamanho_arquivo_final < $tamanho_total_uploads) {
+				
+				$process = new Process('pdftk '.$argumento_pdftk.' cat output '.$endereco_arquivo_matricula);
+
+				$process->setTimeout(3600);
+				
+				$process->run();
+			}
 
 			$dados_para_template['id_candidato'] = $id_user;
 
