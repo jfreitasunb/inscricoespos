@@ -10,6 +10,11 @@ use File;
 class LimpezaArquivosTemporarios extends Command
 {
     /**
+     * Caminho base
+     */
+    
+    protected $caminho_base = "/var/www/inscricoespos/";
+    /**
      * Tempo em meses que os arquivos de um dado edital serão mantidos no servidor.
      */
     
@@ -18,7 +23,6 @@ class LimpezaArquivosTemporarios extends Command
     /**
      * Lista de diretórios a serem limpos.
      */
-    
     
     protected $diretorios_limpar = ['storage/app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
 
