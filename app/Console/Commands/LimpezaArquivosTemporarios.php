@@ -19,7 +19,8 @@ class LimpezaArquivosTemporarios extends Command
      * Lista de diretórios a serem limpos.
      */
     
-    protected $diretorios_limpar = ['app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
+    
+    protected $diretorios_limpar = ['storage/app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
 
 
     /**
