@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use File;
+use Storage;
 
 class LimpezaArquivosTemporarios extends Command
 {
@@ -13,7 +14,7 @@ class LimpezaArquivosTemporarios extends Command
      * Caminho base
      */
     
-    protected $caminho_base = "/var/www/inscricoespos/";
+    // protected $caminho_base = "/var/www/inscricoespos/storage/app/";
     /**
      * Tempo em meses que os arquivos de um dado edital serão mantidos no servidor.
      */
@@ -24,8 +25,9 @@ class LimpezaArquivosTemporarios extends Command
      * Lista de diretórios a serem limpos.
      */
     
-    protected $diretorios_limpar = ['storage/app/arquivos_temporarios', 'public/storage/relatorios/temporario', 'public/storage/relatorios/arquivos_auxiliares', 'public/storage/relatorios/arquivos_internos', 'public/storage/relatorios/ficha_inscricao', 'public/storage/relatorios/matricula'];
+    protected $diretorios_limpar = ['arquivos_temporarios', 'relatorios/temporario', 'relatorios/arquivos_auxiliares', 'relatorios/arquivos_internos', 'relatorios/ficha_inscricao', 'relatorios/matricula'];
 
+    // protected $diretorios_limpar = ['arquivos_temporarios'];
 
     /**
      * The name and signature of the console command.
@@ -60,5 +62,15 @@ class LimpezaArquivosTemporarios extends Command
     public function handle()
     {
         //File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
+        
+        foreach ($this->diretorios_limpar as $diretorio) {
+
+            if (File::isDirectory(storage_path($diretorio))) {
+
+                Storage::deleteDirectory($diretorio);
+
+                // File::makeDirectory($endereco_diretorio, 0775, TRUE);
+            }
+        }
     }
 }
