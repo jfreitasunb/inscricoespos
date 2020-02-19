@@ -4,7 +4,8 @@ namespace InscricoesPos\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use InscricoesPos\Models\DocumentoMatricula;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
+use File;
 
 class LimpezaArquivosTemporarios extends Command
 {
@@ -53,6 +54,6 @@ class LimpezaArquivosTemporarios extends Command
      */
     public function handle()
     {
-        //
+        //File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
     }
 }
