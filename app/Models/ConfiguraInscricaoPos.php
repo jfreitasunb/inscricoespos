@@ -34,6 +34,12 @@ class ConfiguraInscricaoPos extends Model
         'necessita_recomendante'
     ];
 
+    public function retorna_editais_para_limpeza()
+    {
+
+        return $this->orderBy('id_inscricao_pos','desc')->get();
+    }
+
     public function retorna_lista_para_relatorio()
     {
 
