@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use File;
 use Storage;
+use Carbon\Carbon;
 
 class LimpezaArquivosTemporarios extends Command
 {
@@ -19,7 +20,7 @@ class LimpezaArquivosTemporarios extends Command
      * Tempo em meses que os arquivos de um dado edital serão mantidos no servidor.
      */
     
-    protected $tempo_permanencia_relatorios_editais = 2;
+    protected $tempo_permanencia_relatorios_editais = 8;
 
     /**
      * Lista de diretórios a serem limpos.
@@ -63,14 +64,28 @@ class LimpezaArquivosTemporarios extends Command
     {
         //File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
         
-        foreach ($this->diretorios_limpar as $diretorio) {
+        $editais = new ConfiguraInscricaoPos();
 
-            if (File::isDirectory(storage_path($diretorio))) {
+        $editais_presentes = $editais->retorna_editais_para_limpeza();
 
-                Storage::deleteDirectory($diretorio);
+        foreach ($editais_presentes as $edital) {
 
-                // File::makeDirectory($endereco_diretorio, 0775, TRUE);
+            $diferenca = Carbon::now()->diffInMonths($edital->fim_inscricao);
+
+            if ($diferenca > $this->tempo_permanencia_relatorios_editais) {
+                echo "Removendo arquivos do edital: ".$edital->edital."\n";
             }
         }
+
+
+        // foreach ($this->diretorios_limpar as $diretorio) {
+
+        //     if (File::isDirectory(storage_path($diretorio))) {
+
+        //         Storage::deleteDirectory($diretorio);
+
+        //         // File::makeDirectory($endereco_diretorio, 0775, TRUE);
+        //     }
+        // }
     }
 }
