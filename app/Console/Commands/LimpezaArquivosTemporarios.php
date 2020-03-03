@@ -26,7 +26,7 @@ class LimpezaArquivosTemporarios extends Command
      * Lista de diretórios a serem limpos.
      */
     
-    protected $diretorios_limpar = ['arquivos_temporarios', 'relatorios/temporario', 'relatorios/arquivos_auxiliares', 'relatorios/arquivos_internos', 'relatorios/ficha_inscricao', 'relatorios/matricula'];
+    protected $diretorios_limpar = ['app/public/relatorios/arquivos_temporarios', 'app/public/relatorios/temporario', 'app/public/relatorios/arquivos_auxiliares', 'app/public/relatorios/arquivos_internos', 'app/public/relatorios/ficha_inscricao', 'app/public/relatorios/matricula'];
 
     // protected $diretorios_limpar = ['arquivos_temporarios'];
 
@@ -62,8 +62,6 @@ class LimpezaArquivosTemporarios extends Command
      */
     public function handle()
     {
-        //File::isDirectory($locais_arquivos['ficha_inscricao']) or File::makeDirectory($locais_arquivos['ficha_inscricao'],0775,true);
-        
         $editais = new ConfiguraInscricaoPos();
 
         $editais_presentes = $editais->retorna_editais_para_limpeza();
@@ -73,19 +71,24 @@ class LimpezaArquivosTemporarios extends Command
             $diferenca = Carbon::now()->diffInMonths($edital->fim_inscricao);
 
             if ($diferenca > $this->tempo_permanencia_relatorios_editais) {
-                echo "Removendo arquivos do edital: ".$edital->edital."\n";
+                
+                $diterorio_edital = "app/public/relatorios/edital_".$edital->edital."/";
+                
+                if (File::isDirectory(storage_path($diterorio_edital))) {
+
+                    File::deleteDirectory(storage_path($diterorio_edital));
+                }
             }
         }
 
+        foreach ($this->diretorios_limpar as $diretorio) {
+            
+            if (File::isDirectory(storage_path($diretorio))) {
+                
+                File::deleteDirectory(storage_path($diretorio));
 
-        // foreach ($this->diretorios_limpar as $diretorio) {
-
-        //     if (File::isDirectory(storage_path($diretorio))) {
-
-        //         Storage::deleteDirectory($diretorio);
-
-        //         // File::makeDirectory($endereco_diretorio, 0775, TRUE);
-        //     }
-        // }
+                File::makeDirectory(storage_path($diretorio), 0775, TRUE);
+            }
+        }
     }
 }
