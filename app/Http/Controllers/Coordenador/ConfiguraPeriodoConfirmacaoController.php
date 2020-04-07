@@ -66,8 +66,6 @@ class ConfiguraPeriodoConfirmacaoController extends CoordenadorController
 
         $configura_inicio = new ConfiguraInicioPrograma();
 
-        // $configura_inicio->limpa_configuracoes_anteriores($id_inscricao_pos);
-
         $configura_inicio->id_inscricao_pos = $id_inscricao_pos;
 
         $configura_inicio->mes_inicio = $mes_inicio_1;
