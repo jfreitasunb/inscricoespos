@@ -65,11 +65,9 @@ class ReativarInscricaoCandidatoController extends AdminController
 
 		if (!is_null($finalizou)) {
 			
-
 			$modo_pesquisa = false;
 
 			return view('templates.partials.admin.reativar_inscricao_candidato')->with(compact('modo_pesquisa','finalizou','email_candidato'));
-
 		}else{
 			
 			notify()->flash('O candidato com e-mail: '.$email_candidato.' ainda não finalizou a inscrição!','error');
@@ -87,14 +85,17 @@ class ReativarInscricaoCandidatoController extends AdminController
 		]);
 
 		$id = (int)$request->id;
+		
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+		
 		$id_candidato = (int)$request->id_candidato;
+		
 		$email_candidato = $request->email_candidato;
-
 
 		$finalizada = (strtolower(trim($request->finalizada)) == 'sim' ? 1 : 0);
 
 		if (!$finalizada) {
+			
 			$inscricao_finalizada = new FinalizaInscricao;
 
 			DB::table('finaliza_inscricao')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->update(['finalizada' => 'false', 'updated_at' => date('Y-m-d H:i:s') ]);

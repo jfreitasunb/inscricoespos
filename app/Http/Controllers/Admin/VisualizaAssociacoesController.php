@@ -30,13 +30,11 @@ class VisualizaAssociacoesController extends AdminController
 	{
 		$associacoes = new AssociaEmailsRecomendante;
 
-	
-
 		$associacoes_existentes = $associacoes->retorna_associacoes();
 
 		$total = sizeof($associacoes_existentes);
-		$limit = 1;
-
+		
+        $limit = 1;
 
 		$itemCollection = collect($associacoes_existentes);
 
@@ -57,7 +55,6 @@ class VisualizaAssociacoesController extends AdminController
  
         // set url path for generted links
         $paginatedItems->setPath($request->url());
-
 
 		return view('templates.partials.admin.visualiza_associacoes')->with(compact('paginatedItems'));
 	}

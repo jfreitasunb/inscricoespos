@@ -96,10 +96,15 @@ class PesquisaContaController extends AdminController
 		$id_user = (int)$request->id_user;
 
 		$novos_dados_usuario['nome'] = trim($request->nome);
+		
 		$novos_dados_usuario['email'] = strtolower(trim($request->email));
+		
 		$novos_dados_usuario['locale'] = strtolower(trim($request->locale));
+		
 		$novos_dados_usuario['validation_code'] = NULL;
+		
 		$novos_dados_usuario['user_type'] = strtolower(trim($request->user_type));
+		
 		$novos_dados_usuario['ativo'] = (strtolower(trim($request->ativo)) == 'sim' ? 1 : 0);
 		
 		$atualiza_usuario = User::find($id_user);
@@ -109,14 +114,18 @@ class PesquisaContaController extends AdminController
 		$pesquisa_email = $pesquisa_usuario->retorna_user_por_email($novos_dados_usuario['email']);
 
 		if (!is_null($pesquisa_email)) {
+			
 			if ($atualiza_usuario->email === $pesquisa_email->email) {
+				
 				$atualiza_usuario->update($novos_dados_usuario);
 			}else{
 
 				notify()->flash('Já existe uma conta registrada com o e-mail: '.$novos_dados_usuario['email'].'!','error');
+				
 				return redirect()->back();
 			}
 		}else{
+			
 			$atualiza_usuario->update($novos_dados_usuario);
 		}
 		

@@ -75,7 +75,9 @@ class LinkSenhaController extends AdminController
 
 			return view('templates.partials.admin.link_muda_senha')->with(compact('modo_pesquisa', 'user', 'url_mudar_senha'));
 		}else{
+			
 			notify()->flash('Não existe nenhuma conta registrada com o e-mail: '.$email.'!','error');
+			
 			return redirect()->route('pesquisa.usuario');
 		}
 	}

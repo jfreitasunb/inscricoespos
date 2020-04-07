@@ -53,16 +53,20 @@ class EditarInscricaoController extends AdminController
 		$edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
 
 		$novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
+		
 		$novos_dados_edital['fim_inscricao'] = $request->fim_inscricao;
+
 		$novos_dados_edital['prazo_carta'] = $request->prazo_carta;
+		
 		$novos_dados_edital['programa'] = $request->programa;
+		
 		$novos_dados_edital['edital'] = $request->edital;
+		
 		$novos_dados_edital['data_homologacao'] = $request->data_homologacao;
+		
 		$novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
 
 		$temp = strtolower($request->necessita_recomendante);
-
-
 
 		switch ($temp) {
 			case 'nao':

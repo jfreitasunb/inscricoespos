@@ -48,7 +48,6 @@ class MudaRecomendanteController extends AdminController
 
 	public function postPesquisarRecomendantes(Request $request)
 	{
-
 		$this->validate($request, [
 			'email_candidato' => 'required|email',
 		]);
@@ -108,8 +107,6 @@ class MudaRecomendanteController extends AdminController
 
 	public function postAlteraRecomendante(Request $request)
 	{
-
-		
 		if ($request->cancelar === 'Cancelar'){
 
 			notify()->flash('Alteração dos recomendantes cancelada!','info');
@@ -126,16 +123,22 @@ class MudaRecomendanteController extends AdminController
 			'email_recomendante' => 'required|email',
 		]);
 
-
 		$id = (int)$request->id;
+		
 		$id_candidato = (int)$request->id_candidato;
+		
 		$id_inscricao_pos = (int)$request->id_inscricao_pos;
+		
 		$id_recomendante = (int)$request->id_recomendante;
+		
 		$email_recomendante = strtolower(trim($request->email_recomendante));
+		
 		$nome_recomendante = trim($request->nome_recomendante);
+		
 		$email_candidato = strtolower(trim($request->email_candidato));
 		
 		$novo_recomendante['nome'] = $nome_recomendante;
+		
 		$novo_recomendante['email'] = $email_recomendante;
 
 		$user_recomendante = new User;
@@ -150,10 +153,12 @@ class MudaRecomendanteController extends AdminController
 		}else{
 
 			if ($acha_recomendante->user_type === 'recomendante') {
+				
 				$id_novo_recomendante = $acha_recomendante->id_user;
 			}else{
 
 				notify()->flash('O e-mail: '.$email_recomendante.' pertence a um candidato!','error');
+				
 				return redirect()->back();
 			}	
 		}
@@ -165,9 +170,11 @@ class MudaRecomendanteController extends AdminController
 		if ($ja_enviou_carta->completada) {
 			
 			notify()->flash('O recomendante original já enviou a carta. Não é possível trocar!','error');
+			
 			return redirect()->back();
 			
 		}else{
+			
 			$mudou_recomendante = DB::table('cartas_recomendacoes')->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->where('completada', false)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
 
 			DB::table('contatos_recomendantes')->where('id', $id)->where('id_candidato', $id_candidato)->where('id_inscricao_pos', $id_inscricao_pos)->where('id_recomendante', $id_recomendante)->update(['id_recomendante' => $id_novo_recomendante, 'updated_at' => date('Y-m-d H:i:s') ]);
@@ -177,9 +184,13 @@ class MudaRecomendanteController extends AdminController
 			$prazo_envio = Carbon::createFromFormat('Y-m-d', $edital->prazo_carta);
 
 			$dados_email['nome_professor'] = $nome_recomendante;
+	        
 	        $dados_email['nome_candidato'] = $request->nome_candidato;
+			
 			$dados_email['programa'] = $request->programa;
+	        
 	        $dados_email['email_recomendante'] = $email_recomendante;
+	        
 	        $dados_email['prazo_envio'] = $prazo_envio->format('d/m/Y');
 
 			Notification::send(User::find($id_novo_recomendante), new NotificaRecomendante($dados_email));

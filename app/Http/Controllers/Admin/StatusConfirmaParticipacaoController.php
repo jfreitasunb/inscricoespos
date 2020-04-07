@@ -52,15 +52,18 @@ class StatusConfirmaParticipacaoController extends AdminController
         $retorna_meses_confirmacao = $configurado_inicio->retorna_meses_para_inicio($id_inscricao_pos);
 
         foreach ($retorna_meses_confirmacao as $mes) {
+            
             $meses_disponiveis[] = $mes->mes_inicio;
         }
 
         $nao_foi_configurado = $configurado_inicio->retorna_configuracao_confirmacao($id_inscricao_pos);
 
         if ($nao_foi_configurado) {
+            
             notify()->flash('Não foi configurada o período de confirmação. Faça isso antes de continuar.','warning', [
                 'timer' => 3000,
             ]);
+            
             return redirect()->route('configura.periodo.confirmacao');
         }
 
@@ -73,13 +76,17 @@ class StatusConfirmaParticipacaoController extends AdminController
         foreach ($candidatos_selecionados as $selecionado) {
 
             if (is_null($selecionado->inicio_no_programa)) {
+                
                 $mes_candidato[$selecionado->id_candidato] = "Não informado";
             }else{
                 
                 $mes = ConfiguraInicioPrograma::find($selecionado->inicio_no_programa)['mes_inicio'];
+                
                 if (is_null($mes)) {
+                    
                     $mes_candidato[$selecionado->id_candidato] = "Não informado";
                 }else{
+                    
                     $mes_candidato[$selecionado->id_candidato] = $this->array_meses[$mes];    
                 }
             }
@@ -105,7 +112,6 @@ class StatusConfirmaParticipacaoController extends AdminController
 
         $confirmacoes_csv = Writer::createFromPath($local_arquivo_confirmacoes.$nome_arquivo_csv, 'w+');
     
-
         $confirmacoes_csv->insertOne($cabecalho_csv);
 
         $confirmacoes_csv->setOutputBOM(Reader::BOM_UTF8);
@@ -113,9 +119,13 @@ class StatusConfirmaParticipacaoController extends AdminController
         foreach ($candidatos_selecionados as $candidato) {
   
             $linha_arquivo['nome']               = $candidato->nome;
+            
             $linha_arquivo['email']              = $candidato->email;
+            
             $linha_arquivo['programa']           = $candidato->tipo_programa_pos_ptbr;
+            
             $linha_arquivo['confirmou_presenca'] = $candidato->confirmou_presenca? "Sim" : "Não";
+            
             $linha_arquivo['mes_inicio']         = $mes_candidato[$candidato->id_candidato];
             
             $confirmacoes_csv->insertOne($linha_arquivo);
@@ -169,6 +179,5 @@ class StatusConfirmaParticipacaoController extends AdminController
 
             return redirect()->route('altera.status.selecionados');
         }
-
     }
 }

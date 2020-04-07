@@ -56,7 +56,6 @@ class ListaQuemIndicouController extends AdminController
 
 		$contato_recomendante = new ContatoRecomendante;
 
-		
 		if (sizeof($contato_recomendante->retorna_candidatos_por_recomendante($recomendante->id_user, $this->locale_default)) == 0) {
 			
 			notify()->flash('O e-mail: '.$email_recomendante.' não foi indicado por nenhum candidato no edital atual.','error');
