@@ -24,8 +24,6 @@ class CreateArquivosEnviadosTable extends Migration
             $table->timestamps();
             $table->boolean('removido')->default(FALSE);
             $table->timestamp('data_remocao');
-            $table->boolean('removido')->default(FALSE);
-            $table->timestamp('data_remocao');
         });
     }
 
