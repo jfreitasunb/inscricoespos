@@ -792,6 +792,8 @@ class RelatorioController extends BaseController
 
     $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_pos);
 
+    $necessita_recomendante = $relatorio_disponivel->necessita_recomendante;
+
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel['edital']);
 
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
@@ -853,7 +855,7 @@ class RelatorioController extends BaseController
       $relatorio_csv->insertOne($linha_arquivo);
       
     }
-
+    
     $arquivos_zipados_para_view = $this->ConsolidaArquivosZIP($relatorio_disponivel->edital, $locais_arquivos['arquivo_zip'], $locais_arquivos['local_relatorios'], $relatorio_disponivel->programa);
 
     return $this->getArquivosRelatoriosAnteriores($id_inscricao_pos,$arquivos_zipados_para_view, $locais_arquivos['arquivo_relatorio_csv']);
