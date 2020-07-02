@@ -48,6 +48,7 @@
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.historico') }}</legend>
         <div class="form-horizontal"{{ $errors->has('historico') ? ' has-error' : '' }}>
           <div class="row">
+            <p><i>{{ trans('tela_motivacao_documentos.complento_historico') }}</i></p>
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
                 <button type="button" class="btn btn-primary" style="display:none;">
