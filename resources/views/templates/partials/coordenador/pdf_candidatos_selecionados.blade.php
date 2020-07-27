@@ -107,9 +107,9 @@
         </div>
         <h2>Programa de Pós-Graduação em Matemática</h2>
         <br>
-        <h3>Resultado Final da Seleção para o Programa de Pós-graduação em Matemática - {{ $dados_homologacao['numero_semestre'] }}º/{{ $dados_homologacao['ano_inicio'] }}</h3>
+        <h3>Resultado Parcial da Seleção para o Programa de Pós-graduação em Matemática - {{ $dados_homologacao['edital'] }}</h3>
         <div>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O Programa de Pós-graduação em Matemática da Universidade de Brasília torna público o Resultado Parcial para a seleção de aluos de {{ $dados_homologacao['texto_cursos_pos'] }}, realizados no âmbito do edital nº {{ $dados_homologacao['edital'] }}. </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O Programa de Pós-graduação em Matemática da Universidade de Brasília torna público o Resultado Parcial para a seleção de alunos de {{ $dados_homologacao['texto_cursos_pos'] }}, realizados no âmbito do edital nº {{ $dados_homologacao['edital'] }}. </p>
         </div>
 
         <div>
