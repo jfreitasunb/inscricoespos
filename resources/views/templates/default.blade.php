@@ -85,7 +85,7 @@
   <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   
-  <script>
+  {{-- <script>
     @if (notify()->ready())
       swal({
         title: "{!! notify()->message() !!}",
@@ -146,7 +146,7 @@ headers: {
       @endif
         ;
     @endif
-  </script>
+  </script> --}}
 
   <script>
 
