@@ -182,7 +182,6 @@ return [
         InscricoesPos\Providers\RouteServiceProvider::class,
         ValidadorCpf\CpfServiceProvider54::class,
         InscricoesPos\Providers\ViewComposerServiceProvider::class,
-        Codecourse\Notify\NotifyServiceProvider::class,
         InscricoesPos\Providers\BladeServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
