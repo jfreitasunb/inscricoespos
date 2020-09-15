@@ -143,9 +143,9 @@ class AuthController extends BaseController
 		}
 		
 		if ($user_type === 'admin') {
-			notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
-				'timer' => 1500,
-			]);
+			// notify()->flash(trans('mensagens_gerais.bem_vindo'),'success',[
+			// 	'timer' => 1500,
+			// ]);
 			return redirect()->intended('admin');
 		}
 
@@ -174,9 +174,9 @@ class AuthController extends BaseController
 	{
 		Auth::logout();
 
-		notify()->flash(trans('mensagens_gerais.logout'),'info',[
-				'timer' => 1500,
-			]);
+		// notify()->flash(trans('mensagens_gerais.logout'),'info',[
+		// 		'timer' => 1500,
+		// 	]);
 
 		return redirect()->route('home');
 	}
