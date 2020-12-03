@@ -50,6 +50,8 @@ class MotivacaoDocumentosController extends BaseController
 
 	public function getMotivacaoDocumentos()
 	{
+		$anexos = array('1' => 'VI', '2' => 'V', '3' => 'VII', '4' => 'IV');
+		
 		$user = $this->SetUser();
 		
 		$id_candidato = $user->id_user;
@@ -91,6 +93,17 @@ class MotivacaoDocumentosController extends BaseController
 				return redirect()->back();
 			}else{
 
+				$escolha = new EscolhaCandidato();
+
+				$candidato_ja_escolheu = $escolha->retorna_escolha_candidato($id_candidato, $id_inscricao_pos);
+				if (!is_null($candidato_ja_escolheu)) {
+					$dados['tipo_cotista'] = $candidato_ja_escolheu->id_tipo_cotista;
+
+					if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
+						$dados['numero_anexo'] = $anexos[$candidato_ja_escolheu->id_tipo_cotista];
+					}
+				}
+				
 				$motivacao = new CartaMotivacao();
 
 				$fez_carta_motivacao = $motivacao->retorna_carta_motivacao($id_candidato,$id_inscricao_pos);
@@ -115,15 +128,39 @@ class MotivacaoDocumentosController extends BaseController
 	}
 
 	public function postMotivacaoDocumentos(Request $request)
-	{
-		$this->validate($request, [
-			'motivacao' => 'required',
-			'documentos_pessoais' => 'required|max:50000|mimes:pdf',
-			'historico' => 'required|max:50000|mimes:pdf',
-			'projeto' => 'required|max:50000|mimes:pdf',
-			'comprovante_proficiencia' => 'max:50000|mimes:pdf',
-			'concorda_termos' => 'required',
-		]);
+	{	
+		$user = $this->SetUser();
+		
+		$id_candidato = $user->id_user;
+
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+		$escolha = new EscolhaCandidato();
+
+		$candidato_ja_escolheu = $escolha->retorna_escolha_candidato($id_candidato, $id_inscricao_pos);
+
+		if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
+			$this->validate($request, [
+				'motivacao' => 'required',
+				'comprovacao_cota_social' => 'required|max:50000|mimes:pdf',
+				'documentos_pessoais' => 'required|max:50000|mimes:pdf',
+				'historico' => 'required|max:50000|mimes:pdf',
+				'projeto' => 'required|max:50000|mimes:pdf',
+				'comprovante_proficiencia' => 'max:50000|mimes:pdf',
+				'concorda_termos' => 'required',
+			]);
+		}else{
+			$this->validate($request, [
+				'motivacao' => 'required',
+				'documentos_pessoais' => 'required|max:50000|mimes:pdf',
+				'historico' => 'required|max:50000|mimes:pdf',
+				'projeto' => 'required|max:50000|mimes:pdf',
+				'comprovante_proficiencia' => 'max:50000|mimes:pdf',
+				'concorda_termos' => 'required',
+			]);
+		}
 
 		$user = $this->SetUser();
 		
@@ -137,6 +174,36 @@ class MotivacaoDocumentosController extends BaseController
 
 		$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
+
+		if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
+			
+			$arquivo = new Documento();
+				
+			$comprovante_cota_ja_enviados = $arquivo->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Cotista');
+
+			if (is_null($comprovante_cota_ja_enviados)) {
+
+				$doc_cotista = $request->comprovacao_cota_social->store('uploads');
+
+				$arquivo->id_candidato = $id_candidato;
+			
+				$arquivo->nome_arquivo = $doc_cotista;
+			
+				$arquivo->tipo_arquivo = "Cotista";
+			
+				$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			
+				$arquivo->save();
+			}else{
+				
+				$nome_arquivo = explode("/", $comprovante_cota_ja_enviados->nome_arquivo);
+
+				$request->comprovacao_cota_social->storeAs('uploads', $nome_arquivo[1]);
+
+				$arquivo->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Cotista');
+			}
+		}
+		
 		$arquivo = new Documento();
 				
 		$doc_pessoais_ja_enviados = $arquivo->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Documentos');
@@ -192,7 +259,7 @@ class MotivacaoDocumentosController extends BaseController
 
 		$projeto = new Documento();
 				
-		$projeto_ja_enviado = $projeto->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Projeto');
+		$projeto_ja_enviado = $projeto->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Prova de Títulos');
 
 		if (is_null($projeto_ja_enviado)) {
 			
@@ -202,7 +269,7 @@ class MotivacaoDocumentosController extends BaseController
 		
 			$projeto->nome_arquivo = $proj;
 		
-			$projeto->tipo_arquivo = "Projeto";
+			$projeto->tipo_arquivo = "Prova de Títulos";
 		
 			$projeto->id_inscricao_pos = $id_inscricao_pos;
 		
@@ -214,7 +281,7 @@ class MotivacaoDocumentosController extends BaseController
 
 			$request->projeto->storeAs('uploads', $nome_projeto[1]);
 
-			$projeto->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Projeto');
+			$projeto->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Prova de Títulos');
 		}
 
 

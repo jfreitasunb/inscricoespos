@@ -22,4 +22,5 @@ return [
     'area_secundaria' => 'Secondary Area',
     'sim' => 'Yes',
     'nao' => 'No',
+    'cotista' => 'Type of Application',
 ];

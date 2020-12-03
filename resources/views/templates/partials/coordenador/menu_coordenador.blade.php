@@ -60,6 +60,11 @@
                                         <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('editar.formacao') }}">Editar Formação</a>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td class= "{{ Route::currentRouteNamed('editar.cota.social') ? 'active_link' : '' }}">
+                                        <span class="glyphicon glyphicon-wrench fa-fw"></span><a href="{{ route('editar.cota.social') }}">Editar Cota Social</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -103,6 +108,7 @@
                     <div id="collapseQuatro" class="panel-collapse collapse {{ $keep_open_accordion_relatorios }}">
                         <div class="panel-body">
                             <table class="table">
+                                
                                 <tr>
                                     <td class= "{{ Route::currentRouteNamed('relatorio.atual') ? 'active_link' : '' }}">
                                         <span class="glyphicon glyphicon-duplicate fa-fw"></span><a href="{{ route('relatorio.atual') }}">Edital Vigente</a>

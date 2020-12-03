@@ -20,6 +20,7 @@ class EscolhaCandidato extends Model
         'interesse_bolsa',
         'vinculo_empregaticio',
         'id_inscricao_pos',
+        'id_tipo_cotista',
     ];
 
     public function retorna_escolha_candidato($id_candidato,$id_inscricao_pos)
@@ -34,7 +35,7 @@ class EscolhaCandidato extends Model
     //     } )->select('users.nome', 'programa_pos_mat.tipo_programa_pos_ptbr')->orderBy('programa_pos_mat.tipo_programa_pos_ptbr');
     // }
 
-    public function grava_escolhas_candidato($id_candidato,$id_inscricao_pos,$request)
+    public function grava_escolhas_candidato($id_candidato, $id_inscricao_pos, $request)
     {
 
         $candidato_fez_escolhas = $this->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
@@ -51,6 +52,10 @@ class EscolhaCandidato extends Model
             }
             $dados_escolhas['interesse_bolsa'] = (bool)$request->interesse_bolsa;
             $dados_escolhas['vinculo_empregaticio'] = (bool)$request->vinculo_empregaticio;
+
+            
+            $dados_escolhas['id_tipo_cotista'] = (int)$request->tipo_cotista;
+            
             $atualiza_escolhas->update($dados_escolhas);
         }else{
             $escolhas_candidato = new EscolhaCandidato();
@@ -67,6 +72,9 @@ class EscolhaCandidato extends Model
             $escolhas_candidato->interesse_bolsa = (bool)$request->interesse_bolsa;
             $escolhas_candidato->vinculo_empregaticio = (bool)$request->vinculo_empregaticio;
             $escolhas_candidato->id_inscricao_pos = $id_inscricao_pos;
+
+            $escolhas_candidato->id_tipo_cotista = (int)$request->tipo_cotista;
+            
             $escolhas_candidato->save();
         }
     }

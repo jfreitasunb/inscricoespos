@@ -66,12 +66,24 @@ class Documento extends Model
 
     public function retorna_projeto($id_candidato,$id_inscricao_pos)
     {   
-        if (!is_null($this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Projeto')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first())) {
+        if (!is_null($this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Prova de Títulos')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first())) {
             
-            return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Projeto')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
+            return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Prova de Títulos')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
         }else{
 
-            return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Projeto')->orderBy('created_at','desc')->first();
+            return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Prova de Títulos')->orderBy('created_at','desc')->first();
+
+        }
+    }
+
+    public function retorna_cotista($id_candidato,$id_inscricao_pos)
+    {   
+        if (!is_null($this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Cotista')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first())) {
+            
+            return $this->select('nome_arquivo')->where('id_candidato',$id_candidato)->where('tipo_arquivo','Cotista')->where('id_inscricao_pos',$id_inscricao_pos)->orderBy('created_at','desc')->first();
+        }else{
+
+            return null;
 
         }
     }

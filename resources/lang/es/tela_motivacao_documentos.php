@@ -19,4 +19,9 @@ return [
     'menu_enviar' => 'Enviar',
     'comprovante_proficiencia' => 'Certificados de competencia en idioma en Inglés',
     'projeto' => 'Pre-proyecto',
+    'comprovacao_cota_social' => 'Formulario de Autodeclaración',
+    'complemento_comprovacao_cota_social_1' => 'Debe enviar <strong> Anexo ',
+    'complemento_comprovacao_cota_social_2' => '</strong> completado y firmado.',
+    'prova_avaliacao_curricular' => 'Prueba de Evaluación Curricular',
+    'complemento_prova_avaliacao_curricular' => 'Adjunte, en el siguiente orden: <ol type="1"> <li>   Currículo Lattes o el Currículum Vitae;</li> <li> Anexos II o III (según el nivel de su aplicación);</li> <li> Todos los documentos de respaldo utilizados para calcular su puntaje, en el orden en que aparecen en el Anexo II o III.</li></ol> Todos estos documentos deben adjuntarse en un solo archivo PDF.',
 ];

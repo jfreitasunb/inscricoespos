@@ -23,6 +23,7 @@
         @candidato(Auth()->user())
         <div class="container">
           @include('templates.partials.candidato.menu_candidato')
+          @yield('ver_edital_vigente')
           @yield('dados_pessoais')
           @yield('dados_academicos')
           @yield('escolha_monitoria')
@@ -83,7 +84,7 @@
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/monitoria.js') }}"></script>
   <script src="{{ asset('bower_components/sweetalert2/dist/sweetalert2.min.js') }}"></script>
-  <script src="{{ asset('js/app.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
   
   {{-- <script>
     @if (notify()->ready())

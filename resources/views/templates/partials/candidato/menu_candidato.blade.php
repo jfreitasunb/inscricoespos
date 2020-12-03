@@ -10,6 +10,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bar1">
       <ul class="nav navbar-nav">
+        <li class="{{ Route::currentRouteNamed('ver.edital.vigente') ? 'active' : '' }}"><a href="{{ route('ver.edital.vigente') }}">{{trans('tela_ver_edital_vigente.tela_edital_vigente')}}</a></li>
         <li class="{{ Route::currentRouteNamed('dados.pessoais') ? 'active' : '' }}"><a href="{{ route('dados.pessoais') }}">{{trans('tela_dados_pessoais.tela_dados_pessoais')}}</a></li>
         @liberamenu(Auth()->user())
         <li class="{{ Route::currentRouteNamed('dados.academicos') ? 'active' : '' }}"><a href="{{ route('dados.academicos') }}">{{ trans('tela_dados_academicos.tela_dados_academicos') }}</a></li>

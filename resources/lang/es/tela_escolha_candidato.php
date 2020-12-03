@@ -23,4 +23,5 @@ return [
     'area_secundaria' => 'Area Secundaria',
     'sim' => 'Sí',
     'nao' => 'No',
+    'cotista' => 'Tipo de Competencia',
 ];

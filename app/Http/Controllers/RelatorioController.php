@@ -441,6 +441,13 @@ class RelatorioController extends BaseController
 
     $nome_projeto_banco = $local_documentos.$documento->retorna_projeto($id_candidato, $id_inscricao_pos)->nome_arquivo;
 
+
+    if (is_null($documento->retorna_cotista($id_candidato, $id_inscricao_pos))) {
+      $nome_cotista_banco = null;
+    }else{
+      $nome_cotista_banco = $local_documentos.$documento->retorna_cotista($id_candidato, $id_inscricao_pos)->nome_arquivo;
+    }
+
     if (File::extension($nome_documento_banco) != 'pdf')
     {
       $nome_documento_pdf = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
@@ -808,10 +815,20 @@ class RelatorioController extends BaseController
 
       foreach ($contatos_indicados  as $id ) {
         $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+        $recomendantes_candidato[$id->id_recomendante]['endereco_recomendante'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['endereco_recomendante'], 120, "\n", true));
+
+        $recomendantes_candidato[$id->id_recomendante]['circunstancia_outra'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['circunstancia_outra'], 120, "\n", true));
+        
+        $recomendantes_candidato[$id->id_recomendante]['antecedentes_academicos'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['antecedentes_academicos'], 120, "\n", true));
+
+        $recomendantes_candidato[$id->id_recomendante]['possivel_aproveitamento'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['possivel_aproveitamento'], 120, "\n", true));
+
+        $recomendantes_candidato[$id->id_recomendante]['informacoes_relevantes'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['informacoes_relevantes'], 120, "\n", true));
       }
     }
 
-    $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
+    $dados_candidato_para_relatorio['motivacao'] = nl2br(wordwrap($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos), 120, "\n", true));
 
     $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
     

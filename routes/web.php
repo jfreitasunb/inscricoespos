@@ -26,6 +26,8 @@ Route::prefix('candidato')->middleware('user.role:candidato,admin','define.local
 	
 	Route::get('/', '\InscricoesPos\Http\Controllers\Candidato\CandidatoController@getMenu')->name('menu.candidato');
 
+	Route::get('ver/edital/vigente', '\InscricoesPos\Http\Controllers\Candidato\CandidatoController@getVerEditalVigente')->name('ver.edital.vigente');
+
 	Route::get('dados/pessoais', '\InscricoesPos\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoais')->name('dados.pessoais');
 
 	Route::get('dados/pessoais/editar', '\InscricoesPos\Http\Controllers\Candidato\DadosPessoaisController@getDadosPessoaisEditar')->name('dados.pessoais.editar');
@@ -222,6 +224,10 @@ Route::prefix('coordenador')->middleware('user.role:coordenador,admin')->group(f
 	Route::get('editar/area/pos', '\InscricoesPos\Http\Controllers\Coordenador\EditarAreaPosController@getEditarAreaPos')->name('editar.area.pos');
 
 	Route::post('editar/area/pos', '\InscricoesPos\Http\Controllers\Coordenador\EditarAreaPosController@postEditarAreaPos');
+
+	Route::get('editar/cota/social', '\InscricoesPos\Http\Controllers\Coordenador\EditarCotaSocialController@getEditarCotaSocial')->name('editar.cota.social');
+
+	Route::post('editar/cota/social', '\InscricoesPos\Http\Controllers\Coordenador\EditarCotaSocialController@postEditarCotaSocial');
 
 	Route::get('editar/formacao', '\InscricoesPos\Http\Controllers\Coordenador\EditarFormacaoController@getEditarFormacao')->name('editar.formacao');
 

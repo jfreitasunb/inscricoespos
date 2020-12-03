@@ -23,6 +23,30 @@
       </div>
   </fieldset>
 
+  @if (isset($dados['tipo_cotista']) and ($dados['tipo_cotista'] != 5))
+    <fieldset class="scheduler-border">
+        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.comprovacao_cota_social') }}</legend>
+        <div class="form-horizontal"{{ $errors->has('comprovacao_cota_social') ? ' has-error' : '' }}>
+          <div class="row">
+            <p><i>{!! trans('tela_motivacao_documentos.complemento_comprovacao_cota_social_1').$dados['numero_anexo'].trans('tela_motivacao_documentos.complemento_comprovacao_cota_social_2') !!}</i></p>
+            <span class="input-group-btn">
+                <!-- image-preview-clear button -->
+                <button type="button" class="btn btn-primary" style="display:none;">
+                    <span class="glyphicon glyphicon-remove"></span> Clear
+                </button>
+                <!-- image-preview-input -->
+                <div class="btn btn-primary">
+                    <input type="file" accept="application/pdf" name="comprovacao_cota_social" required=""/> <!-- rename it -->
+                </div>
+            </span>
+          </div>
+           @if ($errors->has('comprovacao_cota_social'))
+            <span class="help-block">{{ $errors->first('comprovacao_cota_social') }}</span>
+          @endif
+        </div>
+  </fieldset>
+
+  @endif
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.documentos_pessoais') }}</legend>
         <div class="form-horizontal"{{ $errors->has('documentos_pessoais') ? ' has-error' : '' }}>
@@ -47,8 +71,8 @@
   <fieldset class="scheduler-border">
         <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.historico') }}</legend>
         <div class="form-horizontal"{{ $errors->has('historico') ? ' has-error' : '' }}>
-          <div class="row">
-            <p><i>{{ trans('tela_motivacao_documentos.complento_historico') }}</i></p>
+	  <div class="row">
+		<p><i>{{ trans('tela_motivacao_documentos.complento_historico') }}</i></p>
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
                 <button type="button" class="btn btn-primary" style="display:none;">
@@ -67,9 +91,10 @@
   </fieldset>
 
   <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.projeto') }}</legend>
+        <legend class="scheduler-border">{{ trans('tela_motivacao_documentos.prova_avaliacao_curricular') }}</legend>
         <div class="form-horizontal"{{ $errors->has('projeto') ? ' has-error' : '' }}>
           <div class="row">
+            <p><i>{!! trans('tela_motivacao_documentos.complemento_prova_avaliacao_curricular') !!}</i></p>
             <span class="input-group-btn">
                 <!-- image-preview-clear button -->
                 <button type="button" class="btn btn-primary" style="display:none;">

@@ -74,11 +74,22 @@
         </div>
       </div>
   </fieldset>
+
+  <fieldset class="scheduler-border">
+    <legend class="scheduler-border">{{trans('tela_escolha_candidato.cotista')}}</legend>
+      <div class="row">
+        @foreach($cota_social as $cotista => $key)
+          <div class="col-md-4">
+            <label class="radio-inline">{!! Form::radio('tipo_cotista', $cotista, $dados['tipo_cotista'] == $cotista ?: '', ['required' => '']) !!} {!! $key !!}</label>
+          </div>
+        @endforeach
+      </div>
+  </fieldset>
   @if($necessita_recomendante)
     <fieldset class="scheduler-border">
     <legend class="scheduler-border"></legend>
       <div class="row">
-        {{trans('tela_escolha_candidato.texto_recomendantes')}}
+        {!! trans('tela_escolha_candidato.texto_recomendantes') !!}
       </div>
     </fieldset>
 
