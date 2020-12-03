@@ -13,6 +13,7 @@ use Imagick;
 use InscricoesPos\Http\Controllers\FPDFController;
 use Carbon\Carbon;
 use InscricoesPos\Models\User;
+use InscricoesPos\Models\CotaSocial;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\DadoPessoalCandidato;
@@ -220,13 +221,32 @@ class RelatorioController extends BaseController
 
     $area_pos_mat = new AreaPosMat();
 
+    $cotista = new CotaSocial();
+
     $escolha_feita_candidato = $escolha_candidato->retorna_escolha_candidato($id_candidato,$id_inscricao_pos);
 
     $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido, $locale_relatorio);
+    
     $consolida_escolha['area_pos_principal'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_principal, $locale_relatorio);
+    
     $consolida_escolha['area_pos_secundaria'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_secundaria, $locale_relatorio);
+    
     $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
+
     $consolida_escolha['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
+
+    if (!is_null($escolha_feita_candidato['id_tipo_cotista'])) {
+
+      $temp_id_cotista = explode("_", $escolha_feita_candidato['id_tipo_cotista']);
+
+      $temp_tipo_cotista = [];
+
+      foreach ($temp_id_cotista as $id) {
+        $temp_tipo_cotista[] = $cotista->pega_programa_cota_social($id, $locale_relatorio);
+      }
+
+      $consolida_escolha['tipo_cotista'] = implode("_", $temp_tipo_cotista);
+    }
 
     return $consolida_escolha;
   }
@@ -461,11 +481,28 @@ class RelatorioController extends BaseController
 
       $nome_projeto_pdf = str_replace(File::extension($nome_projeto_banco),'pdf', $nome_projeto_banco);
       
-      DB::table('arquivos_enviados')->where('nome_arquivo', $nome_projeto_banco)->where('tipo_arquivo', 'Projeto')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_projeto_pdf]);
+      DB::table('arquivos_enviados')->where('nome_arquivo', $nome_projeto_banco)->where('tipo_arquivo', 'Prova de Títulos')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_projeto_pdf]);
 
       $img = new Imagick($nome_projeto_banco);
       $img->setImageFormat('pdf');
       $success = $img->writeImage($nome_comprovante_pdf);
+    }
+
+    if (!is_null($nome_cotista_banco) and File::extension($nome_cotista_banco) != 'pdf')
+    {
+
+      $nome_cotista_pdf = str_replace(File::extension($nome_cotista_banco),'pdf', $nome_cotista_banco);
+      
+      DB::table('arquivos_enviados')->where('nome_arquivo', $nome_cotista_banco)->where('tipo_arquivo', 'Cotista')->where('id_inscricao_pos', $id_inscricao_pos)->update(['nome_arquivo' => $nome_cotista_pdf]);
+
+      $img = new Imagick($nome_cotista_banco);
+      $img->setImageFormat('pdf');
+      $success = $img->writeImage($nome_cotista_pdf);
+
+    }
+
+    if (!is_null($nome_cotista_banco)) {
+      $nome_uploads['nome_cotista_pdf'] = str_replace(File::extension($nome_cotista_banco),'pdf', $nome_cotista_banco);
     }
 
     $nome_uploads['documento_pdf'] = str_replace(File::extension($nome_documento_banco),'pdf', $nome_documento_banco);
@@ -484,11 +521,20 @@ class RelatorioController extends BaseController
 
   public function ConsolidaFichaRelatorio($nome_arquivos, $nome_uploads)
   {
+    
     if (array_key_exists('nome_proficiencia_pdf', $nome_uploads)) {
-      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      if (array_key_exists('nome_cotista_pdf', $nome_uploads)) {
+        $process = new Process('qpdf --empty --pages '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['nome_cotista_pdf'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' -- '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      }else{
+        $process = new Process('qpdf --empty --pages '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_proficiencia_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' -- '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      }
     }else{
-      $process = new Process('pdftk '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' '.' cat output '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      if (array_key_exists('nome_cotista_pdf', $nome_uploads)) {
+        $process = new Process('qpdf --empty --pages '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['nome_cotista_pdf'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' -- '.$nome_arquivos['arquivo_relatorio_candidato_final']);
+      }else{
+      $process = new Process('qpdf --empty --pages '.$nome_arquivos['arquivo_relatorio_candidato_temporario'].' '.$nome_uploads['documento_pdf'].' '.$nome_uploads['historico_pdf'].' '.$nome_uploads['nome_projeto_pdf'].' '.' -- '.$nome_arquivos['arquivo_relatorio_candidato_final']);
     }
+  }
 
     $process->setTimeout(3600);
     
@@ -691,10 +737,20 @@ class RelatorioController extends BaseController
 
         foreach ($contatos_indicados  as $id ) {
           $recomendantes_candidato[$id->id_recomendante] = $this->ConsolidaCartaPorRecomendante($id->id_recomendante,$dados_candidato_para_relatorio['id_aluno'],$id_inscricao_pos);
+
+          $recomendantes_candidato[$id->id_recomendante]['endereco_recomendante'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['endereco_recomendante'], 120, "\n", true));
+
+          $recomendantes_candidato[$id->id_recomendante]['circunstancia_outra'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['circunstancia_outra'], 120, "\n", true));
+          
+          $recomendantes_candidato[$id->id_recomendante]['antecedentes_academicos'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['antecedentes_academicos'], 120, "\n", true));
+
+          $recomendantes_candidato[$id->id_recomendante]['possivel_aproveitamento'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['possivel_aproveitamento'], 120, "\n", true));
+
+          $recomendantes_candidato[$id->id_recomendante]['informacoes_relevantes'] = nl2br(wordwrap($recomendantes_candidato[$id->id_recomendante]['informacoes_relevantes'], 120, "\n"));
         }
       }
       
-      $dados_candidato_para_relatorio['motivacao'] = nl2br($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos));
+      $dados_candidato_para_relatorio['motivacao'] = nl2br(wordwrap($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos), 120, "\n", true));
 
       $nome_arquivos = [];
 
@@ -780,7 +836,7 @@ class RelatorioController extends BaseController
     $relatorios_anteriores = $relatorio->retorna_lista_para_relatorio();
 
     $monitoria = $id_inscricao_pos;
-
+    
     return redirect()->back()->with(compact('monitoria','relatorios_anteriores','arquivos_zipados_para_view','relatorio_csv'));
   }
 
@@ -791,11 +847,11 @@ class RelatorioController extends BaseController
     $locale_relatorio = 'pt-br';
 
     $relatorio_disponivel = ConfiguraInscricaoPos::find($id_inscricao_pos);
-
+    
     $necessita_recomendante = $relatorio_disponivel->necessita_recomendante;
-
+    
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio_disponivel['edital']);
-
+    
     $relatorio_csv = Writer::createFromPath($locais_arquivos['local_relatorios'].$locais_arquivos['arquivo_relatorio_csv'], 'w+');
 
     $relatorio_csv->insertOne($this->ConsolidaCabecalhoCSV());
