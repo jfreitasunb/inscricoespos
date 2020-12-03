@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use InscricoesPos\Models\User;
 use InscricoesPos\Models\AssociaEmailsRecomendante;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
+use InscricoesPos\Models\CotaSocial;
 use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\ProgramaPos;
@@ -100,6 +101,8 @@ class EscolhaCandidatoController extends BaseController
 			$dados['interesse_bolsa'] = null;
 			
 			$dados['vinculo_empregaticio'] = null;
+
+			$dados['area_cotista'] = null;
 					
 			$dados['nome_recomendante_1'] = null;
 			
@@ -124,6 +127,8 @@ class EscolhaCandidatoController extends BaseController
 			$dados['email_recomendante_2'] = null;
 			
 			$dados['email_recomendante_3'] = null;
+
+			$dados['tipo_cotista'] = null;
 
 			$escolha_candidato = new EscolhaCandidato();
 
@@ -162,6 +167,8 @@ class EscolhaCandidatoController extends BaseController
 				$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
 				
 				$dados['vinculo_empregaticio'] = $candidato_ja_escolheu->vinculo_empregaticio;
+
+				$dados['tipo_cotista'] = $candidato_ja_escolheu->id_tipo_cotista;
 			}
 
 			if (in_array(2, $programas_disponiveis)) {
@@ -169,21 +176,26 @@ class EscolhaCandidatoController extends BaseController
 				switch ($locale_candidato) {
 				 	case 'en':
 				 		$nome_coluna = 'nome_en';
+				 		$nome_coluna_cota_social = 'cota_social_en';
 				 		break;
 
 				 	case 'es':
 				 		$nome_coluna = 'nome_es';
+				 		$nome_coluna_cota_social = 'cota_social_es';
 				 		break;
 				 	
 				 	default:
 				 		$nome_coluna = 'nome_ptbr';
+				 		$nome_coluna_cota_social = 'cota_social_ptbr';
 				 		break;
 				 }
 
 				$areas_pos = AreaPosMat::where('id_area_pos', '!=', 10)->pluck($nome_coluna,'id_area_pos')->prepend(trans('mensagens_gerais.selecionar'),'');
+
+				$cota_social = CotaSocial::pluck($nome_coluna_cota_social,'id');
 			}
-			
-			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos','dados', 'necessita_recomendante'));
+
+			return view('templates.partials.candidato.escolha_candidato')->with(compact('disable','programa_para_inscricao','areas_pos', 'cota_social', 'dados', 'necessita_recomendante'));
 
 			if (in_array(3, $programas_disponiveis)) {
 			
@@ -239,6 +251,7 @@ class EscolhaCandidatoController extends BaseController
 						'programa_pretendido' => 'required',
 						'interesse_bolsa' => 'required',
 						'vinculo_empregaticio' => 'required',
+						'tipo_cotista' => 'required',
 						'nome_recomendante' => 'required',
 						'email_recomendante' => 'required|tres_recomendantes',
 						'confirmar_email_recomendante' => 'required|same:email_recomendante',
