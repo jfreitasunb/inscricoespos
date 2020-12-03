@@ -92,4 +92,34 @@ class CandidatoController extends BaseController
         
 		return view('home');
 	}
+
+    public function getVerEditalVigente()
+    {
+        Session::get('locale');
+        
+        $user = $this->SetUser();
+        
+        $id_candidato = $user->id_user;
+
+        $locale_candidato = User::find($id_candidato)->locale;
+
+        $edital_vigente = new ConfiguraInscricaoPos();
+
+        $edital = $edital_vigente->retorna_inscricao_ativa()->edital;
+
+        $arquivos_editais = "storage/editais/";
+
+        $edital_pdf = 'Edital_MAT_'.$edital.'_ptbr';
+
+        if ($locale_candidato == 'en' && file_exists(storage_path("app/public/editais/").'Edital_MAT_'.$edital.'_en.pdf') ) {
+            $edital_pdf = 'Edital_MAT_'.$edital.'_en';
+        }
+        
+        if ($locale_candidato == 'es' && file_exists(storage_path("app/public/editais/").'Edital_MAT_'.$edital.'_es.pdf') ) {
+            $edital_pdf = 'Edital_MAT_'.$edital.'_es';
+        }
+
+        return view('templates.partials.candidato.ver_edital_vigente',compact('arquivos_editais', 'edital', 'edital_pdf'));
+
+    }
 }
