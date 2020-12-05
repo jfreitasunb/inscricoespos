@@ -25,6 +25,7 @@ class AreaPosMat extends FuncoesModels
         'nome_ptbr',
         'nome_en',
         'nome_es',
+        'ativa',
     ];
 
     public function pega_area_pos_mat($area_pos, $locale)
@@ -35,7 +36,7 @@ class AreaPosMat extends FuncoesModels
             return null;
         }else{
             return $this->select($nome_coluna)
-            ->where('id_area_pos', $area_pos)->where('id_area_pos', '!=', 10)
+            ->where('id_area_pos', $area_pos)->where('id_area_pos', '!=', 10)->where('ativa', True)
             ->value($nome_coluna);
         }   
     }

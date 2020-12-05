@@ -18,6 +18,7 @@ class CreateAreaPosMatTable extends Migration
             $table->string('nome_ptbr',200);
             $table->string('nome_en',200)->nullable();
             $table->string('nome_es',200)->nullable();
+            $table->boolean('ativa')->default(True);
             $table->timestamps();
         });
     }

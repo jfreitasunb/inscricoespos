@@ -36,6 +36,8 @@ class EditarAreaPosController extends CoordenadorController
 	{
 		$areas_pos_mat = AreaPosMat::orderBy('id_area_pos')->get()->all();
 
+		dd($areas_pos_mat);
+
 		return view('templates.partials.coordenador.editar_area_pos')->with(compact('areas_pos_mat'));
 	}
 
@@ -46,14 +48,42 @@ class EditarAreaPosController extends CoordenadorController
 			'nome_ptbr' => 'required',
 			'nome_en' => 'required',
 			'nome_es' => 'required',
+			'ativa' => 'required',
 		]);
 
 		$id_area_pos = (int)$request->id_area_pos;
+
+		switch (strtolower($request->ativa)) {
+			case 'n':
+				$area_ativa = False;
+				break;
+			
+			case 'não':
+				$area_ativa = False;
+				break;
+
+			case 'nao':
+				$area_ativa = False;
+				break;
+			
+			case '0':
+				$area_ativa = False;
+				break;
+			
+			case '1':
+				$area_ativa = False;
+				break;
+			
+			default:
+				$area_ativa = True;
+				break;
+		}
 
 		$dados_area_pos = [
 			'nome_ptbr' => trim($request->nome_ptbr),
 			'nome_en' => trim($request->nome_en),
 			'nome_es' => trim($request->nome_es),
+			'ativa' => $area_ativa,
 		];
 
 		$area_pos = AreaPosMat::find($id_area_pos);
