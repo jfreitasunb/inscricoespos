@@ -227,10 +227,13 @@ class RelatorioController extends BaseController
 
     $consolida_escolha['programa_pretendido'] = $programa_pos->pega_programa_pos_mat($escolha_feita_candidato->programa_pretendido, $locale_relatorio);
     
-    $consolida_escolha['area_pos_principal'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_principal, $locale_relatorio);
+    if ($escolha_feita_candidato->programa_pretendido !== 1){
+
+      $consolida_escolha['area_pos_principal'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_principal, $locale_relatorio);
     
-    $consolida_escolha['area_pos_secundaria'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_secundaria, $locale_relatorio);
-    
+      $consolida_escolha['area_pos_secundaria'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_secundaria, $locale_relatorio);
+    }
+
     $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
 
     $consolida_escolha['vinculo_empregaticio'] = $escolha_feita_candidato->vinculo_empregaticio;
@@ -412,7 +415,7 @@ class RelatorioController extends BaseController
   {
     $nome_arquivos = [];
 
-    if (is_null($dados_candidato_para_relatorio['area_pos_principal'])) {
+    if (!array_key_exists('area_pos_principal',$dados_candidato_para_relatorio)) {
       $nome_arquivos['arquivo_relatorio_candidato_temporario'] = $local_arquivos_temporarios.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['programa_pretendido'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       $nome_arquivos['arquivo_relatorio_candidato_final'] = $local_arquivos_definitivos.'Inscricao_'.str_replace('\'s','',str_replace(' ', '-', strtr($dados_candidato_para_relatorio['programa_pretendido'], $this->normalizeChars))).'_'.str_replace(' ', '-', strtr($dados_candidato_para_relatorio['nome'], $this->normalizeChars)).'_'.$dados_candidato_para_relatorio['id_aluno'].'.pdf';
       }else{

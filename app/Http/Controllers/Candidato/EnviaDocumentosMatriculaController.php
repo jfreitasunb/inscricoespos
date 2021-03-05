@@ -56,6 +56,14 @@ class EnviaDocumentosMatriculaController extends BaseController
 		$edital_ativo = new ConfiguraInscricaoPos();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+		$id_programa_foi_selecionado = (int)$candidato_selecionado->retorna_ja_foi_selecionado($id_candidato);
+
+        $diferenca = $id_inscricao_pos - $id_programa_foi_selecionado;
+
+        if (($diferenca > 0) and ($diferenca < $id_inscricao_pos) and ($diferenca < 2)) {
+            $id_inscricao_pos = $id_programa_foi_selecionado;
+        }
 		
 		if ($id_inscricao_pos_candidato == $id_inscricao_pos ) {
 			

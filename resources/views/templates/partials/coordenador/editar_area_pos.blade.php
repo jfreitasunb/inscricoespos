@@ -30,7 +30,7 @@
             <td>{!! Form::text('nome_ptbr', $area->nome_ptbr, ['class' => 'form-control']) !!}</td>
             <td>{!! Form::text('nome_en', $area->nome_en, ['class' => 'form-control']) !!}</td>
             <td>{!! Form::text('nome_es', $area->nome_es, ['class' => 'form-control']) !!}</td>
-            <td>{!! Form::text('nome_es', $area->ativa, ['class' => 'form-control']) !!}</td>
+            <td>{!! Form::text('ativa', $area->ativa? 'Sim' : 'Não', ['class' => 'form-control']) !!}</td>
             <td>{!! Form::submit('Alterar', ['class' => 'btn btn-danger pull-righ']) !!}</td>
             {!! Form::close() !!}
           </tr>

@@ -200,7 +200,7 @@ class BladeServiceProvider extends ServiceProvider
 
             $user = auth()->user();
             
-            $id_user = $user->id_user;
+            $id_candidato = $user->id_user;
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
@@ -208,11 +208,19 @@ class BladeServiceProvider extends ServiceProvider
 
             $candidato_selecionado = new CandidatosSelecionados();
 
-            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_user);
+            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_candidato);
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+            $id_programa_foi_selecionado = (int)$candidato_selecionado->retorna_ja_foi_selecionado($id_candidato);
+
+            $diferenca = $id_inscricao_pos - $id_programa_foi_selecionado;
+
+            if (($diferenca > 0) and ($diferenca < $id_inscricao_pos) and ($diferenca < 2)) {
+                $id_inscricao_pos = $id_programa_foi_selecionado;
+            }
 
             if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
 
@@ -222,7 +230,7 @@ class BladeServiceProvider extends ServiceProvider
 
                 $finaliza_inscricao = new FinalizaInscricao();
 
-                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user, $id_inscricao_pos);
+                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato, $id_inscricao_pos);
 
                 if ($autoriza_inscricao and !$status_inscricao) {
                     return true;
@@ -242,7 +250,7 @@ class BladeServiceProvider extends ServiceProvider
 
                 $finaliza_inscricao = new FinalizaInscricao();
 
-                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_user, $id_inscricao_pos);
+                $status_inscricao = $finaliza_inscricao->retorna_inscricao_finalizada($id_candidato, $id_inscricao_pos);
 
                 if ($autoriza_inscricao and !$status_inscricao) {
                     return true;
@@ -294,7 +302,8 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('confirmacao_participacao', function ( $user = null ){
 
             $user = auth()->user();
-            $id_user = $user->id_user;
+
+            $id_candidato = $user->id_user;
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
@@ -302,7 +311,7 @@ class BladeServiceProvider extends ServiceProvider
             
             $selecao_candidatos = new CandidatosSelecionados();
 
-            $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+            $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
             $configura_inicio = new ConfiguraInicioPrograma();
 
@@ -322,21 +331,29 @@ class BladeServiceProvider extends ServiceProvider
 
             $user = auth()->user();
             
-            $id_user = $user->id_user;
+            $id_candidato = $user->id_user;
 
             $candidato_selecionado = new CandidatosSelecionados();
 
-            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_user);
+            $id_inscricao_pos_candidato = $candidato_selecionado->encontra_id_tabela($id_candidato);
 
             $edital_ativo = new ConfiguraInscricaoPos();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 
+            $id_programa_foi_selecionado = (int)$candidato_selecionado->retorna_ja_foi_selecionado($id_candidato);
+
+            $diferenca = $id_inscricao_pos - $id_programa_foi_selecionado;
+
+            if (($diferenca > 0) and ($diferenca < $id_inscricao_pos) and ($diferenca < 2)) {
+                $id_inscricao_pos = $id_programa_foi_selecionado;
+            }
+
             if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
                 
                 $selecao_candidatos = new CandidatosSelecionados();
 
-                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
                 $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
@@ -358,7 +375,7 @@ class BladeServiceProvider extends ServiceProvider
 
                 $selecao_candidatos = new CandidatosSelecionados();
 
-                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
+                $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_candidato);
 
                 $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
