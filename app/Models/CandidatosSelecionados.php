@@ -26,7 +26,7 @@ class CandidatosSelecionados extends FuncoesModels
 
     public function encontra_id_tabela($id_candidato)
     {
-        $temp = $this->where('id_candidato', $id_candidato)->where('selecionado', True)->orderBy('created_at', 'desc')->get();
+        $temp = $this->where('id_candidato', $id_candidato)->where('selecionado', True)->where('confirmou_presenca', True)->orderBy('created_at', 'desc')->get();
 
         if (count($temp)) {
 
