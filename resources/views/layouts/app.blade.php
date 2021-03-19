@@ -10,6 +10,24 @@
     </head>
     
     <body>
-        @yield('content')
+        
+        {{-- header --}}
+        <div class="bg-azul-MAT p-4">
+            {{-- left side --}}
+            <div class="flex justify-between items-center">
+                <img src="{{ asset('imagens/logo/logo_unb.png') }}" width="120" alt="Logo" class="mr-2">
+                <p class="text-indigo-50">Departamento de Matemática</p>
+                <p>Inscrições para o Mestrado e Doutorado</p>
+                <p>01/01/2021 à 31/12/2021</p>
+            </div>
+
+            {{-- right side --}}
+
+        </div>
+        {{-- main area --}}
+
+        {{-- footer --}}
+            @yield('content')
+        
     </body>
 </html>
