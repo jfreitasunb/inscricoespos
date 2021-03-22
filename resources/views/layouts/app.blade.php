@@ -32,15 +32,26 @@
         {{-- Language area --}}
 
         <div id="main" class="p-4 lg:justify-center lg:space-x-14 md:justify-around ml-2 h-26 w-3/3 flex items-stretch">
-        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Português</a></div>  
-        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">English</a></div>  
-        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Español</a></div>  
-    </div>  
+            <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Português</a></div>
+            <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">English</a></div>
+            <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Español</a></div>
+        </div>
         {{-- main area --}}
 
+        <div id="main" class="p-16 lg:justify-center lg:space-x-14 md:justify-around ml-2 h-26 w-3/3 flex items-stretch">
+            <div class="bg-verde-MAT rounded-lg py-2 w-72 hover:bg-blue-700 text-center text-white"><a href="#">Login</a></div>
+            <div class="bg-blue-700 rounded-lg py-2 w-72 hover:bg-blue-800 text-center text-white"><a href="#">Registrar</a></div>
+        </div>
 
+        <div id="main" class="lg:justify-center lg:space-x-14 md:justify-around ml-2 w-3/3 flex items-stretch">
+            <div class="hover:underline text-center text-blue-600"><a href="#">Esqueceu a senha?</a></div>
+        </div>
+
+        @yield('content')
+        
         {{-- footer --}}
-            @yield('content')
+            <p>Pós-Graduação MAT/UnB - {{ date("Y") }}  - <a href="mailto:posgrad@mat.unb.br">{{ trans('mensagens_gerais.duvidas_pos') }}</a> - <a href="mailto:informatica@mat.unb.br">{{ trans('mensagens_gerais.problemas') }}</a></p>
+
         
     </body>
 </html>
