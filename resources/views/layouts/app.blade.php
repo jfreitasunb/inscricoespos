@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     </head>
     
-    <body>
+    <body class="bg-gray-100">
         
         {{-- header --}}
-        <div class="bg-azul-MAT p-4 flex mb-4 lg:justify-center md:justify-between">
+        <div class="bg-azul-MAT p-4 flex lg:justify-center md:justify-between items-center">
             {{-- left side --}}
             <div class="lg:w-1/3 md:w-1/2">
                 <img src="{{ asset('imagens/logo/logo_unb.png') }}" width="140" alt="Logo">
@@ -26,9 +26,18 @@
                 <h3 class="lg:text-2xl md:text-2xl text-white md:text-center lg:mb-4">01/01/2021 à 31/12/2021</h3>
             </div>
             <div></div>
-
+´
         </div>
+
+        {{-- Language area --}}
+
+        <div id="main" class="p-4 lg:justify-center lg:space-x-14 md:justify-around ml-2 h-26 w-3/3 flex items-stretch">
+        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Português</a></div>  
+        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">English</a></div>  
+        <div class="bg-azul-MAT rounded-full py-2 w-32 hover:bg-blue-700 text-center text-white"><a href="#">Español</a></div>  
+    </div>  
         {{-- main area --}}
+
 
         {{-- footer --}}
             @yield('content')
