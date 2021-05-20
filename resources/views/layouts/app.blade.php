@@ -21,9 +21,9 @@
                 {{-- right side --}}
 
                 <div class="lg:w-2/3 lg:self-center md:w-1/2 ml-2 lg:mr-96">
-                    <h1 class="lg:text-6xl md:text-4xl text-white md:text-center lg:mb-4">Departamento de Matemática</h1>
-                    <h2 class="lg:text-4xl md:text-2xl text-white md:text-center lg:mb-4">Inscrições para o Mestrado e Doutorado</h2>
-                    <h3 class="lg:text-2xl md:text-2xl text-white md:text-center lg:mb-4">01/01/2021 à 31/12/2021</h3>
+                    <h1 class="lg:text-6xl md:text-4xl text-white md:text-center lg:mb-4">{{ __('mensagens_gerais.departamento') }}</h1>
+                    <h2 class="lg:text-4xl md:text-2xl text-white md:text-center lg:mb-4">{{ __('mensagens_gerais.'.$texto_inscricao_pos) }}</h2>
+                    <h3 class="lg:text-2xl md:text-2xl text-white md:text-center lg:mb-4">{{ $periodo_inscricao }}</h3>
                 </div>
                 <div></div>
     ´
@@ -39,19 +39,20 @@
             {{-- main area --}}
 
             <div id="main2" class="lg:justify-center lg:space-x-14 justify-around ml-2 w-3/3 flex items-stretch">
-                <a href="#" class="inline-block w-28 py-3 px-6 text-lg bg-verde-MAT rounded-lg hover:bg-blue-700 text-center text-white">Login</a>
+                <a href="{{ route('auth.login') }}" class="inline-block w-28 py-3 px-6 text-lg bg-verde-MAT rounded-lg hover:bg-blue-700 text-center text-white">Login</a>
 
-                <a href="#" class="inline-block w-28 py-3 px-6 text-lg bg-blue-500 rounded-lg hover:bg-blue-700 text-center text-white">Registrar</a>
+                <a href="{{ route('auth.registrar') }}" class="inline-block w-28 py-3 px-6 text-lg bg-blue-500 rounded-lg hover:bg-blue-700 text-center text-white">Registrar</a>
             </div>
 
             <div id="main3" class="justify-center lg:space-x-14 md:justify-around ml-2 w-3/3 flex items-stretch">
-                <div class="hover:underline text-center text-blue-600"><a href="#">Esqueceu a senha?</a></div>
+                <div class="hover:underline text-center text-blue-600"><a href="{{ route('password.request') }}">{{ __('tela_login.menu_esqueceu_senha') }}</a></div>
             </div>
 
             {{-- footer --}}
 
             <footer class="justify-center h-14">
-                <p class="text-center bg-gray-300">Pós-Graduação MAT/UnB - {{ date("Y") }}  - <a class="hover:underline text-center text-blue-600" href="mailto:posgrad@mat.unb.br">{{ trans('mensagens_gerais.duvidas_pos') }}</a> - <a class="hover:underline text-center text-blue-600" href="mailto:informatica@mat.unb.br">{{ trans('mensagens_gerais.problemas') }}</a></p>
+                <hr style="background: #009fe5; height: 4px;opacity: 1;">
+                <p class="text-center bg-gray-300">Pós-Graduação MAT/UnB - {{ date("Y") }}  - <a class="hover:underline text-center text-blue-600" href="mailto:posgrad@mat.unb.br">{{ __('mensagens_gerais.duvidas_pos') }}</a> - <a class="hover:underline text-center text-blue-600" href="mailto:informatica@mat.unb.br">{{ __('mensagens_gerais.problemas') }}</a></p>
             </footer>
         </div>
     </body>
