@@ -20,3 +20,22 @@ Route::get('/', function () {
 Route::get('/candidato', function () {
     return view('candidato.index');
 });
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('auth.login');
+
+Route::post('/login', [LoginController::class, 'logar']);
+
+Route::get('/register', [RegistrarController::class, 'index'])->name('auth.registrar');
+
+Route::post('/register', [RegistrarController::class, 'logar']);
+
+Route::get('/forgot-password', [RecuperaSenhaController::class, 'create'])->middleware('guest')->name('password.request');
+
+Route::post('/forgot-password', [RecuperaSenhaController::class, 'store'])->middleware('guest')->name('password.email');
+
+Route::get('/reset-password/{token}', [NovaSenhaController::class, 'create'])->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [NovaSenhaController::class, 'store'])->middleware('guest')->name('password.update');
+
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
