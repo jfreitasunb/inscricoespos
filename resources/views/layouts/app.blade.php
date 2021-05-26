@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,16 +32,22 @@
             {{-- Language area --}}
 
             <div id="main" class="lg:justify-center lg:space-x-14 justify-around ml-2 w-3/3 flex items-stretch">
-                <a href="#" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Português</a>
-                <a href="#" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">English</a>
-                <a href="#" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Español</a>
+                <a href="{{ route('lang.portugues') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Português</a>
+                <a href="{{ route('lang.ingles') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">English</a>
+                <a href="{{ route('lang.espanhol') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Español</a>
             </div>
             {{-- main area --}}
 
-            <div id="main2" class="lg:justify-center lg:space-x-14 justify-around ml-2 w-3/3 flex items-stretch">
-                <a href="{{ route('auth.login') }}" class="inline-block w-28 py-3 px-6 text-lg bg-verde-MAT rounded-lg hover:bg-blue-700 text-center text-white">Login</a>
+            @if (session('status') == 'verification-link-sent')
+                <div class="mb-4 font-medium text-sm text-green-600">
+                    {{ __('A verification link has been sent to the email address you provided during registration.') }}
+                </div>
+            @endif
 
-                <a href="{{ route('auth.registrar') }}" class="inline-block w-28 py-3 px-6 text-lg bg-blue-500 rounded-lg hover:bg-blue-700 text-center text-white">Registrar</a>
+            <div id="main2" class="lg:justify-center lg:space-x-14 justify-around ml-2 w-3/3 flex items-stretch">
+                <a href="{{ route('login') }}" class="inline-block w-28 py-3 px-6 text-lg bg-verde-MAT rounded-lg hover:bg-blue-700 text-center text-white">Login</a>
+
+                <a href="{{ route('registrar') }}" class="inline-block w-28 py-3 px-6 text-lg bg-blue-500 rounded-lg hover:bg-blue-700 text-center text-white">Registrar</a>
             </div>
 
             <div id="main3" class="justify-center lg:space-x-14 md:justify-around ml-2 w-3/3 flex items-stretch">

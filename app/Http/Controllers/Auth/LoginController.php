@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+  
     /**
      * Display the login view.
      *
@@ -30,11 +31,23 @@ class LoginController extends Controller
     {
         $request->authenticate();
 
-        dd(Auth::user()->hasRole('admin'));
-
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if (Auth::user()->hasRole('admin')) {
+            return redirect()->intended(RouteServiceProvider::ADMIN);
+        }
+
+        if (Auth::user()->hasRole('coordenador')) {
+            return redirect()->intended(RouteServiceProvider::COORD);
+        }
+
+        if (Auth::user()->hasRole('candidato')) {
+            return redirect()->intended(RouteServiceProvider::CAND);
+        }
+
+        if (Auth::user()->hasRole('recomendante')) {
+            return redirect()->intended(RouteServiceProvider::RECO);
+        }
     }
 
     /**
@@ -43,7 +56,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function logout(Request $request)
     {
         Auth::guard('web')->logout();
 
