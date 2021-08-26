@@ -132,9 +132,7 @@ class HomologaInscricoesController extends CoordenadorController
 
         $dados_homologacao['edital'] = str_pad(explode("-",$relatorio_disponivel->edital)[1], 2, '0', STR_PAD_LEFT)."/".explode("-",$relatorio_disponivel->edital)[0];
 
-	$dados_homologacao['numero_edital'] = "0".explode("-", $relatorio_disponivel->edital)[1];
-
-	$numero_programas = count(explode("_", $relatorio_disponivel->programa));
+        $numero_programas = count(explode("_", $relatorio_disponivel->programa));
 
         if ($numero_programas > 1) {
             $dados_homologacao['texto_cursos_pos'] = "os cursos de Doutorado e Mestrado Acadêmico";

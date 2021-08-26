@@ -8,7 +8,7 @@
 
 {!! Form::open(array('route' => 'envia.documentos.matricula', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data', 'data-parsley-validate' => '' )) !!}
   <fieldset class="scheduler-border">
-        <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.ficha_cadastral') }} - {{ link_to('/storage/modelo-ficha-cadastral.pdf',trans('tela_envia_documentos_matricula.modelo'), array('target' => '_blank' )) }}</legend>
+        <legend class="scheduler-border">{{ trans('tela_envia_documentos_matricula.ficha_cadastral') }} - {{ link_to('storage/modelo-ficha-cadastral.pdf',trans('tela_envia_documentos_matricula.modelo'), array('target' => '_blank' )) }}</legend>
         <div class="form-horizontal"{{ $errors->has('arquivos_matricula[1_fc]') ? ' has-error' : '' }}>
           <div class="row">
             <span class="input-group-btn">

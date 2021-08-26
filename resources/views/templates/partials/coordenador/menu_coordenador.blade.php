@@ -213,7 +213,6 @@
                 @yield('graficos')
                 @yield('auxilia_selecao')
                 @yield('documentos_matricula_coordenador')
-                @yield('edita_cota_social')
             </div>
         </div>
     </div>

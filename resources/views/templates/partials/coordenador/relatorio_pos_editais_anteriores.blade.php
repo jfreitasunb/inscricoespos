@@ -29,7 +29,7 @@
 				      			@endforeach
 				      		@endif
 				      		@endif</td>
-				      	<td>@if($monitoria == $relatorio['id_inscricao_pos']  or Session::get('monitoria') == $relatorio['id_inscricao_pos'] )  <a target="_blank" href="{{asset('storage/relatorios/edital_'.$relatorio['edital'].'/'.Session::get('relatorio_csv'))}}" >{{Session::has('relatorio_csv')? Session::get('relatorio_csv'): $relatorio_csv}}</a> @endif</td>
+				      	<td>@if($monitoria == $relatorio['id_inscricao_pos']  or Session::get('monitoria') == $relatorio['id_inscricao_pos'] ) <a target="_blank" href="{{asset('storage/relatorios/edital_'.$relatorio['edital'].'/'.Session::get('relatorio_csv'))}}">{{Session::has('relatorio_csv')? Session::get('relatorio_csv'): $relatorio_csv}}</a> @endif</td>
 				    	</tr>
 		  			@endforeach
 			  	</tbody>

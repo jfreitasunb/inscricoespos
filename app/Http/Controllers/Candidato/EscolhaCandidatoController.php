@@ -132,25 +132,6 @@ class EscolhaCandidatoController extends BaseController
 
 			$escolha_candidato = new EscolhaCandidato();
 
-			switch ($locale_candidato) {
-			 	case 'en':
-			 		$nome_coluna = 'nome_en';
-			 		$nome_coluna_cota_social = 'cota_social_en';
-			 		break;
-
-			 	case 'es':
-			 		$nome_coluna = 'nome_es';
-			 		$nome_coluna_cota_social = 'cota_social_es';
-			 		break;
-			 	
-			 	default:
-			 		$nome_coluna = 'nome_ptbr';
-			 		$nome_coluna_cota_social = 'cota_social_ptbr';
-			 		break;
-			 }
-
-			$cota_social = CotaSocial::pluck($nome_coluna_cota_social,'id');
-
 			$candidato_ja_escolheu = $escolha_candidato->retorna_escolha_candidato($id_user, $id_inscricao_pos);
 
 			if (!is_null($candidato_ja_escolheu)) {

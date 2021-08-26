@@ -101,8 +101,8 @@
         <div>
             <h2>Homologação das inscrições para o Programa de Pós-Graduação em Matemática - Edital {{ $dados_homologacao['edital'] }}</h2>
             <div>
-	    	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O Programa de Pós-graduação em Matemática da Universidade de Brasília torna público o edital de homologação das inscrições para {{ $dados_homologacao['texto_cursos_pos'] }} realizadas no âmbito do edital nº {{ $dados_homologacao['edital'] }}. </p>
-	    </div>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;O Programa de Pós-graduação em Matemática da Universidade de Brasília torna pública o edital de homologação das inscrições para {{ $dados_homologacao['texto_cursos_pos'] }} realizadas no âmbito do edital nº {{ $dados_homologacao['edital'] }}. </p>
+            </div>
         </div>
         
         @foreach ($homologacoes as $key => $candidato)

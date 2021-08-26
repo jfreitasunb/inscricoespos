@@ -140,28 +140,17 @@ class MotivacaoDocumentosController extends BaseController
 		$escolha = new EscolhaCandidato();
 
 		$candidato_ja_escolheu = $escolha->retorna_escolha_candidato($id_candidato, $id_inscricao_pos);
-		
-		if (!is_null($candidato_ja_escolheu)) {
-			if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
-				$this->validate($request, [
-					'motivacao' => 'required',
-					'comprovacao_cota_social' => 'required|max:50000|mimes:pdf',
-					'documentos_pessoais' => 'required|max:50000|mimes:pdf',
-					'historico' => 'required|max:50000|mimes:pdf',
-					'projeto' => 'required|max:50000|mimes:pdf',
-					'comprovante_proficiencia' => 'max:50000|mimes:pdf',
-					'concorda_termos' => 'required',
-				]);
-			}else{
-				$this->validate($request, [
-					'motivacao' => 'required',
-					'documentos_pessoais' => 'required|max:50000|mimes:pdf',
-					'historico' => 'required|max:50000|mimes:pdf',
-					'projeto' => 'required|max:50000|mimes:pdf',
-					'comprovante_proficiencia' => 'max:50000|mimes:pdf',
-					'concorda_termos' => 'required',
-				]);
-			}
+
+		if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
+			$this->validate($request, [
+				'motivacao' => 'required',
+				'comprovacao_cota_social' => 'required|max:50000|mimes:pdf',
+				'documentos_pessoais' => 'required|max:50000|mimes:pdf',
+				'historico' => 'required|max:50000|mimes:pdf',
+				'projeto' => 'required|max:50000|mimes:pdf',
+				'comprovante_proficiencia' => 'max:50000|mimes:pdf',
+				'concorda_termos' => 'required',
+			]);
 		}else{
 			$this->validate($request, [
 				'motivacao' => 'required',
@@ -185,34 +174,33 @@ class MotivacaoDocumentosController extends BaseController
 
 		$finaliza_inscricao->inicializa_tabela_finalizacao($id_candidato, $id_inscricao_pos);
 
-		if (!is_null($candidato_ja_escolheu)) {
-			if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
+
+		if ($candidato_ja_escolheu->id_tipo_cotista != 5) {
 			
-				$arquivo = new Documento();
-					
-				$comprovante_cota_ja_enviados = $arquivo->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Cotista');
-
-				if (is_null($comprovante_cota_ja_enviados)) {
-
-					$doc_cotista = $request->comprovacao_cota_social->store('uploads');
-
-					$arquivo->id_candidato = $id_candidato;
+			$arquivo = new Documento();
 				
-					$arquivo->nome_arquivo = $doc_cotista;
-				
-					$arquivo->tipo_arquivo = "Cotista";
-				
-					$arquivo->id_inscricao_pos = $id_inscricao_pos;
-				
-					$arquivo->save();
-				}else{
-					
-					$nome_arquivo = explode("/", $comprovante_cota_ja_enviados->nome_arquivo);
+			$comprovante_cota_ja_enviados = $arquivo->retorna_arquivo_edital_atual($id_candidato, $id_inscricao_pos, 'Cotista');
 
-					$request->comprovacao_cota_social->storeAs('uploads', $nome_arquivo[1]);
+			if (is_null($comprovante_cota_ja_enviados)) {
 
-					$arquivo->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Cotista');
-				}
+				$doc_cotista = $request->comprovacao_cota_social->store('uploads');
+
+				$arquivo->id_candidato = $id_candidato;
+			
+				$arquivo->nome_arquivo = $doc_cotista;
+			
+				$arquivo->tipo_arquivo = "Cotista";
+			
+				$arquivo->id_inscricao_pos = $id_inscricao_pos;
+			
+				$arquivo->save();
+			}else{
+				
+				$nome_arquivo = explode("/", $comprovante_cota_ja_enviados->nome_arquivo);
+
+				$request->comprovacao_cota_social->storeAs('uploads', $nome_arquivo[1]);
+
+				$arquivo->atualiza_arquivos_enviados($id_candidato, $id_inscricao_pos, 'Cotista');
 			}
 		}
 		

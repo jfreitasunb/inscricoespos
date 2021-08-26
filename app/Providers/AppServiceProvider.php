@@ -1,34 +1,36 @@
 <?php
 
-namespace InscricoesPos\Providers;
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use InscricoesPos\Models\ConfiguraInscricaoPos;
-use Validator;
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
-    {
-        Validator::extend('is_voluntario', function($attribute, $value, $parameters, $validator) {
-            $sponsor_id = array_get($validator->getData(), $parameters[0], null);
-            if($value!='somentevoluntaria' && $sponsor_id == "sim"){
-                return false;
-            }
-                return true;
-        });
-
-        Validator::extend('tres_recomendantes', function($attribute, $value, $parameters, $validator) {
-            if(sizeof(array_unique($value)) <> 3){
-                return false;
-            }
-                return true;
-        });
-
-    }
-
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
     public function register()
     {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $periodo_inscricao = "26/05/2021 à 13/06/2021";
+
+        $texto_inscricao_pos = "dois_programas";
+
+        View::share ( 'periodo_inscricao', $periodo_inscricao );
+
+        View::share ( 'texto_inscricao_pos', $texto_inscricao_pos );
     }
 }

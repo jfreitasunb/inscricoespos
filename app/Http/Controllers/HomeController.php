@@ -1,60 +1,54 @@
 <?php
 
-namespace InscricoesPos\Http\Controllers;
+namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+
 use Session;
-use InscricoesPos\Models\User;
 
-
-/**
-* Classe para visualização da página inicial.
-*/
-class HomeController extends BaseController
+class HomeController extends Controller
 {
-	
-	public function __construct(){
-       parent::__construct();
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
     }
 
-	public function index()
-	{
-		return view('home');
-	}
-
-	public function setaLocale($locale)
-    {
-    	if(Auth::check()){
-
-	       $user = User::find(Auth::user()->id_user);
-
-	       $user->update(['locale'=>$locale]);
-
-	  	}else{
-            
-	    	Session::put('locale',$locale);
-	  	}
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {   
+        return view('layouts.app');
     }
 
-	public function getLangPortuguese()
+    public function getLangPortugues()
     {
-    	$this->setaLocale('pt-br');
+        App::setLocale('pt_BR');
 
-    	return redirect()->back();
+        Session::put('locale','pt_BR');
+
+        return redirect()->back();
     }
 
-    public function getLangEnglish()
+    public function getLangIngles()
     {
-    	$this->setaLocale('en');
-
-    	return redirect()->back();
+        Session::put('locale','en');
+        
+        return redirect()->back();
     }
 
-    public function getLangSpanish()
+    public function getLangEspanhol()
     {
-    	$this->setaLocale('es');
-
-    	return redirect()->back();
-    }    
-
+        Session::put('locale','es');
+        
+        return redirect()->back();
+    }
 }

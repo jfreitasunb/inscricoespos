@@ -6,7 +6,7 @@
 
 
 return [
-    'comite' => 'Postgraduate Comitee of MAT/UnB',
+
     'inscricao_inativa' => 'Application period is already closed or has not been opened.',
     'inscricao_finalizada' => 'You have already completed your application. You can not change this data. Only personal data can now be changed.',
     'informe_area' => 'You must inform the research area.',
@@ -15,8 +15,6 @@ return [
     'envio_final' => 'Your application has been successfully submitted.',
     'inscricao_mat' => 'Subscription for the postgraduate program at MAT/UnB',
     'inscricao_mat_1' => 'Dear applicant, ',
-    'selecionado_mat' => 'Dear student, ',
-    'selecionado_documentos' => 'Yours documents were successfully received in our system.',
     'inscricao_mat_2' => 'Your subscription to the program ',
     'inscricao_mat_3' => ' at MAT/UnB has been successfully received in our system. Attached you will find a copy of your registration form.',
     'recupera_senha' => 'Click here to create your password',

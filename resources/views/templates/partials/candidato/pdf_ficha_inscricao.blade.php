@@ -98,7 +98,7 @@
         <hr>
         <h3>{{ trans('tela_escolha_candidato.tela_escolhas') }}</h3>
         <div>
-            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! array_key_exists('area_pos_principal',$dados_candidato_para_relatorio) ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Principal: </label>'.$dados_candidato_para_relatorio['area_pos_principal']: '' !!} {!! array_key_exists('area_pos_secundaria',$dados_candidato_para_relatorio) ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Secundária: </label>'.$dados_candidato_para_relatorio['area_pos_secundaria']: '' !!}
+            <label>{{ trans('tela_escolha_candidato.programa_disponivel') }}: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</label>{{ $dados_candidato_para_relatorio['programa_pretendido'] }} {!! $dados_candidato_para_relatorio['area_pos_principal'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Principal: </label>'.$dados_candidato_para_relatorio['area_pos_principal']: '' !!} {!! $dados_candidato_para_relatorio['area_pos_secundaria'] ? '&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<label> Área Secundária: </label>'.$dados_candidato_para_relatorio['area_pos_secundaria']: '' !!}
         </div>
         <div>
             <label>{{ trans('tela_escolha_candidato.interesse_bolsa') }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> {{ $dados_candidato_para_relatorio['interesse_bolsa'] ?  trans('tela_escolha_candidato.sim')  :  trans('tela_escolha_candidato.nao') }}
