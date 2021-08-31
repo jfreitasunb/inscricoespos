@@ -26,9 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $periodo_inscricao = "26/09/2021 à 31/12/2021";
+        $periodo_inscricao = "26/08/2021 à 31/12/2021";
 
-        return view('layouts.app')->with('periodo_inscricao', $periodo_inscricao);
+        $idioma = App::getLocale();
+
+        return view('layouts.app')->with(compact('periodo_inscricao', 'idioma'));
     }
 
     public function getLangPortugues()
@@ -36,7 +38,6 @@ class HomeController extends Controller
         App::setLocale('pt_BR');
 
         Session::put('locale','pt_BR');
-
         return redirect()->back();
     }
 
