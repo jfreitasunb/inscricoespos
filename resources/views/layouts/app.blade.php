@@ -11,7 +11,7 @@
 
     <body>
         <div class="flex flex-col justify-between h-screen bg-gray-300">
-            <x-header />
+            <x-header :message="$periodo_inscricao"/>
             {{-- Language area --}}
 
             @section('principal')

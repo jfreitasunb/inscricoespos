@@ -25,8 +25,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   
-        return view('layouts.app');
+    {
+        $periodo_inscricao = "26/09/2021 à 31/12/2021";
+
+        return view('layouts.app')->with('periodo_inscricao', $periodo_inscricao);
     }
 
     public function getLangPortugues()
@@ -41,14 +43,14 @@ class HomeController extends Controller
     public function getLangIngles()
     {
         Session::put('locale','en');
-        
+
         return redirect()->back();
     }
 
     public function getLangEspanhol()
     {
         Session::put('locale','es');
-        
+
         return redirect()->back();
     }
 }
