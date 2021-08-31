@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     </head>
-    
+
     <body>
         <div class="flex flex-col h-screen justify-between bg-gray-300">
             {{-- header --}}
@@ -32,7 +32,7 @@
             {{-- Language area --}}
 
             <div id="main" class="lg:justify-center lg:space-x-14 justify-around ml-2 w-3/3 flex items-stretch">
-                <a href="{{ route('lang.portugues') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Português</a>
+                <a href="{{ route('lang.portugues') }}" class="inline-block px-2 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Português</a>
                 <a href="{{ route('lang.ingles') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">English</a>
                 <a href="{{ route('lang.espanhol') }}" class="inline-block px-6 bg-azul-MAT rounded-full py-2 w-28 hover:bg-blue-700 text-center text-white">Español</a>
             </div>
