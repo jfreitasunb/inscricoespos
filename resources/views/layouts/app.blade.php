@@ -12,15 +12,7 @@
     <body>
         <div class="flex flex-col justify-between h-screen bg-gray-300">
             <x-header :message="$periodo_inscricao"/>
-            {{-- Language area --}}
-
-            @section('principal')
-            @show
-
-            @section('login')
-            @show
-            {{-- footer --}}
-
+            <x-tela-home :idioma="$idioma"/>
             <x-footer />
         </div>
     </body>
