@@ -109,7 +109,7 @@ class BladeServiceProvider extends ServiceProvider
             }else{
                 return false;
             }
-            
+
         });
 
         Blade::if('impersonating_candidato', function () {
@@ -123,7 +123,7 @@ class BladeServiceProvider extends ServiceProvider
             }else{
                 return false;
             }
-            
+
         });
 
         Blade::if('admin', function ( $user = null ){
@@ -137,7 +137,7 @@ class BladeServiceProvider extends ServiceProvider
             }
 
             View::share('keep_open_accordion_contas', $this->ativa_accordion_contas());
-            
+
             View::share('keep_open_accordion_dados_pos', $this->ativa_accordion_dados_pos());
 
             View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
@@ -158,7 +158,7 @@ class BladeServiceProvider extends ServiceProvider
             View::share('keep_open_accordion_configurar_edital', $this->ativa_accordion_configura_edital());
 
             View::share('keep_open_accordion_acompanhar_inscricoes', $this->ativa_accordion_acompanhar_inscricoes());
-            
+
             View::share('keep_open_accordion_dados_pos', $this->ativa_accordion_dados_pos());
 
             View::share('keep_open_accordion_relatorios', $this->ativa_accordion_relatorios());
@@ -199,7 +199,7 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('liberamenu', function ( $user = null ){
 
             $user = auth()->user();
-            
+
             $id_user = $user->id_user;
 
             $edital_ativo = new ConfiguraInscricaoPos();
@@ -217,7 +217,7 @@ class BladeServiceProvider extends ServiceProvider
             if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
 
                 $edital = $edital_ativo->retorna_inscricao_ativa()->edital;
-                
+
                 $autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
                 $finaliza_inscricao = new FinalizaInscricao();
@@ -235,9 +235,9 @@ class BladeServiceProvider extends ServiceProvider
 
                     $id_inscricao_pos = $id_inscricao_pos_candidato;
                 }
-                
+
                 $edital = $edital_ativo->retorna_inscricao_ativa($id_inscricao_pos)->edital;
-                
+
                 $autoriza_inscricao = $edital_ativo->autoriza_inscricao($id_inscricao_pos);
 
                 $finaliza_inscricao = new FinalizaInscricao();
@@ -249,7 +249,7 @@ class BladeServiceProvider extends ServiceProvider
                 }else{
                     return false;
                 }
-            }    
+            }
         });
 
         Blade::if('liberacarta', function ( $user = null ){
@@ -266,7 +266,7 @@ class BladeServiceProvider extends ServiceProvider
                 return true;
             }else{
                 return false;
-            }         
+            }
         });
 
         Blade::if('statuscarta', function ( $user = null ){
@@ -288,7 +288,7 @@ class BladeServiceProvider extends ServiceProvider
                 return true;
             }else{
                 return false;
-            }         
+            }
         });
 
         Blade::if('confirmacao_participacao', function ( $user = null ){
@@ -299,7 +299,7 @@ class BladeServiceProvider extends ServiceProvider
             $edital_ativo = new ConfiguraInscricaoPos();
 
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
-            
+
             $selecao_candidatos = new CandidatosSelecionados();
 
             $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
@@ -307,7 +307,7 @@ class BladeServiceProvider extends ServiceProvider
             $configura_inicio = new ConfiguraInicioPrograma();
 
             $liberar_tela = $configura_inicio->libera_tela_confirmacao($id_inscricao_pos);
-            
+
             if (!is_null($status_selecao)) {
                 if ($status_selecao->selecionado and !$status_selecao->confirmou_presenca and $liberar_tela) {
                     return true;
@@ -315,13 +315,13 @@ class BladeServiceProvider extends ServiceProvider
                     return false;
                 }
             }
-                     
+
         });
 
         Blade::if('envia_documentos_matricula', function ( $user = null ){
 
             $user = auth()->user();
-            
+
             $id_user = $user->id_user;
 
             $candidato_selecionado = new CandidatosSelecionados();
@@ -333,7 +333,7 @@ class BladeServiceProvider extends ServiceProvider
             $id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 
             if ($id_inscricao_pos_candidato == $id_inscricao_pos) {
-                
+
                 $selecao_candidatos = new CandidatosSelecionados();
 
                 $status_selecao = $selecao_candidatos->retorna_status_selecionado($id_inscricao_pos, $id_user);
@@ -341,7 +341,7 @@ class BladeServiceProvider extends ServiceProvider
                 $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
                 $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
-                
+
                 if (!is_null($status_selecao)) {
                     if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
                         return true;
@@ -352,7 +352,7 @@ class BladeServiceProvider extends ServiceProvider
             }else{
 
                 if ($id_inscricao_pos_candidato != 0) {
-                    
+
                     $id_inscricao_pos = $id_inscricao_pos_candidato;
                 }
 
@@ -363,7 +363,7 @@ class BladeServiceProvider extends ServiceProvider
                 $configura_inicio = new ConfiguraEnvioDocumentosMatricula();
 
                 $liberar_tela = $configura_inicio->libera_tela_documento_matricula($id_inscricao_pos);
-                
+
                 if (!is_null($status_selecao)) {
                     if ($status_selecao->selecionado and $status_selecao->confirmou_presenca and $liberar_tela) {
                         return true;
@@ -372,7 +372,7 @@ class BladeServiceProvider extends ServiceProvider
                     }
                 }
             }
-                     
+
         });
     }
 
