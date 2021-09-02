@@ -54,9 +54,9 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 
 Route::post('/login', [LoginController::class, 'logar']);
 
-Route::get('/register', [RegistrarController::class, 'index'])->name('registrar');
+Route::get('/registrar', [RegistrarController::class, 'index'])->name('registrar');
 
-Route::post('/register', [RegistrarController::class, 'registrar']);
+Route::post('/registrar', [RegistrarController::class, 'registrar']);
 
 Route::get('/forgot-password', [RecuperaSenhaController::class, 'create'])->middleware('guest')->name('password.request');
 
