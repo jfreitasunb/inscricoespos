@@ -10,4 +10,5 @@ return [
     'menu_senha' => 'Password',
     'menu_entrar' => 'Enter',
     'menu_esqueceu_senha' => 'Forgot password?',
+    'menu_rememberme' => 'Remember me',
 ];

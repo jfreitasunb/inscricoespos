@@ -10,4 +10,5 @@ return [
     'menu_senha' => 'Contraseña',
     'menu_entrar' => 'Acceder',
     'menu_esqueceu_senha' => '¿Recuperar contraseña?',
+    'menu_rememberme' => 'Recuérdame',
 ];
