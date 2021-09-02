@@ -16,7 +16,7 @@
             @if (Route::currentRouteName() == "home")
                 <x-tela-login-registrar />
             @endif
-            @if (Route::currentRouteName() == "registrar")
+            @if (Route::currentRouteName() == "registrar" or Route::currentRouteName() == "login")
                 <div class="font-sans antialiased text-gray-900">
                     {{ $slot }}
                 </div>
