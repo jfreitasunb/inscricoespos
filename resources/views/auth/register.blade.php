@@ -51,11 +51,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <a class="text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('tela_registro.menu_registro_ja_possui_conta') }}
                 </a>
 
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('tela_registro.menu_registro') }}
                 </x-button>
             </div>
         </form>
