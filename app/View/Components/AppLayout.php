@@ -4,6 +4,8 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
+use Illuminate\Support\Facades\App;
+
 class AppLayout extends Component
 {
     /**
@@ -13,6 +15,8 @@ class AppLayout extends Component
      */
     public function render()
     {
-        return view('layouts.app');
+        $idioma = App::getLocale();
+
+        return view('layouts.app')->with('idioma', $idioma);
     }
 }
