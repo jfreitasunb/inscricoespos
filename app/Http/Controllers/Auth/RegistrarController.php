@@ -6,11 +6,14 @@ use App\Http\Controllers\Controller;
 
 use App\Providers\RouteServiceProvider;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+
+use Session;
 
 use App\Models\User;
 use App\Models\Role;
@@ -25,6 +28,7 @@ class RegistrarController extends Controller
      */
     public function index()
     {
+        App::setLocale(Session::get('locale'));
         return view('auth.register');
     }
 
@@ -60,8 +64,8 @@ class RegistrarController extends Controller
         // Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME)->with('register_success', 'Um e-mail de confirmação foi enviado para o endereço fornecido. Antes de entrar você precisa confirmar seu e-mail.');
-        // 
-        
+        //
+
         return redirect(RouteServiceProvider::HOME)->with('status', 'verification-link-sent');
 
     }
