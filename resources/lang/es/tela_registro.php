@@ -15,4 +15,5 @@ return [
     'menu_confirma_senha' => 'Confirmar contraseña',
     'menu_registro_sucesso_parte_inicial' => 'Cuenta creada con éxito. Se envió al correto electrónico: ',
     'menu_registro_sucesso_parte_final' => 'un vínculo de activación de su cuenta.',
+    'menu_registro_ja_possui_conta' => '¿Ya registrado?',
 ];

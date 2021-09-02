@@ -15,4 +15,5 @@ return [
     'menu_confirma_senha' => 'Confirm Password',
     'menu_registro_sucesso_parte_inicial' => 'Account created successfuly. An e-mail was sent to: ',
     'menu_registro_sucesso_parte_final' => 'with a link to activate your account.',
+    'menu_registro_ja_possui_conta' => 'Already registered?',
 ];
