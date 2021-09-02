@@ -1,7 +1,7 @@
 <div class="flex items-center p-4 bg-azul-MAT lg:justify-center md:justify-between">
     {{-- left side --}}
     <div class="lg:w-1/3 md:w-1/2">
-        <img src="{{ asset('imagens/logo/logo_unb.png') }}" width="140" alt="Logo">
+        <a href="{{ URL::to('/') }}"><img src="{{ asset('imagens/logo/logo_unb.png') }}" width="140" alt="Logo"></a>
     </div>
 
     {{-- right side --}}
