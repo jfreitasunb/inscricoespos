@@ -8,9 +8,13 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\App;
+
+use Session;
+
 class LoginController extends Controller
 {
-  
+
     /**
      * Display the login view.
      *
@@ -18,6 +22,8 @@ class LoginController extends Controller
      */
     public function index()
     {
+        App::setLocale(Session::get('locale'));
+
         return view('auth.login');
     }
 
