@@ -11,9 +11,15 @@
 
     <body>
         <div class="flex flex-col justify-between h-screen bg-gray-300">
-            <x-header :message="$periodo_inscricao"/>
-            <x-tela-home :idioma="$idioma"/>
-            <x-footer />
+            @include('layouts.cabecalho')
+
+            @include('layouts.idiomas')
+
+            @if (Route::currentRouteName() == "home")
+                @include('layouts.menu_login_registrar')
+            @endif
+
+            @include('layouts.rodape')
         </div>
     </body>
 </html>
