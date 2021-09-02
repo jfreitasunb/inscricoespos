@@ -1,7 +1,11 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-auth-card>
+        <!-- Session Status -->
+        <x-auth-session-status class="mb-4" :status="session('status')" />
 
-@section('login')
-    @parent
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -42,4 +46,5 @@
                 </x-button>
             </div>
         </form>
-@endsection
+    </x-auth-card>
+</x-app-layout>
