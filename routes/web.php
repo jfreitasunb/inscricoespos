@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistrarController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\HomeController;
 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,12 +60,20 @@ Route::get('/registrar', [RegistrarController::class, 'index'])->name('registrar
 
 Route::post('/registrar', [RegistrarController::class, 'registrar']);
 
-Route::get('/forgot-password', [RecuperaSenhaController::class, 'create'])->middleware('guest')->name('password.request');
+Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])
+                ->middleware('guest')
+                ->name('password.request');
 
-Route::post('/forgot-password', [RecuperaSenhaController::class, 'store'])->middleware('guest')->name('password.email');
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
+                ->middleware('guest')
+                ->name('password.email');
 
-Route::get('/reset-password/{token}', [NovaSenhaController::class, 'create'])->middleware('guest')->name('password.reset');
+Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
+                ->middleware('guest')
+                ->name('password.reset');
 
-Route::post('/reset-password', [NovaSenhaController::class, 'store'])->middleware('guest')->name('password.update');
+Route::post('/reset-password', [NewPasswordController::class, 'store'])
+                ->middleware('guest')
+                ->name('password.update');
 
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
