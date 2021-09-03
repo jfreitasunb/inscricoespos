@@ -10,7 +10,7 @@
     <a href="{{ route('registrar') }}" class="inline-block px-6 py-3 text-lg text-center text-white bg-blue-500 rounded-lg w-28 hover:bg-blue-700">Registrar</a>
 </div>
 
-<div id="main3" class="flex items-stretch justify-center ml-2 lg:space-x-14 md:justify-around w-3/3">
+<div id="main3" class="flex items-stretch justify-center mt-20 ml-2 lg:space-x-14 md:justify-around w-3/3">
     <div class="text-center text-blue-600 hover:underline">
         <a href="{{ route('password.request') }}">{{ __('tela_login.menu_esqueceu_senha') }}</a>
     </div>
