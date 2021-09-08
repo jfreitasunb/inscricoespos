@@ -1,3 +1,3 @@
-<div class="w-full overflow-hidden border-t tab">
+<div class="tab w-full overflow-hidden border-t">
 {{ $slot }}
 </div>
