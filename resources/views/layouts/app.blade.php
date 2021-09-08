@@ -7,6 +7,7 @@
     <title>Inscrições Pós Graduação MAT/UnB</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     </head>
 
     <body>
