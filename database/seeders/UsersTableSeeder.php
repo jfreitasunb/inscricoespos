@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         User::truncate();
 
         $super_admin = User::create([
-            'name' => "José",
+            'nome' => "José",
             'email' => 'jfreitas.mat@gmail.com',
             'password' => bcrypt('1'),
             'locale' => 'pt_BR',
@@ -36,13 +36,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $coord = User::create([
-            'name' => "Pós Graduação",
+            'nome' => "Pós Graduação",
             'email' => 'posgrad@mat.unb.br',
             'password' => bcrypt('1'),
             'locale' => 'pt_BR',
             'email_verified_at' => now()
         ]);
-        
+
         $super_admin->roles()->attach($adminRole);
 
         $coord->roles()->attach($coordRole);
