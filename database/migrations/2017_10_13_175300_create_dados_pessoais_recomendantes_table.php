@@ -16,7 +16,7 @@ class CreateDadosPessoaisRecomendantesTable extends Migration
         Schema::create('dados_pessoais_recomendantes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_recomendante');
-            $table->foreign('id_recomendante')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_recomendante')->references('id')->on('users')->onDelete('cascade');
             $table->string('instituicao_recomendante',500)->nullable();
             $table->string('titulacao_recomendante',200)->nullable();
             $table->string('area_recomendante',200)->nullable();

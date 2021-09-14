@@ -16,7 +16,7 @@ class CreateEscolhasCandidatosTable extends Migration
         Schema::create('escolhas_candidato', function (Blueprint $table){
             $table->increments('id');
             $table->unsignedInteger('id_candidato');
-            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_candidato')->references('id')->on('users')->onDelete('cascade');
             $table->integer('programa_pretendido');
             $table->integer('area_pos_principal');
             $table->foreign('area_pos_principal')->references('id_area_pos')->on('area_pos_mat')->onDelete('cascade');

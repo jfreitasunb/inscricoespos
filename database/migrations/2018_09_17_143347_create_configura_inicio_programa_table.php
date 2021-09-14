@@ -20,7 +20,7 @@ class CreateConfiguraInicioProgramaTable extends Migration
             $table->integer('mes_inicio');
             $table->date('prazo_confirmacao');
             $table->unsignedInteger('id_coordenador');
-            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_coordenador')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('programa_para_confirmar')->nullable();
             $table->foreign('programa_para_confirmar')->references('id_programa_pos')->on('programa_pos_mat')->onDelete('cascade');
             $table->softDeletes();

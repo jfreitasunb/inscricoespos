@@ -16,7 +16,7 @@ class CreateCandidatosSelecionadosTable extends Migration
         Schema::create('candidatos_selecionados', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('id_candidato');
-            $table->foreign('id_candidato')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_candidato')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('id_inscricao_pos');
             $table->foreign('id_inscricao_pos')->references('id_inscricao_pos')->on('configura_inscricao_pos')->onDelete('cascade');
             $table->unsignedInteger('programa_pretendido');
@@ -28,7 +28,7 @@ class CreateCandidatosSelecionadosTable extends Migration
             $table->unsignedInteger('inicio_no_programa')->nullable();
             $table->foreign('inicio_no_programa')->references('id_inicio_programa')->on('configura_inicio_programa')->onDelete('cascade');
             $table->unsignedInteger('id_coordenador');
-            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_coordenador')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

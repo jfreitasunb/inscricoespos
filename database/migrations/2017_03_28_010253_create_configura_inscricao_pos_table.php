@@ -23,7 +23,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->string('programa', 7);
             $table->string('edital', 7);
             $table->unsignedInteger('id_coordenador');
-            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_coordenador')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('necessita_recomendante')->default(TRUE);
             $table->timestamps();
         });

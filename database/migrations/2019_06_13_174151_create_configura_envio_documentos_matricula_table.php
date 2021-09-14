@@ -20,7 +20,7 @@ class CreateConfiguraEnvioDocumentosMatriculaTable extends Migration
             $table->date('inicio_envio_documentos');
             $table->date('fim_envio_documentos');
             $table->unsignedInteger('id_coordenador');
-            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_coordenador')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
