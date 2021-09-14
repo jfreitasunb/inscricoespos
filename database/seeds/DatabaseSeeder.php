@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
+    {
         // $this->call(UsersTableSeeder::class);
         // $this->call(ConfiguraInscricaoPosTableSeeder::class);
         // $this->call(ProgramaInscricoesPosTableSeeder::class);
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(ContatosRecomendantesTableSeeder::class);
         // $this->call(CartasRecomendacoesTableSeeder::class);
         // $this->call(FinalizaInscricaoTableSeeder::class);
-        
+
 
         $user = ['nome' => 'Jota', 'email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'ativo' => '1', 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         $db_user = DB::table('users')->insert($user);
@@ -54,7 +54,7 @@ class DatabaseSeeder extends Seeder
         // $dados_coord = [
         //     'id_user' => '2',
         //     'data_nascimento' => '1963-04-01',
-        //     'numerorg' => '2', 
+        //     'numerorg' => '2',
         //     'endereco' => '2',
         //     'cidade' => '2',
         //     'cep' => '2',
@@ -137,11 +137,11 @@ class DatabaseSeeder extends Seeder
 
         // $lista_areas_pos = [1 => 'Álgebra', 2 => 'Análise', 3 => 'Análise Numérica', 4 => 'Geometria', 5 => 'Matemática Aplicada', 6 => 'Probabilidade', 7 => 'Sistemas Dinâmicos', 8 => 'Teoria da Computação', 9 => 'Teoria dos Números'];
 
-        // for ($i=1; $i < sizeof($lista_areas_pos)+1; $i++) { 
-            
+        // for ($i=1; $i < sizeof($lista_areas_pos)+1; $i++) {
+
         //     $disciplina = ['id_area_pos' => $i, 'nome' => $lista_areas_pos[$i], 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
         //     $db_disciplina = DB::table('area_pos_mat')->insert($disciplina);
-        
+
     // }
 
 
