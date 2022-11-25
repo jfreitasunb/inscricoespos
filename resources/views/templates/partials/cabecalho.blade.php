@@ -7,9 +7,9 @@
                 <a href="{{URL::to('/')}}"> <img src="{{ asset('imagens/logo/logo_unb.png') }}" class="img-responsive" style="height:120px" /></a>
               </div>
               <div class="col-sm-8 col-md-7 col-xs-12">  
-                <h1>{{ trans('mensagens_gerais.departamento') }}</h1>
-                <h2>{{ trans('mensagens_gerais.'.$texto_inscricao_pos) }}</h2>
-                <h3>{{$periodo_inscricao}}</h3>
+                <h1>Departamento de Matemática</h1>
+                <h2>Inscrições para o Mestrada e Doutorado</h2>
+                <h3>22/11/2022 à 22/01/2023</h3>
               </div>
         </div>
       </div>
