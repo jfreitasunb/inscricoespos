@@ -17,6 +17,7 @@ use InscricoesPos\Models\AreaPosMat;
 use InscricoesPos\Models\CartaMotivacao;
 use InscricoesPos\Models\ProgramaPos;
 use InscricoesPos\Models\DadoPessoalCandidato;
+use InscricoesPos\Models\DisciplinaDestaque;
 use InscricoesPos\Models\Formacao;
 use InscricoesPos\Models\Estado;
 use InscricoesPos\Models\DadoAcademicoCandidato;
@@ -155,6 +156,12 @@ class DadosAcademicosController extends BaseController
 
 		$nivel_candidato[2] = 'Doutorado';
 
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
+		$destaques = $request->discplinas_destaque;
+
 		$dados_academicos = DadoAcademicoCandidato::find($id_candidato);
 
 		$cria_dados_academicos['curso_graduacao'] = $this->titleCase(Purifier::clean(trim($request->input('curso_graduacao'))));
@@ -209,7 +216,40 @@ class DadosAcademicosController extends BaseController
 
 			$cria_dados_academicos->save();
 
-		}else{			
+			foreach ($destaques as $destaque) {
+
+				$discplina_destaque = new DisciplinaDestaque();
+
+				$discplina_destaque->id_candidato = $id_candidato;
+
+				$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
+
+				$discplina_destaque->nome_disciplina = Purifier::clean(trim($destaque['nome_disciplina']));
+
+				$discplina_destaque->mencao = $destaque['mencao'];
+
+				$discplina_destaque->save();
+			}
+
+
+		}else{
+			$deleted = DB::table('disciplinas_destaque')->where('id_candidato', '=', $id_candidato)->where('id_inscricao_pos', '=', $id_inscricao_pos)->delete();
+			
+			foreach ($destaques as $destaque) {
+
+				$discplina_destaque = new DisciplinaDestaque();
+
+				$discplina_destaque->id_candidato = $id_candidato;
+
+				$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
+
+				$discplina_destaque->nome_disciplina = $destaque['nome_disciplina'];
+
+				$discplina_destaque->mencao = $destaque['mencao'];
+
+				$discplina_destaque->save();
+			}
+
 
 			$dados_academicos->update($cria_dados_academicos);
 		}

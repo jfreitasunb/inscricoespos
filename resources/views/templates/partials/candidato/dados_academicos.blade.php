@@ -80,6 +80,29 @@
   </div>
 </fieldset>
 
+<fieldset class="scheduler-border">
+  <legend class="scheduler-border">{{trans('tela_dados_academicos.disciplinas_destaque')}}</legend>
+  <div class="row">
+    <table class="table table-bordered" id="dynamicTable">
+      <tr>
+        <th>{{ trans('tela_dados_academicos.nome_disciplina') }}</th>
+
+        <th>{{ trans('tela_dados_academicos.mencao') }}</th>
+
+        <th>{{ trans('tela_dados_academicos.acao') }}</th>
+      </tr>
+
+      <tr>
+        <td><input type="text" name="discplinas_destaque[0][nome_disciplina]" placeholder="{{ trans('tela_dados_academicos.placeholder_nome_disciplina') }}" class="form-control" /></td>
+
+        <td><select name="discplinas_destaque[0][mencao]" class="form-control" /><option value="" selected="selected">Selecione</option><option value="SS">SS</option><option value="MS">MS</option><option value="MM">MM</option></select></td>
+
+        <td><button type="button" name="add" id="add" class="btn btn-success">{{ trans('tela_dados_academicos.adicionar_mais') }}</button></td>
+      </tr>
+    </table>
+  </div>
+</fieldset>
+
 <div class="form-group">
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
@@ -91,10 +114,12 @@
 @endsection
 
 @section('scripts')
+  {!! Html::script( asset('//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js') ) !!}
   {!! Html::script( asset('bower_components/moment/min/moment.min.js') ) !!}
   {!! Html::script( asset('bower_components/moment/locale/pt-br.js') ) !!}
   {!! Html::script( asset('bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') ) !!}
   {!! Html::script( asset('bower_components/moment/locale/fr.js') ) !!}
   {!! Html::script( asset('js/datepicker.js') ) !!}
+  {!! Html::script( asset('js/addmore.js') ) !!}
   {!! Html::script( asset('js/parsley.min.js') ) !!}
 @endsection
