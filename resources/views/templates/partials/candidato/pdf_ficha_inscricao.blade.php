@@ -82,6 +82,17 @@
         <div>
             <label>{{ trans('tela_dados_academicos.ano_conclusao') }}: &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> {{ $dados_candidato_para_relatorio['ano_conclusao_graduacao'] }}
         </div>
+        @if (count($disciplinas_destaque)> 0)
+            <div>
+                <label>{{ trans('tela_dados_academicos.disciplinas_destaque') }}:</label>
+                <ul>
+                    @foreach ($disciplinas_destaque as $disciplina)
+                        <li>{{ $disciplina['nome_disciplina'] }}: {{ $disciplina['mencao'] }} </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
         @if ($dados_candidato_para_relatorio['curso_pos'])
         <hr size="0">
         <div>

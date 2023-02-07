@@ -17,6 +17,7 @@ use InscricoesPos\Models\CotaSocial;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 use InscricoesPos\Models\FinalizaInscricao;
 use InscricoesPos\Models\DadoPessoalCandidato;
+use InscricoesPos\Models\DisciplinaDestaque;
 use InscricoesPos\Models\Paises;
 use InscricoesPos\Models\HomologaInscricoes;
 use InscricoesPos\Models\AuxiliaSelecao;
@@ -731,6 +732,8 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
+      $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_aluno, $id_inscricao_pos);
+
       $linha_arquivo['tipo_cotista'] = $dados_candidato_para_relatorio['tipo_cotista'];
 
       $linha_arquivo['email'] = User::find($dados_candidato_para_relatorio['id_aluno'])->email;
@@ -786,7 +789,7 @@ class RelatorioController extends BaseController
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
 
-      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante'));
+      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante', 'disciplinas_destaque'));
 
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
@@ -1009,7 +1012,11 @@ class RelatorioController extends BaseController
     
     $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['ficha_inscricao'], $dados_candidato_para_relatorio);
 
-    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante'));
+    $destaque = new DisciplinaDestaque();
+
+    $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_aluno, $id_inscricao_pos);
+
+    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'disciplinas_destaque', 'necessita_recomendante'));
 
     $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
