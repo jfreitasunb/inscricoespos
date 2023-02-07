@@ -82,6 +82,34 @@
 
 <fieldset class="scheduler-border">
   <legend class="scheduler-border">{{trans('tela_dados_academicos.disciplinas_destaque')}}</legend>
+  @if (count($disciplinas_destaque) > 0)
+    <div class="row">
+      {{trans('tela_dados_academicos.texto_disciplinas_destaque')}}
+    </div>
+    <table class="table table-bordered">
+      <tr>
+        <th>{{ trans('tela_dados_academicos.nome_disciplina') }}</th>
+
+        <th>{{ trans('tela_dados_academicos.mencao') }}</th>
+
+        <th>{{ trans('tela_dados_academicos.remove_destaque') }}</th>
+      </tr>
+      @foreach ($disciplinas_destaque as $disciplina)
+        <tr>
+          <td>{{ $disciplina['nome_disciplina'] }}</td>
+          <td>{{ $disciplina['mencao'] }}</td>
+          <td>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="remover_destaque[{{ $disciplina['id'] }}][]" id="inlineRadio1" value="0" checked>
+              <label class="form-check-label" for="inlineRadio1">Não</label>
+              <input class="form-check-input" type="radio" name="remover_destaque[{{ $disciplina['id'] }}][]" id="inlineRadio2" value="1">
+              <label class="form-check-label" for="inlineRadio2">Sim</label>
+            </div>
+          </td>
+        </tr>
+      @endforeach
+    </table>
+  @endif
   <div class="row">
     <table class="table table-bordered" id="dynamicTable">
       <tr>

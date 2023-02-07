@@ -60,6 +60,10 @@ class DadosAcademicosController extends BaseController
 		
 		$locale_candidato = Session::get('locale');
 
+		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
+
 		switch ($locale_candidato) {
 		 	case 'en':
 		 		$nome_coluna = 'tipo_en';
@@ -90,6 +94,10 @@ class DadosAcademicosController extends BaseController
 		
 		$nivel_candidato[2] = 'Doutorado';
 
+		$destaque = new DisciplinaDestaque();
+
+		$disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_candidato, $id_inscricao_pos);
+
 		if (is_null($dados_academicos_candidato)) {
 
 			$dados = [];
@@ -110,7 +118,7 @@ class DadosAcademicosController extends BaseController
 
 			$dados['ano_conclusao_pos'] = '';
 
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato','pos', 'disciplinas_destaque'));
 		}else{
 
 			$dados['curso_graduacao'] = $dados_academicos_candidato->curso_graduacao;
@@ -130,13 +138,12 @@ class DadosAcademicosController extends BaseController
 
 			$dados['ano_conclusao_pos'] = $dados_academicos_candidato->ano_conclusao_pos;
 
-			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos'));
+			return view('templates.partials.candidato.dados_academicos')->with(compact('dados', 'graduacao', 'nivel_candidato', 'pos', 'disciplinas_destaque'));
 		}
 	}
 
 	public function postDadosAcademicos(Request $request)
 	{
-
 		$this->validate($request, [
 			'curso_pos' => 'required_without_all:curso_graduacao',
 			'tipo_curso_pos' => 'required_without_all:tipo_curso_graduacao',
@@ -162,6 +169,16 @@ class DadosAcademicosController extends BaseController
 
 		$destaques = $request->discplinas_destaque;
 
+		$remover = $request->remover_destaque;
+
+		if (isset($remover)) {
+			foreach ($remover as $key => $value) {
+				if ($value[0]) {
+					$deleted = DB::table('disciplinas_destaque')->where('id_candidato', '=', $id_candidato)->where('id_inscricao_pos', '=', $id_inscricao_pos)->where('id', '=', $key)->delete();
+				}
+			}
+		}
+
 		$dados_academicos = DadoAcademicoCandidato::find($id_candidato);
 
 		$cria_dados_academicos['curso_graduacao'] = $this->titleCase(Purifier::clean(trim($request->input('curso_graduacao'))));
@@ -173,7 +190,6 @@ class DadosAcademicosController extends BaseController
 		$cria_dados_academicos['ano_conclusao_graduacao'] = (int)Purifier::clean(trim($request->input('ano_conclusao_graduacao')));
 
 		$cria_dados_academicos['curso_pos'] = $this->titleCase(Purifier::clean(trim($request->input('curso_pos'))));
-		// $cria_dados_academicos['nivel_pos'] = $formacao->retorna_id_formacao($nivel_candidato[(int)$request->nivel_pos],'Pós-Graduação');
 		
 		if (is_null(($request->input('tipo_curso_pos')))) {
 
@@ -218,38 +234,42 @@ class DadosAcademicosController extends BaseController
 
 			foreach ($destaques as $destaque) {
 
-				$discplina_destaque = new DisciplinaDestaque();
+				
+				if (!is_null($destaque['nome_disciplina'])) {
+					
+					$discplina_destaque = new DisciplinaDestaque();
 
-				$discplina_destaque->id_candidato = $id_candidato;
+					$discplina_destaque->id_candidato = $id_candidato;
 
-				$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
+					$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
 
-				$discplina_destaque->nome_disciplina = Purifier::clean(trim($destaque['nome_disciplina']));
+					$discplina_destaque->nome_disciplina = Purifier::clean(trim($destaque['nome_disciplina']));
 
-				$discplina_destaque->mencao = $destaque['mencao'];
+					$discplina_destaque->mencao = $destaque['mencao'];
 
-				$discplina_destaque->save();
+					$discplina_destaque->save();
+				}
 			}
 
 
 		}else{
-			$deleted = DB::table('disciplinas_destaque')->where('id_candidato', '=', $id_candidato)->where('id_inscricao_pos', '=', $id_inscricao_pos)->delete();
 			
 			foreach ($destaques as $destaque) {
 
-				$discplina_destaque = new DisciplinaDestaque();
+				if (!is_null($destaque['nome_disciplina'])) {
+					$discplina_destaque = new DisciplinaDestaque();
 
-				$discplina_destaque->id_candidato = $id_candidato;
+					$discplina_destaque->id_candidato = $id_candidato;
 
-				$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
+					$discplina_destaque->id_inscricao_pos = $id_inscricao_pos;
 
-				$discplina_destaque->nome_disciplina = $destaque['nome_disciplina'];
+					$discplina_destaque->nome_disciplina = $destaque['nome_disciplina'];
 
-				$discplina_destaque->mencao = $destaque['mencao'];
+					$discplina_destaque->mencao = $destaque['mencao'];
 
-				$discplina_destaque->save();
+					$discplina_destaque->save();
+				}
 			}
-
 
 			$dados_academicos->update($cria_dados_academicos);
 		}
