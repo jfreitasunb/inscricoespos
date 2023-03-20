@@ -84,7 +84,7 @@
   <legend class="scheduler-border">{{trans('tela_dados_academicos.disciplinas_destaque')}}</legend>
   @if (count($disciplinas_destaque) > 0)
     <div class="row">
-      <p>&nbsp; &nbsp;{{ trans('tela_dados_academicos.texto_disciplinas_destaque') }}</p>
+      <p>&nbsp; &nbsp; {{ trans('tela_dados_academicos.texto_disciplinas_destaque') }}</p>
     </div>
     <table class="table table-bordered">
       <tr>
@@ -110,7 +110,6 @@
       @endforeach
     </table>
   @endif
-  <div class="row">
     <table class="table table-bordered" id="dynamicTable">
       <tr>
         <th>{{ trans('tela_dados_academicos.nome_disciplina') }}</th>
@@ -128,7 +127,6 @@
         <td><button type="button" name="add" id="add" class="btn btn-success">{{ trans('tela_dados_academicos.adicionar_mais') }}</button></td>
       </tr>
     </table>
-  </div>
 </fieldset>
 
 <div class="form-group">
