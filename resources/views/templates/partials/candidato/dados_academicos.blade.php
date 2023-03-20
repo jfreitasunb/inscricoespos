@@ -84,7 +84,7 @@
   <legend class="scheduler-border">{{trans('tela_dados_academicos.disciplinas_destaque')}}</legend>
   @if (count($disciplinas_destaque) > 0)
     <div class="row">
-      {{trans('tela_dados_academicos.texto_disciplinas_destaque')}}
+      <p>&nbsp; &nbsp;{{ trans('tela_dados_academicos.texto_disciplinas_destaque') }}</p>
     </div>
     <table class="table table-bordered">
       <tr>
