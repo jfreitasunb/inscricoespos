@@ -69,7 +69,12 @@ class EscolhaCandidatoController extends BaseController
 		$necessita_recomendante = $edital_ativo->retorna_inscricao_ativa()->necessita_recomendante;
 		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
-		$semestre_inicio = explode("-", $edital_ativo->retorna_inscricao_ativa()->semestre_inicio);
+
+		$precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
+		if ($precisa_semestre_inicio) {
+			$semestre_inicio = explode("-", $edital_ativo->retorna_inscricao_ativa()->semestre_inicio);
+		}
 
 		if ($autoriza_inscricao) {
 		
@@ -164,9 +169,13 @@ class EscolhaCandidatoController extends BaseController
 				}
 
 				$dados['programa_pretendido'] = $candidato_ja_escolheu->programa_pretendido;
-				
-				$dados['semestre_inicio'] = $candidato_ja_escolheu->semestre_inicio;
-				
+
+				$precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
+				if ($precisa_semestre_inicio) {
+					$dados['semestre_inicio'] = $candidato_ja_escolheu->semestre_inicio;
+				}
+
 				$dados['area_pos'] = $candidato_ja_escolheu->area_pos;
 				
 				$dados['interesse_bolsa'] = $candidato_ja_escolheu->interesse_bolsa;
@@ -218,13 +227,13 @@ class EscolhaCandidatoController extends BaseController
 
 			$cota_social = CotaSocial::pluck($nome_coluna_cota_social,'id');
 
-			return view('templates.partials.candidato.escolha_candidato')->with(compact('programa_para_inscricao', 'semestre_inicio', 'areas_pos', 'cota_social', 'dados', 'necessita_recomendante'));
+			return view('templates.partials.candidato.escolha_candidato')->with(compact('programa_para_inscricao', 'precisa_semestre_inicio', 'semestre_inicio', 'areas_pos', 'cota_social', 'dados', 'necessita_recomendante'));
 
 			if (in_array(3, $programas_disponiveis)) {
 			
 				$desativa_recomendante = true;
 
-				return view('templates.partials.candidato.escolha_candidato')->with(compact('programa_para_inscricao', 'semestre_inicio', 'desativa_recomendante'));
+				return view('templates.partials.candidato.escolha_candidato')->with(compact('programa_para_inscricao',  'precisa_semestre_inicio', 'semestre_inicio', 'desativa_recomendante'));
 			}
 		}else{
 			
@@ -249,6 +258,8 @@ class EscolhaCandidatoController extends BaseController
 		
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
 
+		$precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
 		if ($autoriza_inscricao) {
 			
 			$finaliza_inscricao = new FinalizaInscricao();
@@ -269,10 +280,15 @@ class EscolhaCandidatoController extends BaseController
 
 			if (!in_array(3, $programas_disponiveis)) {
 
+				if ($precisa_semestre_inicio) {
+					$this->validate($request, [
+						'semestre_inicio' => 'required',
+					]);
+				}
+
 				if ($necessita_recomendante) {
 					$this->validate($request, [
 						'programa_pretendido' => 'required',
-						'semestre_inicio' => 'required',
 						'interesse_bolsa' => 'required',
 						'vinculo_empregaticio' => 'required',
 						'tipo_cotista' => 'required',

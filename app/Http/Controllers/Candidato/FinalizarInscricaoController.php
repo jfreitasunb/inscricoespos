@@ -63,6 +63,8 @@ class FinalizarInscricaoController extends BaseController
 
 		$edital = $edital_ativo->retorna_inscricao_ativa()->edital;
 
+		$precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
 		$necessita_recomendante = $edital_ativo->retorna_inscricao_ativa()->necessita_recomendante;
 
 		$autoriza_inscricao = $edital_ativo->autoriza_inscricao();
@@ -161,10 +163,10 @@ class FinalizarInscricaoController extends BaseController
 			
 			$novo_relatorio = new RelatorioController;
 
-			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_candidato, $id_inscricao_pos, $locale_candidato);
+			$ficha_inscricao = $novo_relatorio->geraFichaInscricao($id_candidato, $id_inscricao_pos, $locale_candidato, $precisa_semestre_inicio);
 
 
-			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato'));
+			return view('templates.partials.candidato.finalizar_inscricao',compact('ficha_inscricao','nome_candidato', 'precisa_semestre_inicio'));
 
 		}else{
 			notify()->flash(trans('mensagens_gerais.inscricao_inativa'),'warning');
@@ -182,6 +184,8 @@ class FinalizarInscricaoController extends BaseController
 		$locale_fixo = 'en';
 
 		$edital_ativo = new ConfiguraInscricaoPos();
+
+		$precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
 
 		$id_inscricao_pos = $edital_ativo->retorna_inscricao_ativa()->id_inscricao_pos;
 

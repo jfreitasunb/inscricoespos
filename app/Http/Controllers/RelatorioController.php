@@ -230,7 +230,13 @@ class RelatorioController extends BaseController
       $consolida_escolha['area_pos_secundaria'] = $area_pos_mat->pega_area_pos_mat((int)$escolha_feita_candidato->area_pos_secundaria, $locale_relatorio);
     }
 
-    $consolida_escolha['semestre_inicio'] = $escolha_feita_candidato->semestre_inicio;
+    $edital_ativo = new ConfiguraInscricaoPos();
+
+    $precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
+    if ($precisa_semestre_inicio) {
+      $consolida_escolha['semestre_inicio'] = $escolha_feita_candidato->semestre_inicio;
+    }
 
     $consolida_escolha['interesse_bolsa'] = $escolha_feita_candidato->interesse_bolsa;
 
@@ -689,6 +695,10 @@ class RelatorioController extends BaseController
 
     $necessita_recomendante = $relatorio->necessita_recomendante;
 
+    $edital_ativo = new ConfiguraInscricaoPos();
+
+    $precisa_semestre_inicio = $edital_ativo->precisa_semestre_inicio();
+
     $locais_arquivos = $this->ConsolidaLocaisArquivos($relatorio->edital);
 
     foreach (glob( $locais_arquivos['local_relatorios']."Inscri*") as $fileName ){
@@ -732,7 +742,9 @@ class RelatorioController extends BaseController
         $dados_candidato_para_relatorio[$key] = $value;
       }
 
-      $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_aluno, $id_inscricao_pos);
+      $destaque = new DisciplinaDestaque();
+
+      $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($candidato->id_candidato, $id_inscricao_pos);
 
       $linha_arquivo['tipo_cotista'] = $dados_candidato_para_relatorio['tipo_cotista'];
 
@@ -789,7 +801,7 @@ class RelatorioController extends BaseController
 
       $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
 
-      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante', 'disciplinas_destaque'));
+      $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante', 'precisa_semestre_inicio', 'disciplinas_destaque'));
 
       $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
@@ -969,7 +981,7 @@ class RelatorioController extends BaseController
     return view('templates.partials.coordenador.relatorio_pos_edital_vigente');
   }
 
-  public function geraFichaInscricao($id_aluno, $id_inscricao_pos, $locale_relatorio)
+  public function geraFichaInscricao($id_aluno, $id_inscricao_pos, $locale_relatorio, $precisa_semestre_inicio = null)
   {
 
     $endereco_mudar = '/var/www/inscricoespos/storage/app/public/';
@@ -1016,7 +1028,7 @@ class RelatorioController extends BaseController
 
     $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_aluno, $id_inscricao_pos);
 
-    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'disciplinas_destaque', 'necessita_recomendante'));
+    $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'disciplinas_destaque', 'necessita_recomendante', 'precisa_semestre_inicio'));
 
     $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 

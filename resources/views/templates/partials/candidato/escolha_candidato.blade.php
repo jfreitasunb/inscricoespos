@@ -24,8 +24,9 @@
       </div>
   </fieldset>
 
-  <fieldset class="scheduler-border">
-    <legend class="scheduler-border">{{trans('tela_escolha_candidato.semestre_inicio')}}</legend>
+  @if($precisa_semestre_inicio))
+    <fieldset class="scheduler-border">
+      <legend class="scheduler-border">{{trans('tela_escolha_candidato.semestre_inicio')}}</legend>
       <div class="row">
         <div class="col-md-6">
           <label class="radio-inline">{!! Form::radio('semestre_inicio', $semestre_inicio[0], $dados['semestre_inicio'] == $semestre_inicio[0] ? true : false, ['class' => 'control-label', 'required' => '']) !!}{{ $semestre_inicio[0] }}</label>
@@ -34,7 +35,8 @@
           <label class="radio-inline">{!! Form::radio('semestre_inicio', $semestre_inicio[1], $dados['semestre_inicio'] == $semestre_inicio[1] ? true : false, ['class' => 'control-label']) !!}{{ $semestre_inicio[1] }}</label>
         </div>
       </div>
-  </fieldset>
+    </fieldset>
+  @endif
 
   @if(isset($areas_pos))
     <fieldset class="scheduler-border">

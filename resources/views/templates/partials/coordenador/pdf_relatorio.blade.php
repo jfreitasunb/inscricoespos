@@ -138,9 +138,11 @@
             <b>Programa pretendido: </b><em>{{ $dados_candidato_para_relatorio['programa_pretendido'] }}</em> {!! array_key_exists('area_pos_principal',$dados_candidato_para_relatorio) ? '<b> Área Principal: </b><em>'.$dados_candidato_para_relatorio['area_pos_principal']: '' !!} {!! array_key_exists('area_pos_secundaria',$dados_candidato_para_relatorio) ? '</em><b> Área Secundária: </b><em>'.$dados_candidato_para_relatorio['area_pos_secundaria']: '' .'</em>'!!}
         </div>
 
-        <div class="form-control">
-            <b>Início no programa: </b><em>{{ $dados_candidato_para_relatorio['semestre_inicio'] }}</em>
-        </div>
+        @if ($precisa_semestre_inicio)
+            <div class="form-control">
+                <b>Início no programa: </b><em>{{ $dados_candidato_para_relatorio['semestre_inicio'] }}</em>
+            </div>
+        @endif
 
         <div class="form-control">
             <b>Interesse em bolsa: </b><em>{{ $dados_candidato_para_relatorio['interesse_bolsa'] ? 'Sim' : 'Não' }}</em>

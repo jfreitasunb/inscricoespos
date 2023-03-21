@@ -240,4 +240,17 @@ class ConfiguraInscricaoPos extends Model
 
         return $ano_semestre_ira;
     }
+
+    public function precisa_semestre_inicio()
+    {
+
+        $conta_semestre_inicio = count(explode('-', $this->retorna_inscricao_ativa()->semestre_inicio));
+        
+
+        if ($conta_semestre_inicio > 1) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
