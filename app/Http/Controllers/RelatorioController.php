@@ -1032,6 +1032,12 @@ class RelatorioController extends BaseController
 
     $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($id_aluno, $id_inscricao_pos);
 
+    $precisa_semestre_inicio = $relatorio_disponivel->precisa_semestre_inicio();
+
+    if ($precisa_semestre_inicio) {
+      $consolida_escolha['semestre_inicio'] = $escolha_feita_candidato->semestre_inicio;
+    }
+
     $pdf = PDF::loadView('templates.partials.candidato.pdf_ficha_inscricao', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'disciplinas_destaque', 'necessita_recomendante', 'precisa_semestre_inicio'));
 
     $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
