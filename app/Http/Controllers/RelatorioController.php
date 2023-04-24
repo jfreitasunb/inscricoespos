@@ -866,11 +866,15 @@ class RelatorioController extends BaseController
       }
     }
 
+    $destaque = new DisciplinaDestaque();
+
+    $disciplinas_destaque = $destaque->retorna_disciplinas_destaque($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos);
+
     $dados_candidato_para_relatorio['motivacao'] = nl2br(wordwrap($this->ConsolidaCartaMotivacao($dados_candidato_para_relatorio['id_aluno'], $id_inscricao_pos), 120, "\n", true));
 
     $nome_arquivos = $this->ConsolidaNomeArquivos($locais_arquivos['arquivos_temporarios'], $locais_arquivos['local_relatorios'], $dados_candidato_para_relatorio);
     
-    $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante'));
+    $pdf = PDF::loadView('templates.partials.coordenador.pdf_relatorio', compact('dados_candidato_para_relatorio','recomendantes_candidato', 'necessita_recomendante', 'disciplinas_destaque'));
 
     $pdf->save($nome_arquivos['arquivo_relatorio_candidato_temporario']);
 
