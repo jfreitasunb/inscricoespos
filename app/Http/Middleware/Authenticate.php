@@ -1,36 +1,17 @@
 <?php
 
-namespace InscricoesPos\Http\Middleware;
+namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Request;
 
-class Authenticate
+class Authenticate extends Middleware
 {
-
-    protected $auth;
-
-    public function __construct(Guard $auth)
-    {
-        $this->auth = $auth;
-    }
-
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * Get the path the user should be redirected to when they are not authenticated.
      */
-    public function handle($request, Closure $next)
+    protected function redirectTo(Request $request): ?string
     {
-        if ($this->auth->guest()) {
-            if ($request->ajax()) {
-                return response('Unauthorized.',410);
-            }else{
-                return redirect()->guest('auth.login');
-            }
-        }
-        return $next($request);
+        return $request->expectsJson() ? null : route('login');
     }
 }

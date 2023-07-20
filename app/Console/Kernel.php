@@ -1,6 +1,6 @@
 <?php
 
-namespace InscricoesPos\Console;
+namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -8,43 +8,20 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        Commands\RememberRecomendante::class,
-        Commands\RememberCandidadoFimPrazo::class,
-    ];
-
-    /**
      * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        $filePath="/home/vagrant/remember_recomendante.log";
-
-        $filePath2="/home/vagrant/remember_candidato.log";
-
-
-        $schedule->command('remember:recomendante')
-                 ->everyMinute()
-                 ->sendOutputTo($filePath);
-        $schedule->command('remember:candidato')
-                 ->everyMinute()
-                 ->sendOutputTo($filePath2);
+        // $schedule->command('inspire')->hourly();
     }
 
     /**
-     * Register the Closure based commands for the application.
-     *
-     * @return void
+     * Register the commands for the application.
      */
-    protected function commands()
+    protected function commands(): void
     {
+        $this->load(__DIR__.'/Commands');
+
         require base_path('routes/console.php');
     }
 }
