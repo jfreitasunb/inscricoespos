@@ -7,10 +7,20 @@ export default {
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './resources/views/*.blade.php',
     ],
 
     theme: {
         extend: {
+            color: {
+                .bg-azul-MAT{
+                    background: #009FE5;
+                }
+
+                .bg-verde-MAT{
+                    background: #449D44;
+                }
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
