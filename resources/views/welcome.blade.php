@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        <livewire:styles>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen">
@@ -75,5 +77,6 @@
                 <p class="pl-4 text-center">Pós-Graduação MAT/UnB - {{ date("Y") }}  - <a class="text-blue-500 hover:underline" href="mailto:posgrad@mat.unb.br">{{ trans('mensagens_gerais.duvidas_pos') }}</a> - <a class="text-blue-500 hover:underline" href="mailto:informatica@mat.unb.br">{{ trans('mensagens_gerais.problemas') }}</a></p>
             </div>
         </footer>
+        <livewire:scripts>
     </body>
 </html>
