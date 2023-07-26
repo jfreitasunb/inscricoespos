@@ -1,7 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
+
 
 const defaultTheme = require('tailwindcss/defaultTheme')
+
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
+import aspectRatio from '@tailwindcss/aspect-ratio';
 
 export default {
   content: [
@@ -10,16 +14,20 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    colors: {
+    extend: {
+        colors: {
         'azul-MAT': '#009FE5',
         'verde-MAT': '#449D44',
     },
-    extend: {
         fontFamily: {
         'sans': ['Proxima Nova', ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  plugins: [],
+  plugins: [
+        typography,
+        forms,
+        aspectRatio,
+    ],
 }
 
