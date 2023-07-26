@@ -7,8 +7,8 @@
         <title>Inscrições Pós-Graduação do MAT/UnB</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        {{-- <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" /> --}}
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -33,6 +33,7 @@
             <div class="flex justify-center items-center mt-12">
                 <div class="grid grid-cols-3 gap-4">
                     <div class="mt-4">
+
                         <button type="button" class="bg-azul-MAT text-white hover:text-white border border-azul-MAT bg-violet-500 hover:bg-violet-600 active:bg-violet-700 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
                             Português
                         </button>
