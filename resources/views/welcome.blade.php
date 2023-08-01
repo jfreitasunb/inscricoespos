@@ -71,18 +71,28 @@
 
             <div class="flex justify-center items-center mt-8">
                 <div class="flex items-center mt-4">
-                    <p class="items-center text-blue-500 hover:underline"><a href="#">Esqueceu a senha?</a>
+                    <p class="items-center text-blue-500 hover:underline"><a href="#">Esqueceu a senha?</a></p>
                 </div>
             </div>
         </div>
+    </main>
 
-    <!-- Rodapé -->
-    <footer class="py-4 text-center fixed bottom-0 w-full">
-        <hr class="my-8">
-        <p class="pl-4 text-center">Pós-Graduação MAT/UnB - {{ date("Y") }}</p>
-        <p class="pl-4 text-center"><a class="text-blue-500 hover:underline" href="mailto:posgrad@mat.unb.br">{{ trans('mensagens_gerais.duvidas_pos') }}</a></p>
-        <p class="pl-4 text-center"><a class="text-blue-500 hover:underline" href="mailto:informatica@mat.unb.br">{{ trans('mensagens_gerais.problemas') }}</a></p>
-    </footer>
+        <!-- Rodapé -->
+        <div  class="fixed inset-x-0 bottom-0">
+            <footer class="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+                <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+                    <span class="text-sm sm:text-center dark:text-gray-400">Pós-Graduação MAT/UnB - {{ date("Y") }}</span>
+                    <ul class="flex flex-wrap items-ledt mt-3 text-sm font-medium dark:text-gray-400 sm:mt-0">
+                        <li>
+                            <a href="mailto:posgrad@mat.unb.br" class="text-blue-500 mr-4 hover:underline md:mr-6 ">{{ trans('mensagens_gerais.duvidas_pos') }}</a>
+                        </li>
+                        <li>
+                            <a href="mailto:informatica@mat.unb.br" class="text-blue-500 mr-4 hover:underline md:mr-6">{{ trans('mensagens_gerais.problemas') }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
         @livewireScripts
     </body>
 </html>
