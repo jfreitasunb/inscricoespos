@@ -27,8 +27,8 @@
                 <!-- Div com tamanho w-5/6 e texto em três parágrafos -->
                 <div class="p-4 flex flex-col md:ml-72 md:text-center">
                     <!-- Conteúdo da segunda div -->
-                    <h1 class="text-white md:text-5xl">Departamento de Matemática</h1>
-                    <h2 class="text-white md:text-5xl">Inscrições para o Mestrado e Doutorado</h2>
+                    <h1 class="text-white md:text-5xl">{{ trans('mensagens_gerais.departamento') }}</h1>
+                    <h2 class="text-white md:text-5xl">{{ trans('mensagens_gerais.dois_programas') }}</h2>
                     <h3 class="text-white md:text-5xl">22/11/2022 à 22/01/2023</h3>
                 </div>
             </header>
@@ -58,13 +58,11 @@
                 <div class="flex justify-center items-center mt-12 lg:mt-44">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="mt-4 sm:pl-4">
-                            <button type="button" class="w-full bg-verde-MAT text-white border border-bg-azul-MAT hover:bg-green-700 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">
-                                Login
+                            <button type="button" class="w-full bg-verde-MAT text-white border border-bg-azul-MAT hover:bg-green-700 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_login') }}
                             </button>
                         </div>
                         <div class="mt-4 sm:pl-4">
-                            <button type="button" class="bg-azul-MAT text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">
-                                Registrar
+                            <button type="button" class="bg-azul-MAT text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_registrar') }}
                             </button>
                         </div>
                     </div>
@@ -72,7 +70,7 @@
 
                 <div class="flex justify-center items-center mt-8">
                     <div class="flex items-center mt-4">
-                        <p class="items-center text-blue-500 hover:underline"><a href="#">Esqueceu a senha?</a></p>
+                        <p class="items-center text-blue-500 hover:underline"><a href="#">{{ trans('tela_login.menu_esqueceu_senha') }}</a></p>
                     </div>
                 </div>
             </div>
