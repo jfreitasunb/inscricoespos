@@ -1,14 +1,13 @@
 {
   "Servers": {
-      "1": {
-          "Name": "pos",
-          "Group": "Servers",
-          "Host": "db",
-          "Port": 5432,
-          "MaintenanceDB": "novoinscricoespos",
-          "Username": "pos",
-          "PassFile": "/pgpass",
-          "SSLMode": "prefer"
-      }
+    "1": {
+      "Name": "Pos",
+      "Group": "Servers",
+      "Host": "db",
+      "Port": 5432,
+      "MaintenanceDB": "pos",
+      "Username": "pos",
+      "SSLMode": "prefer"
+    }
   }
 }

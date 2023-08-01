@@ -1,7 +1,10 @@
-version: '3.8'
+version: "3.8"
+
+volumes:
+  pg_data:
+  pgadmin_data:
 
 services:
-
   # Web Server Service
   nginx:
     image: nginx:alpine
@@ -15,23 +18,51 @@ services:
     depends_on:
       - app
       - db
-
   db:
-    image: postgres
-    container_name: postgres
-    volumes:
-      - ./data/postgresql/data:/var/lib/postgresql/data
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=pos
+      - POSTGRES_PASSWORD=estudos
+      - POSTGRES_DB=pos
     ports:
       - "5432:5432"
-    environment: 
-      POSTGRES_DB: novoinscricoespos
-      POSTGRES_USER: pos 
-      POSTGRES_PASSWORD: estudos 
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  init-pgadmin:
+    image: dpage/pgadmin4:latest
+    user: root
+    entrypoint:
+      - sh
+      - -c
+      - |
+        mkdir -p /var/lib/pgadmin/storage/pgadmin4_pgadmin.org/
+        cp /config/pgpass /var/lib/pgadmin/storage/pgadmin4_pgadmin.org/pgpass
+        chown -R pgadmin /var/lib/pgadmin
+    volumes:
+      - ./docker/pgadmin:/config
+      - pgadmin_data:/var/lib/pgadmin
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=jota@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=estudos
+      - PGADMIN_CONFIG_SERVER_MODE=True
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+
+    depends_on:
+      init-pgadmin:
+        condition: service_completed_successfully
 
   # Application Service
   app:
     container_name: inscricoespos
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     volumes:
@@ -39,21 +70,6 @@ services:
     ports:
       - "9000:9000"
     working_dir: /var/www
-
-  pgadmin:
-    image: dpage/pgadmin4:7.5
-    container_name: pgAdmin
-    links:
-      - "db:pgsql-server"
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    volumes:
-      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
-    environment:
-      PGADMIN_DEFAULT_EMAIL: jota@jota.com
-      PGADMIN_DEFAULT_PASSWORD: estudos 
 
   mailhog:
     image: mailhog/mailhog:latest
