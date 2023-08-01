@@ -38,19 +38,19 @@
             <div class="flex justify-center items-center mt-12">
                     <div class="grid grid-cols-3 gap-4">
                         <div class="mt-4">
-                            <button type="button" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
+                            <a href="{{ route('lang.portuguese') }}" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
                                 Português
-                            </button>
+                            </a>
                         </div>
                         <div class="mt-4 pl-2">
-                            <button type="button" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
+                            <a href="{{ route('lang.english') }}" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
                                 English
-                            </button>
+                            </a>
                         </div>
                         <div class="mt-4 pl-2">
-                            <button type="button" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
+                            <a href="{{ route('lang.spanish') }}" class="bg-azul-MAT text-white hover:text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-full text-xs lg:text-xl px-6 lg:px-32 py-1 focus-outline-none">
                                 Español
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>
