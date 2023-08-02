@@ -1,33 +1,25 @@
-/** @type {import('tailwindcss').Config} */
-
-
-const defaultTheme = require('tailwindcss/defaultTheme')
-
-import typography from '@tailwindcss/typography';
+import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
-import aspectRatio from '@tailwindcss/aspect-ratio';
 
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {
-        colors: {
-        'azul-MAT': '#009FE5',
-        'verde-MAT': '#449D44',
-    },
-        fontFamily: {
-        'sans': ['Proxima Nova', ...defaultTheme.fontFamily.sans],
-      },
-    },
-  },
-  plugins: [
-        typography,
-        forms,
-        aspectRatio,
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
     ],
-}
 
+    theme: {
+        extend: {
+            colors: {
+                'azul-MAT': '#009FE5',
+                'verde-MAT': '#449D44',
+            },
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+
+    plugins: [forms],
+};
