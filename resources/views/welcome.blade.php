@@ -58,19 +58,19 @@
                 <div class="flex justify-center items-center mt-12 lg:mt-44">
                     <div class="grid grid-cols-2 gap-4">
                         <div class="mt-4 sm:pl-4">
-                            <button type="button" class="w-full bg-verde-MAT text-white border border-bg-azul-MAT hover:bg-green-700 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_login') }}
-                            </button>
+                            <a href="{{ route('login') }}" class="w-full bg-verde-MAT text-white border border-bg-azul-MAT hover:bg-green-700 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_login') }}
+                            </a>
                         </div>
                         <div class="mt-4 sm:pl-4">
-                            <button type="button" class="bg-azul-MAT text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_registrar') }}
-                            </button>
+                            <a  href="{{ route('register') }}" class="bg-azul-MAT text-white border border-bg-azul-MAT hover:bg-sky-900 font-semibold rounded-md lg:text-4xl px-12 lg:px-40 py-1 focus-outline-none">{{ trans('tela_inicial.menu_registrar') }}
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 <div class="flex justify-center items-center mt-8">
                     <div class="flex items-center mt-4">
-                        <p class="items-center text-blue-500 hover:underline"><a href="#">{{ trans('tela_login.menu_esqueceu_senha') }}</a></p>
+                        <p class="items-center text-blue-500 hover:underline"><a href="{{ route('password.request') }}">{{ trans('tela_login.menu_esqueceu_senha') }}</a></p>
                     </div>
                 </div>
             </div>
