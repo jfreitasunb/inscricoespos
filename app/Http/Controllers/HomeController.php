@@ -13,11 +13,6 @@ use Session;
 class HomeController extends Controller
 {
 
-    public function index()
-    {
-        return view('home');
-    }
-
     public function setaLocale($locale)
     {
         if(Auth::check()){
@@ -51,5 +46,10 @@ class HomeController extends Controller
         $this->setaLocale('es');
 
         return redirect()->back();
+    }
+
+    public function index()
+    {
+        return view('layouts.home');
     }
 }

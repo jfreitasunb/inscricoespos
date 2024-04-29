@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,8 +18,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
+        'locale',
         'password',
     ];
 
@@ -42,4 +43,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function isAdmin()
+    {
+        if (auth()->user()->user_type === 'admin') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isCoordenador()
+    {
+        if (auth()->user()->user_type === 'coordenador') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isCandidato()
+    {
+        if (auth()->user()->user_type === 'candidato') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+
+    public function isREcomendante()
+    {
+        if (auth()->user()->user_type === 'recomendante') {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
 }

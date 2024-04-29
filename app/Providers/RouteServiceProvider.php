@@ -17,7 +17,17 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/';
+
+    public const NOVACONTA = '/dashboard';
+
+    public const ADMIN = '/admin';
+
+    public const COORDENADOR = '/coordenador';
+
+    public const CANDIDATO = '/candidato';
+
+    public const RECOMENDANTE = '/recomendante';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

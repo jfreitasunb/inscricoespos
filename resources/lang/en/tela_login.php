@@ -8,6 +8,7 @@
 return [
     'menu_email' => 'E-mail',
     'menu_senha' => 'Password',
+    'remember_me' => 'Remember me',
     'menu_entrar' => 'Enter',
     'menu_esqueceu_senha' => 'Forgot password?',
 ];

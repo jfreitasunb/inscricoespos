@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Session;
 
 class RegisteredUserController extends Controller
 {
@@ -30,15 +31,23 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'nome' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'confirmed', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if (Session::has('locale')) {
+            $locale = Session::get('locale');
+        }else{
+            $locale = "pt_BR";
+        }
+
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'nome' => $request->nome,
+            'email' => trim($request->email),
+            'locale' => $locale,
             'password' => Hash::make($request->password),
         ]);
 
@@ -46,6 +55,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::NOVACONTA);
     }
 }
