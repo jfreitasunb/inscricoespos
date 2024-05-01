@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Coordenador;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\ProgramaPos;
+use InscricoesPos\Models\ConfiguraInscricaoPos;
 
 use Illuminate\Http\Request;
 
@@ -16,6 +18,8 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 {
     public function getConfiguraInscricao()
     {
-        return view('layouts.coordenador.configura_inscricao');
+        $programas_pos_mat = ProgramaPos::get()->all();
+
+        return view('layouts.coordenador.configura_inscricao')->with(compact('programas_pos_mat'));
     }    
 }
