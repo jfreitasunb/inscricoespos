@@ -18,7 +18,6 @@ class ProgramaPosMatTableSeeder extends Seeder
         \DB::table('programa_pos_mat')->insert(array (
             0 => 
             array (
-                'id_programa_pos' => 1,
                 'tipo_programa_pos_ptbr' => 'Mestrado',
                 'tipo_programa_pos_en' => 'Master\'s degree',
                 'tipo_programa_pos_es' => 'Maestría',
@@ -27,7 +26,6 @@ class ProgramaPosMatTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id_programa_pos' => 2,
                 'tipo_programa_pos_ptbr' => 'Doutorado',
                 'tipo_programa_pos_en' => 'PhD degree',
                 'tipo_programa_pos_es' => 'Doctorado',
@@ -36,7 +34,7 @@ class ProgramaPosMatTableSeeder extends Seeder
             ),
             // 2 => 
             // array (
-            //     'id_programa_pos' => 3,
+            //     'id' => 3,
             //     'tipo_programa_pos' => 'Verão',
             //     'created_at' => '2017-11-21 15:27:00',
             //     'updated_at' => '2017-11-21 15:27:00',
@@ -45,9 +43,9 @@ class ProgramaPosMatTableSeeder extends Seeder
         
         $tableToCheck = 'programa_pos_mat';
 
-        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
-        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
+        $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
+        $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_seq\')'))->first();
 
-        DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
+        DB::select('SELECT setval(\''.$tableToCheck.'_id_seq\', '.$highestId->max.')');
     }
 }

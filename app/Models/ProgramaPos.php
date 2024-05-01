@@ -12,7 +12,7 @@ class ProgramaPos extends FuncoesModels
      * @var array
      */
     
-    protected $primaryKey = 'id_programa_pos';
+    // protected $primaryKey = 'id_programa_pos';
 
     protected $table = 'programa_pos_mat';
 
@@ -27,7 +27,7 @@ class ProgramaPos extends FuncoesModels
         $nome_coluna = $this->define_nome_coluna_programa_pos_mat($locale);
 
         return $this->select($nome_coluna)
-            ->where('id_programa_pos', $programa)
+            ->where('id', $programa)
             ->value($nome_coluna);
     }
 }

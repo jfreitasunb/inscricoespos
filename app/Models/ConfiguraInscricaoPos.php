@@ -13,7 +13,7 @@ class ConfiguraInscricaoPos extends Model
      * @var array
      */
     
-    protected $primaryKey = 'id_inscricao_pos';
+    // protected $primaryKey = 'id_inscricao_pos';
 
     protected $table = 'configura_inscricao_pos';
 
@@ -33,17 +33,18 @@ class ConfiguraInscricaoPos extends Model
     public function retorna_lista_para_relatorio()
     {
 
-        return $this->orderBy('id_inscricao_pos','desc')->paginate(5);
+        return $this->orderBy('id','desc')->paginate(5);
     }
 
     public function retorna_edital_vigente($id_inscricao_pos = null)
     {
         if (is_null($id_inscricao_pos)) {
 
-            return $this->orderBy('id_inscricao_pos','desc')->get()->first();
+            return $this->orderBy('id','desc')->get()->first();
         }else{
             
-            return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+            // return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+            return $this->get()->first();
         }    
     }
 
@@ -51,10 +52,11 @@ class ConfiguraInscricaoPos extends Model
     {
         if (is_null($id_inscricao_pos)) {
             
-            return $this->get()->sortByDesc('id_inscricao_pos')->first();
+            return $this->get()->sortByDesc('id')->first();
         }else{
             
-            return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+            // return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
+            return $this->get()->first();
         }   
     }
 

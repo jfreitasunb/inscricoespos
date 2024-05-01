@@ -14,7 +14,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
     public function up()
     {
         Schema::create('configura_inscricao_pos', function (Blueprint $table){
-            $table->increments('id_inscricao_pos');
+            $table->id();
             $table->date('inicio_inscricao');
             $table->date('fim_inscricao');
             $table->date('prazo_carta');
@@ -25,7 +25,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->string('programa', 7);
             $table->string('edital', 7);
             $table->unsignedInteger('id_coordenador');
-            $table->foreign('id_coordenador')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_coordenador')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

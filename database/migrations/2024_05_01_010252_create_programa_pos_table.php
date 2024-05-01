@@ -14,7 +14,7 @@ class CreateProgramaPosTable extends Migration
     public function up()
     {
          Schema::create('programa_pos_mat', function (Blueprint $table){
-            $table->increments('id_programa_pos');
+            $table->id();
             $table->string('tipo_programa_pos_ptbr',255);
             $table->string('tipo_programa_pos_en',255)->nullable();
             $table->string('tipo_programa_pos_es',255)->nullable();
