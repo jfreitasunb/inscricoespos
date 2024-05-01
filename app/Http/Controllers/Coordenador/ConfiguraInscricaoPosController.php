@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Coordenador;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\ProgramaPos;
+use App\Models\ProgramaPos;
 use InscricoesPos\Models\ConfiguraInscricaoPos;
 
 use Illuminate\Http\Request;
