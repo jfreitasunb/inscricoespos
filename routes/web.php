@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Coordenador\CoordenadorController;
+use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
 use App\Http\Controllers\Recomendante\RecomendanteController;
 use App\Livewire\ListaUsuarios;
@@ -54,7 +55,7 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'getMenu'])->name('menu.admin');
-    Route::get('/admin/configura/inscricao', ListaUsuarios::class)->name('admin.configura.inscricao');
+    Route::get('/admin/configura/inscricao', [ConfiguraInscricaoPosController::class, 'getConfiguraInscricao'])->name('configura.inscricao');
 });
 
 
