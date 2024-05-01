@@ -10,8 +10,8 @@
                     </button>
                     <ul id="dropdown-sistema" class="hidden py-2 space-y-2">
                         <li>
-                            <form method="POST" action="{{ route('admin.configura.inscricao') }}">
-                                <a href="{{ route('admin.configura.inscricao') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Usuários</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                <a href="{{ route('logout') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Usuários</a>
                             </form>
                         </li>
                         <li>
@@ -88,8 +88,8 @@
                     </button>
                     <ul id="dropdown-edital" class="hidden py-2 space-y-2">
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Usuários</a>
+                            <form method="POST" action="{{ route('configura.inscricao') }}">
+                                <a href="{{ route('configura.inscricao') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Configurar Edital</a>
                             </form>
                         </li>
                         <li>
@@ -291,7 +291,7 @@
             </ul>
         </div>
     </aside>
-    <div class="w-full h-full h-32 px-4 py-2 bg-gray-200">
+    <div class="w-full h-full h-32 px-4 py-2">
         <div class="container mx-auto mt-12">
             @yield('configura_inscricao')
             @yield('lista_usuarios')
