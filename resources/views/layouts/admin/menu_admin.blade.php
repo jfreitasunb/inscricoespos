@@ -1,6 +1,6 @@
 <div class="flex h-screen">
     <aside class="w-96" aria-label="Sidebar">
-        <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 dark:bg-gray-500">
+        <div class="px-3 py-4 overflow-y-auto rounded bg-gray-200 dark:bg-gray-500">
             <ul class="space-y-2">
                 <li>
                     <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-sistema" data-collapse-toggle="dropdown-sistema">
@@ -280,7 +280,7 @@
                         @csrf
                         <a href="{{ route('logout') }}"  onclick="event.preventDefault();
                         this.closest('form').submit();"
-                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                            class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
                             <svg class="h-8 w-8 text-white"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
                               </svg>
