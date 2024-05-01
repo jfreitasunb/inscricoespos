@@ -13,19 +13,19 @@
             </div>
             <div>
                 <label for="final-inscricao" class="block mb-1">Final da Inscrição</label>
-                <input type="text" id="final-inscricao" name="final-inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <input type="date" id="final-inscricao" name="final-inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
                 <label for="prazo-envio-carta" class="block mb-1">Prazo para Envio da Carta</label>
-                <input type="text" id="prazo-envio-carta" name="prazo-envio-carta" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <input type="date" id="prazo-envio-carta" name="prazo-envio-carta" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
                 <label for="homologacao-inscricoes" class="block mb-1">Data da Homologação das Inscrições</label>
-                <input type="text" id="homologacao-inscricoes" name="homologacao-inscricoes" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <input type="date" id="homologacao-inscricoes" name="homologacao-inscricoes" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
                 <label for="divulgacao-resultado" class="block mb-1">Data da Divulgação do Resultado</label>
-                <input type="text" id="divulgacao-resultado" name="divulgacao-resultado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <input type="date" id="divulgacao-resultado" name="divulgacao-resultado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
                 <label for="ano-semestre" class="block mb-1">Ano e Semestre de Início no Programa</label>
