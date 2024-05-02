@@ -17,10 +17,10 @@
                 @endif
             </div>
             <div>
-                <label for="final_inscricao" class="block mb-1">Final da Inscrição</label>
-                <input type="date" id="final_inscricao" name="final_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('final_inscricao') }}" required>
-                @if($errors->has('final_inscricao'))
-                    <div class="error">{{ $errors->first('final_inscricao') }}</div>
+                <label for="fim_inscricao" class="block mb-1">Final da Inscrição</label>
+                <input type="date" id="fim_inscricao" name="fim_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('fim_inscricao') }}" required>
+                @if($errors->has('fim_inscricao'))
+                    <div class="error">{{ $errors->first('fim_inscricao') }}</div>
                 @endif
             </div>
             <div>
