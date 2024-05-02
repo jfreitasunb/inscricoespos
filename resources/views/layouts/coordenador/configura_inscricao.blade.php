@@ -19,6 +19,9 @@
             <div>
                 <label for="final_inscricao" class="block mb-1">Final da Inscrição</label>
                 <input type="date" id="final_inscricao" name="final_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('final_inscricao') }}" required>
+                @if($errors->has('final_inscricao'))
+                    <div class="error">{{ $errors->first('final_inscricao') }}</div>
+                @endif
             </div>
             <div>
                 <label for="prazo_carta" class="block mb-1">Prazo para Envio da Carta</label>
