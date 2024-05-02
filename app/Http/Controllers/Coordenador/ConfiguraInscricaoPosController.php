@@ -21,5 +21,10 @@ class ConfiguraInscricaoPosController extends CoordenadorController
         $programas_pos_mat = ProgramaPos::get()->all();
 
         return view('layouts.coordenador.configura_inscricao')->with(compact('programas_pos_mat'));
-    }    
+    }
+
+    public function postConfiguraInscricao(Request $request)
+    {
+        dd($request);
+    }
 }
