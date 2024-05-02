@@ -21,7 +21,7 @@ class CreateConfiguraInscricaoPosTable extends Migration
             $table->date('data_homologacao');
             $table->date('data_divulgacao_resultado');
             $table->boolean('necessita_recomendante')->default(TRUE);
-            $table->string('semestre_inicio', 20);
+            $table->string('semestre_inicio', 10)->nullable();
             $table->string('programa', 7);
             $table->string('edital', 7);
             $table->unsignedInteger('id_coordenador');
