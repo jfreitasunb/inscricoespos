@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Coordenador;
 use App\Http\Controllers\Controller;
 use App\Models\ProgramaPos;
 use App\Models\ConfiguraInscricaoPos;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -136,10 +137,10 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 
                 $dados_email['programa'] = implode('/', $temp);
 
-                Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
+                // Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
 
                 // notify()->flash('Inscrição configurada com sucesso.','success');
-                return redirect()->route('configura.inscricao');
+                return redirect()->route('configura.inscricao')->with('success', 'Inscrição configurada com sucesso.');
 
 
             }else{
