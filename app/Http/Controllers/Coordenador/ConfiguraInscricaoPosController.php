@@ -29,7 +29,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
         $this->validate($request, [
             'inicio_inscricao' => 'required|date_format:"Y-m-d"|before:fim_inscricao|after:today',
             'fim_inscricao' => 'required|date_format:"Y-m-d"|after:inicio_inscricao|after:today',
-            'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao|after:today',
+            'prazo_carta' => 'required|date_format:"Y-m-d"|after:inicio_inscricao|after:fim_inscricao|after:today',
             'data_homologacao' => 'required|date_format:"Y-m-d"|after:fim_inscricao|after:today',
             'data_divulgacao_resultado' => 'required|date_format:"Y-m-d"|after:data_homologacao|after:today',
             'necessita_recomendante' => 'required',
