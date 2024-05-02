@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'getMenu'])->name('menu.admin');
     Route::get('configura/inscricao', [ConfiguraInscricaoPosController::class, 'getConfiguraInscricao'])->name('configura.inscricao');
+    Route::post('configura/inscricao', [ConfiguraInscricaoPosController::class, 'postConfiguraInscricao']);
 });
 
 
