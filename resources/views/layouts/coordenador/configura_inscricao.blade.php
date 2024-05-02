@@ -3,7 +3,8 @@
 
 @section('configura_inscricao')
 <div class="max-w-2xl mx-auto">
-    <form method="POST" action="{{ route('configura.inscricao')}}">
+    <x-alerta />
+    <form method="POST" action="{{ route('configura.inscricao')}}" enctype="multipart/form-data">
     @csrf
     <!-- Seção: Datas importantes -->
     <div class="mb-8">
