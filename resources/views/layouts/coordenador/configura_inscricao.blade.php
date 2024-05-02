@@ -11,27 +11,30 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="inicio_inscricao" class="block mb-1">Início da Inscrição</label>
-                <input type="date" id="inicio_inscricao" name="inicio_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                <input type="date" id="inicio_inscricao" name="inicio_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('inicio_inscricao') }}" required>
+                @if($errors->has('inicio_inscricao'))
+                    <div class="error">{{ $errors->first('inicio_inscricao') }}</div>
+                @endif
             </div>
             <div>
                 <label for="final_inscricao" class="block mb-1">Final da Inscrição</label>
-                <input type="date" id="final_inscricao" name="final_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                <input type="date" id="final_inscricao" name="final_inscricao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('final_inscricao') }}" required>
             </div>
             <div>
                 <label for="prazo_carta" class="block mb-1">Prazo para Envio da Carta</label>
-                <input type="date" id="prazo_carta" name="prazo_carta" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                <input type="date" id="prazo_carta" name="prazo_carta" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('prazo_carta') }}" required>
             </div>
             <div>
                 <label for="data_homologacao" class="block mb-1">Data da Homologação das Inscrições</label>
-                <input type="date" id="data_homologacao" name="data_homologacao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                <input type="date" id="data_homologacao" name="data_homologacao" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('data_homologacao') }}" required>
             </div>
             <div>
                 <label for="data_divulgacao_resultado" class="block mb-1">Data da Divulgação do Resultado</label>
-                <input type="date" id="data_divulgacao_resultado" name="data_divulgacao_resultado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
+                <input type="date" id="data_divulgacao_resultado" name="data_divulgacao_resultado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('data_divulgacao_resultado') }}" required>
             </div>
             <div>
                 <label for="semestre_inicio" class="block mb-1">Ano e Semestre de Início no Programa</label>
-                <input type="text" id="semestre_inicio" name="semestre_inicio" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <input type="text" id="semestre_inicio" name="semestre_inicio" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('semestre_inicio') }}">
             </div>
         </div>
     </div>
