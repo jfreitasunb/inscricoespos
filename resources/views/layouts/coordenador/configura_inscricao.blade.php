@@ -2,6 +2,8 @@
 
 
 @section('configura_inscricao')
+<form method="POST" action="/profile">
+    @csrf
 <div class="max-w-2xl mx-auto">
     <!-- Seção: Datas importantes -->
     <div class="mb-8">
@@ -99,5 +101,5 @@
         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Enviar</button>
     </div>
 </div>
-
+</form>
 @endsection
