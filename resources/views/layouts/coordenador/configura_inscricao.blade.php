@@ -2,9 +2,9 @@
 
 
 @section('configura_inscricao')
-<form method="POST" action="{{ route('configura.inscricao')}}">
-    @csrf
 <div class="max-w-2xl mx-auto">
+    <form method="POST" action="{{ route('configura.inscricao')}}">
+    @csrf
     <!-- Seção: Datas importantes -->
     <div class="mb-8">
         <h2 class="text-lg font-semibold mb-4">Datas Importantes</h2>
@@ -40,12 +40,11 @@
     <div class="mb-8">
         <h2 class="text-lg font-semibold mb-4">Escolha de Programas</h2>
         <div class="flex flex-wrap gap-4">
-            <label for="programa1" class="inline-flex items-center">
-                <input type="checkbox" id="programa1" name="programa1" class="mr-2"> Programa 1
-            </label>
-            <label for="programa2" class="inline-flex items-center">
-                <input type="checkbox" id="programa2" name="programa2" class="mr-2"> Programa 2
-            </label>
+            @foreach($programas_pos_mat as $programa)
+                <label for="escolhas_coordenador[]" class="inline-flex items-center">
+                    <input type="checkbox" id="escolhas_coordenador[]" name="escolhas_coordenador[]" class="mr-2" value="{{ $programa->id }}"> {{ $programa->tipo_programa_pos_ptbr }}
+                </label>
+            @endforeach
         </div>
     </div>
 
@@ -53,26 +52,26 @@
     <div class="mb-8">
         <h2 class="text-lg font-semibold mb-4">Recomendante</h2>
         <div class="flex items-center gap-4">
-            <label for="recomendante" class="inline-flex items-center">
-                <input type="radio" id="recomendante" name="recomendante" class="mr-2"> Sim
+            <label for="necessita_recomendante" class="inline-flex items-center">
+                <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2"value="1" checked> Sim
             </label>
-            <label for="sem-recomendante" class="inline-flex items-center">
-                <input type="radio" id="sem-recomendante" name="recomendante" class="mr-2"> Não
+            <label for="necessita_recomendante" class="inline-flex items-center">
+                <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2" value="0"> Não
             </label>
         </div>
     </div>
 
     <!-- Seção: Outros Detalhes -->
     <div class="mb-8">
-        <h2 class="text-lg font-semibold mb-4">Outros Detalhes</h2>
+        <h2 class="text-lg font-semibold mb-4">Ano e número do edital</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label for="ano-selecionado" class="block mb-1">Ano Selecionado</label>
-                <input type="text" id="ano-selecionado" name="ano-selecionado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <label for="edital_ano" class="block mb-1">Ano</label>
+                <input type="text" id="edital_ano" name="edital_ano" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
             <div>
-                <label for="numero-informado" class="block mb-1">Número Informado</label>
-                <input type="text" id="numero-informado" name="numero-informado" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+                <label for="edital_numero" class="block mb-1">Número</label>
+                <input type="text" id="edital_numero" name="edital_numero" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500">
             </div>
         </div>
     </div>
@@ -80,18 +79,18 @@
     <!-- Seção: Envio de Arquivos -->
     <div class="mb-8">
         <h2 class="text-lg font-semibold mb-4">Envio de Arquivos</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
             <div>
-                <label for="arquivo1" class="block mb-1">Arquivo 1</label>
-                <input type="file" id="arquivo1" name="arquivo1" class="w-full">
+                <label for="edital_portugues" class="block mb-1">Edital em Português</label>
+                <input type="file" id="edital_portugues" name="edital_portugues" class="w-full">
             </div>
             <div>
-                <label for="arquivo2" class="block mb-1">Arquivo 2</label>
-                <input type="file" id="arquivo2" name="arquivo2" class="w-full">
+                <label for="edital_ingles" class="block mb-1">Edital em Inglês</label>
+                <input type="file" id="edital_ingles" name="edital_ingles" class="w-full">
             </div>
             <div>
-                <label for="arquivo3" class="block mb-1">Arquivo 3</label>
-                <input type="file" id="arquivo3" name="arquivo3" class="w-full">
+                <label for="edital_espanhol" class="block mb-1">Edital em Espanhol</label>
+                <input type="file" id="edital_espanhol" name="edital_espanhol" class="w-full">
             </div>
         </div>
     </div>
@@ -100,6 +99,7 @@
     <div class="text-center">
         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Enviar</button>
     </div>
+    </form>
 </div>
-</form>
+
 @endsection
