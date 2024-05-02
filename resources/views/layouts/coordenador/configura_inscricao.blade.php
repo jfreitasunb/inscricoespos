@@ -2,7 +2,7 @@
 
 
 @section('configura_inscricao')
-<form method="POST" action="/profile">
+<form method="POST" action="{{ route('configura.inscricao')}}">
     @csrf
 <div class="max-w-2xl mx-auto">
     <!-- Seção: Datas importantes -->
