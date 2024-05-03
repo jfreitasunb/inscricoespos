@@ -10,8 +10,8 @@
         <div class="p-4 flex flex-col md:ml-72 md:text-center">
             <!-- Conteúdo da segunda div -->
             <h1 class="text-white md:text-5xl">{{ __('mensagens_gerais.departamento') }}</h1>
-            <h2 class="text-white md:text-5xl">{{ __('mensagens_gerais.dois_programas') }}</h2>
-            <h3 class="text-white md:text-5xl">22/11/2022 à 22/01/2023</h3>
+            <h2 class="text-white md:text-5xl">{{ __('mensagens_gerais.'.$texto_inscricao_pos) }}</h2>
+            <h3 class="text-white md:text-5xl">{{ $periodo_inscricao }}</h3>
         </div>
     </header>
 </div>
