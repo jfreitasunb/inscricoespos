@@ -19,6 +19,7 @@ use Session;
 use File;
 
 use Notification;
+use App\Notifications\NotificaNovaInscricao;
 
 class ConfiguraInscricaoPosController extends CoordenadorController
 {
@@ -137,18 +138,16 @@ class ConfiguraInscricaoPosController extends CoordenadorController
 
                 $dados_email['programa'] = implode('/', $temp);
 
-                // Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
+                Notification::send(User::find('1'), new NotificaNovaInscricao($dados_email));
 
-                // notify()->flash('Inscrição configurada com sucesso.','success');
                 return redirect()->route('configura.inscricao')->with('success', 'Inscrição configurada com sucesso.');
 
 
             }else{
-                // notify()->flash('Houve um problema na hora de enviar o edital. Tente novamente.','error');
                 return redirect()->route('configura.inscricao');
             }
         }else{
-            return redirect()->route('configura.inscricao')->with('status_erro', 'Já existe uma inscrição ativa para esse período.');
+            return redirect()->route('configura.inscricao')->with('erro_configura_edital', 'Já existe uma inscrição ativa para esse período.');
         }
     }
 }
