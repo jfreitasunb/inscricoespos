@@ -10,20 +10,21 @@ use Auth;
 
 use Session;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
-
+    
     public function setaLocale($locale)
     {
         if(Auth::check()){
 
-           $user = User::find(Auth::user()->id_user);
+           $user = User::find(Auth::user()->id);
 
            $user->update(['locale'=>$locale]);
 
         }else{
 
-            Session::put('locale',$locale);
+            App::setLocale($locale);
+            Session::put("locale", $locale);
         }
     }
 
