@@ -97,9 +97,12 @@ class BaseController extends Controller
       return User::find(session()->get('impersonate'));
     }else{
       return Auth::user();
+    }
   }
 
-  public function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), $exceptions = array("de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
+  public function titleCase($string, 
+    $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), 
+    $exceptions = array("de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
   {
     /*
     * Exceptions in lower case are words you don't want converted
