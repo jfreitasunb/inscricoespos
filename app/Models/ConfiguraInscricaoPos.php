@@ -103,11 +103,11 @@ class ConfiguraInscricaoPos extends Model
         $data_hoje = (new Carbon())->format('Y-m-d');
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
-            if (Session::get('locale') == 'en') {
-                return $periodo_inscricao = $inicio->format('m/d/Y').__('mensagens_gerais.to').$fim->format('m/d/Y');
-            }else{
-                return $periodo_inscricao = $inicio->format('d/m/Y').__('mensagens_gerais.to').$fim->format('d/m/Y');
-            }
+            // if (Session::get('locale') == 'en') {
+                // return $periodo_inscricao = $inicio->format('m/d/Y').__('mensagens_gerais.to').$fim->format('m/d/Y');
+            // }else{
+                return $periodo_inscricao = [ $inicio->format('d/m/Y'), $fim->format('d/m/Y')];
+            // }
             
         }
 
