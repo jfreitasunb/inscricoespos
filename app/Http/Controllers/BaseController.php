@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\ConfiguraInscricaoPos;
+
 use App\Models\User;
 
 use Illuminate\Support\Facades\App;
@@ -25,6 +26,8 @@ class BaseController extends Controller
     public $periodo_inscricao;
 
   public $texto_inscricao_pos;
+  
+  public $locale;
 
   protected $array_meses  = array(
                 '1' => 'Janeiro',
@@ -41,18 +44,38 @@ class BaseController extends Controller
                 '12' => 'Dezembro',
               );
 
-    public function __construct()
+    public function setaLocale($locale)
     {
-        // dd(App::currentLocale());
-        $inscricao_pos = new ConfiguraInscricaoPos();
+        if(Auth::check()){
+          $user = User::find(Auth::user()->id);
 
-        $periodo_inscricao = $inscricao_pos->retorna_periodo_inscricao();
+          $user->update(['locale'=>$locale]);
+        }else{
+          App::setLocale($locale);
 
-        $texto_inscricao_pos = $inscricao_pos->define_texto_inscricao();
+          Session::put("locale", $locale);
+        }
+    }
 
-        View::share ( 'periodo_inscricao', $periodo_inscricao );
+    public function getLangPortuguese()
+    {
+        $this->setaLocale('pt_BR');
 
-        View::share ( 'texto_inscricao_pos', $texto_inscricao_pos );
+        return redirect()->back();
+    }
+
+    public function getLangEnglish()
+    {
+        $this->setaLocale('en');
+
+        return redirect()->back();
+    }
+
+    public function getLangSpanish()
+    {
+        $this->setaLocale('es');
+
+        return redirect()->back();
     }
 
   public function SetUser()
