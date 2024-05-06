@@ -11,7 +11,7 @@
             <!-- Conteúdo da segunda div -->
             <h1 class="text-white md:text-5xl">{{ __('mensagens_gerais.departamento') }}</h1>
             <h2 class="text-white md:text-5xl">{{ __('mensagens_gerais.'.$texto_inscricao_pos) }}</h2>
-            <h3 class="text-white md:text-5xl">{{ $periodo_inscricao }}</h3>
+            <h3 class="text-white md:text-5xl">{{ $periodo_inscricao[0].__('mensagens_gerais.to').$periodo_inscricao[1]}}</h3>
         </div>
     </header>
 </div>
