@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\EditarInscricaoPosController;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
@@ -56,8 +57,14 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'getMenu'])->name('menu.admin');
+    
     Route::get('configura/inscricao', [ConfiguraInscricaoPosController::class, 'getConfiguraInscricao'])->name('configura.inscricao');
+    
     Route::post('configura/inscricao', [ConfiguraInscricaoPosController::class, 'postConfiguraInscricao']);
+
+    Route::get('inscricao/editar', [EditarInscricaoPosController::class, 'getEditarInscricao'])->name('editar.inscricao');
+
+    Route::post('inscricao/editar', [EditarInscricaoPosController::class, 'postEditarInscricao']);
 });
 
 
