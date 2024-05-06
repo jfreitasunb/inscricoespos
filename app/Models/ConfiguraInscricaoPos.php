@@ -90,7 +90,6 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_periodo_inscricao()
     {
-        // dd(Session::get('locale'));
         if (is_null($this->retorna_inscricao_ativa())){
             $data_inicio = '3000-01-01';
         }else{
