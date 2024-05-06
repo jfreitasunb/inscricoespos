@@ -93,8 +93,8 @@
                             </form>
                         </li>
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Link de mudança de senha</a>
+                            <form method="POST" action="{{ route('editar.inscricao') }}">
+                                <a href="{{ route('editar.inscricao') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Editar detalhes da inscrição</a>
                             </form>
                         </li>
                         <li>
