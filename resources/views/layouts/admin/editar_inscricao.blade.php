@@ -4,7 +4,8 @@
 @section('configura_inscricao')
     <div class="max-w-4xl mx-auto bg-white rounded p-6 shadow-md">
         <h2 class="text-2xl font-semibold mb-4">Formulário</h2>
-        <form class="grid grid-cols-2 gap-4">
+         <form class="grid grid-cols-2 gap-4" method="POST" action="{{ route('editar.inscricao')}}" enctype="multipart/form-data">
+    		@csrf
             <div>
                 <div class="mb-4">
                     <label for="inicio_inscricao" class="block text-gray-700 font-semibold mb-2">Início da inscrição:</label>
