@@ -39,7 +39,7 @@ return [
     'confirma_presenca' => 'Resposta gravada com sucesso.',
     'inscricao_encerrada' => 'Inscrições encerradas.',
     'inscricao_nao_iniciada' => 'A inscrição não está aberta',
-    'to' => ' à ',
+    'to' => ' a ',
     'dois_programas' => 'Inscrições para o Mestrado e Doutorado',
     'inscricao_mestrado' => 'Inscrições para o Mestrado',
     'inscricao_doutorado' => 'Inscrições para o Doutorado',
