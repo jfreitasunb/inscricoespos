@@ -2,13 +2,13 @@
 
 
 @section('configura_inscricao')
-<div class="max-w-2xl mx-auto">
+<div class="max-w-4xl mx-auto bg-white rounded p-6 shadow-md">
     <x-alerta />
     <form method="POST" action="{{ route('configura.inscricao')}}" enctype="multipart/form-data">
     @csrf
     <!-- Seção: Datas importantes -->
     <div class="mb-8">
-        <h2 class="text-lg font-semibold mb-4">Datas Importantes</h2>
+        <h2 class="text-2xl font-semibold mb-4">Configurar período da abertura da inscrição</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="inicio_inscricao" class="block mb-1">Início da Inscrição</label>
@@ -54,7 +54,7 @@
 
     <!-- Seção: Escolha de Programas -->
     <div class="mb-8">
-        <h2 class="text-lg font-semibold mb-4">Escolha de Programas</h2>
+        <h2 class="text-lg font-semibold mb-4">Escolher os programas para Inscrição:</h2>
         <div class="flex flex-wrap gap-4">
             @foreach($programas_pos_mat as $programa)
                 <label for="escolhas_coordenador[]" class="inline-flex items-center">
@@ -66,7 +66,7 @@
 
     <!-- Seção: Recomendante -->
     <div class="mb-8">
-        <h2 class="text-lg font-semibold mb-4">Recomendante</h2>
+        <h2 class="text-lg font-semibold mb-4">É necessário indicar recomendantes?</h2>
         <div class="flex items-center gap-4">
             <label for="necessita_recomendante" class="inline-flex items-center">
                 <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2"value="1" checked> Sim
@@ -79,7 +79,7 @@
 
     <!-- Seção: Outros Detalhes -->
     <div class="mb-8">
-        <h2 class="text-lg font-semibold mb-4">Ano e número do edital</h2>
+        <h2 class="text-lg font-semibold mb-4">Edital</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="edital_ano" class="block mb-1">Ano</label>
