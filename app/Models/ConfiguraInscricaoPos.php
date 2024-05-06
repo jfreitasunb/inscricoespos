@@ -4,6 +4,8 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+use Session;
+
 class ConfiguraInscricaoPos extends Model
 {
     
@@ -88,7 +90,7 @@ class ConfiguraInscricaoPos extends Model
 
     public function retorna_periodo_inscricao()
     {
-        Session::get('locale');
+        // dd(Session::get('locale'));
         if (is_null($this->retorna_inscricao_ativa())){
             $data_inicio = '3000-01-01';
         }else{
@@ -103,19 +105,19 @@ class ConfiguraInscricaoPos extends Model
 
         if ($data_hoje >= $data_inicio && $data_hoje <= $data_fim) {
             if (Session::get('locale') == 'en') {
-                return $periodo_inscricao = $inicio->format('m/d/Y').trans('mensagens_gerais.to').$fim->format('m/d/Y');
+                return $periodo_inscricao = $inicio->format('m/d/Y').__('mensagens_gerais.to').$fim->format('m/d/Y');
             }else{
-                return $periodo_inscricao = $inicio->format('d/m/Y').trans('mensagens_gerais.to').$fim->format('d/m/Y');
+                return $periodo_inscricao = $inicio->format('d/m/Y').__('mensagens_gerais.to').$fim->format('d/m/Y');
             }
             
         }
 
         if ($data_hoje < $data_inicio) {
-            return $periodo_inscricao = trans('mensagens_gerais.inscricao_nao_iniciada');
+            return $periodo_inscricao = __('mensagens_gerais.inscricao_nao_iniciada');
         }
 
         if ($data_hoje > $data_fim) {
-            return $periodo_inscricao = trans('mensagens_gerais.inscricao_encerrada');
+            return $periodo_inscricao = __('mensagens_gerais.inscricao_encerrada');
         }
     }
 
