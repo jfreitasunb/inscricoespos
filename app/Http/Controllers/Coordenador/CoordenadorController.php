@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Coordenador;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ use Auth;
 
 use Session;
 
-class CoordenadorController extends Controller
+class CoordenadorController extends BaseController
 {
 
     public $locale_default = 'pt_BR';

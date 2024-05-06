@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Session;
 
-class AuthenticatedSessionController extends Controller
+class AuthenticatedSessionController extends BaseController
 {
     /**
      * Display the login view.
@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         if (Session::has('locale')) {
-            Session::put('locale',$locale);
+            Session::put('locale', Session::get('locale'));
         }
 
         Session::put('user_type', Auth::user()->user_type);
