@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
@@ -25,11 +26,11 @@ use App\Livewire\ListaUsuarios;
  * Rotas para definir idiomas
 */
 
-Route::get('/ptbr', [HomeController::class, 'getLangPortuguese'])->name('lang.portuguese')->middleware('define.locale');
+Route::get('/ptbr', [BaseController::class, 'getLangPortuguese'])->name('lang.portuguese')->middleware('define.locale');
 
-Route::get('/en', [HomeController::class, 'getLangEnglish'])->name('lang.english')->middleware('define.locale');
+Route::get('/en', [BaseController::class, 'getLangEnglish'])->name('lang.english')->middleware('define.locale');
 
-Route::get('/es', [HomeController::class, 'getLangSpanish'])->name('lang.spanish')->middleware('define.locale');
+Route::get('/es', [BaseController::class, 'getLangSpanish'])->name('lang.spanish')->middleware('define.locale');
 
 
 /*
