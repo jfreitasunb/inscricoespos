@@ -23,81 +23,92 @@ use View;
 class BaseController extends Controller
 {
 
-    public $periodo_inscricao;
+  public $periodo_inscricao;
 
   public $texto_inscricao_pos;
   
   public $locale;
 
   protected $array_meses  = array(
-                '1' => 'Janeiro',
-                '2' => 'Fevereiro',
-                '3' => 'Março',
-                '4' => 'Abril',
-                '5' => 'Maio',
-                '6' => 'Junho',
-                '7' => 'Julho',
-                '8' => 'Agosto',
-                '9' => 'Setembro',
-                '10' => 'Outubro',
-                '11' => 'Novembro',
-                '12' => 'Dezembro',
-              );
+            '1' => 'Janeiro',
+            '2' => 'Fevereiro',
+            '3' => 'Março',
+            '4' => 'Abril',
+            '5' => 'Maio',
+            '6' => 'Junho',
+            '7' => 'Julho',
+            '8' => 'Agosto',
+            '9' => 'Setembro',
+            '10' => 'Outubro',
+            '11' => 'Novembro',
+            '12' => 'Dezembro',
+            );
 
-    public function setaLocale($locale)
-    {
-        if(Auth::check()){
-          $user = User::find(Auth::user()->id);
+  public function __construct()
+  {
+    $inscricao_pos = new ConfiguraInscricaoPos();
 
-          $user->update(['locale'=>$locale]);
-        }else{
-          App::setLocale($locale);
+    $periodo_inscricao = $inscricao_pos->retorna_periodo_inscricao();
 
-          Session::put("locale", $locale);
-        }
+    $texto_inscricao_pos = $inscricao_pos->define_texto_inscricao();
+
+    View::share('periodo_inscricao', $periodo_inscricao);
+
+    View::share('texto_inscricao_pos', $texto_inscricao_pos);
+  }
+
+  public function setaLocale($locale)
+  {
+    if(Auth::check()){
+      $user = User::find(Auth::user()->id);
+
+      $user->update(['locale'=>$locale]);
+    }else{
+      App::setLocale($locale);
+
+      Session::put("locale", $locale);
     }
+  }
 
-    public function getLangPortuguese()
-    {
-        $this->setaLocale('pt_BR');
+  public function getLangPortuguese()
+  {
+    $this->setaLocale('pt_BR');
 
-        return redirect()->back();
-    }
+    return redirect()->back();
+  }
 
-    public function getLangEnglish()
-    {
-        $this->setaLocale('en');
+  public function getLangEnglish()
+  {
+    $this->setaLocale('en');
 
-        return redirect()->back();
-    }
+    return redirect()->back();
+  }
 
-    public function getLangSpanish()
-    {
-        $this->setaLocale('es');
+  public function getLangSpanish()
+  {
+    $this->setaLocale('es');
 
-        return redirect()->back();
-    }
+    return redirect()->back();
+  }
 
   public function SetUser()
   {
     if (session()->has('impersonate')) {
-        
-        return User::find(session()->get('impersonate'));
+      return User::find(session()->get('impersonate'));
     }else{
-        return Auth::user();
-    }
+      return Auth::user();
   }
 
   public function titleCase($string, $delimiters = array(" ", "-", ".", "'", "O'", "Mc"), $exceptions = array("de", "da", "dos", "das", "do", "I", "II", "III", "IV", "V", "VI"))
   {
     /*
-     * Exceptions in lower case are words you don't want converted
-     * Exceptions all in upper case are any words you don't want converted to title case
-     *   but should be converted to upper case, e.g.:
-     *   king henry viii or king henry Viii should be King Henry VIII
-     */
+    * Exceptions in lower case are words you don't want converted
+    * Exceptions all in upper case are any words you don't want converted to title case
+    *   but should be converted to upper case, e.g.:
+    *   king henry viii or king henry Viii should be King Henry VIII
+    */
     $string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
-    
+  
     foreach ($delimiters as $dlnr => $delimiter) {
       $words = explode($delimiter, $string);
       $newwords = array();
@@ -105,10 +116,10 @@ class BaseController extends Controller
         if (in_array(mb_strtoupper($word, "UTF-8"), $exceptions)) {
           // check exceptions list for any words that should be in upper case
           $word = mb_strtoupper($word, "UTF-8");
-        } elseif (in_array(mb_strtolower($word, "UTF-8"), $exceptions)) {
+        }elseif (in_array(mb_strtolower($word, "UTF-8"), $exceptions)) {
           // check exceptions list for any words that should be in upper case
           $word = mb_strtolower($word, "UTF-8");
-        } elseif (!in_array($word, $exceptions)) {
+        }elseif (!in_array($word, $exceptions)) {
           // convert to uppercase (non-utf8 only)
           $word = ucfirst($word);
         }
@@ -117,7 +128,6 @@ class BaseController extends Controller
       $string = join($delimiter, $newwords);
     }//foreach
 
-   return $string;
+    return $string;
   }
 }
-
