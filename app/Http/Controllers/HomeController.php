@@ -19,12 +19,7 @@ class HomeController extends BaseController
 
     public function index()
     {
-        $periodo = new ConfiguraInscricaoPos();
 
-        $periodo_inscricao = $periodo->retorna_periodo_inscricao();
-
-        $texto_inscricao_pos = $periodo->define_texto_inscricao();
-        
-        return view('layouts.home')->with(compact('texto_inscricao_pos', 'periodo_inscricao'));
+        return view('layouts.home');
     }
 }
