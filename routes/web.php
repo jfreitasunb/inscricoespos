@@ -6,11 +6,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EditarInscricaoPosController;
+use App\Http\Controllers\Admin\ListaUsuariosController;
+use App\Livewire\ListaUsuarios;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
 use App\Http\Controllers\Recomendante\RecomendanteController;
-use App\Livewire\ListaUsuarios;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,8 @@ Route::prefix('admin')->group(function () {
     Route::get('inscricao/editar', [EditarInscricaoPosController::class, 'getEditarInscricao'])->name('editar.inscricao');
 
     Route::post('inscricao/editar', [EditarInscricaoPosController::class, 'postEditarInscricao']);
+
+    Route::get('edita/usuarios', ListaUsuarios::class)->name('edita.usuarios');
 });
 
 
