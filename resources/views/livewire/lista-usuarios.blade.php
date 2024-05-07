@@ -3,25 +3,7 @@
         <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
             <!-- Start coding here -->
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                <div class="flex items-center justify-between d p-4">
-                    <div class="flex">
-                        <div class="relative w-full">
-                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                                    fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <input 
-                                wire:model.live.debounce.300ms = "search"
-                                type="text"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
-                                placeholder="Search" required="">
-                        </div>
-                    </div>
-                </div>
+                @include('livewire.includes.search-bar')
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -47,25 +29,49 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                            <tr class="border-b dark:border-gray-700">
-                                <th scope="row"
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $user->nome}}</th>
-                                <td class="px-4 py-3">{{ $user->email}}</td>
-                                <td class="px-4 py-3 text-green-500">
-                                    {{ $user->user_type}}</td>
-                                <td class="px-4 py-3">{{ $user->created_at }}</td>
-                                <td class="px-4 py-3">{{ $user->updated_at }}</td>
-                                <td class="px-4 py-3 flex items-center justify-end">
-                                    <button class="text-sm text-teal-500 font-semibold rounded hover:text-teal-800">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                            stroke="currentColor" class="w-4 h-4">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                        </svg>
-                                    </button>
-                                </td>
-                            </tr>
+                                <tr wire:key = "{{ $user->id }}" class="border-b dark:border-gray-700">
+                                @if($editingUserId === $user->id)
+                                    <td class="px-4 py-3">
+                                        <input wire:model = "editingUserNome" type="text" class="bg-gray-100 text-gray-900 text-sm rounded block w-full p-2.5">
+                                            @error('editingUserNome')
+                                                <span class="text-red-500 text-xs block">{{ $message }}</span>
+                                            @enderror
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <input wire:model = "editingUserEmail" type="text" class="bg-gray-100 text-gray-900 text-sm rounded block w-full p-2.5">
+                                            @error('editingUserEmail')
+                                                <span class="text-red-500 text-xs block">{{ $message }}</span>
+                                            @enderror
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <input wire:model = "editingUserTipo" type="text" class="bg-gray-100 text-gray-900 text-sm rounded block w-full p-2.5">
+                                            @error('editingUserTipo')
+                                                <span class="text-red-500 text-xs block">{{ $message }}</span>
+                                            @enderror
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button wire:click = "update" class="mb-2 mt-3 px-4 py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600">Update</button>
+                                    </td>
+                                    <td class="px-4 py-3">
+                                        <button wire:click = "cancelEditing" class="mb-2 mt-3 px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600">Cancel</button>
+                                    </td>
+                                @else
+                                        <td class="px-4 py-3">{{ $user->nome }}</td>
+                                        <td class="px-4 py-3">{{ $user->email }}</td>
+                                        <td class="px-4 py-3 text-green-500">{{ $user->user_type }}</td>
+                                        <td class="px-4 py-3">{{ $user->created_at }}</td>
+                                        <td class="px-4 py-3">{{ $user->updated_at }}</td>
+                                        <td class="px-4 py-3 flex items-center justify-end">
+                                            <button wire:click = "edit({{ $user->id }})" class="text-sm text-teal-500 font-semibold rounded hover:text-teal-800">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                    stroke="currentColor" class="w-4 h-4">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

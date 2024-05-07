@@ -22,6 +22,48 @@ class ListaUsuarios extends Component
 
     public $sortDir = 'DESC';
 
+    public $editingUserId;
+
+    public $editingUserNome;
+    
+    public $editingUserEmail;
+
+    public $editingUserTipo;
+
+    public function edit($userid)
+    {
+        $this->editingUserId = $userid;
+
+        $this->editingUserNome = User::find($userid)->nome;
+
+        $this->editingUserEmail = User::find($userid)->email;
+
+        $this->editingUserTipo = User::find($userid)->user_type;
+    }
+
+    public function cancelEditing()
+    {
+        $this->reset('editingUserId', 'editingUserNome', 'editingUserEmail', 'editingUserTipo');
+    }
+
+    public function update()
+    {   
+        $validatedData = $this->validate([
+            'editingUserNome' => 'required|min:6|max:255',
+            'editingUserEmail' => 'required|email|max:255',
+            'editingUserTipo' => 'required|max:20',
+        ]);
+        User::find($this->editingUserId)->update(
+            [
+                'nome' => $this->editingUserNome,
+                'email' => $this->editingUserEmail,
+                'user_type' => $this->editingUserTipo,
+            ]
+        );
+
+        $this->cancelEditing();
+    }
+
     public function updatedSearc()
     {
         $this->resetPage();
