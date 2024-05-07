@@ -10,8 +10,8 @@
                     </button>
                     <ul id="dropdown-sistema" class="hidden py-2 space-y-2">
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                <a href="{{ route('logout') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Usuários</a>
+                            <form method="POST" action="{{ route('edita.usuarios') }}">
+                                <a href="{{ route('edita.usuarios') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Usuários</a>
                             </form>
                         </li>
                         <li>
@@ -294,7 +294,10 @@
     <div class="w-full h-full h-32 px-4 py-2">
         <div class="container mx-auto mt-12">
             @yield('configura_inscricao')
-            @yield('lista_usuarios')
+            @yield('editar_inscricao')
+            @if (Route::currentRouteName() == 'edita.usuarios')
+                @livewire('lista-usuarios')
+            @endif
         </div>
     </div>
     <script src="https://unpkg.com/flowbite@1.3.4/dist/flowbite.js"></script>
