@@ -20,11 +20,14 @@
         @include('layouts.cabecalho')
         <!-- Corpo -->
         <main class="container mx-auto px-4 flex-grow">
-            @admin(Auth()->user())
-                @include('layouts.admin.menu_admin')
-            @endadmin
-            @yield('inicio')
-            @yield('content')
+            @if (Auth::check())
+                @admin(Auth()->user())
+                    @include('layouts.admin.menu_admin')
+                @endadmin
+            @else
+                @yield('inicio')
+                @yield('content')
+            @endif
         </main>
 
         {{-- Cabeçalho --}}
