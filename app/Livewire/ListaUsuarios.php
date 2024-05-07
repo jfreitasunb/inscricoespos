@@ -14,7 +14,7 @@ class ListaUsuarios extends Component
 {
     use WithPagination;
 
-    public $perPage = 5;
+    public $perPage = 20;
 
     public $search = '';
 
