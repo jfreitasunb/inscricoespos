@@ -16,6 +16,8 @@ class ListaUsuarios extends Component
 
     public $perPage = 5;
 
+    public $search = '';
+
     public function render()
     {
         $inscricao_pos = new ConfiguraInscricaoPos();
@@ -30,7 +32,7 @@ class ListaUsuarios extends Component
 
         return view('livewire.lista-usuarios',
             [
-                'users' => User::paginate($this->perPage)
+                'users' => User::search($this->search)->paginate($this->perPage)
             ])->extends('layouts.app')
         ->section('lista_usuarios');
     }
