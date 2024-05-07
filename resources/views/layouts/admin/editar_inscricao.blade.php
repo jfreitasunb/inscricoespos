@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('configura_inscricao')
+@section('editar_inscricao')
     <div class="max-w-4xl mx-auto bg-white rounded p-6 shadow-md">
     	<x-alerta />
         <h2 class="text-2xl font-semibold mb-4">Editar os dados da inscrição vigente</h2>
