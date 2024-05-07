@@ -26,9 +26,18 @@
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
-                                <th scope="col" class="px-4 py-3">name</th>
-                                <th scope="col" class="px-4 py-3">email</th>
-                                <th scope="col" class="px-4 py-3">Role</th>
+                                @include('livewire.includes.table-sortable-th', [
+                                    'name' => 'nome',
+                                    'displayName' => 'Nome'
+                                ])
+                                @include('livewire.includes.table-sortable-th', [
+                                    'name' => 'email',
+                                    'displayName' => 'E-mail'
+                                ])
+                                @include('livewire.includes.table-sortable-th', [
+                                    'name' => 'user_type',
+                                    'displayName' => 'Tipo'
+                                ])
                                 <th scope="col" class="px-4 py-3">Joined</th>
                                 <th scope="col" class="px-4 py-3">Last update</th>
                                 <th scope="col" class="px-4 py-3">
@@ -44,9 +53,9 @@
                                     {{ $user->nome}}</th>
                                 <td class="px-4 py-3">{{ $user->email}}</td>
                                 <td class="px-4 py-3 text-green-500">
-                                    admin</td>
-                                <td class="px-4 py-3">created_at</td>
-                                <td class="px-4 py-3">updated_at</td>
+                                    {{ $user->user_type}}</td>
+                                <td class="px-4 py-3">{{ $user->created_at }}</td>
+                                <td class="px-4 py-3">{{ $user->updated_at }}</td>
                                 <td class="px-4 py-3 flex items-center justify-end">
                                     <button class="px-3 py-1 bg-red-500 text-white rounded">X</button>
                                 </td>
