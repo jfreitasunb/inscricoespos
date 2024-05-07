@@ -32,49 +32,14 @@ class DatabaseSeeder extends Seeder
         // $this->call(CartasRecomendacoesTableSeeder::class);
         // $this->call(FinalizaInscricaoTableSeeder::class);
         
-        // \DB::table('programa_pos_mat')->delete();
-        
-        // \DB::table('programa_pos_mat')->insert(array (
-        //     0 => 
-        //     array (
-        //         'id_programa_pos' => 1,
-        //         'tipo_programa_pos_ptbr' => 'Mestrado',
-        //         'tipo_programa_pos_en' => 'Master\'s degree',
-        //         'tipo_programa_pos_es' => 'Maestría',
-        //         'created_at' => date("Y-m-d H:i:s"),
-        //         'updated_at' => date("Y-m-d H:i:s"),
-        //     ),
-        //     1 => 
-        //     array (
-        //         'id_programa_pos' => 2,
-        //         'tipo_programa_pos_ptbr' => 'Doutorado',
-        //         'tipo_programa_pos_en' => 'PhD degree',
-        //         'tipo_programa_pos_es' => 'Doctorado',
-        //         'created_at' => date("Y-m-d H:i:s"),
-        //         'updated_at' => date("Y-m-d H:i:s"),
-        //     ),
-        //     // 2 => 
-        //     // array (
-        //     //     'id_programa_pos' => 3,
-        //     //     'tipo_programa_pos' => 'Verão',
-        //     //     'created_at' => '2017-11-21 15:27:00',
-        //     //     'updated_at' => '2017-11-21 15:27:00',
-        //     // ),
-        // ));
-        
-        // $tableToCheck = 'programa_pos_mat';
-
-        // $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id_programa_pos)'))->first();
-        // $nextId = DB::table($tableToCheck)->select(DB::raw('nextval(\''.$tableToCheck.'_id_programa_pos_seq\')'))->first();
-
-        // DB::select('SELECT setval(\''.$tableToCheck.'_id_programa_pos_seq\', '.$highestId->max.')');
+        \App\Models\User::factory(100)->create();
         
 
-        $user = ['nome' => 'José Antônio', 'email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'email_verified_at' => date("Y-m-d H:i:s"), 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
-        $db_user = DB::table('users')->insert($user);
+        // $user = ['nome' => 'José Antônio', 'email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'email_verified_at' => date("Y-m-d H:i:s"), 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        // $db_user = DB::table('users')->insert($user);
 
-        $user = ['nome' => 'Coordenação de Pós-Graduação', 'email' => 'posgrad@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'email_verified_at' => date("Y-m-d H:i:s"), 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
-        $db_user = DB::table('users')->insert($user);
+        // $user = ['nome' => 'Coordenação de Pós-Graduação', 'email' => 'posgrad@mat.unb.br', 'password' => bcrypt('1'), 'user_type' => 'coordenador' , 'email_verified_at' => date("Y-m-d H:i:s"), 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
+        // $db_user = DB::table('users')->insert($user);
 
         // $dados_jota = [
         //     'id_user' => '1',
