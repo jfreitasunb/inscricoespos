@@ -26,8 +26,6 @@ class BaseController extends Controller
   public $periodo_inscricao;
 
   public $texto_inscricao_pos;
-  
-  public $locale;
 
   protected $array_meses  = array(
             '1' => 'Janeiro',
