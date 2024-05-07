@@ -46,6 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    public function scopeSearch($query, $value)
+    {
+        $query->where('nome', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
+    }
+
     public function isAdmin()
     {
         if (auth()->user()->user_type === 'admin') {
