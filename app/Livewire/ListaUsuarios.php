@@ -18,6 +18,27 @@ class ListaUsuarios extends Component
 
     public $search = '';
 
+    public $sortBy = 'created_at';
+
+    public $sortDir = 'DESC';
+
+    public function updatedSearc()
+    {
+        $this->resetPage();
+    }
+
+    public function setSortBy($sortByField)
+    {
+        if ($this->sortBy == $sortByField) {
+            $this->sortDir = ($this->sortDir == "ASC") ? 'DESC' : 'ASC';
+            return;
+        }
+
+        $this->sortBy = $sortByField;
+
+        $this->sortDir = 'DESC';
+    }
+
     public function render()
     {
         $inscricao_pos = new ConfiguraInscricaoPos();
@@ -32,7 +53,7 @@ class ListaUsuarios extends Component
 
         return view('livewire.lista-usuarios',
             [
-                'users' => User::search($this->search)->paginate($this->perPage)
+                'users' => User::search($this->search)->orderBy($this->sortBy, $this->sortDir)->paginate($this->perPage)
             ])->extends('layouts.app')
         ->section('lista_usuarios');
     }
