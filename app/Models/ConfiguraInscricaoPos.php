@@ -8,28 +8,30 @@ use Session;
 
 class ConfiguraInscricaoPos extends Model
 {
-    
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    
+
     // protected $primaryKey = 'id_inscricao_pos';
 
     protected $table = 'configura_inscricao_pos';
 
-    protected $fillable = [ 
-        'inicio_inscricao', 
+    protected $fillable = [
+        'inicio_inscricao',
         'fim_inscricao',
         'prazo_carta',
         'data_homologacao',
         'data_divulgacao_resultado',
+        'necessita_recomendante',
+        'necessita_semestre_inicio',
+        'semestre_inicio',
         'programa',
         'edital',
         'id_coordenador',
-        'necessita_recomendante',
         'semestre_inicio',
     ];
 
@@ -45,43 +47,43 @@ class ConfiguraInscricaoPos extends Model
 
             return $this->orderBy('id','desc')->get()->first();
         }else{
-            
+
             // return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
             return $this->get()->first();
-        }    
+        }
     }
 
     public function retorna_inscricao_ativa($id_inscricao_pos = null)
     {
         if (is_null($id_inscricao_pos)) {
-            
+
             return $this->get()->sortByDesc('id')->first();
         }else{
-            
+
             // return $this->where('id_inscricao_pos', $id_inscricao_pos)->get()->first();
             return $this->get()->first();
-        }   
+        }
     }
 
     public function define_texto_inscricao()
     {
 
         if (!is_null($this->retorna_inscricao_ativa())){
-            
+
             $programas = explode('_', $this->retorna_inscricao_ativa()->programa);
 
-            
+
             if (sizeof($programas) > 1) {
                 return $texto_inscricao_pos = 'dois_programas';
             }else{
-                
+
                 if ($programas[0] == 1) {
-                    
+
                     return $texto_inscricao_pos = 'inscricao_mestrado';
                 }
 
                 if ($programas[0] == 2) {
-                    
+
                     return $texto_inscricao_pos = 'inscricao_doutorado';
                 }
             }
@@ -95,9 +97,9 @@ class ConfiguraInscricaoPos extends Model
         }else{
             $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
             $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
-            
+
             $data_inicio = $inicio->format('Y-m-d');
-            $data_fim = $fim->format('Y-m-d');    
+            $data_fim = $fim->format('Y-m-d');
         }
 
         $data_hoje = (new Carbon())->format('Y-m-d');
@@ -108,7 +110,7 @@ class ConfiguraInscricaoPos extends Model
             // }else{
                 return $periodo_inscricao = [ $inicio->format('d/m/Y'), $fim->format('d/m/Y')];
             // }
-            
+
         }
 
         if ($data_hoje < $data_inicio) {
@@ -121,9 +123,9 @@ class ConfiguraInscricaoPos extends Model
     }
 
     public function autoriza_inscricao($id_inscricao_pos = null)
-    {   
+    {
         if (is_null($id_inscricao_pos)) {
-            
+
             $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
             $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
         }else{
@@ -131,7 +133,7 @@ class ConfiguraInscricaoPos extends Model
             $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa($id_inscricao_pos)->inicio_inscricao);
             $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa($id_inscricao_pos)->fim_inscricao);
         }
-        
+
 
         $data_inicio = $inicio->format('Y-m-d');
         $data_fim = $fim->format('Y-m-d');
@@ -199,20 +201,20 @@ class ConfiguraInscricaoPos extends Model
     {
 
         if (!is_null($this->retorna_inscricao_ativa())) {
-            
+
             $inicio = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->inicio_inscricao);
-            
+
             $fim = Carbon::createFromFormat('Y-m-d', $this->retorna_inscricao_ativa()->fim_inscricao);
 
             $data_inicio = $inicio->format('Y-m-d');
-            
+
             $data_fim = $fim->format('Y-m-d');
 
             if ($nova_inscricao_inicio > $data_fim) {
-                
+
                 return true;
             }else{
-                
+
                 return false;
             }
         }else{
@@ -222,18 +224,18 @@ class ConfiguraInscricaoPos extends Model
     }
 
     public function ira_ano_semestre()
-    {    
+    {
         $date = new Carbon();
-        
+
         $mes = $date->format('m');
-        
+
         $ano = $date->format('y');
-    
+
         if ($mes < 7) {
-            
+
             $ano_semestre_ira = "02/".($ano-1);
         }else{
-            
+
             $ano_semestre_ira = "01/".$ano;
         }
 
