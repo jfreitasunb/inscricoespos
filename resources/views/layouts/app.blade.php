@@ -29,9 +29,9 @@
                 @yield('content')
             @endif
         </main>
-
-        {{-- Cabeçalho --}}
-        @include('layouts.rodape')
+        @if (Route::current()->getName() == "home")
+            @include('layouts.rodape')
+        @endif
 
         @livewireScripts
     </body>
