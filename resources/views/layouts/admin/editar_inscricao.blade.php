@@ -25,6 +25,11 @@
                     <label for="edital" class="block text-gray-700 font-semibold mb-2">Edital:</label>
                     <input type="text" id="edital" name="edital" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" value="{{ $edital_vigente->edital }}">
                 </div>
+                <div class="mb-4">
+                    <label for="necessita_semestre_inicio" class="block text-gray-700 font-semibold mb-2">Necessita semestre de início?</label>
+                    <input type="text" id="necessita_semestre_inicio" name="necessita_semestre_inicio" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" value="{{ $edital_vigente->necessita_semestre_inicio ? 'Sim' : 'Não' }}">
+                </div>
+
             </div>
             <div>
                 <div class="mb-4">
@@ -41,7 +46,11 @@
                 </div>
                 <div class="mb-4">
                     <label for="necessita_recomendante" class="block text-gray-700 font-semibold mb-2">Necessita de recomendante?</label>
-                    <input type="text" id="necessita_recomendante" name="necessita_recomendante" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" value="{{ $edital_vigente->necessita_recomendante? 'Sim' : 'Não' }}">
+                    <input type="text" id="necessita_recomendante" name="necessita_recomendante" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" value="{{ $edital_vigente->necessita_recomendante ? 'Sim' : 'Não' }}">
+                </div>
+                <div class="mb-4">
+                    <label for="semestre_inicio" class="block text-gray-700 font-semibold mb-2">Semestre de Início:</label>
+                    <input type="text" id="semestre_inicio" name="semestre_inicio" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" value="{{ $edital_vigente->semestre_inicio }}">
                 </div>
             </div>
             <div class="col-span-2 mt-6 flex justify-center">
@@ -50,3 +59,4 @@
         </form>
     </div>
 @endsection
+
