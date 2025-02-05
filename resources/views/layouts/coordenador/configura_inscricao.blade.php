@@ -45,10 +45,6 @@
                     <x-erro-validacao type="danger" message="{{ $errors->first('data_divulgacao_resultado') }}"/>
                 @endif
             </div>
-            <div>
-                <label for="semestre_inicio" class="block mb-1">Ano e Semestre de Início no Programa</label>
-                <input type="text" id="semestre_inicio" name="semestre_inicio" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('semestre_inicio') }}">
-            </div>
         </div>
     </div>
 
@@ -69,12 +65,30 @@
         <h2 class="text-lg font-semibold mb-4">É necessário indicar recomendantes?</h2>
         <div class="flex items-center gap-4">
             <label for="necessita_recomendante" class="inline-flex items-center">
-                <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2"value="1" checked> Sim
+                <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2" value="1" checked> Sim
             </label>
             <label for="necessita_recomendante" class="inline-flex items-center">
                 <input type="radio" id="necessita_recomendante" name="necessita_recomendante" class="mr-2" value="0"> Não
             </label>
         </div>
+    </div>
+
+   <!-- Seção: Semestre de Início-->
+    <div class="mb-8">
+        <h2 class="text-lg font-semibold mb-4">É necessário informar o período de início?</h2>
+        <div class="flex items-center gap-4">
+            <label for="necessita_semestre_inicio" class="inline-flex items-center">
+                <input type="radio" id="necessita_semestre_inicio" name="necessita_semestre_inicio" class="mr-2" value="1"> Sim
+            </label>
+            <label for="necessita_semestre_inicio" class="inline-flex items-center">
+                <input type="radio" id="necessita_semestre_inicio" name="necessita_semestre_inicio" class="mr-2" value="0" checked > Não
+            </label>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label for="semestre_inicio" class="block mb-1">Ano e Semestre de Início no Programa</label>
+            <input type="text" id="semestre_inicio" name="semestre_inicio" class="w-full rounded border-gray-300 focus:border-blue-500 focus:ring-blue-500" value="{{ old('semestre_inicio') }}">
+        </div>
+
     </div>
 
     <!-- Seção: Outros Detalhes -->
