@@ -45,7 +45,11 @@ class ConfiguraInscricaoPosController extends CoordenadorController
             'escolhas_coordenador' => 'required',
         ]);
 
-        // dd($request);
+        if ($request->necessita_semestre_inicio){
+            $this->validate($request,[
+                'semestre_inicio' => 'required',
+            ]);
+        }
 
         $configura_nova_inscricao_pos = new ConfiguraInscricaoPos();
 
@@ -56,7 +60,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
         $arquivos_editais = storage_path("app/public/editais/");
 
         File::isDirectory($arquivos_editais) or File::makeDirectory($arquivos_editais,0775,true);
-        
+
         $inicio = Carbon::createFromFormat('Y-m-d', $request->inicio_inscricao);
         $fim = Carbon::createFromFormat('Y-m-d', $request->fim_inscricao);
         $prazo = Carbon::createFromFormat('Y-m-d', $request->prazo_carta);
@@ -85,6 +89,11 @@ class ConfiguraInscricaoPosController extends CoordenadorController
             $configura_nova_inscricao_pos->necessita_recomendante = $necessita_recomendante;
             $configura_nova_inscricao_pos->semestre_inicio = $semestre_inicio;
 
+            if ($request->necessita_semestre_inicio){
+                $configura_nova_inscricao_pos->semestre_inicio = $request->necessita_semestre_inicio;
+                $configura_nova_inscricao_pos->semestre_inicio = $request->semestre_inicio;
+            }
+
             $temp_file_portugues = $request->edital_portugues->store("arquivos_temporarios");
 
             $nome_temporario_edital_portugues = $local_documentos.$temp_file_portugues;
@@ -92,11 +101,11 @@ class ConfiguraInscricaoPosController extends CoordenadorController
             $nome_final_edital_portugues = $arquivos_editais."Edital_MAT_".$configura_nova_inscricao_pos->edital."_ptbr.pdf";
 
             if (File::copy($nome_temporario_edital_portugues, $nome_final_edital_portugues)) {
-                
+
                 File::delete($nome_temporario_edital_portugues);
 
                 if (isset($request->edital_ingles)) {
-                    
+
                     $temp_file_ingles = $request->edital_ingles->store("arquivos_temporarios");
 
                     $nome_temporario_edital_ingles = $local_documentos.$temp_file_ingles;
@@ -110,7 +119,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
                 }
 
                 if (isset($request->edital_espanhol)) {
-                    
+
                     $temp_file_ingles = $request->edital_espanhol->store("arquivos_temporarios");
 
                     $nome_temporario_edital_espanhol = $local_documentos.$temp_file_ingles;
@@ -130,7 +139,7 @@ class ConfiguraInscricaoPosController extends CoordenadorController
                 $dados_email['prazo_carta'] = $request->prazo_carta;
 
                 foreach ($request->escolhas_coordenador as $key) {
-                    
+
                     $nome_programa_pos = new ProgramaPos();
 
                     $temp[] = $nome_programa_pos->pega_programa_pos_mat($key, $this->locale_default);
