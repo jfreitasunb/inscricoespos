@@ -20,7 +20,7 @@ class EditarInscricaoPosController extends AdminController
 {
 
     public function getEditarInscricao()
-    {   
+    {
         $edital = new ConfiguraInscricaoPos();
 
         $edital_vigente = $edital->retorna_edital_vigente();
@@ -42,6 +42,12 @@ class EditarInscricaoPosController extends AdminController
             'necessita_recomendante' => 'required',
         ]);
 
+        if ($request->necessita_semestre_inicio){
+            $this->validate($request, [
+                'semestre_inicio' => 'required',
+            ]);
+        }
+
         $edital_vigente = ConfiguraInscricaoPos::find((int)$request->id_inscricao_pos);
 
         $novos_dados_edital['inicio_inscricao'] = $request->inicio_inscricao;
@@ -49,6 +55,35 @@ class EditarInscricaoPosController extends AdminController
         $novos_dados_edital['prazo_carta'] = $request->prazo_carta;
         $novos_dados_edital['programa'] = $request->programa;
         $novos_dados_edital['edital'] = $request->edital;
+
+        if ($request->necessita_semestre_inicio) {
+
+            $temp = strtolower($request->necessita_recomendante);
+
+            switch ($temp) {
+                case 'sim':
+                    $necessita_semestre_inicio = true;
+                    break;
+                case 'Sim':
+                    $necessita_semestre_inicio = true;
+                    break;
+
+                case 's':
+                    $necessita_semestre_inicio = true;
+                    break;
+                case '1':
+                    $necessita_semestre_inicio = true;
+                    break;
+
+                default:
+                    $necessita_semestre_inicio = false;
+                    break;
+            }
+
+            $novos_dados_edital['necessita_semestre_inicio'] = $necessita_semestre_inicio;
+            $novos_dados_edital['semestre_inicio'] = $request->semestre_inicio;
+        }
+
         $novos_dados_edital['data_homologacao'] = $request->data_homologacao;
         $novos_dados_edital['data_divulgacao_resultado'] = $request->data_divulgacao_resultado;
 
@@ -61,14 +96,14 @@ class EditarInscricaoPosController extends AdminController
             case 'não':
                 $necessita_recomendante = false;
                 break;
-            
+
             case 'n':
                 $necessita_recomendante = false;
                 break;
             case '0':
                 $necessita_recomendante = false;
                 break;
-                
+
             default:
                 $necessita_recomendante = true;
                 break;
