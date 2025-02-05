@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {   
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         // $this->call(ConfiguraInscricaoPosTableSeeder::class);
         // $this->call(ProgramaInscricoesPosTableSeeder::class);
         $this->call(ProgramaPosMatTableSeeder::class);
@@ -31,8 +31,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(ContatosRecomendantesTableSeeder::class);
         // $this->call(CartasRecomendacoesTableSeeder::class);
         // $this->call(FinalizaInscricaoTableSeeder::class);
-        
-        \App\Models\User::factory(100)->create();
         
 
         // $user = ['nome' => 'José Antônio', 'email' => 'jfreitas.mat@gmail.com', 'password' => bcrypt('1'), 'user_type' => 'admin' , 'email_verified_at' => date("Y-m-d H:i:s"), 'created_at' => date("Y-m-d H:i:s"), 'updated_at' => date("Y-m-d H:i:s")];
