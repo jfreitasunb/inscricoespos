@@ -1,5 +1,5 @@
 <div class="flex h-screen">
-    <aside class="w-96" aria-label="Sidebar">
+    <aside class="w-96 m-4" aria-label="Sidebar">
         <div class="px-3 py-4 overflow-y-auto rounded bg-gray-200 dark:bg-gray-500">
             <ul class="space-y-2">
                 <li>
