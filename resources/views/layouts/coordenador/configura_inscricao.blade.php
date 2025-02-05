@@ -130,6 +130,4 @@
         </div>
     </form>
 </div>
-
-@include('layouts.rodape')
 @endsection
