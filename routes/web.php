@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ListaUsuariosController;
 use App\Livewire\ListaUsuarios;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
+use App\Http\Controllers\Coordenador\DadosCoordenadorPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
 use App\Http\Controllers\Recomendante\RecomendanteController;
 
@@ -58,9 +59,9 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'getMenu'])->name('menu.admin');
-    
+
     Route::get('configura/inscricao', [ConfiguraInscricaoPosController::class, 'getConfiguraInscricao'])->name('configura.inscricao');
-    
+
     Route::post('configura/inscricao', [ConfiguraInscricaoPosController::class, 'postConfiguraInscricao']);
 
     Route::get('inscricao/editar', [EditarInscricaoPosController::class, 'getEditarInscricao'])->name('editar.inscricao');
@@ -77,6 +78,8 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('coordenador')->middleware(['auth', 'verified', 'user.role:coordenador,admin'])->group(function () {
     Route::get('/', [CoordenadorController::class, 'getMenu'])->name('menu.coordenador');
+    Route::get('contas/coordenador/pos', [DadosCoordenadorPosController::class, 'getDadosCoordenadorPos'])->name('dados.coordenador.pos');
+	Route::post('contas/coordenador/pos',[DadosCoordenadorPosController::class, 'postDadosCoordenadorPos']);
 })->name('coordenador');
 
 /*

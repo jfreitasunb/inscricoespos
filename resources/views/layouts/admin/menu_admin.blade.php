@@ -59,8 +59,8 @@
                     </button>
                     <ul id="dropdown-int" class="hidden py-2 space-y-2">
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Dados Coordenador</a>
+                            <form method="POST" action="{{ route('dados.coordenador.pos') }}">
+                                <a href="{{ route('dados.coordenador.pos') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Dados Coordenador</a>
                             </form>
                         </li>
                         <li>
@@ -257,6 +257,7 @@
         <div class="container mx-auto mt-12">
             @yield('configura_inscricao')
             @yield('editar_inscricao')
+            @yield('dados_coordenador_pos')
             @if (Route::currentRouteName() == 'edita.usuarios')
                 @livewire('lista-usuarios')
             @endif
