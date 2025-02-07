@@ -14,9 +14,9 @@ class ProgramaPosMatTableSeeder extends Seeder
     public function run(): void
     {
         \DB::table('programa_pos_mat')->delete();
-        
+
         \DB::table('programa_pos_mat')->insert(array (
-            0 => 
+            0 =>
             array (
                 'tipo_programa_pos_ptbr' => 'Mestrado',
                 'tipo_programa_pos_en' => 'Master\'s degree',
@@ -24,7 +24,7 @@ class ProgramaPosMatTableSeeder extends Seeder
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s"),
             ),
-            1 => 
+            1 =>
             array (
                 'tipo_programa_pos_ptbr' => 'Doutorado',
                 'tipo_programa_pos_en' => 'PhD degree',
@@ -32,7 +32,7 @@ class ProgramaPosMatTableSeeder extends Seeder
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s"),
             ),
-            // 2 => 
+            // 2 =>
             // array (
             //     'id' => 3,
             //     'tipo_programa_pos' => 'Verão',
@@ -40,7 +40,7 @@ class ProgramaPosMatTableSeeder extends Seeder
             //     'updated_at' => '2017-11-21 15:27:00',
             // ),
         ));
-        
+
         $tableToCheck = 'programa_pos_mat';
 
         $highestId = DB::table($tableToCheck)->select(DB::raw('MAX(id)'))->first();
