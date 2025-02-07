@@ -9,16 +9,16 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 @include('livewire.includes.table-sortable-th', [
-                                    'name' => 'nome',
-                                    'displayName' => 'Nome'
+                                    'name' => 'nome_ptbr',
+                                    'displayName' => 'Nome Português'
                                 ])
                                 @include('livewire.includes.table-sortable-th', [
-                                    'name' => 'email',
-                                    'displayName' => 'E-mail'
+                                    'name' => 'nome_en',
+                                    'displayName' => 'Nome Inglês'
                                 ])
                                 @include('livewire.includes.table-sortable-th', [
-                                    'name' => 'user_type',
-                                    'displayName' => 'Tipo'
+                                    'name' => 'nome_es',
+                                    'displayName' => 'Nome Espanhol'
                                 ])
                                 <th scope="col" class="px-4 py-3"></th>
                                 <th scope="col" class="px-4 py-3">
