@@ -22,6 +22,10 @@ class AreaPosMat extends FuncoesModels
         'nome_es',
     ];
 
+    public function scopeSearch($query, $value)
+    {
+        $query->where('nome_ptbr', 'like', "%{$value}%")->orWhere('nome_en', 'like', "%{$value}%")->orWhere('nome_es', 'like', "%{$value}%");
+    }
     public function pega_area_pos_mat($area_pos, $locale)
     {
         $nome_coluna = $this->define_nome_coluna_area_pos_mat($locale);

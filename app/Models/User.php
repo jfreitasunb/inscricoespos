@@ -79,7 +79,7 @@ class User extends Authenticatable implements MustVerifyEmail
         }
     }
 
-    public function isREcomendante()
+    public function isRecomendante()
     {
         if (auth()->user()->user_type === 'recomendante') {
             return TRUE;

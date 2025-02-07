@@ -6,11 +6,11 @@ use Livewire\Component;
 
 use Livewire\WithPagination;
 
-use App\Models\User;
+use App\Models\AreaPosMat;
 use App\Models\ConfiguraInscricaoPos;
 use View;
 
-class ListaUsuarios extends Component
+class ListaAreaPos extends Component
 {
     use WithPagination;
 
@@ -22,42 +22,44 @@ class ListaUsuarios extends Component
 
     public $sortDir = 'DESC';
 
-    public $editingUserId;
+    public $editingAreaPosId;
 
-    public $editingUserNome;
+    public $editingAreaPosNomeBR;
 
-    public $editingUserEmail;
+    public $editingAreaPosNomeEN;
 
-    public $editingUserTipo;
+    public $editingAreaPosNomeES;
 
-    public function edit($userid)
+    public function edit($areaposid)
     {
-        $this->editingUserId = $userid;
+        $this->editingAreaPosId = $areaposid;
 
-        $this->editingUserNome = User::find($userid)->nome;
+        $this->editingAreaPosNomeBR = AreaPosMat::find($areaposid)->nome_ptbr;
 
-        $this->editingUserEmail = User::find($userid)->email;
+        $this->editingAreaPosNomeEN = AreaPosMat::find($areaposid)->nome_en;
 
-        $this->editingUserTipo = User::find($userid)->user_type;
+        $this->editingAreaPosNomeES = AreaPosMat::find($areaposid)->nome_es;
+
     }
 
     public function cancelEditing()
     {
-        $this->reset('editingUserId', 'editingUserNome', 'editingUserEmail', 'editingUserTipo');
+        $this->reset('editingAreaPosId', 'editingAreaPosNomeBR', 'editingAreaPosNomeEN', 'editingAreaPosNomeES');
     }
 
     public function update()
     {
         $validatedData = $this->validate([
-            'editingUserNome' => 'required|min:6|max:255',
-            'editingUserEmail' => 'required|email|max:255',
-            'editingUserTipo' => 'required|max:20',
+            'editingAreaPosNomeBR' => 'required|max:255',
+            'editingAreaPosNomeEN' => 'required|max:255',
+            'editingAreaPosNomeES' => 'required|max:255',
         ]);
-        User::find($this->editingUserId)->update(
+
+        AreaPosMat::find($this->editingAreaPosId)->update(
             [
-                'nome' => $this->editingUserNome,
-                'email' => $this->editingUserEmail,
-                'user_type' => $this->editingUserTipo,
+                'nome_ptbr' => trim($this->editingAreaPosNomeBR),
+                'nome_en' => trim($this->editingAreaPosNomeEN),
+                'nome_es' => trim($this->editingAreaPosNomeES),
             ]
         );
 
@@ -93,10 +95,10 @@ class ListaUsuarios extends Component
 
         View::share('texto_inscricao_pos', $texto_inscricao_pos);
 
-        return view('livewire.lista-usuarios',
+        return view('livewire.lista-area-pos',
             [
-                'users' => User::search($this->search)->orderBy($this->sortBy, $this->sortDir)->paginate($this->perPage)
+                'areapos' => AreaPosMat::search($this->search)->orderBy($this->sortBy, $this->sortDir)->paginate($this->perPage)
             ])->extends('layouts.app')
-            ->section('lista_usuarios');
+            ->section('lista_area_pos');
     }
 }

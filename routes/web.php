@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EditarInscricaoPosController;
 use App\Http\Controllers\Admin\ListaUsuariosController;
 use App\Livewire\ListaUsuarios;
+use App\Livewire\ListaAreaPos;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Coordenador\DadosCoordenadorPosController;
@@ -83,6 +84,7 @@ Route::prefix('coordenador')->middleware(['auth', 'verified', 'user.role:coorden
     Route::post('contas/coordenador/pos',[DadosCoordenadorPosController::class, 'postDadosCoordenadorPos']);
     Route::get('cadastra/area/pos', [CadastraAreaPosController::class, 'getCadastraAreaPos'])->name('cadastra.area.pos');
 	Route::post('cadastra/area/pos', [CadastraAreaPosController::class,'postCadastraAreaPos']);
+    Route::get('edita/area/pos', ListaAreaPos::class)->name('edita.area.pos');
 })->name('coordenador');
 
 /*
