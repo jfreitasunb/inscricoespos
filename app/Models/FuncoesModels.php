@@ -4,6 +4,7 @@ namespace App\Models;
 
 use DB;
 use Carbon\Carbon;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 

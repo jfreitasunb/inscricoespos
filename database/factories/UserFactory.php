@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'nome' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'locale' => 'pt_BR',
-            'user_type' => 'recomendante',
+            'user_type' => 'candidato',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

@@ -11,6 +11,7 @@ use App\Livewire\ListaUsuarios;
 use App\Http\Controllers\Coordenador\CoordenadorController;
 use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Coordenador\DadosCoordenadorPosController;
+use App\Http\Controllers\Coordenador\CadastraAreaPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
 use App\Http\Controllers\Recomendante\RecomendanteController;
 
@@ -79,7 +80,9 @@ Route::prefix('admin')->group(function () {
 Route::prefix('coordenador')->middleware(['auth', 'verified', 'user.role:coordenador,admin'])->group(function () {
     Route::get('/', [CoordenadorController::class, 'getMenu'])->name('menu.coordenador');
     Route::get('contas/coordenador/pos', [DadosCoordenadorPosController::class, 'getDadosCoordenadorPos'])->name('dados.coordenador.pos');
-	Route::post('contas/coordenador/pos',[DadosCoordenadorPosController::class, 'postDadosCoordenadorPos']);
+    Route::post('contas/coordenador/pos',[DadosCoordenadorPosController::class, 'postDadosCoordenadorPos']);
+    Route::get('cadastra/area/pos', [CadastraAreaPosController::class, 'getCadastraAreaPos'])->name('cadastra.area.pos');
+	Route::post('cadastra/area/pos', [CadastraAreaPosController::class,'postCadastraAreaPos']);
 })->name('coordenador');
 
 /*

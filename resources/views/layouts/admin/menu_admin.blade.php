@@ -64,8 +64,8 @@
                             </form>
                         </li>
                         <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                <a href="#" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Cadastrar nova área</a>
+                            <form method="POST" action="{{ route('cadastra.area.pos') }}">
+                                <a href="{{ route('cadastra.area.pos') }}" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Cadastrar nova área</a>
                             </form>
                         </li>
                         <li>
@@ -258,6 +258,7 @@
             @yield('configura_inscricao')
             @yield('editar_inscricao')
             @yield('dados_coordenador_pos')
+            @yield('cadastra_area_pos')
             @if (Route::currentRouteName() == 'edita.usuarios')
                 @livewire('lista-usuarios')
             @endif
