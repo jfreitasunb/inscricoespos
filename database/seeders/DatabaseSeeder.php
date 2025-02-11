@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(AreaPosMatTableSeeder::class);
         $this->call(FormacaoTableSeeder::class);
         $this->call(ConfiguraInscricaoPosTableSeeder::class);
-        // $this->call(PaisesTableSeeder::class);
-        // $this->call(EstadosTableSeeder::class);
-        // $this->call(CidadesTableSeeder::class);
+        $this->call(PaisesTableSeeder::class);
+        $this->call(EstadosTableSeeder::class);
+        $this->call(CidadesTableSeeder::class);
         // $this->call(DadosPessoaisTableSeeder::class);
         // $this->call(DadosRecomendantesTableSeeder::class);
         // $this->call(DadosAcademicosTableSeeder::class);
