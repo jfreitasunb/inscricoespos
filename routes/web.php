@@ -96,7 +96,9 @@ Route::prefix('coordenador')->middleware(['auth', 'verified', 'user.role:coorden
 
 Route::prefix('candidato')->middleware(['auth', 'verified','user.role:candidato'])->group(function () {
     Route::get('/', [CandidatoController::class, 'getMenu'])->name('menu.candidato');
-    Route::get('/', [DadosPessoaisCandidatoController::class, 'getDadosPessoais'])->name('dados.pessoais');
+    Route::get('/dados/pessoais', [DadosPessoaisCandidatoController::class, 'getDadosPessoais'])->name('dados.pessoais');
+    Route::get('/dados/pessoais/editar', [DadosPessoaisCandidatoController::class, 'getDadosPessoaisEditar'])->name('dados.pessoais.editar');
+    Route::post('/dados/pessoais', [DadosPessoaisCandidatoController::class, 'postDadosPessoais'])->name('dados.pessoais');
 })->name('candidato');
 
 /*
