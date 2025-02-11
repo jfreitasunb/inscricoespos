@@ -15,6 +15,7 @@ use App\Http\Controllers\Coordenador\ConfiguraInscricaoPosController;
 use App\Http\Controllers\Coordenador\DadosCoordenadorPosController;
 use App\Http\Controllers\Coordenador\CadastraAreaPosController;
 use App\Http\Controllers\Candidato\CandidatoController;
+use App\Http\Controllers\Candidato\DadosPessoaisCandidatoController;
 use App\Http\Controllers\Recomendante\RecomendanteController;
 
 /*
@@ -95,6 +96,7 @@ Route::prefix('coordenador')->middleware(['auth', 'verified', 'user.role:coorden
 
 Route::prefix('candidato')->middleware(['auth', 'verified','user.role:candidato'])->group(function () {
     Route::get('/', [CandidatoController::class, 'getMenu'])->name('menu.candidato');
+    Route::get('/', [DadosPessoaisCandidatoController::class, 'getDadosPessoais'])->name('dados.pessoais');
 })->name('candidato');
 
 /*
