@@ -24,6 +24,9 @@
                 @admin(Auth()->user())
                     @include('layouts.admin.menu_admin')
                 @endadmin
+                @candidato(Auth()->user())
+                    @include('layouts.candidato.navigation')
+                @endcandidato
             @else
                 @yield('inicio')
                 @yield('content')
