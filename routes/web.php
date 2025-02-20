@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\EditarInscricaoPosController;
 use App\Http\Controllers\Admin\ListaUsuariosController;
@@ -39,6 +40,14 @@ Route::get('/en', [BaseController::class, 'getLangEnglish'])->name('lang.english
 
 Route::get('/es', [BaseController::class, 'getLangSpanish'])->name('lang.spanish')->middleware('define.locale');
 
+
+/*
+ * Rotas para pesquisa de Estados e Cidades a partir do país
+ */
+Route::get('/get-cidades/{idEstado}', [CandidatoController::class, 'getCidades']);
+Route::get('api/dependent-dropdown',[APIController::class, 'index']);
+Route::get('api/get-state-list',[APIController::class, 'getStateList']);
+Route::get('api/get-city-list',[APIController::class, 'getCityList']);
 
 /*
 * Home
@@ -98,6 +107,7 @@ Route::prefix('candidato')->middleware(['auth', 'verified','user.role:candidato'
     Route::get('/', [CandidatoController::class, 'getMenu'])->name('menu.candidato');
     Route::get('/dados/pessoais', [DadosPessoaisCandidatoController::class, 'getDadosPessoais'])->name('dados.pessoais');
     Route::get('/dados/pessoais/editar', [DadosPessoaisCandidatoController::class, 'getDadosPessoaisEditar'])->name('dados.pessoais.editar');
+    Route::post('/dados/pessoais/editar', [DadosPessoaisCandidatoController::class, 'postDadosPessoaisEditar'])->name('dados.pessoais.salvar');
     Route::post('/dados/pessoais', [DadosPessoaisCandidatoController::class, 'postDadosPessoais'])->name('dados.pessoais');
 })->name('candidato');
 

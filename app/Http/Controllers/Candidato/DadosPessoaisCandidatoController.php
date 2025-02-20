@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Candidato;
 
 use App\Http\Controllers\BaseController;
 
+use App\Http\Controllers\APIController;
+
 use Illuminate\Http\Request;
+
+use App\Models\DadosPessoaisCandidato;
 
 class DadosPessoaisCandidatoController extends BaseController
 {
@@ -12,98 +16,86 @@ class DadosPessoaisCandidatoController extends BaseController
 
     public function getDadosPessoais()
     {
+        $getcountries = new APIController();
 
-        // $getcountries = new APIController();
+        $countries = $getcountries->index();
 
-        // $countries = $getcountries->index();
+        $user = $this->SetUser();
 
-        // $user = $this->SetUser();
-        
-        // $id_user = $user->id_user;
+        $id_user = $user->id_user;
 
-        // $editar_dados = false;
-        
-        // $candidato = new DadoPessoalCandidato();
-        
-        // $dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
+        $editar_dados = True;
 
-        // if (is_null($dados_pessoais)) {
-            
-        //     $dados = [
-        //         'nome' => $this->titleCase($user->nome),
-        //         'data_nascimento' => '',
-        //         'numerorg' => '',
-        //         'emissorrg' => '',
-        //         'cpf' => '',
-        //         'data_nascimento' => '',
-        //         'endereco' => '',
-        //         'pais' => '',
-        //         'estado' => '',
-        //         'cidade' => '',
-        //         'cep' => '',
-        //         'celular' => '',
-        //     ];
-        // }else{
-            
-        //     if (!is_null($dados_pessoais->data_nascimento)) {
-            
-        //         $nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
+        $candidato = new DadosPessoaisCandidato();
 
-        //         $data_nascimento = $nascimento->format('d/m/Y');
-        //     }else{
-            
-        //         $data_nascimento = '';
-        //     }
-            
+        $dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
-        //     $nome_pais = new Paises;
+        if (is_null($dados_pessoais)) {
+            $dados = [
+                'nome' => $this->titleCase($user->nome),
+                'data_nascimento' => '',
+                'numerorg' => '',
+                'emissorrg' => '',
+                'cpf' => '',
+                'data_nascimento' => '',
+                'endereco' => '',
+                'pais' => '',
+                'estado' => '',
+                'cidade' => '',
+                'cep' => '',
+                'celular' => '',
+            ];
+        }else{
+            if (!is_null($dados_pessoais->data_nascimento)) {
+                $nascimento = Carbon::createFromFormat('Y-m-d',$dados_pessoais->data_nascimento);
 
-        //     $nome_estado = new Estado;
+                $data_nascimento = $nascimento->format('d/m/Y');
+            }else{
+                $data_nascimento = '';
+            }
 
-        //     $nome_cidade = new Cidade;
+            $nome_pais = new Paises;
 
-        //     if (!is_null($dados_pessoais->pais)) {
-            
-        //         $pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
-        //     }else{
+            $nome_estado = new Estado;
 
-        //         $pais = '';
-        //     }
+            $nome_cidade = new Cidade;
 
-        //     if (!is_null($dados_pessoais->estado)) {
-            
-        //         $estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
-        //     }else{
+            if (!is_null($dados_pessoais->pais)) {
+                $pais = $nome_pais->retorna_nome_pais_por_id($dados_pessoais->pais);
+            }else{
+                $pais = '';
+            }
 
-        //         $estado = '';
-        //     }
+            if (!is_null($dados_pessoais->estado)) {
+                $estado = $nome_estado->retorna_nome_estados_por_id($dados_pessoais->pais, $dados_pessoais->estado);
+            }else{
+                $estado = '';
+            }
 
-        //     if (!is_null($dados_pessoais->cidade)) {
-                
-        //         $cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
-        //     }else{
+            if (!is_null($dados_pessoais->cidade)) {
+                $cidade = $nome_cidade->retorna_nome_cidade_por_id($dados_pessoais->cidade, $dados_pessoais->estado);
+            }else{
+                $cidade = '';
+            }
 
-        //         $cidade = '';
-        //     }
+            $dados = [
+                'nome' => $this->titleCase($dados_pessoais->nome),
+                'data_nascimento' => $dados_pessoais->data_nascimento,
+                'numerorg' => $dados_pessoais->numerorg,
+                'emissorrg' => $dados_pessoais->emissorrg,
+                'cpf' => $dados_pessoais->cpf,
+                'data_nascimento' => $data_nascimento,
+                'endereco' => $dados_pessoais->endereco,
+                'pais' => $pais,
+                'estado' => $estado,
+                'cidade' => $cidade,
+                'cep' => $dados_pessoais->cep,
+                'celular' => $dados_pessoais->celular,
+            ];
+        }
 
-        //     $dados = [
-        //         'nome' => $this->titleCase($dados_pessoais->nome),
-        //         'data_nascimento' => $dados_pessoais->data_nascimento,
-        //         'numerorg' => $dados_pessoais->numerorg,
-        //         'emissorrg' => $dados_pessoais->emissorrg,
-        //         'cpf' => $dados_pessoais->cpf,
-        //         'data_nascimento' => $data_nascimento,
-        //         'endereco' => $dados_pessoais->endereco,
-        //         'pais' => $pais,
-        //         'estado' => $estado,
-        //         'cidade' => $cidade,
-        //         'cep' => $dados_pessoais->cep,
-        //         'celular' => $dados_pessoais->celular,
-        //     ];
-        // }
-
-        // return view('layouts.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
-        return view('layouts.candidato.dados_pessoais');
+        return view('layouts.candidato.dados_pessoais')->with(compact('countries','dados','editar_dados'));
+        //return view('layouts.candidato.dados_pessoais');
     }
 
     public function getDadosPessoaisEditar()
@@ -114,19 +106,19 @@ class DadosPessoaisCandidatoController extends BaseController
         $countries = $getcountries->index();
 
         $user = $this->SetUser();
-        
+
         $nome = $user->nome;
-        
+
         $id_user = $user->id_user;
 
         $editar_dados = true;
-        
+
         $candidato = new DadoPessoalCandidato();
-        
+
         $dados_pessoais = $candidato->retorna_dados_pessoais($id_user);
 
         if (is_null($dados_pessoais)) {
-            
+
             $dados = [
                     'nome' => $this->titleCase($user->nome),
                     'data_nascimento' => '',
@@ -142,7 +134,7 @@ class DadosPessoaisCandidatoController extends BaseController
                     'celular' => '',
             ];
         }else{
-            
+
             $dados = [
                 'nome' => $this->titleCase($dados_pessoais->nome),
                 'data_nascimento' => $dados_pessoais->data_nascimento,
@@ -176,13 +168,13 @@ class DadosPessoaisCandidatoController extends BaseController
         ]);
 
         $user = $this->SetUser();
-        
+
         $id_candidato = $user->id_user;
 
         $nascimento = Carbon::createFromFormat('d/m/Y', Purifier::clean(trim($request->data_nascimento)));
 
         $data_nascimento = $nascimento->format('Y-m-d');
-    
+
         $dados_pessoais = [
             'id_candidato' => $id_candidato,
             'data_nascimento' => $data_nascimento,
@@ -196,7 +188,7 @@ class DadosPessoaisCandidatoController extends BaseController
         ];
 
         $candidato =  DadoPessoalCandidato::find($id_candidato);
-        
+
         $usuario = User::find($id_candidato);
 
         $update_nome['nome'] = $this->titleCase(Purifier::clean(trim($request->input('nome'))));
@@ -228,7 +220,7 @@ class DadosPessoaisCandidatoController extends BaseController
             $usuario->update($update_nome);
 
         }else{
-            
+
             $candidato->update($dados_pessoais);
 
             $usuario->update($update_nome);
