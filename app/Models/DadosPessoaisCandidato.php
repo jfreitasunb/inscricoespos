@@ -25,7 +25,6 @@ class DadosPessoaisCandidato extends Model
 
     public function retorna_dados_pessoais($id_candidato)
     {
-        
         return $this->where('id_candidato', $id_candidato)->join('users', 'users.id', 'dados_pessoais_candidato.id')->select('users.nome', 'users.email', 'dados_pessoais_candidato.*')->get()->first();
 
     }

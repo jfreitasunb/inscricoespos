@@ -38,4 +38,6 @@
 
         @livewireScripts
     </body>
+    @yield('scripts')
+    @yield('post-script')
 </html>
